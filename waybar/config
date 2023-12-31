@@ -13,8 +13,8 @@
   ],
 
   "modules-right": [
+    "pulseaudio",
     "memory",
-    "custom/pipewire",
     "clock",
     "battery",
   ],
@@ -38,18 +38,29 @@
     "max-length": 128
   },
 
-  "custom/pipewire": {
-    "exec": "pw-volume status",
-    "return-type": "json",
-    "interval": "once",
-    "signal": 8,
-    "format": "{icon} {percentage}%",
+  "pulseaudio": {
+    "scroll-step": 1, 
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
     "format-icons": {
-        "mute": "󰕾",
-        "default": ["󰕿", "󰖀", "󰕾"]
-    }
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
   },
 
+  "memory": {
+    "format": "{}% "
+  },
 
   "battery": {
     "states": {
