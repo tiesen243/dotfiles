@@ -14,7 +14,6 @@
 
   "modules-right": [
     "pulseaudio",
-    "memory",
     "clock",
     "battery",
   ],
@@ -56,10 +55,6 @@
       "default": ["", "", ""]
     },
     "on-click": "pavucontrol"
-  },
-
-  "memory": {
-    "format": "{}% "
   },
 
   "battery": {
