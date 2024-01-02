@@ -11,9 +11,7 @@
 
 ## Dependence
 
-Dependence:
-
-1. Pacman: `zsh`, `waybar`, `swayidle`, `hyprpaper`,`p7zip`, `unzip`
+1. Pacman: `zsh`, `waybar`, `swayidle`, `hyprpaper`,`p7zip`
 2. Yay: `swaylock-effects`, `lazygit`
 3. If Jappanese/Chinese/Korean font not display correctly
 
@@ -24,7 +22,7 @@ sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 4. If you dont want to use default file manager
 
 ```bash
-sudo pacman -S thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman tumbler gvfs gvfs-backends gvfs-fuse
+sudo pacman -S thunar gvfs gvfs-backends gvfs-fuse
 ```
 
 ## How to install
@@ -72,19 +70,25 @@ yay -S nvm
 
 ## How to use
 
-- Change the content of `~/.config/hypr/hyprland.conf` to
+1. Change the content of `~/.config/hypr/hyprland.conf` to
 
 ```bash
 source ~/dotfile/hypr/hyprland.conf
 ```
 
-- Change the content of `~/.config/kitty/kitty.conf` to
+2. Change the content of `~/.config/kitty/kitty.conf` to
 
 ```bash
 include ~/dotfile/kitty/kitty.conf
 ```
 
-- Change the content of `~/.zshrc` to
+3. Copy folder `~/dotfile/custom` to `~/.oh-my-zsh/custom`
+
+```bash
+cp -r ~/dotfile/custom ~/.oh-my-zsh/custom
+```
+
+4. Change the content of `~/.zshrc` to
 
 ```bash
 source ~/dotfile/.zshrc
@@ -95,9 +99,9 @@ source ~/dotfile/.zshrc
 1. Change Themes
 
 ```bash
-mv ~/dotfile/.fonts ~/
-mv ~/dotfile/.icons ~/
-mv ~/dotfile/.themes ~/
+cp -r ~/dotfile/.fonts ~/
+cp -r ~/dotfile/.icons ~/
+cp -r ~/dotfile/.themes ~/
 
 yay -S nwg-look
 ```
