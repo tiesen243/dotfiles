@@ -25,9 +25,13 @@ include ~/dotfile/kitty/kitty.conf
 ```
 
 move `./.zshrc` folder to `~/.zshrc`
+
 move `./.fonts` folder to `~/.fonts`
+
 move `./.icons` folder to `~/.icons`
+
 move `./.themes` folder to `~/.themes`
+
 move `~/dotfile/custom` folder to `~/.oh-my-zsh`
 
 # How to change the wallpaper
