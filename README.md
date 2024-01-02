@@ -1,40 +1,45 @@
 # My arch linux config with Hyprland
 
-install nwg-look for apply themes
+# Table of Contents
 
-dependence: zsh oh-my-zsh waybar swaylock-effects swayidle lazygit miniconda3
+1. [Dependence](#dependence)
+2. [How to install](#how-to-install)
+3. [How to use](#how-to-use)
+4. [How to change the wallpaper](#how-to-change-the-wallpaper)
 
-# How to install
+## Dependence
+
+install `nwg-look` for apply themes
+
+dependence: `zsh`, `oh-my-zsh`, `waybar`, `swaylock-effects`, `swayidle`, `lazygit`, `miniconda3`
+
+## How to install
 
 ```bash
 git clone git@github.com:tiesen243/dotfile.git ~/dotfile
 ```
 
-# How to use
+## How to use
 
-change the content of `~/.config/hypr/hyprland.conf` to
+- Change the content of `~/.config/hypr/hyprland.conf` to
 
 ```bash
 source ~/dotfile/hypr/hyprland.conf
 ```
 
-change the content of `~/.config/kitty/kitty.conf` to
+- Change the content of `~/.config/kitty/kitty.conf` to
 
 ```bash
 include ~/dotfile/kitty/kitty.conf
 ```
 
-move `./.zshrc` folder to `~/.zshrc`
+- Move `./.zshrc` folder to `~/.zshrc`
+- Move `./.fonts` folder to `~/.fonts`
+- Move `./.icons` folder to `~/.icons`
+- Move `./.themes` folder to `~/.themes`
+- Move `~/dotfile/custom` folder to `~/.oh-my-zsh`
 
-move `./.fonts` folder to `~/.fonts`
-
-move `./.icons` folder to `~/.icons`
-
-move `./.themes` folder to `~/.themes`
-
-move `~/dotfile/custom` folder to `~/.oh-my-zsh`
-
-# How to change the wallpaper
+## How to change the wallpaper
 
 ```bash
 touch ~/.config/hypr/hyprpaper.conf
@@ -44,4 +49,4 @@ preload = ~/path/to/wallpaper
 wallpaper = ,~/path/to/wallpaper
 ```
 
-Enjoy it!
+# Enjoy it!
