@@ -30,4 +30,14 @@ move `./.icons` folder to `~/.icons`
 move `./.themes` folder to `~/.themes`
 move `~/dotfile/custom` folder to `~/.oh-my-zsh`
 
+# How to change the wallpaper
+
+```bash
+touch ~/.config/hypr/hyprpaper.conf
+
+# add the content to hyprpaper.conf
+preload = ~/path/to/wallpaper
+wallpaper = ,~/path/to/wallpaper
+```
+
 Enjoy it!
