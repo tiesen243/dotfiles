@@ -1,4 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
+export CUSTOM="$HOME/dotfile/custom"
 
 ZSH_THEME="dracula"
 
