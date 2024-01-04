@@ -1,7 +1,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 24,
+  "height": 30,
   "spacing": 8,
   "modules-left": [
     "hyprland/workspaces",
@@ -41,20 +41,21 @@
     "scroll-step": 1, 
     "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
+    "format-bluetooth-muted": "🔇  {format_source}",
+    "format-muted": "🔇 {format_source}",
     "format-source": "{volume}% ",
     "format-source-muted": "",
     "format-icons": {
-      "headphone": "",
+      "headphone": [" ", " ", " "],
       "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      "headset": [" ", " ", " "],
+      "phone": [" ", " ", " "],
+      "portable": [" ", " ", " "],
+      "car": [" ", " ", " "],
       "default": ["", "", ""]
     },
-    "on-click": "pavucontrol"
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol",
   },
 
   "battery": {
@@ -73,9 +74,5 @@
   "clock": {
     "format": "{:%H:%M %d-%m-%Y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-  },
-
-  "tray": {
-    "spacing": 4
   },
 }
