@@ -13,7 +13,7 @@
   ],
 
   "modules-right": [
-    "pulseaudio",
+    "pulseaudio#sink",
     "clock",
     "battery",
   ],
@@ -37,14 +37,12 @@
     "max-length": 128
   },
 
-  "pulseaudio": {
+  "pulseaudio#sink": {
     "scroll-step": 1, 
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": "🔇  {format_source}",
-    "format-muted": "🔇 {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-bluetooth-muted": "🔇",
+    "format-muted": "🔇",
     "format-icons": {
       "headphone": [" ", " ", " "],
       "hands-free": "",
