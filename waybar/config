@@ -39,10 +39,12 @@
 
   "pulseaudio#sink": {
     "scroll-step": 1, 
-    "format": "{volume}% {icon}",
+    "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon}",
     "format-bluetooth-muted": "🔇",
     "format-muted": "🔇",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
     "format-icons": {
       "headphone": [" ", " ", " "],
       "hands-free": "",
