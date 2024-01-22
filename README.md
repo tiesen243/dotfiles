@@ -11,15 +11,18 @@
 
 ## Dependence
 
-1. Pacman: `zsh`, `waybar`, `swayidle`, `hyprpaper`,`p7zip`
-2. Yay: `swaylock-effects`, `lazygit`
-3. If Jappanese/Chinese/Korean font not display correctly
+```bash
+sudo pacman -S zsh waybar swayidle hyprpaper p7zip pipewire-jack pipewire-alsa easyeffects pavucontrol
+sudo yay -S swaylock-effects lazygit
+```
+
+> If Jappanese/Chinese/Korean font not display correctly
 
 ```bash
 sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 ```
 
-4. If you dont want to use default file manager
+> If you dont want to use default file manager
 
 ```bash
 sudo pacman -S thunar gvfs gvfs-backends gvfs-fuse
