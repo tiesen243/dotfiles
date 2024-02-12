@@ -10,7 +10,7 @@ configuration {
     font: "Geist Bold 12";
     foreground: #f8f8f2;
     background-color: #282a36;
-    active-background: #6272a4;
+    active-background: #33ccffee;
     urgent-background: #ff5555;
     urgent-foreground: #282a36;
     selected-background: @active-background;
@@ -65,7 +65,7 @@ configuration {
 }
 #element.selected.normal {
     background-color: @selected-background;
-    text-color:       @foreground;
+    text-color:       @background-color;
 }
 #element.selected.urgent {
     background-color: @selected-urgent-background;
