@@ -1,37 +1,15 @@
 # My arch linux config with Hyprland
 
-> This is my arch linux config with Hyprland and use Dracula theme for all application
+## Table of Contents
 
-# Table of Contents
-
-1. [Dependence](#dependence)
-2. [How to install](#how-to-install)
-3. [How to use](#how-to-use)
-4. [How to change the themes](#how-to-change-the-themes)
-
-## Dependence
-
-```bash
-sudo pacman -S zsh waybar swayidle hyprpaper p7zip pipewire-jack pipewire-alsa easyeffects pavucontrol
-sudo yay -S swaylock-effects lazygit
-```
-
-> If Jappanese/Chinese/Korean font not display correctly
-
-```bash
-sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
-```
-
-> If you dont want to use default file manager
-
-```bash
-sudo pacman -S thunar gvfs gvfs-backends gvfs-fuse
-```
+1. [How to install](#how-to-install)
+2. [How to use](#how-to-use)
+3. [How to change the themes](#how-to-change-the-themes)
 
 ## How to install
 
 ```bash
-git clone git@github.com:tiesen243/dotfile.git ~/dotfile
+git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
 ```
 
 > Install `yay`
@@ -42,6 +20,19 @@ git clone https://aur.archlinux.org/yay.git ~/yay
 cd ~/yay
 makepkg -si
 rm -rf ~/yay
+```
+
+> Install all dependences
+
+```bash
+sudo pacman -S zsh waybar swayidle hyprpaper p7zip pipewire-jack pipewire-alsa easyeffects pavucontrol thunar gvfs gvfs-backends gvfs-fuse
+sudo yay -S swaylock-effects lazygit
+```
+
+> If Jappanese/Chinese/Korean font not display correctly
+
+```bash
+sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 ```
 
 > Install `oh-my-zsh`
@@ -57,7 +48,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-> Optional: Install `miniconda3` for python and `nvm` for nodejs development environment if you need else you can skip this step and remove nvm and miniconda3 config block in `~/dotfile/.zshrc`
+> Optional: Install `miniconda3` for python and `nvm` for nodejs development environment if you need else you can skip this step and remove nvm and miniconda3 config block in `~/dotfiles/.zshrc`
 
 ```bash
 mkdir -p ~/.miniconda3
@@ -76,25 +67,25 @@ yay -S nvm
 1. Change the content of `~/.config/hypr/hyprland.conf` to
 
 ```bash
-source ~/dotfile/hypr/hyprland.conf
+source ~/dotfiles/hypr/hyprland.conf
 ```
 
 2. Change the content of `~/.config/kitty/kitty.conf` to
 
 ```bash
-include ~/dotfile/kitty/kitty.conf
+include ~/dotfiles/kitty/kitty.conf
 ```
 
-3. Copy folder `~/dotfile/custom` to `~/.oh-my-zsh/custom`
+3. Copy folder `~/dotfiles/custom` to `~/.oh-my-zsh/custom`
 
 ```bash
-cp -r ~/dotfile/custom ~/.oh-my-zsh/custom
+cp -r ~/dotfiles/custom ~/.oh-my-zsh/custom
 ```
 
 4. Change the content of `~/.zshrc` to
 
 ```bash
-source ~/dotfile/.zshrc
+source ~/dotfiles/.zshrc
 ```
 
 ## How to change the themes
@@ -102,9 +93,9 @@ source ~/dotfile/.zshrc
 1. Change Themes
 
 ```bash
-cp -r ~/dotfile/.fonts ~/
-cp -r ~/dotfile/.icons ~/
-cp -r ~/dotfile/.themes ~/
+cp -r ~/dotfiles/.fonts ~/
+cp -r ~/dotfiles/.icons ~/
+cp -r ~/dotfiles/.themes ~/
 
 yay -S nwg-look
 ```
@@ -126,4 +117,4 @@ wallpaper = ,~/path/to/wallpaper
 
 ### Enjoy it!
 
-> Optional: You can try my neovim config at [here](https://github.com/tiesen243/nvim)
+Optional: You can try my neovim config at [here](https://github.com/tiesen243/nvim)
