@@ -29,11 +29,10 @@ alias ci="conda install"
 alias cr="conda remove"
 alias ca="conda activate"
 alias cde="conda deactivate"
-alias cenv="conda env list"
+alias cenvl="conda env list"
 alias cenvc="conda create -n"
 alias cenvr="conda env remove -n"
-alias cenvu="conda env update -f"
-alias cenva="conda env export > requirements.yml"
+alias cenvle="conda list -e > requirements.txt"
 
 # >>> nvm initialize >>>
 source ~/.nvm/nvm.sh
