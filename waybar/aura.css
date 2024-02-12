@@ -30,12 +30,12 @@ window#waybar {
 #tray,
 #taskbar,
 #workspaces {
-  background: #15141b;
+  background: rgba(0, 0, 0, 0.4);
   padding: 0 0.3em;
 }
 
 #mode {
-  color: #15141b;
+  color: rgba(0, 0, 0, 0.4);
   background: #61ffca;
 }
 
@@ -59,21 +59,21 @@ window#waybar {
 #taskbar button.focused,
 #workspaces button.focused {
   color: #61ffca;
-  background: #15141b;
+  background: rgba(0, 0, 0, 0.4);
   border: 1px solid #61ffca;
   box-shadow: inherit;
   text-shadow: inherit;
 }
 
 #workspaces button.urgent {
-  color: #15141b;
+  color: rgba(0, 0, 0, 0.4);
   background: #61ffca;
 }
 
 #taskbar button:hover,
 #workspaces button:hover {
   color: #61ffca;
-  background: #15141b;
+  background: rgba(0, 0, 0, 0.4);
   border: 1px solid #61ffca;
   box-shadow: inherit;
   text-shadow: inherit;
