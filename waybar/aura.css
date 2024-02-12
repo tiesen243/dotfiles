@@ -1,12 +1,13 @@
 * {
-  font-size: 1em;
-  font-family: Geist;
-  border-radius: 0;
+  font-size: 12px;
+  font-family: Geist Mono;
+  border-radius: 4px;
+  min-height: 0;
 }
 
 window#waybar {
   color: #edecee;
-  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 #custom-arrow-left-fg,
@@ -27,9 +28,10 @@ window#waybar {
 #network,
 #pulseaudio,
 #tray,
+#taskbar,
 #workspaces {
   background: #15141b;
-  padding: 0 0.5em;
+  padding: 0 0.3em;
 }
 
 #mode {
@@ -37,25 +39,38 @@ window#waybar {
   background: #61ffca;
 }
 
+#taskbar,
 #workspaces {
   padding: 0;
 }
+
+#taskbar button,
 #workspaces button {
   color: #edecee;
-  padding: 0 0.3em;
+  padding: 0 0.5em;
+  margin-right: 0.4em;
 }
+
+#taskbar button.active,
 #workspaces button.visible {
-  color: #15141b;
-  background: #6d6d6d;
+  border: 1px solid rgba(97, 255, 202, 0.5);
 }
+
+#taskbar button.focused,
 #workspaces button.focused {
-  color: #15141b;
-  background: #a277ff;
+  color: #61ffca;
+  background: #15141b;
+  border: 1px solid #61ffca;
+  box-shadow: inherit;
+  text-shadow: inherit;
 }
+
 #workspaces button.urgent {
   color: #15141b;
   background: #61ffca;
 }
+
+#taskbar button:hover,
 #workspaces button:hover {
   color: #61ffca;
   background: #15141b;

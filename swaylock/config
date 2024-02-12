@@ -9,7 +9,7 @@ ignore-empty-password
 indicator-thickness=15
 indicator-radius=200
 ring-color=5D5B74
-key-hl-color=48C3FF
+key-hl-color=33ccffee
 inside-color=00000088
 inside-clear-color=00000000
 text-color=fff
