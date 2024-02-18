@@ -4,7 +4,7 @@ export CUSTOM="$HOME/dotfile/custom"
 ZSH_THEME="dracula"
 
 # Plugins
-plugins=(git yarn zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git archlinux zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/plugins/zsh-syntax-highlighting.sh
@@ -33,6 +33,15 @@ alias cenvl="conda env list"
 alias cenvc="conda create -n"
 alias cenvr="conda env remove -n"
 alias cenvle="conda list -e > requirements.txt"
+
+# Bun
+alias b="bun install"
+alias ba="bun add"
+alias bad="bun add -d"
+alias br="bun remove"
+alias bf="bun format"
+alias bl="bun lint"
+alias bb="bun run build"
 
 # >>> nvm initialize >>>
 source ~/.nvm/nvm.sh
