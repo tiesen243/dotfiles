@@ -41,6 +41,7 @@ alias bad="bun add -d"
 alias br="bun remove"
 alias bf="bun format"
 alias bl="bun lint"
+alias bd="bun dev"
 alias bb="bun run build"
 
 # >>> nvm initialize >>>
