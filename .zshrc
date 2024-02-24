@@ -36,6 +36,7 @@ alias cenvle="conda list -e > requirements.txt"
 
 # Bun
 alias b="bun"
+alias bc="bun create"
 alias bi="bun install"
 alias ba="bun add"
 alias bad="bun add -d"
