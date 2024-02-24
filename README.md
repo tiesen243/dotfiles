@@ -48,7 +48,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-> Optional: Install `miniconda3` for python and `nvm` for nodejs development environment if you need else you can skip this step and remove nvm and miniconda3 config block in `~/dotfiles/.zshrc`
+> Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
 
 ```bash
 mkdir -p ~/.miniconda3
@@ -79,7 +79,8 @@ include ~/dotfiles/kitty/kitty.conf
 3. Copy folder `~/dotfiles/custom` to `~/.oh-my-zsh/custom`
 
 ```bash
-cp -r ~/dotfiles/custom ~/.oh-my-zsh/custom
+cp ~/dotfiles/custom/plugins/zsh-syntax-highlighting.sh .oh-my-zsh/custom/plugins/zsh-syntax-highlighting.zsh
+cp ~/dotfiles/custom/themes ~/.oh-my-zsh/custom
 ```
 
 4. Change the content of `~/.zshrc` to
