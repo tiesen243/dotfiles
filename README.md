@@ -25,8 +25,8 @@ rm -rf ~/yay
 > Install all dependences
 
 ```bash
-sudo pacman -S zsh waybar swayidle hyprpaper p7zip pipewire-jack pipewire-alsa easyeffects pavucontrol thunar gvfs gvfs-backends gvfs-fuse
-sudo yay -S swaylock-effects lazygit
+sudo pacman -S zsh swayidle hyprpaper p7zip pavucontrol thunar gvfs gvfs-backends gvfs-fuse
+sudo yay -S swaylock-effects lazygit floorp
 ```
 
 > If Jappanese/Chinese/Korean font not display correctly

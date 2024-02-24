@@ -35,14 +35,17 @@ alias cenvr="conda env remove -n"
 alias cenvle="conda list -e > requirements.txt"
 
 # Bun
-alias b="bun install"
+alias b="bun"
+alias bi="bun install"
 alias ba="bun add"
 alias bad="bun add -d"
+alias bup="bun add -p"
 alias br="bun remove"
 alias bf="bun format"
 alias bl="bun lint"
 alias bd="bun dev"
 alias bb="bun run build"
+alias bst="bun start"
 
 # >>> nvm initialize >>>
 source ~/.nvm/nvm.sh
