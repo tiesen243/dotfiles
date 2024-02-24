@@ -25,7 +25,7 @@ rm -rf ~/yay
 > Install all dependences
 
 ```bash
-sudo pacman -S zsh swayidle hyprpaper p7zip pavucontrol thunar gvfs gvfs-backends gvfs-fuse
+sudo pacman -S zsh swayidle hyprpaper p7zip rofi pavucontrol thunar gvfs
 sudo yay -S swaylock-effects lazygit floorp
 ```
 
@@ -67,7 +67,7 @@ yay -S nvm
 1. Change the content of `~/.config/hypr/hyprland.conf` to
 
 ```bash
-source ~/dotfiles/hypr/hyprland.conf
+source = ~/dotfiles/hypr/hyprland.conf
 ```
 
 2. Change the content of `~/.config/kitty/kitty.conf` to
