@@ -26,7 +26,7 @@ rm -rf ~/yay
 
 ```bash
 sudo pacman -S zsh swayidle hyprpaper p7zip rofi pavucontrol thunar gvfs
-sudo yay -S swaylock-effects lazygit floorp
+sudo yay -S swaylock-effects lazygit floorp-bin
 ```
 
 > If Jappanese/Chinese/Korean font not display correctly
