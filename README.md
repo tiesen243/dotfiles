@@ -114,6 +114,13 @@ preload = ~/path/to/wallpaper
 wallpaper = ,~/path/to/wallpaper
 ```
 
+3. Install `obs-studio` for screen recording
+
+```bash
+sudo pacman -S obs-studio
+yay -S wlrobs
+```
+
 ---
 
 ### Enjoy it!
