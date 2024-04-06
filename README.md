@@ -25,7 +25,7 @@ rm -rf ~/yay
 > Install all dependences
 
 ```bash
-sudo pacman -S zsh swayidle hyprpaper p7zip rofi pavucontrol thunar gvfs
+sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs
 sudo yay -S swaylock-effects lazygit floorp-bin wlogout
 ```
 
