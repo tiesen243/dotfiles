@@ -33,7 +33,7 @@ button:active,
 button:hover {
   border: 2px solid transparent;
   border-image-slice: 1;
-  border-image-source: linear-gradient(45deg, #33ccff, #00ff99);
+  border-image: linear-gradient(to bottom right, #e87e8b, #7dbfe8) 1;
 
   background-color: #1c1b22;
   outline-style: none;
