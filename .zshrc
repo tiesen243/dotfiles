@@ -20,6 +20,7 @@ alias vi="nvim"
 alias py="python"
 alias lg="lazygit"
 alias cls="clear"
+alias monitor="hyprctl monitors"
 
 # Kitty
 alias icat="kitten icat"
