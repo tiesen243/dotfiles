@@ -25,7 +25,7 @@ rm -rf ~/yay
 > Install all dependences
 
 ```bash
-sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl
+sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch
 sudo yay -S swaylock-effects lazygit floorp-bin wlogout
 ```
 
@@ -33,6 +33,28 @@ sudo yay -S swaylock-effects lazygit floorp-bin wlogout
 
 ```bash
 sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
+```
+
+> If you use `nvidia` GPU
+
+```bash
+sudo pacman -S nvidia-dkms nvidia-utils
+```
+
+Then add this line to end of `/etc/default/grub`
+
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet nvidia_drm.modeset=1"
+
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+Then add this line to end of `/etc/mkinitcpio.conf`
+
+```bash
+MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+
+sudo mkinitcpio -P
 ```
 
 > Install `oh-my-zsh`
