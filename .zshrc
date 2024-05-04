@@ -1,22 +1,20 @@
 export ZSH="$HOME/.oh-my-zsh"
-export CUSTOM="$HOME/dotfile/custom"
+export CUSTOM="$HOME/dotfiles/custom"
 
 ZSH_THEME="dracula"
 
 # Plugins
-plugins=(git archlinux zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git emoji zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-source $ZSH/custom/plugins/zsh-syntax-highlighting.sh
+source $CUSTOM/plugins/zsh-syntax-highlighting.sh
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 # FZF Theme
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 alias fzf="fzf -e"
 
-vfzf () {
-  nvim $(fzf -e)
-}
+
 
 # Alias
 
@@ -35,7 +33,7 @@ alias icat="kitten icat"
 alias ci="conda install"
 alias cr="conda remove"
 alias ca="conda activate"
-alias cde="conda deactivate"
+alias cda="conda deactivate"
 alias cenvl="conda env list"
 alias cenvc="conda create -n"
 alias cenvr="conda env remove -n"
@@ -56,6 +54,7 @@ alias bd="bun dev"
 alias bb="bun run build"
 alias bst="bun start"
 
+# Custom commands
 
 fastpush() {
   git add .
@@ -63,4 +62,10 @@ fastpush() {
   git push
 }
 
+vfzf () {
+  nvim $(fzf -e)
+}
+
+
+# Show date and time in terminal when opening a new terminal
 date
