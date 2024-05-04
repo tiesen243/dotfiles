@@ -55,3 +55,11 @@ alias bl="bun lint"
 alias bd="bun dev"
 alias bb="bun run build"
 alias bst="bun start"
+
+
+fastpush() {
+  git add .
+  git commit -m "$1"
+  git push
+}
+date
