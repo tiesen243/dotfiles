@@ -25,7 +25,7 @@ rm -rf ~/yay
 > Install all dependences
 
 ```bash
-sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch
+sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch btop
 sudo yay -S swaylock-effects lazygit floorp-bin wlogout
 ```
 
@@ -101,8 +101,7 @@ include ~/dotfiles/kitty/kitty.conf
 3. Copy folder `~/dotfiles/custom` to `~/.oh-my-zsh/custom`
 
 ```bash
-cp ~/dotfiles/custom/plugins/zsh-syntax-highlighting.sh .oh-my-zsh/custom/plugins/zsh-syntax-highlighting.zsh
-cp ~/dotfiles/custom/themes ~/.oh-my-zsh/custom
+cp -r ~/dotfiles/custom/themes ~/.oh-my-zsh/custom
 ```
 
 4. Change the content of `~/.zshrc` to
