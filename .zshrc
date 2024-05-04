@@ -14,13 +14,19 @@ export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 alias fzf="fzf -e"
 
+vfzf () {
+  nvim $(fzf -e)
+}
+
 # Alias
+
 alias q="exit"
 alias vi="nvim"
 alias py="python"
 alias lg="lazygit"
 alias cls="clear"
 alias monitor="hyprctl monitors"
+alias battery="cat /sys/class/power_supply/BAT1/capacity"
 
 # Kitty
 alias icat="kitten icat"
@@ -33,7 +39,7 @@ alias cde="conda deactivate"
 alias cenvl="conda env list"
 alias cenvc="conda create -n"
 alias cenvr="conda env remove -n"
-alias cenvle="conda list -e > requirements.txt"
+alias cenvle='conda env export | grep -v "^prefix: " > requirements.yml'
 
 # Bun
 alias b="bun"
