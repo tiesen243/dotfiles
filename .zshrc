@@ -35,7 +35,7 @@ alias cda="conda deactivate"
 alias cenvl="conda env list"
 alias cenvc="conda create -n"
 alias cenvr="conda env remove -n"
-alias cenvle='conda env export | grep -v "^prefix: " > requirements.yml'
+alias cenvle='conda env export | grep -v "^prefix: " > environment.yml'
 
 # Bun
 alias b="bun"
