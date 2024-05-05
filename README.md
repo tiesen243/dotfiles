@@ -26,7 +26,7 @@ rm -rf ~/yay
 
 ```bash
 sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard
-sudo yay -S swaylock-effects lazygit floorp-bin wlogout
+sudo yay -S swaylock-effects lazygit floorp-bin wlogout hyprpicker-git
 ```
 
 > If Jappanese/Chinese/Korean font not display correctly
