@@ -25,7 +25,7 @@ rm -rf ~/yay
 > Install all dependences
 
 ```bash
-sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch btop copyq wl-clipboard
+sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard
 sudo yay -S swaylock-effects lazygit floorp-bin wlogout
 ```
 
