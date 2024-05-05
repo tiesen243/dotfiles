@@ -1,5 +1,4 @@
 export ZSH="$HOME/.oh-my-zsh"
-export CUSTOM="$HOME/dotfiles/custom"
 
 ZSH_THEME="dracula"
 
@@ -7,7 +6,6 @@ ZSH_THEME="dracula"
 plugins=(git emoji zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-source $CUSTOM/plugins/zsh-syntax-highlighting.sh
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 # FZF Theme
@@ -56,7 +54,7 @@ alias bst="bun start"
 
 # Custom commands
 
-fastpush() {
+gitpush () {
   git add .
   git commit -m "$1"
   git push
@@ -67,5 +65,4 @@ vfzf () {
 }
 
 
-# Show date and time in terminal when opening a new terminal
 date
