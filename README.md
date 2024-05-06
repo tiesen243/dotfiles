@@ -136,6 +136,6 @@ yay -S wlrobs
 
 ### Enjoy it!
 
-Documentations: [Hyprland](https://tiesen.id.vn/blog/hyprland/)
+Documentations: [here](https://tiesen.id.vn/blog/hyprland/)
 
 Optional: You can try my neovim config at [here](https://github.com/tiesen243/nvim)
