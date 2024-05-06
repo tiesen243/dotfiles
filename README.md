@@ -137,3 +137,4 @@ yay -S wlrobs
 ### Enjoy it!
 
 Optional: You can try my neovim config at [here](https://github.com/tiesen243/nvim)
+Documentations: [Hyprland](https://tiesen.id.vn/blog/hyprland/)
