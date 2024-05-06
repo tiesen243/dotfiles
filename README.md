@@ -12,7 +12,7 @@
 git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
 ```
 
-> Install `yay`
+Install `yay`
 
 ```bash
 pacman -S --needed git base-devel
@@ -22,20 +22,20 @@ makepkg -si
 rm -rf ~/yay
 ```
 
-> Install all dependences
+Install all dependences
 
 ```bash
 sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard xfce4-settings grim slurp
 sudo yay -S swaylock-effects lazygit floorp-bin wlogout hyprpicker-git
 ```
 
-> If Jappanese/Chinese/Korean font not display correctly
+If Jappanese/Chinese/Korean font not display correctly
 
 ```bash
 sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 ```
 
-> If you use `nvidia` GPU
+If you use `nvidia` GPU
 
 ```bash
 sudo pacman -S nvidia-dkms nvidia-utils
@@ -57,20 +57,20 @@ MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
 sudo mkinitcpio -P
 ```
 
-> Install `oh-my-zsh`
+Install `oh-my-zsh`
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-> Install zsh plugins
+Install zsh plugins
 
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-> Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
+Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
 
 ```bash
 mkdir -p ~/.miniconda3
@@ -92,19 +92,13 @@ yay -S nvm
 source = ~/dotfiles/hypr/hyprland.conf
 ```
 
-2. Change the content of `~/.config/kitty/kitty.conf` to
+2. Copy folder `~/dotfiles/zsh-theme` to `~/.oh-my-zsh/custom/themes`
 
 ```bash
-include ~/dotfiles/kitty/kitty.conf
+cp -r ~/dotfiles/zsh-theme/* ~/.oh-my-zsh/custom/themes
 ```
 
-3. Copy folder `~/dotfiles/custom` to `~/.oh-my-zsh/custom`
-
-```bash
-cp -r ~/dotfiles/custom/themes ~/.oh-my-zsh/custom
-```
-
-4. Change the content of `~/.zshrc` to
+Then, change the content of `~/.zshrc` to
 
 ```bash
 source ~/dotfiles/.zshrc
@@ -124,13 +118,9 @@ yay -S nwg-look
 
 Then, you can change the themes by `nwg-look` command
 
-2. Change Wallpaper
+2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
 ```bash
-sudo pacman -S hyprpaper
-touch ~/.config/hypr/hyprpaper.conf
-
-# add the content to hyprpaper.conf
 preload = ~/path/to/wallpaper
 wallpaper = ,~/path/to/wallpaper
 ```
