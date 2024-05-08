@@ -1,9 +1,9 @@
 window {
   margin: 0px;
   border: solid 2px #282a36;
-  border-image: linear-gradient(to bottom right, #e87e8b, #7dbfe8) 1;
+  border-color: #98aef8;
   background-color: #282a36;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 #input {
@@ -46,7 +46,7 @@ window {
 
 #entry:selected {
   background-color: #44475a;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 #entry:selected #text {
