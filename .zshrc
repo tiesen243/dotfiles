@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="dracula"
 
 # Plugins
-plugins=(git emoji zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -20,7 +20,7 @@ alias lg="lazygit"
 alias cls="clear"
 alias monitor="hyprctl monitors"
 alias battery="cat /sys/class/power_supply/BAT1/capacity"
-alias fastfetch="fastfetch -c ~/dotfiles/fastfetch.jsonc"
+alias spec="fastfetch -c ~/dotfiles/fastfetch.jsonc"
 
 # Kitty
 alias icat="kitten icat"
