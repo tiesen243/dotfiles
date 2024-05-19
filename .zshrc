@@ -20,7 +20,7 @@ alias lg="lazygit"
 alias cls="clear"
 alias monitor="hyprctl monitors"
 alias battery="cat /sys/class/power_supply/BAT1/capacity"
-alias fetch="fastfetch --logo ~/dotfiles/assets/YukikazeWedding.png"
+alias fastfetch="fastfetch -c ~/dotfiles/fastfetch.jsonc"
 
 # Kitty
 alias icat="kitten icat"
