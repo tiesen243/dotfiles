@@ -1,0 +1,78 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/dotfiles/assets/fastfetch.png",
+    "height": 30,
+    "padding": {
+      "left": 2,
+    },
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌────────────────────────────────────────────────────────────┐",
+    },
+    {
+      "type": "title",
+      "format": "                         {1}@{2}",
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────────────┘",
+    },
+    {
+      "type": "custom",
+      "format": " \u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m  \u001b[38m  \u001b[39m       \u001b[38m  \u001b[37m  \u001b[36m  \u001b[35m  \u001b[34m  \u001b[33m  \u001b[32m  \u001b[31m  \u001b[90m",
+    },
+
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌────────────────────────────────────────────────────────────┐",
+    },
+    { "type": "host", "key": "󰌢  PC" },
+    { "type": "os", "key": "  OS" },
+    { "type": "wm", "key": "  DE" },
+    { "type": "terminal", "key": "  Terminal" },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────────────┘",
+    },
+
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌────────────────────────────────────────────────────────────┐",
+    },
+    { "type": "theme", "key": "󰉼  Theme" },
+    { "type": "icons", "key": "󰀻  Icon" },
+    { "type": "cursor", "key": "󰏚  Cursor" },
+    { "type": "font", "key": "  Font" },
+    { "type": "terminalFont", "key": "  Terminal Font" },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────────────┘",
+    },
+
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌────────────────────────────────────────────────────────────┐",
+    },
+    { "type": "cpu", "key": "󰻠  CPU" },
+    { "type": "gpu", "key": "󰍛  GPU" },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────────────┘",
+    },
+
+    {
+      "type": "custom",
+      "format": "\u001b[90m┌────────────────────────────────────────────────────────────┐",
+    },
+    { "type": "localip", "key": "󰩟  Local IP" },
+    { "type": "battery", "key": "  Battery" },
+    { "type": "uptime", "key": "󰅐  Uptime" },
+    {
+      "type": "custom",
+      "format": "\u001b[90m└────────────────────────────────────────────────────────────┘",
+    },
+  ],
+}
