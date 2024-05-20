@@ -28,7 +28,7 @@ Install all dependences
 
 ```bash
 sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard xfce4-settings grim slurp
-sudo yay -S swaylock-effects lazygit floorp-bin wlogout hyprpicker-git
+sudo yay -S swaylock-effects lazygit floorp-bin wlogout hyprpicker-git nwg-look
 ```
 
 If Jappanese/Chinese/Korean font not display correctly
@@ -94,16 +94,16 @@ yay -S nvm
 source = ~/dotfiles/hypr/hyprland.conf
 ```
 
-2. Copy folder `~/dotfiles/zsh-theme` to `~/.oh-my-zsh/custom/themes`
+2. Copy folder `~/dotfiles/zsh/theme` to `~/.oh-my-zsh/custom/themes`
 
 ```bash
-cp -r ~/dotfiles/zsh-theme/* ~/.oh-my-zsh/custom/themes
+cp -r ~/dotfiles/zsh/theme/* ~/.oh-my-zsh/custom/themes
 ```
 
 Then, change the content of `~/.zshrc` to
 
 ```bash
-source ~/dotfiles/.zshrc
+source ~/dotfiles/zsh/config.zsh
 ```
 
 ## How to change the themes
@@ -114,8 +114,6 @@ source ~/dotfiles/.zshrc
 cp -r ~/dotfiles/.fonts ~/
 cp -r ~/dotfiles/.icons ~/
 cp -r ~/dotfiles/.themes ~/
-
-yay -S nwg-look
 ```
 
 Then, you can change the themes by `nwg-look` command
@@ -126,6 +124,8 @@ Then, you can change the themes by `nwg-look` command
 preload = ~/path/to/wallpaper
 wallpaper = ,~/path/to/wallpaper
 ```
+
+Or change file in `~/dotfiles/assets/background.png`
 
 3. Install `obs-studio` for screen recording
 
