@@ -1,5 +1,7 @@
 # My arch linux config with Hyprland
 
+![preview](./assets/preview.png)
+
 ## Table of Contents
 
 1. [How to install](#how-to-install)
