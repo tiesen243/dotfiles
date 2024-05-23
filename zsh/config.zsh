@@ -13,42 +13,49 @@ alias fzf="fzf -e"
 
 # Alias
 
-alias q="exit"
-alias vi="nvim"
-alias py="python"
-alias lg="lazygit"
-alias cls="clear"
-alias monitor="hyprctl monitors"
-alias battery="cat /sys/class/power_supply/BAT1/capacity"
-alias spec="fastfetch -c ~/dotfiles/fastfetch.jsonc"
+alias  cls="clear"
+alias   vi="nvim"
+alias   py="python"
+alias   lg="lazygit"
+alias   ls="lsd -l"
+alias   la="lsd -a"
+alias   lla="lsd -la"
+alias   lt="lsd --tree"
+alias    q="exit"
 
 # Kitty
 alias icat="kitten icat"
 
 # Conda
-alias ci="conda install"
-alias cr="conda remove"
-alias ca="conda activate"
-alias cda="conda deactivate"
-alias cenvl="conda env list"
-alias cenvc="conda create -n"
-alias cenvr="conda env remove -n"
-alias cenvle='conda env export | grep -v "^prefix: " > environment.yml'
+alias cele='conda env export | grep -v "^prefix: " > environment.yml'
+alias  cda="conda deactivate"
+alias  cel="conda env list"
+alias  cec="conda create -n"
+alias  cer="conda env remove -n"
+alias   ci="conda install"
+alias   cr="conda remove"
+alias   ca="conda activate"
 
 # Bun
-alias b="bun"
-alias bc="bun create"
-alias bi="bun install"
-alias ba="bun add"
-alias bad="bun add -d"
-alias bup="bun add -p"
-alias br="bun remove"
-alias bu="bun update"
-alias bf="bun format"
-alias bl="bun lint"
-alias bd="bun dev"
-alias bb="bun run build"
-alias bst="bun start"
+alias  bup="bun upgrade"
+alias  bad="bun add -d"
+alias  bap="bun add -p"
+alias   ba="bun add"
+alias   bc="bun create"
+alias   bi="bun install"
+alias   bd="bun dev"
+alias   bl="bun lint"
+alias   bf="bun format"
+alias   bb="bun run build"
+alias   bs="bun start"
+alias   bp="bun preview"
+alias   bu="bun update"
+alias   br="bun remove"
+alias    b="bun"
+
+# Others
+alias monitor="hyprctl monitors"
+alias spec="fastfetch -c ~/dotfiles/zsh/fastfetch.jsonc"
 
 # Custom commands
 
@@ -61,6 +68,5 @@ gitpush () {
 vfzf () {
   nvim $(fzf -e)
 }
-
 
 date
