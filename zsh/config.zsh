@@ -13,6 +13,7 @@ alias fzf="fzf -e"
 
 # Alias
 
+# General
 alias  cls="clear"
 alias   vi="nvim"
 alias   py="python"
@@ -59,7 +60,7 @@ alias spec="fastfetch -c ~/dotfiles/zsh/fastfetch.jsonc"
 
 # Custom commands
 
-gitpush () {
+gP () {
   git add .
   git commit -m "$1"
   git push
