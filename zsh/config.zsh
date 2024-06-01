@@ -28,14 +28,14 @@ alias    q="exit"
 alias icat="kitten icat"
 
 # Conda
-alias cele='conda env export | grep -v "^prefix: " > environment.yml'
-alias  cda="conda deactivate"
-alias  cel="conda env list"
-alias  cec="conda create -n"
-alias  cer="conda env remove -n"
-alias   ci="conda install"
-alias   cr="conda remove"
-alias   ca="conda activate"
+alias cee='conda env export | grep -v "^prefix: " > environment.yml'
+alias cda="conda deactivate"
+alias cel="conda env list"
+alias cec="conda create -n"
+alias cer="conda env remove -n"
+alias  ci="conda install"
+alias  cr="conda remove"
+alias  ca="conda activate"
 
 # Bun
 alias  bup="bun upgrade"
