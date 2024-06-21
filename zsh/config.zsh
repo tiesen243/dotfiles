@@ -54,6 +54,10 @@ alias   bu="bun update"
 alias   br="bun remove"
 alias    b="bun"
 
+# Git 
+alias   grc="gh repo create"
+alias   gcd="gh repo delete"
+
 # Others
 alias monitor="hyprctl monitors"
 alias spec="fastfetch -c ~/dotfiles/zsh/fastfetch.jsonc"
