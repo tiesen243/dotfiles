@@ -23,6 +23,7 @@ alias   la="lsd -a"
 alias   lla="lsd -la"
 alias   lt="lsd --tree"
 alias    q="exit"
+alias    y="yazi"
 
 # Kitty
 alias icat="kitten icat"
