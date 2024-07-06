@@ -10,11 +10,13 @@
 
 ## How to install
 
+1. Clone this repository
+
 ```bash
 git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
 ```
 
-Install `yay`
+2. Install `yay`
 
 ```bash
 pacman -S --needed git base-devel
@@ -24,55 +26,33 @@ makepkg -si
 rm -rf ~/yay
 ```
 
-Install all dependences
+3. Install all dependences
 
 ```bash
-sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol thunar gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard xfce4-settings grim slurp lsd
-sudo yay -S swaylock-effects lazygit floorp-bin wlogout hyprpicker-git nwg-look
+sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard xfce4-settings grim slurp lsd
+sudo yay -S swaylock-effects lazygit floorp-bin wlogout hyprpicker-git nwg-look yazi
 ```
 
-If Jappanese/Chinese/Korean font not display correctly
+4. If Japanese/Chinese/Korean font not display correctly
 
 ```bash
 sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 ```
 
-If you use `nvidia` GPU
-
-```bash
-sudo pacman -S nvidia-dkms nvidia-utils
-```
-
-Then add this line to end of `/etc/default/grub`
-
-```bash
-GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet nvidia_drm.modeset=1"
-
-sudo grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-Then add this line to end of `/etc/mkinitcpio.conf`
-
-```bash
-MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)
-
-sudo mkinitcpio -P
-```
-
-Install `oh-my-zsh`
+5. Install `oh-my-zsh`
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-Install zsh plugins
+Then, install zsh plugins
 
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
+6. Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
 
 ```bash
 mkdir -p ~/.miniconda3
@@ -104,6 +84,12 @@ Then, change the content of `~/.zshrc` to
 
 ```bash
 source ~/dotfiles/zsh/config.zsh
+```
+
+4. Copy `yazi` config to `~/.config/yazi`
+
+```bash
+cp -r ~/dotfiles/yazi/* ~/.config/yazi
 ```
 
 ## How to change the themes
