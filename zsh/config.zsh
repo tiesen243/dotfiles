@@ -61,7 +61,7 @@ alias   gcd="gh repo delete"
 
 # Others
 alias monitor="hyprctl monitors"
-alias spec="fastfetch -c ~/dotfiles/zsh/fastfetch.jsonc"
+alias spec="clear && fastfetch -c ~/dotfiles/zsh/fastfetch.jsonc"
 
 # Custom commands
 
@@ -75,4 +75,4 @@ vfzf () {
   nvim $(fzf -e)
 }
 
-date
+cowsay -f moose $(date)
