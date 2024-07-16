@@ -29,7 +29,7 @@ rm -rf ~/yay
 3. Install all dependences
 
 ```bash
-sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard xfce4-settings grim slurp lsd
+sudo pacman -S zsh swayidle hyprpaper p7zip wofi pavucontrol gvfs brightnessctl playerctl fastfetch btop cliphist wl-clipboard xfce4-settings grim slurp lsd cowsay
 sudo yay -S swaylock-effects lazygit floorp-bin wlogout hyprpicker nwg-look yazi
 ```
 
