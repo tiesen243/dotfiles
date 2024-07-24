@@ -15,15 +15,15 @@ alias fzf="fzf -e"
 
 # General
 alias  cls="clear"
-alias   vi="nvim"
 alias   py="python"
 alias   lg="lazygit"
 alias   ls="lsd -l"
 alias   la="lsd -a"
 alias   lla="lsd -la"
 alias   lt="lsd --tree"
-alias    q="exit"
+alias    v="nvim"
 alias    y="yazi"
+alias    q="exit"
 
 # Kitty
 alias icat="kitten icat"
@@ -55,9 +55,10 @@ alias   bu="bun update"
 alias   br="bun remove"
 alias    b="bun"
 
-# Git 
+# Git
 alias   grc="gh repo create"
 alias   gcd="gh repo delete"
+alias   gcl="gh repo clone"
 
 # Others
 alias monitor="hyprctl monitors"
