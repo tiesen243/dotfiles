@@ -4,7 +4,7 @@
 }
 
 window {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(1, 9, 9, 0.4);
 }
 
 button {
@@ -13,17 +13,17 @@ button {
   text-shadow: none;
 
   /* Text */
-  color: #edecee;
+  color: rgb(250, 250, 250);
   font-size: 1em;
   font-weight: 600;
   font-family: "Geist Sans", sans-serif;
 
   /* Border */
-  border: #27272a 2px solid;
+  border: rgba(42, 39, 39, 0.7) 2px solid;
   border-radius: 8px;
 
   /* Color */
-  background-color: #09090b;
+  background-color: rgba(11, 9, 9, 0.7);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 25%;
@@ -34,7 +34,7 @@ button {
 button:focus,
 button:active,
 button:hover {
-  border: #fafafa 2px solid;
+  border: rgba(250, 250, 250, 0.7) 2px solid;
 }
 
 #lock {
