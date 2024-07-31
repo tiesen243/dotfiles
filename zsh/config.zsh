@@ -59,6 +59,7 @@ alias    b="bun"
 alias   grc="gh repo create"
 alias   gcd="gh repo delete"
 alias   gcl="gh repo clone"
+alias    gs="git status"
 
 # Others
 alias monitor="hyprctl monitors"
