@@ -19,11 +19,11 @@ button {
   font-family: "Geist Sans", sans-serif;
 
   /* Border */
-  border: #4d4d4d 2px solid;
+  border: #27272a 2px solid;
   border-radius: 8px;
 
   /* Color */
-  background-color: #21202e;
+  background-color: #09090b;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 25%;
@@ -34,7 +34,7 @@ button {
 button:focus,
 button:active,
 button:hover {
-  border: #97aefa 2px solid;
+  border: #fafafa 2px solid;
 }
 
 #lock {

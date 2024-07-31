@@ -1,28 +1,27 @@
 window {
   margin: 0px;
-  border: solid 2px #282a36;
-  border-color: #98aef8;
-  background-color: #282a36;
+  border: solid 2px #27272a;
+  background-color: #09090b;
   border-radius: 8px;
 }
 
 #input {
-  margin: 5px;
+  margin: 4px;
   border: none;
-  color: #f8f8f2;
-  background-color: #44475a;
+  color: #fafafa;
+  background-color: #09090b;
 }
 
 #inner-box {
-  margin: 5px;
+  margin: 4px;
   border: none;
-  background-color: #282a36;
+  background-color: #09090b;
 }
 
 #outer-box {
-  margin: 5px;
+  margin: 4px;
   border: none;
-  background-color: #282a36;
+  background-color: #09090b;
 }
 
 #scroll {
@@ -31,21 +30,21 @@ window {
 }
 
 #text {
-  margin: 5px;
+  margin: 4px;
   border: none;
-  color: #f8f8f2;
+  color: #fafafa;
 }
 
 #entry.activatable #text {
-  color: #282a36;
+  color: #27272a;
 }
 
 #entry > * {
-  color: #f8f8f2;
+  color: #fafafa;
 }
 
 #entry:selected {
-  background-color: #44475a;
+  background-color: #27272a;
   border-radius: 4px;
 }
 
