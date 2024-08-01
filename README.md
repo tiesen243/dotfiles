@@ -88,9 +88,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 # .zshrc
 
 # >>> bun initialize >>>
-export BUN_DIR="$HOME/.bun"
-if [ -d "$BUN_DIR/bin" ]; then
-    export PATH="$BUN_DIR/bin:$PATH"
+if [ -d "$HOME/.bun/bin" ]; then
+    export PATH="$HOME/.bun/bin:$PATH"
 fi
 # <<< nvm initialize <<<
 ```
