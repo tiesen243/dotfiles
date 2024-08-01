@@ -61,6 +61,12 @@ alias   gcd="gh repo delete"
 alias   gcl="gh repo clone"
 alias    gs="git status"
 
+# Pacman (Arch Linux) | Yay
+alias    pr="yay -Runs"
+alias    pu="yay -Syu"
+alias    pc="yay -Scc"
+alias    pi="yay -S"
+
 # Others
 alias monitor="hyprctl monitors"
 alias spec="clear && fastfetch -c ~/dotfiles/zsh/fastfetch.jsonc"
