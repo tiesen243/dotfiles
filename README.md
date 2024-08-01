@@ -55,7 +55,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 5. Copy folder `~/dotfiles/zsh/theme` to `~/.oh-my-zsh/custom/themes`
 
 ```bash
-cp -r ~/dotfiles/zsh/theme/* ~/.oh-my-zsh/custom/themes
+cp -r ~/dotfiles/zsh/themes ~/.oh-my-zsh/custom
 ```
 
 Then, change the content of `~/.zshrc` to
@@ -66,6 +66,8 @@ source ~/dotfiles/zsh/config.zsh
 
 6. Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
 
+- Miniconda
+
 ```bash
 mkdir -p ~/.miniconda3
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/.miniconda3/miniconda.sh
@@ -74,8 +76,23 @@ rm -rf ~/.miniconda3/miniconda.sh
 ~/.miniconda3/bin/conda init zsh
 ```
 
+- NVM
+
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+```
+
+- If you use `bun` for default node package manager
+
+```bash
+# .zshrc
+
+# >>> bun initialize >>>
+export BUN_DIR="$HOME/.bun"
+if [ -d "$BUN_DIR/bin" ]; then
+    export PATH="$BUN_DIR/bin:$PATH"
+fi
+# <<< nvm initialize <<<
 ```
 
 ## How to use
