@@ -72,33 +72,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 
 ```bash
 source ~/dotfiles/zsh/config.zsh
-
-# >>> nvm initialize >>>
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# >>> nvm initialize >>>
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/tiesen/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/tiesen/.miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/tiesen/.miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/tiesen/.miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# >>> bun initialize >>>
-export BUN_PATH="$HOME/.bun"
-export PATH="$BUN_PATH/bin:$PATH"
-# <<< bun initialize <<<
-
 ```
 
 2. Copy folder `~/dotfiles/zsh/theme` to `~/.oh-my-zsh/custom/themes`
