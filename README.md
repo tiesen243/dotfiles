@@ -52,6 +52,18 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
+5. Copy folder `~/dotfiles/zsh/theme` to `~/.oh-my-zsh/custom/themes`
+
+```bash
+cp -r ~/dotfiles/zsh/theme/* ~/.oh-my-zsh/custom/themes
+```
+
+Then, change the content of `~/.zshrc` to
+
+```bash
+source ~/dotfiles/zsh/config.zsh
+```
+
 6. Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
 
 ```bash
@@ -71,25 +83,13 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 1. Change the content of `~/.config/hypr/hyprland.conf` to
 
 ```bash
-source ~/dotfiles/zsh/config.zsh
+source ~/dotfiles/hypr/hyprland.conf
 ```
 
-2. Copy folder `~/dotfiles/zsh/theme` to `~/.oh-my-zsh/custom/themes`
+2. Copy `yazi` config to `~/.config/yazi`
 
 ```bash
-cp -r ~/dotfiles/zsh/theme/* ~/.oh-my-zsh/custom/themes
-```
-
-Then, change the content of `~/.zshrc` to
-
-```bash
-source ~/dotfiles/zsh/config.zsh
-```
-
-4. Copy `yazi` config to `~/.config/yazi`
-
-```bash
-cp -r ~/dotfiles/yazi/* ~/.config/yazi
+cp -r ~/dotfiles/yazi/yazi.toml ~/.config/yazi
 ```
 
 ## How to change the themes
@@ -120,36 +120,6 @@ Or change file in `~/dotfiles/assets/background.png`
 ```bash
 sudo pacman -S obs-studio
 yay -S wlrobs
-```
-
-- If you use `nvm`, `miniconda`, `bun`, add this line to `~/.zshrc`
-
-```bash
-# >>> nvm initialize >>>
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# >>> nvm initialize >>>
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/tiesen/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/tiesen/.miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/tiesen/.miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/tiesen/.miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# >>> bun initialize >>>
-export BUN_PATH="$HOME/.bun"
-export PATH="$BUN_PATH/bin:$PATH"
-# <<< bun initialize <<<
 ```
 
 ---
