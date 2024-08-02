@@ -58,6 +58,7 @@ alias  gcl="gh repo clone"
 alias   gs="git status"
 
 # Pacman (Arch Linux) | Yay
+alias pacq="yay -Rns $(yay -Qtdq)"
 alias pacr="yay -Runs"
 alias pacu="yay -Syu"
 alias pacc="yay -Scc"
