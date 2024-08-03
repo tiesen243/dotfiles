@@ -5,3 +5,12 @@ linemode = "size"
 edit = [
   { run = 'nvim "$@"', block = true },
 ]
+play = [
+  {run = 'vlc "$@"', opharn=true, block = true},
+]
+
+[open]
+rules = [
+  { mime = "video/*", use = "play" },
+]
+
