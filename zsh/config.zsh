@@ -1,4 +1,6 @@
+# Environment variables
 export ZSH="$HOME/.oh-my-zsh"
+export YAZI_CONFIG_HOME="$HOME/dotfiles/yazi"
 
 ZSH_THEME="yuki"
 
