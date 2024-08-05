@@ -55,7 +55,7 @@ alias    b="bun"
 
 # Git
 alias  grc="gh repo create"
-alias  gcd="gh repo delete"
+alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
 alias   gs="git status"
 
