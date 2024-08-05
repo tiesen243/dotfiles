@@ -96,16 +96,10 @@ fi
 
 ## How to use
 
-1. Change the content of `~/.config/hypr/hyprland.conf` to
+Change the content of `~/.config/hypr/hyprland.conf` to
 
 ```bash
 source ~/dotfiles/hypr/hyprland.conf
-```
-
-2. Copy `yazi` config to `~/.config/yazi`
-
-```bash
-cp -r ~/dotfiles/yazi/yazi.toml ~/.config/yazi
 ```
 
 ## How to change the themes
