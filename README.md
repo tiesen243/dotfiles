@@ -99,7 +99,7 @@ fi
 Change the content of `~/.config/hypr/hyprland.conf` to
 
 ```bash
-source ~/dotfiles/hypr/hyprland.conf
+source = ~/dotfiles/hypr/hyprland.conf
 ```
 
 ## How to change the themes
