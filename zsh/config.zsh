@@ -60,14 +60,14 @@ alias  gcl="gh repo clone"
 alias   gs="git status"
 
 # Pacman (Arch Linux) | Yay
-alias pacq="yay -Rns $(yay -Qtdq)"
+alias pacq="yay -Runs $(yay -Qtdq)"
 alias pacr="yay -Runs"
 alias pacu="yay -Syu"
 alias pacc="yay -Scc"
 alias paci="yay -S"
 
 # Others
-alias monitor="hyprctl monitors"
+alias moni="hyprctl monitors"
 alias spec="clear && fastfetch -c ~/dotfiles/fastfetch/config.jsonc"
 alias  fzf="fzf -e"
 
@@ -83,8 +83,3 @@ gP () {
   git push
 }
 
-vfzf () {
-  nvim $(fzf -e)
-}
-
-cowsay -f moose $(date)

@@ -1,0 +1,54 @@
+* {
+  font-family: FiraCode Nerd Font;
+  font-size: 12px;
+}
+
+window#waybar {
+  background-color: transparent;
+}
+
+#custom-distro-icon {
+  color: white;
+  margin-left: 12px;
+  margin-right: 16px;
+  font-size: 18px;
+}
+
+#workspaces button {
+  color: #a1a1aa;
+  background: #27272a;
+
+  font-size: 16px;
+  margin-right: 12px;
+  padding: 0 16px;
+  border-radius: 16px;
+  font-weight: bolder;
+}
+
+#workspaces button:hover {
+  border: 1px solid #a1a1aa;
+}
+
+#workspaces button.active {
+  color: #18181b;
+  background: #fafafa;
+}
+
+#battery,
+#pulseaudio,
+#clock,
+#custom-wlogout {
+  color: #18181b;
+  background: #fafafa;
+
+  font-size: 16px;
+  margin-right: 12px;
+  padding: 0 16px;
+  border-radius: 16px;
+}
+
+#pulseaudio:hover,
+#clock:hover,
+#custom-wlogout:hover {
+  opacity: 0.8;
+}
