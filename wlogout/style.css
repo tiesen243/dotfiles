@@ -4,7 +4,7 @@
 }
 
 window {
-  background-color: rgba(1, 9, 9, 0.4);
+  background-color: rgba(1, 9, 9, 0.7);
 }
 
 button {
@@ -23,7 +23,7 @@ button {
   border-radius: 8px;
 
   /* Color */
-  background-color: rgba(11, 9, 9, 0.7);
+  background-color: rgba(11, 9, 9, 0.9);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 25%;
