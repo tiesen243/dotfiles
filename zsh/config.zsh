@@ -54,6 +54,7 @@ alias   br="bun remove"
 alias    b="bun"
 
 # Git
+alias  gpf="git push --force"
 alias  grc="gh repo create"
 alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
