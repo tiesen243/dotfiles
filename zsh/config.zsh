@@ -69,6 +69,7 @@ alias paci="yay -S"
 # Others
 alias moni="hyprctl monitors"
 alias spec="clear && fastfetch -c ~/dotfiles/fastfetch/config.jsonc"
+alias  cat="bat"
 alias  fzf="fzf -e"
 
 # Custom commands
