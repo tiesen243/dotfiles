@@ -3,11 +3,10 @@ export ZSH="$HOME/.oh-my-zsh"
 export YAZI_CONFIG_HOME="$HOME/dotfiles/yazi"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
+# ZSH Plugins and Theme
 ZSH_THEME="yuki"
-source $ZSH/oh-my-zsh.sh
-
-# Plugins
 plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+source $ZSH/oh-my-zsh.sh
 
 # Alias
 
