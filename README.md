@@ -29,8 +29,8 @@ rm -rf ~/yay
 3. Install all dependences
 
 ```bash
-sudo pacman -S zsh hypridle hyprpaper hyprlock p7zip wofi pavucontrol brightnessctl playerctl fastfetch btop cliphist wl-clipboard grim slurp lsd waybar
-sudo yay -S lazygit floorp-bin wlogout hyprpicker nwg-look yazi
+sudo pacman -S zsh hypridle hyprpaper hyprlock p7zip wofi pavucontrol brightnessctl playerctl fastfetch btop cliphist wl-clipboard grim slurp lsd waybar bat
+sudo yay -S floorp-bin wlogout hyprpicker nwg-look yazi
 ```
 
 4. If Japanese/Chinese/Korean font not display correctly
@@ -91,7 +91,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 if [ -d "$HOME/.bun/bin" ]; then
     export PATH="$HOME/.bun/bin:$PATH"
 fi
-# <<< nvm initialize <<<
+# <<< bun initialize <<<
 ```
 
 ## How to use
@@ -109,7 +109,6 @@ source = ~/dotfiles/hypr/hyprland.conf
 ```bash
 cp -r ~/dotfiles/.fonts ~/
 cp -r ~/dotfiles/.icons ~/
-cp -r ~/dotfiles/.themes ~/
 ```
 
 Then, you can change the themes by `nwg-look` command
