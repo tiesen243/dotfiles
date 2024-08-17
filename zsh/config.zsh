@@ -27,29 +27,29 @@ alias icat="kitten icat"
 
 # Conda
 alias  cee='conda env export | grep -v "^prefix: " > environment.yml'
-alias  cda="conda deactivate"
-alias  cel="conda env list"
-alias  cec="conda create -n"
 alias  cer="conda env remove -n"
+alias  cda="conda deactivate"
+alias  cec="conda create -n"
+alias  cel="conda env list"
+alias   ca="conda activate"
 alias   ci="conda install"
 alias   cr="conda remove"
-alias   ca="conda activate"
 
 # Bun
 alias  bup="bun upgrade"
 alias  bad="bun add -d"
 alias  bap="bun add -p"
-alias   ba="bun add"
-alias   bc="bun create"
-alias   bi="bun install"
-alias   bd="bun dev"
-alias   bl="bun lint"
-alias   bf="bun format"
 alias   bb="bun run build"
-alias   bs="bun start"
 alias   bp="bun preview"
+alias   bi="bun install"
+alias   bc="bun create"
 alias   bu="bun update"
 alias   br="bun remove"
+alias   bf="bun format"
+alias   bs="bun start"
+alias   bl="bun lint"
+alias   ba="bun add"
+alias   bd="bun dev"
 alias    b="bun"
 
 # Git
@@ -69,8 +69,8 @@ alias paci="yay -S"
 # Others
 alias moni="hyprctl monitors"
 alias spec="clear && fastfetch -c ~/dotfiles/fastfetch/config.jsonc"
-alias  cat="bat"
 alias  fzf="fzf -e"
+alias  cat="bat"
 
 # Custom commands
 
