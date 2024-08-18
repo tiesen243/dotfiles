@@ -25,4 +25,4 @@ export NVM_DIR="$HOME/.nvm"
 if [ -d "$HOME/.bun/bin" ]; then
     export PATH="$HOME/.bun/bin:$PATH"
 fi
-# <<< nvm initialize <<<
+# <<< bun initialize <<<
