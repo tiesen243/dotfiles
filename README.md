@@ -107,7 +107,7 @@ source = ~/dotfiles/hypr/hyprland.conf
 1. Change Themes
 
 ```bash
-cp -a ~/dotfiles/theme/. ~/
+cp -a ~/dotfiles/themes/. ~/
 ```
 
 Then, you can change the themes by `nwg-look` command
