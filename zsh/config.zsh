@@ -77,9 +77,9 @@ alias  cat="bat"
 gP () {
   git add .
   if [ -z "$1" ]; then
-    git commit
+    git commit -a
   else
-    git commit -m "$1"
+    git commit -a -m "$1"
   fi
   git push
 }
