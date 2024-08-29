@@ -59,6 +59,15 @@ alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
 alias   gs="git status"
 
+# Docker
+alias  ddc="docker rm -f $(docker ps -a -q)"
+alias  ddi="docker rmi -f $(docker images -q)"
+alias   dr="docker run"
+alias   db="docker build"
+alias   di="docker images"
+alias   dp="docker ps"
+alias   dl="docker logs"
+
 # Pacman (Arch Linux) | Yay
 alias pacq="yay -Qdtq | yay -Rns -"
 alias pacr="yay -Runs"
