@@ -136,3 +136,7 @@ yay -S wlrobs
 Documentations: [here](https://tiesen.id.vn/blog/hyprland/)
 
 Optional: You can try my neovim config at [here](https://github.com/tiesen243/nvim)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
