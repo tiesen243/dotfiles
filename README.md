@@ -118,7 +118,7 @@ preload = ~/path/to/wallpaper
 wallpaper = ,~/path/to/wallpaper
 ```
 
-Or change file in `~/dotfiles/assets/background.png`
+Or change file in `~/dotfiles/assets/_background.jpg`
 
 ## Note:
 
