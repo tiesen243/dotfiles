@@ -1,0 +1,2 @@
+# ignore all files with _ in head of name
+_*.*
