@@ -1,6 +1,7 @@
 * {
   font-family: FiraCode Nerd Font;
   font-size: 12px;
+  margin-top: 1.5px;
 }
 
 window#waybar {
