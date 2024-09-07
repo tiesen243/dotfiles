@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "hyprlock -c ~/dotfiles/hypr/hyprlock.conf",
+    "action" : "hyprlock -c ~/dotfiles/hypr/misc/hyprlock.conf",
     "text" : "Lock",
     "keybind" : "l"
 }
