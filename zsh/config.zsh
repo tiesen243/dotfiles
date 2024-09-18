@@ -37,6 +37,8 @@ alias   cr="conda remove"
 
 # Bun
 alias  bup="bun upgrade"
+alias  big="bun install -g"
+alias  bug="bun update -g"
 alias  bad="bun add -d"
 alias  bap="bun add -p"
 alias   bb="bun run build"
@@ -59,15 +61,15 @@ alias  grc="gh repo create"
 alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
 alias   gs="git status"
+alias    g="git"
 
 # Docker
 alias  ddc="docker rm -f $(docker ps -a -q)"
 alias  ddi="docker rmi -f $(docker images -q)"
-alias   dr="docker run"
-alias   db="docker build"
+alias   dc="docker container ls"
 alias   di="docker images"
-alias   dp="docker ps"
-alias   dl="docker logs"
+alias   db="docker build"
+alias   dr="docker run"
 
 # Pacman (Arch Linux) | Yay
 alias pacq="yay -Qdtq | yay -Rns -"
