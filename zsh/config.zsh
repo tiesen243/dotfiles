@@ -66,6 +66,8 @@ alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
 alias  gcz="git cz -a"
 alias   gc="git commit -a"
+alias   gp="git push"
+alias   ga="git add"
 alias   gs="git status"
 alias    g="git"
 
