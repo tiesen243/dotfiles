@@ -5,7 +5,7 @@ export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 # ZSH Plugins and Theme
 ZSH_THEME="yuki"
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting vi-mode)
 source $ZSH/oh-my-zsh.sh
 
 # Alias
@@ -58,10 +58,14 @@ alias   bd="bun dev"
 alias    b="bun"
 
 # Git
+alias  gcs="gh copilot suggest"
+alias  gce="gh copilot explain"
 alias  gpf="git push --force"
 alias  grc="gh repo create"
 alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
+alias  gcz="git cz -a"
+alias   gc="git commit -a"
 alias   gs="git status"
 alias    g="git"
 
