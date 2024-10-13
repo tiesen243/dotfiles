@@ -12,12 +12,12 @@ source $ZSH/oh-my-zsh.sh
 
 # General
 alias  cls="clear"
-alias   py="python"
-alias   lg="lazygit"
+alias  lzg="lazygit"
+alias  lla="lsd -la"
+alias   lt="lsd --tree --depth=3"
 alias   ls="lsd -l"
 alias   la="lsd -a"
-alias   lla="lsd -la"
-alias   lt="lsd --tree"
+alias   py="python"
 alias    v="nvim"
 alias    y="yazi"
 alias    q="exit"
@@ -28,7 +28,7 @@ alias icat="kitten icat"
 # Conda
 alias  cee='conda env export | grep -v "^prefix: " > environment.yml'
 alias  cer="conda env remove -n"
-alias  cda="conda deactivate"
+alias  ced="conda deactivate"
 alias  cec="conda create -n"
 alias  cel="conda env list"
 alias   ca="conda activate"
@@ -93,7 +93,7 @@ alias spec="clear && fastfetch -c ~/dotfiles/fastfetch/config.jsonc"
 alias  fzf="fzf -e"
 alias  cat="bat"
 
-# Custom commands
+# Functions
 
 gP () {
   git add .
