@@ -20,7 +20,7 @@ makepkg -si
 rm -rf ~/yay
 ```
 
-3. Install all dependences
+3. Install all packages
 
 ```bash
 yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop
@@ -43,12 +43,6 @@ Then, install zsh plugins
 ```bash
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-```
-
-Final, change link to my custom zsh config
-
-```bash
-ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
 
 5. If Japanese/Chinese/Korean font not display correctly
@@ -85,13 +79,20 @@ fi
 # <<< bun initialize <<<
 ```
 
-7. Change content in `~/.config/hypr/hyprland.conf`
+## Usage
+
+Link all config files to your `.config` directory
 
 ```bash
-source = ~/dotfiles/hypr/hyprland.conf
+ln -s ~/dotfiles/nvim ~/.config/nvim
+ln -s ~/dotfiles/hypr ~/.config/hypr
+ln -s ~/dotfiles/kitty ~/.config/kitty
+ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
 
-8. Change Themes
+## Customization
+
+1. Change Themes
 
 ```bash
 cp -a ~/dotfiles/themes/. ~/
@@ -99,7 +100,7 @@ cp -a ~/dotfiles/themes/. ~/
 
 Then, you can change the themes by `nwg-look` command
 
-9. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
+2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
 ```bash
 preload = ~/path/to/wallpaper
