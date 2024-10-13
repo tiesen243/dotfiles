@@ -11,7 +11,7 @@
 # @website https://tiesen.id.vn
 
 # Initialization {{{
-source ${0:A:h}/lib/async.zsh
+source ~/dotfiles/zsh/themes/async.zsh
 autoload -Uz add-zsh-hook
 setopt PROMPT_SUBST
 async_init
@@ -30,6 +30,8 @@ YUKI_DISPLAY_CONTEXT=${YUKI_DISPLAY_CONTEXT:-1}
 
 # Changes the triangle icon
 YUKI_ARROW_ICON=${YUKI_ARROW_ICON:-▲ }
+YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-󰘧 }
+
 # Set to 1 to use a new line for commands
 YUKI_DISPLAY_NEW_LINE=${YUKI_DISPLAY_NEW_LINE:-0}
 
@@ -65,7 +67,7 @@ YUKI_GIT_NOLOCK=${YUKI_GIT_NOLOCK:-$(yuki_test_git_optional_lock)}
 
 # time format string
 if [[ -z "$YUKI_TIME_FORMAT" ]]; then
-  YUKI_TIME_FORMAT="%-H:%M"
+  YUKI_TIME_FORMAT="%H:%M"
   # check if locale uses AM and PM
   if locale -ck LC_TIME 2>/dev/null | grep -q '^t_fmt="%r"$'; then
     YUKI_TIME_FORMAT="%-I:%M%p"
@@ -89,7 +91,7 @@ PROMPT+='%(?:%F{foreground}:%F{red})%B$(yuki_arrow start)'
 # Time segment {{{
 yuki_time_segment() {
   if (( YUKI_DISPLAY_TIME )); then
-    print -P "%D{$YUKI_TIME_FORMAT} "
+    print -P "<%D{$YUKI_TIME_FORMAT} /> "
   fi
 }
 
@@ -99,7 +101,7 @@ PROMPT+='%F{foreground}%B$(yuki_time_segment)'
 # User context segment {{{
 yuki_context() {
   if (( YUKI_DISPLAY_CONTEXT )); then
-    echo '%n@%m '
+    echo '%n@%m 󱦰 '
   fi
 }
 
@@ -169,8 +171,8 @@ add-zsh-hook precmd yuki_git_async
 
 PROMPT+='$YUKI_GIT_STATUS'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{red}%B("
-ZSH_THEME_GIT_PROMPT_CLEAN=") %F{green}%Bᗜˬᗜ "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}%B("
+ZSH_THEME_GIT_PROMPT_CLEAN=") %F{magenta}%Bᗜˬᗜ "
 ZSH_THEME_GIT_PROMPT_DIRTY=") %F{yellow}%Bᗜ˰ᗜ "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""%f%b""
 # }}}
@@ -180,4 +182,4 @@ PROMPT+='%F{foreground}%B$(yuki_arrow end)'
 # }}}
 
 # Ensure effects are reset
-PROMPT+='%f%b'
+PROMPT+='%f%b$YUKI_EXECUTED_ICON'
