@@ -120,10 +120,6 @@ yay -S obs-studio wlrobs
 
 This is my personal config for my arch linux system. You can use it as a reference or clone it to your system. If you have any question, feel free to ask me.
 
----
-
-## Enjoy it!
-
 Documentations: [here](https://tiesen.id.vn/blogs/hyprland/)
 
 Optional: You can try my neovim config at [here](https://github.com/tiesen243/nvim)
