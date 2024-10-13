@@ -29,7 +29,7 @@ rm -rf ~/yay
 3. Install all dependences
 
 ```bash
-yay -S zsh hypridle hyprpaper hyprlock p7zip wofi pavucontrol brightnessctl playerctl fastfetch btop cliphist wl-clipboard grim slurp lsd waybar bat floorp-bin wlogout hyprpicker nwg-look yazi
+yay -S zsh hypridle hyprpaper hyprlock p7zip wofi pavucontrol brightnessctl playerctl fastfetch btop cliphist wl-clipboard grim slurp lsd bat floorp-bin wlogout hyprpicker nwg-look yazi
 ```
 
 4. If Japanese/Chinese/Korean font not display correctly
