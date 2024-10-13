@@ -74,7 +74,7 @@
 
     # Show how many messages are currently hidden (because of
     # notification_limit).
-    indicate_hidden = yes
+    indicate_hidden = no
 
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
@@ -85,7 +85,7 @@
     # notifications.
     # Set to 0 to disable.
     # If gap_size is greater than 0, this setting will be ignored.
-    separator_height = 2
+    separator_height = 0
 
     # Padding between text and separator.
     padding = 12
@@ -274,7 +274,7 @@
     # Useful to enforce the timeout set by dunst configuration. Without this
     # parameter, an application may close the notification sent before the
     # user defined timeout.
-    ignore_dbusclose = false
+    ignore_dbusclose = true
 
     ### Wayland ###
     # These settings are Wayland-specific. They have no effect when using X11
@@ -333,23 +333,23 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#0a0a0a"
     foreground = "#fafafa"
-    timeout = 10
+    timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     default_icon = ~/dotfiles/dunst/normal.png
 
 [urgency_normal]
     background = "#0a0a0a"
     foreground = "#fafafa"
-    timeout = 10
-    override_pause_level = 30
+    timeout = 5
+    # override_pause_level = 30
     # Icon for notifications with normal urgency, uncomment to enable
     default_icon = ~/dotfiles/dunst/normal.png
 
 [urgency_critical]
     background = "#a71b1a"
     foreground = "#fafafa"
-    timeout = 0
-    override_pause_level = 60
+    timeout = 10
+    # override_pause_level = 60
     # Icon for notifications with critical urgency, uncomment to enable
     default_icon = ~/dotfiles/dunst/critical.png
 
