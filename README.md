@@ -51,10 +51,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-Final, change the content of `~/.zshrc` to
+Final, change link to my custom zsh config
 
 ```bash
-source ~/dotfiles/zsh/config.zsh
+ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
 
 5. If Japanese/Chinese/Korean font not display correctly
@@ -93,15 +93,13 @@ fi
 
 ## How to use
 
-Change the content of `~/.config/hypr/hyprland.conf` to
+1. Change content in `~/.config/hypr/hyprland.conf`
 
 ```bash
 source = ~/dotfiles/hypr/hyprland.conf
 ```
 
-## How to change the themes
-
-1. Change Themes
+2. Change Themes
 
 ```bash
 cp -a ~/dotfiles/themes/. ~/
@@ -109,7 +107,7 @@ cp -a ~/dotfiles/themes/. ~/
 
 Then, you can change the themes by `nwg-look` command
 
-2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
+3. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
 ```bash
 preload = ~/path/to/wallpaper
