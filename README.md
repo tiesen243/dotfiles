@@ -84,7 +84,6 @@ fi
 Link all config files to your `.config` directory
 
 ```bash
-ln -s ~/dotfiles/nvim ~/.config/nvim
 ln -s ~/dotfiles/hypr ~/.config/hypr
 ln -s ~/dotfiles/kitty ~/.config/kitty
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
