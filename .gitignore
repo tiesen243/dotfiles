@@ -1,2 +1,5 @@
 # ignore all files with _ in head of name
 _*.*
+
+# ignore log files
+*.log
