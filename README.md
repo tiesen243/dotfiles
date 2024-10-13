@@ -23,7 +23,7 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop
+yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go
 ```
 
 4. Install `oh-my-zsh`
@@ -87,6 +87,7 @@ Link all config files to your `.config` directory
 ln -s ~/dotfiles/hypr ~/.config/hypr
 ln -s ~/dotfiles/kitty ~/.config/kitty
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+ln -s ~/dotfiles/lazygit ~/.config/lazygit
 ```
 
 ## Customization
