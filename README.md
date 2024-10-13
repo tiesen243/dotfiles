@@ -29,19 +29,19 @@ rm -rf ~/yay
 3. Install all dependences
 
 ```bash
-yay -S zsh hypridle hyprpaper hyprlock p7zip wofi pavucontrol brightnessctl playerctl fastfetch btop cliphist wl-clipboard grim slurp lsd bat floorp-bin wlogout hyprpicker nwg-look yazi
+yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop
 ```
 
-4. If Japanese/Chinese/Korean font not display correctly
-
-```bash
-sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji
-```
-
-5. Install `oh-my-zsh`
+4. Install `oh-my-zsh`
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+Next, link my custom zsh theme to `~/.oh-my-zsh/custom/themes`
+
+```bash
+ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes/yuki.zsh-theme
 ```
 
 Then, install zsh plugins
@@ -51,16 +51,16 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-5. Copy folder `~/dotfiles/zsh/theme` to `~/.oh-my-zsh/custom/themes`
-
-```bash
-cp -r ~/dotfiles/zsh/themes ~/.oh-my-zsh/custom
-```
-
-Then, change the content of `~/.zshrc` to
+Final, change the content of `~/.zshrc` to
 
 ```bash
 source ~/dotfiles/zsh/config.zsh
+```
+
+5. If Japanese/Chinese/Korean font not display correctly
+
+```bash
+yay -S noto-fonts noto-fonts-cjk noto-fonts-emoji
 ```
 
 6. Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
@@ -81,11 +81,9 @@ rm -rf ~/.miniconda3/miniconda.sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 ```
 
-- If you use `bun` for default node package manager
+- If you use `bun` for default node package manager, remember to add this to your `.zshrc`
 
 ```bash
-# .zshrc
-
 # >>> bun initialize >>>
 if [ -d "$HOME/.bun/bin" ]; then
     export PATH="$HOME/.bun/bin:$PATH"
@@ -125,8 +123,7 @@ Or change file in `~/dotfiles/assets/_background.jpg`
 - If you use `obs-studio`, you can install `wlrobs` dependency for screen recording
 
 ```bash
-sudo pacman -S obs-studio
-yay -S wlrobs
+yay -S obs-studio wlrobs
 ```
 
 ---
