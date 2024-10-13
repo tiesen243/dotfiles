@@ -68,6 +68,7 @@ alias    b="bun"
 # Git
 alias  gcs="gh copilot suggest"
 alias  gce="gh copilot explain"
+alias  grv="gh repo view --web"
 alias  gpf="git push --force"
 alias  grc="gh repo create"
 alias  grd="gh repo delete"
