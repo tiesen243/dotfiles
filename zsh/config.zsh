@@ -26,7 +26,6 @@ alias   ls="lsd -l"
 alias   la="lsd -a"
 alias   py="python"
 alias    v="nvim"
-alias    y="yazi"
 alias    q="exit"
 alias    h="~"
 
