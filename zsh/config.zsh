@@ -18,9 +18,11 @@ source $ZSH/oh-my-zsh.sh
 #############################################
 
 # General
-alias  cls="clear"
 alias  lzg="lazygit"
 alias  lla="lsd -la"
+alias  fzf="fzf -e"
+alias  cls="clear"
+alias  cat="bat"
 alias   lt="lsd --tree --depth=3"
 alias   ls="lsd -l"
 alias   la="lsd -a"
@@ -96,12 +98,6 @@ alias pacr="yay -Runs"
 alias pacu="yay -Syu"
 alias pacc="yay -Scc"
 alias paci="yay -S"
-
-# Others
-alias moni="hyprctl monitors"
-alias spec="clear && fastfetch -c ~/dotfiles/fastfetch/config.jsonc"
-alias  fzf="fzf -e"
-alias  cat="bat"
 
 #############################################
 # Functions
