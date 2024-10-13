@@ -2,13 +2,7 @@
 
 ![preview](./assets/preview.png)
 
-## Table of Contents
-
-1. [How to install](#how-to-install)
-2. [How to use](#how-to-use)
-3. [How to change the themes](#how-to-change-the-themes)
-
-## How to install
+## Installation
 
 1. Clone this repository
 
@@ -91,15 +85,13 @@ fi
 # <<< bun initialize <<<
 ```
 
-## How to use
-
-1. Change content in `~/.config/hypr/hyprland.conf`
+7. Change content in `~/.config/hypr/hyprland.conf`
 
 ```bash
 source = ~/dotfiles/hypr/hyprland.conf
 ```
 
-2. Change Themes
+8. Change Themes
 
 ```bash
 cp -a ~/dotfiles/themes/. ~/
@@ -107,7 +99,7 @@ cp -a ~/dotfiles/themes/. ~/
 
 Then, you can change the themes by `nwg-look` command
 
-3. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
+9. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
 ```bash
 preload = ~/path/to/wallpaper
@@ -124,11 +116,15 @@ Or change file in `~/dotfiles/assets/_background.jpg`
 yay -S obs-studio wlrobs
 ```
 
+## Conclusion
+
+This is my personal config for my arch linux system. You can use it as a reference or clone it to your system. If you have any question, feel free to ask me.
+
 ---
 
 ## Enjoy it!
 
-Documentations: [here](https://tiesen.id.vn/blog/hyprland/)
+Documentations: [here](https://tiesen.id.vn/blogs/hyprland/)
 
 Optional: You can try my neovim config at [here](https://github.com/tiesen243/nvim)
 
