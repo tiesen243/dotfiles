@@ -81,13 +81,16 @@ fi
 
 ## Usage
 
-Link all config files to your `.config` directory
+To apply my config, you can run the following command
 
 ```bash
 ln -s ~/dotfiles/hypr ~/.config/hypr
+ln -s ~/dotfiles/btop ~/.config/btop
 ln -s ~/dotfiles/kitty ~/.config/kitty
+ln -s ~/dotfiles/dunst ~/.config/dunst
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ln -s ~/dotfiles/lazygit ~/.config/lazygit
+ln -s ~/dotfiles/fastfetch ~/.config/fastfetch
 ```
 
 ## Customization
