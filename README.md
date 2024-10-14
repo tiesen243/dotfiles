@@ -114,10 +114,10 @@ Or change file in `~/dotfiles/assets/_background.jpg`
 
 ## Note:
 
-- If you use `obs-studio`, you can install `wlrobs` dependency for screen recording
+- If you use `obs-studio`, you can install `wlrobs-hg` dependency for screen recording
 
 ```bash
-yay -S obs-studio wlrobs
+yay -S obs-studio wlrobs-hg
 ```
 
 ## Conclusion
