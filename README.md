@@ -32,11 +32,7 @@ yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brigh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-Next, link my custom zsh theme to `~/.oh-my-zsh/custom/themes`
-
-```bash
-ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes/yuki.zsh-theme
-```
+> Remember to choose `zsh` as your default shell
 
 Then, install zsh plugins
 
@@ -84,13 +80,7 @@ fi
 To apply my config, you can run the following command
 
 ```bash
-ln -s ~/dotfiles/hypr ~/.config/hypr
-ln -s ~/dotfiles/btop ~/.config/btop
-ln -s ~/dotfiles/kitty ~/.config/kitty
-ln -s ~/dotfiles/dunst ~/.config/dunst
-ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
-ln -s ~/dotfiles/lazygit ~/.config/lazygit
-ln -s ~/dotfiles/fastfetch ~/.config/fastfetch
+sh ~/dotfiles/install.sh
 ```
 
 ## Customization
