@@ -10,6 +10,14 @@
 git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
 ```
 
+> [!TIP]
+> You can run the following command to automatically setup all config files
+> Or just following the steps below to install each package manually
+
+```bash
+sh ~/dotfiles/install.sh
+```
+
 2. Install `yay`
 
 ```bash
@@ -80,7 +88,14 @@ fi
 To apply my config, you can run the following command
 
 ```bash
-sh ~/dotfiles/install.sh
+ln -s ~/dotfiles/hypr ~/.config
+ln -s ~/dotfiles/btop ~/.config
+ln -s ~/dotfiles/kitty ~/.config
+ln -s ~/dotfiles/dunst ~/.config
+ln -s ~/dotfiles/lazygit ~/.config
+ln -s ~/dotfiles/fastfetch ~/.config
+ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ```
 
 ## Customization
