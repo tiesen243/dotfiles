@@ -128,16 +128,16 @@ echo "Dotfiles linked!"
 # Copying themes
 echo "Copying themes..."
 
-if [ ! -d ~/.themes ]; then
-  cp -r ~/dotfiles/themes/.themes ~/
+if [ ! -d ~/.local/share/themes ]; then
+  cp -r ~/dotfiles/customsize/themes ~/.local/share
 fi
 
-if [ ! -d ~/.icons ]; then
-  cp -r ~/dotfiles/themes/.icons ~/
+if [ ! -d ~/.local/share/icons ]; then
+  cp -r ~/dotfiles/customsize/icons ~/.local/share
 fi
 
-if [ ! -d ~/dotfiles/themes/.fonts ]; then
-  cp -r ~/dotfiles/themes/.fonts ~/
+if [ ! -d ~/.local/share/fonts ]; then
+  cp -r ~/dotfiles/customsize/fonts ~/.local/share
 fi
 
 echo "Themes copied! You can change the theme in 'nwg-look'."
