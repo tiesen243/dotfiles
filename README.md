@@ -103,7 +103,7 @@ ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 1. Change Themes
 
 ```bash
-cp -a ~/dotfiles/themes/. ~/
+cp -r ~/dotfiles/customsize/* ~/.local/share
 ```
 
 Then, you can change the themes by `nwg-look` command
