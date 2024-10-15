@@ -15,7 +15,7 @@ git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
 > Or just following the steps below to install each package manually
 
 ```bash
-curl -sL https://raw.githubusercontent.com/tiesen243/dotfiles/refs/heads/main/install.sh | sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/tiesen243/dotfiles/main/install.sh)"
 ```
 
 2. Install `yay`
