@@ -38,33 +38,25 @@ button:hover {
 }
 
 #lock {
-  background-image: image(
-    url("./icons/lock_white.png"),
-    url("/usr/share/wlogout/icons/lock.png"),
-    url("/usr/local/share/wlogout/icons/lock.png")
-  );
+  background-image: image(url("./icons/lock_white.png"),
+      url("/usr/share/wlogout/icons/lock.png"),
+      url("/usr/local/share/wlogout/icons/lock.png"));
 }
 
 #logout {
-  background-image: image(
-    url("./icons/logout_white.png"),
-    url("/usr/share/wlogout/icons/logout.png"),
-    url("/usr/local/share/wlogout/icons/logout.png")
-  );
+  background-image: image(url("./icons/logout_white.png"),
+      url("/usr/share/wlogout/icons/logout.png"),
+      url("/usr/local/share/wlogout/icons/logout.png"));
 }
 
 #shutdown {
-  background-image: image(
-    url("./icons/shutdown_white.png"),
-    url("/usr/share/wlogout/icons/shutdown.png"),
-    url("/usr/local/share/wlogout/icons/shutdown.png")
-  );
+  background-image: image(url("./icons/shutdown_white.png"),
+      url("/usr/share/wlogout/icons/shutdown.png"),
+      url("/usr/local/share/wlogout/icons/shutdown.png"));
 }
 
 #reboot {
-  background-image: image(
-    url("./icons/reboot_white.png"),
-    url("/usr/share/wlogout/icons/reboot.png"),
-    url("/usr/local/share/wlogout/icons/reboot.png")
-  );
+  background-image: image(url("./icons/reboot_white.png"),
+      url("/usr/share/wlogout/icons/reboot.png"),
+      url("/usr/local/share/wlogout/icons/reboot.png"));
 }
