@@ -14,7 +14,7 @@ if ! command -v yay &> /dev/null; then
 
   echo "yay installed!"
 else
-  echo "yay is installed!"
+  echo "yay is arleady installed!"
 fi
 
 # Install packages
