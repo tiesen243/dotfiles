@@ -109,11 +109,12 @@ echo "Dotfiles cloned!"
 echo "Linking dotfiles..."
 
 rm ~/.zshrc
-rm -rf ~/.config/{hypr,btop,kitty,dunst,wlogout,lazygit,fastfetch}
 rm -rf ~/.oh-my-zsh/custom/themes/yuki.zsh-theme
+rm -rf ~/.config/{hypr,btop,nvim,kitty,dunst,wlogout,lazygit,fastfetch}
 
 ln -s ~/dotfiles/hypr ~/.config
 ln -s ~/dotfiles/btop ~/.config
+ln -s ~/dotfiles/nvim ~/.config
 ln -s ~/dotfiles/kitty ~/.config
 ln -s ~/dotfiles/dunst ~/.config
 ln -s ~/dotfiles/wlogout ~/.config
