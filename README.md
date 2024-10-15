@@ -31,7 +31,7 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go
+yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep
 ```
 
 4. Install `oh-my-zsh`
@@ -49,13 +49,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-5. If Japanese/Chinese/Korean font not display correctly
-
-```bash
-yay -S noto-fonts noto-fonts-cjk noto-fonts-emoji
-```
-
-6. Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
+5. Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
 
 - Miniconda
 
@@ -88,6 +82,10 @@ fi
 To apply my config, you can run the following command
 
 ```bash
+rm ~/.zshrc
+rm -rf ~/.config/{hypr,btop,kitty,dunst,wlogout,lazygit,fastfetch}
+rm -rf ~/.oh-my-zsh/custom/themes/yuki.zsh-theme
+
 ln -s ~/dotfiles/hypr ~/.config
 ln -s ~/dotfiles/btop ~/.config
 ln -s ~/dotfiles/kitty ~/.config
@@ -108,14 +106,13 @@ cp -a ~/dotfiles/themes/. ~/
 
 Then, you can change the themes by `nwg-look` command
 
-2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
+2. Change Wallpaper in `~/dotfiles/hypr/misc/hyprpaper.conf`
 
 ```bash
-preload = ~/path/to/wallpaper
-wallpaper = ,~/path/to/wallpaper
+$path = /path/to/your/wallpaper
 ```
 
-Or change file in `~/dotfiles/assets/_background.jpg`
+Or change file in `~/dotfiles/assets/_background.png`
 
 ## Note:
 
