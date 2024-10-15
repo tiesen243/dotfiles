@@ -3,7 +3,6 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "kmontocam/nvim-conda",
     },
     config = function()
       local lspconfig = require("lspconfig")
@@ -30,12 +29,6 @@ return {
         vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<cr>", opts("Peak definition"))
         vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts("Prev diagnostic"))
         vim.keymap.set("n", "<leader>lD", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts("Next diagnostic"))
-
-        if client.name == "pyright" then
-          vim.keymap.set("n", "<leader>lc", "<nop>", opts("Conda"))
-          vim.keymap.set("n", "<leader>lca", "<cmd>CondaActivate<cr>", opts("Conda Activate"))
-          vim.keymap.set("n", "<leader>lcd", "<cmd>CondaDeactivate<cr>", opts("Conda Deactivate"))
-        end
       end
 
       local servers = { "html", "emmet_ls", "tailwindcss", "eslint", "prismals", "pyright", "dockerls" }
