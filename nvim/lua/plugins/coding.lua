@@ -1,194 +1,245 @@
 return {
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-buffer",
-      "onsails/lspkind-nvim",
-      "saadparwaiz1/cmp_luasnip",
-      "rafamadriz/friendly-snippets",
-      { "L3MON4D3/LuaSnip", run = "make install_jsregexp" },
-    },
-    config = function()
-      local cmp = require("cmp")
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-path",
+			"onsails/lspkind-nvim",
+			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
+			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+		},
+		config = function()
+			local cmp = require("cmp")
+			local luasnip = require("luasnip")
 
-      require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load()
 
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
-        },
-        window = { completion = cmp.config.window.bordered() },
-        mapping = {
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
+			cmp.setup({
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
+				mapping = {
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+						elseif luasnip.locally_jumpable(1) then
+							luasnip.jump(1)
+						else
+							fallback()
+						end
+					end, { "i", "s", "c" }),
 
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+						elseif luasnip.locally_jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s", "c" }),
 
-          ["<C-k>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-j>"] = cmp.mapping.scroll_docs(4),
+					["<C-k>"] = cmp.mapping.scroll_docs(-4),
+					["<C-j>"] = cmp.mapping.scroll_docs(4),
 
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-S-Space>"] = cmp.mapping.close(),
+					["<C-Space>"] = cmp.mapping.complete(),
+					["<C-S-Space>"] = cmp.mapping.close(),
 
-          ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          }),
-        },
+					["<CR>"] = cmp.mapping.confirm({
+						select = true,
+						behavior = cmp.ConfirmBehavior.Replace,
+					}),
+				},
 
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path" },
-          { name = "buffer" },
-        },
-        formatting = {
-          format = require("lspkind").cmp_format({
-            maxwidth = 50,
-            ellipsis_char = "",
-            preset = "codicons",
-            mode = "symbol_text",
-          }),
-        },
-      })
+				sources = {
+					{ name = "luasnip" },
+					{ name = "nvim_lsp" },
+					{ name = "path" },
+				},
 
-      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-    end,
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    config = function()
-      local null_ls = require("null-ls")
-      local formatters = null_ls.builtins.formatting
-      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+				formatting = {
+					format = require("lspkind").cmp_format({
+						maxwidth = 50,
+						ellipsis_char = "",
+						preset = "codicons",
+						mode = "symbol_text",
+					}),
+				},
+			})
 
-      null_ls.setup({
-        sources = {
-          -- Lua
-          formatters.stylua,
+			cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+		end,
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		config = function()
+			local null_ls = require("null-ls")
+			local formatters = null_ls.builtins.formatting
 
-          -- Web
-          formatters.prettier,
+			null_ls.setup({
+				sources = {
+					-- Lua
+					formatters.stylua,
+					formatters.prettier,
+					formatters.black,
+				},
+			})
+		end,
+	},
 
-          -- Python
-          formatters.black,
-        },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		config = function()
+			local treesitter = require("nvim-treesitter.configs")
 
-        -- Format on save
-        debug = false,
-        on_attach = function(client, bufnr)
-          local async_formatting = function()
-            bufnr = bufnr or vim.api.nvim_get_current_buf()
+			treesitter.setup({
+				auto_install = true,
+				sync_install = true,
+				indent = { enable = true },
+				incremental_selection = { enable = true },
+				highlight = { enable = true, additional_vim_regex_highlighting = false },
+			})
 
-            vim.lsp.buf_request(
-              bufnr,
-              "textDocument/formatting",
-              vim.lsp.util.make_formatting_params({}),
-              function(err, res, ctx)
-                if err then
-                  local err_msg = type(err) == "string" and err or err.message
-                  -- you can modify the log message / level (or ignore it completely)
-                  vim.notify("formatting: " .. err_msg, vim.log.levels.WARN)
-                  return
-                end
+			vim.filetype.add({ extension = { mdx = "mdx", conf = "bash" } })
+			vim.filetype.add({ pattern = { [".*/hypr/.*%.conf"] = "hyprlang" } })
 
-                -- don't apply results if buffer is unloaded or has been modified
-                if
-                    not vim.api.nvim_buf_is_loaded(bufnr)
-                    or vim.api.nvim_buf_get_option(bufnr, "modified")
-                then
-                  return
-                end
+			vim.treesitter.language.register("markdown", "mdx")
+		end,
+	},
+	{
+		"numToStr/Comment.nvim",
+		dependencies = {
+			"folke/todo-comments.nvim",
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
+		config = function()
+			local status_ok, comment = pcall(require, "Comment")
+			if not status_ok then
+				return
+			end
 
-                if res then
-                  local client = vim.lsp.get_client_by_id(ctx.client_id)
-                  vim.lsp.util.apply_text_edits(
-                    res,
-                    bufnr,
-                    client and client.offset_encoding or "utf-16"
-                  )
-                  vim.api.nvim_buf_call(bufnr, function()
-                    vim.cmd("silent noautocmd update")
-                  end)
-                end
-              end
-            )
-          end
+			local status_okk, ts_commentstring = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+			if not status_okk then
+				return
+			end
 
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePost", {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                async_formatting(bufnr)
-              end,
-            })
-          end
-        end,
-      })
-    end,
-  },
-  {
-    "razak17/tailwind-fold.nvim",
-    lazy = false,
-    keys = { { "<C-f>", "<cmd>TailwindFoldToggle<cr>", desc = "Toggle Tailwind Fold" } },
-    config = function()
-      require("tailwind-fold").setup()
-    end,
-  },
-  {
-    "ggandor/lightspeed.nvim",
-    config = function()
-      require("lightspeed").setup({
-        ignore_case = true,
-      })
+			local status_okkk, todo = pcall(require, "todo-comments")
+			if not status_okkk then
+				return
+			end
 
-      vim.cmd("autocmd ColorScheme * lua require('lightspeed').init_highlight(true)")
-    end,
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    lazy = false,
-    dependencies = { "github/copilot.vim" },
-    keys = {
-      { "<leader>c",  "<nop>",                             desc = "Copilot" },
-      { "<leader>ct", "<cmd>CopilotChatToggle<cr>",        desc = "Toggle Copilot Chat" },
-      { "<leader>ce", "<cmd>CopilotChatExplain<cr>",       desc = "Explain code" },
-      { "<leader>cr", "<cmd>CopilotChatReview<cr>",        desc = "Review code" },
-      { "<leader>cf", "<cmd>CopilotChatFix<cr>",           desc = "Fix bug" },
-      { "<leader>co", "<cmd>CopilotChatOptimize<cr>",      desc = "Optimize code" },
-      { "<leader>cd", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix Diagnostic" },
-      { "<leader>cc", "<cmd>CopilotChatCommit<cr>",        desc = "Suggest commit message" },
-      { "<leader>cs", "<cmd>CopilotChatCommitStaged<cr>",  desc = "Suggest commit stage message" },
-      {
-        "<leader>cp",
-        function()
-          local actions = require("CopilotChat.actions")
-          require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
-        end,
-        desc = "CopilotChat - Prompt actions",
-      },
-    },
-    config = function()
-      require("CopilotChat").setup({
-        window = { layout = "float", title = "Copilot Chat" },
-        mappings = { complete = { insert = "" } },
-      })
-    end,
-  },
+			vim.g.skip_ts_context_commentstring_module = true
+
+			comment.setup({
+				padding = true,
+				sticky = true,
+				ignore = nil,
+				toggler = {
+					line = "<C-/>",
+					block = "<C-S-/>",
+				},
+				opleader = {
+					line = "<C-/>",
+					block = "<C-S-/>",
+				},
+				pre_hook = ts_commentstring.create_pre_hook(),
+			})
+
+			todo.setup()
+		end,
+	},
+	{
+		"m4xshen/autoclose.nvim",
+		config = function()
+			require("autoclose").setup()
+		end,
+	},
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+	{
+		"ggandor/lightspeed.nvim",
+		config = function()
+			require("lightspeed").setup({
+				ignore_case = true,
+			})
+
+			vim.cmd("autocmd ColorScheme * lua require('lightspeed').init_highlight(true)")
+		end,
+	},
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		lazy = false,
+		dependencies = { "github/copilot.vim" },
+		keys = {
+			{ "<leader>c", "<noh>", desc = "Copilot" },
+			{ "<leader>ct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
+			{ "<leader>ce", "<cmd>CopilotChatExplain<cr>", desc = "Explain code" },
+			{ "<leader>cr", "<cmd>CopilotChatReview<cr>", desc = "Review code" },
+			{ "<leader>cf", "<cmd>CopilotChatFix<cr>", desc = "Fix bug" },
+			{ "<leader>co", "<cmd>CopilotChatOptimize<cr>", desc = "Optimize code" },
+			{ "<leader>cd", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix Diagnostic" },
+			{ "<leader>cc", "<cmd>CopilotChatCommit<cr>", desc = "Suggest commit message" },
+			{ "<leader>cs", "<cmd>CopilotChatCommitStaged<cr>", desc = "Suggest commit stage message" },
+			{
+				"<leader>cp",
+				function()
+					local actions = require("CopilotChat.actions")
+					require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+				end,
+				desc = "CopilotChat - Prompt actions",
+			},
+		},
+		config = function()
+			require("CopilotChat").setup({
+				window = { layout = "float", title = "Copilot Chat" },
+				mappings = { complete = { insert = "" } },
+			})
+		end,
+	},
+	{
+		"NvChad/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup({
+				filetypes = { "*" },
+				user_default_options = {
+					RGB = true, -- #RGB hex codes
+					RRGGBB = true, -- #RRGGBB hex codes
+					names = true, -- "Name" codes like Blue or blue
+					RRGGBBAA = true, -- #RRGGBBAA hex codes
+					AARRGGBB = true, -- 0xAARRGGBB hex codes
+					rgb_fn = true, -- CSS rgb() and rgba() functions
+					hsl_fn = true, -- CSS hsl() and hsla() functions
+					css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+					css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+					-- Available modes for `mode`: foreground, background,  virtualtext
+					mode = "background", -- Set the display mode.
+					-- Available methods are false / true / "normal" / "lsp" / "both"
+					-- True is same as normal
+					tailwind = true, -- Enable tailwind colors
+					-- parsers can contain values used in |user_default_options|
+					sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
+					virtualtext = "■",
+					-- update color values even if buffer is not focused
+					-- example use: cmp_menu, cmp_docs
+					always_update = true,
+				},
+				-- all the sub-options of filetypes apply to buftypes
+				buftypes = {},
+			})
+		end,
+	},
 }

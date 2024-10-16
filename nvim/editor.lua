@@ -47,6 +47,21 @@ return {
 		end,
 	},
 	{
+		"aserowy/tmux.nvim",
+		lazy = false,
+		keys = {
+			{ "<C-Up>", "<cmd>lua require('tmux').resize_top()<cr>", desc = "Increase Window Height" },
+			{ "<C-Left>", "<cmd>lua require('tmux').resize_left()<cr>", desc = "Decrease Window Width" },
+			{ "<C-Right>", "<cmd>lua require('tmux').resize_right()<cr>", desc = "Increase Window Width" },
+			{ "<C-Down>", "<cmd>lua require('tmux').resize_bottom()<cr>", desc = "Decrease Window Height" },
+		},
+		config = function()
+			require("tmux").setup({
+				resize = { enable_default_keybindings = false },
+			})
+		end,
+	},
+	{
 		"folke/which-key.nvim",
 		config = function()
 			local wk = require("which-key")
@@ -59,11 +74,15 @@ return {
 
 				win = {
 					row = -1,
-					title = false,
-					zindex = 1000,
-					---@type "none" | "single" | "double" | "rounded"
-					border = "rounded",
+					border = "none",
 					padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+					title = true,
+					title_pos = "center",
+					zindex = 1000,
+					bo = {},
+					wo = {
+						winblend = 1, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+					},
 				},
 				layout = {
 					width = { min = 20 }, -- min and max width of the columns
@@ -266,21 +285,6 @@ return {
 					inc_rename = true, -- enables an input dialog for inc-rename.nvim
 					lsp_doc_border = true, -- add a border to hover docs and signature help
 				},
-			})
-		end,
-	},
-	{
-		"aserowy/tmux.nvim",
-		lazy = false,
-		keys = {
-			{ "<C-Up>", "<cmd>lua require('tmux').resize_top()<cr>", desc = "Increase Window Height" },
-			{ "<C-Left>", "<cmd>lua require('tmux').resize_left()<cr>", desc = "Decrease Window Width" },
-			{ "<C-Right>", "<cmd>lua require('tmux').resize_right()<cr>", desc = "Increase Window Width" },
-			{ "<C-Down>", "<cmd>lua require('tmux').resize_bottom()<cr>", desc = "Decrease Window Height" },
-		},
-		config = function()
-			require("tmux").setup({
-				resize = { enable_default_keybindings = false },
 			})
 		end,
 	},

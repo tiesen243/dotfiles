@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 local opts = function(desc)
-  return { noremap = true, silent = true, expr = false, nowait = false, desc = desc }
+	return { noremap = true, silent = true, expr = false, nowait = false, desc = desc }
 end
 
 map("n", "<C-a>", "<cmd>normal! ggVG<cr>", opts("Select all"))
@@ -13,10 +13,11 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>write<cr><esc>", opts("Save current b
 
 -- Do things without affecting the registers
 map({ "v", "n" }, "x", '"_x', opts("Delete without yanking"))
+map({ "x", "n", "s" }, "p", "pgvy", opts("Paste without yanking"))
 
 -- Undo & Redo
 map("n", "u", "<nop>", opts("Disable undo"))
-map("n", "<C-z>", "<cmd>undo<cr>", opts("Undo"))
+map({ "n", "i" }, "<C-z>", "<cmd>undo<cr>", opts("Undo"))
 map("n", "<C-r>", "<cmd>redo<cr>", opts("Redo"))
 
 -- Increment & Decrement
