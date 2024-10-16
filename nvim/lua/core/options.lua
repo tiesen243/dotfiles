@@ -1,6 +1,9 @@
+-- Leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
-
 
 vim.opt.title = true
 vim.opt.shell = "zsh"
@@ -27,7 +30,7 @@ vim.opt.inccommand = "split"
 vim.opt.wrap = false -- No Wrap lines
 vim.opt.backspace = { "start", "eol", "indent" }
 vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" }
-vim.opt.ignorecase = true     -- Case insensitive searching UNLESS /C or capital in search
+vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
 vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 vim.opt.wildignore:append({ "*/node_modules/*" })
 
@@ -52,7 +55,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = false
 vim.opt.guicursor =
-"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
+	"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
@@ -62,5 +65,5 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 vim.opt.formatoptions:append({ "r" })
 
 if vim.fn.has("nvim-0.8") == 1 then
-  vim.opt.cmdheight = 0
+	vim.opt.cmdheight = 0
 end
