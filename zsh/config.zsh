@@ -18,12 +18,12 @@ source $ZSH/oh-my-zsh.sh
 #############################################
 
 # General
-alias  lzg="lazygit"
 alias  lla="lsd -la"
 alias  fzf="fzf -e"
 alias  cls="clear"
 alias  cat="bat"
 alias   lt="lsd --tree --depth=3"
+alias   lg="lazygit"
 alias   ls="lsd -l"
 alias   la="lsd -a"
 alias   py="python"
