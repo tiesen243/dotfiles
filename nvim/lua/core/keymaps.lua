@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 local opts = function(desc)
-	return { noremap = true, silent = true, expr = false, nowait = false, desc = desc }
+  return { noremap = true, silent = true, expr = false, nowait = false, desc = desc }
 end
 
 map("n", "<C-a>", "<cmd>normal! ggVG<cr>", opts("Select all"))
@@ -23,11 +23,6 @@ map("n", "<C-r>", "<cmd>redo<cr>", opts("Redo"))
 -- Increment & Decrement
 map("n", "+", "<C-a>", opts("Increment"))
 map("n", "-", "<C-x>", opts("Decrement"))
-
--- Split navigation
-map("n", "<leader>s", "<nop>", opts("Split"))
-map("n", "<leader>sv", "<cmd>vsplit<cr>", opts("Split vertically"))
-map("n", "<leader>ss", "<cmd>split<cr>", opts("Split horizontally"))
 
 -- Move Lines
 map("n", "<A-k>", "<cmd>m .-2<cr>==", opts("Move Up"))
