@@ -176,13 +176,13 @@ return {
         },
         sections = {
           lualine_a = { "mode" },
-          lualine_b = { "branch" },
-          lualine_c = {
-            { "filetype",   icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
-            { "filename",   file_status = true, separator = "", path = 1 },
+          lualine_b = {
+            { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
+            { "filename", file_status = true, path = 1 },
+            { "branch" },
             { "diff" },
-            { "diagnostics" },
           },
+          lualine_c = { "diagnostics" },
           lualine_x = { "encoding", "fileformat" },
           lualine_y = {
             { "progress", padding = { left = 1, right = 0 }, separator = "" },
