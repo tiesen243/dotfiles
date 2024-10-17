@@ -1,4 +1,15 @@
 return {
+  {
+    "rest-nvim/rest.nvim",
+    keys = {
+      { "<C-CR>", "<cmd>Rest run<cr>", desc = "Send request" },
+    },
+    config = function()
+      ---@type rest.Opts
+      vim.g.rest_nvim = {}
+    end,
+  },
+
   -- Github theme --
   {
     "projekt0n/github-nvim-theme",
@@ -183,7 +194,7 @@ return {
             { "diff" },
           },
           lualine_c = { "diagnostics" },
-          lualine_x = { "encoding", "fileformat" },
+          lualine_x = { "encoding", "fileformat", "rest" },
           lualine_y = {
             { "progress", padding = { left = 1, right = 0 }, separator = "" },
             { "location", padding = { left = 0, right = 1 } },
