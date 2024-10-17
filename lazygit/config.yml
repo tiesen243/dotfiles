@@ -5,12 +5,3 @@ customCommands:
     description: "commit with commitizen"
     loadingText: "opening commitizen commit tool"
     subprocess: true
-
-gui:
-  theme:
-    # Border color of focused window
-    activeBorderColor:
-      - magenta
-      - bold
-    defaultFgColor:
-      - magenta
