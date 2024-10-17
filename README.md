@@ -1,6 +1,8 @@
 # My arch linux config with Hyprland
 
+## Preview
 ![preview](./assets/preview.png)
+![preview-neovim](./assets/preview-neovim.png)
 
 ## Installation
 
