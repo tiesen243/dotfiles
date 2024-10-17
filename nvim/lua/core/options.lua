@@ -19,21 +19,6 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.smarttab = true
 
-vim.opt.hlsearch = true
-vim.opt.backup = false
-vim.opt.showcmd = true
-vim.opt.cmdheight = 1
-vim.opt.laststatus = 3
-vim.opt.scrolloff = 10
-vim.opt.expandtab = true
-vim.opt.inccommand = "split"
-vim.opt.wrap = false -- No Wrap lines
-vim.opt.backspace = { "start", "eol", "indent" }
-vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" }
-vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
-vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
-vim.opt.wildignore:append({ "*/node_modules/*" })
-
 -- Window splits
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
@@ -46,7 +31,7 @@ vim.opt.autochdir = true
 vim.opt.autowriteall = true
 
 -- Mouse
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus"
@@ -64,9 +49,20 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
 
-if vim.fn.has("nvim-0.8") == 1 then
-	vim.opt.cmdheight = 0
-end
-
 -- Others
+vim.opt.hlsearch = true
+vim.opt.backup = false
+vim.opt.showcmd = true
+vim.opt.cmdheight = 1
+vim.opt.laststatus = 3
+vim.opt.scrolloff = 10
+vim.opt.expandtab = true
 vim.opt.backupcopy = "yes"
+vim.opt.inccommand = "split"
+vim.opt.fillchars = { eob = " " }
+vim.opt.wrap = false -- No Wrap lines
+vim.opt.backspace = { "start", "eol", "indent" }
+vim.opt.wildignore:append({ "*/node_modules/*" })
+vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" }
+vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
+vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
