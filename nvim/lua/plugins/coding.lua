@@ -75,23 +75,6 @@ return {
     end,
   },
 
-  -- Formatter and Linter --
-  {
-    "nvimtools/none-ls.nvim",
-    config = function()
-      local null_ls = require("null-ls")
-      local formatters = null_ls.builtins.formatting
-
-      null_ls.setup({
-        sources = {
-          formatters.stylua,
-          formatters.prettier,
-          formatters.black,
-        },
-      })
-    end,
-  },
-
   -- Treesitter --
   {
     "nvim-treesitter/nvim-treesitter",
@@ -104,7 +87,7 @@ return {
         sync_install = true,
         indent = { enable = true },
         incremental_selection = { enable = true },
-        highlight = { enable = true, additional_vim_regex_highlighting = false },
+        highlight = { enable = true, additional_vim_regex_highlighting = true },
       })
 
       vim.filetype.add({ extension = { mdx = "mdx", conf = "bash" } })
@@ -203,19 +186,19 @@ return {
       require("colorizer").setup({
         filetypes = { "*" },
         user_default_options = {
-          RGB = true,                                -- #RGB hex codes
-          RRGGBB = true,                             -- #RRGGBB hex codes
-          names = true,                              -- "Name" codes like Blue or blue
-          RRGGBBAA = true,                           -- #RRGGBBAA hex codes
-          AARRGGBB = true,                           -- 0xAARRGGBB hex codes
-          rgb_fn = true,                             -- CSS rgb() and rgba() functions
-          hsl_fn = true,                             -- CSS hsl() and hsla() functions
-          css = true,                                -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = true,                             -- Enable all CSS *functions*: rgb_fn, hsl_fn
+          RGB = true,                                     -- #RGB hex codes
+          RRGGBB = true,                                  -- #RRGGBB hex codes
+          names = true,                                   -- "Name" codes like Blue or blue
+          RRGGBBAA = true,                                -- #RRGGBBAA hex codes
+          AARRGGBB = true,                                -- 0xAARRGGBB hex codes
+          rgb_fn = true,                                  -- CSS rgb() and rgba() functions
+          hsl_fn = true,                                  -- CSS hsl() and hsla() functions
+          css = true,                                     -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = true,                                  -- Enable all CSS *functions*: rgb_fn, hsl_fn
           --- @type string | "foreground" | "background" | "virtualtext"
-          mode = "background",                       -- Set the display mode.
+          mode = "background",                            -- Set the display mode.
           --- @type boolean | "normal" | "lsp" | "both"
-          tailwind = "lsp",                          -- Enable tailwind colors
+          tailwind = "lsp",                               -- Enable tailwind colors
           -- parsers can contain values used in |user_default_options|
           sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
           virtualtext = "■",
