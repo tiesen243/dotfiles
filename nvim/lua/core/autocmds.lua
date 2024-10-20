@@ -37,6 +37,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- map mdx to markdown filetype
+vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
+  group = augroup("mdx_to_markdown"),
+  pattern = { "*.mdx" },
+  callback = function(event)
+    vim.bo[event.buf].filetype = "markdown"
+  end,
+})
+
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),

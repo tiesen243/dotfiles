@@ -75,6 +75,24 @@ return {
     end,
   },
 
+  -- Formatter and Linter --
+  {
+    "nvimtools/none-ls.nvim",
+    config = function()
+      local null_ls = require("null-ls")
+      local formatters = null_ls.builtins.formatting
+
+      null_ls.setup({
+        sources = {
+          formatters.stylua,
+          formatters.prettier,
+          formatters.black,
+        },
+      })
+    end,
+  },
+
+
   -- Treesitter --
   {
     "nvim-treesitter/nvim-treesitter",
