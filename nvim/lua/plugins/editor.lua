@@ -46,17 +46,15 @@ return {
 		},
 		keys = function()
 			local builtin = require("telescope.builtin")
+			local extensions = require("telescope").extensions
+
 			return {
 				{ "<leader>fb", builtin.buffers, desc = "Buffers" },
 				{ "<leader>fg", builtin.live_grep, desc = "Live Grep" },
-				{ "<leader>fG", builtin.git_files, desc = "Git Files" },
 				{ "<leader>ff", builtin.find_files, desc = "Find Files" },
-				{ "<leader>fr", builtin.oldfiles, desc = "Recent Files" },
-				{ "<leader>ft", builtin.treesitter, desc = "Treesitter" },
-				{ "<leader>fe", builtin.file_browser, desc = "File Browser" },
+				{ "<leader>fe", extensions.file_browser.file_browser, desc = "File Browser" },
 			}
 		end,
-
 		config = function()
 			local telescope = require("telescope")
 			local actions = require("telescope.actions")
@@ -71,9 +69,8 @@ return {
 						},
 					},
 				},
-				pickers = {
-					find_files = { theme = "dropdown" },
-				},
+				pickers = { find_files = { theme = "dropdown" } },
+				extensions = { file_browser = { theme = "dropdown" } },
 			})
 
 			telescope.load_extension("noice")
