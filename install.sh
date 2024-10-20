@@ -22,6 +22,7 @@ ${txtcyan}----------------------------------------------------------------------
 EOM
 )"
 
+echo "Installing yay..."
 if ! command -v yay &> /dev/null; then
   sudo pacman -S --needed git base-devel
   git clone https://aur.archlinux.org/yay.git ~/yay
@@ -49,7 +50,9 @@ ${txtblue}----------------------------------------------------------------------
 ------------------------------------------------------------------------${txtreset}
 EOM
 )"
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
+
+echo "Installing packages..."
+yay -Syu zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
 echo "All packages installed!"
 
 # Install miniconda3
@@ -150,8 +153,8 @@ cat << "EOF"
 ------------------------------------------------------------------------
 EOF
 
+echo "Installing oh-my-zsh..."
 if [ ! -d ~/.oh-my-zsh ]; then
-  echo "Installing oh-my-zsh..."
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   echo "oh-my-zsh installed!"
 else 
@@ -187,8 +190,8 @@ ${txtyellow}--------------------------------------------------------------------
 EOM
 )"
 
+echo "Cloning dotfiles..."
 if [ ! -d ~/dotfiles ]; then
-  echo "Cloning dotfiles..."
   git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
   echo "Dotfiles cloned!"
 fi
