@@ -1,11 +1,28 @@
 #!/bin/bash
 
-echo "Starting installation..."
+txtcyan='\033[0;36m'
+txtblue='\033[0;34m'
+txtgreen='\033[0;32m'
+txtyellow='\033[0;33m'
+txtreset='\033[0m'
 
 # Install yay
-if ! command -v yay &> /dev/null; then
-  echo "Installing yay..."
+echo -e "$(
+cat << EOM
+${txtcyan}------------------------------------------------------------------------
 
+██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗         ██╗   ██╗ █████╗ ██╗   ██╗
+██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║         ╚██╗ ██╔╝██╔══██╗╚██╗ ██╔╝
+██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║          ╚████╔╝ ███████║ ╚████╔╝ 
+██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║           ╚██╔╝  ██╔══██║  ╚██╔╝  
+██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗       ██║   ██║  ██║   ██║   
+╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝       ╚═╝   ╚═╝  ╚═╝   ╚═╝   
+                                                                                    
+------------------------------------------------------------------------${txtreset}
+EOM
+)"
+
+if ! command -v yay &> /dev/null; then
   sudo pacman -S --needed git base-devel
   git clone https://aur.archlinux.org/yay.git ~/yay
   cd ~/yay
@@ -18,13 +35,82 @@ else
 fi
 
 # Install packages
-echo "Installing packages..."
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
-echo "Packages installed!"
+echo -e "$(
+cat << EOM
+${txtblue}------------------------------------------------------------------------
+
+██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗          █████╗ ██████╗ ██████╗ 
+██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║         ██╔══██╗██╔══██╗██╔══██╗
+██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║         ███████║██████╔╝██████╔╝
+██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║         ██╔══██║██╔═══╝ ██╔═══╝ 
+██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗    ██║  ██║██║     ██║     
+╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═╝╚═╝     ╚═╝     
+
+------------------------------------------------------------------------${txtreset}
+EOM
+)"
+# yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
+echo "All packages installed!"
+
+# Install miniconda3
+if [ ! -d ~/.miniconda3 ]; then
+  read -p "Do you want to install miniconda3? [y/n]: " is_miniconda
+  if [ $is_miniconda == "y" ]; then
+    echo "Installing miniconda3..."
+
+    mkdir -p ~/.miniconda3
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/.miniconda3/miniconda.sh
+    bash ~/.miniconda3/miniconda.sh -b -u -p ~/.miniconda3
+    rm -rf ~/.miniconda3/miniconda.sh
+    ~/.miniconda3/bin/conda init zsh
+
+    echo "Miniconda3 installed!"
+  fi
+else 
+  echo "Miniconda3 is already installed!"
+fi
+
+# Install nvm
+if [ ! -d ~/.nvm ]; then
+  read -p "Do you want to install nvm? [y/n]: " is_nvm
+  if [ $is_nvm == "y" ]; then
+    echo "Installing nvm..."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+    echo "nvm installed!"
+  fi
+else
+  echo "nvm is already installed!"
+fi
+
+# Install obs-studio
+if ! command -v obs &> /dev/null; then
+  read -p "Do you want to install obs-studio? [y/n]: " is_obs
+  if [ $is_obs == "y" ]; then
+    echo "Installing obs-studio..."
+    yay -S obs-studio wlrobs-hg
+    echo "OBS Studio installed!"
+  fi
+else
+  echo "OBS Studio is already installed!"
+fi
 
 # git config
-echo "Configuring git..."
+echo -e "$(
+cat << EOM
+${txtgreen}------------------------------------------------------------------------
 
+ ██████╗ ██╗████████╗     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ 
+██╔════╝ ██║╚══██╔══╝    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ 
+██║  ███╗██║   ██║       ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+██║   ██║██║   ██║       ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+╚██████╔╝██║   ██║       ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+ ╚═════╝ ╚═╝   ╚═╝        ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝ 
+
+------------------------------------------------------------------------${txtreset}
+EOM
+)"
+
+echo "Configuring git..."
 git config --global core.editor "nvim"
 if [ -z "$(git config --global user.name)" ]; then
   read -p "Enter your name: " name
@@ -51,10 +137,25 @@ else
 fi
 
 # Install oh-my-zsh
+cat << "EOF"
+------------------------------------------------------------------------
+
+ ██████╗ ██╗  ██╗      ███╗   ███╗██╗   ██╗      ███████╗███████╗██╗  ██╗
+██╔═══██╗██║  ██║      ████╗ ████║╚██╗ ██╔╝      ╚══███╔╝██╔════╝██║  ██║
+██║   ██║███████║█████╗██╔████╔██║ ╚████╔╝ █████╗  ███╔╝ ███████╗███████║
+██║   ██║██╔══██║╚════╝██║╚██╔╝██║  ╚██╔╝  ╚════╝ ███╔╝  ╚════██║██╔══██║
+╚██████╔╝██║  ██║      ██║ ╚═╝ ██║   ██║         ███████╗███████║██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝      ╚═╝     ╚═╝   ╚═╝         ╚══════╝╚══════╝╚═╝  ╚═╝
+                                                                        
+------------------------------------------------------------------------
+EOF
+
 if [ ! -d ~/.oh-my-zsh ]; then
   echo "Installing oh-my-zsh..."
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   echo "oh-my-zsh installed!"
+else 
+  echo "oh-my-zsh is already installed!"
 fi
 
 # Install zsh plugins
@@ -70,40 +171,28 @@ fi
 
 echo "Zsh plugins installed!"
 
-# Install miniconda3
-if [ ! -d ~/.miniconda3 ]; then
-  read -p "Do you want to install miniconda3? [y/n]: " is_miniconda
-  if [ $is_miniconda == "y" ]; then
-    echo "Installing miniconda3..."
-
-    mkdir -p ~/.miniconda3
-    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/.miniconda3/miniconda.sh
-    bash ~/.miniconda3/miniconda.sh -b -u -p ~/.miniconda3
-    rm -rf ~/.miniconda3/miniconda.sh
-    ~/.miniconda3/bin/conda init zsh
-
-    echo "Miniconda3 installed!"
-  fi
-fi
-
-# Install nvm
-if [ ! -d ~/.nvm ]; then
-  read -p "Do you want to install nvm? [y/n]: " is_nvm
-  if [ $is_nvm == "y" ]; then
-    echo "Installing nvm..."
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-    echo "nvm installed!"
-  fi
-fi
-
 # Clone dotfiles
-echo "Cloning dotfiles..."
+echo -e "$(
+cat << EOM
+${txtyellow}------------------------------------------------------------------------
+
+███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ 
+██╔════╝╚██╗ ██╔╝██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ 
+███████╗ ╚████╔╝ ███████╗   ██║   █████╗  ██╔████╔██║    ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+╚════██║  ╚██╔╝  ╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝ 
+                                                                                                       
+------------------------------------------------------------------------${txtreset}
+EOM
+)"
 
 if [ ! -d ~/dotfiles ]; then
+  echo "Cloning dotfiles..."
   git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
+  echo "Dotfiles cloned!"
 fi
 
-echo "Dotfiles cloned!"
 
 # Linking dotfiles to .config directory
 echo "Linking dotfiles..."
@@ -142,16 +231,6 @@ fi
 
 echo "Themes copied! You can change the theme in 'nwg-look'."
 
-# Install obs-studio
-if ! command -v obs &> /dev/null; then
-  read -p "Do you want to install obs-studio? [y/n]: " is_obs
-  if [ $is_obs == "y" ]; then
-    echo "Installing obs-studio..."
-    yay -S obs-studio wlrobs-hg
-    echo "OBS Studio installed!"
-  fi
-fi
-
 echo "Cleaning up..."
 
 if [ -n "$(yay -Qdtq)" ]; then
@@ -173,4 +252,18 @@ fi
 
 echo "Cleaning up completed!"
 
-echo "Installation completed!"
+echo -e "$(
+cat << EOM
+${txtgreen}------------------------------------------------------------------------
+
+ ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ███████╗████████╗███████╗██████╗ ██╗
+██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║     ██╔════╝╚══██╔══╝██╔════╝██╔══██╗██║
+██║     ██║   ██║██╔████╔██║██████╔╝██║     █████╗     ██║   █████╗  ██║  ██║██║
+██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║     ██╔══╝     ██║   ██╔══╝  ██║  ██║╚═╝
+╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ███████╗███████╗   ██║   ███████╗██████╔╝██╗
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═════╝ ╚═╝
+                                                                                
+
+------------------------------------------------------------------------${txtreset}
+EOM
+)"
