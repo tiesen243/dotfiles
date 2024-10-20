@@ -18,6 +18,7 @@ source $ZSH/oh-my-zsh.sh
 #############################################
 
 # General
+alias date="date +'%A %d-%m-%Y %H:%M:%S'"
 alias  lla="lsd -la"
 alias  fzf="fzf -e"
 alias  cls="clear"
