@@ -210,19 +210,7 @@ fi
 
 # Copying themes
 echo "Copying themes..."
-
-if [ ! -d ~/.local/share/themes ]; then
-  cp -r ~/dotfiles/customsize/themes ~/.local/share
-fi
-
-if [ ! -d ~/.local/share/icons ]; then
-  cp -r ~/dotfiles/customsize/icons ~/.local/share
-fi
-
-if [ ! -d ~/.local/share/fonts ]; then
-  cp -r ~/dotfiles/customsize/fonts ~/.local/share
-fi
-
+cp -r ~/dotfiles/customsize/* ~/.local/share
 echo "Themes copied!"
 
 # Linking dotfiles to .config directory
