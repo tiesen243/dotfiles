@@ -1,20 +1,4 @@
 return {
-	{
-		"rest-nvim/rest.nvim",
-		init = function()
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = "http",
-				callback = function()
-					vim.keymap.set("n", "<leader>rr", "<cmd>Rest run<cr>", {})
-					vim.keymap.set("n", "<leader>rc", "<cmd>Rest Cookies<cr>", {})
-				end,
-			})
-		end,
-		config = function()
-			vim.g.rest_nvim = {}
-		end,
-	},
-
 	-- Github theme --
 	{
 		"projekt0n/github-nvim-theme",
