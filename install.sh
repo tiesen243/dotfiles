@@ -61,9 +61,12 @@ else
   echo "yay is arleady installed!"
 fi
 
-echo "Installing packages..."
-yay -Syu zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
-echo "All packages installed!"
+read -p "Install all packages? [y/n]: " isInstall
+if [ $is_miniconda == "y" ]; then
+  echo "Installing packages..."
+  yay -Syu zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
+  echo "All packages installed!"
+fi
 
 # Install miniconda3
 if [ ! -d ~/.miniconda3 ]; then
