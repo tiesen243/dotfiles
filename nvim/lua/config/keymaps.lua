@@ -1,5 +1,11 @@
 local map = vim.keymap.set
 
+-- General
+map({ "n", "x" }, "<C-a>", "ggVG", { desc = "Select All" })
+map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr>", { desc = "Undo" })
+map({ "i", "x", "n", "s" }, "<C-r>", "<cmd>redo<cr>", { desc = "Redo" })
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
+
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -8,10 +14,6 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tru
 
 -- Disable yank
 map({ "x", "n", "s" }, "p", "pgvy", { desc = "Paste without yanking" })
-
--- Some
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
-map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr>", { desc = "Undo" })
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
