@@ -1,26 +1,23 @@
 return {
-  -- Github theme --
   {
     "projekt0n/github-nvim-theme",
-    dependencies = { "xiyaowong/transparent.nvim" },
+    name = "github-theme",
+    lazy = false,  -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("github-theme").setup({
-        options = {
-          darken = { floats = true },
-          transparent = vim.g.transparent_enabled,
-        },
+        transparent = vim.g.transparent_enabled,
       })
-
-      require("transparent").setup({
-        extra_groups = { "NormalFloat", "NvimTreeNormal" },
-        exclude_groups = { "CursorLine", "CursorLineNr" },
-      })
-
-      vim.cmd([[colorscheme github_dark]])
+      vim.cmd("colorscheme github_dark")
     end,
   },
-
-  -- Telescope --
+  {
+    "xiyaowong/transparent.nvim",
+    config = function()
+      require("transparent").setup({})
+      require("transparent").clear_prefix("NvimTree")
+    end,
+  },
   {
     "nvim-telescope/telescope.nvim",
     event = "VeryLazy",
@@ -57,12 +54,9 @@ return {
         extensions = { file_browser = { theme = "dropdown" } },
       })
 
-      telescope.load_extension("noice")
       telescope.load_extension("file_browser")
     end,
   },
-
-  -- Nvim Tree --
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
@@ -90,55 +84,6 @@ return {
       })
     end,
   },
-
-  -- Which Key --
-  {
-    "folke/which-key.nvim",
-    config = function()
-      local wk = require("which-key")
-
-      wk.setup({
-        ---@type false | "classic" | "modern" | "helix"
-        preset = "modern",
-
-        triggers = { "<leader>", mode = { "n" } },
-
-        win = {
-          row = -1,
-          title = false,
-          zindex = 1000,
-          ---@type "none" | "single" | "double" | "rounded"
-          border = "rounded",
-          padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
-        },
-        layout = {
-          width = { min = 20 }, -- min and max width of the columns
-          spacing = 4,     -- spacing between columns
-          align = "center", -- align columns left, center or right
-        },
-
-        plugins = { marks = false, registers = false, spelling = false },
-      })
-
-      wk.add({
-        { "<leader>f", group = "Telescope" },
-        { "<leader>l", group = "LSP", icon = { icon = " ", color = "green" } },
-        { "<leader>o", group = "Options", icon = { icon = " ", color = "blue" } },
-        { "<leader>c", group = "Copilot", icon = { icon = " ", color = "orange" } },
-      })
-    end,
-  },
-
-  -- Lightspeed --
-  {
-    "ggandor/lightspeed.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("lightspeed").setup({})
-    end,
-  },
-
-  -- Status Line --
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -172,116 +117,85 @@ return {
       })
     end,
   },
-
-  -- Indent Blank Line --
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+    "folke/which-key.nvim",
+    event = "VeryLazy",
     config = function()
-      require("ibl").setup()
-    end,
-  },
+      local wk = require("which-key")
 
-  -- Dashboard --
-  {
-    "goolord/alpha-nvim",
-    config = function()
-      local dashboard = require("alpha.themes.dashboard")
-      local startify = require("alpha.themes.startify")
-      startify.file_icons.provider = "devicons"
+      wk.setup({
+        ---@type false | "classic" | "modern" | "helix"
+        preset = "modern",
 
-      -- Header --
-      dashboard.section.header.val = {
-        [[                                              ]],
-        [[                                              ]],
-        [[█████████╗██╗███████╗██████╗███████╗███╗   ██╗]],
-        [[ ╚══██╔══╝██║██╔════╝██╔═══╝██╔════╝████╗  ██║]],
-        [[    ██║   ██║█████╗  ██████╗█████╗  ██╔██╗ ██║]],
-        [[    ██║   ██║██╔══╝  ╚═══██║██╔══╝  ██║╚██╗██║]],
-        [[    ██║   ██║███████╗██████║███████╗██║ ╚████║]],
-        [[    ╚═╝   ╚═╝╚══════╝╚═════╝╚══════╝╚═╝  ╚═══╝]],
-        [[                                              ]],
-        [[                    @tiesen243                ]],
-      }
+        triggers = { "<leader>", mode = { "n" } },
 
-      -- Buttons --
-      dashboard.section.buttons.val = {
-        dashboard.button("n", "  New file", "<cmd>enew<CR>"),
-        dashboard.button("f", "  Find file", "<cmd>Telescope find_files<CR>"),
-        dashboard.button("g", "󰈬  Live grep", "<cmd>Telescope live_grep<CR>"),
-        dashboard.button("r", "  Recently opened files", "<cmd>Telescope oldfiles<CR>"),
-        dashboard.button("c", "  Configuration", "<cmd>e ~/.config/nvim/init.lua<CR>"),
-        dashboard.button("q", "⏻  Quit", "<cmd>wqa<CR>"),
-      }
-      dashboard.section.buttons.opts = {
-        spacing = 0,
-        position = "center",
-      }
-
-      -- Footer --
-      dashboard.section.footer.val = function()
-        local stats = require("lazy").stats()
-        local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-
-        return {
-          [[                                              ]],
-          [[                                              ]],
-          [[                  I believe this world is flat]],
-          [[                      Because loli is my world]],
-          [[                                              ]],
-          [[                                              ]],
-          "   ⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms ⚡",
-        }
-      end
-
-      -- Configuration --
-      dashboard.section.footer.opts.hl = "Type"
-      dashboard.section.header.opts.hl = "Include"
-      dashboard.section.buttons.opts.hl = "Keyword"
-      dashboard.opts.opts.noautocmd = true
-
-      -- Set up
-      require("alpha").setup(dashboard.opts)
-    end,
-  },
-
-  -- Noice --
-  {
-    "folke/noice.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    config = function()
-      require("noice").setup({
-        lsp = {
-          override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-          },
+        win = {
+          row = -1,
+          title = false,
+          zindex = 1000,
+          ---@type "none" | "single" | "double" | "rounded"
+          border = "none",
+          padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
         },
-        presets = {
-          bottom_search = true,    -- use a classic bottom cmdline for search
-          command_palette = true,  -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = true,       -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = true,   -- add a border to hover docs and signature help
+        layout = {
+          width = { min = 20 }, -- min and max width of the columns
+          spacing = 4,     -- spacing between columns
+          align = "center", -- align columns left, center or right
         },
+
+        plugins = { marks = false, registers = false, spelling = false },
+      })
+
+      wk.add({
+        { "<leader>a", group = "Actions" },
+        { "<leader>f", group = "Telescope" },
+        { "<leader>l", group = "LSP", icon = { icon = " ", color = "green" } },
+        { "<leader>o", group = "Options", icon = { icon = " ", color = "blue" } },
+        { "<leader>c", group = "Copilot", icon = { icon = " ", color = "orange" } },
       })
     end,
   },
-
-  -- Tmux --
   {
     "aserowy/tmux.nvim",
-    lazy = false,
-    keys = {
-      { "<C-Up>",    "<cmd>lua require('tmux').resize_top()<cr>",    desc = "Increase Window Height" },
-      { "<C-Left>",  "<cmd>lua require('tmux').resize_left()<cr>",   desc = "Decrease Window Width" },
-      { "<C-Right>", "<cmd>lua require('tmux').resize_right()<cr>",  desc = "Increase Window Width" },
-      { "<C-Down>",  "<cmd>lua require('tmux').resize_bottom()<cr>", desc = "Decrease Window Height" },
-    },
     config = function()
-      require("tmux").setup({
-        resize = { enable_default_keybindings = false },
+      require("tmux").setup({})
+    end,
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    config = function()
+      require("snacks").setup({})
+    end,
+  },
+  {
+    "NvChad/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup({
+        filetypes = { "*" },
+        user_default_options = {
+          RGB = true,                                -- #RGB hex codes
+          RRGGBB = true,                             -- #RRGGBB hex codes
+          names = true,                              -- "Name" codes like Blue or blue
+          RRGGBBAA = true,                           -- #RRGGBBAA hex codes
+          AARRGGBB = true,                           -- 0xAARRGGBB hex codes
+          rgb_fn = true,                             -- CSS rgb() and rgba() functions
+          hsl_fn = true,                             -- CSS hsl() and hsla() functions
+          css = true,                                -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = true,                             -- Enable all CSS *functions*: rgb_fn, hsl_fn
+          --- @type string | "foreground" | "background" | "virtualtext"
+          mode = "background",                       -- Set the display mode.
+          --- @type boolean | "normal" | "lsp" | "both"
+          tailwind = "lsp",                          -- Enable tailwind colors
+          -- parsers can contain values used in |user_default_options|
+          sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
+          virtualtext = "■",
+          -- update color values even if buffer is not focused
+          -- example use: cmp_menu, cmp_docs
+          always_update = true,
+        },
+        -- all the sub-options of filetypes apply to buftypes
+        buftypes = {},
       })
     end,
   },

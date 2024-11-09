@@ -87,7 +87,6 @@ return {
       })
     end,
   },
-
   {
     "nvimdev/lspsaga.nvim",
     config = function()
@@ -107,7 +106,6 @@ return {
       })
     end,
   },
-
   {
     "williamboman/mason.nvim",
     dependencies = {
