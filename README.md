@@ -1,26 +1,10 @@
 # My arch linux config with Hyprland
 
 ## Preview
-![preview](./assets/preview.png)
-![preview-neovim](./assets/preview-neovim.png)
 
 ## Installation
 
-1. Clone this repository
-
-```bash
-git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
-```
-
-> [!TIP]
-> You can run the following command to automatically setup all config files
-> Or just following the steps below to install each package manually
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/tiesen243/dotfiles/main/install.sh)"
-```
-
-2. Install `yay`
+1. Install `yay`
 
 ```bash
 pacman -S --needed git base-devel
@@ -33,7 +17,7 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock wlogout wofi pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp thunar gvfs lsd bat nwg-look p7zip fastfetch btop commitizen-go localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
+yay -S zsh hyprpaper hyprpicker hypridle hyprlock pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp lsd bat nwg-look fastfetch btop localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
 ```
 
 4. Install `oh-my-zsh`
@@ -85,17 +69,9 @@ To apply my config, you can run the following command
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.oh-my-zsh/custom/themes/yuki.zsh-theme
-rm -rf ~/.config/{hypr,btop,nvim,kitty,dunst,wlogout,lazygit,fastfetch}
+rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,nvim,wofi}
 
-ln -s ~/dotfiles/hypr ~/.config
-ln -s ~/dotfiles/btop ~/.config
-ln -s ~/dotfiles/nvim ~/.config
-ln -s ~/dotfiles/kitty ~/.config
-ln -s ~/dotfiles/dunst ~/.config
-ln -s ~/dotfiles/wlogout ~/.config
-ln -s ~/dotfiles/lazygit ~/.config
-ln -s ~/dotfiles/fastfetch ~/.config
+ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,nvim,wofi} ~/.config
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ```
