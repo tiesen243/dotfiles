@@ -116,7 +116,7 @@ map("n", "<leader>oi", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>oI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
 -- floating terminal
-map("n", "<leader>at", function()
+map("n", "<leader>t", function()
   Snacks.terminal()
 end, { desc = "Terminal (cwd)" })
 
