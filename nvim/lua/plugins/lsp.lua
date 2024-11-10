@@ -35,7 +35,7 @@ return {
         end
       end
 
-      local servers = { "html", "emmet_ls", "volar", "tailwindcss", "eslint", "prismals", "pyright", "dockerls" }
+      local servers = { "html", "emmet_ls", "volar", "tailwindcss", "eslint", "prismals", "dockerls" }
       for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
           on_attach = on_attach,
@@ -133,7 +133,7 @@ return {
           "tailwindcss",
 
           --Python
-          "pyright",
+          -- "pyright",
 
           -- Utils
           "dockerls",
