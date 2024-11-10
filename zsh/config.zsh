@@ -9,7 +9,7 @@ export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 # ZSH Plugins and Theme
 #############################################
 ZSH_THEME="yuki"
-plugins=(zsh-autosuggestions zsh-syntax-highlighting vi-mode)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 #############################################
@@ -30,13 +30,12 @@ alias   la="lsd -a"
 alias   py="python"
 alias    v="nvim"
 alias    q="exit"
-alias    h="~"
 
 # Kitty
 alias icat="kitten icat"
 
 # Conda
-alias  cee='conda env export | grep -v "^prefix: " > environment.yml'
+alias  cee="conda env export | grep -v '^prefix: ' > environment.yml"
 alias  cer="conda env remove -n"
 alias  ced="conda deactivate"
 alias  cec="conda create -n"
