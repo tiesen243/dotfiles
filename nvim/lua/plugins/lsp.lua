@@ -23,7 +23,6 @@ return {
 
         vim.keymap.set("n", "<leader>lo", "<cmd>Lspsaga outline<cr>", opts("Outline"))
         vim.keymap.set("n", "<leader>lf", "<cmd>Lspsaga finder<cr>", opts("References"))
-        vim.keymap.set("n", "<leader>lt", "<cmd>Lspsaga term_toggle<cr>", opts("Terminal"))
         vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<cr>", opts("Peak definition"))
         vim.keymap.set("n", "<leader>lg", "<cmd>Lspsaga goto_definition<cr>", opts("Goto definition"))
 
