@@ -4,7 +4,7 @@ local map = vim.keymap.set
 map({ "n", "x" }, "<C-a>", "ggVG", { desc = "Select All" })
 map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr>", { desc = "Undo" })
 map({ "i", "x", "n", "s" }, "<C-r>", "<cmd>redo<cr>", { desc = "Redo" })
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>write<cr>", { desc = "Save file" })
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>write<cr><esc>", { desc = "Save File" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
