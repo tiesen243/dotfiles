@@ -35,14 +35,14 @@ alias    q="exit"
 alias icat="kitten icat"
 
 # Conda
-alias  cee="conda env export | grep -v '^prefix: ' > environment.yml"
-alias  cer="conda env remove -n"
-alias  ced="conda deactivate"
-alias  cec="conda create -n"
-alias  cel="conda env list"
-alias   ca="conda activate"
-alias   ci="conda install"
-alias   cr="conda remove"
+# alias  cee="conda env export | grep -v '^prefix: ' > environment.yml"
+# alias  cer="conda env remove -n"
+# alias  ced="conda deactivate"
+# alias  cec="conda create -n"
+# alias  cel="conda env list"
+# alias   ca="conda activate"
+# alias   ci="conda install"
+# alias   cr="conda remove"
 
 # Bun
 alias  bup="bun upgrade"
@@ -122,17 +122,17 @@ gP () {
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/tiesen/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/tiesen/.miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/tiesen/.miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/tiesen/.miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/home/tiesen/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/tiesen/.miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/tiesen/.miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/tiesen/.miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
 # >>> nvm initialize >>>
