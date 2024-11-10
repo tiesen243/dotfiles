@@ -69,9 +69,9 @@ To apply my config, you can run the following command
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,nvim,wofi}
+rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,wofi}
 
-ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,nvim,wofi} ~/.config
+ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,wofi} ~/.config
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ```
