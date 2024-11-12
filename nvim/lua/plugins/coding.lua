@@ -5,28 +5,27 @@ return {
 		dependencies = {
 			"hrsh7th/cmp-path",
 			"onsails/lspkind-nvim",
+			"zbirenbaum/copilot-cmp",
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 		},
 		config = function()
 			local cmp = require("cmp")
-			local luasnip = require("luasnip")
 
 			require("luasnip.loaders.from_vscode").lazy_load()
+			require("copilot_cmp").setup()
 
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						luasnip.lsp_expand(args.body)
+						require("luasnip").lsp_expand(args.body)
 					end,
 				},
 				mapping = {
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-						-- elseif luasnip.locally_jumpable(1) then
-						--   luasnip.jump(1)
 						else
 							fallback()
 						end
@@ -35,8 +34,6 @@ return {
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-						-- elseif luasnip.locally_jumpable(-1) then
-						--   luasnip.jump(-1)
 						else
 							fallback()
 						end
@@ -55,6 +52,7 @@ return {
 				},
 
 				sources = {
+					{ name = "copilot" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
@@ -66,10 +64,12 @@ return {
 						ellipsis_char = "",
 						preset = "codicons",
 						mode = "symbol_text",
+						symbol_map = { Copilot = "" },
 					}),
 				},
 			})
 
+			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 			cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 		end,
 	},
@@ -79,7 +79,7 @@ return {
 			require("conform").setup({
 				formatters_by_ft = {
 					["lua"] = { "stylua" },
-					["*"] = { "prettier" },
+					["_"] = { "prettier" },
 				},
 				format_on_save = {
 					-- These options will be passed to conform.format()
@@ -158,9 +158,17 @@ return {
 		end,
 	},
 	{
+		"zbirenbaum/copilot.lua",
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = false },
+				panel = { enabled = false },
+			})
+		end,
+	},
+	{
 		"CopilotC-Nvim/CopilotChat.nvim",
-		lazy = false,
-		dependencies = { "github/copilot.vim", "nvim-lua/plenary.nvim" },
+		cmd = "CopilotChat",
 		keys = {
 			{ "<leader>ct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
 			{ "<leader>ce", "<cmd>CopilotChatExplain<cr>", desc = "Explain code" },
@@ -173,7 +181,7 @@ return {
 		},
 		config = function()
 			require("CopilotChat").setup({
-				window = { title = "Copilot Chat", layout = "vertical", width = 0.3 },
+				window = { title = "Copilot Chat", layout = "vertical", width = 0.4 },
 			})
 		end,
 	},
