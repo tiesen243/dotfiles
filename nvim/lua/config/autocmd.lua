@@ -33,8 +33,14 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 -- format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("format_on_save"),
-  callback = function()
-    vim.lsp.buf.format()
+  callback = function(event)
+    vim.lsp.buf.format({
+      bufnr = event.buf,
+      timeout_ms = 2000,
+      filter = function(client)
+        return client.name == "null-ls"
+      end,
+    })
   end,
 })
 
