@@ -33,7 +33,6 @@ return {
       local extensions = require("telescope").extensions
 
       return {
-        { "<leader>fb", builtin.buffers,                      desc = "Buffers" },
         { "<leader>fg", builtin.live_grep,                    desc = "Live Grep" },
         { "<leader>ff", builtin.find_files,                   desc = "Find Files" },
         { "<leader>fe", extensions.file_browser.file_browser, desc = "File Browser" },
@@ -62,9 +61,7 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "File explorer" },
     },
@@ -84,6 +81,20 @@ return {
           custom = { ".git" },
           exclude = { ".env", ".env*.local" },
         },
+      })
+
+      local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "NvimTreeSetup",
+        callback = function()
+          local events = require("nvim-tree.api").events
+          events.subscribe(events.Event.NodeRenamed, function(data)
+            if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+              data = data
+              Snacks.rename.on_rename_file(data.old_name, data.new_name)
+            end
+          end)
+        end,
       })
     end,
   },
@@ -150,14 +161,17 @@ return {
       })
 
       wk.add({
-        { "<leader>a", group = "Actions" },
+        { "<leader>a", group = "Actions", icon = { icon = " ", color = "yellow" } },
+        { "<leader>b", group = "Buffers" },
         { "<leader>f", group = "Telescope" },
+        { "<leader>g", group = "Git" },
+        { "<leader>gc", group = "Copilot" },
         { "<leader>l", group = "LSP", icon = { icon = " ", color = "green" } },
         { "<leader>o", group = "Options", icon = { icon = " ", color = "blue" } },
-        { "<leader>c", group = "Copilot", icon = { icon = " ", color = "orange" } },
       })
     end,
   },
+
   {
     "aserowy/tmux.nvim",
     config = function()
@@ -165,10 +179,35 @@ return {
     end,
   },
   {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require('gitsigns').setup({
+        current_line_blame = true,
+        current_line_blame_opts = {
+          delay = 500,
+          ignore_whitespace = true,
+        }
+      })
+    end
+  },
+  {
     "folke/snacks.nvim",
     priority = 1000,
     config = function()
-      require("snacks").setup({})
+      require("snacks").setup({
+        statuscolumn = {
+          Config = {
+            folds = {
+              open = true,   -- show open fold icons
+              git_hl = true, -- use Git Signs hl for fold icons
+            },
+            git = {
+              -- patterns to match Git signs
+              patterns = { "GitSign" },
+            },
+          },
+        },
+      })
     end,
   },
   {
