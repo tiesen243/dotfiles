@@ -30,6 +30,14 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
+-- format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("format_on_save"),
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
+
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),

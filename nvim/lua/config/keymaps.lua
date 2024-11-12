@@ -39,8 +39,9 @@ map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", {
 -- buffers
 map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<leader>ad", function()
-	Snacks.bufdelete()
+map("n", "<leader>bl", "<cmd>Telescope buffers<cr>", { desc = "List Buffers" })
+map("n", "<leader>bd", function()
+  Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
 
 -- Clear search with <esc>
@@ -49,10 +50,10 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsea
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
-	"n",
-	"<leader>ar",
-	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-	{ desc = "Redraw / Clear hlsearch / Diff Update" }
+  "n",
+  "<leader>ar",
+  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+  { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
@@ -74,19 +75,15 @@ map("n", ">", ">>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
--- lazy
-map("n", "<leader>ol", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-	severity = severity and vim.diagnostic.severity[severity] or nil
-	return function()
-		go({ severity = severity })
-	end
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
 end
 
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
@@ -101,12 +98,12 @@ Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leade
 Snacks.toggle.diagnostics():map("<leader>od")
 Snacks.toggle.line_number():map("<leader>ol")
 Snacks.toggle
-	.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-	:map("<leader>oc")
+    .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+    :map("<leader>oc")
 Snacks.toggle.treesitter():map("<leader>oT")
 map("n", "<leader>ot", "<cmd>TransparentToggle<cr>", { desc = "Toggle Transparent" })
 if vim.lsp.inlay_hint then
-	Snacks.toggle.inlay_hints():map("<leader>oh")
+  Snacks.toggle.inlay_hints():map("<leader>oh")
 end
 
 -- highlights under cursor
@@ -115,9 +112,20 @@ map("n", "<leader>oI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
 -- floating terminal
 map("n", "<leader>t", function()
-	Snacks.terminal()
+  Snacks.terminal()
 end, { desc = "Terminal (cwd)" })
 
 -- Terminal Mappings
 map("t", "<C-q>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+
+-- Git
+map("n", "<leader>gl", function()
+  Snacks.git.blame_line()
+end, { desc = "Git Blame Line" })
+map("n", "<leader>gb", function()
+  Snacks.gitbrowse()
+end, { desc = "Git Browse" })
+map("n", "<leader>gL", function()
+  Snacks.lazygit()
+end, { desc = "LazyGit" })
