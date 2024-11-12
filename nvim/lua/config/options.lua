@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+-- Automatically
 opt.autowrite = true    -- Enable auto write
 opt.autoread = true     -- Enable auto read
 opt.autowriteall = true -- Enable auto write all
@@ -59,6 +60,7 @@ opt.termguicolors = true                      -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
 opt.undofile = true
 opt.undolevels = 10000
+opt.swapfile = false               -- Disable swap file
 opt.updatetime = 200               -- Save swap file and trigger CursorHold
 opt.virtualedit = "block"          -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode

@@ -30,23 +30,6 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- format on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = augroup("format_on_save"),
-  callback = function()
-    vim.lsp.buf.format({ timeout_ms = 2000 })
-  end,
-})
-
--- map mdx to markdown filetype
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("mdx_to_markdown"),
-  pattern = { "mdx" },
-  callback = function(event)
-    vim.bo[event.buf].filetype = "markdown"
-  end,
-})
-
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),

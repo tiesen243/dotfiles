@@ -2,7 +2,7 @@ return {
   {
     "projekt0n/github-nvim-theme",
     name = "github-theme",
-    lazy = false,  -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("github-theme").setup({
@@ -142,8 +142,8 @@ return {
         },
         layout = {
           width = { min = 20 }, -- min and max width of the columns
-          spacing = 4,     -- spacing between columns
-          align = "center", -- align columns left, center or right
+          spacing = 4,          -- spacing between columns
+          align = "center",     -- align columns left, center or right
         },
 
         plugins = { marks = false, registers = false, spelling = false },
@@ -177,19 +177,19 @@ return {
       require("colorizer").setup({
         filetypes = { "*" },
         user_default_options = {
-          RGB = true,                                -- #RGB hex codes
-          RRGGBB = true,                             -- #RRGGBB hex codes
-          names = true,                              -- "Name" codes like Blue or blue
-          RRGGBBAA = true,                           -- #RRGGBBAA hex codes
-          AARRGGBB = true,                           -- 0xAARRGGBB hex codes
-          rgb_fn = true,                             -- CSS rgb() and rgba() functions
-          hsl_fn = true,                             -- CSS hsl() and hsla() functions
-          css = true,                                -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-          css_fn = true,                             -- Enable all CSS *functions*: rgb_fn, hsl_fn
+          RGB = true,                                     -- #RGB hex codes
+          RRGGBB = true,                                  -- #RRGGBB hex codes
+          names = true,                                   -- "Name" codes like Blue or blue
+          RRGGBBAA = true,                                -- #RRGGBBAA hex codes
+          AARRGGBB = true,                                -- 0xAARRGGBB hex codes
+          rgb_fn = true,                                  -- CSS rgb() and rgba() functions
+          hsl_fn = true,                                  -- CSS hsl() and hsla() functions
+          css = true,                                     -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+          css_fn = true,                                  -- Enable all CSS *functions*: rgb_fn, hsl_fn
           --- @type string | "foreground" | "background" | "virtualtext"
-          mode = "background",                       -- Set the display mode.
+          mode = "background",                            -- Set the display mode.
           --- @type boolean | "normal" | "lsp" | "both"
-          tailwind = "lsp",                          -- Enable tailwind colors
+          tailwind = "lsp",                               -- Enable tailwind colors
           -- parsers can contain values used in |user_default_options|
           sass = { enable = false, parsers = { "css" } }, -- Enable sass colors
           virtualtext = "■",
