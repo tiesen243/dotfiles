@@ -37,9 +37,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({
       bufnr = event.buf,
       timeout_ms = 2000,
-      filter = function(client)
-        return client.name == "null-ls"
-      end,
     })
   end,
 })
