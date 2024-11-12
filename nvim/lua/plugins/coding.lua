@@ -73,6 +73,19 @@ return {
     end,
   },
   {
+    "nvimtools/none-ls.nvim",
+    config = function()
+      local nls = require("null-ls")
+
+      nls.setup({
+        sources = {
+          nls.builtins.formatting.stylua,
+          nls.builtins.formatting.prettier,
+        }
+      })
+    end
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
