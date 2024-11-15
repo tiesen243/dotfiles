@@ -2,7 +2,8 @@
 
 ## Preview
 
-![preview](./assets/preview.png)
+![preview-1](./assets/preview-1.png)
+![preview-2](./assets/preview-2.png)
 
 ## Installation
 
