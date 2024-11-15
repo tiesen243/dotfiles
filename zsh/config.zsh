@@ -1,15 +1,30 @@
 #############################################
 # Environment variables
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 #############################################
+
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-export YAZI_CONFIG_HOME="$HOME/dotfiles/yazi"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 #############################################
 # ZSH Plugins and Theme
 #############################################
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time Oh My Zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="yuki"
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+
 source $ZSH/oh-my-zsh.sh
 
 #############################################
@@ -85,12 +100,12 @@ alias   ga="git add"
 alias    g="git"
 
 # Docker
-alias  ddc="docker rm -f $(docker ps -a -q)"
-alias  ddi="docker rmi -f $(docker images -q)"
-alias   dc="docker container ls"
-alias   di="docker images"
-alias   db="docker build"
-alias   dr="docker run"
+# alias  ddc="docker rm -f $(docker ps -a -q)"
+# alias  ddi="docker rmi -f $(docker images -q)"
+# alias   dc="docker container ls"
+# alias   di="docker images"
+# alias   db="docker build"
+# alias   dr="docker run"
 
 # Pacman (Arch Linux) | Yay
 alias pacq="yay -Qdtq | yay -Rns -"

@@ -17,7 +17,13 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock pavucontrol brightnessctl playerctl floorp-bin cliphist wl-clipboard grim slurp lsd bat nwg-look fastfetch btop localsend lazygit noto-fonts noto-fonts-cjk noto-fonts-emoji github-cli docker ripgrep vlc
+yay -S zsh hyprpaper hyprpicker hypridle hyprlock \
+noto-fonts noto-fonts-cjk noto-fonts-emoji \
+github-cli fastfetch btop lazygit ripgrep \
+pavucontrol brightnessctl playerctl \
+cliphist wl-clipboard \
+lsd bat nwg-look \
+grim slurp
 ```
 
 4. Install `oh-my-zsh`
@@ -81,7 +87,7 @@ ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 1. Change Themes
 
 ```bash
-cp -r ~/dotfiles/customsize/* ~/.local/share
+cp -r assets/* ~/.local/share/
 ```
 
 Then, you can change the themes by `nwg-look` command
