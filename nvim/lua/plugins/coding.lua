@@ -28,7 +28,7 @@ return {
             else
               fallback()
             end
-          end, { "i", "s", "c" }),
+          end, { "i" }),
 
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
@@ -36,7 +36,7 @@ return {
             else
               fallback()
             end
-          end, { "i", "s", "c" }),
+          end, { "i" }),
 
           ["<C-k>"] = cmp.mapping.scroll_docs(-4),
           ["<C-j>"] = cmp.mapping.scroll_docs(4),
