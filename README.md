@@ -19,11 +19,11 @@ rm -rf ~/yay
 ```bash
 yay -S zsh hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
+bat lsd ripgrep brightnessctl \
 cliphist wl-clipboard \
 nwg-look pavucontrol \
 btop fastfetch rofi \
 github-cli lazygit \
-bat lsd ripgrep \
 thunar gvfs \
 grim slurp
 ```
@@ -101,7 +101,7 @@ ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 1. Change Themes
 
 ```bash
-cp -r assets/* ~/.local/share/
+cp -r ~/dotfiles/assets/* ~/.local/share/
 ```
 
 Then, you can change the themes by `nwg-look` command
