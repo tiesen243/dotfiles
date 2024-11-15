@@ -113,9 +113,8 @@ $path = /path/to/your/wallpaper
 
 Or change file in `~/dotfiles/assets/_background.png`
 
-## Note:
-
-- If you dual boot and get wrong time on windows, run this command:
+> [!TIP]
+> If windows display wrong time when dual boot, run this command:
 
 ```bash
 timedatectl set-local-rtc 1
