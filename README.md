@@ -90,7 +90,7 @@ sudo pacman -Runs htop nano vim wofi
 rm ~/.zshrc
 rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout,xsettingsd}
 
-find ~/dotfiles/assets/* -maxdepth 0 -type d -name '*' -exec cp -r {} ~/Downloads \;
+find ~/dotfiles/assets/* -maxdepth 0 -type d -name '*' -exec cp -r {} ~/.local/share \;
 ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout,xsettingsd} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
