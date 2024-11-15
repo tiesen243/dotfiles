@@ -84,23 +84,16 @@ sudo pacman -Runs htop nano vim wofi
 
 ## Usage
 
-To apply my config, you can run the following command
+1. To apply my config, you can run the following command:
 
 ```bash
 rm ~/.zshrc
 rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout,xsettingsd}
 
+find ~/dotfiles/assets/* -maxdepth 0 -type d -name '*' -exec cp -r {} ~/Downloads \;
 ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout,xsettingsd} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
-```
-
-## Customization
-
-1. Change Themes
-
-```bash
-cp -r ~/dotfiles/assets/* ~/.local/share/
 ```
 
 Then, you can change the themes by `nwg-look` command
