@@ -36,7 +36,7 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
--- buffers
+-- Buffers
 map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bl", "<cmd>Telescope buffers<cr>", { desc = "List Buffers" })
