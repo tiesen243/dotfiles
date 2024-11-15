@@ -7,7 +7,7 @@
 1. Install `yay`
 
 ```bash
-pacman -S --needed git base-devel
+pacman -Syu --needed git base-devel
 git clone https://aur.archlinux.org/yay.git ~/yay
 cd ~/yay
 makepkg -si
@@ -19,9 +19,11 @@ rm -rf ~/yay
 ```bash
 yay -S zsh hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
-github-cli fastfetch btop lazygit ripgrep \
-pavucontrol lsd bat nwg-look \
 cliphist wl-clipboard \
+nwg-look pavucontrol \
+btop fastfetch rofi \
+github-cli lazygit \
+bat lsd ripgrep \
 thunar gvfs \
 grim slurp
 ```
@@ -41,7 +43,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-5. Optional: Install `miniconda3` for python and `nvm` for nodejs development environment
+5. Optional: Install `miniconda3` for python, `nvm` for nodejs development environment and `OBS` for screen record
 
 - Miniconda
 
@@ -67,6 +69,18 @@ if [ -d "$HOME/.bun/bin" ]; then
     export PATH="$HOME/.bun/bin:$PATH"
 fi
 # <<< bun initialize <<<
+```
+
+- OBS Studio
+
+```bash
+yay -S obs-studio wlrobs-hg
+```
+
+6. Uninstall unnecessary packages (optional)
+
+```bash
+sudo pacman -Runs dolphin htop nano vim wofi
 ```
 
 ## Usage
@@ -102,10 +116,10 @@ Or change file in `~/dotfiles/assets/_background.png`
 
 ## Note:
 
-- If you use `obs-studio`, you can install `wlrobs-hg` dependency for screen recording
+- If you dual boot and get wrong time on windows, run this command:
 
 ```bash
-yay -S obs-studio wlrobs-hg
+timedatectl set-local-rtc 1
 ```
 
 ## Conclusion
