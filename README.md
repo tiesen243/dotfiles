@@ -20,9 +20,9 @@ rm -rf ~/yay
 yay -S zsh hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 github-cli fastfetch btop lazygit ripgrep \
-pavucontrol brightnessctl playerctl \
+pavucontrol lsd bat nwg-look \
 cliphist wl-clipboard \
-lsd bat nwg-look \
+thunar gvfs \
 grim slurp
 ```
 
@@ -75,11 +75,11 @@ To apply my config, you can run the following command
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,wofi}
+rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout}
 
-ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,wofi} ~/.config
-ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
+ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
 
 ## Customization
