@@ -24,7 +24,6 @@ cliphist wl-clipboard \
 nwg-look pavucontrol \
 btop fastfetch rofi \
 github-cli lazygit \
-thunar gvfs \
 grim slurp
 ```
 
@@ -80,7 +79,7 @@ yay -S obs-studio wlrobs-hg
 6. Uninstall unnecessary packages (optional)
 
 ```bash
-sudo pacman -Runs dolphin htop nano vim wofi
+sudo pacman -Runs htop nano vim wofi
 ```
 
 ## Usage
