@@ -31,7 +31,7 @@ return {
         vim.keymap.set("n", "<leader>lD", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts("Next diagnostic"))
 
         if client.name == "ts_ls" then
-          vim.keymap.set("n", "<leader>lO", "<cmd>OrganizeImports<cr>", opts("Organize imports"))
+          vim.keymap.set("n", "<C-o>", "<cmd>OrganizeImports<cr>", opts("Organize imports"))
         end
       end
 
@@ -131,10 +131,7 @@ return {
           "eslint",
           "emmet_ls",
           "prismals",
-          "tailwindcss",
-
-          -- Utils
-          "dockerls",
+          "tailwindcss"
         },
       })
     end,
