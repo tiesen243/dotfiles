@@ -2,6 +2,8 @@
 
 ## Preview
 
+![preview](./assets/preview.png)
+
 ## Installation
 
 1. Install `yay`
