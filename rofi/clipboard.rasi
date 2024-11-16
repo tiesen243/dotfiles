@@ -2,14 +2,15 @@
 configuration {
     modi:                        "drun";
     show-icons:                  false;
+    font:                        "Geist Mono 12";
 }
 
-@theme "~/.config/rofi/theme.rasi"
+@theme "~/dotfiles/rofi/theme.rasi"
 
 
 // Main //
 window {
-    width:                       24em;
+    width:                       32em;
     height:                      32em;
     transparency:                "real";
     fullscreen:                  false;
@@ -48,15 +49,16 @@ wallframe {
 // Inputs //
 inputbar {
     enabled:                     true;
-    padding:                     0em;
+    padding:                     1em;
     children:                    [ "entry" ];
     background-color:            @main-bg;
     expand:                      true;
 }
 entry {
     enabled:                     true;
-    padding:                     1em;
+    padding:                     1em 0em;
     text-color:                  @main-fg;
+    font:                        "Geist Mono 20";
     background-color:            transparent;
 }
 
