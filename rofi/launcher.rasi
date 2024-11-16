@@ -3,8 +3,8 @@ configuration {
     modi:                        "drun,filebrowser,run";
     show-icons:                  true;
     display-drun:                " ";
-    display-run:                 " ";
     display-filebrowser:         " ";
+    display-run:                 " ";
     drun-display-format:         "{name}";
     window-format:               "{w}{t}";
     font:                        "Geist Mono Medium 12";
