@@ -1,0 +1,55 @@
+// Config //
+configuration {
+    modi:                        "drun";
+    show-icons:                  false;
+    font:                        "Geist Mono 16";
+}
+
+@theme "~/dotfiles/rofi/theme.rasi"
+
+
+// Main //
+window {
+    height:                      4em;
+    width:                       32em;
+    transparency:                "real";
+    fullscreen:                  false;
+    enabled:                     true;
+    cursor:                      "default";
+    spacing:                     0em;
+    padding:                     0em;
+    border-color:                @main-br;
+    background-color:            @main-bg;
+}
+mainbox {
+    enabled:                     true;
+    spacing:                     0em;
+    padding:                     0.5em;
+    background-color:            transparent;
+}
+
+inputbar {
+  enabled:                     true;
+  padding:                     0.5em;
+  spacing:                     0em;
+  text-color:                  @main-fg;
+  background-color:            @main-bg;
+  children:                    [ prompt, entry ];
+}
+
+prompt {
+  enabled:                     true;
+  padding:                     1em;
+  text-color:                  @main-fg;
+  background-color:            @main-bg;
+}
+entry {
+  enabled:                     true;
+  padding:                     1em;
+  text-color:                  @main-fg;
+  background-color:            @main-bg;
+}
+
+listview {
+  enabled:                     false;
+}
