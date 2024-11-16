@@ -12,7 +12,11 @@ if [ -z "$query" ]; then
 fi
 
 # check if query is a URL
-if [[ "$query" =~ ^(http://|https://)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)(:[0-9]+)?(/.*)?$ ]]; then
+if [[ "$query" =~ ^(http://|https://)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)(:[0-9]+)?(/.*)?$
+  || "$query" =~ ^localhost.*$
+  || "$query" =~ ^file://.*$
+  || "$query" =~ ^192.168.*$ 
+  ]]; then
   $1 $query
 else
   $1 "https://www.google.com/search?q=$query"
