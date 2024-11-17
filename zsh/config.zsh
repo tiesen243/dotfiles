@@ -8,6 +8,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
+
 #############################################
 # ZSH Plugins and Theme
 #############################################
@@ -25,7 +26,9 @@ ZSH_THEME="yuki"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-autosuggestions zsh-syntax-highlighting)
 
+
 source $ZSH/oh-my-zsh.sh
+
 
 #############################################
 # Alias
@@ -34,20 +37,19 @@ source $ZSH/oh-my-zsh.sh
 
 # General
 alias date="date +'%A %d-%m-%Y %H:%M:%S'"
-alias  lla="lsd -la"
 alias  fzf="fzf -e"
 alias  cls="clear"
-alias  cat="bat"
-alias   lt="lsd --tree --depth=3"
 alias   lg="lazygit"
-alias   ls="lsd -l"
-alias   la="lsd -a"
 alias   py="python"
 alias    v="nvim"
 alias    q="exit"
 
 # Kitty
 alias icat="kitten icat"
+
+# LSD
+alias ls="lsd"
+alias lt="lsd --tree --depth 3"
 
 # Conda
 # alias  cee="conda env export | grep -v '^prefix: ' > environment.yml"
@@ -60,43 +62,33 @@ alias icat="kitten icat"
 # alias   cr="conda remove"
 
 # Bun
-alias  bup="bun upgrade"
-alias  big="bun install -g"
-alias  bug="bun update -g"
-alias  bad="bun add -d"
-alias  bap="bun add -p"
 alias  bff="bun format:fix"
 alias  blf="bun lint:fix"
-alias   bb="bun run build"
-alias   bo="bun outdated"
-alias   bp="bun preview"
+alias   bf="bun format"
+alias   bl="bun lint"
 alias   bi="bun install"
-alias   bx="bunx --bun"
-alias   bc="bun create"
 alias   bu="bun update"
 alias   br="bun remove"
-alias   bf="bun format"
-alias   bs="bun start"
-alias   bl="bun lint"
 alias   ba="bun add"
+alias   bb="bun run build"
+alias   bx="bunx --bun"
+alias   bs="bun start"
 alias   bd="bun dev"
 alias    b="bun"
 
 # Git
 alias  gcs="gh copilot suggest"
 alias  gce="gh copilot explain"
-alias  grv="gh repo view --web"
-alias  gpf="git push --force"
 alias  grc="gh repo create"
 alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
 alias  gaa="git add --all"
+alias   ga="git add"
 alias   gp="git push origin"
 alias   gc="git commit -a"
-alias   gS="git switch"
-alias   gs="git status"
-alias   gl="git pull"
-alias   ga="git add"
+alias   gs="git switch"
+alias   gS="git status"
+alias   gP="git pull"
 alias    g="git"
 
 # Docker
@@ -108,18 +100,20 @@ alias    g="git"
 # alias   dr="docker run"
 
 # Pacman (Arch Linux) | Yay
-alias pacq="yay -Qdtq | yay -Rns -"
-alias pacr="yay -Runs"
-alias pacu="yay -Syu"
-alias pacc="yay -Scc"
-alias paci="yay -S"
+alias yp="yay -Qdtq | yay -Rns -"
+alias yr="yay -Runs"
+alias yu="yay -Syu"
+alias yc="yay -Scc"
+alias yi="yay -S"
+
 
 #############################################
 # Functions
 #############################################
 
-gP () {
-  git add .
+push ()
+{
+  git add --all
   if [ -z "$1" ]; then
     git commit -a
   else

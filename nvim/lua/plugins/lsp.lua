@@ -35,56 +35,35 @@ return {
         end
       end
 
-      local servers = { "html", "emmet_ls", "volar", "tailwindcss", "eslint", "prismals", "dockerls" }
-      for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup({
+      local servers = { "lua_ls", "ts_ls", "emmet_ls", "tailwindcss", "eslint", "prismals" }
+      for _, server_name in ipairs(servers) do
+        local conf = {
           on_attach = on_attach,
           capabilities = capabilities,
-        })
-      end
+        }
 
-      lspconfig["ts_ls"].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = { "typescript-language-server", "--stdio" },
-        commands = {
-          OrganizeImports = {
+        if server_name == "ts_ls" then
+          local commands = conf.commands or {}
+          commands.OrganizeImports = {
             function()
-              local params = {
+              vim.lsp.buf.execute_command({
                 command = "_typescript.organizeImports",
                 arguments = { vim.api.nvim_buf_get_name(0) },
-                title = "Organize Imports",
-              }
-              vim.lsp.buf.execute_command(params)
+              })
             end,
-            description = "Organize Imports",
-          },
-        },
-      })
+            description = "Organize imports",
+          }
+          conf.commands = commands
+        end
 
-      lspconfig["cssls"].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = { css = { validate = true, lint = { unknownAtRules = "ignore" } } },
-      })
+        if server_name == "lua_ls" then
+          local settings = conf.settings or {}
+          settings = { Lua = { diagnostics = { globals = { "vim", "Snacks" } } } }
+          conf.settings = settings
+        end
 
-      lspconfig["lua_ls"].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim", "Snacks" },
-            },
-            workspace = {
-              library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-              },
-            },
-          },
-        },
-      })
+        lspconfig[server_name].setup(conf)
+      end
     end,
   },
   {
@@ -108,30 +87,30 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-    },
+    dependencies = { "williamboman/mason-lspconfig.nvim", "jay-babu/mason-null-ls.nvim" },
     config = function()
       require("mason").setup({
-        ensure_installed = { "prettier" },
         ui = {
           icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
+          border = "rounded",
         },
       })
 
       require("mason-lspconfig").setup({
         ensure_installed = {
-          --Lua
           "lua_ls",
-
-          --Web Development
-          "html",
           "ts_ls",
-          "cssls",
           "eslint",
           "emmet_ls",
           "prismals",
-          "tailwindcss"
+          "tailwindcss",
+        },
+      })
+
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          "stylua",
+          "prettier",
         },
       })
     end,

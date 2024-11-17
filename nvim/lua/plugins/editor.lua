@@ -9,6 +9,7 @@ return {
         transparent = vim.g.transparent_enabled,
       })
       vim.cmd("colorscheme github_dark")
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
     end,
   },
   {
@@ -148,7 +149,7 @@ return {
           title = false,
           zindex = 1000,
           ---@type "none" | "single" | "double" | "rounded"
-          border = "none",
+          border = "rounded",
           padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
         },
         layout = {
