@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function(event)
     vim.lsp.buf.format({
       bufnr = event.buf,
-      timeout_ms = 2000,
+      timeout_ms = 1000,
     })
   end,
 })

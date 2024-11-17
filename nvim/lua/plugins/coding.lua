@@ -57,6 +57,11 @@ return {
           { name = "path" },
         },
 
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+
         formatting = {
           format = require("lspkind").cmp_format({
             maxwidth = 50,
@@ -74,6 +79,7 @@ return {
   },
   {
     "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
     config = function()
       local nls = require("null-ls")
 
@@ -81,9 +87,9 @@ return {
         sources = {
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.prettier,
-        }
+        },
       })
-    end
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -98,11 +104,6 @@ return {
         incremental_selection = { enable = true },
         highlight = { enable = true, additional_vim_regex_highlighting = true },
       })
-
-      vim.filetype.add({ extension = { mdx = "mdx", conf = "bash" } })
-      vim.filetype.add({ pattern = { [".*/hypr/.*%.conf"] = "hyprlang" } })
-
-      vim.treesitter.language.register("markdown", "mdx")
     end,
   },
   {
@@ -117,14 +118,8 @@ return {
         padding = true,
         sticky = true,
         ignore = nil,
-        toggler = {
-          line = "<C-/>",
-          block = "<C-S-/>",
-        },
-        opleader = {
-          line = "<C-/>",
-          block = "<C-S-/>",
-        },
+        toggler = { line = "<C-/>" },
+        opleader = { line = "<C-/>" },
         pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
       })
     end,
@@ -164,14 +159,14 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     cmd = "CopilotChat",
     keys = {
-      { "<leader>gct", "<cmd>CopilotChatToggle<cr>",        desc = "Toggle Copilot Chat" },
-      { "<leader>gce", "<cmd>CopilotChatExplain<cr>",       desc = "Explain code" },
-      { "<leader>gcr", "<cmd>CopilotChatReview<cr>",        desc = "Review code" },
-      { "<leader>gcf", "<cmd>CopilotChatFix<cr>",           desc = "Fix bug" },
-      { "<leader>gco", "<cmd>CopilotChatOptimize<cr>",      desc = "Optimize code" },
+      { "<leader>gct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
+      { "<leader>gce", "<cmd>CopilotChatExplain<cr>", desc = "Explain code" },
+      { "<leader>gcr", "<cmd>CopilotChatReview<cr>", desc = "Review code" },
+      { "<leader>gcf", "<cmd>CopilotChatFix<cr>", desc = "Fix bug" },
+      { "<leader>gco", "<cmd>CopilotChatOptimize<cr>", desc = "Optimize code" },
       { "<leader>gcd", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix Diagnostic" },
-      { "<leader>gcc", "<cmd>CopilotChatCommit<cr>",        desc = "Suggest commit message" },
-      { "<leader>gcs", "<cmd>CopilotChatCommitStaged<cr>",  desc = "Suggest commit stage message" },
+      { "<leader>gcc", "<cmd>CopilotChatCommit<cr>", desc = "Suggest commit message" },
+      { "<leader>gcs", "<cmd>CopilotChatCommitStaged<cr>", desc = "Suggest commit stage message" },
     },
     config = function()
       require("CopilotChat").setup({
