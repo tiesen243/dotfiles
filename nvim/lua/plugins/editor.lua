@@ -22,6 +22,8 @@ return {
           enable = true,
           dotfiles = false,
           git_ignored = true,
+          custom = { ".git$" },
+          exclude = { ".env" },
         },
       }
     end,
