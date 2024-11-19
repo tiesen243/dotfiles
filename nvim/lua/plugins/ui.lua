@@ -8,10 +8,6 @@ return {
     opts = {
       transparent = vim.g.transparent_enabled,
     },
-    config = function()
-      vim.cmd("colorscheme github_dark")
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
-    end,
   },
   {
     "xiyaowong/transparent.nvim",
