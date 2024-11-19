@@ -106,7 +106,9 @@ Snacks.toggle({
   get = function()
     return vim.g.transparent_enabled
   end,
-  set = function() end,
+  set = function()
+    vim.cmd("TransparentToggle")
+  end,
 }):map("<leader>ot")
 if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>oh")

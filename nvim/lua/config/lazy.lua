@@ -29,11 +29,14 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "github-dark" } },
+  install = { colorscheme = { "github_dark" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
-})
 
+  ui = {
+    border = "rounded",
+  },
+})
 require("config.options")
 require("config.keymaps")
 require("config.autocmd")
