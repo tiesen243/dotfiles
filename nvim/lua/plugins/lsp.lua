@@ -1,7 +1,6 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
       local lspconfig = require("lspconfig")
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -11,27 +10,39 @@ return {
       cmp_nvim_lsp.setup({ capabilities = capabilities })
 
       local on_attach = function(client, _)
-        local opts = function(desc)
-          return { noremap = true, silent = true, expr = false, nowait = false, desc = desc }
+        vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
+
+        vim.keymap.set("n", "<leader>lg", "<nop>", { desc = "LSP GoTo" })
+        vim.keymap.set("n", "<leader>lgd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto Definition" })
+        vim.keymap.set("n", "<leader>lgr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "References" })
+        vim.keymap.set(
+          "n",
+          "<leader>lgI",
+          "<cmd>lua vim.lsp.buf.implementation()<cr>",
+          { desc = "Goto Implementation" }
+        )
+        vim.keymap.set(
+          "n",
+          "<leader>lgy",
+          "<cmd>lua vim.lsp.buf.type_definition()<cr>",
+          { desc = "Goto Type Definition" }
+        )
+        vim.keymap.set("n", "<leader>lgD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration" })
+
+        vim.keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
+        vim.keymap.set("n", "<leader>lH", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
+
+        vim.keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code Action" })
+        vim.keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
+        vim.keymap.set("n", "<leader>lR", "<cmd>lua Snacks.rename.rename_file()<cr>", { desc = "Rename File" })
+
+        if Snacks.words.is_enabled() then
+          vim.keymap.set("n", "]]", "<cmd>lua Snacks.words.jump(vim.v.count1)<cr>", { desc = "Next Word" })
+          vim.keymap.set("n", "[[", "<cmd>lua Snacks.words.jump(-vim.v.count1)<cr>", { desc = "Previous Word" })
         end
 
-        vim.keymap.set("n", "<leader>lR", "<cmd>LspRestart<cr>", opts("Restart LSP"))
-
-        vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", opts("Rename"))
-        vim.keymap.set("n", "<leader>lh", "<cmd>Lspsaga hover_doc<cr>", opts("Hover docs"))
-        vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", opts("Code action"))
-
-        vim.keymap.set("n", "<leader>lo", "<cmd>Lspsaga outline<cr>", opts("Outline"))
-        vim.keymap.set("n", "<leader>lf", "<cmd>Lspsaga finder<cr>", opts("References"))
-        vim.keymap.set("n", "<leader>lF", "<cmd>lua vim.lsp.buf.format()<cr>", opts("Format"))
-        vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<cr>", opts("Peak definition"))
-        vim.keymap.set("n", "<leader>lg", "<cmd>Lspsaga goto_definition<cr>", opts("Goto definition"))
-
-        vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts("Prev diagnostic"))
-        vim.keymap.set("n", "<leader>lD", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts("Next diagnostic"))
-
         if client.name == "ts_ls" then
-          vim.keymap.set("n", "<C-o>", "<cmd>OrganizeImports<cr>", opts("Organize imports"))
+          vim.keymap.set("n", "<C-o>", "<cmd>OrganizeImports<cr>", { desc = "Organize Imports" })
         end
       end
 
@@ -66,25 +77,8 @@ return {
       end
     end,
   },
-  {
-    "nvimdev/lspsaga.nvim",
-    config = function()
-      require("lspsaga").setup({
-        lightbulbs = { enabled = false },
-        rename = { keys = { quit = "<C-d>" } },
-        finder = { default = "ref", keys = { tabnew = "<cr>" } },
-        code_action = {
-          num_shortcut = true,
-          show_server_name = true,
-          extend_gitsigns = true,
-        },
-        outline = {
-          close_after_jump = false,
-          keys = { jump = "<cr>" },
-        },
-      })
-    end,
-  },
+
+  -- auto install server
   {
     "williamboman/mason.nvim",
     dependencies = { "williamboman/mason-lspconfig.nvim", "jay-babu/mason-null-ls.nvim" },

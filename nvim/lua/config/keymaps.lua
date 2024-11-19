@@ -98,10 +98,16 @@ Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leade
 Snacks.toggle.diagnostics():map("<leader>od")
 Snacks.toggle.line_number():map("<leader>ol")
 Snacks.toggle
-    .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-    :map("<leader>oc")
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+  :map("<leader>oc")
 Snacks.toggle.treesitter():map("<leader>oT")
-map("n", "<leader>ot", "<cmd>TransparentToggle<cr>", { desc = "Toggle Transparent" })
+Snacks.toggle({
+  name = "Transparent Background",
+  get = function()
+    return vim.g.transparent_enabled
+  end,
+  set = function() end,
+}):map("<leader>ot")
 if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>oh")
 end
@@ -112,7 +118,7 @@ map("n", "<leader>oI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
 -- floating terminal
 map("n", "<leader>t", function()
-  Snacks.terminal()
+  Snacks.terminal.open()
 end, { desc = "Terminal (cwd)" })
 
 -- Terminal Mappings
