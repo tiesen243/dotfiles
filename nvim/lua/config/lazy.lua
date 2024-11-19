@@ -29,7 +29,7 @@ require("lazy").setup({
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "github_dark" } },
+  install = { colorscheme = { "github_dark_dimmed" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
 
@@ -40,3 +40,6 @@ require("lazy").setup({
 require("config.options")
 require("config.keymaps")
 require("config.autocmd")
+
+vim.cmd("colorscheme github_dark_dimmed")
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = nil })
