@@ -1,60 +1,43 @@
 return {
+  -- auto completion and snippets
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-path",
-      "onsails/lspkind-nvim",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
       "zbirenbaum/copilot-cmp",
       "saadparwaiz1/cmp_luasnip",
-      "rafamadriz/friendly-snippets",
-      { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+      "onsails/lspkind-nvim",
     },
     config = function()
       local cmp = require("cmp")
+      local defaults = require("cmp.config.default")()
 
-      require("luasnip.loaders.from_vscode").lazy_load()
       require("copilot_cmp").setup()
-
       cmp.setup({
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
           end,
         },
-        mapping = {
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            else
-              fallback()
-            end
-          end, { "i" }),
 
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-            else
-              fallback()
-            end
-          end, { "i" }),
-
+        mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.scroll_docs(-4),
           ["<C-j>"] = cmp.mapping.scroll_docs(4),
 
+          ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-S-Space>"] = cmp.mapping.close(),
-
-          ["<CR>"] = cmp.mapping.confirm({
-            select = true,
-            behavior = cmp.ConfirmBehavior.Replace,
-          }),
-        },
+          ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert }),
+        }),
 
         sources = {
           { name = "copilot" },
           { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "path" },
+          { name = "buffer" },
+          { name = "luasnip" },
         },
 
         window = {
@@ -71,107 +54,81 @@ return {
             symbol_map = { Copilot = "" },
           }),
         },
+
+        experimental = { sorting = defaults.sorting },
       })
 
       vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
     end,
   },
+
+  -- snippets
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    dependencies = {
+      {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+      },
+    },
+    opts = {
+      history = true,
+      updateevents = "TextChanged",
+    },
+  },
+
+  -- formatter
   {
     "nvimtools/none-ls.nvim",
     event = "VeryLazy",
-    config = function()
+    opts = function()
       local nls = require("null-ls")
-
-      nls.setup({
+      return {
         sources = {
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.prettier,
         },
-      })
+      }
     end,
   },
+
+  -- auto pairs
+  {
+    "echasnovski/mini.pairs",
+    event = "VeryLazy",
+    opts = { modes = { insert = true, command = true, terminal = false } },
+  },
+
+  -- comments
+  {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function()
-      local treesitter = require("nvim-treesitter.configs")
-
-      treesitter.setup({
-        auto_install = true,
-        sync_install = true,
-        indent = { enable = true },
-        incremental_selection = { enable = true },
-        highlight = { enable = true, additional_vim_regex_highlighting = true },
-      })
-    end,
-  },
-  {
-    "numToStr/Comment.nvim",
-    dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
+    event = "VeryLazy",
+    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+    opts = {
+      auto_install = true,
+      sync_install = true,
+      indent = { enable = true },
+      highlight = { enable = true, additional_vim_regex_highlighting = true },
     },
-    config = function()
-      vim.g.skip_ts_context_commentstring_module = true
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
 
-      require("Comment").setup({
-        padding = true,
-        sticky = true,
-        ignore = nil,
-        toggler = { line = "<C-/>" },
-        opleader = { line = "<C-/>" },
-        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-      })
-    end,
-  },
-  {
-    "m4xshen/autoclose.nvim",
-    config = function()
-      require("autoclose").setup()
-    end,
-  },
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = function()
-      require("nvim-autopairs").setup()
-    end,
-  },
+  -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup({
-        otps = { enable_close_on_slash = false },
-      })
-    end,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    lazy = false,
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    cmd = "CopilotChat",
-    keys = {
-      { "<leader>gct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
-      { "<leader>gce", "<cmd>CopilotChatExplain<cr>", desc = "Explain code" },
-      { "<leader>gcr", "<cmd>CopilotChatReview<cr>", desc = "Review code" },
-      { "<leader>gcf", "<cmd>CopilotChatFix<cr>", desc = "Fix bug" },
-      { "<leader>gco", "<cmd>CopilotChatOptimize<cr>", desc = "Optimize code" },
-      { "<leader>gcd", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix Diagnostic" },
-      { "<leader>gcc", "<cmd>CopilotChatCommit<cr>", desc = "Suggest commit message" },
-      { "<leader>gcs", "<cmd>CopilotChatCommitStaged<cr>", desc = "Suggest commit stage message" },
-    },
-    config = function()
-      require("CopilotChat").setup({
-        window = { title = "Copilot Chat", layout = "vertical", width = 0.4 },
-      })
-    end,
+    opts = {},
   },
 }
