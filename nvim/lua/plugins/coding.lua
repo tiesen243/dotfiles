@@ -88,27 +88,8 @@ return {
     event = "VeryLazy",
     opts = function()
       local nls = require("null-ls")
-      return {
-        sources = {
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.prettier,
-        },
-      }
+      return { sources = { nls.builtins.formatting.stylua, nls.builtins.formatting.prettier } }
     end,
-  },
-
-  -- auto pairs
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {},
-  },
-
-  -- comments
-  {
-    "folke/ts-comments.nvim",
-    event = "VeryLazy",
-    opts = {},
   },
 
   -- treesitter
@@ -120,7 +101,6 @@ return {
     opts = {
       auto_install = true,
       sync_install = true,
-      indent = { enable = true },
       highlight = { enable = true, additional_vim_regex_highlighting = true },
     },
     config = function(_, opts)
@@ -128,9 +108,38 @@ return {
     end,
   },
 
+  -- auto pairs
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {
+      check_ts = true,
+      fast_wrap = {},
+    },
+  },
+
   -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
     opts = {},
+  },
+
+  -- comments
+  {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  -- colorize hex colors in the buffer
+  {
+    "NvChad/nvim-colorizer.lua",
+    opts = {
+      --- @type string | "foreground" | "background" | "virtualtext"
+      mode = "background", -- Set the display mode.
+      virtualtext = "■",
+      --- @type boolean | "normal" | "lsp" | "both"
+      tailwind = "lsp", -- Enable tailwind colors
+    },
   },
 }
