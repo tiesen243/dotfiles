@@ -13,6 +13,7 @@ return {
     config = function()
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
       require("copilot_cmp").setup()
       cmp.setup({
@@ -59,6 +60,7 @@ return {
       })
 
       vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
     end,
   },
 
@@ -97,9 +99,9 @@ return {
 
   -- auto pairs
   {
-    "echasnovski/mini.pairs",
-    event = "VeryLazy",
-    opts = { modes = { insert = true, command = true, terminal = false } },
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
   },
 
   -- comments
