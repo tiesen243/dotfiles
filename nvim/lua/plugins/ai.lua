@@ -10,6 +10,7 @@ return {
       filetypes = { markdown = true, help = true },
     },
   },
+
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     cmd = "CopilotChat",

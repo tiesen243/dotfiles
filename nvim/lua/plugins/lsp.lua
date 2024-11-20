@@ -24,8 +24,8 @@ return {
         )
         vim.keymap.set("n", "<leader>lgD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration" })
 
-        vim.keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover Doc" })
-        vim.keymap.set("n", "<leader>lH", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
+        vim.keymap.set({ "n", "i" }, "<M-h>", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover Doc" })
+        vim.keymap.set({ "n", "i" }, "<M-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
 
         vim.keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code Action" })
         vim.keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
