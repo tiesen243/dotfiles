@@ -3,11 +3,6 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
-      local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-      local capabilities = cmp_nvim_lsp.default_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      cmp_nvim_lsp.setup({ capabilities = capabilities })
 
       local on_attach = function(client, _)
         vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
@@ -29,7 +24,7 @@ return {
         )
         vim.keymap.set("n", "<leader>lgD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration" })
 
-        vim.keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
+        vim.keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover Doc" })
         vim.keymap.set("n", "<leader>lH", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
 
         vim.keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code Action" })
@@ -50,7 +45,7 @@ return {
       for _, server_name in ipairs(servers) do
         local conf = {
           on_attach = on_attach,
-          capabilities = capabilities,
+          capabilities = require("cmp_nvim_lsp").default_capabilities(),
         }
 
         if server_name == "ts_ls" then
