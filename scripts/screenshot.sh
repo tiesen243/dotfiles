@@ -1,16 +1,22 @@
 #!/bin/bash
 
 if [ -d ~/OneDrive ]; then
-  saveLocation=~/OneDrive/Pictures/Screenshots/Screenshot_$(date +%F_%H%M%S).png
+  saveLocation=~/OneDrive/Pictures/Screenshots
 else
-  saveLocation=~/Pictures/Screenshots/Screenshot_$(date +%F_%H%M%S).png
+  saveLocation=~/Pictures/Screenshots
+  if [ ! -d $saveLocation ]; then
+    mkdir -p $saveLocation
+  fi
 fi
 
-if [ $1 = 1 ]; then
-  grim $saveLocation
+saveLocation=($saveLocation/Screenshot\ $(date +%Y-%m-%d)\ $(date +%H%M%S)\.png)
+
+if [ "$1" == "1" ]; then
+  grim "$saveLocation"
 else
-  grim -g "$(slurp)" $saveLocation
+  grim -g "$(slurp)" "$saveLocation"
 fi
 
-wl-copy < $saveLocation
-notify-send Screenshot "Saved to $saveLocation"
+wl-copy < "$saveLocation"
+
+notify-send "Screenshot taken" "Saved to $saveLocation"
