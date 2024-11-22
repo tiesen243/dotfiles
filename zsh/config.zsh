@@ -111,7 +111,7 @@ alias yi="yay -S"
 # Functions
 #############################################
 
-push ()
+gcp ()
 {
   git add --all
   if [ -z "$1" ]; then
@@ -119,7 +119,7 @@ push ()
   else
     git commit -a -m "$1"
   fi
-  git push
+  git push origin
 }
 
 
