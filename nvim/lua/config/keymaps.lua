@@ -1,48 +1,36 @@
 local map = vim.keymap.set
 
 -- General
-map({ "n", "x" }, "<C-a>", "ggVG", { desc = "Select All" })
-map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr>", { desc = "Undo" })
-map({ "i", "x", "n", "s" }, "<C-r>", "<cmd>redo<cr>", { desc = "Redo" })
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>write<cr><esc>", { desc = "Save File" })
-map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit All" })
-
--- better up/down
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-
--- Disable yank
+map({ "n", "x" }, "<C-a>", "ggVG", { desc = "Select all" })
 map({ "x", "n", "s" }, "p", "pgvy", { desc = "Paste without yanking" })
+map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr>", { desc = "Undo" })
+map({ "x", "n", "s" }, "u", "<nop>", { desc = "Remove default undo" })
+map({ "i", "x", "n", "s" }, "<C-r>", "<cmd>redo<cr>", { desc = "Redo" })
 
--- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
-
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>lua require('tmux').resize_top()<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>lua require('tmux').resize_bottom()<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>lua require('tmux').resize_left()<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>lua require('tmux').resize_right()<cr>", { desc = "Increase Window Width" })
+-- Quit
+map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
+map("n", "<leader>qQ", "<cmd>quitall<cr>", { desc = "Quit all" })
+map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save & quit all" })
 
 -- Move Lines
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move down" })
+map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move up" })
+map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
+map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
+map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move down" })
+map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move up" })
 
 -- Buffers
 map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<leader>bl", "<cmd>Telescope buffers<cr>", { desc = "List Buffers" })
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
+map("n", "<leader>bo", function()
+  Snacks.bufdelete.other()
+end, { desc = "Delete Other Buffers" })
+map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
@@ -51,7 +39,7 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsea
 -- taken from runtime/lua/_editor.lua
 map(
   "n",
-  "<leader>ar",
+  "<leader>ur",
   "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
   { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
@@ -69,12 +57,6 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
--- better indenting
-map("n", "<", "<<")
-map("n", ">", ">>")
-map("v", "<", "<gv")
-map("v", ">", ">gv")
-
 -- diagnostic
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -83,7 +65,7 @@ local diagnostic_goto = function(next, severity)
     go({ severity = severity })
   end
 end
-
+map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
@@ -91,49 +73,53 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- toggle options
-Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>os")
-Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>ow")
-Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>oL")
-Snacks.toggle.diagnostics():map("<leader>od")
-Snacks.toggle.line_number():map("<leader>ol")
-Snacks.toggle
-  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-  :map("<leader>oc")
-Snacks.toggle.treesitter():map("<leader>oT")
+-- windows
+map("n", "<leader>w", "<c-w>", { desc = "Windows", remap = true })
+map("n", "<leader>wb", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "<leader>wr", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+
+-- UI
+map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
+map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
+-- stylua: ignore start
+Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uN")
+Snacks.toggle.line_number():map("<leader>un")
+Snacks.toggle.diagnostics():map("<leader>ud")
+Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle({
   name = "Transparent Background",
   get = function()
     return vim.g.transparent_enabled
   end,
-  set = function()
-    vim.cmd("TransparentToggle")
+  set = function(state)
+    if state then
+      vim.cmd[[TransparentEnable]]
+    else
+      vim.cmd[[TransparentDisable]]
+    end
   end,
-}):map("<leader>ot")
+}):map("<leader>ut")
 if vim.lsp.inlay_hint then
-  Snacks.toggle.inlay_hints():map("<leader>oh")
+  Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
 -- highlights under cursor
-map("n", "<leader>oi", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>oI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
-
--- floating terminal
-map("n", "<leader>t", function()
-  Snacks.terminal.open()
-end, { desc = "Terminal (cwd)" })
-
--- Terminal Mappings
-map("t", "<C-q>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
+map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
 -- Git
-map("n", "<leader>gl", function()
-  Snacks.git.blame_line()
-end, { desc = "Git Blame Line" })
-map("n", "<leader>gb", function()
-  Snacks.gitbrowse()
-end, { desc = "Git Browse" })
-map("n", "<leader>gL", function()
-  Snacks.lazygit()
-end, { desc = "LazyGit" })
+map("n", "<leader>gl", function() Snacks.lazygit() end, { desc = "Lazygit" })
+map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
+map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+map({"n", "x" }, "<leader>gY", function()
+  Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end })
+end, { desc = "Git Browse (copy)" })
+
+-- Terminal
+map("n", "<C-`>", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+map("t", "<C-`>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })

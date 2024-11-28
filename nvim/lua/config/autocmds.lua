@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
--- highlight on yank
+-- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
@@ -27,17 +27,6 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
     local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
     vim.cmd("tabnext " .. current_tab)
-  end,
-})
-
--- format on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = augroup("format_on_save"),
-  callback = function(event)
-    vim.lsp.buf.format({
-      bufnr = event.buf,
-      timeout_ms = 1000,
-    })
   end,
 })
 
@@ -130,7 +119,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
     end
-    ---@diagnostic disable-next-line: undefined-field
     local file = vim.uv.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
