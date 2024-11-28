@@ -1,15 +1,18 @@
 return {
+  -- copilot
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
     event = "InsertEnter",
     opts = {
-      panel = { enabled = false },
       suggestion = { enabled = false },
+      panel = { enabled = false },
       filetypes = { markdown = true, help = true },
     },
   },
+
+  { "zbirenbaum/copilot-cmp", opts = {} },
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",

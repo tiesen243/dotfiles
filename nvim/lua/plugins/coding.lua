@@ -1,51 +1,50 @@
 return {
-  -- auto completion and snippets
+  -- auto completion
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
-      "zbirenbaum/copilot-cmp",
-      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
       "onsails/lspkind-nvim",
+      "saadparwaiz1/cmp_luasnip",
     },
-    config = function()
+
+    opts = function()
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
-      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      local auto_select = true
 
-      require("copilot_cmp").setup()
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-          end,
+      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+      return {
+        auto_brackets = {}, -- configure any filetype to auto add brackets
+        preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
+        completion = {
+          completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
         },
-
         mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.scroll_docs(-4),
           ["<C-j>"] = cmp.mapping.scroll_docs(4),
-
           ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert }),
         }),
-
-        sources = {
+        sources = cmp.config.sources({
           { name = "copilot" },
+          { name = "luasnip" },
           { name = "nvim_lsp" },
           { name = "path" },
           { name = "buffer" },
-          { name = "luasnip" },
-        },
-
+        }),
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-
         formatting = {
           format = require("lspkind").cmp_format({
             maxwidth = 50,
@@ -55,12 +54,9 @@ return {
             symbol_map = { Copilot = "" },
           }),
         },
-
-        experimental = { sorting = defaults.sorting },
-      })
-
-      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+        experimental = { ghost_text = { hl_group = "CmpGhostText" } },
+        sorting = defaults.sorting,
+      }
     end,
   },
 
@@ -68,28 +64,20 @@ return {
   {
     "L3MON4D3/LuaSnip",
     lazy = true,
-    dependencies = {
-      {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
-    },
-    opts = {
-      history = true,
-      updateevents = "TextChanged",
-    },
+    dependencies = { "rafamadriz/friendly-snippets" },
+    opts = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+      return { history = true, delete_check_events = "TextChanged" }
+    end,
   },
 
-  -- formatter
+  -- Formatter
   {
-    "nvimtools/none-ls.nvim",
-    event = "VeryLazy",
-    opts = function()
-      local nls = require("null-ls")
-      return { sources = { nls.builtins.formatting.stylua, nls.builtins.formatting.prettier } }
-    end,
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = { lua = { "stylua" }, ["_"] = { "prettier" } },
+      format_on_save = { timeout_ms = 500 },
+    },
   },
 
   -- treesitter
@@ -108,27 +96,16 @@ return {
     end,
   },
 
-  -- auto pairs
-  {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = {
-      check_ts = true,
-      fast_wrap = {},
-    },
-  },
-
   -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
     opts = {},
   },
 
-  -- comments
+  -- auto pairs
   {
-    "folke/ts-comments.nvim",
-    event = "VeryLazy",
-    opts = {},
+    "windwp/nvim-autopairs",
+    opts = { check_ts = true, fast_wrap = {} },
   },
 
   -- colorize hex colors in the buffer
