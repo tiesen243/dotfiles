@@ -4,48 +4,38 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
 
-      local on_attach = function(client, _)
-        vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
-
-        vim.keymap.set("n", "<leader>lg", "<nop>", { desc = "LSP GoTo" })
-        vim.keymap.set("n", "<leader>lgd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto Definition" })
-        vim.keymap.set("n", "<leader>lgr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "References" })
-        vim.keymap.set(
-          "n",
-          "<leader>lgI",
-          "<cmd>lua vim.lsp.buf.implementation()<cr>",
-          { desc = "Goto Implementation" }
-        )
-        vim.keymap.set(
-          "n",
-          "<leader>lgy",
-          "<cmd>lua vim.lsp.buf.type_definition()<cr>",
-          { desc = "Goto Type Definition" }
-        )
-        vim.keymap.set("n", "<leader>lgD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration" })
-
-        vim.keymap.set("n", "<leader>lh", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover Doc" })
-        vim.keymap.set("n", "<leader>lk", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
-
-        vim.keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code Action" })
-        vim.keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
-        vim.keymap.set("n", "<leader>lR", "<cmd>lua Snacks.rename.rename_file()<cr>", { desc = "Rename File" })
-
-        if Snacks.words.is_enabled() then
-          vim.keymap.set("n", "]]", "<cmd>lua Snacks.words.jump(vim.v.count1)<cr>", { desc = "Next Word" })
-          vim.keymap.set("n", "[[", "<cmd>lua Snacks.words.jump(-vim.v.count1)<cr>", { desc = "Previous Word" })
-        end
-
-        if client.name == "ts_ls" then
-          vim.keymap.set("n", "<C-o>", "<cmd>OrganizeImports<cr>", { desc = "Organize Imports" })
-        end
-      end
-
-      local servers = { "lua_ls", "ts_ls", "emmet_ls", "tailwindcss", "eslint", "prismals" }
+      local servers = { "lua_ls", "ts_ls", "eslint", "emmet_ls", "tailwindcss" }
       for _, server_name in ipairs(servers) do
         local conf = {
-          on_attach = on_attach,
           capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          on_attach = function(client, buf)
+            local map = vim.keymap.set
+
+            -- stylua: ignore start
+            map("n", "<leader>cg", "<nop>", { desc = "Goto" })
+            map("n", "<leader>cgd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto definition" })
+            map("n", "<leader>cgr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Goto references" })
+            map("n", "<leader>cgi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Goto implementation" })
+            map("n", "<leader>cgy", "<cmd>lua vim.lsp.buf.type_definition()<cr>", { desc = "Goto t[y]pe definition" })
+            map("n", "<leader>cgD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto declaration" })
+
+            map("n","<leader>cK", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
+            map("n", "<leader>ck", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature help" })
+            map("i", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature help" })
+
+            map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code action" })
+            map("v", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
+            map("n", "<leader>cR", "<cmd>lua Snacks.rename.rename_file()<cr>", { desc = "Rename File" })
+
+            if Snacks.words.is_enabled() then
+              map("n", "]]", function() Snacks.words.jump(vim.v.count1, true) end, { desc = "Next word" })
+              map("n", "[[", function() Snacks.words.jump(-vim.v.count1, true) end, { desc = "Previous word" })
+            end
+
+            if client.name == "ts_ls" then
+              vim.keymap.set("n", "<C-o>", "<cmd>OrganizeImports<cr>", { desc = "Organize Imports" })
+            end
+          end,
         }
 
         if server_name == "ts_ls" then
@@ -76,11 +66,15 @@ return {
   -- auto install server
   {
     "williamboman/mason.nvim",
-    dependencies = { "williamboman/mason-lspconfig.nvim", "jay-babu/mason-null-ls.nvim" },
+    dependencies = { "williamboman/mason-lspconfig.nvim" },
     config = function()
       require("mason").setup({
         ui = {
-          icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+          },
           border = "rounded",
         },
       })
@@ -91,15 +85,7 @@ return {
           "ts_ls",
           "eslint",
           "emmet_ls",
-          "prismals",
           "tailwindcss",
-        },
-      })
-
-      require("mason-null-ls").setup({
-        ensure_installed = {
-          "stylua",
-          "prettier",
         },
       })
     end,
