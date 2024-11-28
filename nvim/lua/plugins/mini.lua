@@ -42,11 +42,6 @@ return {
       require("mini.icons").mock_nvim_web_devicons()
     end,
     opts = {
-      file = {
-        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
-        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
-        [".env"] = { glyph = "", hl = "MiniIconsYellow" },
-      },
       filetype = {
         dotenv = { glyph = "", hl = "MiniIconsYellow" },
       },

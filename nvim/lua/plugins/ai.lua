@@ -12,8 +12,6 @@ return {
     },
   },
 
-  { "zbirenbaum/copilot-cmp", opts = {} },
-
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     cmd = "CopilotChat",
