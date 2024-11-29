@@ -64,11 +64,16 @@ return {
 
   -- Formatter
   {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = { lua = { "stylua" }, ["_"] = { "prettier" } },
-      format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
-    },
+    "nvimtools/none-ls.nvim",
+    opts = function()
+      local nls = require("null-ls")
+      nls.setup({
+        sources = {
+          nls.builtins.formatting.stylua,
+          nls.builtins.formatting.prettier,
+        },
+      })
+    end,
   },
 
   -- treesitter

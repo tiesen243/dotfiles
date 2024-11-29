@@ -4,7 +4,7 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
 
-      local servers = { "lua_ls", "ts_ls", "eslint", "emmet_ls", "tailwindcss" }
+      local servers = { "lua_ls", "ts_ls", "eslint", "emmet_ls", "tailwindcss", "prismals" }
       for _, server_name in ipairs(servers) do
         local conf = {
           capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -19,7 +19,7 @@ return {
             map("n", "<leader>cgy", "<cmd>lua vim.lsp.buf.type_definition()<cr>", { desc = "Goto t[y]pe definition" })
             map("n", "<leader>cgD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto declaration" })
 
-            map("n","<leader>cK", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
+            map("n", "<leader>cK", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
             map("n", "<leader>ck", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature help" })
             map("i", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature help" })
 
@@ -86,6 +86,7 @@ return {
           "eslint",
           "emmet_ls",
           "tailwindcss",
+          "prismals",
         },
       })
     end,
