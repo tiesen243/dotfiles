@@ -5,6 +5,8 @@ vim.g.ai_cmp = false
 -- General
 opt.syntax = "on"
 opt.foldlevel = 99
+vim.wo.foldmethod = "indent"
+vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
