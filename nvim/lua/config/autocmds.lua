@@ -2,6 +2,16 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("yuki_" .. name, { clear = true })
 end
 
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("format_on_save"),
+  callback = function()
+    vim.lsp.buf.format({
+      timeout_ms = 1000,
+    })
+  end,
+})
+
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
