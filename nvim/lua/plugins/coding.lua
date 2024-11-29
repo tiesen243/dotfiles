@@ -67,13 +67,7 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = { lua = { "stylua" }, ["_"] = { "prettier" } },
-      format_on_save = { timeout_ms = 500 },
-      default_format_opts = {
-        timeout_ms = 500,
-        async = false, -- not recommended to change
-        quiet = false, -- not recommended to change
-        lsp_format = "fallback", -- not recommended to change
-      },
+      format_on_save = { timeout_ms = 500, lsp_format = "fallback" },
     },
   },
 
@@ -86,6 +80,7 @@ return {
     opts = {
       auto_install = true,
       sync_install = true,
+      indent = { enable = true },
       highlight = { enable = true, additional_vim_regex_highlighting = true },
     },
     config = function(_, opts)
@@ -103,17 +98,5 @@ return {
   {
     "windwp/nvim-autopairs",
     opts = { check_ts = true, fast_wrap = {} },
-  },
-
-  -- colorize hex colors in the buffer
-  {
-    "NvChad/nvim-colorizer.lua",
-    opts = {
-      --- @type string | "foreground" | "background" | "virtualtext"
-      mode = "background", -- Set the display mode.
-      virtualtext = "■",
-      --- @type boolean | "normal" | "lsp" | "both"
-      tailwind = "lsp", -- Enable tailwind colors
-    },
   },
 }
