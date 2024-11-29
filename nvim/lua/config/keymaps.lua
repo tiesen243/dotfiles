@@ -9,7 +9,7 @@ map({ "i", "x", "n", "s" }, "<C-r>", "<cmd>redo<cr>", { desc = "Redo" })
 
 -- Quit
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
-map("n", "<leader>qQ", "<cmd>quitall<cr>", { desc = "Quit all" })
+map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit all" })
 map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save & quit all" })
 
 -- Move Lines
@@ -21,16 +21,17 @@ map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move up" })
 
 -- Buffers
-map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to other buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
-end, { desc = "Delete Buffer" })
+end, { desc = "Delete buffer" })
 map("n", "<leader>bo", function()
   Snacks.bufdelete.other()
-end, { desc = "Delete Other Buffers" })
-map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+end, { desc = "Delete other buffers" })
+map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete buffer and window" })
+map("n", "<leader>bl", "<cmd>Telescope buffers<cr>", { desc = "Buffer list" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
@@ -82,6 +83,7 @@ map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 -- UI
 map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
+
 -- stylua: ignore start
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
@@ -112,7 +114,7 @@ map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
 -- Git
-map("n", "<leader>gl", function() Snacks.lazygit() end, { desc = "Lazygit" })
+map("n", "<leader>gl", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, { desc = "Lazygit" })
 map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
 map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
 map({"n", "x" }, "<leader>gY", function()
@@ -120,6 +122,6 @@ map({"n", "x" }, "<leader>gY", function()
 end, { desc = "Git Browse (copy)" })
 
 -- Terminal
-map("n", "<C-`>", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+map("n", "<C-`>", function() Snacks.terminal(nil, { cwd = Snacks.git.get_root() }) end, { desc = "Terminal (cwd)" })
 map("t", "<C-`>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })

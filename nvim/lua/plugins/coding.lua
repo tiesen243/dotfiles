@@ -6,7 +6,6 @@ return {
     dependencies = {
       { "zbirenbaum/copilot-cmp", opts = {} },
       "hrsh7th/cmp-nvim-lsp",
-      "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
       "onsails/lspkind-nvim",
@@ -32,13 +31,15 @@ return {
           ["<C-j>"] = cmp.mapping.scroll_docs(4),
           ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
           ["<C-Space>"] = cmp.mapping.complete(),
+          ["<CR>"] = cmp.mapping.confirm({
+            select = auto_select,
+            behavior = cmp.ConfirmBehavior.Replace,
+          }),
         }),
         sources = cmp.config.sources({
-          { name = "copilot" },
+          { name = vim.g.ai_cmp and "copilot" or nil },
           { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "path" },
           { name = "buffer" },
         }),
@@ -61,22 +62,18 @@ return {
     end,
   },
 
-  -- snippets
-  {
-    "L3MON4D3/LuaSnip",
-    dependencies = { "rafamadriz/friendly-snippets" },
-    opts = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-      return { history = true, delete_check_events = "TextChanged" }
-    end,
-  },
-
   -- Formatter
   {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = { lua = { "stylua" }, ["_"] = { "prettier" } },
       format_on_save = { timeout_ms = 500 },
+      default_format_opts = {
+        timeout_ms = 500,
+        async = false, -- not recommended to change
+        quiet = false, -- not recommended to change
+        lsp_format = "fallback", -- not recommended to change
+      },
     },
   },
 

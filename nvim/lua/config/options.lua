@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+vim.g.ai_cmp = false
 
 -- General
 opt.syntax = "on"
