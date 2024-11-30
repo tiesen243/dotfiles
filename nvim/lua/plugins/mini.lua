@@ -35,23 +35,29 @@ return {
     },
   },
 
-  -- Icons
-  {
-    "echasnovski/mini.icons",
-    init = function()
-      require("mini.icons").mock_nvim_web_devicons()
-    end,
-    opts = {
-      filetype = {
-        dotenv = { glyph = "", hl = "MiniIconsYellow" },
-      },
-    },
-  },
-
-  -- Indentscope
+  --  mini.indentscope [guides]
+  --  https://github.com/echasnovski/mini.indentscope
   {
     "echasnovski/mini.indentscope",
-    opts = { symbol = "▏", options = { try_as_border = true } },
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      options = { border = "top", try_as_border = true },
+      symbol = "▏",
+    },
+    config = function(_, opts)
+      require("mini.indentscope").setup(opts)
+
+      -- Disable for certain filetypes
+      vim.api.nvim_create_autocmd({ "FileType" }, {
+        desc = "Disable indentscope for certain filetypes",
+        callback = function()
+          local ignore_filetypes = { "dashboard", "help", "lazy", "mason", "neo-tree", "notify" }
+          if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+            vim.b.miniindentscope_disable = true
+          end
+        end,
+      })
+    end,
   },
 
   -- Comment
@@ -70,7 +76,7 @@ return {
         pad_comment_parts = true,
         custom_commentstring = function()
           return require("ts_context_commentstring").calculate_commentstring()
-            or vim.bo.commentstring
+              or vim.bo.commentstring
         end,
       },
       mappings = {

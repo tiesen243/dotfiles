@@ -56,7 +56,7 @@ return {
             symbol_map = { Copilot = "" },
           }),
         },
-        experimental = { ghost_text = { hl_group = "CmpGhostText" } },
+        experimental = { ghost_text = vim.g.ai_cmp and { hl_group = "CmpGhostText" } or false },
         sorting = defaults.sorting,
       }
     end,
