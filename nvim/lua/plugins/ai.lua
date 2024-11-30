@@ -5,27 +5,11 @@ return {
     cmd = "Copilot",
     build = ":Copilot auth",
     event = "InsertEnter",
-    opts = function()
-      Snacks.toggle({
-        name = "AI Completion",
-        get = function()
-          return vim.g.ai_cmp
-        end,
-        set = function(state)
-          if state then
-            vim.g.ai_cmp = true
-          else
-            vim.g.ai_cmp = false
-          end
-        end,
-      }):map("<leader>ci")
-
-      return {
-        panel = { enabled = false },
-        suggestion = { enabled = vim.g.ai_cmp },
-        filetypes = { markdown = true, help = true },
-      }
-    end,
+    opts = {
+      panel = { enabled = false },
+      suggestion = { enabled = vim.g.ai_cmp },
+      filetypes = { markdown = true, help = true },
+    },
   },
 
   {
