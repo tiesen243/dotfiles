@@ -89,6 +89,8 @@ return {
       highlight = { enable = true, additional_vim_regex_highlighting = true },
     },
     config = function(_, opts)
+      vim.opt.updatetime = 100
+      vim.g.skip_ts_context_commentstring_module = true
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
@@ -103,5 +105,18 @@ return {
   {
     "windwp/nvim-autopairs",
     opts = { check_ts = true, fast_wrap = {} },
+  },
+
+  -- Comment
+  {
+    "numToStr/Comment.nvim",
+    dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+    opts = {
+      toggler = { line = "<C-/>" },
+      opleader = { line = "<C-/>" },
+      pre_hook = function()
+        return vim.bo.commentstring
+      end,
+    },
   },
 }

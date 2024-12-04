@@ -84,13 +84,14 @@ map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
 
--- stylua: ignore start
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uN")
 Snacks.toggle.line_number():map("<leader>un")
 Snacks.toggle.diagnostics():map("<leader>ud")
-Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
+Snacks.toggle
+    .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+    :map("<leader>uc")
 Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle({
   name = "Transparent Background",
@@ -99,9 +100,9 @@ Snacks.toggle({
   end,
   set = function(state)
     if state then
-      vim.cmd[[TransparentEnable]]
+      vim.cmd([[TransparentEnable]])
     else
-      vim.cmd[[TransparentDisable]]
+      vim.cmd([[TransparentDisable]])
     end
   end,
 }):map("<leader>ut")
@@ -114,14 +115,29 @@ map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
 -- Git
-map("n", "<leader>gl", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, { desc = "Lazygit" })
-map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
-map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
-map({"n", "x" }, "<leader>gY", function()
-  Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end })
+map("n", "<leader>gl", function()
+  Snacks.lazygit({ cwd = Snacks.git.get_root() })
+end, { desc = "Lazygit" })
+map("n", "<leader>gb", function()
+  Snacks.git.blame_line()
+end, { desc = "Git Blame Line" })
+map({ "n", "x" }, "<leader>gB", function()
+  Snacks.gitbrowse()
+end, { desc = "Git Browse (open)" })
+map({ "n", "x" }, "<leader>gY", function()
+  Snacks.gitbrowse({
+    open = function(url)
+      vim.fn.setreg("+", url)
+    end,
+  })
 end, { desc = "Git Browse (copy)" })
 
 -- Terminal
-map("n", "<C-`>", function() Snacks.terminal(nil, { cwd = Snacks.git.get_root() }) end, { desc = "Terminal (cwd)" })
+map("n", "<leader>tc", function()
+  Snacks.terminal(nil, {})
+end, { desc = "Terminal (cwd)" })
+map("n", "<leader>tr", function()
+  Snacks.terminal(nil, { cwd = Snacks.git.get_root() })
+end, { desc = "Terminal (rwd)" })
 map("t", "<C-`>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })

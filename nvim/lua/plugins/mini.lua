@@ -59,32 +59,4 @@ return {
       })
     end,
   },
-
-  -- Comment
-  {
-    "echasnovski/mini.comment",
-    dependencies = {
-      {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        opts = { enable_autocmd = false },
-      },
-    },
-    opts = {
-      options = {
-        ignore_blank_line = true,
-        start_of_line = true,
-        pad_comment_parts = true,
-        custom_commentstring = function()
-          return require("ts_context_commentstring").calculate_commentstring()
-              or vim.bo.commentstring
-        end,
-      },
-      mappings = {
-        comment = "<C-/>",
-        comment_line = "<C-/>",
-        comment_visual = "<C-/>",
-        textobject = "<C-/>",
-      },
-    },
-  },
 }

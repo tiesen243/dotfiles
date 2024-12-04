@@ -13,8 +13,9 @@ return {
           { "<leader>b", group = "Buffers" },
           { "<leader>c", group = "Code" },
           { "<leader>f", group = "Finder" },
-          { "<leader>q", group = "Quit" },
           { "<leader>g", group = "Git" },
+          { "<leader>q", group = "Quit" },
+          { "<leader>t", group = "Terminal" },
           { "<leader>gc", group = "Copilot" },
           { "<leader>u", group = "UI" },
         },
@@ -99,7 +100,7 @@ return {
     opts = {},
     -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
       { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     },
   },
