@@ -7,7 +7,7 @@ return {
     event = "InsertEnter",
     opts = {
       panel = { enabled = false },
-      suggestion = { enabled = vim.g.ai_cmp },
+      suggestion = { enabled = not vim.g.ai_cmp },
       filetypes = { markdown = true, help = true },
     },
   },
