@@ -17,7 +17,6 @@ return {
       local auto_select = true
 
       vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
       return {
@@ -56,7 +55,6 @@ return {
             symbol_map = { Copilot = "" },
           }),
         },
-        experimental = { ghost_text = vim.g.ai_cmp and { hl_group = "CmpGhostText" } or false },
         sorting = defaults.sorting,
       }
     end,
