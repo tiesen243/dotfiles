@@ -2,8 +2,10 @@
 
 ## Preview
 
-![preview-1](./assets/preview-1.png)
-![preview-2](./assets/preview-2.png)
+![preview](./assets/preview.png)
+
+> [!NOTE]
+> Wallpaper: [here](https://www.pixiv.net/en/artworks/68467122)
 
 ## Installation
 
