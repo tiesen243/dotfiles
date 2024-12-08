@@ -20,7 +20,7 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock \
+yay -S zsh hyprpaper hyprpicker hypridle hyprlock hyprpolkitagent \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 bat lsd ripgrep brightnessctl \
 cliphist wl-clipboard \

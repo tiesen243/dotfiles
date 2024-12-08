@@ -22,16 +22,17 @@ return {
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "main",
     cmd = "CopilotChat",
     build = "make tiktoken",
     keys = {
-      { "<leader>gct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
-      { "<leader>gcr", "<cmd>CopilotChatReview<cr>", desc = "Review code" },
+      { "<leader>gcc", "<cmd>CopilotChatCommit<cr>", desc = "Suggest commit message" },
+      { "<leader>gcd", "<cmd>CopilotChatDocs<cr>", desc = "Suggest documentation" },
       { "<leader>gcf", "<cmd>CopilotChatFix<cr>", desc = "Fix bug" },
       { "<leader>gco", "<cmd>CopilotChatOptimize<cr>", desc = "Optimize code" },
-      { "<leader>gcd", "<cmd>CopilotChatFixDiagnostic<cr>", desc = "Fix Diagnostic" },
-      { "<leader>gcc", "<cmd>CopilotChatCommit<cr>", desc = "Suggest commit message" },
-      { "<leader>gcs", "<cmd>CopilotChatCommitStaged<cr>", desc = "Suggest commit stage message" },
+      { "<leader>gcr", "<cmd>CopilotChatReview<cr>", desc = "Review code" },
+      { "<leader>gct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
+      { "<leader>gcT", "<cmd>CopilotChatTests<cr>", desc = "Test code" },
     },
     opts = {
       window = { title = "Copilot Chat", layout = "vertical", width = 0.4 },
