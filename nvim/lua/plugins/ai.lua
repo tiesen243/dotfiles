@@ -15,6 +15,7 @@ return {
         desc = "Copilot Accept",
         expr = true,
         replace_keycodes = false,
+        silent = true,
       },
       { "<leader>gcp", "<cmd>Copilot panel<cr>", desc = "Panel" },
     },
