@@ -4,8 +4,16 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
 
-      local servers =
-      { "lua_ls", "ts_ls", "eslint", "emmet_ls", "tailwindcss", "prismals", "typos_lsp" }
+      local servers = {
+        "lua_ls",
+        "ts_ls",
+        "eslint",
+        "emmet_ls",
+        "tailwindcss",
+        "prismals",
+        "pyright",
+        "typos_lsp",
+      }
       for _, server_name in ipairs(servers) do
         local conf = {
           capabilities = require("cmp_nvim_lsp").default_capabilities(),
