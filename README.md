@@ -24,7 +24,8 @@ rm -rf ~/yay
 ```bash
 yay -S zsh hyprpaper hyprpicker hypridle hyprlock hyprpolkitagent \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
-bat lsd ripgrep brightnessctl \
+zen-browser-avx2-bin ffmpeg \
+lsd ripgrep brightnessctl \
 cliphist wl-clipboard \
 nwg-look pavucontrol \
 btop fastfetch rofi \
