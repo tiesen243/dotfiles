@@ -150,7 +150,13 @@ export NVM_DIR="$HOME/.nvm"
 # <<< nvm initialize <<<
 
 # >>> bun initialize >>>
-if [ -d "$HOME/.bun/bin" ]; then
-    export PATH="$HOME/.bun/bin:$PATH"
-fi
+# if [ -d "$HOME/.bun/bin" ]; then
+#     export PATH="$HOME/.bun/bin:$PATH"
+# fi
 # <<< bun initialize <<<
+
+# >>> uv initialize >>>
+. "$HOME/.local/bin/env"
+eval "$(uv generate-shell-completion zsh)"
+# <<< uv initialize <<<
+
