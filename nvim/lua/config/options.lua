@@ -1,7 +1,5 @@
 local opt = vim.opt
 
-vim.g.ai_cmp = false
-
 -- General
 opt.syntax = "on"
 opt.foldlevel = 99

@@ -1,23 +1,31 @@
+vim.g.copilot_no_tab_map = true
+
 return {
   -- copilot
   {
-    "zbirenbaum/copilot.lua",
+    "github/copilot.vim",
     cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "InsertEnter",
-    opts = {
-      panel = { enabled = false },
-      suggestion = { enabled = not vim.g.ai_cmp },
-      filetypes = { markdown = true, help = true },
+    build = ":Copilot setup",
+    lazy = false,
+    keys = {
+      {
+        mode = { "i" },
+        "<C-CR>",
+        'copilot#Accept("\\<CR>")',
+        desc = "Copilot Accept",
+        expr = true,
+        replace_keycodes = false,
+      },
+      { "<leader>gcp", "<cmd>Copilot panel<cr>", desc = "Panel" },
     },
   },
 
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     cmd = "CopilotChat",
+    build = "make tiktoken",
     keys = {
       { "<leader>gct", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
-      { "<leader>gce", "<cmd>CopilotChatExplain<cr>", desc = "Explain code" },
       { "<leader>gcr", "<cmd>CopilotChatReview<cr>", desc = "Review code" },
       { "<leader>gcf", "<cmd>CopilotChatFix<cr>", desc = "Fix bug" },
       { "<leader>gco", "<cmd>CopilotChatOptimize<cr>", desc = "Optimize code" },
