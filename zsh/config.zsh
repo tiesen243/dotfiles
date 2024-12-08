@@ -51,16 +51,6 @@ alias icat="kitten icat"
 alias ls="lsd"
 alias lt="lsd --tree --depth 3"
 
-# Conda
-# alias  cee="conda env export | grep -v '^prefix: ' > environment.yml"
-# alias  cer="conda env remove -n"
-# alias  ced="conda deactivate"
-# alias  cec="conda create -n"
-# alias  cel="conda env list"
-# alias   ca="conda activate"
-# alias   ci="conda install"
-# alias   cr="conda remove"
-
 # Bun
 alias  bff="bun format:fix"
 alias  blf="bun lint:fix"
@@ -91,14 +81,6 @@ alias   gS="git status"
 alias   gP="git pull"
 alias    g="git"
 
-# Docker
-# alias  ddc="docker rm -f $(docker ps -a -q)"
-# alias  ddi="docker rmi -f $(docker images -q)"
-# alias   dc="docker container ls"
-# alias   di="docker images"
-# alias   db="docker build"
-# alias   dr="docker run"
-
 # Pacman (Arch Linux) | Yay
 alias yp="yay -Qdtq | yay -Rns -"
 alias yr="yay -Runs"
@@ -127,21 +109,6 @@ gcp ()
 # Add custom bin directory to PATH
 # If you don't use this, you can remove this block.
 #############################################
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$('/home/tiesen/.miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/home/tiesen/.miniconda3/etc/profile.d/conda.sh" ]; then
-#         . "/home/tiesen/.miniconda3/etc/profile.d/conda.sh"
-#     else
-#         export PATH="/home/tiesen/.miniconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# <<< conda initialize <<<
 
 # >>> nvm initialize >>>
 export NVM_DIR="$HOME/.nvm"
