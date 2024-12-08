@@ -4,7 +4,6 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      { "zbirenbaum/copilot-cmp", opts = {} },
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
@@ -16,7 +15,6 @@ return {
       local defaults = require("cmp.config.default")()
       local auto_select = true
 
-      vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
       cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
 
       return {
@@ -37,7 +35,6 @@ return {
           }),
         }),
         sources = cmp.config.sources({
-          { name = vim.g.ai_cmp and "copilot" or nil },
           { name = "nvim_lsp" },
           { name = "path" },
           { name = "buffer" },
