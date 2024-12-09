@@ -53,15 +53,14 @@ alias lt="lsd --tree --depth 3"
 
 # Bun
 alias  bff="bun format:fix"
-alias  blf="bun lint:fix"
 alias   bf="bun format"
+alias  blf="bun lint:fix"
 alias   bl="bun lint"
 alias   bi="bun install"
 alias   bu="bun update"
 alias   br="bun remove"
-alias   ba="bun add"
-alias   bb="bun run build"
 alias   bx="bunx --bun"
+alias   bb="bun run build"
 alias   bs="bun start"
 alias   bd="bun dev"
 alias    b="bun"
@@ -74,10 +73,9 @@ alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
 alias  gaa="git add --all"
 alias   ga="git add"
-alias   gp="git push origin"
 alias   gc="git commit -a"
+alias   gp="git push origin"
 alias   gs="git switch"
-alias   gS="git status"
 alias   gP="git pull"
 alias    g="git"
 
@@ -117,9 +115,9 @@ export NVM_DIR="$HOME/.nvm"
 # <<< nvm initialize <<<
 
 # >>> bun initialize >>>
-# if [ -d "$HOME/.bun/bin" ]; then
-#     export PATH="$HOME/.bun/bin:$PATH"
-# fi
+if [ -d "$HOME/.bun/bin" ]; then
+    export PATH="$HOME/.bun/bin:$PATH"
+fi
 # <<< bun initialize <<<
 
 # >>> uv initialize >>>
