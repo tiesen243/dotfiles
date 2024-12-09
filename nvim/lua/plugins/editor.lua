@@ -1,5 +1,6 @@
 return {
   -- Keymap hint
+  -- https://github.com/folke/which-key.nvim
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -24,6 +25,7 @@ return {
   },
 
   -- Telescope
+  -- https://github.com/nvim-telescope/telescope.nvim
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -58,7 +60,8 @@ return {
     end,
   },
 
-  -- Snacks
+  -- Snacks: A collection of small QoL plugins for Neovim
+  -- https://github.com/folke/snacks.nvim
   {
     "folke/snacks.nvim",
     priority = 1000,
@@ -95,6 +98,7 @@ return {
   -- Flash enhances the built-in search functionality by showing labels
   -- at the end of each match, letting you quickly jump to a specific
   -- location.
+  -- https://github.com/folke/flash.nvim
   {
     "folke/flash.nvim",
     opts = {},
@@ -108,6 +112,7 @@ return {
   -- git signs highlights text that has changed since the list
   -- git commit, and also lets you interactively stage & unstage
   -- hunks in a commit.
+  -- https://github.com/lewis6991/gitsigns.nvim
   {
     "lewis6991/gitsigns.nvim",
     opts = {

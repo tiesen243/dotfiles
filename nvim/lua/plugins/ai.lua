@@ -1,7 +1,8 @@
 vim.g.copilot_no_tab_map = true
 
 return {
-  -- copilot
+  -- Copilot
+  -- https://github.com/github/copilot.vim
   {
     "github/copilot.vim",
     cmd = "Copilot",
@@ -21,6 +22,8 @@ return {
     },
   },
 
+  -- Copilot Chat (requires Copilot)
+  -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
