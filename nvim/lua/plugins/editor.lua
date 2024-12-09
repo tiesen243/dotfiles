@@ -11,14 +11,14 @@ return {
       spec = {
         {
           mode = { "n" },
-          { "<leader>b", group = "Buffers" },
-          { "<leader>c", group = "Code" },
-          { "<leader>f", group = "Finder" },
-          { "<leader>g", group = "Git" },
-          { "<leader>q", group = "Quit" },
-          { "<leader>t", group = "Terminal" },
+          { "<leader>b",  group = "Buffers" },
+          { "<leader>c",  group = "Code" },
+          { "<leader>f",  group = "Finder" },
+          { "<leader>g",  group = "Git" },
+          { "<leader>q",  group = "Quit" },
+          { "<leader>t",  group = "Terminal" },
           { "<leader>gc", group = "Copilot" },
-          { "<leader>u", group = "UI" },
+          { "<leader>u",  group = "UI" },
         },
       },
     },
@@ -37,8 +37,8 @@ return {
       local extensions = require("telescope").extensions
 
       return {
-        { "<leader>fg", builtin.live_grep, desc = "Live Grep" },
-        { "<leader>ff", builtin.find_files, desc = "Find Files" },
+        { "<leader>fg", builtin.live_grep,                    desc = "Live Grep" },
+        { "<leader>ff", builtin.find_files,                   desc = "Find Files" },
         { "<leader>fe", extensions.file_browser.file_browser, desc = "File Browser" },
       }
     end,
