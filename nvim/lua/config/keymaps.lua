@@ -81,9 +81,6 @@ map("n", "<leader>wr", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
 -- UI
-map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
-map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
-
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uN")
