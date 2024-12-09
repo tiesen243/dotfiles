@@ -11,14 +11,14 @@ return {
       spec = {
         {
           mode = { "n" },
-          { "<leader>b",  group = "Buffers" },
-          { "<leader>c",  group = "Code" },
-          { "<leader>f",  group = "Finder" },
-          { "<leader>g",  group = "Git" },
-          { "<leader>q",  group = "Quit" },
-          { "<leader>t",  group = "Terminal" },
+          { "<leader>b", group = "Buffers" },
+          { "<leader>c", group = "Code" },
+          { "<leader>f", group = "Finder" },
+          { "<leader>g", group = "Git" },
+          { "<leader>q", group = "Quit" },
+          { "<leader>t", group = "Terminal" },
           { "<leader>gc", group = "Copilot" },
-          { "<leader>u",  group = "UI" },
+          { "<leader>u", group = "UI" },
         },
       },
     },
@@ -37,8 +37,8 @@ return {
       local extensions = require("telescope").extensions
 
       return {
-        { "<leader>fg", builtin.live_grep,                    desc = "Live Grep" },
-        { "<leader>ff", builtin.find_files,                   desc = "Find Files" },
+        { "<leader>fg", builtin.live_grep, desc = "Live Grep" },
+        { "<leader>ff", builtin.find_files, desc = "Find Files" },
         { "<leader>fe", extensions.file_browser.file_browser, desc = "File Browser" },
       }
     end,
@@ -92,20 +92,6 @@ return {
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
-    },
-  },
-
-  -- Flash enhances the built-in search functionality by showing labels
-  -- at the end of each match, letting you quickly jump to a specific
-  -- location.
-  -- https://github.com/folke/flash.nvim
-  {
-    "folke/flash.nvim",
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
     },
   },
 
