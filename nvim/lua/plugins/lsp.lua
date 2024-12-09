@@ -1,4 +1,6 @@
 return {
+  -- LSP Configuration
+  -- https://github.com/neovim/nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -72,32 +74,19 @@ return {
     end,
   },
 
-  -- auto install server
+  -- Package manager
+  -- https://github.com/williamboman/mason.nvim
   {
     "williamboman/mason.nvim",
-    dependencies = { "williamboman/mason-lspconfig.nvim" },
-    config = function()
-      require("mason").setup({
-        ui = {
-          icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-          },
-          border = "rounded",
+    opts = {
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
         },
-      })
-
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "lua_ls",
-          "ts_ls",
-          "eslint",
-          "emmet_ls",
-          "tailwindcss",
-          "prismals",
-        },
-      })
-    end,
+        border = "rounded",
+      },
+    },
   },
 }

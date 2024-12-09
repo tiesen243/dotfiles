@@ -1,5 +1,6 @@
 return {
   -- Basics config
+  -- https://github.com/echasnovski/mini.basics
   {
     "echasnovski/mini.basics",
     opts = {

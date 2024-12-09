@@ -1,5 +1,6 @@
 return {
-  -- auto completion
+  -- auto code completion
+  -- https://github.com/hrsh7th/nvim-cmp
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -58,6 +59,7 @@ return {
   },
 
   -- Formatter
+  -- https://github.com/nvimtools/none-ls.nvim
   {
     "nvimtools/none-ls.nvim",
     opts = function()
@@ -72,7 +74,8 @@ return {
     end,
   },
 
-  -- treesitter
+  -- Treesitter
+  -- https://github.com/nvim-treesitter/nvim-treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -92,18 +95,21 @@ return {
   },
 
   -- Automatically add closing tags for HTML and JSX
+  -- https://github.com/windwp/nvim-ts-autotag
   {
     "windwp/nvim-ts-autotag",
     opts = {},
   },
 
-  -- auto pairs
+  -- Auto pairs
+  -- https://github.com/windwp/nvim-autopairs
   {
     "windwp/nvim-autopairs",
     opts = { check_ts = true, fast_wrap = {} },
   },
 
-  -- Comment
+  -- Comment toggler
+  -- https://github.com/numToStr/Comment.nvim
   {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
