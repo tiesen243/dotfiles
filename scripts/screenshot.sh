@@ -19,4 +19,4 @@ fi
 
 wl-copy < "$saveLocation"
 
-notify-send "Screenshot taken" "Saved to $saveLocation"
+notify-send "Screenshot saved to $saveLocation" 
