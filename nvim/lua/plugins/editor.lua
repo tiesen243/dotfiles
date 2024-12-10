@@ -11,14 +11,14 @@ return {
       spec = {
         {
           mode = { "n" },
-          { "<leader>b", group = "Buffers" },
-          { "<leader>c", group = "Code" },
-          { "<leader>f", group = "Finder" },
-          { "<leader>g", group = "Git" },
-          { "<leader>q", group = "Quit" },
-          { "<leader>t", group = "Terminal" },
+          { "<leader>b",  group = "Buffers" },
+          { "<leader>c",  group = "Code" },
+          { "<leader>f",  group = "Finder" },
+          { "<leader>g",  group = "Git" },
+          { "<leader>q",  group = "Quit" },
+          { "<leader>t",  group = "Terminal" },
           { "<leader>gc", group = "Copilot" },
-          { "<leader>u", group = "UI" },
+          { "<leader>u",  group = "UI" },
         },
       },
     },
@@ -37,8 +37,8 @@ return {
       local extensions = require("telescope").extensions
 
       return {
-        { "<leader>fg", builtin.live_grep, desc = "Live Grep" },
-        { "<leader>ff", builtin.find_files, desc = "Find Files" },
+        { "<leader>fg", builtin.live_grep,                    desc = "Live Grep" },
+        { "<leader>ff", builtin.find_files,                   desc = "Find Files" },
         { "<leader>fe", extensions.file_browser.file_browser, desc = "File Browser" },
       }
     end,
@@ -78,18 +78,14 @@ return {
    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
           ]],
         },
-
-        sections = {
-          { section = "header" },
-          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-          { section = "startup" },
-          { section = "keys", gap = 1, padding = 1, pane = 2 },
-        },
       },
 
+      animate = {},
       bigfile = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
       notifier = { enabled = true },
-      quickfile = { enabled = true },
+      scroll = {},
       statuscolumn = { enabled = true },
       words = { enabled = true },
     },
