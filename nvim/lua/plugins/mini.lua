@@ -35,29 +35,4 @@ return {
       silent = false,
     },
   },
-
-  --  mini.indentscope [guides]
-  --  https://github.com/echasnovski/mini.indentscope
-  {
-    "echasnovski/mini.indentscope",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      options = { border = "top", try_as_border = true },
-      symbol = "▏",
-    },
-    config = function(_, opts)
-      require("mini.indentscope").setup(opts)
-
-      -- Disable for certain filetypes
-      vim.api.nvim_create_autocmd({ "FileType" }, {
-        desc = "Disable indentscope for certain filetypes",
-        callback = function()
-          local ignore_filetypes = { "dashboard", "help", "lazy", "mason", "neo-tree", "notify" }
-          if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-            vim.b.miniindentscope_disable = true
-          end
-        end,
-      })
-    end,
-  },
 }
