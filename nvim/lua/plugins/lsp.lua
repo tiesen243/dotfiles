@@ -3,9 +3,7 @@ return {
   -- https://github.com/neovim/nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      inlay_hints = { enabled = true },
-    },
+    opts = { inlay_hint = { enable = true } },
     config = function()
       local lspconfig = require("lspconfig")
 
@@ -51,7 +49,6 @@ return {
             end
 
             if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-              vim.lsp.inlay_hint.enable()
               vim.api.nvim_set_hl(0, "LspInlayHint", { bg = '#484F58', fg = '#8B949E' })
             end
           end,
