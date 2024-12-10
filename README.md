@@ -22,7 +22,7 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock hyprpolkitagent \
+yay -S zsh hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 zen-browser-avx2-bin ffmpeg \
 lsd ripgrep brightnessctl \
@@ -100,10 +100,10 @@ sudo pacman -Runs htop nano vim wofi
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout,xsettingsd}
+rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,xsettingsd}
 
 find ~/dotfiles/assets/* -maxdepth 0 -type d -name '*' -exec cp -r {} ~/.local/share \;
-ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,wlogout,xsettingsd} ~/.config
+ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,xsettingsd} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
