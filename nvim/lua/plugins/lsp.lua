@@ -3,6 +3,9 @@ return {
   -- https://github.com/neovim/nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
+    opts = {
+      inlay_hints = { enabled = true },
+    },
     config = function()
       local lspconfig = require("lspconfig")
 
@@ -19,7 +22,7 @@ return {
       for _, server_name in ipairs(servers) do
         local conf = {
           capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          on_attach = function(client, buf)
+          on_attach = function(client, bufnr)
             local map = vim.keymap.set
 
             -- stylua: ignore start
@@ -46,6 +49,11 @@ return {
             if client.name == "ts_ls" then
               vim.keymap.set("n", "<C-o>", "<cmd>OrganizeImports<cr>", { desc = "Organize Imports" })
             end
+
+            if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+              vim.lsp.inlay_hint.enable()
+              vim.api.nvim_set_hl(0, "LspInlayHint", { bg = '#484F58', fg = '#8B949E' })
+            end
           end,
         }
 
@@ -61,6 +69,22 @@ return {
             description = "Organize imports",
           }
           conf.commands = commands
+
+          local settings = conf.settings or {}
+          settings = {
+            typescript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = true,
+              },
+            },
+          }
+          conf.settings = settings
         end
 
         if server_name == "lua_ls" then
