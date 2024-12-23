@@ -7,11 +7,11 @@ configuration {
     display-run:                 " ";
     drun-display-format:         "{name}";
     window-format:               "{w}{t}";
-    font:                        "Geist Mono Medium 12";
+    font:                        "GeistMono Nerd Font Medium 12";
     icon-theme:                  "Dracula";
 }
 
-@theme "~/.config/rofi/theme.rasi"
+@theme "~/dotfiles/rofi/theme.rasi"
 
 
 // Main //

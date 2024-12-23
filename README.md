@@ -22,13 +22,12 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh hyprpaper hyprpicker hypridle hyprlock \
+yay -S zsh rofi hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
-zen-browser-avx2-bin ffmpeg \
+zen-browser-bin ffmpeg \
 lsd ripgrep brightnessctl \
 cliphist wl-clipboard \
 nwg-look pavucontrol \
-btop fastfetch rofi \
 github-cli lazygit \
 grim slurp
 ```
@@ -50,36 +49,16 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 5. Optional: Install some stuffs
 
-- Miniconda
-
-```bash
-mkdir -p ~/.miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/.miniconda3/miniconda.sh
-bash ~/.miniconda3/miniconda.sh -b -u -p ~/.miniconda3
-rm -rf ~/.miniconda3/miniconda.sh
-~/.miniconda3/bin/conda init zsh
-```
-
 - UV (Python package manager)
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-- NVM
+- NVM (Node Version Manager)
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-```
-
-- If you use `bun` for default node package manager, remember to add this to your `.zshrc`
-
-```bash
-# >>> bun initialize >>>
-if [ -d "$HOME/.bun/bin" ]; then
-    export PATH="$HOME/.bun/bin:$PATH"
-fi
-# <<< bun initialize <<<
 ```
 
 - OBS Studio
@@ -100,10 +79,9 @@ sudo pacman -Runs htop nano vim wofi
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,xsettingsd}
+rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,nvim}
 
-find ~/dotfiles/assets/* -maxdepth 0 -type d -name '*' -exec cp -r {} ~/.local/share \;
-ln -s ~/dotfiles/{btop,dunst,fastfetch,hypr,kitty,nvim,rofi,xsettingsd} ~/.config
+ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,nvim} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```

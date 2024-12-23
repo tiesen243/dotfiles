@@ -36,12 +36,8 @@ source $ZSH/oh-my-zsh.sh
 #############################################
 
 # General
-alias date="date +'%A %d-%m-%Y %H:%M:%S'"
-alias  fzf="fzf -e"
 alias  cls="clear"
-alias   lg="lazygit"
-alias   py="python"
-alias    v="nvim"
+alias   vi="nvim"
 alias    q="exit"
 
 # Kitty
@@ -66,8 +62,6 @@ alias   bd="bun dev"
 alias    b="bun"
 
 # Git
-alias  gcs="gh copilot suggest"
-alias  gce="gh copilot explain"
 alias  grc="gh repo create"
 alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
@@ -79,7 +73,7 @@ alias   gs="git switch"
 alias   gP="git pull"
 alias    g="git"
 
-# Pacman (Arch Linux) | Yay
+# Pacman | Yay
 alias yp="yay -Qdtq | yay -Rns -"
 alias yr="yay -Runs"
 alias yu="yay -Syu"

@@ -14,7 +14,6 @@ return {
         "emmet_ls",
         "tailwindcss",
         "prismals",
-        "pyright",
         "typos_lsp",
       }
       for _, server_name in ipairs(servers) do
