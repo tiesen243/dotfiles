@@ -37,7 +37,7 @@ source $ZSH/oh-my-zsh.sh
 
 # General
 alias  cls="clear"
-alias   vi="nvim"
+alias    v="nvim"
 alias    q="exit"
 
 # Kitty
