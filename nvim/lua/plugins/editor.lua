@@ -30,21 +30,17 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-file-browser.nvim",
     },
     keys = function()
       local builtin = require("telescope.builtin")
-      local extensions = require("telescope").extensions
 
       return {
-        { "<leader>fg", builtin.live_grep,                    desc = "Live Grep" },
-        { "<leader>ff", builtin.find_files,                   desc = "Find Files" },
-        { "<leader>fe", extensions.file_browser.file_browser, desc = "File Browser" },
+        { "<leader>fg", builtin.live_grep,  desc = "Live Grep" },
+        { "<leader>ff", builtin.find_files, desc = "Find Files" },
       }
     end,
     opts = function()
       local actions = require("telescope.actions")
-      require("telescope").load_extension("file_browser")
 
       return {
         defaults = {
@@ -105,4 +101,41 @@ return {
       },
     },
   },
+
+  -- Basics config
+  -- https://github.com/echasnovski/mini.basics
+  {
+    "echasnovski/mini.basics",
+    opts = {
+      -- Options. Set to `false` to disable.
+      options = {
+        -- Basic options ('number', 'ignorecase', and many more)
+        basic = true,
+        -- Extra UI features ('winblend', 'cmdheight=0', ...)
+        extra_ui = false,
+        -- Presets for window borders ('single', 'double', ...)
+        win_borders = "rounded",
+      },
+      -- Mappings. Set to `false` to disable.
+      mappings = {
+        -- Basic mappings (better 'jk', save with Ctrl+S, ...)
+        basic = true,
+        -- Prefix for mappings that toggle common options ('wrap', 'spell', ...).
+        -- Supply empty string to not create these mappings.
+        option_toggle_prefix = [[\]],
+        -- Window navigation with <C-hjkl>, resize with <C-arrow>
+        windows = true,
+        -- Move cursor in Insert, Command, and Terminal mode with <M-hjkl>
+        move_with_alt = true,
+      },
+      -- Autocommands. Set to `false` to disable
+      autocommands = {
+        -- Basic autocommands (highlight on yank, start Insert in terminal, ...)
+        basic = true,
+        -- Set 'relativenumber' only in linewise and blockwise Visual mode
+        relnum_in_visual_mode = true,
+      },
+      silent = false,
+    },
+  }
 }
