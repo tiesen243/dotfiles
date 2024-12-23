@@ -68,7 +68,6 @@ return {
         sources = {
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.prettier,
-          nls.builtins.formatting.black,
         },
       })
     end,
