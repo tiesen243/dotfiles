@@ -12,6 +12,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+-- Turn off paste mode when leaving insert mode
+vim.api.nvim_create_autocmd("InsertLeave", {
+  group = augroup("nopaste"),
+  pattern = "*",
+  command = "set nopaste",
+})
+
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
@@ -118,7 +125,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
-    vim.opt_local.conceallevel = 0
+    vim.wo.spell = false
+    vim.wo.conceallevel = false
   end,
 })
 

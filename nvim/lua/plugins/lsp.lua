@@ -3,7 +3,7 @@ return {
   -- https://github.com/neovim/nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
-    opts = { inlay_hint = { enable = true } },
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       local lspconfig = require("lspconfig")
 
@@ -21,22 +21,36 @@ return {
           capabilities = require("cmp_nvim_lsp").default_capabilities(),
           on_attach = function(client, bufnr)
             local map = vim.keymap.set
+            local opts = { noremap = true, silent = true, buffer = bufnr }
 
             -- stylua: ignore start
-            map("n", "<leader>cg", "<nop>", { desc = "Goto" })
-            map("n", "<leader>cgd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto definition" })
-            map("n", "<leader>cgr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Goto references" })
-            map("n", "<leader>cgi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Goto implementation" })
-            map("n", "<leader>cgy", "<cmd>lua vim.lsp.buf.type_definition()<cr>", { desc = "Goto t[y]pe definition" })
-            map("n", "<leader>cgD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto declaration" })
+            opts.desc = "Show LSP References"
+            map("n", "gr", "<cmd>Telescope lsp_references<cr>", opts)
+            opts.desc = "Go to declaration"
+            map("n", "gD", vim.lsp.buf.declaration, opts)
+            opts.desc = "Go to definitions"
+            map("n", "gd", "<cmd>Telescope lsp_definitions<cr>", opts)
+            opts.desc = "Go to type implementations"
+            map("n", "gi", "<cmd>Telescope lsp_implementations<cr>", opts)
 
-            map("n", "<leader>cK", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
-            map("n", "<leader>ck", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature help" })
-            map("i", "<c-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature help" })
+            opts.desc = "Show hover doc"
+            map("n", "<leader>ch", vim.lsp.buf.hover, opts)
+            opts.desc = "Show signature help"
+            map("n", "<leader>ck", vim.lsp.buf.signature_help, opts)
+            map("i", "<c-k>", vim.lsp.buf.signature_help, opts)
 
-            map("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", { desc = "Code action" })
-            map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
-            map("n", "<leader>cR", "<cmd>lua Snacks.rename.rename_file()<cr>", { desc = "Rename File" })
+            opts.desc = "Show code actions"
+            map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+            opts.desc = "Rename"
+            map("n", "<leader>cr", vim.lsp.buf.rename, opts)
+            opts.desc = "Rename File"
+            map("n", "<leader>cR", Snacks.rename.rename_file, opts)
+            opts.desc = "Show buffer diagnostics"
+            map("n", "<leader>cD", "<cmd>Telescope diagnostics bufnr=0<cr>", opts)
+            if not client.name == 'tailwindcss' then
+              opts.desc = "Show line diagnostics"
+              map("n", "<leader>cd", vim.diagnostics.open_float, opts)
+            end
 
             if Snacks.words.is_enabled() then
               map("n", "]]", function() Snacks.words.jump(vim.v.count1, true) end, { desc = "Next word" })
@@ -53,6 +67,12 @@ return {
           end,
         }
 
+        local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+        for type, icon in pairs(signs) do
+          local hl = "DiagnosticSign" .. type
+          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+        end
+
         if server_name == "ts_ls" then
           local commands = conf.commands or {}
           commands.OrganizeImports = {
@@ -65,22 +85,6 @@ return {
             description = "Organize imports",
           }
           conf.commands = commands
-
-          local settings = conf.settings or {}
-          settings = {
-            typescript = {
-              inlayHints = {
-                includeInlayEnumMemberValueHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayVariableTypeHints = true,
-              },
-            },
-          }
-          conf.settings = settings
         end
 
         if server_name == "lua_ls" then
