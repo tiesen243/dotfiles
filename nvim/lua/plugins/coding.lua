@@ -30,6 +30,7 @@ return {
           ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ["<C-Space>"] = cmp.mapping.complete(),
+          ["<C-S-Space>"] = cmp.mapping.close(),
           ["<CR>"] = cmp.mapping.confirm({
             select = auto_select,
             behavior = cmp.ConfirmBehavior.Replace,
