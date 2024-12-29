@@ -56,13 +56,11 @@ end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 map("n", "<leader>bl", "<cmd>Telescope buffers<cr>", { desc = "List Buffers" })
 
--- Clear search with <esc>
-map(
-  { "i", "n", "s" },
-  "<esc>",
-  "<cmd>noh<cr><esc>",
-  { expr = true, desc = "Escape and Clear hlsearch" }
-)
+-- Clear search and stop snippet on escape
+map({ "i", "n", "s" }, "<esc>", function()
+  vim.cmd("noh")
+  return "<esc>"
+end, { expr = true, desc = "Escape and Clear hlsearch" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua

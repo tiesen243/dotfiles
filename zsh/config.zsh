@@ -89,7 +89,7 @@ gcp ()
 {
   git add --all
   if [ -z "$1" ]; then
-    git commit -a
+    git cz -a
   else
     git commit -a -m "$1"
   fi
