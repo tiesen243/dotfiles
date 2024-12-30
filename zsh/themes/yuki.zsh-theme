@@ -11,7 +11,7 @@
 # @website https://tiesen.id.vn
 
 # Initialization {{{
-source ~/dotfiles/shell/themes/async.zsh
+source ~/dotfiles/zsh/themes/async.zsh
 autoload -Uz add-zsh-hook
 setopt PROMPT_SUBST
 async_init
@@ -171,7 +171,7 @@ add-zsh-hook precmd yuki_git_async
 
 PROMPT+='$YUKI_GIT_STATUS'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{cyan}%B("
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue}%B("
 ZSH_THEME_GIT_PROMPT_CLEAN=") %F{green}%Bᗜˬᗜ "
 ZSH_THEME_GIT_PROMPT_DIRTY=") %F{yellow}%Bᗜ˰ᗜ "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""%f%b""
