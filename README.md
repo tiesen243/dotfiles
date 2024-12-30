@@ -82,8 +82,9 @@ rm ~/.zshrc
 rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,nvim}
 
 ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,nvim} ~/.config
-ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
-ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+ln -s ~/dotfiles/shell/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
+ln -s ~/dotfiles/shell/config.zsh ~/.zshrc
+ln -s ~/dotfiles/shell/tmux.conf ~/.tmux.conf
 ```
 
 Then, you can change the themes by `nwg-look` command
