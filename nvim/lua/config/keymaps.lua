@@ -192,7 +192,7 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 map("n", "<leader>ws", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>wv", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
-Snacks.toggle.zoom():map("<leader>wm"):map("<leader>uZ")
+Snacks.toggle.zoom():map("<leader>uZ")
 Snacks.toggle.zen():map("<leader>uz")
 
 -- tabs
