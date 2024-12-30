@@ -60,6 +60,13 @@ return {
     end,
   },
 
+  -- Dressing: UI enhancements for Input and Select
+  -- https://github.com/stevearc/dressing.nvim
+  {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
+
   -- Snacks: A collection of small QoL plugins for Neovim
   -- https://github.com/folke/snacks.nvim
   {
