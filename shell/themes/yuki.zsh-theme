@@ -11,7 +11,7 @@
 # @website https://tiesen.id.vn
 
 # Initialization {{{
-source ~/dotfiles/zsh/themes/async.zsh
+source ~/dotfiles/shell/themes/async.zsh
 autoload -Uz add-zsh-hook
 setopt PROMPT_SUBST
 async_init

@@ -1,5 +1,8 @@
 local opt = vim.opt
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 -- General
 opt.autowrite = true                                    -- Automatically save before running commands
 opt.autoread = true                                     -- Automatically read file if changed outside of vim
