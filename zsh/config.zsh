@@ -24,7 +24,7 @@ ZSH_THEME="yuki"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 
 source $ZSH/oh-my-zsh.sh
@@ -39,6 +39,13 @@ source $ZSH/oh-my-zsh.sh
 alias  cls="clear"
 alias    v="nvim"
 alias    q="exit"
+
+# Directory
+alias   xh="cd $HOME"
+alias   xd="cd $HOME/Documents"
+alias   xt="cd $HOME/Downloads"
+alias   xp="cd $HOME/Pictures"
+alias   xc="cd $HOME/dotfiles"
 
 # Kitty
 alias icat="kitten icat"
@@ -65,13 +72,6 @@ alias    b="bun"
 alias  grc="gh repo create"
 alias  grd="gh repo delete"
 alias  gcl="gh repo clone"
-alias  gaa="git add --all"
-alias   ga="git add"
-alias   gc="git commit -a"
-alias   gp="git push origin"
-alias   gs="git switch"
-alias   gP="git pull"
-alias    g="git"
 
 # Pacman | Yay
 alias yp="yay -Qdtq | yay -Rns -"
@@ -85,7 +85,7 @@ alias yi="yay -S"
 # Functions
 #############################################
 
-gcp ()
+gacp()
 {
   git add --all
   if [ -z "$1" ]; then
