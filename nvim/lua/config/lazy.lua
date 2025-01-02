@@ -22,7 +22,7 @@ require("config.options")
 require("lazy").setup({
   spec = { { import = "plugins" } },
   defaults = { lazy = false, version = false },
-  install = { colorscheme = { "github_dark_default", "habamax" } },
+  install = { colorscheme = { "tokyonight", "habamax" } },
   ui = { border = "rounded" },
   checker = { enabled = true, notify = false }, -- automatically check for plugin updates
   performance = {
@@ -39,7 +39,7 @@ require("lazy").setup({
   },
 })
 
-vim.cmd("colorscheme github_dark_default")
+vim.cmd("colorscheme tokyonight")
 
 require("config.keymaps")
 require("config.autocmds")
