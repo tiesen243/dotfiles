@@ -8,5 +8,6 @@ return {
   { "mfussenegger/nvim-lint", enabled = false },
   { "folke/persistence.nvim", enabled = false },
   { "MagicDuck/grug-far.nvim", enabled = false },
+  { "akinsho/bufferline.nvim", enabled = false },
   { "nvim-treesitter/nvim-treesitter-textobjects", enabled = false },
 }
