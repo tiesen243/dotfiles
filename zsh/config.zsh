@@ -97,10 +97,19 @@ gacp()
 }
 
 crj() {
-  local file_name="$1"
-  local class_name=$(basename "$file_name" .java)
+  # Create bin directory if it doesn't exist
   mkdir -p bin
-  javac -d bin "src/$file_name" && java -cp bin "$class_name"
+
+  # Compile Java files in src directory
+  javac -d bin src/*.java
+
+  # Check if compilation was successful
+  if [ $? -eq 0 ]; then
+    # Run the main class
+    java -cp bin Main
+  else
+    echo "Compilation failed."
+  fi
 }
 
 
