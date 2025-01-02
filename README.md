@@ -4,9 +4,6 @@
 
 ![preview](./assets/preview.png)
 
-> [!NOTE]
-> Wallpaper: [here](https://www.pixiv.net/en/artworks/68467122)
-
 ## Installation
 
 1. Install `yay`
