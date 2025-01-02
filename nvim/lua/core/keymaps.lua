@@ -2,7 +2,7 @@ local map = vim.keymap.set
 
 -- General
 map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr><esc>", { desc = "Undo" })
-map({ "i", "x", "n", "s" }, "u", "<nop>", { desc = "Undo" })
+map("n", "u", "<nop>", { desc = "Undo" })
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = true })
 map({ "n", "x" }, "<C-a>", "gg<S-v>G", { desc = "Select all", silent = true })
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
