@@ -5,3 +5,12 @@
 local opts = vim.opt
 
 opts.swapfile = false
+
+-- Set filetypes for different extensions
+vim.filetype.add({
+  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+  extension = {
+    mdx = "markdown",
+    conf = "bash",
+  },
+})
