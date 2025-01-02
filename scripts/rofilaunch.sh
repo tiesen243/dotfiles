@@ -34,23 +34,22 @@ conf_launcher() {
 }
 
 # Function: Custom Menu
-custom_menu() {
+menu() {
   # Menu options displayed in rofi
   options="\n\n\n\n\n"
 
   # Prompt user to choose an option
   chosen=$(echo -e "$options" | rofi -config ~/.config/rofi/submenu.rasi -dmenu -p "Select an option:")
 
+  echo "$chosen"
+
   # Execute the corresponding command based on the selected option
   case $chosen in
-  "")
-    rofi -show drun
-    ;;
-  "")
-    kitty -e yazi
-    ;;
   "")
     kitty
+    ;;
+  "")
+    export EDITOR=nvim && kitty -e yazi
     ;;
   "")
     xdg-open https://about:blank
@@ -58,41 +57,11 @@ custom_menu() {
   "")
     hyprlock
     ;;
-  " ")
-    shutdown now
+  "")
+    systemctl poweroff
     ;;
-  " ")
-    reboot
-    ;;
-  *)
-    echo "No option selected"
-    ;;
-  esac
-}
-
-system_menu() {
-  # Menu options displayed in rofi
-  options="X Clear Cache\nX Clear Clipboard\n Session Options\n Update Rice\n Update System"
-
-  # Prompt user to choose an option
-  chosen=$(echo -e "$options" | rofi -config ~/.config/rofi/launcher.rasi -dmenu -p "Select an option:")
-
-  # Execute the corresponding command based on the selected option
-  case $chosen in
-  "X Clear Cache")
-    find ~/.cache -mindepth 1 -maxdepth 1 ! -name "spotify" -exec rm -rf {} +
-    ;;
-  "X Clear Clipboard")
-    rm -rf ~/.cache/cliphist
-    ;;
-  " Lock")
-    wlogout
-    ;;
-  " Update System")
-    alacritty -e ~/.scripts/update
-    ;;
-  " Update System")
-    alacritty -e ~/.scripts/updaterice
+  "")
+    systemctl reboot
     ;;
   *)
     echo "No option selected"
@@ -114,10 +83,7 @@ case "$1" in
   run_launcher
   ;;
 --menu)
-  custom_menu
-  ;;
---system_menu)
-  system_menu
+  menu
   ;;
 *)
   usage
