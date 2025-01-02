@@ -5,8 +5,14 @@ return {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = { "hrsh7th/cmp-nvim-lsp", "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+    opts = { inlay_hints = { enabled = true } },
     config = function()
-      require("mason").setup({ ui = { icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗", }, border = "rounded", }, })
+      require("mason").setup({
+        ui = {
+          icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
+          border = "rounded",
+        },
+      })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
@@ -14,7 +20,7 @@ return {
       local lsp_attach = function(client, bufnr)
         local map = function(key, func, desc, mode)
           mode = mode or "n"
-          vim.keymap.set(mode, key, func, { buffer = bufnr, desc = "LSP: " .. desc })
+          vim.keymap.set(mode, key, func, { buffer = bufnr, desc = desc })
         end
 
         local builtin = require("telescope.builtin")
@@ -29,6 +35,22 @@ return {
         map("<leader>cr", vim.lsp.buf.rename, "[R]ename")
         map("<leader>cR", Snacks.rename.rename_file, "[R]ename file")
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+        if not client.name == "tailwindcss" then
+          map("<leader>cd", vim.diagnostics.open_float, "Line [D]iagnostics")
+        end
+
+        if Snacks.words.is_enabled() then
+          map("n", "]]", function()
+            Snacks.words.jump(vim.v.count1, true)
+          end, { desc = "Next word" })
+          map("n", "[[", function()
+            Snacks.words.jump(-vim.v.count1, true)
+          end, { desc = "Previous word" })
+        end
+
+        if client and vim.lsp.inlay_hint then
+          vim.lsp.inlay_hint.enable()
+        end
       end
 
       local signs = { Error = "", Warn = "", Hint = "", Info = "" }
@@ -41,12 +63,32 @@ return {
         emmet_ls = {},
         eslint = {},
         jdtls = {},
-        lua_ls = { settings = { Lua = { diagnostics = { globals = { "vim", "Snacks" } } } } },
+        lua_ls = {
+          settings = {
+            Lua = {
+              hint = { enable = true },
+              diagnostics = { globals = { "vim", "Snacks" } },
+            },
+          },
+        },
+        pyright = {},
         prismals = {},
         ruff = {},
         tailwindcss = {},
-        typos_lsp = {},
-        vtsls = {},
+        vtsls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                parameterNames = { enabled = "all" },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+            },
+          },
+        },
       }
 
       local ensure_installed = {}

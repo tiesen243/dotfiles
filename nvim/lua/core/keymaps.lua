@@ -2,13 +2,14 @@ local map = vim.keymap.set
 
 -- General
 map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr><esc>", { desc = "Undo" })
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
-map({ "n", "x" }, "<C-a>", "gg<S-v>G", { desc = "Select all" })
+map({ "i", "x", "n", "s" }, "u", "<nop>", { desc = "Undo" })
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = true })
+map({ "n", "x" }, "<C-a>", "gg<S-v>G", { desc = "Select all", silent = true })
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
 map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All" })
 map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit" })
 
--- better up/down
+-- Better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
@@ -33,8 +34,8 @@ map("v", "J", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "M
 map("v", "K", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- Buffers
-map("n", "[", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to last buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
@@ -67,6 +68,12 @@ map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result
 map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+
+-- better indenting
+map("n", "<", "<<")
+map("n", ">", "")
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -163,6 +170,7 @@ Snacks.toggle.animate():map("<leader>ua")
 Snacks.toggle.indent():map("<leader>ug")
 Snacks.toggle.scroll():map("<leader>uS")
 map("n", "<leader>um", "<cmd>Mason<cr>", { desc = "Mason" })
+map("n", "<leader>ul", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>uh")
