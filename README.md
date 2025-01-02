@@ -76,9 +76,9 @@ sudo pacman -Runs htop nano vim wofi
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,nvim}
+rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,nvim,rofi}
 
-ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,nvim} ~/.config
+ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,nvim,rofi} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
