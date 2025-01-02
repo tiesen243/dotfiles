@@ -34,15 +34,13 @@ return {
         map("<leader>ck", vim.lsp.buf.signature_help, "Signature help")
         map("<leader>ch", vim.lsp.buf.hover, "[H]over doc")
 
-        map("<leader>ct", builtin.lsp_type_definitions, "[T]ype Definition")
-        map("<leader>cs", builtin.lsp_document_symbols, "Document [S]ymbols")
-        map("<leader>cw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
+        map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+        map("<leader>cd", vim.diagnostic.open_float, "Line [D]iagnostics")
         map("<leader>cr", vim.lsp.buf.rename, "[R]ename")
         map("<leader>cR", Snacks.rename.rename_file, "[R]ename file")
-        map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-        if not client.name == "tailwindcss" then
-          map("<leader>cd", vim.diagnostics.open_float, "Line [D]iagnostics")
-        end
+        map("<leader>cs", builtin.lsp_document_symbols, "Document [S]ymbols")
+        map("<leader>ct", builtin.lsp_type_definitions, "[T]ype Definition")
+        map("<leader>cw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
 
         if Snacks.words.is_enabled() then
           map("n", "]]", function()
