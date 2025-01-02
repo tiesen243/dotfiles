@@ -2,11 +2,10 @@ return {
   -- Github theme
   -- https://github.com/projekt0n/github-nvim-theme
   {
-    "projekt0n/github-nvim-theme",
-    name = "github-theme",
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    opts = { options = { transparent = vim.g.transparent_enabled } },
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = { style = "storm", transparent = vim.g.transparent_enabled },
   },
   -- Transparent background
   -- https://github.com/xiyaowong/transparent.nvim
