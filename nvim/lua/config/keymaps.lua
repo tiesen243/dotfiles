@@ -44,8 +44,8 @@ map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- Buffers
-map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+map("n", "g[", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "g]", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to last buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
@@ -89,13 +89,13 @@ map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
 map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All" })
 map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit" })
 
--- better indenting
+-- Better indenting
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 map("n", "<", "<<")
 map("n", ">", ">>")
 
--- diagnostic
+-- Diagnostic
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil

@@ -7,6 +7,14 @@ return {
     build = ":Copilot setup",
     lazy = false,
     keys = {
+      {
+        mode = { "i" },
+        "<C-CR>",
+        'copilot#Accept("\\<CR>")',
+        desc = "Copilot Accept",
+        expr = true,
+        replace_keycodes = false,
+      },
       { "<leader>gcp", "<cmd>Copilot panel<cr>", desc = "Panel" },
     },
   },

@@ -30,6 +30,7 @@ return {
   -- https://github.com/nvim-telescope/telescope.nvim
   {
     "nvim-telescope/telescope.nvim",
+    event = "VimEnter",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -37,10 +38,12 @@ return {
       local builtin = require("telescope.builtin")
 
       return {
-        { "<leader>fg", builtin.live_grep,   desc = "Live Grep" },
-        { "<leader>ff", builtin.find_files,  desc = "Find Files" },
-        { "<leader>fr", builtin.oldfiles,    desc = "Old Files" },
-        { "<leader>fs", builtin.grep_string, desc = "Grep String" },
+        { "<leader>fh", builtin.help_tags,   desc = "[F]ind [H]elp" },
+        { "<leader>fk", builtin.keymaps,     desc = "[F]ind [K]eymaps" },
+        { "<leader>fg", builtin.live_grep,   desc = "[F]ind [G]rep" },
+        { "<leader>ff", builtin.find_files,  desc = "[F]ind [F]iles" },
+        { "<leader>fr", builtin.oldfiles,    desc = "[F]ind [R]ecent Files" },
+        { "<leader>fw", builtin.grep_string, desc = "[F]ind current [W]ord" },
       }
     end,
     opts = function()

@@ -1,11 +1,13 @@
 local opt = vim.opt
 
+-- Set <space> as the leader key
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 
 -- General
 opt.autowrite = true                                    -- Automatically save before running commands
 opt.autoread = true                                     -- Automatically read file if changed outside of vim
+vim.opt.breakindent = true                              -- Indent wrapped lines
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2                                    -- Hide * markup for bold and italic, but not markers with substitutions
@@ -36,7 +38,7 @@ opt.mouse = "a"            -- Enable mouse mode
 opt.number = true          -- Print line number
 opt.pumblend = 0           -- Popup blend
 opt.pumheight = 0          -- Maximum number of entries in a popup
-opt.relativenumber = false -- Relative line numbers
+opt.relativenumber = true  -- Relative line numbers
 opt.ruler = false          -- Disable the default ruler
 opt.scrolloff = 4          -- Lines of context
 opt.sessionoptions =
