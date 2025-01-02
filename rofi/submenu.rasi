@@ -1,7 +1,86 @@
+configuration {
+    modi:                           "drun,run";
+    show-icons:                     true;
+    icon-theme:                     "Papirus";
+    font: "Symbols Nerd Font 15";
+    display-drun:                   "";
+    drun-display-format:            "{icon} {name}";
+}
+
+@theme "colors.rasi"
+
+
+prompt {
+    enabled:                       false;
+    padding:                       0px;
+    font:                          "JetBrainsMono Nerd Font 20";
+}
+
+entry {
+	
+    background-color:              inherit; /* Hide the entry box */
+    text-color:                    inherit;
+    placeholder-color:             inherit;
+    placeholder:                   "";
+    padding:                       0px; /* Remove padding */
+    blink:                         false; /* Remove blinking cursor */
+}
+
+inputbar {
+    children:                      []; /* Remove prompt and entry */
+    padding:                       0px; /* Remove padding */
+}
+
+listview {
+    columns:                       1;
+    lines:                         6;
+    spacing:                       1px;
+    layout:                        vertical;
+    cycle:                         false;
+    scrollbar:                     false;
+}
+
+mainbox {
+    children:                      [listview]; /* Only show listview */
+    spacing:                       0%;
+    padding:                       25px;
+}
+
+element-icon {
+    background-color:              inherit;
+    horizontal-align:              0.5;
+    vertical-align:                0.5;
+    size:                          0px;
+    border:                        0px;
+    
+}
+
+element {
+    border:                        0 0 1px 0;
+    text-align:                     center;
+    padding:                       16px;
+    margin:                        1;
+}
+
+element-text {
+    background-color:              inherit;
+    text-color:                    inherit;
+    text-align:                     center;
+    expand:                        true;
+    padding: 0px;
+}
+
+element selected {
+    text-align:                     center;
+    background-color:              #30304d;
+    text-color:                    @fg;
+    border:                        2px;
+    border-radius:                 4px;
+    border-color:					@fg;
+}
+
 /**
  *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
  * 
  * Rofi Theme File
  * Rofi Version: 1.7.3
@@ -20,8 +99,13 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "colors.rasi"
-@import                          "shared/fonts.rasi"
+@import                          "shared/colors.rasi"
+
+* {
+    font: "JetBrains Mono Nerd Font 15";
+}
+
+
 
 * {
     border-colour:               var(selected);
@@ -36,7 +120,7 @@ configuration {
     active-background:           var(active);
     active-foreground:           var(background);
     selected-normal-background:  #30304d;
-    selected-normal-border: 	var(foreground);
+    selected-normal-border: 	#b4befe;
     selected-normal-foreground:  var(foreground);
     selected-urgent-background:  var(active);
     selected-urgent-foreground:  var(background);
@@ -53,13 +137,15 @@ configuration {
 /*****----- Main Window -----*****/
 window {
     /* properties for window widget */
-    transparency:                "real";
-    location:                    center;
-    anchor:                      center;
+    location:                      west; /* Set the location to north (top-left corner) */
+    anchor:                        west; /* Anchor to the top-left corner */
+    border:                        3px;
+    border-radius:                 12px;
+    width:                         120;
+    x-offset:                      10; /* Set offset to zero */
+    y-offset:                      0; /* Set offset to zero */
+    location:                    west;
     fullscreen:                  false;
-    width:                       600px;
-    x-offset:                    0px;
-    y-offset:                    0px;
 
     /* properties for all widgets */
     enabled:                     true;
@@ -91,45 +177,9 @@ mainbox {
     border-radius:               0px 0px 0px 0px;
     border-color:                @border-colour;
     background-color:          @background;
-    children:                    [ "inputbar", "message", "listview" ];
 }
 
-/*****----- Inputbar -----*****/
-inputbar {
-    enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     0px 10px;
-    border:                      0px solid;
-    border-radius:               10px;
-    border-color:                @border-colour;
-    background-color:          rgb(38, 38, 63);
-    text-color:                  @foreground-colour;
-    children:                    [ "textbox-prompt-colon", "entry", "mode-switcher" ];
-}
 
-prompt {
-    enabled:                     true;
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-textbox-prompt-colon {
-    enabled:                     true;
-    padding:                     5px 3px;
-    expand:                      false;
-    str:                         "";
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-entry {
-    enabled:                     true;
-    padding:                     5px 0px;
-    background-color:            inherit;
-    text-color:                  inherit;
-    cursor:                      text;
-    placeholder:                 "Search...";
-    placeholder-color:           inherit;
-}
 num-filtered-rows {
     enabled:                     true;
     expand:                      false;
@@ -159,18 +209,7 @@ case-indicator {
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       10;
     cycle:                       true;
-    dynamic:                     true;
-    scrollbar:                   true;
-    layout:                      vertical;
-    reverse:                     false;
-    fixed-height:                true;
-    fixed-columns:               true;
-    
-    spacing:                     5px;
-    margin:                      0px;
-    padding:                     0px;
     border:                      0px solid;
     border-radius:               0px;
     border-color:                @border-colour;
@@ -178,25 +217,16 @@ listview {
     text-color:                  @foreground-colour;
     cursor:                      "default";
 }
-scrollbar {
-    handle-width:                5px ;
-    handle-color:                @handle-colour;
-    border-radius:               10px;
-    background-color:            @alternate-background;
-}
 
 /*****----- Elements -----*****/
 element {
+    text-align:                  center;
     enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     5px 10px;
     border:                      0px solid;
     border-radius:               10px;
     border-color:                @border-colour;
     background-color:            transparent;
     text-color:                  @foreground-colour;
-    cursor:                      pointer;
 }
 element normal.normal {
     background-color:            var(normal-background);
@@ -242,71 +272,32 @@ element-icon {
     size:                        24px;
     cursor:                      inherit;
 }
+
+element-icon {
+    background-color:              inherit;
+    horizontal-align:              0.5;
+    vertical-align:                0.5;
+    size:                          0px;
+    border:                        0px;
+    
+}
+
+element {
+    border-radius: 6px;
+    text-align:                     center;
+    padding:                       16px;
+    margin:                        1;
+}
+
 element-text {
-    background-color:            transparent;
-    text-color:                  inherit;
-    highlight:                   inherit;
-    cursor:                      inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
+    background-color:              inherit;
+    text-color:                    inherit;
+    text-align:                     center;
+    expand:                        true;
+    padding: 0px;
 }
 
-/*****----- Mode Switcher -----*****/
-mode-switcher{
-    enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @border-colour;
-    background-color:            transparent;
-    text-color:                  @foreground-colour;
-}
-button {
-    padding:                     0px 18px 0px 12px;
-    border:                      0px solid;
-    border-radius:               10px;
-    border-color:                @border-colour;
-    background-color:            @alternate-background;
-    text-color:                  inherit;
-    cursor:                      pointer;
-}
-button selected {
-    background-color:            var(selected-normal-background);
-    text-color:                  var(selected-normal-foreground);
-}
-
-/*****----- Message -----*****/
-message {
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px 0px 0px 0px;
-    border-color:                @border-colour;
-    background-color:            transparent;
-    text-color:                  @foreground-colour;
-}
-textbox {
-    padding:                     8px 10px;
-    border:                      0px solid;
-    border-radius:               10px;
-    border-color:                @border-colour;
-    background-color:            @alternate-background;
-    text-color:                  @foreground-colour;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-    highlight:                   none;
-    placeholder-color:           @foreground-colour;
-    blink:                       true;
-    markup:                      true;
-}
-error-message {
-    padding:                     10px;
-    border:                      2px solid;
-    border-radius:               10px;
-    border-color:                @border-colour;
-    background-color:            @background-colour;
-    text-color:                  @foreground-colour;
+element selected {
+    text-align:                     center;
+    border:                        2px;
 }
