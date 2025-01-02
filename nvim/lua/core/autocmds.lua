@@ -2,21 +2,12 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("yuki_" .. name, { clear = true })
 end
 
--- Format on save
+-- format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("format_on_save"),
   callback = function()
-    vim.lsp.buf.format({
-      timeout_ms = 1000,
-    })
+    vim.lsp.buf.format({ timeout_ms = 1000 })
   end,
-})
-
--- Turn off paste mode when leaving insert mode
-vim.api.nvim_create_autocmd("InsertLeave", {
-  group = augroup("nopaste"),
-  pattern = "*",
-  command = "set nopaste",
 })
 
 -- Check if we need to reload the file when it changed
@@ -37,7 +28,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Resize splits if window got resized
+-- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
   callback = function()
@@ -47,7 +38,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- Go to last loc when opening a buffer
+-- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function(event)
@@ -81,7 +72,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "neotest-summary",
     "notify",
     "qf",
-    "snacks_win",
     "spectre_panel",
     "startuptime",
     "tsplayground",
@@ -101,7 +91,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Make it easier to close man-files when opened inline
+-- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("man_unlisted"),
   pattern = { "man" },
@@ -110,7 +100,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Wrap and check for spell in text filetypes
+-- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
@@ -125,8 +115,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
-    vim.wo.spell = false
-    vim.wo.conceallevel = false
+    vim.opt_local.conceallevel = 0
   end,
 })
 
