@@ -71,7 +71,7 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result
 
 -- better indenting
 map("n", "<", "<<")
-map("n", ">", "")
+map("n", ">", ">>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
