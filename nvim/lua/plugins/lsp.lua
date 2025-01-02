@@ -29,6 +29,11 @@ return {
         map("gr", builtin.lsp_references, "[G]oto [R]eferences")
         map("gi", builtin.lsp_implementations, "[G]oto [I]mplementation")
 
+        map("<C-k>", vim.lsp.buf.signature_help, "Signature help", "i")
+        map("<C-h>", vim.lsp.buf.hover, "[H]over doc", "i")
+        map("<leader>ck", vim.lsp.buf.signature_help, "Signature help")
+        map("<leader>ch", vim.lsp.buf.hover, "[H]over doc")
+
         map("<leader>ct", builtin.lsp_type_definitions, "[T]ype Definition")
         map("<leader>cs", builtin.lsp_document_symbols, "Document [S]ymbols")
         map("<leader>cw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
