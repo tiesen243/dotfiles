@@ -96,6 +96,13 @@ gacp()
   git push origin
 }
 
+crj() {
+  local file_name="$1"
+  local class_name=$(basename "$file_name" .java)
+  mkdir -p bin
+  javac -d bin "src/$file_name" && java -cp bin "$class_name"
+}
+
 
 #############################################
 # Add custom bin directory to PATH
