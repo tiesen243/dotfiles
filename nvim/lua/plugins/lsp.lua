@@ -100,9 +100,10 @@ return {
 
       local ensure_installed = vim.tbl_keys(opts.servers or {})
       vim.list_extend(ensure_installed, {
-        "stylua",                       -- Used to format Lua code
-        Yuki.lang.react and "prettier", -- Used to format JavaScript, TypeScript, CSS, and JSON
-        "shfmt",                        -- Used to format Shell script
+        Yuki.lang.java and "google-java-format", -- Used to format Java code
+        Yuki.lang.react and "prettier",          -- Used to format JavaScript, TypeScript, CSS, and JSON
+        "shfmt",                                 -- Used to format Shell script
+        "stylua",                                -- Used to format Lua code
       })
 
       require("mason").setup({
@@ -125,7 +126,6 @@ return {
           server.on_attach = lsp_attach
           require("lspconfig")[server_name].setup(server)
         end,
-        ["jdtls"] = function() end,
       })
     end,
   },
