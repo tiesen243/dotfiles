@@ -8,7 +8,7 @@ return {
   {
     "xiyaowong/transparent.nvim",
     opts = {
-      extra_groups = { "Pmenu", "NormalFloat", "Float" },
+      extra_groups = { "Pmenu", "NormalFloat", "Float", "FloatBorder" },
       exclude_groups = { "CursorLine" },
     },
     config = function(_, opts)

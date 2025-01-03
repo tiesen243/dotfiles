@@ -69,12 +69,13 @@ return {
 
       nls.setup({
         sources = {
-          require("none-ls.code_actions.eslint"),
-          nls.builtins.formatting.prettier,
+          Yuki.lang.react and require("none-ls.code_actions.eslint"),
+          Yuki.lang.react and nls.builtins.formatting.prettier,
+          Yuki.lang.java and nls.builtins.formatting.google_java_format,
+          Yuki.lang.python and require("none-ls.formatting.ruff_format"),
+          Yuki.lang.python and require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
           nls.builtins.formatting.shfmt.with({ args = { "-i", "4" } }),
           nls.builtins.formatting.stylua,
-          require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
-          require("none-ls.formatting.ruff_format"),
         },
       })
     end,
