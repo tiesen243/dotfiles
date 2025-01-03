@@ -14,7 +14,7 @@ _G.Yuki = {
     python = true,
     react = true,
   },
-  colorcheme = "tokyonight",
+  colorcheme = "tokyonight-night",
   icons = {
     diagnostics = {
       Error = " ",
