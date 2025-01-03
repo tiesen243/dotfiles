@@ -6,10 +6,10 @@ return {
     event = "VeryLazy",
     opts = {
       preset = "modern",
-      triggers = { { "<leader>", mode = "n" } },
+      triggers = { { "<leader>", mode = { "n", "v" } } },
       spec = {
         {
-          mode = { "n" },
+          mode = { "n", "v" },
           { "<leader>a",     group = "AI" },
           { "<leader>b",     group = "Buffers" },
           { "<leader>c",     group = "Code" },
@@ -18,7 +18,7 @@ return {
           { "<leader>q",     group = "Quit" },
           { "<leader>u",     group = "UI" },
           { "<leader>w",     group = "Window" },
-          { "<leader><tab>", group = "Tab" },
+          { "<leader><tab>", group = "Tabs" },
         },
       },
     },
@@ -30,13 +30,34 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
-    keys = { { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "File Explorer" }, opts = {} },
+    keys = {
+      {
+        "<leader>e",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
+      {
+        "<leader>E",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
+        end,
+        desc = "Explorer NeoTree (rwd)",
+      },
+    },
+    deactivate = function()
+      vim.cmd([[Neotree close]])
+    end,
     opts = {
+      sources = { "filesystem", "buffers", "git_status" },
+      filesystem = { bind_to_cwd = false, follow_current_file = { enabled = true }, use_libuv_file_watcher = true },
       window = {
         width = 32,
         position = "left",
         mappings = {
           ["h"] = "close_node",
+          ["<space>"] = "none",
           ["Y"] = {
             function(state)
               local node = state.tree:get_node()
@@ -46,49 +67,19 @@ return {
             desc = "Copy Path to Clipboard",
           },
         },
-      },
-    },
-  },
-
-  -- Statusline
-  -- https://github.com/nvim-lualine/lualine.nvim
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = {
-      options = {
-        theme = "auto",
-        icons_enabled = true,
-        disabled_filetypes = { statusline = { "snacks_dashboard", "neo-tree" } },
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-        always_divide_middle = true,
-      },
-      sections = {
-        lualine_a = {
-          {
-            "mode",
-            fmt = function(str)
-              return " " .. str
-            end,
+        default_component_configs = {
+          indent = {
+            with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+            expander_collapsed = "",
+            expander_expanded = "",
+            expander_highlight = "NeoTreeExpander",
           },
-        },
-        lualine_b = {
-          { "branch" },
-          { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
-          { "filename", file_status = true, path = 1 },
-          { "diff" },
-        },
-        lualine_c = { "diagnostics" },
-        lualine_x = { "encoding", "fileformat" },
-        lualine_y = {
-          { "progress", padding = { left = 1, right = 0 }, separator = " " },
-          { "location", padding = { left = 0, right = 1 } },
-        },
-        lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
+          git_status = {
+            symbols = {
+              unstaged = "󰄱",
+              staged = "󰱒",
+            },
+          },
         },
       },
     },
@@ -139,6 +130,21 @@ return {
         live_grep = { file_ignore_patterns = { "node_modules", ".git", ".venv" }, additional_args = { "--hidden" } },
       }
     end,
+  },
+
+  -- Git Signs
+  -- https://github.com/lewis6991/gitsigns.nvim
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true,
+      current_line_blame_opts = {
+        delay = 500,
+        ignore_whitespace = true,
+      },
+      signs = Yuki.icons.git_signs,
+      signs_staged = Yuki.icons.git_signs_staged,
+    },
   },
 
   {

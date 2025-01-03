@@ -7,8 +7,8 @@ map("n", "u", "<nop>", opts)                                     -- Disable undo
 map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr><esc>", opts) -- Undo with <C-z>
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)    -- Save with <C-s>
 map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts)                     -- Select all
-map("n", "x", '"_x', opts)                                       -- Delete without yanking
-map("n", "p", '"_dP', opts)                                      -- Paste without yanking
+map({ "n", "v" }, "x", '"_x', opts)                              -- Delete without yanking
+map("v", "p", '"_dP', opts)                                      -- Paste without yanking
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit", noremap = true, silent = true })
 map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All", noremap = true, silent = true })
 map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit", noremap = true, silent = true })
