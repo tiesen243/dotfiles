@@ -1,4 +1,18 @@
+-- Leader key (default is space)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Snacks animations
+-- Set to `false` to globally disable all snacks animations
+vim.g.snacks_animate = true
+
+vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
+
+-- Hide deprecation warnings
+vim.g.deprecation_warnings = false
+
 _G.Yuki = {
+  colorcheme = "tokyonight",
   icons = {
     diagnostics = {
       Error = " ",
@@ -69,4 +83,12 @@ _G.Yuki = {
       Variable = "󰀫 ",
     },
   },
+  logo = [[
+██╗   ██╗██╗   ██╗██╗  ██╗██╗
+╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
+ ╚████╔╝ ██║   ██║█████╔╝ ██║
+  ╚██╔╝  ██║   ██║██╔═██╗ ██║
+   ██║   ╚██████╔╝██║  ██╗██║
+   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
+   ]],
 }

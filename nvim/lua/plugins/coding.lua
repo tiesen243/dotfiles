@@ -52,7 +52,7 @@ return {
         ["<tab>"] = { "select_next", "snippet_forward", "fallback" },
         ["<S-tab>"] = { "select_prev", "snippet_backward", "fallback" },
         ["<C-space>"] = { "show", "hide", "fallback" },
-        ["<C-CR>"] = { "select_and_accept", "fallback" },
+        ["<CR>"] = { "select_and_accept", "fallback" },
         ["<C-j>"] = { "scroll_documentation_up", "select_next", "fallback" },
         ["<C-k>"] = { "scroll_documentation_down", "select_prev", "fallback" },
       },
