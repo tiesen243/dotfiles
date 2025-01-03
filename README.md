@@ -23,9 +23,9 @@ yay -S zsh rofi hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 zen-browser-bin ffmpeg \
 lsd ripgrep brightnessctl \
+github-cli lazygit tmux\
 cliphist wl-clipboard \
 nwg-look pavucontrol \
-github-cli lazygit \
 grim slurp
 ```
 
