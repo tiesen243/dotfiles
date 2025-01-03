@@ -81,7 +81,9 @@ rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,nvim,rofi}
 ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,nvim,rofi} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+tmux source ~/.tmux.conf
 ```
 
 Then, you can change the themes by `nwg-look` command
