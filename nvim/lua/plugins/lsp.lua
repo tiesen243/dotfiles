@@ -5,16 +5,16 @@ return {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+      { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     opts = {
       inlay_hints = { enabled = true },
       servers = {
-        emmet_ls = {},
-        eslint = {},
-        jdtls = {},
+        emmet_ls = { enabled = Yuki.lang.react },
+        eslint = { enabled = Yuki.lang.react },
+        jdtls = { enabled = Yuki.lang.java },
         lua_ls = {
           settings = {
             Lua = {
@@ -24,11 +24,12 @@ return {
             },
           },
         },
-        pyright = {},
-        prismals = {},
-        ruff = {},
-        tailwindcss = {},
+        basedpyright = { enabled = Yuki.lang.python },
+        prismals = { enabled = Yuki.lang.react },
+        ruff = { enabled = Yuki.lang.python },
+        tailwindcss = { enabled = Yuki.lang.react },
         vtsls = {
+          enabled = Yuki.lang.react,
           settings = {
             typescript = {
               inlayHints = {
@@ -70,6 +71,10 @@ return {
         map("<leader>ct", builtin.lsp_type_definitions, "[T]ype Definition")
         map("<leader>cw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
 
+        if client.name == "basedpyright" then
+          map("n", "<leader>cv", "<cmd>VenvSelector<CR>", { desc = "Select [V]irtualenv" })
+        end
+
         if Snacks.words.is_enabled() then
           map("n", "]]", function()
             Snacks.words.jump(vim.v.count1, true)
@@ -82,6 +87,10 @@ return {
         if client and vim.lsp.inlay_hint then
           vim.lsp.inlay_hint.enable()
         end
+
+        if client.server_capabilities.documentSymbolProvider then
+          require("nvim-navic").attach(client, bufnr)
+        end
       end
 
       for type, icon in pairs(Yuki.icons.diagnostics) do
@@ -91,9 +100,9 @@ return {
 
       local ensure_installed = vim.tbl_keys(opts.servers or {})
       vim.list_extend(ensure_installed, {
-        "stylua",   -- Used to format Lua code
-        "prettier", -- Used to format JavaScript, TypeScript, CSS, and JSON
-        "shfmt",    -- Used to format Shell script
+        "stylua",                       -- Used to format Lua code
+        Yuki.lang.react and "prettier", -- Used to format JavaScript, TypeScript, CSS, and JSON
+        "shfmt",                        -- Used to format Shell script
       })
 
       require("mason").setup({
@@ -121,6 +130,17 @@ return {
       })
     end,
   },
-  { "j-hui/fidget.nvim",      opts = {} },
-  { "mfussenegger/nvim-jdtls" },
+  {
+    "j-hui/fidget.nvim",
+    opts = { notification = { window = { winblend = 0, border = "rounded" } } },
+  },
+  {
+    "linux-cultist/venv-selector.nvim",
+    enabled = Yuki.lang.python,
+    event = "VeryLazy",
+    branch = "regexp",
+    opts = { auto_refresh = true, name = { "venv", ".venv" } },
+  },
+  { "mfussenegger/nvim-jdtls", enabled = Yuki.lang.java },
+  { "SmiteshP/nvim-navic" },
 }
