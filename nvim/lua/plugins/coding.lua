@@ -1,99 +1,62 @@
 return {
   -- Code Completion
-  -- https://github.com/hrsh7th/nvim-cmp
+  -- https://github.com/saghen/blink.cmp
   {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
+    dependencies = { "rafamadriz/friendly-snippets", "giuxtaposition/blink-cmp-copilot" },
+    version = "*",
     event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-buffer",
+    opts_extend = { "sources.completion.enabled_providers", "sources.default" },
+    opts = {
+      snippets = {
+        expand = function(snippet, _)
+          return vim.snippet.expand(snippet)
+        end,
+      },
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = "mono",
+        kind_icons = vim.tbl_extend("keep", { Color = "██" }, Yuki.icons.kind),
+      },
+      completion = {
+        ghost_text = { enabled = true },
+        accept = { auto_brackets = { enabled = true } },
+        menu = { border = "rounded", draw = { treesitter = { "lsp" } } },
+        documentation = { auto_show = true, auto_show_delay_ms = 200, window = { border = "rounded" } },
+      },
+      signature = { enabled = true, window = { border = "rounded" } },
+
+      sources = {
+        default = { "copilot", "lsp", "path", "snippets", "buffer" },
+        cmdline = {},
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true,
+            transform_items = function(_, items)
+              local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+              local kind_idx = #CompletionItemKind + 1
+              CompletionItemKind[kind_idx] = "Copilot"
+              for _, item in ipairs(items) do
+                item.kind = kind_idx
+              end
+              return items
+            end,
+          },
+        },
+      },
+      keymap = {
+        preset = "none",
+        ["<tab>"] = { "select_next", "snippet_forward", "fallback" },
+        ["<S-tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        ["<C-space>"] = { "show", "hide", "fallback" },
+        ["<C-CR>"] = { "select_and_accept", "fallback" },
+        ["<C-j>"] = { "scroll_documentation_up", "select_next", "fallback" },
+        ["<C-k>"] = { "scroll_documentation_down", "select_prev", "fallback" },
+      },
     },
-    opts = function()
-      local cmp = require("cmp")
-      local defaults = require("cmp.config.default")()
-      local auto_select = true
-
-      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-
-      local kind_icons = {
-        Text = "󰉿",
-        Method = "m",
-        Function = "󰊕",
-        Constructor = "",
-        Field = "",
-        Variable = "󰆧",
-        Class = "󰌗",
-        Interface = "",
-        Module = "",
-        Property = "",
-        Unit = "",
-        Value = "󰎠",
-        Enum = "",
-        Keyword = "󰌋",
-        Snippet = "",
-        Color = "󰏘",
-        File = "󰈙",
-        Reference = "",
-        Folder = "󰉋",
-        EnumMember = "",
-        Constant = "󰇽",
-        Struct = "",
-        Event = "",
-        Operator = "󰆕",
-        TypeParameter = "󰊄",
-      }
-
-      return {
-        auto_brackets = {}, -- configure any filetype to auto add brackets
-        preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
-        completion = {
-          completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
-        },
-        snippet = {
-          expand = function(args)
-            vim.snippet.expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-k>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-j>"] = cmp.mapping.scroll_docs(4),
-          ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.close(),
-          ["<CR>"] = cmp.mapping.confirm({
-            select = auto_select,
-            behavior = cmp.ConfirmBehavior.Replace,
-          }),
-        }),
-        sources = cmp.config.sources({
-          { name = "snippets" },
-          { name = "nvim_lsp" },
-          { name = "buffer" },
-          { name = "path" },
-        }),
-        formatting = {
-          fields = { "kind", "abbr", "menu" },
-          format = function(entry, vim_item)
-            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-            vim_item.menu = ({
-              nvim_lsp = "[LSP]",
-              snippets = "[Snippet]",
-              buffer = "[Buffer]",
-              path = "[Path]",
-            })[entry.source.name]
-            return vim_item
-          end,
-        },
-        sorting = defaults.sorting,
-      }
-    end,
-  },
-
-  {
-    "garymjr/nvim-snippets",
-    dependencies = { "rafamadriz/friendly-snippets" },
-    opts = { create_cmp_source = true, friendly_snippets = true },
   },
 
   -- Formatter
@@ -103,6 +66,7 @@ return {
     dependencies = { "nvimtools/none-ls-extras.nvim" },
     opts = function()
       local nls = require("null-ls")
+
       nls.setup({
         sources = {
           require("none-ls.code_actions.eslint"),

@@ -1,21 +1,22 @@
 return {
   -- Github Copilot
-  -- https://github.com/github/copilot.vim
+  -- https://github.com/zbirenbaum/copilot.lua
   {
-    "github/copilot.vim",
+    "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    lazy = false,
-    keys = {
-      {
-        "<C-CR>",
-        'copilot#Accept("\\<CR>")',
-        desc = "Copilot Accept",
-        mode = { "i" },
-        expr = true,
-        replace_keycodes = false,
-        silent = true,
+    event = "InsertEnter",
+    keys = { { "<leader>as", "<cmd>Copilot panel<cr>", desc = "Suggestion Panel" } },
+    opts = {
+      suggestion = {
+        enabled = false,
+        auto_trigger = true,
+        keymap = { accept = false, next = "<M-]>", prev = "<M-[>" },
       },
-      { "<leader>ap", "<cmd>Copilot panel<cr>", desc = "Copilot Panel" },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
     },
   },
 

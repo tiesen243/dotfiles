@@ -8,7 +8,7 @@ return {
   {
     "xiyaowong/transparent.nvim",
     opts = {
-      extra_groups = { "NormalFloat" },
+      extra_groups = { "Pmenu", "NormalFloat", "Float" },
       exclude_groups = { "CursorLine" },
     },
     config = function(_, opts)
@@ -17,8 +17,72 @@ return {
       require("transparent").clear_prefix("WhichKey")
       require("transparent").clear_prefix("snack")
       require("transparent").clear_prefix("Telescope")
-      require('transparent').clear_prefix("mason")
+      require("transparent").clear_prefix("mason")
+      require("transparent").clear_prefix("BlinkCmpDoc")
     end,
+  },
+
+  -- Statusline
+  -- https://github.com/nvim-lualine/lualine.nvim
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    opts = {
+      options = {
+        theme = "auto",
+        icons_enabled = true,
+        disabled_filetypes = { statusline = { "snacks_dashboard", "neo-tree" } },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
+        always_divide_middle = true,
+      },
+      sections = {
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(str)
+              return " " .. str
+            end,
+          },
+        },
+        lualine_b = { "branch" },
+        lualine_c = {
+          {
+            "diagnostics",
+            symbols = {
+              error = Yuki.icons.diagnostics.Error,
+              warn = Yuki.icons.diagnostics.Warn,
+              info = Yuki.icons.diagnostics.Info,
+              hint = Yuki.icons.diagnostics.Hint,
+            },
+          },
+          { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
+          { "filename", file_status = true, path = 1 },
+        },
+        lualine_x = {
+          {
+            "diff",
+            symbols = {
+              added = Yuki.icons.git.added,
+              modified = Yuki.icons.git.modified,
+              removed = Yuki.icons.git.removed,
+            },
+          },
+        },
+        lualine_y = {
+          { "selectioncount", padding = { left = 1, right = 1 } },
+          { "searchcount",    padding = { left = 1, right = 1 } },
+          { "progress",       padding = { left = 1, right = 0 }, separator = " " },
+          { "location",       padding = { left = 0, right = 1 } },
+        },
+        lualine_z = {
+          function()
+            return " " .. os.date("%R")
+          end,
+        },
+      },
+      extensions = { "neo-tree", "lazy", "fzf" },
+    },
   },
 
   -- UI Input
@@ -26,18 +90,5 @@ return {
   {
     "stevearc/dressing.nvim",
     opts = {},
-  },
-
-  -- Git Signs
-  -- https://github.com/lewis6991/gitsigns.nvim
-  {
-    "lewis6991/gitsigns.nvim",
-    opts = {
-      current_line_blame = true,
-      current_line_blame_opts = {
-        delay = 500,
-        ignore_whitespace = true,
-      },
-    },
   },
 }
