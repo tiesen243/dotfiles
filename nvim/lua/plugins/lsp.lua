@@ -5,16 +5,46 @@ return {
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
       { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
-    opts = { inlay_hints = { enabled = true } },
-    config = function()
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
+    opts = {
+      inlay_hints = { enabled = true },
+      servers = {
+        emmet_ls = {},
+        eslint = {},
+        jdtls = {},
+        lua_ls = {
+          settings = {
+            Lua = {
+              hint = { enable = true },
+              completion = { callSnippet = "Replace" },
+              diagnostics = { globals = { "vim", "Snacks" } },
+            },
+          },
+        },
+        pyright = {},
+        prismals = {},
+        ruff = {},
+        tailwindcss = {},
+        vtsls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                parameterNames = { enabled = "all" },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+                enumMemberValues = { enabled = true },
+              },
+            },
+          },
+        },
+      },
+    },
+    config = function(_, opts)
       local lsp_attach = function(client, bufnr)
         local map = function(key, func, desc, mode)
           mode = mode or "n"
@@ -49,51 +79,17 @@ return {
           end, { desc = "Previous word" })
         end
 
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+        if client and vim.lsp.inlay_hint then
           vim.lsp.inlay_hint.enable()
         end
       end
 
-      local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-      for type, icon in pairs(signs) do
+      for type, icon in pairs(Yuki.icons.diagnostics) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      local servers = {
-        emmet_ls = {},
-        eslint = {},
-        jdtls = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              hint = { enable = true },
-              completion = { callSnippet = "Replace" },
-              diagnostics = { globals = { "vim", "Snacks" } },
-            },
-          },
-        },
-        pyright = {},
-        prismals = {},
-        ruff = {},
-        tailwindcss = {},
-        vtsls = {
-          settings = {
-            typescript = {
-              inlayHints = {
-                parameterNames = { enabled = "all" },
-                parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                enumMemberValues = { enabled = true },
-              },
-            },
-          },
-        },
-      }
-
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = vim.tbl_keys(opts.servers or {})
       vim.list_extend(ensure_installed, {
         "stylua",   -- Used to format Lua code
         "prettier", -- Used to format JavaScript, TypeScript, CSS, and JSON
@@ -115,8 +111,9 @@ return {
       require("mason-lspconfig").setup({
         handlers = {
           function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            local server = opts.servers[server_name] or {}
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            server.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
             server.on_attach = lsp_attach
             require("lspconfig")[server_name].setup(server)
           end,
