@@ -8,10 +8,12 @@ vim.g.snacks_animate = true
 
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
--- Hide deprecation warnings
-vim.g.deprecation_warnings = false
-
 _G.Yuki = {
+  lang = {
+    java = true,
+    python = true,
+    react = true,
+  },
   colorcheme = "tokyonight",
   icons = {
     diagnostics = {
