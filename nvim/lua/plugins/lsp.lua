@@ -117,16 +117,15 @@ return {
         auto_update = true,
       })
 
-      require("mason-lspconfig").setup({
-        handlers = {
-          function(server_name)
-            local server = opts.servers[server_name] or {}
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            server.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-            server.on_attach = lsp_attach
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
+      require("mason-lspconfig").setup_handlers({
+        function(server_name)
+          local server = opts.servers[server_name] or {}
+          local capabilities = vim.lsp.protocol.make_client_capabilities()
+          server.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+          server.on_attach = lsp_attach
+          require("lspconfig")[server_name].setup(server)
+        end,
+        ["jdtls"] = function() end,
       })
     end,
   },
