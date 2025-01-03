@@ -138,12 +138,9 @@ return {
     "lewis6991/gitsigns.nvim",
     opts = {
       current_line_blame = true,
-      current_line_blame_opts = {
-        delay = 500,
-        ignore_whitespace = true,
-      },
       signs = Yuki.icons.git_signs,
       signs_staged = Yuki.icons.git_signs_staged,
+      current_line_blame_opts = { delay = 500, ignore_whitespace = true },
     },
   },
 
@@ -152,18 +149,7 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-      dashboard = {
-        preset = {
-          header = [[
-██╗   ██╗██╗   ██╗██╗  ██╗██╗
-╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
- ╚████╔╝ ██║   ██║█████╔╝ ██║
-  ╚██╔╝  ██║   ██║██╔═██╗ ██║
-   ██║   ╚██████╔╝██║  ██╗██║
-   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
-          ]],
-        },
-      },
+      dashboard = { preset = { header = Yuki.logo } },
       bigfile = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },

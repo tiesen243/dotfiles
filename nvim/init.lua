@@ -15,32 +15,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 require("core.configs")
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  spec = {
-    -- add your plugins here
-    { import = "plugins" },
-  },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  spec = { { import = "plugins" } },
+  install = { colorscheme = { Yuki.colorcheme, "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
-  change_detection = {
-    enabled = true, -- automatically check for config file changes and reload the ui
-    notify = false, -- turn off notifications whenever plugin changes are made
-  },
+  change_detection = { enabled = true, notify = false },
 })
 
 require("core.options")
 require("core.keymaps")
 require("core.autocmds")
-vim.cmd([[colorscheme tokyonight]])
