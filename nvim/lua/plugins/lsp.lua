@@ -72,7 +72,7 @@ return {
         map("<leader>cw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
 
         if client.name == "basedpyright" then
-          map("n", "<leader>cv", "<cmd>VenvSelector<CR>", { desc = "Select [V]irtualenv" })
+          map("<leader>cv", "<cmd>VenvSelect<CR>", "Select [V]irtualenv")
         end
 
         if Snacks.words.is_enabled() then
