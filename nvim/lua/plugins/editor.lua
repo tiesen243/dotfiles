@@ -34,13 +34,6 @@ return {
       {
         "<leader>e",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
-        end,
-        desc = "Explorer NeoTree (cwd)",
-      },
-      {
-        "<leader>E",
-        function()
           require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
         end,
         desc = "Explorer NeoTree (rwd)",
