@@ -4,16 +4,14 @@ return {
     -- https://github.com/neovim/nvim-lspconfig
     "neovim/nvim-lspconfig",
     event = "VeryLazy",
-    dependencies = { "hrsh7th/cmp-nvim-lsp", "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
     opts = { inlay_hints = { enabled = true } },
     config = function()
-      require("mason").setup({
-        ui = {
-          icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
-          border = "rounded",
-        },
-      })
-
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
@@ -51,7 +49,7 @@ return {
           end, { desc = "Previous word" })
         end
 
-        if client and vim.lsp.inlay_hint then
+        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
           vim.lsp.inlay_hint.enable()
         end
       end
@@ -70,6 +68,7 @@ return {
           settings = {
             Lua = {
               hint = { enable = true },
+              completion = { callSnippet = "Replace" },
               diagnostics = { globals = { "vim", "Snacks" } },
             },
           },
@@ -94,13 +93,26 @@ return {
         },
       }
 
-      local ensure_installed = {}
-      for key, _ in pairs(servers) do
-        table.insert(ensure_installed, key)
-      end
+      local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, {
+        "stylua",   -- Used to format Lua code
+        "prettier", -- Used to format JavaScript, TypeScript, CSS, and JSON
+        "shfmt",    -- Used to format Shell script
+      })
+
+      require("mason").setup({
+        ui = {
+          icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
+          border = "rounded",
+        },
+      })
+
+      require("mason-tool-installer").setup({
+        ensure_installed = ensure_installed,
+        auto_update = true,
+      })
 
       require("mason-lspconfig").setup({
-        ensure_installed = ensure_installed,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -112,5 +124,6 @@ return {
       })
     end,
   },
+  { "j-hui/fidget.nvim",      opts = {} },
   { "mfussenegger/nvim-jdtls" },
 }

@@ -1,13 +1,17 @@
 local map = vim.keymap.set
 
 -- General
-map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr><esc>", { desc = "Undo" })
-map("n", "u", "<nop>", { desc = "Undo" })
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file", silent = true })
-map({ "n", "x" }, "<C-a>", "gg<S-v>G", { desc = "Select all", silent = true })
-map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
-map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All" })
-map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit" })
+local opts = { noremap = true, silent = true }
+map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })         -- Disable space in normal and visual mode
+map("n", "u", "<nop>", opts)                                     -- Disable undo with u
+map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr><esc>", opts) -- Undo with <C-z>
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)    -- Save with <C-s>
+map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts)                     -- Select all
+map("n", "x", '"_x', opts)                                       -- Delete without yanking
+map("n", "p", '"_dP', opts)                                      -- Paste without yanking
+map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit", noremap = true, silent = true })
+map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All", noremap = true, silent = true })
+map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit", noremap = true, silent = true })
 
 -- Better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })

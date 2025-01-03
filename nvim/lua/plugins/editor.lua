@@ -58,12 +58,21 @@ return {
     opts = {
       options = {
         theme = "auto",
+        icons_enabled = true,
         disabled_filetypes = { statusline = { "snacks_dashboard", "neo-tree" } },
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+        always_divide_middle = true,
       },
       sections = {
-        lualine_a = { "mode" },
+        lualine_a = {
+          {
+            "mode",
+            fmt = function(str)
+              return " " .. str
+            end,
+          },
+        },
         lualine_b = {
           { "branch" },
           { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
@@ -71,7 +80,7 @@ return {
           { "diff" },
         },
         lualine_c = { "diagnostics" },
-        lualine_x = { "encoding", "fileformat", "rest" },
+        lualine_x = { "encoding", "fileformat" },
         lualine_y = {
           { "progress", padding = { left = 1, right = 0 }, separator = " " },
           { "location", padding = { left = 0, right = 1 } },
@@ -96,10 +105,21 @@ return {
       local builtin = require("telescope.builtin")
 
       return {
-        { "<leader>fg", builtin.live_grep,   desc = "Live Grep" },
-        { "<leader>ff", builtin.find_files,  desc = "Find Files" },
-        { "<leader>fr", builtin.oldfiles,    desc = "Old Files" },
-        { "<leader>fs", builtin.grep_string, desc = "Grep String" },
+        { "<leader>fd", builtin.diagnostics, desc = "[F]ind [D]iagnostics" },
+        { "<leader>ff", builtin.find_files,  desc = "[F]ind [F]iles" },
+        { "<leader>fg", builtin.live_grep,   desc = "[F]ind by [G]rep" },
+        { "<leader>fh", builtin.help_tags,   desc = "[F]ind [H]elp" },
+        { "<leader>fk", builtin.keymaps,     desc = "[F]ind [K]eymaps" },
+        { "<leader>fr", builtin.oldfiles,    desc = "[F]ind [R]ecents File" },
+        { "<leader>fs", builtin.builtin,     desc = "[F]ind [S]elect Telescope" },
+        { "<leader>fw", builtin.grep_string, desc = "[F]ind by current [W]ord" },
+        {
+          "<leader>/",
+          function()
+            builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({ previewer = false }))
+          end,
+          desc = "Search in current buffer",
+        },
       }
     end,
     opts = function()
@@ -115,6 +135,8 @@ return {
             },
           },
         },
+        pickers = { find_files = { file_ignore_patterns = { "node_modules", ".git", ".venv" }, hidden = true } },
+        live_grep = { file_ignore_patterns = { "node_modules", ".git", ".venv" }, additional_args = { "--hidden" } },
       }
     end,
   },

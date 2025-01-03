@@ -7,7 +7,6 @@ return {
     dependencies = {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-buffer",
-      "onsails/lspkind-nvim",
     },
     opts = function()
       local cmp = require("cmp")
@@ -15,6 +14,34 @@ return {
       local auto_select = true
 
       cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+      local kind_icons = {
+        Text = "󰉿",
+        Method = "m",
+        Function = "󰊕",
+        Constructor = "",
+        Field = "",
+        Variable = "󰆧",
+        Class = "󰌗",
+        Interface = "",
+        Module = "",
+        Property = "",
+        Unit = "",
+        Value = "󰎠",
+        Enum = "",
+        Keyword = "󰌋",
+        Snippet = "",
+        Color = "󰏘",
+        File = "󰈙",
+        Reference = "",
+        Folder = "󰉋",
+        EnumMember = "",
+        Constant = "󰇽",
+        Struct = "",
+        Event = "",
+        Operator = "󰆕",
+        TypeParameter = "󰊄",
+      }
 
       return {
         auto_brackets = {}, -- configure any filetype to auto add brackets
@@ -33,7 +60,7 @@ return {
           ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-S-Space>"] = cmp.mapping.close(),
+          ["<C-e>"] = cmp.mapping.close(),
           ["<CR>"] = cmp.mapping.confirm({
             select = auto_select,
             behavior = cmp.ConfirmBehavior.Replace,
@@ -46,12 +73,17 @@ return {
           { name = "path" },
         }),
         formatting = {
-          format = require("lspkind").cmp_format({
-            maxwidth = 50,
-            ellipsis_char = "",
-            preset = "codicons",
-            mode = "symbol_text",
-          }),
+          fields = { "kind", "abbr", "menu" },
+          format = function(entry, vim_item)
+            vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+            vim_item.menu = ({
+              nvim_lsp = "[LSP]",
+              snippets = "[Snippet]",
+              buffer = "[Buffer]",
+              path = "[Path]",
+            })[entry.source.name]
+            return vim_item
+          end,
         },
         sorting = defaults.sorting,
       }
@@ -68,13 +100,17 @@ return {
   -- https://github.com/nvimtools/none-ls.nvim
   {
     "nvimtools/none-ls.nvim",
+    dependencies = { "nvimtools/none-ls-extras.nvim" },
     opts = function()
       local nls = require("null-ls")
       nls.setup({
         sources = {
+          require("none-ls.code_actions.eslint"),
           nls.builtins.formatting.prettier,
-          nls.builtins.formatting.shfmt,
+          nls.builtins.formatting.shfmt.with({ args = { "-i", "4" } }),
           nls.builtins.formatting.stylua,
+          require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
+          require("none-ls.formatting.ruff_format"),
         },
       })
     end,
@@ -86,6 +122,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "VeryLazy",
+    main = "nvim-treesitter.configs",
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     opts = {
       auto_install = true,
@@ -93,10 +130,6 @@ return {
       indent = { enable = true },
       highlight = { enable = true, additional_vim_regex_highlighting = true },
     },
-    config = function(_, opts)
-      vim.g.skip_ts_context_commentstring_module = true
-      require("nvim-treesitter.configs").setup(opts)
-    end,
   },
 
   -- Automatically add closing tags for HTML and JSX
@@ -110,6 +143,7 @@ return {
   -- https://github.com/windwp/nvim-autopairs
   {
     "windwp/nvim-autopairs",
+    event = "InsertEnter",
     opts = { check_ts = true, fast_wrap = {} },
   },
 
