@@ -2,6 +2,14 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("yuki_" .. name, { clear = true })
 end
 
+-- restore cursor shape on exit
+vim.api.nvim_create_autocmd("VimLeave", {
+  group = augroup("restore_cursor"),
+  callback = function()
+    vim.cmd("set guicursor=a:ver25")
+  end,
+})
+
 -- format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = augroup("format_on_save"),
@@ -10,7 +18,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- Check if we need to reload the file when it changed
+-- check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
