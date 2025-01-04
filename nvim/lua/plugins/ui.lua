@@ -3,7 +3,7 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = { transparent = vim.g.transparent_enabled },
+    opts = { style = "night", transparent = vim.g.transparent_enabled },
   },
   {
     "xiyaowong/transparent.nvim",
@@ -29,7 +29,7 @@ return {
     event = "VeryLazy",
     opts = {
       options = {
-        theme = "auto",
+        theme = Yuki.colorcheme,
         icons_enabled = true,
         disabled_filetypes = { statusline = { "snacks_dashboard", "neo-tree" } },
         component_separators = { left = "", right = "" },
@@ -85,7 +85,7 @@ return {
         },
         lualine_z = {
           function()
-            return "❄ Yuki"
+            return "Yuki ❄"
           end,
         },
       },
