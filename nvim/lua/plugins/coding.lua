@@ -96,8 +96,6 @@ return {
     "numToStr/Comment.nvim",
     dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
     opts = {
-      toggler = { line = "<C-/>" },
-      opleader = { line = "<C-/>" },
       pre_hook = function()
         return vim.bo.commentstring
       end,
