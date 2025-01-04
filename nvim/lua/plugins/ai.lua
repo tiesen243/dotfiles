@@ -2,22 +2,10 @@ return {
   -- Github Copilot
   -- https://github.com/zbirenbaum/copilot.lua
   {
-    "zbirenbaum/copilot.lua",
+    "github/copilot.vim",
     cmd = "Copilot",
     event = "InsertEnter",
     keys = { { "<leader>as", "<cmd>Copilot panel<cr>", desc = "Suggestion Panel" } },
-    opts = {
-      suggestion = {
-        enabled = false,
-        auto_trigger = true,
-        keymap = { accept = false, next = "<M-]>", prev = "<M-[>" },
-      },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-    },
   },
 
   -- Copilot Chat

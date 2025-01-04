@@ -134,6 +134,15 @@ return {
     opts = { notification = { window = { winblend = 0, border = "rounded" } } },
   },
   {
+    "SmiteshP/nvim-navic",
+    opts = {
+      click = true,
+      highlight = true,
+      icons = Yuki.icons.kind,
+      lsp = { auto_attach = true },
+    },
+  },
+  {
     "linux-cultist/venv-selector.nvim",
     enabled = Yuki.lang.python,
     event = "VeryLazy",
@@ -141,5 +150,4 @@ return {
     opts = { auto_refresh = true, name = { "venv", ".venv" } },
   },
   { "mfussenegger/nvim-jdtls", enabled = Yuki.lang.java },
-  { "SmiteshP/nvim-navic" },
 }
