@@ -3,7 +3,6 @@ return {
   -- https://github.com/saghen/blink.cmp
   {
     "saghen/blink.cmp",
-    dependencies = { "rafamadriz/friendly-snippets" },
     version = "*",
     event = "InsertEnter",
     opts_extend = { "sources.completion.enabled_providers", "sources.default" },
@@ -19,10 +18,25 @@ return {
         menu = { border = "rounded", draw = { treesitter = { "lsp" } } },
         documentation = { auto_show = true, auto_show_delay_ms = 200, window = { border = "rounded" } },
       },
-      signature = { enabled = true, window = { border = "rounded" } },
+      signature = { enabled = false, window = { border = "rounded" } },
+
+      snippets = {
+        expand = function(snippet)
+          require("luasnip").lsp_expand(snippet)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require("luasnip").jumpable(filter.direction)
+          end
+          return require("luasnip").in_snippet()
+        end,
+        jump = function(direction)
+          require("luasnip").jump(direction)
+        end,
+      },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "luasnip", "path", "buffer" },
         cmdline = {},
       },
       keymap = {
@@ -35,6 +49,24 @@ return {
         ["<C-k>"] = { "scroll_documentation_down", "select_prev", "fallback" },
       },
     },
+  },
+
+  -- Snippets engine
+  -- https://github.com/L3MON4D3/LuaSnip
+  -- https://github.com/rafamadriz/friendly-snippets
+  {
+    "L3MON4D3/LuaSnip",
+    lazy = true,
+    dependencies = {
+      {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+          require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
+        end,
+      },
+    },
+    opts = { history = true, delete_check_events = "TextChanged" },
   },
 
   -- Formatter
