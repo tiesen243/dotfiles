@@ -7,7 +7,6 @@ return {
     dependencies = {
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     opts = {
       inlay_hints = { enabled = true },
@@ -16,11 +15,21 @@ return {
         eslint = { enabled = Yuki.lang.react },
         jdtls = { enabled = Yuki.lang.java },
         lua_ls = {
+          enabled = true,
+          single_file_support = true,
           settings = {
             Lua = {
-              hint = { enable = true },
-              completion = { callSnippet = "Replace" },
+              completion = { workspaceWord = true, callSnippet = "Both" },
               diagnostics = { globals = { "vim", "Snacks" } },
+              doc = { privateName = { "^_" } },
+              -- stylua: ignore
+              hint = { enable = true, setType = false, paramType = true, paramName = "Disable", semicolon = "Disable", arrayIndex = "Disable" },
+              workspace = { checkThirdParty = false },
+              type = { castNumberToInteger = true },
+              format = {
+                enable = false,
+                defaultConfig = { indent_style = "space", indent_size = "2", continuation_indent_size = "2" },
+              },
             },
           },
         },
@@ -30,6 +39,7 @@ return {
         tailwindcss = { enabled = Yuki.lang.react },
         vtsls = {
           enabled = Yuki.lang.react,
+          single_file_support = true,
           settings = {
             typescript = {
               inlayHints = {
@@ -69,10 +79,6 @@ return {
         map("<leader>ct", builtin.lsp_type_definitions, "[T]ype Definition")
         map("<leader>cw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
 
-        if client.name == "basedpyright" then
-          map("<leader>cv", "<cmd>VenvSelect<CR>", "Select [V]irtualenv")
-        end
-
         if Snacks.words.is_enabled() then
           map("n", "]]", function()
             Snacks.words.jump(vim.v.count1, true)
@@ -96,37 +102,33 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      local ensure_installed = vim.tbl_keys(opts.servers or {})
-      vim.list_extend(ensure_installed, {
-        Yuki.lang.java and "google-java-format", -- Used to format Java code
-        Yuki.lang.react and "prettier",          -- Used to format JavaScript, TypeScript, CSS, and JSON
-        "shfmt",                                 -- Used to format Shell script
-        "stylua",                                -- Used to format Lua code
-      })
+      local ensure_installed = vim.tbl_filter(function(server)
+        return opts.servers[server].enabled
+      end, vim.tbl_keys(opts.servers or {}))
 
       require("mason").setup({
         ui = {
-          icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
           border = "rounded",
+          icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
         },
       })
 
-      require("mason-tool-installer").setup({
+      require("mason-lspconfig").setup({
         ensure_installed = ensure_installed,
-        auto_update = true,
-      })
-
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          local server = opts.servers[server_name] or {}
-          local capabilities = vim.lsp.protocol.make_client_capabilities()
-          server.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
-          server.on_attach = lsp_attach
-          require("lspconfig")[server_name].setup(server)
-        end,
+        handlers = {
+          function(server_name)
+            local server = opts.servers[server_name] or {}
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            server.capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+            server.on_attach = lsp_attach
+            require("lspconfig")[server_name].setup(server)
+          end,
+        },
       })
     end,
   },
+  -- Code context
+  -- https://github.com/SmiteshP/nvim-navic
   {
     "SmiteshP/nvim-navic",
     opts = {
@@ -136,12 +138,7 @@ return {
       lsp = { auto_attach = true },
     },
   },
-  {
-    "linux-cultist/venv-selector.nvim",
-    enabled = Yuki.lang.python,
-    event = "VeryLazy",
-    branch = "regexp",
-    opts = { auto_refresh = true, name = { "venv", ".venv" } },
-  },
+  -- Java LSP
+  -- https://github.com/mfussenegger/nvim-jdtls
   { "mfussenegger/nvim-jdtls", enabled = Yuki.lang.java },
 }

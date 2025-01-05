@@ -6,19 +6,18 @@ return {
     event = "VeryLazy",
     opts = {
       preset = "modern",
-      triggers = { { "<leader>", mode = { "n", "v" } } },
       spec = {
         {
           mode = { "n", "v" },
-          { "<leader>a",     group = "AI" },
-          { "<leader>b",     group = "Buffers" },
-          { "<leader>c",     group = "Code" },
-          { "<leader>f",     group = "Finder" },
-          { "<leader>g",     group = "Git" },
-          { "<leader>q",     group = "Quit" },
-          { "<leader>u",     group = "UI" },
-          { "<leader>w",     group = "Window" },
-          { "<leader><tab>", group = "Tabs" },
+          { "<leader>a", group = "AI" },
+          { "<leader>b", group = "Buffers" },
+          { "<leader>c", group = "Code" },
+          { "<leader>f", group = "Finder" },
+          { "<leader>g", group = "Git" },
+          { "<leader>q", group = "Quit" },
+          { "<leader>t", group = "Terminal" },
+          { "<leader>u", group = "UI" },
+          { "<leader>w", group = "Window" },
         },
       },
     },
@@ -38,12 +37,53 @@ return {
         end,
         desc = "Explorer NeoTree (rwd)",
       },
+      {
+        "<leader>E",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+        end,
+        desc = "Explorer NeoTree (cwd)",
+      },
+      {
+        "<leader>be",
+        function()
+          require("neo-tree.command").execute({ source = "buffers", toggle = true })
+        end,
+        desc = "Buffer Explorer",
+      },
+      {
+        "<leader>ge",
+        function()
+          require("neo-tree.command").execute({ source = "git_status", toggle = true })
+        end,
+        desc = "Git Explorer",
+      },
     },
     deactivate = function()
       vim.cmd([[Neotree close]])
     end,
+    init = function()
+      -- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,
+      -- because `cwd` is not set up properly.
+      vim.api.nvim_create_autocmd("BufEnter", {
+        group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
+        desc = "Start Neo-tree with directory",
+        once = true,
+        callback = function()
+          if package.loaded["neo-tree"] then
+            return
+          else
+            local stats = vim.uv.fs_stat(vim.fn.argv(0))
+            if stats and stats.type == "directory" then
+              require("neo-tree")
+            end
+          end
+        end,
+      })
+    end,
     opts = {
       sources = { "filesystem", "buffers", "git_status" },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = { bind_to_cwd = false, follow_current_file = { enabled = true }, use_libuv_file_watcher = true },
       window = {
         width = 32,
@@ -76,6 +116,27 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      local function on_move(data)
+        Snacks.rename.on_rename_file(data.source, data.destination)
+      end
+
+      local events = require("neo-tree.events")
+      opts.event_handlers = opts.event_handlers or {}
+      vim.list_extend(opts.event_handlers, {
+        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_RENAMED, handler = on_move },
+      })
+      require("neo-tree").setup(opts)
+      vim.api.nvim_create_autocmd("TermClose", {
+        pattern = "*lazygit",
+        callback = function()
+          if package.loaded["neo-tree.sources.git_status"] then
+            require("neo-tree.sources.git_status").refresh()
+          end
+        end,
+      })
+    end,
   },
 
   -- Telescope
@@ -90,12 +151,12 @@ return {
 
       return {
         { "<leader>fd", builtin.diagnostics, desc = "[F]ind [D]iagnostics" },
-        { "<leader>ff", builtin.find_files,  desc = "[F]ind [F]iles" },
-        { "<leader>fg", builtin.live_grep,   desc = "[F]ind by [G]rep" },
-        { "<leader>fh", builtin.help_tags,   desc = "[F]ind [H]elp" },
-        { "<leader>fk", builtin.keymaps,     desc = "[F]ind [K]eymaps" },
-        { "<leader>fr", builtin.oldfiles,    desc = "[F]ind [R]ecents File" },
-        { "<leader>fs", builtin.builtin,     desc = "[F]ind [S]elect Telescope" },
+        { "<leader>ff", builtin.find_files, desc = "[F]ind [F]iles" },
+        { "<leader>fg", builtin.live_grep, desc = "[F]ind by [G]rep" },
+        { "<leader>fh", builtin.help_tags, desc = "[F]ind [H]elp" },
+        { "<leader>fk", builtin.keymaps, desc = "[F]ind [K]eymaps" },
+        { "<leader>fr", builtin.oldfiles, desc = "[F]ind [R]ecents File" },
+        { "<leader>fs", builtin.builtin, desc = "[F]ind [S]elect Telescope" },
         { "<leader>fw", builtin.grep_string, desc = "[F]ind by current [W]ord" },
         {
           "<leader>/",

@@ -9,6 +9,10 @@ vim.g.snacks_animate = true
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 _G.Yuki = {
+  cmp = {
+    use_luasnip = false,
+    sources = { "lsp", "snippets", "path", "buffer" },
+  },
   lang = {
     java = true,
     python = true,
@@ -92,6 +96,16 @@ _G.Yuki = {
    ██║   ╚██████╔╝██║  ██╗██║
    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
    ]],
+  navigate = function(direction)
+    local mappings = { h = "left", j = "bottom", k = "top", l = "right" }
+    local left_win = vim.fn.winnr("1" .. direction)
+    if vim.fn.winnr() ~= left_win then
+      vim.api.nvim_command("wincmd " .. direction)
+    else
+      local command = "kitty @ kitten navigate_kitty.py " .. mappings[direction]
+      vim.fn.system(command)
+    end
+  end,
   get_battery_state = function()
     local capacity = io.open("/sys/class/power_supply/BAT1/capacity", "r")
     local status = io.open("/sys/class/power_supply/BAT1/status", "r")

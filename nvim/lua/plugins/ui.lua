@@ -1,10 +1,15 @@
 return {
+  -- tokyonight theme
+  -- https://github.com/folke/tokyonight.nvim
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = { style = "night", transparent = vim.g.transparent_enabled },
   },
+
+  -- Transparent nvim
+  -- https://github.com/xiyaowong/transparent.nvim
   {
     "xiyaowong/transparent.nvim",
     opts = {
@@ -36,28 +41,6 @@ return {
         section_separators = { left = "", right = "" },
         always_divide_middle = true,
       },
-      winbar = {
-        lualine_b = {
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { "filename", path = 1 },
-        },
-        lualine_c = {
-          {
-            function()
-              return require("nvim-navic").get_location()
-            end,
-            cond = function()
-              return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-            end,
-          },
-        },
-      },
-      inactive_winbar = {
-        lualine_b = {
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-          { "filename", path = 1 },
-        },
-      },
       sections = {
         lualine_a = {
           {
@@ -78,8 +61,16 @@ return {
               hint = Yuki.icons.diagnostics.Hint,
             },
           },
-          { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
-          { "filename", file_status = true, path = 3 },
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          { "filename", file_status = true, path = 1 },
+          {
+            function()
+              return require("nvim-navic").get_location()
+            end,
+            cond = function()
+              return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
+            end,
+          },
         },
         lualine_x = {
           {
@@ -101,7 +92,7 @@ return {
             end,
           },
           { "selectioncount", padding = { left = 1, right = 1 } },
-          { "searchcount",    padding = { left = 1, right = 1 } },
+          { "searchcount", padding = { left = 1, right = 1 } },
         },
         lualine_y = {
           { "progress", padding = { left = 1, right = 0 }, separator = " " },
@@ -109,7 +100,7 @@ return {
         },
         lualine_z = {
           { Yuki.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
-          { Yuki.get_time,          padding = { left = 0, right = 1 } },
+          { Yuki.get_time, padding = { left = 0, right = 1 } },
         },
       },
       extensions = { "neo-tree", "lazy", "fzf", "quickfix" },
@@ -121,20 +112,5 @@ return {
   {
     "stevearc/dressing.nvim",
     opts = {},
-  },
-
-  {
-    "MunsMan/kitty-navigator.nvim",
-    build = {
-      "cp navigate_kitty.py ~/.config/kitty",
-      "cp pass_keys.py ~/.config/kitty",
-    },
-    keys = {
-      -- stylua: ignore start
-      { "<C-h>", function() require("kitty-navigator").navigateLeft() end,  desc = "Move left a Split",  mode = { "n" } },
-      { "<C-j>", function() require("kitty-navigator").navigateDown() end,  desc = "Move down a Split",  mode = { "n" } },
-      { "<C-k>", function() require("kitty-navigator").navigateUp() end,    desc = "Move up a Split",    mode = { "n" } },
-      { "<C-l>", function() require("kitty-navigator").navigateRight() end, desc = "Move right a Split", mode = { "n" } },
-    },
   },
 }
