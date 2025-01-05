@@ -10,7 +10,7 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 _G.Yuki = {
   cmp = {
-    use_luasnip = false,
+    use_luasnip = true,
     sources = { "lsp", "snippets", "path", "buffer" },
   },
   lang = {
