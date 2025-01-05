@@ -136,7 +136,6 @@ return {
       current_line_blame_opts = { delay = 500, ignore_whitespace = true },
     },
   },
-  { "christoomey/vim-tmux-navigator" },
 
   {
     "folke/snacks.nvim",

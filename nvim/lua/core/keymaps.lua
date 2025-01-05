@@ -2,13 +2,13 @@ local map = vim.keymap.set
 
 -- General
 local opts = { noremap = true, silent = true }
-map({ "n", "v" }, "<Space>", "<Nop>", { silent = true })         -- Disable space in normal and visual mode
-map("n", "u", "<nop>", opts)                                     -- Disable undo with u
-map({ "i", "x", "n", "s" }, "<C-z>", "<cmd>undo<cr><esc>", opts) -- Undo with <C-z>
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)    -- Save with <C-s>
-map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts)                     -- Select all
-map({ "n", "v" }, "x", '"_x', opts)                              -- Delete without yanking
-map("v", "p", '"_dP', opts)                                      -- Paste without yanking
+map({ "n", "v" }, "<Space>", "<Nop>", { silent = true }) -- Disable space in normal and visual mode
+map("n", "u", "<nop>", opts)                             -- Disable undo with u
+map({ "i", "n" }, "<C-z>", "<cmd>undo<cr><esc>", opts)   -- Undo with <C-z>
+map({ "i", "n" }, "<C-s>", "<cmd>w<cr><esc>", opts)      -- Save with <C-s>
+map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts)             -- Select all
+map({ "n", "v" }, "x", '"_x', opts)                      -- Delete without yanking
+map("v", "p", '"_dP', opts)                              -- Paste without yanking
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit", noremap = true, silent = true })
 map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All", noremap = true, silent = true })
 map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit", noremap = true, silent = true })
@@ -19,7 +19,7 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- Move to window using the <ctrl> hjkl keys - I use tmux
+-- Move to window using the <ctrl> hjkl keys
 -- map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 -- map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 -- map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
@@ -48,7 +48,7 @@ map("n", "<leader>bo", function()
   Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
-map("n", "<leader>bl", "<cmd>Telescope buffers<cr>", { desc = "List Buffers" })
+map("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", { desc = "List Buffers" })
 
 -- Clear search and stop snippet on escape
 map({ "i", "n", "s" }, "<esc>", function()
@@ -129,7 +129,7 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- windows
 map("n", "<leader>w-", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>w|", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "<leader>w\\", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 Snacks.toggle.zoom():map("<leader>uZ")
 Snacks.toggle.zen():map("<leader>uz")
