@@ -58,10 +58,8 @@ return {
         map("gr", builtin.lsp_references, "[G]oto [R]eferences")
         map("gi", builtin.lsp_implementations, "[G]oto [I]mplementation")
 
-        map("<C-k>", vim.lsp.buf.signature_help, "Signature help", "i")
-        map("<C-h>", vim.lsp.buf.hover, "[H]over doc", "i")
-        map("<leader>ck", vim.lsp.buf.signature_help, "Signature help")
-        map("<leader>ch", vim.lsp.buf.hover, "[H]over doc")
+        map("<C-i>", vim.lsp.buf.signature_help, "Signature help", { "i", "n" })
+        map("<C-o>", vim.lsp.buf.hover, "[H]over doc", { "i", "n" })
 
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
         map("<leader>cd", vim.diagnostic.open_float, "Line [D]iagnostics")
@@ -128,10 +126,6 @@ return {
         end,
       })
     end,
-  },
-  {
-    "j-hui/fidget.nvim",
-    opts = { notification = { window = { winblend = 0, border = "rounded" } } },
   },
   {
     "SmiteshP/nvim-navic",
