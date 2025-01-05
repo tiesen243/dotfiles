@@ -3,8 +3,8 @@ return {
   -- https://github.com/zbirenbaum/copilot.lua
   {
     "github/copilot.vim",
+    lazy = false,
     cmd = "Copilot",
-    event = "InsertEnter",
     keys = { { "<leader>as", "<cmd>Copilot panel<cr>", desc = "Suggestion Panel" } },
   },
 
