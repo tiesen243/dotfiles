@@ -23,7 +23,7 @@ yay -S zsh rofi hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 zen-browser-bin ffmpeg \
 lsd ripgrep brightnessctl \
-github-cli lazygit tmux\
+github-cli lazygit\
 cliphist wl-clipboard \
 nwg-look pavucontrol \
 grim slurp
@@ -81,9 +81,6 @@ rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,lazygit,nvim,rofi}
 ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,lazygit,nvim,rofi} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
-tmux source ~/.tmux.conf
 ```
 
 Then, you can change the themes by `nwg-look` command
