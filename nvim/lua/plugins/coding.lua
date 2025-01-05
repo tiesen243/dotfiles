@@ -1,3 +1,12 @@
+-- Register filetype and extension for treesitter
+vim.filetype.add({
+  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+  extension = {
+    mdx = "markdown",
+  },
+})
+vim.treesitter.language.register("markdown", "mdx")
+
 return {
   -- Code Completion
   -- https://github.com/saghen/blink.cmp
@@ -5,6 +14,7 @@ return {
     "saghen/blink.cmp",
     version = "*",
     event = "InsertEnter",
+    dependencies = { "rafamadriz/friendly-snippets" },
     opts_extend = { "sources.completion.enabled_providers", "sources.default" },
     opts = {
       appearance = {
@@ -20,7 +30,7 @@ return {
       },
       signature = { enabled = false, window = { border = "rounded" } },
 
-      snippets = {
+      snippets = Yuki.cmp.use_luasnip and {
         expand = function(snippet)
           require("luasnip").lsp_expand(snippet)
         end,
@@ -33,12 +43,11 @@ return {
         jump = function(direction)
           require("luasnip").jump(direction)
         end,
-      },
+      } or {},
 
-      sources = {
-        default = { "lsp", "luasnip", "path", "buffer" },
-        cmdline = {},
-      },
+      -- if use luasnip, add luasnip to frist items, otherwise add snippets
+
+      sources = { default = Yuki.cmp.sources, cmdline = {} },
       keymap = {
         preset = "none",
         ["<tab>"] = { "select_next", "snippet_forward", "fallback" },
@@ -56,11 +65,18 @@ return {
   -- https://github.com/rafamadriz/friendly-snippets
   {
     "L3MON4D3/LuaSnip",
-    lazy = true,
+    event = "InsertEnter",
+    enabled = Yuki.cmp.use_luasnip,
     dependencies = {
       {
         "rafamadriz/friendly-snippets",
         config = function()
+          -- Replace snippets with luasnip
+          for i, v in ipairs(Yuki.cmp.sources) do
+            if v == "snippets" then
+              Yuki.cmp.sources[i] = "luasnip"
+            end
+          end
           require("luasnip.loaders.from_vscode").lazy_load()
           require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
         end,

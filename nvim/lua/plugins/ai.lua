@@ -14,12 +14,17 @@ return {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
     cmd = "CopilotChat",
-    build = "make tiktoken", -- Only on MacOS or Linux
+    build = function()
+      if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
+        return "make tiktoken"
+      end
+    end,
     keys = function()
       local chat = require("CopilotChat")
+
       return {
         { "<leader>aa", chat.toggle, desc = "Toggle (CopilotChat)", mode = { "n", "v" } },
-        { "<leader>ax", chat.reset,  desc = "Clear (CopilotChat)",  mode = { "n", "v" } },
+        { "<leader>ax", chat.reset, desc = "Clear (CopilotChat)", mode = { "n", "v" } },
         {
           "<leader>aq",
           function()
