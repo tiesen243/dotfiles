@@ -92,4 +92,40 @@ _G.Yuki = {
    ██║   ╚██████╔╝██║  ██╗██║
    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
    ]],
+  get_battery_state = function()
+    local capacity = io.open("/sys/class/power_supply/BAT1/capacity", "r")
+    local status = io.open("/sys/class/power_supply/BAT1/status", "r")
+
+    if capacity == nil or status == nil then
+      return
+    end
+
+    local capacity_value = tonumber(capacity:read("*all"))
+    local status_value = status:read("*all")
+    local icon = "󰁻"
+
+    if status_value:match("Charging") then
+      icon = "󰂅"
+    elseif capacity_value == 100 then
+      icon = "󰁹"
+    elseif capacity_value >= 80 then
+      icon = "󰂁"
+    elseif capacity_value >= 60 then
+      icon = "󰁿"
+    elseif capacity_value >= 40 then
+      icon = "󰁾"
+    elseif capacity_value >= 20 then
+      icon = "󰁽"
+    else
+      icon = "󰁻"
+    end
+
+    capacity:close()
+    status:close()
+
+    return icon .. " " .. tostring(capacity_value)
+  end,
+  get_time = function()
+    return " " .. os.date("%R")
+  end,
 }
