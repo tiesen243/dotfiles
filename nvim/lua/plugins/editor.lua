@@ -84,7 +84,16 @@ return {
     opts = {
       sources = { "filesystem", "buffers", "git_status" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
-      filesystem = { bind_to_cwd = false, follow_current_file = { enabled = true }, use_libuv_file_watcher = true },
+      filesystem = {
+        bind_to_cwd = false,
+        use_libuv_file_watcher = true,
+        follow_current_file = { enabled = true },
+        filtered_items = {
+          always_show = { ".gitignored" },
+          always_show_by_pattern = { ".env*" },
+          hide_by_name = { "node_modules", ".git", ".venv" },
+        },
+      },
       window = {
         width = 32,
         position = "left",
