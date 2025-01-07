@@ -91,7 +91,7 @@ return {
         filtered_items = {
           always_show = { ".gitignored" },
           always_show_by_pattern = { ".env*" },
-          hide_by_name = { "node_modules", ".git", ".venv" },
+          hide_by_name = { "dist", "node_modules", ".git", ".venv" },
         },
       },
       window = {
@@ -133,7 +133,7 @@ return {
       local events = require("neo-tree.events")
       opts.event_handlers = opts.event_handlers or {}
       vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_MOVED,   handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
       })
       require("neo-tree").setup(opts)
@@ -160,12 +160,12 @@ return {
 
       return {
         { "<leader>fd", builtin.diagnostics, desc = "[F]ind [D]iagnostics" },
-        { "<leader>ff", builtin.find_files, desc = "[F]ind [F]iles" },
-        { "<leader>fg", builtin.live_grep, desc = "[F]ind by [G]rep" },
-        { "<leader>fh", builtin.help_tags, desc = "[F]ind [H]elp" },
-        { "<leader>fk", builtin.keymaps, desc = "[F]ind [K]eymaps" },
-        { "<leader>fr", builtin.oldfiles, desc = "[F]ind [R]ecents File" },
-        { "<leader>fs", builtin.builtin, desc = "[F]ind [S]elect Telescope" },
+        { "<leader>ff", builtin.find_files,  desc = "[F]ind [F]iles" },
+        { "<leader>fg", builtin.live_grep,   desc = "[F]ind by [G]rep" },
+        { "<leader>fh", builtin.help_tags,   desc = "[F]ind [H]elp" },
+        { "<leader>fk", builtin.keymaps,     desc = "[F]ind [K]eymaps" },
+        { "<leader>fr", builtin.oldfiles,    desc = "[F]ind [R]ecents File" },
+        { "<leader>fs", builtin.builtin,     desc = "[F]ind [S]elect Telescope" },
         { "<leader>fw", builtin.grep_string, desc = "[F]ind by current [W]ord" },
         {
           "<leader>/",

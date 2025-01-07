@@ -3,12 +3,12 @@ local map = vim.keymap.set
 -- General
 local opts = { noremap = true, silent = true }
 map({ "n", "v" }, "<Space>", "<Nop>", { silent = true }) -- Disable space in normal and visual mode
-map("n", "u", "<nop>", opts) -- Disable undo with u
-map({ "i", "n" }, "<C-z>", "<cmd>undo<cr><esc>", opts) -- Undo with <C-z>
-map({ "i", "n" }, "<C-s>", "<cmd>w<cr><esc>", opts) -- Save with <C-s>
-map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts) -- Select all
-map({ "n", "v" }, "x", '"_x', opts) -- Delete without yanking
-map("v", "p", '"_dP', opts) -- Paste without yanking
+map("n", "u", "<nop>", opts)                             -- Disable undo with u
+map({ "i", "n" }, "<C-z>", "<cmd>undo<cr><esc>", opts)   -- Undo with <C-z>
+map({ "i", "n" }, "<C-s>", "<cmd>w<cr><esc>", opts)      -- Save with <C-s>
+map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts)             -- Select all
+map({ "n", "v" }, "x", '"_x', opts)                      -- Delete without yanking
+map("v", "p", '"_dP', opts)                              -- Paste without yanking
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit", noremap = true, silent = true })
 map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All", noremap = true, silent = true })
 map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit", noremap = true, silent = true })
@@ -19,13 +19,20 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- Move to window using the <ctrl> hjkl keys, interact with kitty terminal
--- stylua: ignore start
-map("n", "<C-h>", function() Yuki.navigate("h") end, { desc = "Go to Left Window", silent = true })
-map("n", "<C-j>", function() Yuki.navigate("j") end, { desc = "Go to Lower Window", silent = true })
-map("n", "<C-k>", function() Yuki.navigate("k") end, { desc = "Go to Upper Window", silent = true })
-map("n", "<C-l>", function() Yuki.navigate("l") end, { desc = "Go to Right Window", silent = true })
--- stylua: ignore end
+-- Move to window using the <ctrl> hjkl keys (interact with kitty terminal)
+if (Yuki.use_kitty) then
+  -- stylua: ignore start
+  map("n", "<C-h>", function() Yuki.navigate("h") end, { desc = "Go to Left Window", silent = true })
+  map("n", "<C-j>", function() Yuki.navigate("j") end, { desc = "Go to Lower Window", silent = true })
+  map("n", "<C-k>", function() Yuki.navigate("k") end, { desc = "Go to Upper Window", silent = true })
+  map("n", "<C-l>", function() Yuki.navigate("l") end, { desc = "Go to Right Window", silent = true })
+  -- stylua: ignore end
+else
+  map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", silent = true })
+  map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", silent = true })
+  map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", silent = true })
+  map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", silent = true })
+end
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
@@ -115,7 +122,8 @@ if vim.fn.executable("lazygit") == 1 then
 end
 map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Blame Line" })
 map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
-map({ "n", "x" }, "<leader>gY", function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end }) end, { desc = "Git Browse (copy)" })
+map({ "n", "x" }, "<leader>gY", function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end }) end,
+  { desc = "Git Browse (copy)" })
 
 -- Terminal
 map("n", "<leader>tt", function() Snacks.terminal(nil, {}) end, { desc = "Terminal (cwd)" })
@@ -125,8 +133,10 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- UI
 Snacks.toggle.animate():map("<leader>ua")
-Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
-Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
+Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+    :map("<leader>uA")
+Snacks.toggle.option("conceallevel",
+  { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.dim():map("<leader>uD")
 Snacks.toggle.indent():map("<leader>ug")
@@ -138,8 +148,11 @@ Snacks.toggle({
   name = "Transparent Background",
   get = function() return vim.g.transparent_enabled end,
   set = function(state)
-    if state then vim.cmd([[TransparentEnable]])
-    else vim.cmd([[TransparentDisable]]) end
+    if state then
+      vim.cmd([[TransparentEnable]])
+    else
+      vim.cmd([[TransparentDisable]])
+    end
   end,
 }):map("<leader>ut")
 Snacks.toggle.treesitter():map("<leader>uT")
@@ -150,5 +163,3 @@ Snacks.toggle.zen():map("<leader>uz")
 if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>uh")
 end
-
--- stylua: ignore end

@@ -61,7 +61,7 @@ return {
               hint = Yuki.icons.diagnostics.Hint,
             },
           },
-          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
           { "filename", file_status = true, path = 1 },
           {
             function()
@@ -92,7 +92,7 @@ return {
             end,
           },
           { "selectioncount", padding = { left = 1, right = 1 } },
-          { "searchcount", padding = { left = 1, right = 1 } },
+          { "searchcount",    padding = { left = 1, right = 1 } },
         },
         lualine_y = {
           { "progress", padding = { left = 1, right = 0 }, separator = " " },
@@ -100,10 +100,9 @@ return {
         },
         lualine_z = {
           { Yuki.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
-          { Yuki.get_time, padding = { left = 0, right = 1 } },
+          { Yuki.get_time,          padding = { left = 0, right = 1 } },
         },
       },
-      extensions = { "neo-tree", "lazy", "fzf", "quickfix" },
     },
   },
 

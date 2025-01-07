@@ -9,13 +9,15 @@ vim.g.snacks_animate = true
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 _G.Yuki = {
+  ai = true,
+  use_kitty = true,
   cmp = {
-    use_luasnip = true,
+    use_luasnip = false,
     sources = { "lsp", "snippets", "path", "buffer" },
   },
   lang = {
     java = true,
-    python = true,
+    python = false,
     react = true,
   },
   colorcheme = "tokyonight",
