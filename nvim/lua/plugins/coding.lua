@@ -7,6 +7,14 @@ vim.filetype.add({
 })
 vim.treesitter.language.register("markdown", "mdx")
 
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("LspFormatting", {}),
+  callback = function()
+    vim.lsp.buf.format({ timeout = 2000 })
+  end,
+})
+
 return {
   -- Code Completion
   -- https://github.com/saghen/blink.cmp
@@ -23,12 +31,16 @@ return {
         kind_icons = vim.tbl_extend("keep", { Color = "██" }, Yuki.icons.kind),
       },
       completion = {
-        ghost_text = { enabled = true },
+        menu = { draw = { treesitter = { "lsp" } } },
         accept = { auto_brackets = { enabled = true } },
-        menu = { border = "rounded", draw = { treesitter = { "lsp" } } },
-        documentation = { auto_show = true, auto_show_delay_ms = 200, window = { border = "rounded" } },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 250,
+          treesitter_highlighting = true,
+          window = { border = "rounded" },
+        },
       },
-      signature = { enabled = false, window = { border = "rounded" } },
+      signature = { enabled = false },
 
       snippets = Yuki.cmp.use_luasnip and {
         expand = function(snippet)
@@ -45,24 +57,17 @@ return {
         end,
       } or {},
 
-      -- if use luasnip, add luasnip to frist items, otherwise add snippets
-
       sources = { default = Yuki.cmp.sources, cmdline = {} },
       keymap = {
-        preset = "none",
-        ["<tab>"] = { "select_next", "snippet_forward", "fallback" },
-        ["<S-tab>"] = { "select_prev", "snippet_backward", "fallback" },
-        ["<C-space>"] = { "show", "hide", "fallback" },
-        ["<CR>"] = { "select_and_accept", "fallback" },
-        ["<C-j>"] = { "scroll_documentation_up", "select_next", "fallback" },
-        ["<C-k>"] = { "scroll_documentation_down", "select_prev", "fallback" },
+        preset = "enter",
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
       },
     },
   },
 
   -- Snippets engine
   -- https://github.com/L3MON4D3/LuaSnip
-  -- https://github.com/rafamadriz/friendly-snippets
   {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
@@ -95,7 +100,6 @@ return {
       nls.setup({
         sources = {
           Yuki.lang.react and nls.builtins.formatting.prettier,
-          Yuki.lang.java and nls.builtins.formatting.google_java_format,
           nls.builtins.formatting.shfmt.with({ args = { "-i", "4" } }),
           nls.builtins.formatting.stylua,
         },

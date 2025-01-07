@@ -13,23 +13,14 @@ return {
       servers = {
         emmet_ls = { enabled = Yuki.lang.react },
         eslint = { enabled = Yuki.lang.react },
-        jdtls = { enabled = Yuki.lang.java },
         lua_ls = {
           enabled = true,
-          single_file_support = true,
           settings = {
             Lua = {
-              completion = { workspaceWord = true, callSnippet = "Both" },
               diagnostics = { globals = { "vim", "Snacks" } },
-              doc = { privateName = { "^_" } },
+              completion = { workspaceWord = true, callSnippet = "Both" },
               -- stylua: ignore
               hint = { enable = true, setType = false, paramType = true, paramName = "Disable", semicolon = "Disable", arrayIndex = "Disable" },
-              workspace = { checkThirdParty = false },
-              type = { castNumberToInteger = true },
-              format = {
-                enable = false,
-                defaultConfig = { indent_style = "space", indent_size = "2", continuation_indent_size = "2" },
-              },
             },
           },
         },
@@ -68,25 +59,17 @@ return {
         map("gr", builtin.lsp_references, "[G]oto [R]eferences")
         map("gi", builtin.lsp_implementations, "[G]oto [I]mplementation")
 
-        map("<C-i>", vim.lsp.buf.signature_help, "Signature help", { "i", "n" })
-        map("<C-o>", vim.lsp.buf.hover, "[H]over doc", { "i", "n" })
+        map("<C-k>", vim.lsp.buf.signature_help, "Signature help", { "i", "n" })
+        map("<C-j>", vim.lsp.buf.hover, "[H]over doc", { "i", "n" })
 
         map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
         map("<leader>cd", vim.diagnostic.open_float, "Line [D]iagnostics")
+        map("<leader>cf", vim.lsp.buf.format, "[F]ormat")
         map("<leader>cr", vim.lsp.buf.rename, "[R]ename")
         map("<leader>cR", Snacks.rename.rename_file, "[R]ename file")
         map("<leader>cs", builtin.lsp_document_symbols, "Document [S]ymbols")
         map("<leader>ct", builtin.lsp_type_definitions, "[T]ype Definition")
         map("<leader>cw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace Symbols")
-
-        if Snacks.words.is_enabled() then
-          map("n", "]]", function()
-            Snacks.words.jump(vim.v.count1, true)
-          end, { desc = "Next word" })
-          map("n", "[[", function()
-            Snacks.words.jump(-vim.v.count1, true)
-          end, { desc = "Previous word" })
-        end
 
         if client and vim.lsp.inlay_hint then
           vim.lsp.inlay_hint.enable()
@@ -140,5 +123,5 @@ return {
   },
   -- Java LSP
   -- https://github.com/mfussenegger/nvim-jdtls
-  { "mfussenegger/nvim-jdtls", enabled = Yuki.lang.java },
+  { "mfussenegger/nvim-jdtls", enabled = Yuki.lang.java, ft = "java" },
 }
