@@ -4,8 +4,18 @@ return {
   {
     "github/copilot.vim",
     lazy = false,
+    enabled = Yuki.ai,
     cmd = "Copilot",
-    keys = { { "<leader>as", "<cmd>Copilot panel<cr>", desc = "Suggestion Panel" } },
+    keys = {
+      { "<leader>as", "<cmd>Copilot panel<cr>", desc = "Suggestion Panel" },
+      {
+        "<C-CR>",
+        'copilot#Accept("\\<CR>")',
+        expr = true,
+        replace_keycodes = false,
+        mode = { "i" }
+      }
+    },
   },
 
   -- Copilot Chat
@@ -13,18 +23,14 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
+    enabled = Yuki.ai,
     cmd = "CopilotChat",
-    build = function()
-      if vim.fn.has("mac") == 1 or vim.fn.has("unix") == 1 then
-        return "make tiktoken"
-      end
-    end,
     keys = function()
       local chat = require("CopilotChat")
 
       return {
         { "<leader>aa", chat.toggle, desc = "Toggle (CopilotChat)", mode = { "n", "v" } },
-        { "<leader>ax", chat.reset, desc = "Clear (CopilotChat)", mode = { "n", "v" } },
+        { "<leader>ax", chat.reset,  desc = "Clear (CopilotChat)",  mode = { "n", "v" } },
         {
           "<leader>aq",
           function()
