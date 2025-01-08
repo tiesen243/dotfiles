@@ -3,7 +3,7 @@ return {
   -- https://github.com/folke/which-key.nvim
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
+    event = "VimEnter",
     opts = {
       preset = "modern",
       spec = {
@@ -27,7 +27,6 @@ return {
   -- https:://github.com/nvim-neo-tree/neo-tree.nvim
   {
     "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
     dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
     keys = {
       {
@@ -98,7 +97,6 @@ return {
         width = 32,
         position = "left",
         mappings = {
-          ["h"] = "close_node",
           ["<space>"] = "none",
           ["Y"] = {
             function(state)
@@ -154,6 +152,7 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     keys = function()
       local builtin = require("telescope.builtin")
@@ -168,17 +167,20 @@ return {
         { "<leader>fs", builtin.builtin,     desc = "[F]ind [S]elect Telescope" },
         { "<leader>fw", builtin.grep_string, desc = "[F]ind by current [W]ord" },
         {
-          "<leader>/",
+          "<leader>f/",
           function()
-            builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({ previewer = false }))
+            builtin.current_buffer_fuzzy_find(
+              require("telescope.themes").get_dropdown({ previewer = false })
+            )
           end,
-          desc = "Search in current buffer",
+          desc = "Fuzzily search in current buffer",
         },
       }
     end,
     opts = function()
-      local actions = require("telescope.actions")
+      pcall(require("telescope").load_extension, "ui-select")
 
+      local actions = require("telescope.actions")
       return {
         defaults = {
           mappings = {
@@ -190,7 +192,10 @@ return {
           },
         },
         pickers = { find_files = { file_ignore_patterns = { "node_modules", ".git", ".venv" }, hidden = true } },
-        live_grep = { file_ignore_patterns = { "node_modules", ".git", ".venv" }, additional_args = { "--hidden" } },
+        live_grep = {
+          file_ignore_patterns = { "node_modules", ".git", ".venv" },
+          additional_args = { "--hidden" },
+        },
       }
     end,
   },

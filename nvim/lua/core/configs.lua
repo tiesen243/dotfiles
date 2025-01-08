@@ -9,18 +9,14 @@ vim.g.snacks_animate = true
 vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 
 _G.Yuki = {
-  ai = true,
+  colorcheme = "tokyonight",
   use_kitty = true,
-  cmp = {
-    use_luasnip = false,
-    sources = { "lsp", "snippets", "path", "buffer" },
-  },
+  ai = true,
   lang = {
     java = true,
     python = false,
     react = true,
   },
-  colorcheme = "tokyonight",
   icons = {
     diagnostics = {
       Error = " ",
@@ -48,7 +44,7 @@ _G.Yuki = {
       topdelete = { text = "" },
       changedelete = { text = "▎" },
     },
-    kind = {
+    kinds = {
       Array = " ",
       Boolean = " ",
       Class = " ",
@@ -77,16 +73,14 @@ _G.Yuki = {
       Operator = " ",
       Package = " ",
       Property = " ",
-      Reference = " ",
+      Reference = " ",
       Snippet = "󱄽 ",
       String = " ",
       Struct = " ",
-      Supermaven = " ",
-      TabNine = "󰏚 ",
       Text = " ",
       TypeParameter = " ",
       Unit = " ",
-      Value = " ",
+      Value = " ",
       Variable = " ",
     },
   },
@@ -98,50 +92,4 @@ _G.Yuki = {
    ██║   ╚██████╔╝██║  ██╗██║
    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
    ]],
-  navigate = function(direction)
-    local mappings = { h = "left", j = "bottom", k = "top", l = "right" }
-    local left_win = vim.fn.winnr("1" .. direction)
-    if vim.fn.winnr() ~= left_win then
-      vim.api.nvim_command("wincmd " .. direction)
-    else
-      local command = "kitty @ kitten navigate_kitty.py " .. mappings[direction]
-      vim.fn.system(command)
-    end
-  end,
-  get_battery_state = function()
-    local capacity = io.open("/sys/class/power_supply/BAT1/capacity", "r")
-    local status = io.open("/sys/class/power_supply/BAT1/status", "r")
-
-    if capacity == nil or status == nil then
-      return
-    end
-
-    local capacity_value = tonumber(capacity:read("*all"))
-    local status_value = status:read("*all")
-    local icon = "󰁻"
-
-    if status_value:match("Charging") then
-      icon = "󰂅"
-    elseif capacity_value == 100 then
-      icon = "󰁹"
-    elseif capacity_value >= 80 then
-      icon = "󰂁"
-    elseif capacity_value >= 60 then
-      icon = "󰁿"
-    elseif capacity_value >= 40 then
-      icon = "󰁾"
-    elseif capacity_value >= 20 then
-      icon = "󰁽"
-    else
-      icon = "󰁻"
-    end
-
-    capacity:close()
-    status:close()
-
-    return icon .. " " .. tostring(capacity_value)
-  end,
-  get_time = function()
-    return " " .. os.date("%R")
-  end,
 }
