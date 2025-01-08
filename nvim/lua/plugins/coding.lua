@@ -17,77 +17,86 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 return {
   -- Code Completion
-  -- https://github.com/saghen/blink.cmp
+  -- https://github.com/hrsh7th/nvim-cmp
   {
-    "saghen/blink.cmp",
-    version = "*",
+    "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    dependencies = { "rafamadriz/friendly-snippets" },
-    opts_extend = { "sources.completion.enabled_providers", "sources.default" },
-    opts = {
-      appearance = {
-        nerd_font_variant = "mono",
-        use_nvim_cmp_as_default = false,
-        kind_icons = vim.tbl_extend("keep", { Color = "██" }, Yuki.icons.kind),
-      },
-      completion = {
-        menu = { draw = { treesitter = { "lsp" } } },
-        accept = { auto_brackets = { enabled = true } },
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 250,
-          treesitter_highlighting = true,
-          window = { border = "rounded" },
+    dependencies = { "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" },
+    opts = function()
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      local defaults = require("cmp.config.default")()
+      local cmp = require("cmp")
+
+      cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+      return {
+        completion = { competeopt = "menu,menuone,preview,noselect" },
+        preselect = cmp.PreselectMode.Item,
+        snippet = {
+          expand = function(args)
+            vim.snippet.expand(args.body)
+          end,
         },
-      },
-      signature = { enabled = false },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Replace }),
+          ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Replace }),
+          ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-j>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space"] = cmp.mapping.complete(),
+          ["<C-e>"] = cmp.mapping.abort(),
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        }),
+        sources = cmp.config.sources({
+          { name = "snippets", group_index = 0 },
+          { name = "nvim_lsp" },
+          { name = "buffer" },
+          { name = "path" },
+        }),
+        formatting = {
+          fields = { "kind", "abbr", "menu" },
+          format = function(entry, item)
+            if vim.tbl_contains({ "path" }, entry.source.name) then
+              local icon, hl_group =
+                  require("nvim-web-devicons").get_icon(entry:get_completion_item().label)
+              if icon then
+                item.kind = icon
+                item.kind_hl_group = hl_group
+                return item
+              end
+            end
 
-      snippets = Yuki.cmp.use_luasnip and {
-        expand = function(snippet)
-          require("luasnip").lsp_expand(snippet)
-        end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require("luasnip").jumpable(filter.direction)
-          end
-          return require("luasnip").in_snippet()
-        end,
-        jump = function(direction)
-          require("luasnip").jump(direction)
-        end,
-      } or {},
+            item.kind = Yuki.icons.kinds[item.kind] or ""
 
-      sources = { default = Yuki.cmp.sources, cmdline = {} },
-      keymap = {
-        preset = "enter",
-        ["<S-Tab>"] = { "select_prev", "fallback" },
-        ["<Tab>"] = { "select_next", "fallback" },
-      },
-    },
+            local widths = {
+              abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 30,
+              menu = vim.g.cmp_widths and vim.g.cmp_widths.menu or 20,
+            }
+
+            for key, width in pairs(widths) do
+              if item[key] and vim.fn.strdisplaywidth(item[key]) > width then
+                item[key] = vim.fn.strcharpart(item[key], 0, width - 1) .. "…"
+              end
+            end
+
+            return item
+          end,
+        },
+        experimental = { ghost_text = { hl_group = "CmpGhostText" } },
+        sorting = defaults.sorting,
+      }
+    end,
   },
 
   -- Snippets engine
-  -- https://github.com/L3MON4D3/LuaSnip
+  -- https://github.com/garymjr/nvim-snippets
   {
-    "L3MON4D3/LuaSnip",
-    event = "InsertEnter",
-    enabled = Yuki.cmp.use_luasnip,
-    dependencies = {
-      {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          -- Replace snippets with luasnip
-          for i, v in ipairs(Yuki.cmp.sources) do
-            if v == "snippets" then
-              Yuki.cmp.sources[i] = "luasnip"
-            end
-          end
-          require("luasnip.loaders.from_vscode").lazy_load()
-          require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
-        end,
-      },
-    },
-    opts = { history = true, delete_check_events = "TextChanged" },
+    "garymjr/nvim-snippets",
+    dependencies = "rafamadriz/friendly-snippets",
+    opts = { friendly_snippets = true },
   },
 
   -- Formatter
@@ -118,6 +127,7 @@ return {
     opts = {
       auto_install = true,
       sync_install = true,
+      autotag = { enable = true },
       indent = { enable = true },
       highlight = { enable = true, additional_vim_regex_highlighting = true },
     },

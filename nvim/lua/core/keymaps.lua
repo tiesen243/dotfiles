@@ -2,13 +2,13 @@ local map = vim.keymap.set
 
 -- General
 local opts = { noremap = true, silent = true }
-map({ "n", "v" }, "<Space>", "<Nop>", { silent = true }) -- Disable space in normal and visual mode
-map("n", "u", "<nop>", opts)                             -- Disable undo with u
-map({ "i", "n" }, "<C-z>", "<cmd>undo<cr><esc>", opts)   -- Undo with <C-z>
-map({ "i", "n" }, "<C-s>", "<cmd>w<cr><esc>", opts)      -- Save with <C-s>
-map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts)             -- Select all
-map({ "n", "v" }, "x", '"_x', opts)                      -- Delete without yanking
-map("v", "p", '"_dP', opts)                              -- Paste without yanking
+map("n", "u", "<nop>")                                 -- Disable undo with u
+map({ "i", "n" }, "<C-z>", "<cmd>undo<cr><esc>", opts) -- Undo with <C-z>
+map({ "i", "n" }, "<C-s>", "<cmd>w<cr><esc>", opts)    -- Save with <C-s>
+map({ "n", "x" }, "<C-a>", "gg<S-v>G", opts)           -- Select all
+map({ "n", "v" }, "x", '"_x', opts)                    -- Delete without yanking
+map("v", "p", '"_dP', opts)                            -- Paste without yanking
+
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit", noremap = true, silent = true })
 map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All", noremap = true, silent = true })
 map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save and Quit", noremap = true, silent = true })
@@ -20,12 +20,13 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, 
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- Move to window using the <ctrl> hjkl keys (interact with kitty terminal)
-if (Yuki.use_kitty) then
+if Yuki.use_kitty then
   -- stylua: ignore start
-  map("n", "<C-h>", function() Yuki.navigate("h") end, { desc = "Go to Left Window", silent = true })
-  map("n", "<C-j>", function() Yuki.navigate("j") end, { desc = "Go to Lower Window", silent = true })
-  map("n", "<C-k>", function() Yuki.navigate("k") end, { desc = "Go to Upper Window", silent = true })
-  map("n", "<C-l>", function() Yuki.navigate("l") end, { desc = "Go to Right Window", silent = true })
+  local utils = require('core.utils')
+  map("n", "<C-h>", function() utils.navigate("h") end, { desc = "Go to Left Window", silent = true })
+  map("n", "<C-j>", function() utils.navigate("j") end, { desc = "Go to Lower Window", silent = true })
+  map("n", "<C-k>", function() utils.navigate("k") end, { desc = "Go to Upper Window", silent = true })
+  map("n", "<C-l>", function() utils.navigate("l") end, { desc = "Go to Right Window", silent = true })
   -- stylua: ignore end
 else
   map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", silent = true })
@@ -66,15 +67,6 @@ map({ "i", "n", "s" }, "<esc>", function()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
--- Clear search, diff update and redraw
--- taken from runtime/lua/_editor.lua
-map(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
-)
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
 map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
@@ -88,10 +80,6 @@ map("n", "<", "<<")
 map("n", ">", ">>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
--- commenting
-map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -125,23 +113,15 @@ map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git
 map({ "n", "x" }, "<leader>gY", function() Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end }) end,
   { desc = "Git Browse (copy)" })
 
--- Terminal
-map("n", "<leader>tt", function() Snacks.terminal(nil, {}) end, { desc = "Terminal (cwd)" })
-map("n", "<leader>tT", function() Snacks.terminal(nil, { cwd = Snacks.git.get_root() }) end, { desc = "Terminal (rwd)" })
-map("t", "<C-`>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
-
 -- UI
 Snacks.toggle.animate():map("<leader>ua")
-Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
-    :map("<leader>uA")
 Snacks.toggle.option("conceallevel",
   { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.dim():map("<leader>uD")
 Snacks.toggle.indent():map("<leader>ug")
-Snacks.toggle.line_number():map("<leader>un")
-Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uN")
+Snacks.toggle.line_number():map("<leader>ul")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.scroll():map("<leader>uS")
 Snacks.toggle({

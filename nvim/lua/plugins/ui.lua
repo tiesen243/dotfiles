@@ -1,3 +1,5 @@
+local utils = require("core.utils")
+
 return {
   -- tokyonight theme
   -- https://github.com/folke/tokyonight.nvim
@@ -23,7 +25,6 @@ return {
       require("transparent").clear_prefix("snack")
       require("transparent").clear_prefix("Telescope")
       require("transparent").clear_prefix("mason")
-      require("transparent").clear_prefix("BlinkCmpDoc")
     end,
   },
 
@@ -99,17 +100,10 @@ return {
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          { Yuki.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
-          { Yuki.get_time,          padding = { left = 0, right = 1 } },
+          { utils.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
+          { utils.get_time,          padding = { left = 0, right = 1 } },
         },
       },
     },
-  },
-
-  -- UI Input
-  -- https://github.com/stevearc/dressing.nvim
-  {
-    "stevearc/dressing.nvim",
-    opts = {},
   },
 }
