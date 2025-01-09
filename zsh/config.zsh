@@ -59,7 +59,7 @@ source $ZSH/oh-my-zsh.sh
 #############################################
 
 # General
-alias    c="clear"
+alias  cls="clear"
 alias    v="nvim"
 alias    q="exit"
 
