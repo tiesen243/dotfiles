@@ -2,22 +2,22 @@ return {
   -- Keymap hint
   -- https://github.com/folke/which-key.nvim
   {
-    "folke/which-key.nvim",
-    event = "VimEnter",
+    'folke/which-key.nvim',
+    event = 'VimEnter',
     opts = {
-      preset = "modern",
+      preset = 'modern',
       spec = {
         {
-          mode = { "n", "v" },
-          { "<leader>a", group = "AI" },
-          { "<leader>b", group = "Buffers" },
-          { "<leader>c", group = "Code" },
-          { "<leader>f", group = "Finder" },
-          { "<leader>g", group = "Git" },
-          { "<leader>q", group = "Quit" },
-          { "<leader>t", group = "Terminal" },
-          { "<leader>u", group = "UI" },
-          { "<leader>w", group = "Window" },
+          mode = { 'n', 'v' },
+          { '<leader>a', group = 'AI' },
+          { '<leader>b', group = 'Buffers' },
+          { '<leader>c', group = 'Code' },
+          { '<leader>f', group = 'Finder' },
+          { '<leader>g', group = 'Git' },
+          { '<leader>q', group = 'Quit' },
+          { '<leader>t', group = 'Terminal' },
+          { '<leader>u', group = 'UI' },
+          { '<leader>w', group = 'Window' },
         },
       },
     },
@@ -26,98 +26,98 @@ return {
   -- File Explorer
   -- https:://github.com/nvim-neo-tree/neo-tree.nvim
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+    'nvim-neo-tree/neo-tree.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons', 'MunifTanjim/nui.nvim' },
     keys = {
       {
-        "<leader>e",
+        '<leader>e',
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
+          require('neo-tree.command').execute { toggle = true, dir = Snacks.git.get_root() }
         end,
-        desc = "Explorer NeoTree (rwd)",
+        desc = 'Explorer NeoTree (rwd)',
       },
       {
-        "<leader>E",
+        '<leader>E',
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+          require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() }
         end,
-        desc = "Explorer NeoTree (cwd)",
+        desc = 'Explorer NeoTree (cwd)',
       },
       {
-        "<leader>be",
+        '<leader>be',
         function()
-          require("neo-tree.command").execute({ source = "buffers", toggle = true })
+          require('neo-tree.command').execute { source = 'buffers', toggle = true }
         end,
-        desc = "Buffer Explorer",
+        desc = 'Buffer Explorer',
       },
       {
-        "<leader>ge",
+        '<leader>ge',
         function()
-          require("neo-tree.command").execute({ source = "git_status", toggle = true })
+          require('neo-tree.command').execute { source = 'git_status', toggle = true }
         end,
-        desc = "Git Explorer",
+        desc = 'Git Explorer',
       },
     },
     deactivate = function()
-      vim.cmd([[Neotree close]])
+      vim.cmd [[Neotree close]]
     end,
     init = function()
       -- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,
       -- because `cwd` is not set up properly.
-      vim.api.nvim_create_autocmd("BufEnter", {
-        group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
-        desc = "Start Neo-tree with directory",
+      vim.api.nvim_create_autocmd('BufEnter', {
+        group = vim.api.nvim_create_augroup('Neotree_start_directory', { clear = true }),
+        desc = 'Start Neo-tree with directory',
         once = true,
         callback = function()
-          if package.loaded["neo-tree"] then
+          if package.loaded['neo-tree'] then
             return
           else
             local stats = vim.uv.fs_stat(vim.fn.argv(0))
-            if stats and stats.type == "directory" then
-              require("neo-tree")
+            if stats and stats.type == 'directory' then
+              require 'neo-tree'
             end
           end
         end,
       })
     end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status" },
-      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+      sources = { 'filesystem', 'buffers', 'git_status' },
+      open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
       filesystem = {
         bind_to_cwd = false,
         use_libuv_file_watcher = true,
         follow_current_file = { enabled = true },
         filtered_items = {
-          always_show = { ".gitignored" },
-          always_show_by_pattern = { ".env*" },
-          hide_by_name = { "dist", "node_modules", ".git", ".venv" },
+          always_show = { '.gitignored' },
+          always_show_by_pattern = { '.env*' },
+          hide_by_name = { 'dist', 'node_modules', '.git', '.venv' },
         },
       },
       window = {
         width = 32,
-        position = "left",
+        position = 'left',
         mappings = {
-          ["<space>"] = "none",
-          ["Y"] = {
+          ['<space>'] = 'none',
+          ['Y'] = {
             function(state)
               local node = state.tree:get_node()
               local path = node:get_id()
-              vim.fn.setreg("+", path, "c")
+              vim.fn.setreg('+', path, 'c')
             end,
-            desc = "Copy Path to Clipboard",
+            desc = 'Copy Path to Clipboard',
           },
         },
         default_component_configs = {
           indent = {
             with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-            expander_collapsed = "",
-            expander_expanded = "",
-            expander_highlight = "NeoTreeExpander",
+            expander_collapsed = '',
+            expander_expanded = '',
+            expander_highlight = 'NeoTreeExpander',
           },
           git_status = {
             symbols = {
-              unstaged = "󰄱",
-              staged = "󰱒",
+              unstaged = '󰄱',
+              staged = '󰱒',
             },
           },
         },
@@ -128,18 +128,18 @@ return {
         Snacks.rename.on_rename_file(data.source, data.destination)
       end
 
-      local events = require("neo-tree.events")
+      local events = require 'neo-tree.events'
       opts.event_handlers = opts.event_handlers or {}
       vim.list_extend(opts.event_handlers, {
         { event = events.FILE_MOVED,   handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
       })
-      require("neo-tree").setup(opts)
-      vim.api.nvim_create_autocmd("TermClose", {
-        pattern = "*lazygit",
+      require('neo-tree').setup(opts)
+      vim.api.nvim_create_autocmd('TermClose', {
+        pattern = '*lazygit',
         callback = function()
-          if package.loaded["neo-tree.sources.git_status"] then
-            require("neo-tree.sources.git_status").refresh()
+          if package.loaded['neo-tree.sources.git_status'] then
+            require('neo-tree.sources.git_status').refresh()
           end
         end,
       })
@@ -149,52 +149,51 @@ return {
   -- Telescope
   -- https://github.com/nvim-telescope/telescope.nvim
   {
-    "nvim-telescope/telescope.nvim",
+    'nvim-telescope/telescope.nvim',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-ui-select.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
     },
     keys = function()
-      local builtin = require("telescope.builtin")
+      local builtin = require 'telescope.builtin'
 
       return {
-        { "<leader>fd", builtin.diagnostics, desc = "[F]ind [D]iagnostics" },
-        { "<leader>ff", builtin.find_files,  desc = "[F]ind [F]iles" },
-        { "<leader>fg", builtin.live_grep,   desc = "[F]ind by [G]rep" },
-        { "<leader>fh", builtin.help_tags,   desc = "[F]ind [H]elp" },
-        { "<leader>fk", builtin.keymaps,     desc = "[F]ind [K]eymaps" },
-        { "<leader>fr", builtin.oldfiles,    desc = "[F]ind [R]ecents File" },
-        { "<leader>fs", builtin.builtin,     desc = "[F]ind [S]elect Telescope" },
-        { "<leader>fw", builtin.grep_string, desc = "[F]ind by current [W]ord" },
+        { '<leader>fd',       builtin.diagnostics, desc = '[F]ind [D]iagnostics' },
+        { '<leader>ff',       builtin.find_files,  desc = '[F]ind [F]iles' },
+        { '<leader>fg',       builtin.live_grep,   desc = '[F]ind by [G]rep' },
+        { '<leader>fh',       builtin.help_tags,   desc = '[F]ind [H]elp' },
+        { '<leader>fk',       builtin.keymaps,     desc = '[F]ind [K]eymaps' },
+        { '<leader>fr',       builtin.oldfiles,    desc = '[F]ind [R]ecents File' },
+        { '<leader>fs',       builtin.builtin,     desc = '[F]ind [S]elect Telescope' },
+        { '<leader>fw',       builtin.grep_string, desc = '[F]ind by current [W]ord' },
+        { '<leader><leader>', builtin.buffers,     desc = 'Find existing buffers' },
         {
-          "<leader>f/",
+          '<leader>f/',
           function()
-            builtin.current_buffer_fuzzy_find(
-              require("telescope.themes").get_dropdown({ previewer = false })
-            )
+            builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { previewer = false })
           end,
-          desc = "Fuzzily search in current buffer",
+          desc = 'Fuzzily search in current buffer',
         },
       }
     end,
     opts = function()
-      pcall(require("telescope").load_extension, "ui-select")
+      pcall(require('telescope').load_extension, 'ui-select')
 
-      local actions = require("telescope.actions")
+      local actions = require 'telescope.actions'
       return {
         defaults = {
           mappings = {
             i = {
-              ["<esc>"] = actions.close,
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
+              ['<esc>'] = actions.close,
+              ['<C-j>'] = actions.move_selection_next,
+              ['<C-k>'] = actions.move_selection_previous,
             },
           },
         },
-        pickers = { find_files = { file_ignore_patterns = { "node_modules", ".git", ".venv" }, hidden = true } },
+        pickers = { find_files = { file_ignore_patterns = { 'node_modules', '.git', '.venv' }, hidden = true } },
         live_grep = {
-          file_ignore_patterns = { "node_modules", ".git", ".venv" },
-          additional_args = { "--hidden" },
+          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+          additional_args = { '--hidden' },
         },
       }
     end,
@@ -203,7 +202,19 @@ return {
   -- Git Signs
   -- https://github.com/lewis6991/gitsigns.nvim
   {
-    "lewis6991/gitsigns.nvim",
+    'lewis6991/gitsigns.nvim',
+    keys = function()
+      local gitsigns = require 'gitsigns'
+      return {
+        { '<leader>gs', gitsigns.stage_hunk,      desc = '[G]it [s]tage Hunk' },
+        { '<leader>gS', gitsigns.stage_buffer,    desc = '[G]it [S]tage Buffer' },
+        { '<leader>gr', gitsigns.reset_hunk,      desc = '[G]it [r]eset Hunk' },
+        { '<leader>gR', gitsigns.reset_buffer,    desc = '[G]it [R]eset Buffer' },
+        { '<leader>gu', gitsigns.undo_stage_hunk, desc = '[G]it [U]ndo Stage Hunk' },
+        { '<leader>gp', gitsigns.preview_hunk,    desc = '[G]it [P]review Hunk' },
+        { '<leader>gd', gitsigns.diffthis,        desc = '[G]it [D]iff against index' },
+      }
+    end,
     opts = {
       current_line_blame = true,
       signs = Yuki.icons.git_signs,
@@ -213,7 +224,7 @@ return {
   },
 
   {
-    "folke/snacks.nvim",
+    'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
     opts = {

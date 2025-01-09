@@ -59,7 +59,7 @@ source $ZSH/oh-my-zsh.sh
 #############################################
 
 # General
-alias  cls="clear"
+alias    c="clear"
 alias    v="nvim"
 alias    q="exit"
 
@@ -74,15 +74,15 @@ alias   xc="cd $HOME/dotfiles"
 alias icat="kitten icat"
 
 # LSD
-alias ls="lsd"
-alias lt="lsd --tree --depth 3"
+alias   ls="lsd"
+alias   lt="lsd --tree --depth 3"
 
 # Bun
 alias  bff="bun format:fix"
 alias   bf="bun format"
 alias  blf="bun lint:fix"
 alias   bl="bun lint"
-alias   bi="bun install"
+alias   ba="bun add"
 alias   bu="bun update"
 alias   br="bun remove"
 alias   bx="bunx --bun"
@@ -117,22 +117,6 @@ gacp()
     git commit -a -m "$1"
   fi
   git push origin
-}
-
-crj() {
-  # Create bin directory if it doesn't exist
-  mkdir -p bin
-
-  # Compile Java files in src directory
-  javac -d bin src/*.java
-
-  # Check if compilation was successful
-  if [ $? -eq 0 ]; then
-    # Run the main class
-    java -cp bin Main
-  else
-    echo "Compilation failed."
-  fi
 }
 
 
