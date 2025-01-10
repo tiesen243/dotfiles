@@ -15,7 +15,7 @@ return {
   {
     'xiyaowong/transparent.nvim',
     opts = {
-      extra_groups = { 'Pmenu', 'NormalFloat', 'Float', 'FloatBorder' },
+      extra_groups = { 'NormalFloat', 'Float' },
       exclude_groups = { 'CursorLine' },
     },
     config = function(_, opts)
@@ -35,22 +35,16 @@ return {
     event = 'VeryLazy',
     opts = {
       options = {
-        theme = Yuki.colorcheme,
         icons_enabled = true,
-        disabled_filetypes = { 'snacks_dashboard', 'neo-tree' },
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
         always_divide_middle = true,
+        theme = Yuki.colorcheme or 'auto',
+        section_separators = { left = '', right = '' },
+        component_separators = { left = '', right = '' },
+        disabled_filetypes = { 'snacks_dashboard', 'neo-tree' },
       },
       sections = {
-        lualine_a = {
-          {
-            'mode',
-            fmt = function(str)
-              return ' ' .. str
-            end,
-          },
-        },
+        -- stylua: ignore
+        lualine_a = { { 'mode', fmt = function(str) return ' ' .. str end } },
         lualine_b = { 'branch' },
         lualine_c = {
           {
@@ -104,6 +98,24 @@ return {
           { utils.get_time,          padding = { left = 0, right = 1 } },
         },
       },
+    },
+  },
+
+  -- Snacks - A collection of small QoL plugins for Neovim.
+  -- https://github.com/folke/snacks.nvim
+  {
+    'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = {
+      dashboard = { preset = { header = Yuki.logo } },
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
     },
   },
 }
