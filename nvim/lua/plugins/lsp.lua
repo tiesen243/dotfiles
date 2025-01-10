@@ -133,10 +133,7 @@ return {
 
   -- LSP Progress
   -- https://github.com/j-hui/fidget.nvim
-  {
-    'j-hui/fidget.nvim',
-    opts = { notification = { window = { border = 'single', winblend = 1 } } },
-  },
+  { 'j-hui/fidget.nvim',       opts = {} },
 
   -- Java LSP
   -- https://github.com/mfussenegger/nvim-jdtls
