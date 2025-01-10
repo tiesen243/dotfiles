@@ -5,7 +5,7 @@ return {
     'folke/which-key.nvim',
     event = 'VimEnter',
     opts = {
-      preset = 'modern',
+      preset = 'helix',
       spec = {
         {
           mode = { 'n', 'v' },
@@ -29,41 +29,16 @@ return {
     'nvim-neo-tree/neo-tree.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons', 'MunifTanjim/nui.nvim' },
     keys = {
-      {
-        '<leader>e',
-        function()
-          require('neo-tree.command').execute { toggle = true, dir = Snacks.git.get_root() }
-        end,
-        desc = 'Explorer NeoTree (rwd)',
-      },
-      {
-        '<leader>E',
-        function()
-          require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() }
-        end,
-        desc = 'Explorer NeoTree (cwd)',
-      },
-      {
-        '<leader>be',
-        function()
-          require('neo-tree.command').execute { source = 'buffers', toggle = true }
-        end,
-        desc = 'Buffer Explorer',
-      },
-      {
-        '<leader>ge',
-        function()
-          require('neo-tree.command').execute { source = 'git_status', toggle = true }
-        end,
-        desc = 'Git Explorer',
-      },
+      -- stylua: ignore start
+      { '<leader>e',  function() require('neo-tree.command').execute { toggle = true, dir = Snacks.git.get_root() } end, desc = 'Explorer NeoTree (rwd)' },
+      { '<leader>E',  function() require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() } end,          desc = 'Explorer NeoTree (cwd)' },
+      { '<leader>be', function() require('neo-tree.command').execute { source = 'buffers', toggle = true } end,          desc = 'Buffer Explorer', },
+      { '<leader>ge', function() require('neo-tree.command').execute { source = 'git_status', toggle = true } end,       desc = 'Git Explorer', },
     },
     deactivate = function()
       vim.cmd [[Neotree close]]
     end,
     init = function()
-      -- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,
-      -- because `cwd` is not set up properly.
       vim.api.nvim_create_autocmd('BufEnter', {
         group = vim.api.nvim_create_augroup('Neotree_start_directory', { clear = true }),
         desc = 'Start Neo-tree with directory',
@@ -87,11 +62,7 @@ return {
         bind_to_cwd = false,
         use_libuv_file_watcher = true,
         follow_current_file = { enabled = true },
-        filtered_items = {
-          always_show = { '.gitignored' },
-          always_show_by_pattern = { '.env*' },
-          hide_by_name = { 'dist', 'node_modules', '.git', '.venv' },
-        },
+        filtered_items = { always_show = { '.gitignore' }, always_show_by_pattern = { '.env*' }, hide_by_name = { 'dist', 'node_modules', '.git', '.venv' } },
       },
       window = {
         width = 32,
@@ -108,18 +79,8 @@ return {
           },
         },
         default_component_configs = {
-          indent = {
-            with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-            expander_collapsed = '',
-            expander_expanded = '',
-            expander_highlight = 'NeoTreeExpander',
-          },
-          git_status = {
-            symbols = {
-              unstaged = '󰄱',
-              staged = '󰱒',
-            },
-          },
+          indent = { with_expanders = true, expander_collapsed = '', expander_expanded = '', expander_highlight = 'NeoTreeExpander' },
+          git_status = { symbols = { unstaged = '󰄱', staged = '󰱒' } },
         },
       },
     },
@@ -220,23 +181,6 @@ return {
       signs = Yuki.icons.git_signs,
       signs_staged = Yuki.icons.git_signs_staged,
       current_line_blame_opts = { delay = 500, ignore_whitespace = true },
-    },
-  },
-
-  {
-    'folke/snacks.nvim',
-    priority = 1000,
-    lazy = false,
-    opts = {
-      dashboard = { preset = { header = Yuki.logo } },
-      bigfile = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = true },
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
     },
   },
 }
