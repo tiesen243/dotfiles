@@ -56,7 +56,7 @@ opt.fillchars = {
   eob = ' ',
 }
 opt.foldlevel = 99
-opt.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()"
+opt.formatexpr = 'v:lua.vim.lsp.formatexpr()'
 opt.formatoptions = 'jcroqlnt'     -- tcqj
 opt.grepformat = '%f:%l:%c:%m'     -- Format for grepping
 opt.grepprg = 'rg --vimgrep'       -- Use ripgrep for grepping
