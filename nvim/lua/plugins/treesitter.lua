@@ -2,9 +2,9 @@
 vim.filetype.add {
   extension = { rasi = 'rasi', rofi = 'rasi', wofi = 'rasi', mdx = 'markdown' },
   pattern = {
-    ['*/waybar/config'] = 'jsonc',
-    ['*/kitty/.+%.conf'] = 'kitty',
-    ['*/hypr/.+%.conf'] = 'hyprlang',
+    ['.*/waybar/config'] = 'jsonc',
+    ['.*/kitty/.+%.conf'] = 'kitty',
+    ['.*/hypr/.+%.conf'] = 'hyprlang',
   },
 }
 vim.treesitter.language.register('bash', 'kitty')

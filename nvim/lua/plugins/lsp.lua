@@ -27,7 +27,6 @@ return {
         },
       },
       servers = {
-        emmet_ls = { enabled = Yuki.lang.react },
         eslint = { enabled = Yuki.lang.react },
         lua_ls = {
           enabled = true,
@@ -108,9 +107,10 @@ return {
           function(server_name)
             local server = opts.servers[server_name] or {}
 
-            server.capabilities =
-                vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(),
-                  require('blink.cmp').get_lsp_capabilities(), opts.capabilities)
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            server.capabilities = vim.tbl_deep_extend('force', capabilities,
+              require('cmp_nvim_lsp').default_capabilities(), opts.capabilities)
+
             server.on_attach = utils.lsp_attach
             require('lspconfig')[server_name].setup(server)
           end,
