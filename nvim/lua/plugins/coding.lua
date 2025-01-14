@@ -12,10 +12,11 @@ return {
   {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter' },
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path' },
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'saadparwaiz1/cmp_luasnip' },
     opts = function()
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require 'cmp'
+      local luasnip = require 'luasnip'
       local defaults = require 'cmp.config.default' ()
 
       local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
@@ -26,7 +27,7 @@ return {
         preselect = cmp.PreselectMode.Item,
         snippet = {
           expand = function(args)
-            return vim.snippet.expand(args.body)
+            return luasnip.lsp_expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert {
@@ -34,25 +35,33 @@ return {
           ['<C-j>'] = cmp.mapping.scroll_docs(4),
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+              cmp.select_next_item()
+            elseif luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
             else
               fallback()
             end
-          end, { 'i' }),
+          end, { 'i', 's' }),
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+              cmp.select_prev_item()
+            elseif luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
             else
               fallback()
             end
-          end, { 'i' }),
+          end, { 'i', 's' }),
           ['<CR>'] = cmp.mapping(function(fallback)
-            if cmp.visible() and cmp.get_active_entry() then
-              cmp.confirm { select = true }
+            if cmp.visible() then
+              if luasnip.expandable() then
+                luasnip.expand()
+              else
+                cmp.confirm { select = true }
+              end
             else
               fallback()
             end
-          end, { 'i' }),
+          end),
           ['<C-Space>'] = cmp.mapping(function()
             if cmp.visible() then
               cmp.abort()
@@ -65,7 +74,7 @@ return {
           { name = 'nvim_lsp' },
           { name = 'path' },
           { name = 'buffer' },
-          { name = 'snippets' },
+          { name = 'luasnip' },
         },
         formatting = {
           fields = { 'kind', 'abbr', 'menu' },
@@ -102,13 +111,14 @@ return {
   },
 
   -- Snippets
+  -- https://github.com/L3MON4D3/LuaSnip
   {
-    'garymjr/nvim-snippets',
+    'L3MON4D3/LuaSnip',
     dependencies = { 'rafamadriz/friendly-snippets' },
-    opts = {
-      create_cmp_source = true,
-      friendly_snippets = true,
-    },
+    opts = function()
+      require('luasnip.loaders.from_vscode').lazy_load()
+      return {}
+    end,
   },
 
   -- Formatter
