@@ -5,8 +5,8 @@ return {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-      'williamboman/mason.nvim',
-      { 'williamboman/mason-lspconfig.nvim', config = function() end },
+      { 'williamboman/mason.nvim',           config = true },
+      { 'williamboman/mason-lspconfig.nvim', config = true },
     },
     opts = {
       inlay_hints = { enabled = true },
@@ -109,7 +109,7 @@ return {
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             server.capabilities = vim.tbl_deep_extend('force', capabilities,
-              require('cmp_nvim_lsp').default_capabilities(), opts.capabilities)
+              require('blink.cmp').get_lsp_capabilities(opts.capabilities))
 
             server.on_attach = utils.lsp_attach
             require('lspconfig')[server_name].setup(server)
