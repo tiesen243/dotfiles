@@ -30,8 +30,8 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-tree/nvim-web-devicons', 'MunifTanjim/nui.nvim' },
     keys = {
       -- stylua: ignore start
-      { '<leader>e',  function() require('neo-tree.command').execute { toggle = true, dir = Snacks.git.get_root() } end, desc = 'Explorer NeoTree (rwd)' },
-      { '<leader>E',  function() require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() } end,          desc = 'Explorer NeoTree (cwd)' },
+      { '<leader>e',  function() require('neo-tree.command').execute { toggle = true, dir = Snacks.git.get_root() } end, desc = 'File Explorer (rwd)' },
+      { '<leader>E',  function() require('neo-tree.command').execute { toggle = true, dir = vim.uv.cwd() } end,          desc = 'File Explorer (cwd)' },
       { '<leader>be', function() require('neo-tree.command').execute { source = 'buffers', toggle = true } end,          desc = 'Buffer Explorer', },
       { '<leader>ge', function() require('neo-tree.command').execute { source = 'git_status', toggle = true } end,       desc = 'Git Explorer', },
     },
@@ -56,8 +56,6 @@ return {
       })
     end,
     opts = {
-      sources = { 'filesystem', 'buffers', 'git_status' },
-      open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
       filesystem = {
         bind_to_cwd = false,
         use_libuv_file_watcher = true,
@@ -129,7 +127,7 @@ return {
         { '<leader>fw',       builtin.grep_string, desc = '[F]ind by current [W]ord' },
         { '<leader><leader>', builtin.buffers,     desc = 'Find existing buffers' },
         {
-          '<leader>f/',
+          '<leader>/',
           function()
             builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown { previewer = false })
           end,
@@ -143,6 +141,7 @@ return {
       local actions = require 'telescope.actions'
       return {
         defaults = {
+          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
           mappings = {
             i = {
               ['<esc>'] = actions.close,
@@ -151,11 +150,8 @@ return {
             },
           },
         },
-        pickers = { find_files = { file_ignore_patterns = { 'node_modules', '.git', '.venv' }, hidden = true } },
-        live_grep = {
-          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
-          additional_args = { '--hidden' },
-        },
+        pickers = { find_files = { hidden = true } },
+        live_grep = { additional_args = { '--hidden' } },
       }
     end,
   },
