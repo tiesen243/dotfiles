@@ -5,8 +5,8 @@ return {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-      { 'williamboman/mason.nvim',           config = true },
-      { 'williamboman/mason-lspconfig.nvim', config = true },
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
     },
     opts = {
       inlay_hints = { enabled = true },
@@ -51,7 +51,7 @@ return {
           settings = {
             typescript = {
               inlayHints = {
-                parameterNames = { enabled = 'all' },
+                parameterNames = { enabled = 'literals' },
                 parameterTypes = { enabled = true },
                 variableTypes = { enabled = true },
                 propertyDeclarationTypes = { enabled = true },
@@ -133,7 +133,7 @@ return {
 
   -- LSP Progress
   -- https://github.com/j-hui/fidget.nvim
-  { 'j-hui/fidget.nvim',       opts = { notification = { window = { align = 'top', winblend = 0 } } } },
+  { 'j-hui/fidget.nvim',       opts = { notification = { window = { winblend = 0 } } } },
 
   -- Java LSP
   -- https://github.com/mfussenegger/nvim-jdtls
