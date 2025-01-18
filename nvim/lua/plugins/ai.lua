@@ -4,7 +4,7 @@ return {
   {
     'github/copilot.vim',
     lazy = false,
-    enabled = Yuki.ai,
+    enabled = Yuki.use_copilot,
     cmd = 'Copilot',
     keys = {
       -- stylua: ignore
@@ -17,7 +17,7 @@ return {
   {
     'CopilotC-Nvim/CopilotChat.nvim',
     branch = 'main',
-    enabled = Yuki.ai,
+    enabled = Yuki.use_copilot,
     cmd = 'CopilotChat',
     keys = function()
       local chat = require 'CopilotChat'

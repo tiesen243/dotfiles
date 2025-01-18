@@ -18,6 +18,7 @@ export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="yuki"
+# Tokyo Night theme for fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
   --info=inline-right \
