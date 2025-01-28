@@ -1,5 +1,21 @@
 local M = {}
 
+---@param t table
+---@param key string
+---@param values table
+M.extend = function(t, key, values)
+  local keys = vim.split(key, ".", { plain = true })
+  for i = 1, #keys do
+    local k = keys[i]
+    t[k] = t[k] or {}
+    if type(t) ~= "table" then
+      return
+    end
+    t = t[k]
+  end
+  return vim.list_extend(t, values)
+end
+
 ---@param method string|string[]
 M.has = function(buffer, method)
   if type(method) == 'table' then
@@ -20,6 +36,8 @@ M.has = function(buffer, method)
   return false
 end
 
+---@param client table
+---@param bufnr vbuf
 M.lsp_attach = function(client, bufnr)
   local builtin = require 'telescope.builtin'
   -- stylua: ignore start
@@ -75,6 +93,7 @@ M.lsp_attach = function(client, bufnr)
   end
 end
 
+---@param direction string | 'h' | 'j' | 'k' | 'l'
 M.navigate = function(direction)
   local mappings = { h = 'left', j = 'bottom', k = 'top', l = 'right' }
   local left_win = vim.fn.winnr('1' .. direction)

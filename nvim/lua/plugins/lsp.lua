@@ -5,7 +5,7 @@ return {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     dependencies = {
-      'williamboman/mason.nvim',
+      { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
     },
     opts = {
@@ -27,9 +27,9 @@ return {
         },
       },
       servers = {
-        eslint = { enabled = Yuki.coding.lang.react },
+        eslint = { mason = Yuki.coding.lang.react },
         lua_ls = {
-          enabled = true,
+          mason = true,
           settings = {
             Lua = {
               workspace = { checkThirdParty = false },
@@ -41,10 +41,10 @@ return {
             },
           },
         },
-        basedpyright = { enabled = Yuki.coding.lang.python },
-        jdtls = { enabled = Yuki.coding.lang.java },
+        basedpyright = { mason = Yuki.coding.lang.python },
+        jdtls = { mason = Yuki.coding.lang.java },
         jsonls = {
-          enabled = true,
+          mason = true,
           settings = {
             json = {
               schemas = {
@@ -54,11 +54,16 @@ return {
             },
           },
         },
-        prismals = { enabled = Yuki.coding.lang.react },
-        ruff = { enabled = Yuki.coding.lang.python },
-        tailwindcss = { enabled = Yuki.coding.lang.react },
+        prismals = { mason = Yuki.coding.lang.react },
+        ruff = { mason = Yuki.coding.lang.python },
+        tailwindcss = { mason = Yuki.coding.lang.react },
+        volar = {
+          mason = Yuki.coding.lang.vue,
+          init_options = { vue = { hybridMode = true } },
+        },
         vtsls = {
-          enabled = Yuki.coding.lang.react,
+          mason = Yuki.coding.lang.react,
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact' },
           settings = {
             typescript = {
               inlayHints = {
@@ -101,9 +106,23 @@ return {
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-      local ensure_installed = vim.tbl_filter(function(server)
-        return opts.servers[server].enabled
-      end, vim.tbl_keys(opts.servers or {}))
+      local ensure_installed = {} ---@type string[]
+      for server, server_opts in pairs(opts.servers) do
+        if server_opts.mason then
+          ensure_installed[#ensure_installed + 1] = server
+        end
+      end
+
+      if Yuki.coding.lang.vue then
+        table.insert(opts.servers.vtsls.filetypes, 'vue')
+        utils.extend(opts.servers.vtsls, "settings.vtsls.tsserver.globalPlugins", {
+          {
+            name = '@vue/typescript-plugin',
+            location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+            languages = { 'vue' },
+          },
+        })
+      end
 
       require('mason').setup {
         ui = {
@@ -113,7 +132,11 @@ return {
       }
 
       require('mason-lspconfig').setup {
-        ensure_installed = ensure_installed,
+        ensure_installed = vim.tbl_deep_extend(
+          "force",
+          ensure_installed,
+          {} ---@type string[] @ Additional servers to install
+        ),
         handlers = {
           function(server_name)
             local server = opts.servers[server_name] or {}
@@ -138,7 +161,7 @@ return {
       click = true,
       highlight = true,
       icons = Yuki.icons.kinds,
-      lsp = { auto_attach = true },
+      lsp = { auto_attach = true, preference = { "volar" } },
     },
   },
 

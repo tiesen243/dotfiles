@@ -16,6 +16,7 @@ _G.Yuki = {
       java = false,
       python = false,
       react = true,
+      vue = true,
     },
     use_copilot = true,
   },
