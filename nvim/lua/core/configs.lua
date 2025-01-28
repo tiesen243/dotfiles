@@ -9,12 +9,15 @@ vim.g.snacks_animate = true
 vim.g.root_spec = { 'lsp', { '.git', 'lua' }, 'cwd' }
 
 _G.Yuki = {
-  use_copilot = true,
   colorcheme = 'tokyonight',
-  lang = {
-    java = false,
-    python = false,
-    react = true,
+  coding = {
+    format_on_save = true,
+    lang = {
+      java = false,
+      python = false,
+      react = true,
+    },
+    use_copilot = true,
   },
   icons = {
     diagnostics = {
