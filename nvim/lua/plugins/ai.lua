@@ -48,6 +48,7 @@ return {
       }
     end,
     opts = {
+      model = 'claude-3.5-sonnet',
       window = { title = 'Copilot Chat', layout = 'vertical', width = 0.4 },
       auto_insert_mode = true,
       question_header = ' ' .. (vim.env.USER or 'User') .. ' ',
