@@ -2,7 +2,9 @@
 vim.api.nvim_create_autocmd('BufWritePre', {
   group = vim.api.nvim_create_augroup('LspFormatting', {}),
   callback = function()
-    pcall(vim.lsp.buf.format, { timeout = 2000 })
+    if Yuki.coding.format_on_save then
+      pcall(vim.lsp.buf.format, { timeout = 2000 })
+    end
   end,
 })
 
@@ -63,7 +65,7 @@ return {
 
       nls.setup {
         sources = {
-          Yuki.lang.react and nls.builtins.formatting.prettier,
+          Yuki.coding.lang.react and nls.builtins.formatting.prettier,
           nls.builtins.formatting.shfmt,
           nls.builtins.formatting.stylua,
         },

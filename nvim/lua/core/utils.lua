@@ -28,13 +28,13 @@ M.lsp_attach = function(client, bufnr)
     { 'gD',         vim.lsp.buf.declaration,               desc = '[G]oto [D]eclaration' },
     { 'gr',         builtin.lsp_references,                desc = '[G]oto [R]eferences',       opts = { nowait = true } },
     { 'gi',         builtin.lsp_implementations,           desc = '[G]oto [I]mplementation' },
-    { '<C-k>',      vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp',   mode = { 'i', 'n' } },
+    { '<C-k>',      vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp',                                            mode = { 'i', 'n' } },
     { '<C-j>',      vim.lsp.buf.hover,                     desc = '[H]over doc',               mode = { 'i', 'n' } },
-    { '<leader>ca', vim.lsp.buf.code_action,               desc = '[C]ode [A]ction',           has = 'codeAction',      mode = { 'n', 'x' } },
+    { '<leader>ca', vim.lsp.buf.code_action,               desc = '[C]ode [A]ction',           has = 'codeAction',                                               mode = { 'n', 'x' } },
     { '<leader>cd', vim.diagnostic.open_float,             desc = '[C]ode [D]iagnostics' },
     { '<leader>cf', vim.lsp.buf.format,                    desc = '[C]ode [F]ormat' },
     { '<leader>cr', vim.lsp.buf.rename,                    desc = '[C]ode [R]ename',           has = 'rename' },
-    { '<leader>cR', Snacks.rename.rename_file,             desc = '[C]ode [R]ename file' },
+    { '<leader>cR', Snacks.rename.rename_file,             desc = '[C]ode [R]ename file',      has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
     { '<leader>cs', builtin.lsp_document_symbols,          desc = '[C]ode Document [S]ymbols' },
     { '<leader>ct', builtin.lsp_type_definitions,          desc = '[C]ode [T]ype Definition' },
     { '<leader>cw', builtin.lsp_dynamic_workspace_symbols, desc = '[C]ode [W]orkspace Symbols' },
@@ -53,6 +53,11 @@ M.lsp_attach = function(client, bufnr)
       cond = function() return Snacks.words.is_enabled() end,
     },
   }
+  Snacks.toggle({
+    name = "Format on save",
+    get = function() return Yuki.coding.format_on_save end,
+    set = function(state) Yuki.coding.format_on_save = state end,
+  }):map("<leader>cF")
   -- stylua: ignore end
 
   for _, k in ipairs(keys) do
