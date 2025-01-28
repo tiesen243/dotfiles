@@ -1,28 +1,69 @@
 local M = {}
 
-M.lsp_attach = function(client, bufnr)
-  local map = function(key, func, desc, mode)
-    mode = mode or 'n'
-    vim.keymap.set(mode, key, func, { buffer = bufnr, desc = desc })
+---@param method string|string[]
+M.has = function(buffer, method)
+  if type(method) == 'table' then
+    for _, m in ipairs(method) do
+      if M.has(buffer, m) then
+        return true
+      end
+    end
+    return false
   end
+  method = method:find '/' and method or 'textDocument/' .. method
+  local clients = vim.lsp.get_clients { bufnr = buffer }
+  for _, client in ipairs(clients) do
+    if client.supports_method(method) then
+      return true
+    end
+  end
+  return false
+end
 
+M.lsp_attach = function(client, bufnr)
   local builtin = require 'telescope.builtin'
-  map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-  map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  map('gr', builtin.lsp_references, '[G]oto [R]eferences')
-  map('gi', builtin.lsp_implementations, '[G]oto [I]mplementation')
+  -- stylua: ignore start
+  local keys = {
+    { 'gd',         builtin.lsp_definitions,               desc = '[G]oto [D]efinition',       has = 'definition' },
+    { 'gD',         vim.lsp.buf.declaration,               desc = '[G]oto [D]eclaration' },
+    { 'gr',         builtin.lsp_references,                desc = '[G]oto [R]eferences',       opts = { nowait = true } },
+    { 'gi',         builtin.lsp_implementations,           desc = '[G]oto [I]mplementation' },
+    { '<C-k>',      vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp',   mode = { 'i', 'n' } },
+    { '<C-j>',      vim.lsp.buf.hover,                     desc = '[H]over doc',               mode = { 'i', 'n' } },
+    { '<leader>ca', vim.lsp.buf.code_action,               desc = '[C]ode [A]ction',           has = 'codeAction',      mode = { 'n', 'x' } },
+    { '<leader>cd', vim.diagnostic.open_float,             desc = '[C]ode [D]iagnostics' },
+    { '<leader>cf', vim.lsp.buf.format,                    desc = '[C]ode [F]ormat' },
+    { '<leader>cr', vim.lsp.buf.rename,                    desc = '[C]ode [R]ename',           has = 'rename' },
+    { '<leader>cR', Snacks.rename.rename_file,             desc = '[C]ode [R]ename file' },
+    { '<leader>cs', builtin.lsp_document_symbols,          desc = '[C]ode Document [S]ymbols' },
+    { '<leader>ct', builtin.lsp_type_definitions,          desc = '[C]ode [T]ype Definition' },
+    { '<leader>cw', builtin.lsp_dynamic_workspace_symbols, desc = '[C]ode [W]orkspace Symbols' },
+    {
+      ']]',
+      function() Snacks.words.jump(vim.v.count1) end,
+      desc = 'Next Reference',
+      has = 'documentHighlight',
+      cond = function() return Snacks.words.is_enabled() end,
+    },
+    {
+      '[[',
+      function() Snacks.words.jump(-vim.v.count1) end,
+      desc = 'Previous Reference',
+      has = 'documentHighlight',
+      cond = function() return Snacks.words.is_enabled() end,
+    },
+  }
+  -- stylua: ignore end
 
-  map('<C-k>', vim.lsp.buf.signature_help, 'Signature help', { 'i', 'n' })
-  map('<C-j>', vim.lsp.buf.hover, '[H]over doc', { 'i', 'n' })
+  for _, k in ipairs(keys) do
+    local has = not k.has or M.has(bufnr, k.has)
+    local cond = not (keys.cond == false or ((type(keys.cond) == 'function') and not keys.cond()))
+    local otps = vim.tbl_extend('force', k.opts or {}, { buffer = bufnr, desc = k.desc, silent = true })
 
-  map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-  map('<leader>cd', vim.diagnostic.open_float, '[C]ode [D]iagnostics')
-  map('<leader>cf', vim.lsp.buf.format, '[C]ode [F]ormat')
-  map('<leader>cr', vim.lsp.buf.rename, '[C]ode [R]ename')
-  map('<leader>cR', Snacks.rename.rename_file, '[C]ode [R]ename file')
-  map('<leader>cs', builtin.lsp_document_symbols, '[C]ode Document [S]ymbols')
-  map('<leader>ct', builtin.lsp_type_definitions, '[C]ode [T]ype Definition')
-  map('<leader>cw', builtin.lsp_dynamic_workspace_symbols, '[C]ode [W]orkspace Symbols')
+    if has and cond then
+      vim.keymap.set(k.mode or 'n', k[1], k[2], otps)
+    end
+  end
 
   if client.server_capabilities.documentSymbolProvider then
     require('nvim-navic').attach(client, bufnr)
