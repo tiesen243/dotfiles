@@ -27,7 +27,7 @@ return {
         },
       },
       servers = {
-        eslint = { enabled = Yuki.lang.react },
+        eslint = { enabled = Yuki.coding.lang.react },
         lua_ls = {
           enabled = true,
           settings = {
@@ -41,13 +41,24 @@ return {
             },
           },
         },
-        basedpyright = { enabled = Yuki.lang.python },
-        jdtls = { enabled = Yuki.lang.java },
-        prismals = { enabled = Yuki.lang.react },
-        ruff = { enabled = Yuki.lang.python },
-        tailwindcss = { enabled = Yuki.lang.react },
+        basedpyright = { enabled = Yuki.coding.lang.python },
+        jdtls = { enabled = Yuki.coding.lang.java },
+        jsonls = {
+          enabled = true,
+          settings = {
+            json = {
+              schemas = {
+                { fileMatch = { 'package.json' },   url = 'https://json.schemastore.org/package.json' },
+                { fileMatch = { 'tsconfig*.json' }, url = 'https://json.schemastore.org/tsconfig.json' },
+              },
+            },
+          },
+        },
+        prismals = { enabled = Yuki.coding.lang.react },
+        ruff = { enabled = Yuki.coding.lang.python },
+        tailwindcss = { enabled = Yuki.coding.lang.react },
         vtsls = {
-          enabled = Yuki.lang.react,
+          enabled = Yuki.coding.lang.react,
           settings = {
             typescript = {
               inlayHints = {
@@ -137,5 +148,5 @@ return {
 
   -- Java LSP
   -- https://github.com/mfussenegger/nvim-jdtls
-  { 'mfussenegger/nvim-jdtls', enabled = Yuki.lang.java },
+  { 'mfussenegger/nvim-jdtls', enabled = Yuki.coding.lang.java },
 }
