@@ -44,7 +44,7 @@ return {
         basedpyright = { mason = Yuki.coding.lang.python },
         jdtls = { mason = Yuki.coding.lang.java },
         jsonls = {
-          mason = true,
+          mason = false,
           settings = {
             json = {
               schemas = {

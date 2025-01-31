@@ -14,7 +14,7 @@ _G.Yuki = {
     format_on_save = true,
     lang = {
       java = false,
-      python = false,
+      python = true,
       react = true,
       vue = true,
     },
