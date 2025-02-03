@@ -8,9 +8,11 @@ getCurrentBrightness() {
 }
 
 if [ $1 = "--up" ]; then
+	dunstctl close-all
 	brightnessctl s +5%
 	notify-send "Brightness increased to $(getCurrentBrightness)"
 elif [ $1 = "--down" ]; then
+	dunstctl close-all
 	brightnessctl s 5%-
 	notify-send "Brightness decreased to $(getCurrentBrightness)"
 fi
