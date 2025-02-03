@@ -147,6 +147,7 @@ return {
                 },
               },
             })
+            Yuki.lsp.attach(client, args.buf)
 
             -- User can set additional keymaps in opts.on_attach
             if opts.on_attach then
