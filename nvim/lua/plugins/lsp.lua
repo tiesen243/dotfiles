@@ -25,18 +25,8 @@ return {
           },
         },
       },
-      -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-      -- Be aware that you also will need to properly configure your LSP server to
-      -- provide the inlay hints.
-      inlay_hints = {
-        enabled = true,
-        exclude = { "vue" }, -- filetypes for which you don't want to enable inlay hints
-      },
-      -- add any global capabilities here
+      inlay_hints = { enabled = true },
       capabilities = { workspace = { fileOperations = { didRename = true, willRename = true } } },
-      -- options for vim.lsp.buf.format
-      -- `bufnr` and `filter` is handled by the LazyVim formatter,
-      -- but can be also overridden when specified
       format = {
         formatting_options = nil,
         timeout_ms = nil,
@@ -75,7 +65,6 @@ return {
       },
     },
     config = function(_, opts)
-      -- setup keymaps
       Yuki.lsp.on_attach(function(client, buffer)
         Yuki.lsp.attach(client, buffer)
       end)
@@ -95,9 +84,9 @@ return {
       if opts.inlay_hints.enabled then
         Yuki.lsp.on_supports_method("textDocument/inlayHint", function(_, buffer)
           if
-            vim.api.nvim_buf_is_valid(buffer)
-            and vim.bo[buffer].buftype == ""
-            and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
+              vim.api.nvim_buf_is_valid(buffer)
+              and vim.bo[buffer].buftype == ""
+              and not vim.tbl_contains(opts.inlay_hints.exclude, vim.bo[buffer].filetype)
           then
             vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
           end
@@ -106,14 +95,14 @@ return {
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = Yuki.icons.diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
+            or function(diagnostic)
+              local icons = Yuki.icons.diagnostics
+              for d, icon in pairs(icons) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                  return icon
+                end
               end
             end
-          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -181,7 +170,6 @@ return {
     end,
   },
 
-  -- cmdline tools and lsp servers
   {
 
     "williamboman/mason.nvim",
