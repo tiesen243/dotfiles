@@ -49,7 +49,6 @@ return {
 
       nls.setup({
         sources = {
-          nls.builtins.formatting.prettier,
           nls.builtins.formatting.shfmt,
           nls.builtins.formatting.stylua,
         },
