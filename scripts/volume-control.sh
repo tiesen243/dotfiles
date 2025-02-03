@@ -15,12 +15,15 @@ getVolumeStatus() {
 }
 
 if [ $1 = "--up" ]; then
+	dunstctl close-all
 	pactl set-sink-volume @DEFAULT_SINK@ +5%
 	notify-send "Volume increased to $(getCurrentVolume)"
 elif [ $1 = "--down" ]; then
+	dunstctl close-all
 	pactl set-sink-volume @DEFAULT_SINK@ -5%
 	notify-send "Volume decreased to $(getCurrentVolume)"
 elif [ $1 = "--toggle" ]; then
+	dunstctl close-all
 	pactl set-sink-mute @DEFAULT_SINK@ toggle
 	notify-send "Volume $(getVolumeStatus)"
 fi
