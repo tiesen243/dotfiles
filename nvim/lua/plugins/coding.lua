@@ -35,8 +35,6 @@ return {
       keymap = {
         ---@type string | 'none' |'default'| 'super-tab'|'enter' |
         preset = 'super-tab',
-        ['<C-k>'] = { 'select_prev', 'fallback' },
-        ['<C-j>'] = { 'select_next', 'fallback' },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
@@ -45,11 +43,10 @@ return {
       },
       completion = {
         accept = { auto_brackets = { enabled = true } },
-        menu = { draw = { treesitter = { 'lsp' } } },
         documentation = { auto_show = true, auto_show_delay_ms = 250 },
-        ghost_text = { enabled = true },
         list = { selection = { preselect = false, auto_insert = true } },
-        trigger = { show_in_snippet = false },
+        menu = { draw = { treesitter = { 'lsp' } } },
+        ghost_text = { enabled = true },
       },
       sources = { default = { 'lsp', 'path', 'buffer', 'snippets' } },
     },
