@@ -1,8 +1,11 @@
 return {
-  -- add json to treesitter
+  -- depends on the typescript
+  { import = "plugin.lang.typescript" },
+
+  -- add vue to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "vue" } },
+    opts = { ensure_installed = { "vue", "css" } },
   },
 
   -- setup lspconfig
@@ -15,6 +18,7 @@ return {
       },
     },
   },
+
   -- Configure tsserver plugin
   {
     "neovim/nvim-lspconfig",
