@@ -12,9 +12,9 @@ function M.snippet_preview(snippet)
     return vim.lsp._snippet_grammar.parse(snippet)
   end)
   return ok and tostring(parsed)
-      or M.snippet_replace(snippet, function(placeholder)
-        return M.snippet_preview(placeholder.text)
-      end):gsub("%$0", "")
+    or M.snippet_replace(snippet, function(placeholder)
+      return M.snippet_preview(placeholder.text)
+    end):gsub("%$0", "")
 end
 
 function M.snippet_fix(snippet)
@@ -34,9 +34,9 @@ function M.expand(snippet)
     ok = pcall(vim.snippet.expand, fixed)
 
     local msg = ok and "Failed to parse snippet,\nbut was able to fix it automatically."
-        or ("Failed to parse snippet.\n" .. err)
+      or ("Failed to parse snippet.\n" .. err)
 
-    vim.notify(msg)
+    Snacks.notify.warn(msg, { title = "Snippet" })
   end
 
   -- Restore top-level session when needed
