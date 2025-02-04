@@ -5,7 +5,7 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = { style = "night", transparent = vim.g.transparent_enabled },
+    opts = { style = "storm", transparent = vim.g.transparent_enabled },
   },
 
   -- Transparent nvim
@@ -13,14 +13,20 @@ return {
   {
     "xiyaowong/transparent.nvim",
     opts = {
-      extra_groups = { "NormalFloat", "Float" },
+      extra_groups = {
+        "NormalFloat",
+        "Float",
+        "TelescopeNormal",
+        "TelescopeBorder",
+        "SnacksPickerBorder",
+        "SnacksPickerInputBorder",
+      },
       exclude_groups = { "CursorLine" },
     },
     config = function(_, opts)
       require("transparent").setup(opts)
       require("transparent").clear_prefix("NeoTree")
       require("transparent").clear_prefix("WhichKey")
-      require("transparent").clear_prefix("Telescope")
     end,
   },
 
