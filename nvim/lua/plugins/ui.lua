@@ -61,16 +61,9 @@ return {
               hint = Yuki.icons.diagnostics.Hint,
             },
           },
-          { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
-          { "filename", file_status = true, path = 1 },
-          {
-            function()
-              return require("nvim-navic").get_location()
-            end,
-            cond = function()
-              return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-            end,
-          },
+          { "filetype", icon_only = true,            separator = "", padding = { left = 1, right = 0 } },
+          { "filename", file_status = true,          path = 1 },
+          { 'navic',    color_correction = "dynamic" },
         },
         lualine_x = {
           {
