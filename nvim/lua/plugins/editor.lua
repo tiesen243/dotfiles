@@ -249,7 +249,7 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
-      dashboard = { preset = { header = Yuki.logo } },
+      dashboard = { preset = { header = Yuki.configs.logo } },
       indent = { enabled = true },
       input = { enabled = true },
       picker = { enabled = true },

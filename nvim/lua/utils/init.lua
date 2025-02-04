@@ -1,25 +1,5 @@
 local M = {}
 
-M.coding = {
-  ai = false,
-  lang = {
-    java = false,
-    python = false,
-    typescript = true,
-    vue = true,
-  },
-}
-
-M.colorscheme = "tokyonight"
-M.logo = [[
-██╗   ██╗██╗   ██╗██╗  ██╗██╗
-╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
- ╚████╔╝ ██║   ██║█████╔╝ ██║
-  ╚██╔╝  ██║   ██║██╔═██╗ ██║
-   ██║   ╚██████╔╝██║  ██╗██║
-   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
-   ]]
-
 M.actions = require("utils.actions")
 M.cmp = require("utils.cmp")
 M.icons = require("utils.icons")
