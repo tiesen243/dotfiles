@@ -2,7 +2,7 @@ return {
   -- add javascript, typescript to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "javascript", "typescript" } },
+    opts = { ensure_installed = { "javascript", "typescript", "tsx" } },
   },
 
   -- setup lspconfig
@@ -47,8 +47,34 @@ return {
             },
           },
         },
-        eslint = {},
+        eslint = {
+          settings = {
+            workingDirectories = { mode = "auto" },
+            format = Yuki.configs.auto_format
+          }
+        },
       },
+      setup = {
+        eslint = function()
+          if not Yuki.configs.auto_format then
+            return
+          end
+
+          if not pcall(require, "vim.lsp._dynamic") then
+            local buf = vim.api.nvim_get_current_buf()
+            local client = Yuki.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
+            local augroup = vim.api.nvim_create_augroup("yuki_eslint_fix_all", { clear = true })
+
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = buf })
+            if client then
+              local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+              if #diag > 0 then
+                vim.cmd("EslintFixAll")
+              end
+            end
+          end
+        end
+      }
     },
   },
 }
