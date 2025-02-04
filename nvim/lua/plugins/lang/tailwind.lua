@@ -1,8 +1,5 @@
-if not Yuki.configs.lang.tailwind then
-  return {}
-end
-
 return {
+  -- setup lspconfig
   {
     "neovim/nvim-lspconfig",
     opts = {

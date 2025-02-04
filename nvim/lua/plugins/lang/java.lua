@@ -1,7 +1,3 @@
-if not Yuki.configs.lang.java then
-  return {}
-end
-
 local function extend_or_override(config, custom, ...)
   if type(custom) == "function" then
     config = custom(config, ...) or config
@@ -12,6 +8,12 @@ local function extend_or_override(config, custom, ...)
 end
 
 return {
+  -- Add java to treesitter.
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "java" } },
+  },
+
   -- Configure nvim-lspconfig to install the server automatically via mason, but
   -- defer actually starting it to our configuration of nvim-jtdls below.
   {
@@ -119,11 +121,11 @@ return {
               {
                 mode = "n",
                 buffer = args.buf,
-                { "<leader>ca", vim.lsp.buf.code_action, desc = "[C]ode [A]ction" },
-                { "<leader>cx", group = "extract" },
+                { "<leader>ca",  vim.lsp.buf.code_action,               desc = "[C]ode [A]ction" },
+                { "<leader>cx",  group = "extract" },
                 { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
-                { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
-                { "<leader>co", require("jdtls").organize_imports, desc = "Organize Imports" },
+                { "<leader>cxc", require("jdtls").extract_constant,     desc = "Extract Constant" },
+                { "<leader>co",  require("jdtls").organize_imports,     desc = "Organize Imports" },
               },
             })
             wk.add({

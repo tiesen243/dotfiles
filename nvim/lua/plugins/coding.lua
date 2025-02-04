@@ -1,11 +1,3 @@
--- auto format
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = vim.api.nvim_create_augroup("yuki_format_on_save", { clear = true }),
-  callback = function()
-    pcall(vim.lsp.buf.format, { timeout = 2000 })
-  end,
-})
-
 return {
   {
     "saghen/blink.cmp",
@@ -41,19 +33,15 @@ return {
   },
 
   -- Formatter
-  -- https://github.com/nvimtools/none-ls.nvim
+  -- https://github.com/stevearc/conform.nvim
   {
-    "nvimtools/none-ls.nvim",
-    opts = function()
-      local nls = require("null-ls")
-
-      nls.setup({
-        sources = {
-          nls.builtins.formatting.shfmt,
-          nls.builtins.formatting.stylua,
-        },
-      })
-    end,
+    "stevearc/conform.nvim",
+    opts = {
+      format_on_save = {
+        timeout_ms = 2000,
+        lsp_format = "fallback",
+      },
+    },
   },
 
   -- Auto pairs
