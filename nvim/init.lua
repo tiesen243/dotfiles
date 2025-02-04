@@ -28,7 +28,6 @@ vim.g.maplocalleader = "\\"
 
 _G.Yuki = require("utils")
 Yuki.configs = {
-  ai = true,
   auto_format = true,
   colorscheme = "tokyonight",
   logo = [[
@@ -45,6 +44,7 @@ Yuki.configs = {
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    { import = "plugins.ai.copilot-chat" },
     -- add supported langues
     -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
     { import = "plugins.lang.dot" },

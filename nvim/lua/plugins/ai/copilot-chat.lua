@@ -1,7 +1,3 @@
-if not Yuki.configs.ai then
-  return {}
-end
-
 local M = {}
 
 ---@param kind string
