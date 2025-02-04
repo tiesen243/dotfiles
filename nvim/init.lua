@@ -47,6 +47,7 @@ require("lazy").setup({
     -- add supported langues
     -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
     { import = "plugins.lang.json" },
+    { import = "plugins.lang.markdown" },
     { import = "plugins.lang.prisma" },
     { import = "plugins.lang.typescript" },
   },

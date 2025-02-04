@@ -31,10 +31,10 @@ return {
     },
     opts_extend = { "ensure_installed" },
     opts = {
-      auto_install = true,
+      auto_install = false,
       sync_install = true,
-      ensure_installed = {},
-      highlight = { enable = true },
+      ensure_installed = { "bash", "lua", "hyprlang" },
+      highlight = { enable = true, additional_vim_regex_highlighting = true },
       indent = { enable = true },
       incremental_selection = {
         enable = true,
@@ -52,6 +52,7 @@ return {
   -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {},
   },
 }

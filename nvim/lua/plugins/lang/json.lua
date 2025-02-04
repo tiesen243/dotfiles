@@ -2,7 +2,7 @@ return {
   -- add json to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "json5" } },
+    opts = { ensure_installed = { "json", "jsonc" } },
   },
 
   -- setup lspconfig
@@ -31,4 +31,17 @@ return {
       },
     },
   },
+
+  -- setup formatter
+  {
+    "stevearc/conform.nvim",
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        ["json"] = { "prettier" },
+        ["jsonc"] = { "prettier" }
+      },
+    },
+  },
+
 }
