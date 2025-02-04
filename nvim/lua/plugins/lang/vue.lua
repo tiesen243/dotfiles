@@ -1,4 +1,4 @@
-if not Yuki.coding.lang.vue then
+if not Yuki.configs.lang.vue then
   return {}
 end
 

@@ -105,4 +105,4 @@ end
 vim.g.markdown_recommended_style = 0
 
 -- Set colorscheme
-vim.cmd("colorscheme " .. Yuki.colorscheme)
+vim.cmd("colorscheme " .. Yuki.configs.colorscheme)

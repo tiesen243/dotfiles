@@ -1,4 +1,4 @@
-if not Yuki.coding.lang.python then
+if not Yuki.configs.lang.python then
   return {}
 end
 

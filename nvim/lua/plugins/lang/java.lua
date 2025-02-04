@@ -1,4 +1,4 @@
-if not Yuki.coding.lang.java then
+if not Yuki.configs.lang.java then
   return {}
 end
 
@@ -119,6 +119,7 @@ return {
               {
                 mode = "n",
                 buffer = args.buf,
+                { "<leader>ca", vim.lsp.buf.code_action, desc = "[C]ode [A]ction" },
                 { "<leader>cx", group = "extract" },
                 { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
                 { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
@@ -147,7 +148,6 @@ return {
                 },
               },
             })
-            Yuki.lsp.attach(client, args.buf)
 
             -- User can set additional keymaps in opts.on_attach
             if opts.on_attach then

@@ -1,4 +1,4 @@
-if not Yuki.coding.lang.typescript or not Yuki.coding.lang.vue then
+if not Yuki.configs.lang.prisma then
   return {}
 end
 
