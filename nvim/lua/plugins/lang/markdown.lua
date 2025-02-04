@@ -8,16 +8,6 @@ return {
     opts = { ensure_installed = { "markdown", "markdown_inline" } },
   },
 
-  -- setup lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        marksman = {},
-      },
-    },
-  },
-
   -- setup formatter
   {
     "stevearc/conform.nvim",
