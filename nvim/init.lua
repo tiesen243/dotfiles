@@ -29,6 +29,7 @@ vim.g.maplocalleader = "\\"
 _G.Yuki = require("utils")
 Yuki.configs = {
   ai = true,
+  auto_format = true,
   colorscheme = "tokyonight",
   logo = [[
 ██╗   ██╗██╗   ██╗██╗  ██╗██╗
@@ -46,6 +47,8 @@ require("lazy").setup({
     { import = "plugins" },
     -- add supported langues
     -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
+    { import = "plugins.lang.dot" },
+    { import = "plugins.lang.git" },
     { import = "plugins.lang.json" },
     { import = "plugins.lang.markdown" },
     { import = "plugins.lang.prisma" },

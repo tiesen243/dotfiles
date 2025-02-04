@@ -258,8 +258,10 @@ return {
     opts = {
       click = true,
       highlight = true,
+      depth_limit = 5,
+      lazy_update_context = true,
       icons = Yuki.icons.kinds,
-      lsp = { auto_attach = true, preference = { "volar" } },
+      lsp = { preference = { "volar" } },
     },
   },
 

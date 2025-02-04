@@ -37,10 +37,10 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
-      format_on_save = {
+      format_on_save = Yuki.configs.auto_format and {
         timeout_ms = 2000,
         lsp_format = "fallback",
-      },
+      } or {},
     },
   },
 

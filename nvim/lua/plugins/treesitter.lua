@@ -1,15 +1,3 @@
--- Register filetype and extension for treesitter
-vim.filetype.add({
-  extension = { rasi = "rasi", rofi = "rasi", wofi = "rasi", mdx = "markdown" },
-  pattern = {
-    [".*/waybar/config"] = "jsonc",
-    [".*/kitty/.+%.conf"] = "kitty",
-    [".*/hypr/.+%.conf"] = "hyprlang",
-  },
-})
-vim.treesitter.language.register("bash", "kitty")
-vim.treesitter.language.register("markdown", "mdx")
-
 return {
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate

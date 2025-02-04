@@ -1,8 +1,5 @@
-Yuki.on_very_lazy(function()
-  vim.filetype.add({
-    extension = { mdx = "markdown.mdx" },
-  })
-end)
+vim.filetype.add({ extension = { mdx = "markdown" } })
+vim.treesitter.language.register("markdown", "mdx")
 
 return {
   -- Add markdown to treesitter.
@@ -43,7 +40,6 @@ return {
       },
       heading = {
         sign = false,
-        icons = {},
       },
       checkbox = {
         enabled = false,

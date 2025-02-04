@@ -45,7 +45,7 @@
     { "type": "icons", "key": "󰀻  Icon" },
     { "type": "cursor", "key": "󰏚  Cursor" },
     { "type": "font", "key": "  Font" },
-    { "type": "terminalFont", "key": "  Terminal Font" },
+    { "type": "terminalfont", "key": "  Terminal Font" },
     {
       "type": "custom",
       "format": "\u001b[90m└────────────────────────────────────────────────────────────┘",

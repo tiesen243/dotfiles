@@ -35,13 +35,4 @@ M.get_pkg_path = function(pkg, path, opts)
   return ret
 end
 
-M.on_very_lazy = function(fn)
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "VeryLazy",
-    callback = function()
-      fn()
-    end,
-  })
-end
-
 return M
