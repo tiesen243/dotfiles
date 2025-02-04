@@ -151,9 +151,6 @@ map("n", "<leader>qs", "<cmd>wqa<cr>", { desc = "Quit & Save All" })
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
--- File explorer
-map("n", "<leader>e", function() Snacks.explorer() end, { desc = "File Explorer" })
-
 -- floating terminal
 map("n", "<c-/>", function() Snacks.terminal(nil, { cwd = Snacks.git.get_root() }) end, { desc = "Terminal (Root Dir)" })
 map("n", "<c-_>", function() Snacks.terminal(nil, { cwd = Snacks.git.get_root() }) end, { desc = "which_key_ignore" })

@@ -24,7 +24,7 @@ M.attach = function(_, buffer)
     { "gy",         vim.lsp.buf.type_definition,           desc = "[G]oto T[y]pe Definition" },
     { '<c-k>',      vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp',                                            mode = { 'i' } },
     { 'gk',         vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp' },
-    { 'K',          vim.lsp.buf.hover,                     desc = 'Hover doc',                 mode = { 'i' } },
+    { 'K',          vim.lsp.buf.hover,                     desc = 'Hover doc' },
     { '<leader>ca', vim.lsp.buf.code_action,               desc = '[C]ode [A]ction',           has = 'codeAction',                                               mode = { 'n', 'x' } },
     { '<leader>cd', vim.diagnostic.open_float,             desc = '[C]ode [D]iagnostics' },
     { '<leader>cf', vim.lsp.buf.format,                    desc = '[C]ode [F]ormat' },

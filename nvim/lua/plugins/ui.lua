@@ -16,6 +16,9 @@ return {
       extra_groups = {
         "NormalFloat",
         "Float",
+        "NeoTreeNormal",
+        "WhichKeyNormal",
+        "WhichKeyBorder",
         "TelescopeNormal",
         "TelescopeBorder",
         "SnacksPickerBorder",
@@ -23,11 +26,6 @@ return {
       },
       exclude_groups = { "CursorLine" },
     },
-    config = function(_, opts)
-      require("transparent").setup(opts)
-      require("transparent").clear_prefix("NeoTree")
-      require("transparent").clear_prefix("WhichKey")
-    end,
   },
 
   -- Statusline
