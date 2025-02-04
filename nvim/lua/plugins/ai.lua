@@ -10,7 +10,7 @@ function M.pick(kind)
     local actions = require("CopilotChat.actions")
     local items = actions[kind .. "_actions"]()
     if not items then
-      vim.notify("No " .. kind .. " found on the current line")
+      Snacks.notify.warn("No " .. kind .. " found on the current line", { title = "Copilot Chat" })
       return
     end
     require("CopilotChat.integrations.telescope").pick(items)
@@ -36,8 +36,8 @@ return {
       }
     end,
     keys = {
-      { "<c-s>",     "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
-      { "<leader>a", "",     desc = "+ai",        mode = { "n", "v" } },
+      { "<c-s>", "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
+      { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<leader>aa",
         function()
