@@ -13,6 +13,7 @@ return {
   {
     "xiyaowong/transparent.nvim",
     opts = function()
+      require("transparent").clear_prefix("NeoTree")
       require("transparent").clear_prefix("SnacksNotifier")
 
       return {
@@ -27,7 +28,7 @@ return {
           "SnacksPickerBorder",
           "SnacksPickerInputBorder",
         },
-        exclude_groups = { "CursorLine" },
+        exclude_groups = { "CursorLine", "NeoTreeCursorLine" },
       }
     end,
   },

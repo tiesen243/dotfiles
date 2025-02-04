@@ -110,7 +110,7 @@ return {
       local events = require("neo-tree.events")
       opts.event_handlers = opts.event_handlers or {}
       vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_MOVED,   handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
       })
       require("neo-tree").setup(opts)
@@ -129,20 +129,19 @@ return {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
     version = false,
-    dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
     keys = function()
       local builtin = require("telescope.builtin")
 
       return {
-        { "<leader>fd", builtin.diagnostics, desc = "[F]ind [D]iagnostics" },
-        { "<leader>ff", builtin.find_files, desc = "[F]ind [F]iles" },
-        { "<leader>fg", builtin.live_grep, desc = "[F]ind by [G]rep" },
-        { "<leader>fh", builtin.help_tags, desc = "[F]ind [H]elp" },
-        { "<leader>fk", builtin.keymaps, desc = "[F]ind [K]eymaps" },
-        { "<leader>fr", builtin.oldfiles, desc = "[F]ind [R]ecents File" },
-        { "<leader>fs", builtin.builtin, desc = "[F]ind [S]elect Telescope" },
-        { "<leader>fw", builtin.grep_string, desc = "[F]ind by current [W]ord" },
-        { "<leader><leader>", builtin.buffers, desc = "Find existing buffers" },
+        { "<leader>fd",       builtin.diagnostics, desc = "[F]ind [D]iagnostics" },
+        { "<leader>ff",       builtin.find_files,  desc = "[F]ind [F]iles" },
+        { "<leader>fg",       builtin.live_grep,   desc = "[F]ind by [G]rep" },
+        { "<leader>fh",       builtin.help_tags,   desc = "[F]ind [H]elp" },
+        { "<leader>fk",       builtin.keymaps,     desc = "[F]ind [K]eymaps" },
+        { "<leader>fr",       builtin.oldfiles,    desc = "[F]ind [R]ecents File" },
+        { "<leader>fs",       builtin.builtin,     desc = "[F]ind [S]elect Telescope" },
+        { "<leader>fw",       builtin.grep_string, desc = "[F]ind by current [W]ord" },
+        { "<leader><leader>", builtin.buffers,     desc = "Find existing buffers" },
         {
           "<leader>/",
           function()
@@ -219,10 +218,10 @@ return {
           { "<leader>g", group = "git" },
           { "<leader>q", group = "quit/session" },
           { "<leader>u", group = "ui" },
-          { "[", group = "prev" },
-          { "]", group = "next" },
-          { "g", group = "goto" },
-          { "z", group = "fold" },
+          { "[",         group = "prev" },
+          { "]",         group = "next" },
+          { "g",         group = "goto" },
+          { "z",         group = "fold" },
           {
             "<leader>b",
             group = "buffer",
@@ -290,13 +289,13 @@ return {
     keys = function()
       local gitsigns = require("gitsigns")
       return {
-        { "<leader>gs", gitsigns.stage_hunk, desc = "[G]it [s]tage Hunk" },
-        { "<leader>gS", gitsigns.stage_buffer, desc = "[G]it [S]tage Buffer" },
-        { "<leader>gr", gitsigns.reset_hunk, desc = "[G]it [r]eset Hunk" },
-        { "<leader>gR", gitsigns.reset_buffer, desc = "[G]it [R]eset Buffer" },
+        { "<leader>gs", gitsigns.stage_hunk,      desc = "[G]it [s]tage Hunk" },
+        { "<leader>gS", gitsigns.stage_buffer,    desc = "[G]it [S]tage Buffer" },
+        { "<leader>gr", gitsigns.reset_hunk,      desc = "[G]it [r]eset Hunk" },
+        { "<leader>gR", gitsigns.reset_buffer,    desc = "[G]it [R]eset Buffer" },
         { "<leader>gu", gitsigns.undo_stage_hunk, desc = "[G]it [U]ndo Stage Hunk" },
-        { "<leader>gp", gitsigns.preview_hunk, desc = "[G]it [P]review Hunk" },
-        { "<leader>gd", gitsigns.diffthis, desc = "[G]it [D]iff against index" },
+        { "<leader>gp", gitsigns.preview_hunk,    desc = "[G]it [P]review Hunk" },
+        { "<leader>gd", gitsigns.diffthis,        desc = "[G]it [D]iff against index" },
       }
     end,
     opts = {

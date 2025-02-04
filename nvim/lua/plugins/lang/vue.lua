@@ -1,8 +1,11 @@
-if not Yuki.configs.lang.vue then
-  return {}
-end
-
 return {
+  -- add json to treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "vue" } },
+  },
+
+  -- setup lspconfig
   {
     "neovim/nvim-lspconfig",
     opts = {
