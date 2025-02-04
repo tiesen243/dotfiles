@@ -16,14 +16,15 @@ M.attach = function(_, buffer)
   local builtin = require("telescope.builtin")
   -- stylua: ignore start
   local keys = {
+    { '<leader>cI', '<cmd>LspInfo<cr>',                    desc = "Lsp Info" },
     { 'gd',         builtin.lsp_definitions,               desc = '[G]oto [D]efinition',       has = 'definition' },
     { 'gD',         vim.lsp.buf.declaration,               desc = '[G]oto [D]eclaration' },
     { 'gr',         builtin.lsp_references,                desc = '[G]oto [R]eferences',       opts = { nowait = true } },
     { 'gi',         builtin.lsp_implementations,           desc = '[G]oto [I]mplementation' },
-    { '<C-j>',      vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp',                                            mode = { 'i' } },
-    { 'J',          vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp' },
-    { '<C-k>',      vim.lsp.buf.hover,                     desc = '[H]over doc',               mode = { 'i' } },
-    { 'K',          vim.lsp.buf.hover,                     desc = 'Hover doc',                 has = 'hover', },
+    { "gy",         vim.lsp.buf.type_definition,           desc = "[G]oto T[y]pe Definition" },
+    { '<c-k>',      vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp',                                            mode = { 'i' } },
+    { 'gk',         vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp' },
+    { 'K',          vim.lsp.buf.hover,                     desc = 'Hover doc',                 mode = { 'i' } },
     { '<leader>ca', vim.lsp.buf.code_action,               desc = '[C]ode [A]ction',           has = 'codeAction',                                               mode = { 'n', 'x' } },
     { '<leader>cd', vim.diagnostic.open_float,             desc = '[C]ode [D]iagnostics' },
     { '<leader>cf', vim.lsp.buf.format,                    desc = '[C]ode [F]ormat' },

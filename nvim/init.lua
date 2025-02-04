@@ -25,7 +25,28 @@ vim.opt.rtp:prepend(lazypath)
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
 _G.Yuki = require("utils")
+Yuki.configs = {
+  ai = true,
+  lang = {
+    java = false,
+    prisma = true,
+    python = false,
+    tailwind = true,
+    typescript = true,
+    vue = true,
+  },
+  colorscheme = "tokyonight",
+  logo = [[
+██╗   ██╗██╗   ██╗██╗  ██╗██╗
+╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
+ ╚████╔╝ ██║   ██║█████╔╝ ██║
+  ╚██╔╝  ██║   ██║██╔═██╗ ██║
+   ██║   ╚██████╔╝██║  ██╗██║
+   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
+   ]],
+}
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -33,11 +54,8 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.lang" },
   },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { Yuki.colorscheme } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
 })
 
 require("core.autocmds")

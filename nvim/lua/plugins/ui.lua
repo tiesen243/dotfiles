@@ -20,9 +20,7 @@ return {
       require("transparent").setup(opts)
       require("transparent").clear_prefix("NeoTree")
       require("transparent").clear_prefix("WhichKey")
-      require("transparent").clear_prefix("snack")
       require("transparent").clear_prefix("Telescope")
-      require("transparent").clear_prefix("mason")
     end,
   },
 
@@ -54,7 +52,7 @@ return {
               hint = Yuki.icons.diagnostics.Hint,
             },
           },
-          { "filetype", icon_only = true,   separator = "", padding = { left = 1, right = 0 } },
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", file_status = true, path = 1 },
           {
             function()
@@ -85,7 +83,7 @@ return {
             end,
           },
           { "selectioncount", padding = { left = 1, right = 1 } },
-          { "searchcount",    padding = { left = 1, right = 1 } },
+          { "searchcount", padding = { left = 1, right = 1 } },
         },
         lualine_y = {
           { "progress", padding = { left = 1, right = 0 }, separator = " " },
@@ -93,7 +91,7 @@ return {
         },
         lualine_z = {
           { Yuki.actions.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
-          { Yuki.actions.get_time,          padding = { left = 0, right = 1 } },
+          { Yuki.actions.get_time, padding = { left = 0, right = 1 } },
         },
       },
     },
