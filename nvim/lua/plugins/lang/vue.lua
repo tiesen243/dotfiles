@@ -1,6 +1,6 @@
 return {
   -- depends on the typescript
-  { import = "plugin.lang.typescript" },
+  { import = "plugins.lang.typescript" },
 
   -- add vue to treesitter
   {
@@ -18,7 +18,6 @@ return {
       },
     },
   },
-
   -- Configure tsserver plugin
   {
     "neovim/nvim-lspconfig",
