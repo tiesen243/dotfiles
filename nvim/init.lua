@@ -11,7 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -29,14 +29,6 @@ vim.g.maplocalleader = "\\"
 _G.Yuki = require("utils")
 Yuki.configs = {
   ai = true,
-  lang = {
-    java = false,
-    prisma = true,
-    python = false,
-    tailwind = true,
-    typescript = true,
-    vue = true,
-  },
   colorscheme = "tokyonight",
   logo = [[
 ██╗   ██╗██╗   ██╗██╗  ██╗██╗
@@ -52,7 +44,11 @@ Yuki.configs = {
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    { import = "plugins.lang" },
+    -- add supported langues
+    -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
+    { import = "plugins.lang.json" },
+    { import = "plugins.lang.prisma" },
+    { import = "plugins.lang.typescript" },
   },
   install = { colorscheme = { Yuki.colorscheme } },
   checker = { enabled = false },

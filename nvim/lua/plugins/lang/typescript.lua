@@ -1,8 +1,11 @@
-if not Yuki.configs.lang.typescript or not Yuki.configs.lang.vue then
-  return {}
-end
-
 return {
+  -- add javascript, typescript to treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = { ensure_installed = { "javascript", "typescript" } },
+  },
+
+  -- setup lspconfig
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -47,17 +50,5 @@ return {
         eslint = {},
       },
     },
-  },
-
-  {
-    "nvimtools/none-ls.nvim",
-    opts = function()
-      local nls = require("null-ls")
-      nls.setup({
-        sources = {
-          nls.builtins.formatting.prettier,
-        },
-      })
-    end,
   },
 }

@@ -1,13 +1,19 @@
-if not Yuki.configs.lang.prisma then
-  return {}
-end
-
 return {
+  -- add prisma to treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = { "prisma" },
+    },
+  },
 
-  "neovim/nvim-lspconfig",
-  opts = {
-    servers = {
-      prismals = {},
+  -- setup lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        prismals = {},
+      },
     },
   },
 }
