@@ -1,4 +1,4 @@
--- LazyVim auto format
+-- auto format
 vim.g.autoformat = true
 
 -- Snacks animations
@@ -49,7 +49,7 @@ opt.fillchars = {
   eob = " ",
 }
 opt.foldlevel = 99
-opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+opt.formatexpr = "v:lua.require'utils'.format.formatexpr()"
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"

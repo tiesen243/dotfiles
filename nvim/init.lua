@@ -28,7 +28,6 @@ vim.g.maplocalleader = "\\"
 
 _G.Yuki = require("utils")
 Yuki.configs = {
-  auto_format = true,
   colorscheme = "tokyonight",
   logo = [[
 ██╗   ██╗██╗   ██╗██╗  ██╗██╗
@@ -65,3 +64,5 @@ require("lazy").setup({
 require("core.autocmds")
 require("core.keymaps")
 require("core.options")
+
+Yuki.format.setup()

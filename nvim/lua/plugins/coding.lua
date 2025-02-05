@@ -33,15 +33,58 @@ return {
   },
 
   -- Formatter
-  -- https://github.com/stevearc/conform.nvim
+  -- https://github.com/nvimtools/none-ls.nvim
+
   {
     "stevearc/conform.nvim",
-    opts = {
-      format_on_save = Yuki.configs.auto_format and {
-        timeout_ms = 2000,
-        lsp_format = "fallback",
-      } or {},
+    dependencies = { "mason.nvim" },
+    lazy = true,
+    cmd = "ConformInfo",
+    keys = {
+      {
+        "<leader>cF",
+        function()
+          require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
+        end,
+        mode = { "n", "v" },
+        desc = "Format Injected Langs",
+      },
     },
+    init = function()
+      Yuki.format.register({
+        name = "conform.nvim",
+        priority = 100,
+        primary = true,
+        format = function(buf)
+          require("conform").format({ bufnr = buf })
+        end,
+        sources = function(buf)
+          local ret = require("conform").list_formatters(buf)
+          return vim.tbl_map(function(v)
+            return v.name
+          end, ret)
+        end,
+      })
+    end,
+    opts = {
+      default_format_opts = {
+        timeout_ms = 3000,
+        async = false,
+        quiet = false,
+        lsp_format = "fallback",
+      },
+      formatters_by_ft = {
+        lua = { "stylua" },
+        fish = { "fish_indent" },
+        sh = { "shfmt" },
+      },
+      formatters = {
+        injected = { options = { ignore_errors = true } },
+      },
+    },
+    config = function(_, opts)
+      require("conform").setup(opts)
+    end,
   },
 
   -- Auto pairs
