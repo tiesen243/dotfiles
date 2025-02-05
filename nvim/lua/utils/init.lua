@@ -2,6 +2,7 @@ local M = {}
 
 M.actions = require("utils.actions")
 M.cmp = require("utils.cmp")
+M.format = require("utils.format")
 M.icons = require("utils.icons")
 M.lsp = require("utils.lsp")
 M.ui = require("utils.ui")
@@ -17,6 +18,21 @@ M.extend = function(t, key, values)
     t = t[k]
   end
   return vim.list_extend(t, values)
+end
+
+local cache = {} ---@type table<(fun()), table<string, any>>
+---@generic T: fun()
+---@param fn T
+---@return T
+M.memoize = function(fn)
+  return function(...)
+    local key = vim.inspect({ ... })
+    cache[fn] = cache[fn] or {}
+    if cache[fn][key] == nil then
+      cache[fn][key] = fn(...)
+    end
+    return cache[fn][key]
+  end
 end
 
 M.get_pkg_path = function(pkg, path, opts)
