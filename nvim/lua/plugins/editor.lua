@@ -140,7 +140,7 @@ return {
         { "<leader>fr", builtin.oldfiles, desc = "Find Recents File" },
         { "<leader>fs", builtin.builtin, desc = "Find Select Telescope" },
         { "<leader>fw", builtin.grep_string, desc = "Find by current [W]ord" },
-        { "<leader><leader>", builtin.buffers, desc = "Find existing buffers" },
+        { "<leader><leader>", builtin.buffers, desc = "Opening buffers" },
         {
           "<leader>/",
           function()
