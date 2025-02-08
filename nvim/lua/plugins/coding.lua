@@ -33,8 +33,7 @@ return {
   },
 
   -- Formatter
-  -- https://github.com/nvimtools/none-ls.nvim
-
+  -- https://github.com/stevearc/conform.nvim
   {
     "stevearc/conform.nvim",
     dependencies = { "mason.nvim" },
@@ -75,16 +74,12 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
-        fish = { "fish_indent" },
         sh = { "shfmt" },
       },
       formatters = {
         injected = { options = { ignore_errors = true } },
       },
     },
-    config = function(_, opts)
-      require("conform").setup(opts)
-    end,
   },
 
   -- Auto pairs

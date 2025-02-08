@@ -133,14 +133,14 @@ return {
             end
           end
 
-          -- register the formatter with LazyVim
+          -- register the formatter with Yuki
           Yuki.format.register(formatter)
         end,
       },
     },
   },
 
-  -- add formatter
+  -- add formatter and diagnostic
   {
     "williamboman/mason.nvim",
     opts = { ensure_installed = { "prettier" } },

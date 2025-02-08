@@ -12,54 +12,6 @@ M.on_attach = function(on_attach, name)
   })
 end
 
-M.attach = function(_, buffer)
-  local builtin = require("telescope.builtin")
-  -- stylua: ignore start
-  local keys = {
-    { '<leader>cI', '<cmd>LspInfo<cr>',                    desc = "Lsp Info" },
-    { 'gd',         builtin.lsp_definitions,               desc = '[G]oto [D]efinition',       has = 'definition' },
-    { 'gD',         vim.lsp.buf.declaration,               desc = '[G]oto [D]eclaration' },
-    { 'gr',         builtin.lsp_references,                desc = '[G]oto [R]eferences',       opts = { nowait = true } },
-    { 'gi',         builtin.lsp_implementations,           desc = '[G]oto [I]mplementation' },
-    { "gy",         vim.lsp.buf.type_definition,           desc = "[G]oto T[y]pe Definition" },
-    { '<c-k>',      vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp',                                            mode = { 'i' } },
-    { 'gk',         vim.lsp.buf.signature_help,            desc = 'Signature help',            has = 'signatureHelp' },
-    { 'K',          vim.lsp.buf.hover,                     desc = 'Hover doc' },
-    { '<leader>ca', vim.lsp.buf.code_action,               desc = '[C]ode [A]ction',           has = 'codeAction',                                               mode = { 'n', 'x' } },
-    { '<leader>cd', vim.diagnostic.open_float,             desc = '[C]ode [D]iagnostics' },
-    { '<leader>cf', vim.lsp.buf.format,                    desc = '[C]ode [F]ormat' },
-    { '<leader>cr', vim.lsp.buf.rename,                    desc = '[C]ode [R]ename',           has = 'rename' },
-    { '<leader>cR', Snacks.rename.rename_file,             desc = '[C]ode [R]ename file',      has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-    { '<leader>cs', builtin.lsp_document_symbols,          desc = '[C]ode Document [S]ymbols' },
-    { '<leader>ct', builtin.lsp_type_definitions,          desc = '[C]ode [T]ype Definition' },
-    { '<leader>cw', builtin.lsp_dynamic_workspace_symbols, desc = '[C]ode [W]orkspace Symbols' },
-    {
-      ']]',
-      function() Snacks.words.jump(vim.v.count1) end,
-      desc = 'Next Reference',
-      has = 'documentHighlight',
-      cond = function() return Snacks.words.is_enabled() end,
-    },
-    {
-      '[[',
-      function() Snacks.words.jump(-vim.v.count1) end,
-      desc = 'Previous Reference',
-      has = 'documentHighlight',
-      cond = function() return Snacks.words.is_enabled() end,
-    },
-  }
-
-  for _, k in ipairs(keys) do
-    local has = not k.has or Yuki.actions.has(buffer, k.has)
-    local cond = not (keys.cond == false or ((type(keys.cond) == 'function') and not keys.cond()))
-    local otps = vim.tbl_extend('force', k.opts or {}, { buffer = buffer, desc = k.desc, silent = true })
-
-    if has and cond then
-      vim.keymap.set(k.mode or 'n', k[1], k[2], otps)
-    end
-  end
-end
-
 M._supports_method = {}
 
 function M.setup()

@@ -7,18 +7,14 @@ local function have(path)
 end
 
 return {
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        bashls = {},
-      },
-    },
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = { ensure_installed = { "shellcheck" } },
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = { servers = { bashls = {} } },
+  -- },
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts = { ensure_installed = { "shellcheck" } },
+  -- },
 
   -- add some stuff to treesitter
   {
@@ -46,6 +42,14 @@ return {
 
       if have("hypr") then
         add("hyprlang")
+      end
+
+      if have("fish") then
+        add("fish")
+      end
+
+      if have("rofi") or have("wofi") then
+        add("rasi")
       end
     end,
   },
