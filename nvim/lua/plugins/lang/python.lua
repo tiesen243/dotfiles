@@ -10,7 +10,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        basedpyright = {},
+        basedpyright = { disableOrganizeImports = true },
         ruff = {
           cmd_env = { RUFF_TRACE = "messages" },
           init_options = { settings = { logLevel = "error" } },
@@ -24,5 +24,11 @@ return {
         end,
       },
     },
+  },
+
+  -- setup formatter
+  {
+    "stevearc/conform.nvim",
+    opts = { formatters_by_ft = { python = { "ruff_fix", "ruff_format", "ruff_organize_imports" } } },
   },
 }

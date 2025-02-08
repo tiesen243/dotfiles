@@ -28,6 +28,7 @@ return {
           return true -- avoid duplicate servers
         end,
       },
+      on_attach = require("plugins.lsp.keymaps").on_attach,
     },
   },
 
@@ -85,6 +86,7 @@ return {
       -- Find the extra bundles that should be passed on the jdtls command-line
       -- if nvim-dap is enabled with java debug/test.
       local bundles = {} ---@type string[]
+
       local function attach_jdtls()
         local fname = vim.api.nvim_buf_get_name(0)
 
@@ -121,11 +123,10 @@ return {
               {
                 mode = "n",
                 buffer = args.buf,
-                { "<leader>ca",  vim.lsp.buf.code_action,               desc = "[C]ode [A]ction" },
-                { "<leader>cx",  group = "extract" },
+                { "<leader>cx", group = "extract" },
                 { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
-                { "<leader>cxc", require("jdtls").extract_constant,     desc = "Extract Constant" },
-                { "<leader>co",  require("jdtls").organize_imports,     desc = "Organize Imports" },
+                { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
+                { "<leader>co", require("jdtls").organize_imports, desc = "Organize Imports" },
               },
             })
             wk.add({
@@ -151,9 +152,17 @@ return {
               },
             })
 
-            -- User can set additional keymaps in opts.on_attach
-            if opts.on_attach then
-              opts.on_attach(args)
+            local attach = require("plugins.lsp.keymaps")
+            for _, key in pairs(attach._keys) do
+              local cond = not (key.cond == false or ((type(key.cond) == "function") and not key.cond()))
+
+              if cond then
+                local _opts = {}
+                _opts.desc = key.desc
+                _opts.buffer = args.buf
+                _opts.silent = true
+                vim.keymap.set(key.mode or "n", key[1], key[2], _opts)
+              end
             end
           end
         end,
@@ -162,5 +171,15 @@ return {
       -- Avoid race condition by calling attach the first time, since the autocmd won't fire.
       attach_jdtls()
     end,
+  },
+
+  -- setup formatter
+  {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = { "google-java-format" } },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = { formatters_by_ft = { java = { "google-java-format" } } },
   },
 }

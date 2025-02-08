@@ -6,16 +6,16 @@ local M = setmetatable({}, {
   end,
 })
 
----@class LazyFormatter
+---@class YukiFormatter
 ---@field name string
 ---@field primary? boolean
 ---@field format fun(bufnr:number)
 ---@field sources fun(bufnr:number):string[]
 ---@field priority number
 
-M.formatters = {} ---@type LazyFormatter[]
+M.formatters = {} ---@type YukiFormatter[]
 
----@param formatter LazyFormatter
+---@param formatter YukiFormatter
 function M.register(formatter)
   M.formatters[#M.formatters + 1] = formatter
   table.sort(M.formatters, function(a, b)
@@ -31,11 +31,11 @@ function M.formatexpr()
 end
 
 ---@param buf? number
----@return (LazyFormatter|{active:boolean,resolved:string[]})[]
+---@return (YukiFormatter|{active:boolean,resolved:string[]})[]
 function M.resolve(buf)
   buf = buf or vim.api.nvim_get_current_buf()
   local have_primary = false
-  ---@param formatter LazyFormatter
+  ---@param formatter YukiFormatter
   return vim.tbl_map(function(formatter)
     local sources = formatter.sources(buf)
     local active = #sources > 0 and (not formatter.primary or not have_primary)
@@ -76,7 +76,7 @@ function M.info(buf)
   end
   Snacks.notify[enabled and "info" or "warn"](
     table.concat(lines, "\n"),
-    { title = "LazyFormat (" .. (enabled and "enabled" or "disabled") .. ")" }
+    { title = "YukiFormat (" .. (enabled and "enabled" or "disabled") .. ")" }
   )
 end
 
@@ -139,41 +139,22 @@ function M.format(opts)
   end
 end
 
-function M.health()
-  local Config = require("lazy.core.config")
-  local has_plugin = Config.spec.plugins["none-ls.nvim"]
-  local has_extra = vim.tbl_contains(Config.spec.modules, "lazyvim.plugins.extras.lsp.none-ls")
-  if has_plugin and not has_extra then
-    Snacks.notify.warn({
-      "`conform.nvim` and `nvim-lint` are now the default formatters and linters in LazyVim.",
-      "",
-      "You can use those plugins together with `none-ls.nvim`,",
-      "but you need to enable the `lazyvim.plugins.extras.lsp.none-ls` extra,",
-      "for formatting to work correctly.",
-      "",
-      "In case you no longer want to use `none-ls.nvim`, just remove the spec from your config.",
-    })
-  end
-end
-
 function M.setup()
-  M.health()
-
   -- Autoformat autocmd
   vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("LazyFormat", {}),
+    group = vim.api.nvim_create_augroup("YukiFormat", {}),
     callback = function(event)
       M.format({ buf = event.buf })
     end,
   })
 
   -- Manual format
-  vim.api.nvim_create_user_command("LazyFormat", function()
+  vim.api.nvim_create_user_command("YukiFormat", function()
     M.format({ force = true })
   end, { desc = "Format selection or buffer" })
 
   -- Format info
-  vim.api.nvim_create_user_command("LazyFormatInfo", function()
+  vim.api.nvim_create_user_command("YukiFormatInfo", function()
     M.info()
   end, { desc = "Show info about the formatters for the current buffer" })
 end
