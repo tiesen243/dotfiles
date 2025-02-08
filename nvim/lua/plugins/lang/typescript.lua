@@ -104,19 +104,37 @@ return {
             return
           end
 
-          if not pcall(require, "vim.lsp._dynamic") then
-            local buf = vim.api.nvim_get_current_buf()
-            local client = Yuki.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
-            local augroup = vim.api.nvim_create_augroup("yuki_eslint_fix_all", { clear = true })
+          local function get_client(buf)
+            return Yuki.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
+          end
 
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = buf })
-            if client then
-              local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-              if #diag > 0 then
-                vim.cmd("EslintFixAll")
+          local formatter = Yuki.lsp.formatter({
+            name = "eslint: lsp",
+            primary = false,
+            priority = 200,
+            filter = "eslint",
+          })
+
+          -- Use EslintFixAll on Neovim < 0.10.0
+          if not pcall(require, "vim.lsp._dynamic") then
+            formatter.name = "eslint: EslintFixAll"
+            formatter.sources = function(buf)
+              local client = get_client(buf)
+              return client and { "eslint" } or {}
+            end
+            formatter.format = function(buf)
+              local client = get_client(buf)
+              if client then
+                local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
+                if #diag > 0 then
+                  vim.cmd("EslintFixAll")
+                end
               end
             end
           end
+
+          -- register the formatter with LazyVim
+          Yuki.format.register(formatter)
         end,
       },
     },
@@ -140,7 +158,7 @@ return {
       opts.formatters = opts.formatters or {}
       opts.formatters.prettier = {
         condition = function(_, ctx)
-          return M.has_parser(ctx) and (vim.g.lazyvim_prettier_needs_config ~= true or M.has_config(ctx))
+          return M.has_parser(ctx) and (M.has_config(ctx))
         end,
       }
     end,
