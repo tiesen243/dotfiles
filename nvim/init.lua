@@ -11,7 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
+      { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -48,14 +48,11 @@ require("lazy").setup({
     -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
-    { import = "plugins.lang.java" },
     { import = "plugins.lang.json" },
-    { import = "plugins.lang.markdown" },
     { import = "plugins.lang.prisma" },
-    { import = "plugins.lang.python" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
-    { import = "plugins.lang.vue" }
+    { import = "plugins.lang.vue" },
   },
   install = { colorscheme = { Yuki.colorscheme } },
   checker = { enabled = false },
