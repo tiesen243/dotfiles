@@ -48,8 +48,10 @@ require("lazy").setup({
     -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
+    { import = "plugins.lang.java" },
     { import = "plugins.lang.json" },
     { import = "plugins.lang.prisma" },
+    { import = "plugins.lang.python" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
     { import = "plugins.lang.vue" },

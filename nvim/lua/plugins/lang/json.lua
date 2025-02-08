@@ -23,7 +23,7 @@ return {
                   url = "http://json.schemastore.org/tsconfig",
                 },
               },
-              format = { enable = true },
+              format = { enable = false },
               validate = { enable = true },
             },
           },
@@ -35,13 +35,11 @@ return {
   -- setup formatter
   {
     "stevearc/conform.nvim",
-    optional = true,
     opts = {
       formatters_by_ft = {
         ["json"] = { "prettier" },
-        ["jsonc"] = { "prettier" }
+        ["jsonc"] = { "prettier" },
       },
     },
   },
-
 }
