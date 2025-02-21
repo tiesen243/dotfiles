@@ -44,18 +44,18 @@ yuki_test_git_optional_lock() {
   local git_version="$(git version | cut -d' ' -f3)"
   # test for git versions < 2.14.0
   case "$git_version" in
-    [0-1].*)
-      echo 0
-      return 1
-      ;;
-    2.[0-9].*)
-      echo 0
-      return 1
-      ;;
-    2.1[0-3].*)
-      echo 0
-      return 1
-      ;;
+  [0-1].*)
+    echo 0
+    return 1
+    ;;
+  2.[0-9].*)
+    echo 0
+    return 1
+    ;;
+  2.1[0-3].*)
+    echo 0
+    return 1
+    ;;
   esac
 
   # if version > 2.14.0 return true
@@ -77,9 +77,9 @@ fi
 
 # Status segment {{{
 yuki_arrow() {
-  if [[ "$1" = "start" ]] && (( ! YUKI_DISPLAY_NEW_LINE )); then
+  if [[ "$1" = "start" ]] && ((!YUKI_DISPLAY_NEW_LINE)); then
     print -P "$YUKI_ARROW_ICON"
-  elif [[ "$1" = "end" ]] && (( YUKI_DISPLAY_NEW_LINE )); then
+  elif [[ "$1" = "end" ]] && ((YUKI_DISPLAY_NEW_LINE)); then
     print -P "\n$YUKI_ARROW_ICON"
   fi
 }
@@ -90,7 +90,7 @@ PROMPT+='%(?:%F{foreground}:%F{red})%B$(yuki_arrow start)'
 
 # Time segment {{{
 yuki_time_segment() {
-  if (( YUKI_DISPLAY_TIME )); then
+  if ((YUKI_DISPLAY_TIME)); then
     print -P "<%D{$YUKI_TIME_FORMAT} /> "
   fi
 }
@@ -100,7 +100,7 @@ PROMPT+='%F{foreground}%B$(yuki_time_segment)'
 
 # User context segment {{{
 yuki_context() {
-  if (( YUKI_DISPLAY_CONTEXT )); then
+  if ((YUKI_DISPLAY_CONTEXT)); then
     echo '%n@%m 󱦰 '
   fi
 }
@@ -110,7 +110,7 @@ PROMPT+='%F{foreground}%B$(yuki_context)'
 
 # Directory segment {{{
 yuki_directory() {
-  if (( YUKI_DISPLAY_FULL_CWD )); then
+  if ((YUKI_DISPLAY_FULL_CWD)); then
     print -P '%~ '
   else
     print -P '%c '
@@ -122,19 +122,19 @@ PROMPT+='%F{yellow}%B$(yuki_directory)'
 
 # Async git segment {{{
 yuki_git_status() {
-  (( ! YUKI_DISPLAY_GIT )) && return
+  ((!YUKI_DISPLAY_GIT)) && return
   cd "$1"
 
   local ref branch lockflag
 
-  (( YUKI_GIT_NOLOCK )) && lockflag="--no-optional-locks"
+  ((YUKI_GIT_NOLOCK)) && lockflag="--no-optional-locks"
 
   ref=$(=git $lockflag symbolic-ref --quiet HEAD 2>/dev/null)
 
   case $? in
-    0)   ;;
-    128) return ;;
-    *)   ref=$(=git $lockflag rev-parse --short HEAD 2>/dev/null) || return ;;
+  0) ;;
+  128) return ;;
+  *) ref=$(=git $lockflag rev-parse --short HEAD 2>/dev/null) || return ;;
   esac
 
   branch=${ref#refs/heads/}
