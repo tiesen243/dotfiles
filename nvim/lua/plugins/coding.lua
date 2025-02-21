@@ -25,7 +25,6 @@ return {
 
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
-        cmdline = {},
       },
 
       keymap = { preset = "super-tab" },
