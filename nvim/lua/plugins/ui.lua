@@ -5,7 +5,11 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = { style = "storm", transparent = vim.g.transparent_enabled },
+    opts = function()
+      vim.cmd.colorscheme("tokyonight")
+
+      return { style = "storm", transparent = vim.g.transparent_enabled }
+    end,
   },
 
   -- Transparent nvim
@@ -42,7 +46,6 @@ return {
       options = {
         icons_enabled = true,
         always_divide_middle = true,
-        theme = Yuki.colorcheme or "auto",
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
         disabled_filetypes = { "snacks_dashboard", "neo-tree" },
@@ -61,9 +64,9 @@ return {
               hint = Yuki.icons.diagnostics.Hint,
             },
           },
-          { "filetype", icon_only = true,            separator = "", padding = { left = 1, right = 0 } },
-          { "filename", file_status = true,          path = 1 },
-          { 'navic',    color_correction = "dynamic" },
+          { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+          { "filename", file_status = true, path = 1 },
+          { "navic", color_correction = "dynamic" },
         },
         lualine_x = {
           {
@@ -85,7 +88,7 @@ return {
             end,
           },
           { "selectioncount", padding = { left = 1, right = 1 } },
-          { "searchcount",    padding = { left = 1, right = 1 } },
+          { "searchcount", padding = { left = 1, right = 1 } },
         },
         lualine_y = {
           { "progress", padding = { left = 1, right = 0 }, separator = " " },
@@ -93,7 +96,7 @@ return {
         },
         lualine_z = {
           { Yuki.actions.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
-          { Yuki.actions.get_time,          padding = { left = 0, right = 1 } },
+          { Yuki.actions.get_time, padding = { left = 0, right = 1 } },
         },
       },
     },

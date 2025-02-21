@@ -28,7 +28,6 @@ vim.g.maplocalleader = "\\"
 
 _G.Yuki = require("utils")
 Yuki.configs = {
-  colorscheme = "tokyonight",
   logo = [[
 ██╗   ██╗██╗   ██╗██╗  ██╗██╗
 ╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
@@ -56,7 +55,7 @@ require("lazy").setup({
     { import = "plugins.lang.typescript" },
     { import = "plugins.lang.vue" },
   },
-  install = { colorscheme = { Yuki.colorscheme } },
+  install = { colorscheme = { "tokyonight" } },
   checker = { enabled = false },
 })
 
