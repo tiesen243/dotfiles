@@ -67,7 +67,7 @@ alias    q="exit"
 # Directory
 alias   xh="cd $HOME"
 alias   xd="cd $HOME/Documents"
-alias   xt="cd $HOME/Downloads"
+alias   xD="cd $HOME/Downloads"
 alias   xp="cd $HOME/Pictures"
 alias   xc="cd $HOME/dotfiles"
 
