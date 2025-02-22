@@ -1,14 +1,18 @@
 return {
-  -- tokyonight theme
-  -- https://github.com/folke/tokyonight.nvim
+  -- nightfox theme
+  -- https://github.com/EdenEast/nightfox.nvim
   {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    "EdenEast/nightfox.nvim",
     opts = function()
-      vim.cmd.colorscheme("tokyonight")
+      vim.cmd.colorscheme("carbonfox")
 
-      return { style = "storm", transparent = vim.g.transparent_enabled }
+      return {
+        options = {
+          dim_inactive = true,
+          transparent = vim.g.transparent_enabled,
+          colorblind = { enable = true },
+        },
+      }
     end,
   },
 

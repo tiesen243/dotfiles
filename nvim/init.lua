@@ -54,7 +54,7 @@ require("lazy").setup({
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
   },
-  install = { colorscheme = { "tokyonight" } },
+  install = { colorscheme = { "carbonfox" } },
   checker = { enabled = false },
 })
 
