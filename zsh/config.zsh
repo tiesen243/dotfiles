@@ -138,3 +138,9 @@ fi
 . "$HOME/.local/bin/env"
 eval "$(uv generate-shell-completion zsh)"
 # <<< uv initialize <<<
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/tiesen/.dart-cli-completion/zsh-config.zsh ]] && . /home/tiesen/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
