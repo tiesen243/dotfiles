@@ -1,34 +1,27 @@
-customCommands:
-  - key: "C"
-    command: "git cz -a"
-    description: "commit with commitizen"
-    context: "files"
-    loadingText: "opening commitizen commit tool"
-    subprocess: true
 gui:
   nerdFontsVersion: "3"
   theme:
     activeBorderColor:
-      - "#ff9e64"
+      - "#78a9ff"
       - "bold"
     inactiveBorderColor:
-      - "#27a1b9"
+      - "#535353"
     searchingActiveBorderColor:
-      - "#ff9e64"
+      - "#78a9ff"
       - "bold"
     optionsTextColor:
-      - "#7aa2f7"
+      - "#f2f4f8" 
     selectedLineBgColor:
-      - "#283457"
+      - "#2a2a2a"
     cherryPickedCommitFgColor:
-      - "#7aa2f7"
+      - "#78a9ff"
     cherryPickedCommitBgColor:
-      - "#bb9af7"
+      - "#be95ff"
     markedBaseCommitFgColor:
-      - "#7aa2f7"
+      - "#78a9ff"
     markedBaseCommitBgColor:
-      - "#e0af68"
+      - "#08bdba"
     unstagedChangesColor:
-      - "#db4b4b"
+      - "#ee5396"
     defaultFgColor:
-      - "#c0caf5"
+      - "#f2f4f8"
