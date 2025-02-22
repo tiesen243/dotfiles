@@ -82,16 +82,6 @@ alias yi="yay -S"
 # Functions
 #############################################
 
-gacp() {
-  git add --all
-  if [ -z "$1" ]; then
-    git cz -a
-  else
-    git commit -a -m "$1"
-  fi
-  git push origin
-}
-
 # FZF + Neovim with kitten icat for images
 vf() {
   local file
