@@ -23,7 +23,7 @@ ZSH_THEME="yuki"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bun git git-commit gitignore sudo vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git git-commit gitignore sudo vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,6 +123,14 @@ export NVM_DIR="$HOME/.nvm"
 # >>> bun initialize >>>
 if [ -d "$HOME/.bun/bin" ]; then
   export PATH="$HOME/.bun/bin:$PATH"
+
+  if [[ ! -f "$ZSH_CACHE_DIR/completions/_bun" ]]; then
+    typeset -g -A _comps
+    autoload -Uz _bun
+    _comps[bun]=_bun
+  fi
+
+  SHELL=zsh bun completions >| "$ZSH_CACHE_DIR/completions/_bun" &|
 fi
 # <<< bun initialize <<<
 
