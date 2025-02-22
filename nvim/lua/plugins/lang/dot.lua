@@ -7,15 +7,6 @@ local function have(path)
 end
 
 return {
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   opts = { servers = { bashls = {} } },
-  -- },
-  -- {
-  --   "williamboman/mason.nvim",
-  --   opts = { ensure_installed = { "shellcheck" } },
-  -- },
-
   -- add some stuff to treesitter
   {
     "nvim-treesitter/nvim-treesitter",

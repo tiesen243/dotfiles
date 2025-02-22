@@ -23,7 +23,7 @@ ZSH_THEME="yuki"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(bun command-not-found git git-commit gitignore sudo vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(bun git git-commit gitignore sudo vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
