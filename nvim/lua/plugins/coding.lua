@@ -73,7 +73,6 @@ return {
       },
       formatters_by_ft = {
         lua = { "stylua" },
-        sh = { "shfmt" },
       },
       formatters = {
         injected = { options = { ignore_errors = true } },
