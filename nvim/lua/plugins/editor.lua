@@ -283,6 +283,11 @@ return {
     },
   },
 
+  {
+    "Toprun123/PicVim",
+    opts = {},
+  },
+
   -- Git Signs
   -- https://github.com/lewis6991/gitsigns.nvim
   {
