@@ -43,6 +43,7 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
     { import = "plugins.ai.copilot-chat" },
+
     -- add supported langues
     -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
     { import = "plugins.lang.c" },

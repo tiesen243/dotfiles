@@ -7,36 +7,25 @@ usage() {
 	echo "Usage: $0 [--drun | --run | --menu]"
 	echo ""
 	echo "  --drun   : Launches the application launcher (drun)."
-	echo "  --run    : Launches the command runner (run)."
+  echo "  --window : Launches currently running windows (window)."
 	echo "  --menu   : Displays a custom menu with multiple options."
 	exit 1
 }
 
 # Function: DRUN Launcher
 drun_launcher() {
-	rofi \
-		-show drun \
-		-theme ~/.config/rofi/launcher.rasi
+	rofi -show drun
 }
 
-# Function: RUN Launcher
-run_launcher() {
-	rofi \
-		-show run \
-		-theme ~/.config/rofi/launcher.rasi
-}
-
-# Function: CONFIRMATION Launcher
-conf_launcher() {
-	rofi \
-		-show run \
-		-theme ~/.config/rofi/confirm.rasi
+# Function: Window Launcher
+window_launcher() {
+	rofi -show window
 }
 
 # Function: Custom Menu
 menu() {
 	# Menu options displayed in rofi
-	options="\n\n\n\n\n"
+	options="\n\n\n"
 
 	# Prompt user to choose an option
 	chosen=$(echo -e "$options" | rofi -config ~/.config/rofi/submenu.rasi -dmenu -p "Select an option:")
@@ -45,12 +34,6 @@ menu() {
 
 	# Execute the corresponding command based on the selected option
 	case $chosen in
-	"")
-		export EDITOR=nvim && kitty -e yazi
-		;;
-	"")
-		xdg-open https://about:blank
-		;;
 	"")
 		hyprlock
 		;;
@@ -79,8 +62,8 @@ case "$1" in
 --drun)
 	drun_launcher
 	;;
---run)
-	run_launcher
+--window)
+  window_launcher
 	;;
 --menu)
 	menu
