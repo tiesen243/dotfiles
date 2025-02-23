@@ -2,6 +2,7 @@ return {
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
+  -- https://github.com/nvim-treesitter/nvim-treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
@@ -15,7 +16,7 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
-      { "<bs>",      desc = "Decrement Selection", mode = "x" },
+      { "<bs>", desc = "Decrement Selection", mode = "x" },
     },
     opts_extend = { "ensure_installed" },
     opts = {
@@ -38,6 +39,7 @@ return {
   },
 
   -- Automatically add closing tags for HTML and JSX
+  -- https://github.com/windwp/nvim-ts-autotag
   {
     "windwp/nvim-ts-autotag",
     event = { "BufReadPre", "BufNewFile" },

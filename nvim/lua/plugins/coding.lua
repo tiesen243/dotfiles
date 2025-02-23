@@ -1,4 +1,6 @@
 return {
+  -- auto completion
+  -- https://github.com/saghen/blink.cmp
   {
     "saghen/blink.cmp",
     version = "*",
@@ -31,7 +33,7 @@ return {
     },
   },
 
-  -- Formatter
+  -- formatter
   -- https://github.com/stevearc/conform.nvim
   {
     "stevearc/conform.nvim",
@@ -80,7 +82,7 @@ return {
     },
   },
 
-  -- Auto pairs
+  -- auto pairs
   -- https://github.com/windwp/nvim-autopairs
   {
     "windwp/nvim-autopairs",

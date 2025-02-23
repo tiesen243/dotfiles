@@ -125,6 +125,8 @@ return {
     end,
   },
 
+  -- finder
+  -- https://github.com/nvim-telescope/telescope.nvim
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
@@ -203,6 +205,7 @@ return {
 
   -- which-key helps you remember key bindings by showing a popup
   -- with the active keybindings of the command you started typing.
+  -- https://github.com/folke/which-key.nvim
   {
     "folke/which-key.nvim",
     opts_extend = { "spec" },
@@ -243,6 +246,8 @@ return {
     },
   },
 
+  -- code context
+  -- https://github.com/SmiteshP/nvim-navic
   {
     "SmiteshP/nvim-navic",
     lazy = true,
@@ -264,6 +269,8 @@ return {
     },
   },
 
+  -- QoL plugins for neovim.
+  -- https://github.com/folke/snacks.nvim
   {
     "folke/snacks.nvim",
     priority = 1000,
@@ -283,12 +290,7 @@ return {
     },
   },
 
-  {
-    "Toprun123/PicVim",
-    opts = {},
-  },
-
-  -- Git Signs
+  -- integration for git
   -- https://github.com/lewis6991/gitsigns.nvim
   {
     "lewis6991/gitsigns.nvim",

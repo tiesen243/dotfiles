@@ -1,5 +1,6 @@
 return {
   -- lspconfig
+  -- https://github.com/neovim/nvim-lspconfig
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -162,8 +163,9 @@ return {
     end,
   },
 
+  -- package manager
+  -- https://github.com/williamboman/mason.nvim
   {
-
     "williamboman/mason.nvim",
     cmd = "Mason",
     build = ":MasonUpdate",
@@ -199,6 +201,19 @@ return {
           end
         end
       end)
+    end,
+  },
+
+  -- display prettier diagnostic messages
+  -- https://github.com/rachartier/tiny-inline-diagnostic.nvim
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or `LspAttach`
+    priority = 1000,
+    opts = function()
+      vim.diagnostic.config({ virtual_text = false })
+
+      return {}
     end,
   },
 }
