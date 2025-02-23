@@ -2,18 +2,18 @@ configuration {
     modi:                           "drun,run";
     show-icons:                     true;
     icon-theme:                     "Papirus";
-    font: "Symbols Nerd Font 15";
+    font:                           "GeistMono Nerd Font 12";
     display-drun:                   "";
     drun-display-format:            "{icon} {name}";
 }
 
-@theme "colors.rasi"
+@theme "shared/colors.rasi"
 
 
 prompt {
     enabled:                       false;
     padding:                       0px;
-    font:                          "JetBrainsMono Nerd Font 20";
+    font:                          "GeistMono Nerd Font 12";
 }
 
 entry {
@@ -33,7 +33,7 @@ inputbar {
 
 listview {
     columns:                       1;
-    lines:                         6;
+    lines:                         4;
     spacing:                       1px;
     layout:                        vertical;
     cycle:                         false;
@@ -43,7 +43,7 @@ listview {
 mainbox {
     children:                      [listview]; /* Only show listview */
     spacing:                       0%;
-    padding:                       25px;
+    padding:                       24px;
 }
 
 element-icon {
@@ -57,7 +57,7 @@ element-icon {
 
 element {
     border:                        0 0 1px 0;
-    text-align:                     center;
+    text-align:                    center;
     padding:                       16px;
     margin:                        1;
 }
@@ -65,35 +65,28 @@ element {
 element-text {
     background-color:              inherit;
     text-color:                    inherit;
-    text-align:                     center;
+    text-align:                    center;
     expand:                        true;
-    padding: 0px;
+    padding:                       0px;
 }
 
 element selected {
-    text-align:                     center;
+    text-align:                    center;
     background-color:              #30304d;
     text-color:                    @fg;
     border:                        2px;
     border-radius:                 4px;
-    border-color:					@fg;
+    border-color:                  @fg;
 }
-
-/**
- *
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
 
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun,run,filebrowser,window";
-    show-icons:                 true;
-    display-drun:               "";
-    display-run:                "";
-    display-filebrowser:        "";
-    display-window:             "";
+    show-icons:               true;
+    display-drun:             "";
+    display-run:              "";
+    display-filebrowser:      "";
+    display-window:           "";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
 }
@@ -102,7 +95,7 @@ configuration {
 @import                          "shared/colors.rasi"
 
 * {
-    font: "JetBrains Mono Nerd Font 15";
+    font: "GeistMono Nerd Font 12";
 }
 
 
@@ -120,7 +113,7 @@ configuration {
     active-background:           var(active);
     active-foreground:           var(background);
     selected-normal-background:  #30304d;
-    selected-normal-border: 	#b4befe;
+    selected-normal-border:      #b4befe;
     selected-normal-foreground:  var(foreground);
     selected-urgent-background:  var(active);
     selected-urgent-foreground:  var(background);
@@ -139,13 +132,12 @@ window {
     /* properties for window widget */
     location:                      west; /* Set the location to north (top-left corner) */
     anchor:                        west; /* Anchor to the top-left corner */
-    border:                        3px;
+    border:                        2px;
     border-radius:                 12px;
     width:                         120;
-    x-offset:                      10; /* Set offset to zero */
+    x-offset:                      8; /* Set offset to zero */
     y-offset:                      0; /* Set offset to zero */
-    location:                    west;
-    fullscreen:                  false;
+    fullscreen:                    false;
 
     /* properties for all widgets */
     enabled:                     true;
@@ -176,7 +168,7 @@ mainbox {
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
     border-color:                @border-colour;
-    background-color:          @background;
+    background-color:            @background;
 }
 
 
