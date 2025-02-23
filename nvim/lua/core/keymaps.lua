@@ -77,6 +77,9 @@ map("i", ";", ";<c-g>u")
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
+-- Paste without yanking in visual mode
+map("x", "p", [["_dP]], { desc = "Paste without yank" })
+
 -- better indenting
 map("n", "<", "<<")
 map("n", ">", ">>")
