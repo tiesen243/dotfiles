@@ -208,4 +208,15 @@ return {
       end)
     end,
   },
+
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or `LspAttach`
+    priority = 1000,
+    opts = function()
+      vim.diagnostic.config({ virtual_text = false })
+
+      return {}
+    end,
+  },
 }
