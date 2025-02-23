@@ -14,6 +14,8 @@ function M.pick(kind)
 end
 
 return {
+  -- chat with gitHub copilot in neovim
+  -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "main",
@@ -32,8 +34,8 @@ return {
       }
     end,
     keys = {
-      { "<c-s>",     "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
-      { "<leader>a", "",     desc = "+ai",        mode = { "n", "v" } },
+      { "<c-s>", "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
+      { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<leader>aa",
         function()
@@ -79,7 +81,8 @@ return {
     end,
   },
 
-  -- Edgy integration
+  -- edgy integration
+  -- https://github.com/folke/edgy.nvim
   {
     "folke/edgy.nvim",
     optional = true,
