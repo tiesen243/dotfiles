@@ -14,6 +14,23 @@ function M.pick(kind)
 end
 
 return {
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    event = "BufReadPost",
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        hide_during_completion = false,
+        keymap = { accept = "<C-y>", next = "<M-]>", prev = "<M-[>" },
+      },
+      panel = { enabled = false },
+      filetypes = { markdown = true, help = true },
+    },
+  },
+
   -- chat with gitHub copilot in neovim
   -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
   {
@@ -25,7 +42,7 @@ return {
       user = user:sub(1, 1):upper() .. user:sub(2)
       return {
         auto_insert_mode = true,
-        model = "claude-3.5-sonnet",
+        model = "claude-3.7-sonnet",
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
         window = {
