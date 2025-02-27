@@ -166,6 +166,15 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 Snacks.toggle.zoom():map("<leader>uZ")
 Snacks.toggle.zen():map("<leader>uz")
 
+-- google search
+map(
+  "n",
+  "<leader>fG",
+  ":lua Yuki.actions.google_search()<CR>",
+  { noremap = true, silent = true, desc = "Find on Google" }
+)
+
+
 -- native snippets. only needed on < 0.11, as 0.11 creates these by default
 if vim.fn.has("nvim-0.11") == 0 then
   map("s", "<Tab>", function()
