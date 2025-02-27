@@ -17,7 +17,7 @@ return {
       appearance = {
         use_nvim_cmp_as_default = false,
         nerd_font_variant = "mono",
-        kind_icons = vim.tbl_extend("force", Yuki.icons.kinds, { Color = "██" }),
+        kind_icons = vim.tbl_extend("force", Yuki.configs.icons.kinds, { Color = "██" }),
       },
 
       completion = {
