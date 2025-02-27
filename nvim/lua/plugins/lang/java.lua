@@ -28,7 +28,7 @@ return {
           return true -- avoid duplicate servers
         end,
       },
-      on_attach = require("plugins.lsp.keymaps").on_attach,
+      on_attach = function() end,
     },
   },
 
