@@ -29,7 +29,7 @@ YUKI_DISPLAY_TIME=${YUKI_DISPLAY_TIME:-0}
 YUKI_DISPLAY_CONTEXT=${YUKI_DISPLAY_CONTEXT:-1}
 
 # Changes the triangle icon
-YUKI_ARROW_ICON=${YUKI_ARROW_ICON:-▲ }
+YUKI_ARROW_ICON=${YUKI_ARROW_ICON:-󰣇 }
 YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-󰘧 }
 
 # Set to 1 to use a new line for commands
@@ -91,7 +91,7 @@ PROMPT+='%(?:%F{foreground}:%F{red})%B$(yuki_arrow start)'
 # Time segment {{{
 yuki_time_segment() {
   if ((YUKI_DISPLAY_TIME)); then
-    print -P "<%D{$YUKI_TIME_FORMAT} /> "
+    print -P "%D{$YUKI_TIME_FORMAT} "
   fi
 }
 
@@ -171,14 +171,14 @@ add-zsh-hook precmd yuki_git_async
 
 PROMPT+='$YUKI_GIT_STATUS'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{blue}%B("
-ZSH_THEME_GIT_PROMPT_CLEAN=") %F{green}%Bᗜˬᗜ "
-ZSH_THEME_GIT_PROMPT_DIRTY=") %F{yellow}%Bᗜ˰ᗜ "
-ZSH_THEME_GIT_PROMPT_SUFFIX=""%f%b""
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{foreground}on %F{blue} %B"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}%Bᗜˬᗜ "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}%Bᗜ˰ᗜ "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f%b"
 # }}}
 
 # Linebreak {{{
-PROMPT+='%F{foreground}%B$(yuki_arrow end)'
+PROMPT+='%(1V:%F{yellow}:%(?:%F{foreground}:%F{red}))%B$(yuki_arrow end)'
 # }}}
 
 # Ensure effects are reset
