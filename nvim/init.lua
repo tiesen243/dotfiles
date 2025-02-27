@@ -36,6 +36,7 @@ Yuki.configs = {
    ██║   ╚██████╔╝██║  ██╗██║
    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
    ]],
+  icons = require("utils.icons"),
 }
 
 -- Setup lazy.nvim

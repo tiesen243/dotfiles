@@ -65,10 +65,10 @@ return {
           {
             "diagnostics",
             symbols = {
-              error = Yuki.icons.diagnostics.Error,
-              warn = Yuki.icons.diagnostics.Warn,
-              info = Yuki.icons.diagnostics.Info,
-              hint = Yuki.icons.diagnostics.Hint,
+              error = Yuki.configs.icons.diagnostics.Error,
+              warn = Yuki.configs.icons.diagnostics.Warn,
+              info = Yuki.configs.icons.diagnostics.Info,
+              hint = Yuki.configs.icons.diagnostics.Hint,
             },
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
@@ -79,9 +79,9 @@ return {
           {
             "diff",
             symbols = {
-              added = Yuki.icons.git.added,
-              modified = Yuki.icons.git.modified,
-              removed = Yuki.icons.git.removed,
+              added = Yuki.configs.icons.git.added,
+              modified = Yuki.configs.icons.git.modified,
+              removed = Yuki.configs.icons.git.removed,
             },
             sources = function()
               local gitsigns = vim.b.gitsigns_status_dict

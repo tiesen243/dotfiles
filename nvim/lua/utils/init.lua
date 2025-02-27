@@ -3,7 +3,6 @@ local M = {}
 M.actions = require("utils.actions")
 M.cmp = require("utils.cmp")
 M.format = require("utils.format")
-M.icons = require("utils.icons")
 M.lsp = require("utils.lsp")
 M.ui = require("utils.ui")
 

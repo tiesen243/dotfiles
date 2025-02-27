@@ -19,10 +19,10 @@ return {
         severity_sort = true,
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = Yuki.icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = Yuki.icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = Yuki.icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = Yuki.icons.diagnostics.Info,
+            [vim.diagnostic.severity.ERROR] = Yuki.configs.icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = Yuki.configs.icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = Yuki.configs.icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = Yuki.configs.icons.diagnostics.Info,
           },
         },
       },
