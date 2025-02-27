@@ -45,6 +45,16 @@ return {
     end,
   },
 
+  -- setup lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        bashls = {},
+      },
+    },
+  },
+
   -- add formatter
   {
     "williamboman/mason.nvim",
@@ -54,7 +64,7 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        ["zsh"] = { "shfmt" },
+        sh = { "shfmt" },
       },
     },
   },

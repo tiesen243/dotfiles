@@ -33,7 +33,7 @@ source $ZSH/oh-my-zsh.sh
 #############################################
 
 # General
-alias cls="clear"
+alias c="clear"
 alias v="nvim"
 alias q="exit"
 
@@ -53,8 +53,8 @@ alias lt="lsd --tree --depth 3"
 
 # Bun
 alias bff="bun format:fix"
-alias bf="bun format"
 alias blf="bun lint:fix"
+alias bf="bun format"
 alias bl="bun lint"
 alias ba="bun add"
 alias bi="bun install"
@@ -138,9 +138,3 @@ fi
 . "$HOME/.local/bin/env"
 eval "$(uv generate-shell-completion zsh)"
 # <<< uv initialize <<<
-
-## [Completion]
-## Completion scripts setup. Remove the following line to uninstall
-[[ -f /home/tiesen/.dart-cli-completion/zsh-config.zsh ]] && . /home/tiesen/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]
-
