@@ -112,6 +112,12 @@ return {
       vim.list_extend(opts.event_handlers, {
         { event = events.FILE_MOVED, handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
+        {
+          event = "file_open_requested",
+          handler = function()
+            vim.cmd("Neotree close")
+          end,
+        },
       })
       require("neo-tree").setup(opts)
       vim.api.nvim_create_autocmd("TermClose", {
