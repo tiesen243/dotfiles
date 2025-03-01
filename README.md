@@ -19,13 +19,14 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh rofi hyprpaper hyprpicker hypridle hyprlock \
+yay -S zsh rofi-wayland hyprpaper hyprpicker hypridle hyprlock \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 zen-browser-bin ffmpeg \
 lsd ripgrep brightnessctl \
 github-cli lazygit\
 cliphist wl-clipboard \
 nwg-look pavucontrol \
+lazygit unzip \
 grim slurp
 ```
 
@@ -56,12 +57,6 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-```
-
-- OBS Studio
-
-```bash
-yay -S obs-studio wlrobs-hg
 ```
 
 6. Uninstall unnecessary packages (optional)
