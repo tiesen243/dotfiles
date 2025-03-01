@@ -19,7 +19,7 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh fastfetch rofi-wayland hyprpaper hyprpicker hypridle hyprlock \
+yay -S zsh fastfetch rofi-wayland hyprpaper hyprpicker hypridle hyprlock xdg-desktop-portal-hyprland-git \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 zen-browser-bin ffmpeg \
 lsd ripgrep brightnessctl \
