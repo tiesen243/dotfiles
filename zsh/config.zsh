@@ -3,7 +3,7 @@ export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 ZSH_THEME="yuki"
 
-plugins=(git git-commit gitignore sudo vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git git-commit gitignore sudo z zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
