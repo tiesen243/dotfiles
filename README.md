@@ -70,6 +70,12 @@ sudo pacman -Runs htop nano vim wofi
 1. To apply my config, you can run the following command:
 
 ```bash
+git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
+```
+
+Then, create the symbolic links to the config files
+
+```bash
 rm ~/.zshrc
 rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,lazygit,nvim,rofi}
 
@@ -78,9 +84,7 @@ ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
 
-Then, you can change the themes by `nwg-look` command
-
-2. Change Wallpaper in `~/dotfiles/hypr/misc/hyprpaper.conf`
+2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
 ```bash
 $path = /path/to/your/wallpaper
