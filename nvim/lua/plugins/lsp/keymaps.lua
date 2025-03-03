@@ -7,65 +7,28 @@ M.get = function()
     return M._keys
   end
 
-  local builtin = require("telescope.builtin")
-
+  -- stylua: ignore start
   M._keys = {
-    { "gd", builtin.lsp_definitions, desc = "Goto Definition", has = "definition" },
+    { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition", has = "definition" },
     { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-    { "gr", builtin.lsp_references, desc = "Goto References", opts = { nowait = true } },
-    { "gi", builtin.lsp_implementations, desc = "Goto Implementation" },
+    { "gr", function() Snacks.picker.lsp_references() end, desc = "Goto References", opts = { nowait = true } },
+    { "gi", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", vim.lsp.buf.type_definition, desc = "Goto Type Definition" },
-    {
-      "<c-k>",
-      vim.lsp.buf.signature_help,
-      desc = "Signature help",
-      has = "signatureHelp",
-      mode = { "i" },
-    },
+    { "<c-k>", vim.lsp.buf.signature_help, desc = "Signature help", has = "signatureHelp", mode = { "i" } },
     { "K", vim.lsp.buf.hover, desc = "Hover doc" },
-    {
-      "<leader>ca",
-      vim.lsp.buf.code_action,
-      desc = "Code Action",
-      has = "codeAction",
-      mode = { "n", "x" },
-    },
+    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", has = "codeAction", mode = { "n", "x" } },
     { "<leader>cd", vim.diagnostic.open_float, desc = "Inline Diagnostics" },
-    { "<leader>cD", builtin.diagnostics, desc = "Workspace Diagnostics" },
+    { "<leader>cD", function() Snacks.picker.diagnostics() end, desc = "Workspace Diagnostics" },
     { "<leader>cf", vim.lsp.buf.format, desc = "Format" },
     { "<leader>cr", vim.lsp.buf.rename, desc = "Rename Variable", has = "rename" },
-    {
-      "<leader>cR",
-      Snacks.rename.rename_file,
-      desc = "Rename File",
-      has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
-    },
-    { "<leader>cs", builtin.lsp_document_symbols, desc = "Document Symbols" },
-    { "<leader>ct", builtin.lsp_type_definitions, desc = "Type Definition" },
-    { "<leader>cw", builtin.lsp_dynamic_workspace_symbols, desc = "Workspace Symbols" },
-    {
-      "]]",
-      function()
-        Snacks.words.jump(vim.v.count1)
-      end,
-      desc = "Next Reference",
-      has = "documentHighlight",
-      cond = function()
-        return Snacks.words.is_enabled()
-      end,
-    },
-    {
-      "[[",
-      function()
-        Snacks.words.jump(-vim.v.count1)
-      end,
-      desc = "Previous Reference",
-      has = "documentHighlight",
-      cond = function()
-        return Snacks.words.is_enabled()
-      end,
-    },
+    { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
+    { "<leader>cs", function() Snacks.picker.lsp_symbols() end, desc = "Document Symbols" },
+    { "<leader>ct", function() Snacks.picker.lsp_type_definitions() end, desc = "Type Definition" },
+    { "<leader>cw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Workspace Symbols" },
+    { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end },
+    { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous Reference", has = "documentHighlight", cond = function() return Snacks.words.is_enabled() end },
   }
+  -- stylua: ignore end
 end
 
 M.has = function(buffer, method)

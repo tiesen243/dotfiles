@@ -3,14 +3,21 @@ return {
   -- https://github.com/EdenEast/nightfox.nvim
   {
     "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
     opts = function()
       vim.cmd.colorscheme("carbonfox")
 
       return {
         options = {
-          dim_inactive = true,
           transparent = vim.g.transparent_enabled,
-          colorblind = { enable = true },
+          colorblind = {
+            enable = true,
+            severity = {
+              protan = 0.3,
+              deutan = 0.6,
+            },
+          },
         },
       }
     end,
@@ -21,9 +28,7 @@ return {
   {
     "xiyaowong/transparent.nvim",
     opts = function()
-      require("transparent").clear_prefix("Navic")
       require("transparent").clear_prefix("NeoTree")
-      require("transparent").clear_prefix("SnacksNotifier")
 
       return {
         extra_groups = {
@@ -32,8 +37,6 @@ return {
           "NeoTreeNormal",
           "WhichKeyNormal",
           "WhichKeyBorder",
-          "TelescopeNormal",
-          "TelescopeBorder",
           "SnacksPickerBorder",
           "SnacksPickerInputBorder",
         },
