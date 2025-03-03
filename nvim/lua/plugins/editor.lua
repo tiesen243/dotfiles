@@ -4,7 +4,7 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
-    dependencies = { "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
     keys = {
       {
         "<leader>e",
@@ -132,82 +132,28 @@ return {
   },
 
   -- finder
-  -- https://github.com/nvim-telescope/telescope.nvim
-  {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
-    version = false,
-    keys = function()
-      local builtin = require("telescope.builtin")
-
-      return {
-        { "<leader>ff", builtin.find_files, desc = "Find Files" },
-        { "<leader>fg", builtin.live_grep, desc = "Find by Grep" },
-        { "<leader>fh", builtin.help_tags, desc = "Find Help" },
-        { "<leader>fk", builtin.keymaps, desc = "Find Keymaps" },
-        { "<leader>fr", builtin.oldfiles, desc = "Find Recents File" },
-        { "<leader>fs", builtin.builtin, desc = "Find Select Telescope" },
-        { "<leader>fw", builtin.grep_string, desc = "Find by current [W]ord" },
-        { "<leader><leader>", builtin.buffers, desc = "Opening buffers" },
-        {
-          "<leader>/",
-          function()
-            builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({ previewer = false }))
-          end,
-          desc = "Fuzzily search in current buffer",
-        },
-      }
-    end,
-    opts = function()
-      local actions = require("telescope.actions")
-
-      local function find_command()
-        if 1 == vim.fn.executable("rg") then
-          return { "rg", "--files", "--color", "never", "-g", "!.git" }
-        elseif 1 == vim.fn.executable("fd") then
-          return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
-        elseif 1 == vim.fn.executable("fdfind") then
-          return { "fdfind", "--type", "f", "--color", "never", "-E", ".git" }
-        elseif 1 == vim.fn.executable("find") and vim.fn.has("win32") == 0 then
-          return { "find", ".", "-type", "f" }
-        elseif 1 == vim.fn.executable("where") then
-          return { "where", "/r", ".", "*" }
-        end
-      end
-
-      return {
-        defaults = {
-          prompt_prefix = " ",
-          selection_caret = " ",
-          get_selection_window = function()
-            local wins = vim.api.nvim_list_wins()
-            table.insert(wins, 1, vim.api.nvim_get_current_win())
-            for _, win in ipairs(wins) do
-              local buf = vim.api.nvim_win_get_buf(win)
-              if vim.bo[buf].buftype == "" then
-                return win
-              end
-            end
-            return 0
-          end,
-          mappings = {
-            i = {
-              ["<esc>"] = actions.close,
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-              ["<C-f>"] = actions.preview_scrolling_down,
-              ["<C-b>"] = actions.preview_scrolling_up,
-            },
-            n = {
-              ["q"] = actions.close,
-            },
-          },
-        },
-        pickers = { find_files = { find_command = find_command, hidden = true } },
-        live_grep = { additional_args = { "--hidden" } },
-      }
-    end,
-  },
+  -- {
+  --   "folke/snacks.nvim",
+  --   keys = function()
+  --     local picker = require("Snacks")
+  --
+  --     return {
+  -- { "<leader>ff", picker.files, desc = "Find Files" },
+  -- { "<leader>fg", picker.grep, desc = "Find by Grep" },
+  -- { "<leader>fh", picker.help, desc = "Find Help" },
+  -- { "<leader>fk", picker.keymaps, desc = "Find Keymaps" },
+  -- { "<leader>fr", picker.recent, desc = "Find Recents File" },
+  -- { "<leader>fs", picker, desc = "Find Select Telescope" },
+  -- { "<leader>fw", picker.grep_words, desc = "Find by current [W]ord" },
+  -- { "<leader><leader>", picker.buffers, desc = "Opening buffers" },
+  -- {
+  --   "<leader>/",
+  --   picker.grep_buffers,
+  --   desc = "Fuzzily search in current buffer",
+  -- },
+  --     }
+  --   end,
+  -- },
 
   -- which-key helps you remember key bindings by showing a popup
   -- with the active keybindings of the command you started typing.
@@ -281,6 +227,20 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
+    keys = {
+      -- stylua: ignore start
+      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Find by Grep" },
+      { "<leader>fh", function() Snacks.picker.help() end, desc = "Find Help" },
+      { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Find Keymaps" },
+      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Find Recents File" },
+      { "<leader>fs", function() Snacks.picker() end, desc = "Select Picker" },
+      { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Find by current [W]ord" },
+      { "<leader><leader>", function() Snacks.picker.buffers() end, desc = "Opening buffers" },
+      { "<leader>/", function() Snacks.picker.grep_buffers() end, desc = "Fuzzily search in current buffer" },
+      -- stylua: ignore end
+    },
+
     opts = {
       bigfile = { enabled = true },
       dashboard = { preset = { header = Yuki.configs.logo } },
