@@ -28,6 +28,7 @@ vim.g.maplocalleader = "\\"
 
 _G.Yuki = require("utils")
 Yuki.configs = {
+  auto_format = true,
   logo = [[
 ██╗   ██╗██╗   ██╗██╗  ██╗██╗
 ╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
