@@ -28,7 +28,6 @@ return {
           return true -- avoid duplicate servers
         end,
       },
-      on_attach = function() end,
     },
   },
 
