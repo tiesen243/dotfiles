@@ -1,4 +1,6 @@
 return {
+  -- Github Copilot for Neovim
+  -- https://github.com/zbirenbaum/copilot.lua
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
