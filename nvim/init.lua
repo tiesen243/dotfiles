@@ -47,7 +47,6 @@ require("lazy").setup({
     { import = "plugins.ai.copilot" },
 
     -- add supported langues
-    -- you can add more via https://github.com/LazyVim/LazyVim/tree/main/lua/lazyvim/plugins/extras/lang
     { import = "plugins.lang.c" },
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
