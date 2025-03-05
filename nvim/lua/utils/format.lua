@@ -13,6 +13,7 @@ local M = setmetatable({}, {
 ---@field sources fun(bufnr:number):string[]
 ---@field priority number
 
+-- Core formatter registry
 M.formatters = {} ---@type YukiFormatter[]
 
 ---@param formatter YukiFormatter
@@ -21,13 +22,6 @@ function M.register(formatter)
   table.sort(M.formatters, function(a, b)
     return a.priority > b.priority
   end)
-end
-
-function M.formatexpr()
-  if Yuki.has("conform.nvim") then
-    return require("conform").formatexpr()
-  end
-  return vim.lsp.formatexpr({ timeout_ms = 3000 })
 end
 
 ---@param buf? number
@@ -47,6 +41,112 @@ function M.resolve(buf)
   end, M.formatters)
 end
 
+function M.setup()
+  -- Autoformat autocmd
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("YukiFormat", {}),
+    callback = function(event)
+      M.format({ buf = event.buf })
+    end,
+  })
+
+  -- Manual format
+  vim.api.nvim_create_user_command("YukiFormat", function()
+    M.format({ force = true })
+  end, { desc = "Format selection or buffer" })
+
+  -- Format info
+  vim.api.nvim_create_user_command("YukiFormatInfo", function()
+    M.info()
+  end, { desc = "Show info about the formatters for the current buffer" })
+end
+
+-- Formatting execution
+---@return string
+function M.formatexpr()
+  if Yuki.has("conform.nvim") then
+    return require("conform").formatexpr()
+  end
+  return vim.lsp.formatexpr({ timeout_ms = 3000 })
+end
+
+---@param opts? {force?:boolean, buf?:number}
+function M.format(opts)
+  opts = opts or {}
+  local buf = opts.buf or vim.api.nvim_get_current_buf()
+  if not ((opts and opts.force) or M.enabled(buf)) then
+    return
+  end
+
+  local done = false
+  for _, formatter in ipairs(M.resolve(buf)) do
+    if formatter.active then
+      done = true
+      local isSuccess = pcall(formatter.format, buf)
+      if not isSuccess then
+        Snacks.notify.warn({ msg = "Formatter `" .. formatter.name .. "` failed" })
+      end
+    end
+  end
+
+  if not done and opts and opts.force then
+    Snacks.notify.warn("No formatter available", { title = "YukiVim" })
+  end
+end
+
+-- Configuration management
+---@param buf? number
+function M.enabled(buf)
+  buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
+  local gaf = vim.g.autoformat
+  local baf = vim.b[buf].autoformat
+
+  -- If the buffer has a local value, use that
+  if baf ~= nil then
+    return baf
+  end
+
+  -- Otherwise use the global value if set, or true by default
+  return gaf == nil or gaf
+end
+
+---@param enable? boolean
+---@param buf? boolean
+function M.enable(enable, buf)
+  if enable == nil then
+    enable = true
+  end
+  if buf then
+    vim.b.autoformat = enable
+  else
+    vim.g.autoformat = enable
+    vim.b.autoformat = nil
+  end
+  M.info()
+end
+
+---@param buf? boolean
+function M.toggle(buf)
+  M.enable(not M.enabled(), buf)
+end
+
+---@param buf? boolean
+function M.snacks_toggle(buf)
+  return Snacks.toggle({
+    name = "Auto Format (" .. (buf and "Buffer" or "Global") .. ")",
+    get = function()
+      if not buf then
+        return vim.g.autoformat == nil or vim.g.autoformat
+      end
+      return Yuki.format.enabled()
+    end,
+    set = function(state)
+      Yuki.format.enable(state, buf)
+    end,
+  })
+end
+
+-- Information display
 ---@param buf? number
 function M.info(buf)
   buf = buf or vim.api.nvim_get_current_buf()
@@ -78,101 +178,6 @@ function M.info(buf)
     table.concat(lines, "\n"),
     { title = "YukiFormat (" .. (enabled and "enabled" or "disabled") .. ")" }
   )
-end
-
----@param buf? number
-function M.enabled(buf)
-  buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
-  local gaf = vim.g.autoformat
-  local baf = vim.b[buf].autoformat
-
-  -- If the buffer has a local value, use that
-  if baf ~= nil then
-    return baf
-  end
-
-  -- Otherwise use the global value if set, or true by default
-  return gaf == nil or gaf
-end
-
----@param buf? boolean
-function M.toggle(buf)
-  M.enable(not M.enabled(), buf)
-end
-
----@param enable? boolean
----@param buf? boolean
-function M.enable(enable, buf)
-  if enable == nil then
-    enable = true
-  end
-  if buf then
-    vim.b.autoformat = enable
-  else
-    vim.g.autoformat = enable
-    vim.b.autoformat = nil
-  end
-  M.info()
-end
-
----@param opts? {force?:boolean, buf?:number}
-function M.format(opts)
-  opts = opts or {}
-  local buf = opts.buf or vim.api.nvim_get_current_buf()
-  if not ((opts and opts.force) or M.enabled(buf)) then
-    return
-  end
-
-  local done = false
-  for _, formatter in ipairs(M.resolve(buf)) do
-    if formatter.active then
-      done = true
-      local isSuccess = pcall(formatter.format, buf)
-      if not isSuccess then
-        Snacks.notify.warn({ msg = "Formatter `" .. formatter.name .. "` failed" })
-      end
-    end
-  end
-
-  if not done and opts and opts.force then
-    Snacks.notify.warn("No formatter available", { title = "YukiVim" })
-  end
-end
-
-function M.setup()
-  -- Autoformat autocmd
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("YukiFormat", {}),
-    callback = function(event)
-      M.format({ buf = event.buf })
-    end,
-  })
-
-  -- Manual format
-  vim.api.nvim_create_user_command("YukiFormat", function()
-    M.format({ force = true })
-  end, { desc = "Format selection or buffer" })
-
-  -- Format info
-  vim.api.nvim_create_user_command("YukiFormatInfo", function()
-    M.info()
-  end, { desc = "Show info about the formatters for the current buffer" })
-end
-
----@param buf? boolean
-function M.snacks_toggle(buf)
-  return Snacks.toggle({
-    name = "Auto Format (" .. (buf and "Buffer" or "Global") .. ")",
-    get = function()
-      if not buf then
-        return vim.g.autoformat == nil or vim.g.autoformat
-      end
-      return Yuki.format.enabled()
-    end,
-    set = function(state)
-      Yuki.format.enable(state, buf)
-    end,
-  })
 end
 
 return M
