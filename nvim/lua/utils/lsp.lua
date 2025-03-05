@@ -84,4 +84,78 @@ M.get_raw_config = function(server)
   return require("lspconfig.server_configurations." .. server)
 end
 
+function M.get_clients(opts)
+  local ret = {}
+  if vim.lsp.get_clients then
+    ret = vim.lsp.get_clients(opts)
+  else
+    ret = vim.lsp.get_active_clients(opts)
+    if opts and opts.method then
+      ret = vim.tbl_filter(function(client)
+        return client.supports_method(opts.method, { bufnr = opts.bufnr })
+      end, ret)
+    end
+  end
+  return opts and opts.filter and vim.tbl_filter(opts.filter, ret) or ret
+end
+
+function M.formatter(opts)
+  opts = opts or {}
+  local filter = opts.filter or {}
+  filter = type(filter) == "string" and { name = filter } or filter
+  local ret = {
+    name = "LSP",
+    primary = true,
+    priority = 1,
+    format = function(buf)
+      M.format(vim.tbl_deep_extend("force", {}, filter, { bufnr = buf }))
+    end,
+    sources = function(buf)
+      local clients = M.get_clients(vim.tbl_deep_extend("force", {}, filter, { bufnr = buf }))
+      local ret = vim.tbl_filter(function(client)
+        return client.supports_method("textDocument/formatting")
+          or client.supports_method("textDocument/rangeFormatting")
+      end, clients)
+      return vim.tbl_map(function(client)
+        return client.name
+      end, ret)
+    end,
+  }
+
+  return vim.tbl_deep_extend("force", ret, opts)
+end
+
+function M.format(opts)
+  opts = vim.tbl_deep_extend(
+    "force",
+    {},
+    opts or {},
+    Yuki.opts("nvim-lspconfig").format or {},
+    Yuki.opts("conform.nvim").format or {}
+  )
+  local ok, conform = pcall(require, "conform")
+  -- use conform for formatting with LSP when available,
+  -- since it has better format diffing
+  if ok then
+    opts.formatters = {}
+    conform.format(opts)
+  else
+    vim.lsp.buf.format(opts)
+  end
+end
+
+M.action = setmetatable({}, {
+  __index = function(_, action)
+    return function()
+      vim.lsp.buf.code_action({
+        apply = true,
+        context = {
+          only = { action },
+          diagnostics = {},
+        },
+      })
+    end
+  end,
+})
+
 return M
