@@ -122,10 +122,10 @@ return {
               {
                 mode = "n",
                 buffer = args.buf,
-                { "<leader>cx", group = "extract" },
-                { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
-                { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
                 { "<leader>co", require("jdtls").organize_imports, desc = "Organize Imports" },
+                { "<leader>cx", group = "extract" },
+                { "<leader>cxc", require("jdtls").extract_constant, desc = "Extract Constant" },
+                { "<leader>cxv", require("jdtls").extract_variable_all, desc = "Extract Variable" },
               },
             })
             wk.add({
@@ -133,6 +133,11 @@ return {
                 mode = "v",
                 buffer = args.buf,
                 { "<leader>cx", group = "extract" },
+                {
+                  "<leader>cxc",
+                  [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
+                  desc = "Extract Constant",
+                },
                 {
                   "<leader>cxm",
                   [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
@@ -142,11 +147,6 @@ return {
                   "<leader>cxv",
                   [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
                   desc = "Extract Variable",
-                },
-                {
-                  "<leader>cxc",
-                  [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
-                  desc = "Extract Constant",
                 },
               },
             })
