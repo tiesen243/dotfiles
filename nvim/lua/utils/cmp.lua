@@ -1,5 +1,8 @@
 local M = {}
 
+-- Snippet parsing and manipulation
+---@param snippet string
+---@param fn fun(placeholder: {n: string, text: string}): string
 function M.snippet_replace(snippet, fn)
   return snippet:gsub("%$%b{}", function(m)
     local n, name = m:match("^%${(%d+):(.+)}$")
@@ -7,16 +10,18 @@ function M.snippet_replace(snippet, fn)
   end) or snippet
 end
 
+---@param snippet string
 function M.snippet_preview(snippet)
   local ok, parsed = pcall(function()
     return vim.lsp._snippet_grammar.parse(snippet)
   end)
   return ok and tostring(parsed)
-      or M.snippet_replace(snippet, function(placeholder)
-        return M.snippet_preview(placeholder.text)
-      end):gsub("%$0", "")
+    or M.snippet_replace(snippet, function(placeholder)
+      return M.snippet_preview(placeholder.text)
+    end):gsub("%$0", "")
 end
 
+---@param snippet string
 function M.snippet_fix(snippet)
   local texts = {} ---@type table<number, string>
   return M.snippet_replace(snippet, function(placeholder)
@@ -25,6 +30,8 @@ function M.snippet_fix(snippet)
   end)
 end
 
+-- Snippet expansion
+---@param snippet string
 function M.expand(snippet)
   local session = vim.snippet.active() and vim.snippet._session or nil
 
@@ -34,7 +41,7 @@ function M.expand(snippet)
     ok = pcall(vim.snippet.expand, fixed)
 
     local msg = ok and "Failed to parse snippet,\nbut was able to fix it automatically."
-        or ("Failed to parse snippet.\n" .. err)
+      or ("Failed to parse snippet.\n" .. err)
 
     Snacks.notify.warn(msg, { title = "Snippet" })
   end
