@@ -1,39 +1,27 @@
 local M = {}
 
+-- Module imports
 M.actions = require("utils.actions")
 M.cmp = require("utils.cmp")
 M.format = require("utils.format")
 M.lsp = require("utils.lsp")
 M.ui = require("utils.ui")
 
-M.extend = function(t, key, values)
-  local keys = vim.split(key, ".", { plain = true })
-  for i = 1, #keys do
-    local k = keys[i]
-    t[k] = t[k] or {}
-    if type(t) ~= "table" then
-      return
-    end
-    t = t[k]
-  end
-  return vim.list_extend(t, values)
+-- Plugin management helpers
+function M.get_plugin(name)
+  return require("lazy.core.config").spec.plugins[name]
 end
 
-local cache = {} ---@type table<(fun()), table<string, any>>
----@generic T: fun()
----@param fn T
----@return T
-M.memoize = function(fn)
-  return function(...)
-    local key = vim.inspect({ ... })
-    cache[fn] = cache[fn] or {}
-    if cache[fn][key] == nil then
-      cache[fn][key] = fn(...)
-    end
-    return cache[fn][key]
+function M.opts(name)
+  local plugin = M.get_plugin(name)
+  if not plugin then
+    return {}
   end
+  local Plugin = require("lazy.core.plugin")
+  return Plugin.values(plugin, "opts", false)
 end
 
+-- Path utilities
 M.get_pkg_path = function(pkg, path, opts)
   pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
   local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
@@ -50,17 +38,34 @@ M.get_pkg_path = function(pkg, path, opts)
   return ret
 end
 
-function M.get_plugin(name)
-  return require("lazy.core.config").spec.plugins[name]
+-- Data structure helpers
+M.extend = function(t, key, values)
+  local keys = vim.split(key, ".", { plain = true })
+  for i = 1, #keys do
+    local k = keys[i]
+    t[k] = t[k] or {}
+    if type(t) ~= "table" then
+      return
+    end
+    t = t[k]
+  end
+  return vim.list_extend(t, values)
 end
 
-function M.opts(name)
-  local plugin = M.get_plugin(name)
-  if not plugin then
-    return {}
+-- Function utility helpers
+local cache = {} ---@type table<(fun()), table<string, any>>
+---@generic T: fun()
+---@param fn T
+---@return T
+M.memoize = function(fn)
+  return function(...)
+    local key = vim.inspect({ ... })
+    cache[fn] = cache[fn] or {}
+    if cache[fn][key] == nil then
+      cache[fn][key] = fn(...)
+    end
+    return cache[fn][key]
   end
-  local Plugin = require("lazy.core.plugin")
-  return Plugin.values(plugin, "opts", false)
 end
 
 return M
