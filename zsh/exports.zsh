@@ -29,3 +29,9 @@ if [ -d "$HOME/.local/bin/env" ]; then
   eval "$(uv generate-shell-completion zsh)"
 fi
 # <<< uv initialize <<<
+
+# >>> arm initialize <<<
+if [[ -d "$HOME/.arm-linux-gnueabi/bin" ]]; then
+  export PATH="$HOME/.arm-linux-gnueabi/bin:$PATH"
+fi
+# <<< arm initialize <<<
