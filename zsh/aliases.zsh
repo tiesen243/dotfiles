@@ -3,13 +3,6 @@ alias cls="clear"
 alias v="nvim"
 alias q="exit"
 
-# Directory
-alias xh="cd $HOME"
-alias xd="cd $HOME/Documents"
-alias xD="cd $HOME/Downloads"
-alias xp="cd $HOME/Pictures"
-alias xc="cd $HOME/dotfiles"
-
 # Kitty
 alias icat="kitten icat"
 
@@ -38,6 +31,7 @@ alias b="bun"
 alias grc="gh repo create"
 alias grd="gh repo delete"
 alias gcl="gh repo clone"
+alias lzg="lazygit"
 
 # Pacman | Yay
 alias yp="yay -Qdtq | yay -Rns -"

@@ -11,17 +11,25 @@ fi
 
 saveLocation=($saveLocation/Screenshot\ $(date +%Y-%m-%d)\ $(date +%H%M%S)\.png)
 
-if [ "$1" == "--full" ]; then
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 [--full | --select]"
+  echo ""
+  echo "  --full   : Capture a full screenshot."
+  echo "  --select : Capture a selected area screenshot."
+  exit 1
+fi
+
+case $1 in
+"--full")
   grim "$saveLocation"
-elif [ "$1" == "--select" ]; then
+  ;;
+"--select")
   grim -g "$(slurp)" "$saveLocation"
   if [ $? -ne 0 ]; then
     exit 1
   fi
-else
-  notify-send "Invalid argument. Use --full or --select."
-  exit 1
-fi
+  ;;
+esac
 
 wl-copy <"$saveLocation"
 
