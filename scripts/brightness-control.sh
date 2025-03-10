@@ -7,12 +7,23 @@ getCurrentBrightness() {
   echo "$percentage%"
 }
 
-if [ $1 = "--up" ]; then
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 [--up | --down]"
+  echo ""
+  echo "  --up   : Increase brightness by 5%"
+  echo "  --down : Decrease brightness by 5%"
+  exit 1
+fi
+
+case $1 in
+"--up")
   dunstctl close-all
   brightnessctl s +5%
   notify-send "Brightness increased to $(getCurrentBrightness)"
-elif [ $1 = "--down" ]; then
+  ;;
+"--down")
   dunstctl close-all
   brightnessctl s 5%-
   notify-send "Brightness decreased to $(getCurrentBrightness)"
-fi
+  ;;
+esac

@@ -14,25 +14,33 @@ getVolumeStatus() {
   fi
 }
 
-getMicStatus() {
-  status=$(pactl list sources | grep 'Mute:' | head -n 1 | awk '{print $2}')
-  if [ "$status" = "yes" ]; then
-    echo "muted"
-  else
-    echo "unmuted"
-  fi
-}
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 [--up | --down | --toggle-volume | --show]"
+  echo ""
+  echo "  --up             : Increase volume by 5%"
+  echo "  --down           : Decrease volume by 5%"
+  echo "  --toggle-volume  : Toggle volume mute/unmute"
+  echo "  --show           : Show current volume"
+  exit 1
+fi
 
-if [ $1 = "--up" ]; then
+case $1 in
+"--up")
   dunstctl close-all
   pactl set-sink-volume @DEFAULT_SINK@ +5%
   notify-send "Volume increased to $(getCurrentVolume)"
-elif [ $1 = "--down" ]; then
+  ;;
+"--down")
   dunstctl close-all
   pactl set-sink-volume @DEFAULT_SINK@ -5%
   notify-send "Volume decreased to $(getCurrentVolume)"
-elif [ $1 = "--toggle-volume" ]; then
+  ;;
+"--toggle-volume")
   dunstctl close-all
   pactl set-sink-mute @DEFAULT_SINK@ toggle
   notify-send "Volume $(getVolumeStatus)"
-fi
+  ;;
+"--show")
+  notify-send "Volume: $(getCurrentVolume)"
+  ;;
+esac
