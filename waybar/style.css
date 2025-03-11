@@ -2,9 +2,9 @@
 @define-color background_color #0a0a0a;
 @define-color foreground_color #fafafa;
 @define-color primary_color #78a9ff;
+@define-color secondary_color #E1BDDD;
 @define-color muted_color #262626;
 @define-color destructive_color #7f1d1d;
-@define-color secondary_color #E1BDDD;
 
 /*------------Global Properties-----------------*/
 * {
