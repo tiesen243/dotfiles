@@ -14,6 +14,10 @@
 
 ![preview-03](./assets/preview-03.png)
 
+### Hyprlock 
+
+![preview-04](./assets/preview-04.png)
+
 ## Installation
 
 1. Install `yay`
