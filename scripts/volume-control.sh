@@ -27,6 +27,12 @@ fi
 case $1 in
 "--up")
   dunstctl close-all
+
+  if [ "$(getCurrentVolume)" = "100%" ]; then
+    notify-send "Volume is already at 100%"
+    exit 1
+  fi
+
   pactl set-sink-volume @DEFAULT_SINK@ +5%
   notify-send "Volume increased to $(getCurrentVolume)"
   ;;
