@@ -2,7 +2,17 @@
 
 ## Preview
 
-![preview](./assets/preview.png)
+### Desktop
+
+![preview-01](./assets/preview-01.png)
+
+### Terminal
+
+![preview-02](./assets/preview-02.png)
+
+### Rofi
+
+![preview-03](./assets/preview-03.png)
 
 ## Installation
 
@@ -19,14 +29,13 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S zsh fastfetch rofi-wayland hyprpaper hyprpicker hypridle hyprlock xdg-desktop-portal-hyprland-git \
+yay -S zsh fastfetch rofi-wayland waybar hyprpaper hyprpicker hypridle hyprlock xdg-desktop-portal-hyprland-git \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
+lsd ripgrep brightnessctl playerctl unzip \
 zen-browser-bin ffmpeg \
-lsd ripgrep brightnessctl \
-github-cli lazygit\
 cliphist wl-clipboard \
 nwg-look pavucontrol \
-lazygit unzip \
+github-cli lazygit\
 grim slurp
 ```
 
@@ -77,9 +86,9 @@ Then, create the symbolic links to the config files
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,lazygit,nvim,rofi}
+rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,lazygit,nvim,rofi,waybar}
 
-ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,lazygit,nvim,rofi} ~/.config
+ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,lazygit,nvim,rofi,waybar} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
