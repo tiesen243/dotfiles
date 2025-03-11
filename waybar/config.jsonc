@@ -1,0 +1,174 @@
+ {
+
+	/*----------Global Properties-------------*/
+	"layer": "top",
+	"position": "top",
+	"spacing": 0,
+	"height": 35,
+	"margin-top": 0,
+	"margin-right": 0,
+	"margin-bottom": 0,
+	"margin-left": 0,
+	/*----------Modules Left----------------*/
+	"modules-left": [
+		"custom/launcher",
+		"group/utility",
+    "custom/playerctl#play",
+		"custom/playerlabel"
+	],
+	/*----------Modules Center--------------*/
+	"modules-center": [
+		"hyprland/workspaces"
+	],
+	/*----------Modules Center--------------*/
+	"modules-right": [
+		"tray",
+		"pulseaudio",
+		"network",
+    "battery",
+		"clock"
+	],
+
+	/*----------Hyprland Workspace----------*/
+	"hyprland/workspaces": {
+		"format": "{id}",
+		"format-icons": {
+			"active": " ",
+			"default": " ",
+			"urgent": " "
+		},
+		"on-click": "activate",
+		"on-scroll-down": "hyprctl dispatch workspace e+1",
+		"on-scroll-up": "hyprctl dispatch workspace e-1"
+	},
+
+	/*---------------Launcher-------------*/
+	"custom/launcher": {
+		"format": "󰣇 ",
+		"tooltip": false,
+		"on-click": "pkill -x rofi || sh ~/dotfiles/scripts/rofilaunch.sh --drun"
+	},
+
+	/*-----------Cpu, Memory, Colorpicker, Temperature, Idle-inhibitor------*/
+	"cpu": {
+		"format": "󰻠",
+		"tooltip": true
+	},
+	"memory": {
+		"format": "",
+    "tooltip-format":"{used:0.1f}G/{total:0.1f}G"
+	},
+	"temperature": {
+		"critical-threshold": 80,
+		"format": ""
+	},
+
+	/*----------------Expand---------------*/
+	"custom/expand": {
+		"format": "",
+		"tooltip": true,
+		"tooltip-format": "Click to show utilities"
+	},
+
+	/*-----------Group-------------------*/
+	"group/utility": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 600,
+			"children-class": "child-utility",
+			"transition-left-to-right": true,
+			"click-to-reveal": true
+		},
+		"modules": [
+			"custom/expand",
+			"cpu",
+			"memory",
+			"temperature"
+		]
+	},
+
+	/*---------------Playerctl---------------*/
+  "custom/playerctl#play": {
+		"exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+		"format": "{icon}",
+		"format-icons": {
+			"Paused": "<span> </span>",
+			"Playing": "<span>󰏥 </span>",
+			"Stopped": "<span> </span>"
+		},
+		"on-click": "playerctl play-pause",
+		"return-type": "json"
+	},
+	"custom/playerlabel": {
+		"exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+		"format": "<span>󰎈 {} 󰎈</span>",
+		"max-length": 40,
+		"on-click": "",
+		"return-type": "json"
+	},
+
+	/*---------------Battery-------------*/
+	"battery": {
+		"format": "{icon} {capacity}%",
+		"format-alt": "{icon} {time}",
+		"format-charging": " {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		],
+		"format-plugged": " {capacity}% ",
+		"format-time": "{H}h {m}m",
+		"states": {
+			"critical": 15,
+			"good": 95,
+			"warning": 30
+		}
+	},
+
+	/*---------------Pulseaudio------------*/
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-icons": {
+			"default": [
+				"󰕿",
+				"󰖀",
+				"󰕾"
+			]
+		},
+		"format-muted": "󰝟",
+		"on-click": "pkill -x pavucontrol || pavucontrol",
+		"scroll-step": 5
+	},
+
+	/*--------------Network-----------------*/
+	"network": {
+		"format-disconnected": "󰖪 0% ",
+		"format-ethernet": "󰈀 100% ",
+		"format-linked": "{ifname} (No IP)",
+		"format-wifi": "  {signalStrength}%",
+		"tooltip-format": "Connected to {essid} {ifname} via {gwaddr}",
+		"on-click": "kitty --title FootNmtui sh -c  'sleep 0.1; nmtui'"
+	},
+
+	/*------------Tray--------------------*/
+	"tray": {
+		"icon-size": 20,
+		"spacing": 8
+	},
+
+	/*------------Clock------------------*/
+	"clock": {
+		"format": "󰥔 {:%H:%M:%S} ",
+		"interval": 1,
+    "tooltip-format": "<tt>{calendar}</tt>",
+		"calendar": {
+			"format": {
+				"today": "<span color='#fAfBfC'><b>{}</b></span>"
+			}
+		}
+	}
+
+ }
