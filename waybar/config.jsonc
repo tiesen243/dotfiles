@@ -4,7 +4,7 @@
 	"layer": "top",
 	"position": "top",
 	"spacing": 0,
-	"height": 35,
+	"height": 34,
 	"margin-top": 0,
 	"margin-right": 0,
 	"margin-bottom": 0,
@@ -22,7 +22,6 @@
 	],
 	/*----------Modules Center--------------*/
 	"modules-right": [
-		"tray",
 		"pulseaudio",
 		"network",
     "battery",
@@ -151,12 +150,6 @@
 		"format-wifi": "  {signalStrength}%",
 		"tooltip-format": "Connected to {essid} {ifname} via {gwaddr}",
 		"on-click": "kitty --title FootNmtui sh -c  'sleep 0.1; nmtui'"
-	},
-
-	/*------------Tray--------------------*/
-	"tray": {
-		"icon-size": 20,
-		"spacing": 8
 	},
 
 	/*------------Clock------------------*/
