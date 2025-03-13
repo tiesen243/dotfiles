@@ -18,8 +18,8 @@
 /*------------Window--------------------*/
 #window{
     background: transparent;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 16px;
+    padding-right: 16px;
     border-radius: 16px;
     font-weight: normal;
     font-style: normal;
@@ -44,15 +44,15 @@ tooltip label {
 /*---------Workspaces-----------------*/
 #workspaces {
     background: transparent;
-    margin: 5px;
-    padding: 5px;
+    margin: 4px;
+    padding: 4px;
     border-radius: 16px;
     color: @foreground_color;
 }
 #workspaces button {
     font-weight: bold;
-    padding: 0px 5px;
-    margin: 0px 3px;
+    padding: 0px 4px;
+    margin: 0px 4px;
     border-radius: 16px;
     color: transparent;
     background: @muted_color;
@@ -88,36 +88,25 @@ tooltip label {
     transition: all 0.3s ease-in-out;
 }
 
-/*---------------Tray, Clock, Playerctl, Battery, Cpu, Temperature, Colorpicker, Memory, Idle_inhibitor----------------------*/
-#tray, #pulseaudio, #network, #battery, #cpu, #temperature, #memory, #custom-playerctl.play {
+/*---------------Clock, Playerctl, Battery, Cpu, Temperature, Colorpicker, Memory, Idle_inhibitor----------------------*/
+#pulseaudio, #network, #battery, #cpu, #temperature, #memory, #custom-playerctl.play {
     background: @background_color;
     font-weight: bold;
-    margin: 5px 0px;
+    margin: 4px 0px;
 }
-#tray, #pulseaudio, #network, #battery {
+#pulseaudio, #network, #battery {
     color: @foreground_color;
     border-radius: 10px 24px 10px 24px;
-    padding: 0 20px;
-    margin-left: 7px;
+    padding: 0 16px;
+    margin-left: 8px;
 }
 #clock {
     color: @secondary_color;
     background: @background_color;
     border-radius: 0px 0px 0px 40px;
-    padding: 4px 10px 4px 24px;
-    margin-left: 7px;
+    padding: 0px 8px 0px 16px;
+    margin-left: 8px;
     font-weight: bold;
-    font-size: 14px;
-}
-
-#tray menu * {
-    padding: 0px 5px;
-    transition: all .3s ease; 
-}
-
-#tray menu separator {
-    padding: 0px 5px;
-    transition: all .3s ease; 
 }
 
 /*-----------Playerctl-------------------*/
@@ -125,9 +114,9 @@ tooltip label {
     background: @background_color;
     font-size: 20px;
     color: @secondary_color;
-    border-radius: 24px 0px 0px 10px;
+    border-radius: 24px 0px 0px 8px;
     padding-left: 16px;
-    margin-left: 7px;
+    margin-left: 8px;
 }
 #custom-playerctl.play:hover {
     color: @primary_color;
@@ -135,9 +124,9 @@ tooltip label {
 #custom-playerlabel {
     background: @background_color;
     color: @foreground_color;
-    padding-right: 20px;
-    border-radius: 0px 10px 24px 0px;
-    margin: 5px 0px;
+    padding-right: 24px;
+    border-radius: 0px 8px 24px 0px;
+    margin: 4px 0px;
     font-weight: bold;
 }
 
@@ -151,8 +140,8 @@ tooltip label {
 #custom-launcher {
     color: @secondary_color;
     background: @background_color;
-    margin: 0px 5px 0px 0px;
-    padding: 0px 16px;
+    margin-right: 8px;
+    padding: 0px 16px 0px 8px;
     border-radius: 0px 0px 40px 0px;
     font-size: 24px;
 }
@@ -164,32 +153,31 @@ tooltip label {
 }
 
 #cpu {
-    color: @secondary_color;
+    color: @primary_color;
     border-radius: 24px 0px 0px 10px;
     padding-left: 16px;
-    padding-right: 7px;
-    margin-left: 7px;
+    padding-right: 8px;
+    margin-left: 8px;
 }
 
 #memory {
-    color: @primary_color;
-    padding-left: 7px;
-    padding-right: 7px;
+    color: @secondary_color;
+    padding: 0px 8px;
 }
 
 #temperature {
-    color: @secondary_color;
-    border-radius: 0px 10px 24px 0px;
-    padding-left: 7px;
+    color: @primary_color;
+    border-radius: 0px 8px 24px 0px;
+    padding-left: 8px;
     padding-right: 16px;
 }
 
 /*---------------Expand---------------*/
 #custom-expand {
     background: transparent;
-    color: @foreground_color;
+    color: @secondary_color;
     margin: 1px;
-    font-size: 22px;
+    font-size: 24px;
 }
 
 #custom-expand:hover {
