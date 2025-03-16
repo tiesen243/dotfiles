@@ -8,6 +8,10 @@ return {
     opts = function()
       vim.cmd.colorscheme("carbonfox")
 
+      local palette = require("nightfox.palette").load("carbonfox")
+      vim.api.nvim_set_hl(0, "NavicSeparator", { fg = palette.fg2 })
+      vim.api.nvim_set_hl(0, "NavicText", { fg = palette.fg2 })
+
       return {
         options = {
           transparent = vim.g.transparent_enabled,
@@ -29,6 +33,8 @@ return {
     "xiyaowong/transparent.nvim",
     opts = function()
       require("transparent").clear_prefix("NeoTree")
+      require("transparent").clear_prefix("lualine_c")
+      require("transparent").clear_prefix("lualine_transitional_lualine_b")
 
       return {
         extra_groups = {
@@ -74,7 +80,12 @@ return {
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", file_status = true, path = 1 },
-          { "navic", color_correction = "dynamic" },
+          {
+            function()
+              local navic = require("nvim-navic")
+              return navic.get_location()
+            end,
+          },
         },
         lualine_x = {
           {
