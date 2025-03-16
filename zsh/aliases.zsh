@@ -7,7 +7,7 @@ alias q="exit"
 alias icat="kitten icat"
 
 # LSD
-alias ls="lsd --date=relative --group-dirs=first --hyperlink always --total-size --size short"
+alias ls="lsd"
 alias lt="ls --tree --depth 3"
 
 # Bun
