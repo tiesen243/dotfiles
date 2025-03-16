@@ -10,7 +10,23 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        clangd = { cmd = { "clangd", "--offset-encoding=utf-16" } },
+        clangd = {
+          cmd = {
+            "clangd",
+            "--offset-encoding=utf-16",
+            "--background-index",
+            "-j=12",
+            "--query-driver=**",
+            "--clang-tidy",
+            "--all-scopes-completion",
+            "--cross-file-rename",
+            "--completion-style=detailed",
+            "--header-insertion-decorators",
+            "--header-insertion=iwyu",
+            "--pch-storage=memory",
+            "--suggest-missing-includes",
+          },
+        },
       },
     },
   },
