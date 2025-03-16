@@ -214,7 +214,7 @@ return {
     opts = {
       click = true,
       highlight = true,
-      depth_limit = 5,
+      depth_limit = 3,
       lazy_update_context = true,
       icons = Yuki.configs.icons.kinds,
       lsp = { preference = { "volar" } },
