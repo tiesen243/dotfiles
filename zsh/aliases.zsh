@@ -7,10 +7,8 @@ alias q="exit"
 alias icat="kitten icat"
 
 # LSD
-alias ls="lsd"
-alias ll="lsd -l"
-alias la="lsd -la"
-alias lt="lsd --tree --depth 3"
+alias ls="lsd --hyperlink always --total-size --size short --group-dirs=first"
+alias lt="ls --tree --depth 3"
 
 # Bun
 alias bff="bun format:fix"
