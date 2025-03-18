@@ -8,6 +8,8 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
     event = "InsertEnter",
     opts = {
+      fuzzy = { implementation = "lua" },
+
       snippets = {
         expand = function(snippet, _)
           return Yuki.cmp.expand(snippet)

@@ -33,6 +33,7 @@ return {
     opts = function()
       require("transparent").clear_prefix("NeoTree")
       require("transparent").clear_prefix("lualine_c")
+      require("transparent").clear_prefix("lualine_x_diff")
       require("transparent").clear_prefix("lualine_transitional_lualine_b")
 
       local theme = vim.g.transparent_enabled and "carbonfox" or "nightfox"
