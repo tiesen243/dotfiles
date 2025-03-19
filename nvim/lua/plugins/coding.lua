@@ -8,7 +8,7 @@ return {
     dependencies = { "rafamadriz/friendly-snippets" },
     event = "InsertEnter",
     opts = {
-      fuzzy = { implementation = "lua" },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
 
       snippets = {
         expand = function(snippet, _)
