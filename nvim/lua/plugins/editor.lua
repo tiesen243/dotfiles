@@ -212,12 +212,13 @@ return {
       end)
     end,
     opts = {
-      click = true,
+      icons = Yuki.configs.icons.kinds,
+      lsp = { auto_attach = true },
       highlight = true,
+      separator = "  ",
       depth_limit = 3,
       lazy_update_context = true,
-      icons = Yuki.configs.icons.kinds,
-      lsp = { preference = { "volar" } },
+      click = true,
     },
   },
 
