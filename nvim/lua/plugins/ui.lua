@@ -7,6 +7,8 @@ return {
     lazy = false,
     priority = 1000,
     opts = function()
+      vim.cmd.colorscheme("carbonfox")
+
       local palette = require("nightfox.palette").load("carbonfox")
       vim.api.nvim_set_hl(0, "NavicSeparator", { fg = palette.fg2 })
       vim.api.nvim_set_hl(0, "NavicText", { fg = palette.fg2 })
@@ -35,9 +37,6 @@ return {
       require("transparent").clear_prefix("lualine_c")
       require("transparent").clear_prefix("lualine_x_diff")
       require("transparent").clear_prefix("lualine_transitional_lualine_b")
-
-      local theme = vim.g.transparent_enabled and "carbonfox" or "nightfox"
-      vim.cmd.colorscheme(theme)
 
       return {
         extra_groups = {
@@ -87,6 +86,10 @@ return {
             function()
               local navic = require("nvim-navic")
               return navic.get_location()
+            end,
+            cond = function()
+              local navic = require("nvim-navic")
+              return navic.is_available()
             end,
           },
         },
