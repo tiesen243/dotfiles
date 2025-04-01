@@ -14,16 +14,16 @@ hour=$(date +%H)
 
 # Determine the greeting based on the time
 if [ "$hour" -ge 5 ] && [ "$hour" -lt 12 ]; then
-  greeting="Good Morning"
+  greeting="Ohayou"
 elif [ "$hour" -ge 12 ] && [ "$hour" -lt 17 ]; then
-  greeting="Good Afternoon"
+  greeting="Konnichiwa"
 elif [ "$hour" -ge 17 ] && [ "$hour" -lt 21 ]; then
-  greeting="Good Evening"
+  greeting="Konbanwa"
 elif [ "$hour" -ge 21 ] && [ "$hour" -lt 24 ]; then
-  greeting="Good Night"
+  greeting="Oyasumi"
 else
-  greeting="GO TO SLEEP!"
+  greeting="Oyasumi"
 fi
 
 # Output the combined text
-echo -e "Hello, $username! $greeting"
+echo -e "$greeting, $username!"
