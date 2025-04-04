@@ -120,8 +120,8 @@ return {
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          -- { Yuki.actions.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
-          { Yuki.actions.get_time },
+          { Yuki.actions.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
+          { Yuki.actions.get_time, padding = { left = 0, right = 1 }, separator = " " },
         },
       },
     },
