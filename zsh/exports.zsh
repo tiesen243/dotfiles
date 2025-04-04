@@ -31,7 +31,7 @@ fi
 # <<< uv initialize <<<
 
 # >>> arm initialize <<<
-if [[ -d "$HOME/.arm-linux-gnueabi-5" ]]; then
-  export PATH="$HOME/.arm-linux-gnueabi-5/bin:$PATH"
+if [[ -d "$HOME/.arm-linux-gnueabi-4" ]]; then
+  export PATH="$HOME/.arm-linux-gnueabi-4/bin:$PATH"
 fi
 # <<< arm initialize <<<
