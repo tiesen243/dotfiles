@@ -7,6 +7,11 @@ M.format = require("utils.format")
 M.lsp = require("utils.lsp")
 M.ui = require("utils.ui")
 
+---@param plugin string
+function M.has(plugin)
+  return M.get_plugin(plugin) ~= nil
+end
+
 -- Plugin management helpers
 function M.get_plugin(name)
   return require("lazy.core.config").spec.plugins[name]
