@@ -50,15 +50,12 @@ require("lazy").setup({
     { import = "plugins.lang.c" },
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
-    { import = "plugins.lang.java" },
     { import = "plugins.lang.json" },
-    { import = "plugins.lang.markdown" },
     { import = "plugins.lang.prisma" },
-    { import = "plugins.lang.rust" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
   },
-  install = { colorscheme = { "carbonfox" } },
+  install = { colorscheme = { "tokyonight" } },
   checker = { enabled = false },
 })
 

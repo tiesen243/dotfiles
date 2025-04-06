@@ -89,12 +89,12 @@ tooltip label {
 }
 
 /*---------------Clock, Playerctl, Battery, Cpu, Temperature, Colorpicker, Memory, Idle_inhibitor----------------------*/
-#pulseaudio, #network, #battery, #cpu, #temperature, #memory, #custom-playerctl.play {
+#pulseaudio, #network, #custom-battery, #cpu, #temperature, #memory, #custom-playerctl.play {
     background: @background_color;
     font-weight: bold;
     margin: 4px 0px;
 }
-#pulseaudio, #network, #battery {
+#pulseaudio, #network, #custom-battery {
     color: @foreground_color;
     border-radius: 10px 24px 10px 24px;
     padding: 0 16px;
