@@ -1,15 +1,14 @@
 return {
-  -- tokyonight theme
-  -- https://github.com/folke/tokyonight.nvim
+  -- vercel theme
+  -- https://github.com/tiesen243/vercel.nvim
   {
-    "folke/tokyonight.nvim",
+    "tiesen243/vercel.nvim",
     lazy = false,
     priority = 1000,
     opts = function()
-      vim.cmd.colorscheme("tokyonight-night")
+      vim.cmd.colorscheme("vercel-dark")
 
       return {
-        style = "night",
         transparent = vim.g.transparent_enabled,
       }
     end,
@@ -21,20 +20,14 @@ return {
     "xiyaowong/transparent.nvim",
     opts = function()
       require("transparent").clear_prefix("NeoTree")
+      require("transparent").clear_prefix("Navic")
+
       require("transparent").clear_prefix("lualine_c")
       require("transparent").clear_prefix("lualine_x_diff")
       require("transparent").clear_prefix("lualine_transitional_lualine_b")
 
       return {
-        extra_groups = {
-          "NormalFloat",
-          "Float",
-          "NeoTreeNormal",
-          "WhichKeyNormal",
-          "WhichKeyBorder",
-          "SnacksPickerBorder",
-          "SnacksPickerInputBorder",
-        },
+        extra_groups = { "NormalFloat" },
         exclude_groups = { "CursorLine", "NeoTreeCursorLine" },
       }
     end,
@@ -78,6 +71,7 @@ return {
               local navic = require("nvim-navic")
               return navic.is_available()
             end,
+            padding = { left = 1, right = 0 },
           },
         },
         lualine_x = {
@@ -103,8 +97,8 @@ return {
           { "searchcount", padding = { left = 1, right = 1 } },
         },
         lualine_y = {
-          { "progress", padding = { left = 1, right = 0 }, separator = " " },
-          { "location", padding = { left = 0, right = 1 } },
+          { "progress", separator = "" },
+          { "location" },
         },
         lualine_z = {
           -- { Yuki.actions.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
