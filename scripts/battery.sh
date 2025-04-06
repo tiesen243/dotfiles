@@ -12,6 +12,19 @@ battery_icons=("󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "�
 # Define the charging icon
 charging_icon="󰂄"
 
+# Icon position (left or right)
+icon_position="right"
+
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+  --icon-position)
+    icon_position="$2"
+    shift 2
+    ;;
+  *) shift ;;
+  esac
+done
+
 # Calculate the index for the icon array
 # Ensure the index is within bounds (0 to 9) for battery percentages 0 to 100
 icon_index=$((battery_percentage / 10))
@@ -30,4 +43,8 @@ if [ "$battery_status" = "Charging" ]; then
 fi
 
 # Output the battery percentage and icon
-echo "$battery_percentage% $battery_icon"
+if [ "$icon_position" = "left" ]; then
+  echo "$battery_icon $battery_percentage%"
+else
+  echo "$battery_percentage% $battery_icon"
+fi
