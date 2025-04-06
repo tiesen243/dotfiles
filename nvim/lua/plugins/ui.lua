@@ -1,29 +1,16 @@
 return {
-
-  -- nightfox theme
-  -- https://github.com/EdenEast/nightfox.nvim
+  -- tokyonight theme
+  -- https://github.com/folke/tokyonight.nvim
   {
-    "EdenEast/nightfox.nvim",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = function()
-      vim.cmd.colorscheme("carbonfox")
-
-      local palette = require("nightfox.palette").load("carbonfox")
-      vim.api.nvim_set_hl(0, "NavicSeparator", { fg = palette.fg2 })
-      vim.api.nvim_set_hl(0, "NavicText", { fg = palette.fg2 })
+      vim.cmd.colorscheme("tokyonight-night")
 
       return {
-        options = {
-          transparent = vim.g.transparent_enabled,
-          colorblind = {
-            enable = true,
-            severity = {
-              protan = 0.3,
-              deutan = 0.6,
-            },
-          },
-        },
+        style = "night",
+        transparent = vim.g.transparent_enabled,
       }
     end,
   },
@@ -120,8 +107,8 @@ return {
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-          { Yuki.actions.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
-          { Yuki.actions.get_time, padding = { left = 0, right = 1 }, separator = " " },
+          -- { Yuki.actions.get_battery_state, padding = { left = 1, right = 0 }, separator = " " },
+          { Yuki.actions.get_time },
         },
       },
     },

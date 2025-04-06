@@ -28,10 +28,27 @@ M.navigate = function(direction)
   end
 end
 
+M.checkOS = function()
+  local os_name
+  if vim.fn.has("mac") == 1 then
+    os_name = "macOS"
+  elseif vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1 then
+    os_name = "Windows"
+  else
+    os_name = "Linux"
+  end
+
+  return os_name
+end
+
 M.get_battery_state = function()
+  local os_name = M.checkOS()
+  if os_name == "Windows" then
+    return "N/A"
+  end
+
   local capacity = io.open("/sys/class/power_supply/BAT1/capacity", "r")
   local status = io.open("/sys/class/power_supply/BAT1/status", "r")
-
   if capacity == nil or status == nil then
     return
   end
@@ -75,7 +92,17 @@ M.google_search = function()
     if input and input ~= "" then
       local encoded_query = input:gsub(" ", "+") -- Replace spacebar to "+"
       local url = "https://www.google.com/search?q=" .. encoded_query
-      local open_cmd = "xdg-open" -- Use "open" for macOS, "start" for Windows
+
+      local open_cmd
+      local os_name = M.checkOS()
+      if os_name == "macOS" then
+        open_cmd = "open"
+      elseif os_name == "Windows" then
+        open_cmd = "start"
+      else -- Linux
+        open_cmd = "xdg-open"
+      end
+
       os.execute(open_cmd .. " '" .. url .. "'")
     end
   end)
