@@ -10,6 +10,7 @@ return {
 
       return {
         transparent = vim.g.transparent_enabled,
+        overrides = {},
       }
     end,
   },
@@ -20,8 +21,6 @@ return {
     "xiyaowong/transparent.nvim",
     opts = function()
       require("transparent").clear_prefix("NeoTree")
-      require("transparent").clear_prefix("Navic")
-
       require("transparent").clear_prefix("lualine_c")
       require("transparent").clear_prefix("lualine_x_diff")
       require("transparent").clear_prefix("lualine_transitional_lualine_b")
