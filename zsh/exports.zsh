@@ -10,7 +10,7 @@ fi
 # <<< nvm initialize <<<
 
 # >>> bun initialize >>>
-if [ -d "$HOME/.bun/bin" ]; then
+if [ -d "$HOME/.bun" ]; then
   export PATH="$HOME/.bun/bin:$PATH"
 
   # If the completion file doesn't exist yet, we need to autoload it and
