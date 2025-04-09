@@ -2,9 +2,11 @@ export STARSHIP_CONFIG="$HOME/dotfiles/startship/starship.toml"
 export STARSHIP_CACHE="$HOME/.cache/starship/cache"
 
 # >>> nvm initialize >>>
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+fi
 # <<< nvm initialize <<<
 
 # >>> bun initialize >>>
@@ -31,7 +33,7 @@ fi
 # <<< uv initialize <<<
 
 # >>> arm initialize <<<
-if [[ -d "$HOME/.arm-linux-gnueabi-4" ]]; then
-  export PATH="$HOME/.arm-linux-gnueabi-4/bin:$PATH"
+if [[ -d "$HOME/.arm" ]]; then
+  export PATH="$HOME/.arm/bin:$PATH"
 fi
 # <<< arm initialize <<<
