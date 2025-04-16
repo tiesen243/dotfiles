@@ -88,6 +88,14 @@ return {
                 propertyDeclarationTypes = { enabled = true },
                 variableTypes = { enabled = false },
               },
+              preferences = {
+                autoImportSpecifierExcludeRegexes = {
+                  "@radix-ui",
+                  "next/router",
+                  "next/dist",
+                  "lucide-react",
+                },
+              },
             },
           },
         },
