@@ -69,7 +69,7 @@ return {
       user = user:sub(1, 1):upper() .. user:sub(2)
       return {
         auto_insert_mode = true,
-        model = "claude-3.7-sonnet",
+        model = "claude-3.7-sonnet-thought",
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
         window = {
