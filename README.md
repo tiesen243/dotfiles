@@ -33,7 +33,7 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S fastfetch hyperidle hyprlock hyprpaper hyprpicker rofi-wayland waybar xdg-desktop-portal-hyprland-git zsh \
+yay -S fastfetch hypridle hyprlock hyprpaper hyprpicker rofi-wayland waybar xdg-desktop-portal-hyprland-git zsh \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 brightnessctl lsd playerctl ripgrep unzip \
 ffmpeg zen-browser-bin \
@@ -104,13 +104,6 @@ $path = /path/to/your/wallpaper
 ```
 
 Or change file in `~/dotfiles/assets/_background.png`
-
-> [!TIP]
-> If windows display wrong time when dual boot, run this command:
-
-```bash
-timedatectl set-local-rtc 1
-```
 
 ## Conclusion
 
