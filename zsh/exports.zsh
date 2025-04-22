@@ -26,7 +26,7 @@ fi
 # <<< bun initialize <<<
 
 # >>> uv initialize >>>
-if [ -d "$HOME/.local/bin/env" ]; then
+if [ -f "$HOME/.local/bin/env" ]; then
   . "$HOME/.local/bin/env"
   eval "$(uv generate-shell-completion zsh)"
 fi
