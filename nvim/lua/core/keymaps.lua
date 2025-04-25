@@ -9,16 +9,16 @@ map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = tru
 -- Move to window using the <ctrl> hjkl keys
 if vim.fn.executable("kitty") == 1 then
   -- stylua: ignore start
-  map("n", "<C-h>", function() Yuki.actions.navigate("h") end, { desc = "Go to Left Window", silent = true })
-  map("n", "<C-j>", function() Yuki.actions.navigate("j") end, { desc = "Go to Lower Window", silent = true })
-  map("n", "<C-k>", function() Yuki.actions.navigate("k") end, { desc = "Go to Upper Window", silent = true })
-  map("n", "<C-l>", function() Yuki.actions.navigate("l") end, { desc = "Go to Right Window", silent = true })
+  map({"n","v"}, "<C-h>", function() Yuki.actions.navigate("h") end, { desc = "Go to Left Window", silent = true })
+  map({"n","v"}, "<C-j>", function() Yuki.actions.navigate("j") end, { desc = "Go to Lower Window", silent = true })
+  map({"n","v"}, "<C-k>", function() Yuki.actions.navigate("k") end, { desc = "Go to Upper Window", silent = true })
+  map({"n","v"}, "<C-l>", function() Yuki.actions.navigate("l") end, { desc = "Go to Right Window", silent = true })
   -- stylua: ignore end
 else
-  map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-  map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-  map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-  map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+  map({ "n", "v" }, "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+  map({ "n", "v" }, "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+  map({ "n", "v" }, "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+  map({ "n", "v" }, "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 end
 
 -- Resize window using <ctrl> arrow keys
