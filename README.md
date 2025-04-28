@@ -33,13 +33,14 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S fastfetch hypridle hyprlock hyprpaper hyprpicker rofi-wayland waybar xdg-desktop-portal-hyprland-git zsh \
+yay -S fastfetch hypridle hyprlock hyprpaper hyprpicker rofi-wayland xdg-desktop-portal-hyprland-git zsh \
 noto-fonts noto-fonts-cjk noto-fonts-emoji \
 brightnessctl lsd playerctl ripgrep unzip \
+otf-geist otf-geist-mono-nerd \
 ffmpeg zen-browser-bin \
 cliphist wl-clipboard \
 nwg-look pavucontrol \
-github-cli lazygit\
+github-cli lazygit \
 grim slurp
 ```
 
