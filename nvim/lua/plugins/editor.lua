@@ -136,30 +136,6 @@ return {
     end,
   },
 
-  -- finder
-  -- {
-  --   "folke/snacks.nvim",
-  --   keys = function()
-  --     local picker = require("Snacks")
-  --
-  --     return {
-  -- { "<leader>ff", picker.files, desc = "Find Files" },
-  -- { "<leader>fg", picker.grep, desc = "Find by Grep" },
-  -- { "<leader>fh", picker.help, desc = "Find Help" },
-  -- { "<leader>fk", picker.keymaps, desc = "Find Keymaps" },
-  -- { "<leader>fr", picker.recent, desc = "Find Recents File" },
-  -- { "<leader>fs", picker, desc = "Find Select Telescope" },
-  -- { "<leader>fw", picker.grep_words, desc = "Find by current [W]ord" },
-  -- { "<leader><leader>", picker.buffers, desc = "Opening buffers" },
-  -- {
-  --   "<leader>/",
-  --   picker.grep_buffers,
-  --   desc = "Fuzzily search in current buffer",
-  -- },
-  --     }
-  --   end,
-  -- },
-
   -- which-key helps you remember key bindings by showing a popup
   -- with the active keybindings of the command you started typing.
   -- https://github.com/folke/which-key.nvim
@@ -259,6 +235,26 @@ return {
       scroll = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
+
+      lazygit = {
+        configure = false,
+        config = {
+          theme = {
+            [241] = { fg = "Special" },
+            activeBorderColor = { fg = "#a96249", bold = true },
+            inactiveBorderColor = { fg = "#46120d" },
+            searchingActiveBorderColor = { fg = "#a96249", bold = true },
+            optionsTextColor = { fg = "#f2f4f8" },
+            selectedLineBgColor = { bg = "#2a2a2a" },
+            cherryPickedCommitFgColor = { fg = "#a96249" },
+            cherryPickedCommitBgColor = { bg = "#be95ff" },
+            markedBaseCommitFgColor = { fg = "#a96249" },
+            markedBaseCommitBgColor = { bg = "#08bdba" },
+            unstagedChangesColor = { fg = "#ee5396" },
+            defaultFgColor = { fg = "#f2f4f8" },
+          },
+        },
+      },
     },
   },
 
