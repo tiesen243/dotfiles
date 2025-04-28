@@ -13,5 +13,5 @@ source $HOME/dotfiles/zsh/aliases.zsh
 # ------   Helpful Scruipt   ------
 source $HOME/dotfiles/zsh/scripts.zsh
 
-# ------ Export, Env Variable ------
+# ------ Export Env Variable ------
 source $HOME/dotfiles/zsh/exports.zsh

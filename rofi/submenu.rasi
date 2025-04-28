@@ -7,17 +7,12 @@ configuration {
     drun-display-format:            "{icon} {name}";
 }
 
-@theme "shared/colors.rasi"
-
-
 prompt {
     enabled:                       false;
     padding:                       0px;
-    font:                          "GeistMono Nerd Font 12";
 }
 
 entry {
-	
     background-color:              inherit; /* Hide the entry box */
     text-color:                    inherit;
     placeholder-color:             inherit;
@@ -72,7 +67,7 @@ element-text {
 
 element selected {
     text-align:                    center;
-    background-color:              #30304d;
+    background-color:              @background;
     text-color:                    @fg;
     border:                        2px;
     border-radius:                 4px;
@@ -93,49 +88,17 @@ configuration {
 
 /*****----- Global Properties -----*****/
 @import                          "shared/colors.rasi"
-
-* {
-    font: "GeistMono Nerd Font 12";
-}
-
-
-
-* {
-    border-colour:               var(selected);
-    handle-colour:               var(selected);
-    background-colour:           var(background);
-    foreground-colour:           var(foreground);
-    alternate-background:        var(background-alt);
-    normal-background:           var(background);
-    normal-foreground:           var(foreground);
-    urgent-background:           var(urgent);
-    urgent-foreground:           var(background);
-    active-background:           var(active);
-    active-foreground:           var(background);
-    selected-normal-background:  #30304d;
-    selected-normal-border:      #b4befe;
-    selected-normal-foreground:  var(foreground);
-    selected-urgent-background:  var(active);
-    selected-urgent-foreground:  var(background);
-    selected-active-background:  var(urgent);
-    selected-active-foreground:  var(background);
-    alternate-normal-background: var(background);
-    alternate-normal-foreground: var(foreground);
-    alternate-urgent-background: var(urgent);
-    alternate-urgent-foreground: var(background);
-    alternate-active-background: var(active);
-    alternate-active-foreground: var(background);
-}
+@import                          "shared/fonts.rasi"
 
 /*****----- Main Window -----*****/
 window {
     /* properties for window widget */
     location:                      west; /* Set the location to north (top-left corner) */
     anchor:                        west; /* Anchor to the top-left corner */
-    border:                        2px;
+    border:                        1px;
     border-radius:                 12px;
-    width:                         120;
-    x-offset:                      8; /* Set offset to zero */
+    width:                         80px;
+    x-offset:                      4; /* Set offset to zero */
     y-offset:                      0; /* Set offset to zero */
     fullscreen:                    false;
 
@@ -143,12 +106,12 @@ window {
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
-    border:                      2px solid;
+    border:                      1px solid;
     border-radius:               10px;
-    border-color:                @foreground;
+    border-color:                @primary-color;
     cursor:                      "default";
     /* Backgroud Colors */
-    background-color:            @background-colour;
+    background-color:            @background-color;
     /* Backgroud Image */
     //background-image:          url("/path/to/image.png", none);
     /* Simple Linear Gradient */
@@ -164,37 +127,11 @@ mainbox {
     enabled:                     true;
     spacing:                     20px;
     margin:                      0px;
-    padding:                     30px;
+    padding:                     8px;
     border:                      0px solid;
     border-radius:               0px 0px 0px 0px;
-    border-color:                @border-colour;
-    background-color:            @background;
-}
-
-
-num-filtered-rows {
-    enabled:                     true;
-    expand:                      false;
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-textbox-num-sep {
-    enabled:                     true;
-    expand:                      false;
-    str:                         "/";
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-num-rows {
-    enabled:                     true;
-    expand:                      false;
-    background-color:            inherit;
-    text-color:                  inherit;
-}
-case-indicator {
-    enabled:                     true;
-    background-color:            inherit;
-    text-color:                  inherit;
+    border-color:                @primary-color;
+    background-color:            @background-color;
 }
 
 /*****----- Listview -----*****/
@@ -204,10 +141,9 @@ listview {
     cycle:                       true;
     border:                      0px solid;
     border-radius:               0px;
-    border-color:                @border-colour;
+    border-color:                @background-color;
     background-color:            transparent;
-    text-color:                  @foreground-colour;
-    cursor:                      "default";
+    text-color:                  @foreground-color;
 }
 
 /*****----- Elements -----*****/
@@ -215,81 +151,32 @@ element {
     text-align:                  center;
     enabled:                     true;
     border:                      0px solid;
-    border-radius:               10px;
-    border-color:                @border-colour;
+    border-color:                @background-color;
     background-color:            transparent;
-    text-color:                  @foreground-colour;
+    text-color:                  @foreground-color;
 }
-element normal.normal {
-    background-color:            var(normal-background);
-    text-color:                  var(normal-foreground);
+element normal.normal, element alternate.normal {
+    background-color:            var(background-color);
+    text-color:                  var(foreground-color);
 }
-element normal.urgent {
-    background-color:            var(urgent-background);
-    text-color:                  var(urgent-foreground);
+element normal.urgent, element alternate.urgent {
+    background-color:            var(background-color);
+    text-color:                  var(foreground-color);
 }
-element normal.active {
-    background-color:            var(active-background);
-    text-color:                  var(active-foreground);
+element normal.active, element alternate.active {
+    background-color:            var(background-color);
+    text-color:                  var(foreground-color);
 }
-element selected.normal {
-	border-radius: 2px ;
-	border: 2px solid;
-    background-color:            var(selected-normal-background);
-    text-color:                  var(selected-normal-foreground);
-}
-element selected.urgent {
-    background-color:            var(selected-urgent-background);
-    text-color:                  var(selected-urgent-foreground);
-}
-element selected.active {
-    background-color:            var(selected-active-background);
-    text-color:                  var(selected-active-foreground);
-}
-element alternate.normal {
-    background-color:            var(alternate-normal-background);
-    text-color:                  var(alternate-normal-foreground);
-}
-element alternate.urgent {
-    background-color:            var(alternate-urgent-background);
-    text-color:                  var(alternate-urgent-foreground);
-}
-element alternate.active {
-    background-color:            var(alternate-active-background);
-    text-color:                  var(alternate-active-foreground);
+element selected.normal , element selected.urgent, element selected.active {
+    border:                      2px solid;
+    border-radius:               8px;
+    background-color:            var(secondary-color);
+    text-color:                  var(primary-color);
 }
 element-icon {
-    background-color:            transparent;
-    text-color:                  inherit;
-    size:                        24px;
-    cursor:                      inherit;
-}
-
-element-icon {
-    background-color:              inherit;
-    horizontal-align:              0.5;
-    vertical-align:                0.5;
-    size:                          0px;
-    border:                        0px;
-    
-}
-
-element {
-    border-radius: 6px;
-    text-align:                     center;
-    padding:                       16px;
-    margin:                        1;
-}
-
-element-text {
-    background-color:              inherit;
-    text-color:                    inherit;
-    text-align:                     center;
-    expand:                        true;
-    padding: 0px;
-}
-
-element selected {
-    text-align:                     center;
-    border:                        2px;
+    background-color:            inherit;
+    horizontal-align:            0.5;
+    vertical-align:              0.5;
+    size:                        0px;
+    border:                      0px;
 }

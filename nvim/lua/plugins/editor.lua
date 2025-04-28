@@ -94,6 +94,11 @@ return {
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
         },
+        icon = {
+          folder_closed = "",
+          folder_open = "",
+          folder_empty = "",
+        },
         git_status = {
           symbols = {
             unstaged = "󰄱",

@@ -7,6 +7,9 @@
  *
  **/
 
-/* Import color-scheme from `colors` directory */
-
-@import "~/.config/rofi/colors/binary.rasi"
+* {
+    background-color:   #0a0a0a;
+    foreground-color:   #fafafa;
+    primary-color:      #a96249;
+    secondary-color:    #461a0d;
+}

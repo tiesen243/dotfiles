@@ -19,6 +19,8 @@ return {
   -- https://github.com/xiyaowong/transparent.nvim
   {
     "xiyaowong/transparent.nvim",
+    lazy = false,
+    priority = 1001,
     opts = function()
       require("transparent").clear_prefix("NeoTree")
       require("transparent").clear_prefix("lualine_c")
