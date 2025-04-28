@@ -11,5 +11,6 @@ api.nvim_set_current_buf(orig_buf)
 api.nvim_buf_delete(term_buf, { force = true })
 vim.bo.modified = false
 api.nvim_win_set_cursor(0, { api.nvim_buf_line_count(0), 0 })
+
 api.nvim_buf_set_keymap(orig_buf, "n", "q", "<cmd>q<cr>", { noremap = true, silent = true })
 api.nvim_buf_set_keymap(orig_buf, "n", "<esc>", "<cmd>q<cr>", { noremap = true, silent = true })

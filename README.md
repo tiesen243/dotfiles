@@ -2,19 +2,17 @@
 
 ## Preview
 
-### Desktop
+### Terminal
 
 ![preview-01](./assets/preview-01.png)
 
-### Terminal
+### Rofi
 
 ![preview-02](./assets/preview-02.png)
 
-### Rofi
-
 ![preview-03](./assets/preview-03.png)
 
-### Hyprlock 
+### Hyprlock
 
 ![preview-04](./assets/preview-04.png)
 
@@ -33,15 +31,23 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S fastfetch hypridle hyprlock hyprpaper hyprpicker rofi-wayland xdg-desktop-portal-hyprland-git zsh \
-noto-fonts noto-fonts-cjk noto-fonts-emoji \
-brightnessctl lsd playerctl ripgrep unzip \
-otf-geist otf-geist-mono-nerd \
-ffmpeg zen-browser-bin \
-cliphist wl-clipboard \
-nwg-look pavucontrol \
-github-cli lazygit \
-grim slurp
+yay -S \
+  # Hyprland environment
+  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland \
+  # Fonts
+  noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
+  # System utilities
+  fastfetch zsh brightnessctl nwg-look playerctl pavucontrol \
+  # Screenshots and clipboard
+  grim slurp cliphist wl-clipboard \
+  # Development tools
+  github-cli lazygit \
+# File and terminal tools
+  lsd ripgrep unzip \
+  # Applications
+  zen-browser-bin \
+  # Multimedia
+  ffmpeg
 ```
 
 4. Install `oh-my-zsh`
