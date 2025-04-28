@@ -34,11 +34,12 @@ rm -rf ~/yay
 yes | yay -S --answerclean All --answerdiff None \
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  fastfetch zsh brightnessctl nwg-look playerctl pavucontrol  libnotify \
+  fastfetch zsh brightnessctl nwg-look playerctl pavucontrol libnotify \
   grim slurp cliphist wl-clipboard \
   github-cli lazygit \
   lsd ripgrep unzip \
   zen-browser-bin \
+  thunar gvfs \
   ffmpeg
 ```
 
@@ -89,9 +90,9 @@ Then, create the symbolic links to the config files
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,lazygit,lsd,nvim,rofi,waybar}
+rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,lazygit,lsd,nvim,rofi,Thunar}
 
-ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,lazygit,lsd,nvim,rofi,waybar} ~/.config
+ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,lazygit,lsd,nvim,rofi,Thunar} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
