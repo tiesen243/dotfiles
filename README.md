@@ -34,13 +34,12 @@ rm -rf ~/yay
 yes | yay -S --answerclean All --answerdiff None \
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  fastfetch zsh brightnessctl nwg-look playerctl pavucontrol libnotify \
+  fastfetch zsh brightnessctl nwg-look playerctl libnotify \
+  github-cli lazygit lsd ripgrep unzip \
   grim slurp cliphist wl-clipboard \
-  github-cli lazygit \
-  lsd ripgrep unzip \
+  ffmpeg pipewire wireplumber \
   zen-browser-bin \
-  thunar gvfs \
-  ffmpeg
+  thunar gvfs
 ```
 
 4. Install `oh-my-zsh`
