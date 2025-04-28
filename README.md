@@ -31,22 +31,14 @@ rm -rf ~/yay
 3. Install all packages
 
 ```bash
-yay -S \
-  # Hyprland environment
+yes | yay -S --answerclean All --answerdiff None \
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland \
-  # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  # System utilities
-  fastfetch zsh brightnessctl nwg-look playerctl pavucontrol \
-  # Screenshots and clipboard
+  fastfetch zsh brightnessctl nwg-look playerctl pavucontrol  libnotify \
   grim slurp cliphist wl-clipboard \
-  # Development tools
   github-cli lazygit \
-# File and terminal tools
   lsd ripgrep unzip \
-  # Applications
   zen-browser-bin \
-  # Multimedia
   ffmpeg
 ```
 
@@ -111,6 +103,8 @@ $path = /path/to/your/wallpaper
 ```
 
 Or change file in `~/dotfiles/assets/_background.png`
+
+3. Add your avatar to `~/dotfiles/assets/_profile.png` to show in the lock screen
 
 ## Conclusion
 

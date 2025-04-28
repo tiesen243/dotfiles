@@ -47,11 +47,9 @@ require("lazy").setup({
     { import = "plugins.ai.copilot" },
 
     -- add supported langues
-    { import = "plugins.lang.c" },
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
     { import = "plugins.lang.json" },
-    { import = "plugins.lang.prisma" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
   },
