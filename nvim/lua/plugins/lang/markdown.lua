@@ -1,11 +1,14 @@
-vim.filetype.add({ extension = { mdx = "markdown" } })
-vim.treesitter.language.register("markdown", "mdx")
+vim.filetype.add({
+  extension = {
+    mdx = "markdown",
+  },
+})
 
 return {
   -- Add markdown to treesitter.
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "markdown", "markdown_inline" } },
+    opts = { ensure_installed = { "markdown" } },
   },
 
   -- setup formatter
@@ -15,7 +18,6 @@ return {
     opts = {
       formatters_by_ft = {
         ["markdown"] = { "prettier" },
-        ["markdown.mdx"] = { "prettier" },
       },
     },
   },
@@ -25,19 +27,11 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
-      code = {
-        sign = false,
-        width = "block",
-        right_pad = 1,
-      },
-      heading = {
-        sign = false,
-      },
-      checkbox = {
-        enabled = false,
-      },
+      code = { width = "block", border = "thick" },
+      completions = { blink = { enabled = true } },
+      indent = { enabled = true, skip_heading = true },
     },
-    ft = { "markdown", "norg", "rmd", "org", "codecompanion", "markdown.mdx" },
+    ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
       Snacks.toggle({
