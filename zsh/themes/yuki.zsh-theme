@@ -30,7 +30,7 @@ YUKI_DISPLAY_CONTEXT=${YUKI_DISPLAY_CONTEXT:-1}
 
 # Changes the triangle icon
 YUKI_ARROW_ICON=${YUKI_ARROW_ICON:-󰣇 }
-YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-󰘧 }
+YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-}
 
 # Set to 1 to use a new line for commands
 YUKI_DISPLAY_NEW_LINE=${YUKI_DISPLAY_NEW_LINE:-0}
@@ -172,8 +172,8 @@ add-zsh-hook precmd yuki_git_async
 PROMPT+='$YUKI_GIT_STATUS'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{foreground}on %F{blue} %B"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}%Bᗜˬᗜ "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}%Bᗜ˰ᗜ "
+ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}%B✔ "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}%B✗ "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%f%b"
 # }}}
 
