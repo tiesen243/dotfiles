@@ -15,3 +15,9 @@ source $HOME/dotfiles/zsh/scripts.zsh
 
 # ------ Export Env Variable ------
 source $HOME/dotfiles/zsh/exports.zsh
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/tiesen/.dart-cli-completion/zsh-config.zsh ]] && . /home/tiesen/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
