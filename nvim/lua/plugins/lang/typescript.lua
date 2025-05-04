@@ -166,7 +166,7 @@ return {
       opts.formatters = opts.formatters or {}
       opts.formatters.prettier = {
         condition = function(_, ctx)
-          return M.has_parser(ctx) and (M.has_config(ctx))
+          return M.has_parser(ctx) or (M.has_config(ctx))
         end,
       }
     end,
