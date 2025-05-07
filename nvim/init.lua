@@ -51,6 +51,7 @@ require("lazy").setup({
     { import = "plugins.lang.git" },
     { import = "plugins.lang.json" },
     { import = "plugins.lang.markdown" },
+    { import = "plugins.lang.python" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
   },
