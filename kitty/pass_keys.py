@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+
 import re
 
 from kittens.tui.handler import result_handler
+
 from kitty.key_encoding import KeyEvent, parse_shortcut
 
 VIM_ID = "n?vim"
