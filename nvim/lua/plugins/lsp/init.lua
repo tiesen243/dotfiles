@@ -34,26 +34,7 @@ return {
       },
       -- LSP Server Settings
       servers = {
-        lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          settings = {
-            Lua = {
-              workspace = { checkThirdParty = false },
-              codeLens = { enable = true },
-              completion = { callSnippet = "Replace" },
-              doc = { privateName = { "^_" } },
-              diagnostics = { globals = { "vim", "Snacks" } },
-              hint = {
-                enable = true,
-                setType = false,
-                paramType = true,
-                paramName = "Disable",
-                semicolon = "Disable",
-                arrayIndex = "Disable",
-              },
-            },
-          },
-        },
+        lua_ls = {},
       },
       setup = {},
     },
@@ -135,7 +116,8 @@ return {
       local have_mason, mlsp = pcall(require, "mason-lspconfig")
       local all_mslp_servers = {}
       if have_mason then
-        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+        local mappings = require("mason-lspconfig.mappings").get_all()
+        all_mslp_servers = vim.tbl_keys(mappings.lspconfig_to_package)
       end
 
       local ensure_installed = {} ---@type string[]
