@@ -40,6 +40,9 @@ Yuki.configs = {
   icons = require("utils.icons"),
 }
 
+-- use AI completion
+vim.g.ai_cmp = true
+
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {

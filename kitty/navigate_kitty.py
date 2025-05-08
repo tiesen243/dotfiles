@@ -1,5 +1,9 @@
-from kittens.tui.handler import result_handler
+#!/usr/bin/env python3
+
 from typing import List
+
+from kittens.tui.handler import result_handler
+
 from kitty.boss import Boss
 
 
