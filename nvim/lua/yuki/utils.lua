@@ -1,11 +1,17 @@
 local M = {}
 
--- foldtext for Neovim < 0.10.0
-function M.foldtext()
-  return vim.api.nvim_buf_get_lines(0, vim.v.lnum - 1, vim.v.lnum, false)[1]
+---@param direction string | 'h' | 'j' | 'k' | 'l'
+M.navigate = function(direction)
+  local mappings = { h = "left", j = "bottom", k = "top", l = "right" }
+  local left_win = vim.fn.winnr("1" .. direction)
+  if vim.fn.winnr() ~= left_win then
+    vim.api.nvim_command("wincmd " .. direction)
+  else
+    local command = "kitty @ kitten navigate_kitty.py " .. mappings[direction]
+    vim.fn.system(command)
+  end
 end
 
--- optimized treesitter foldexpr for Neovim >= 0.10.0
 function M.foldexpr()
   local buf = vim.api.nvim_get_current_buf()
   if vim.b[buf].ts_folds == nil then
@@ -21,6 +27,10 @@ function M.foldexpr()
     end
   end
   return vim.b[buf].ts_folds and vim.treesitter.foldexpr() or "0"
+end
+
+M.get_time = function()
+  return " " .. os.date("%R")
 end
 
 return M

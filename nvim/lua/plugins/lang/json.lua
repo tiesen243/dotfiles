@@ -1,38 +1,34 @@
+vim.lsp.config("jsonls", {
+  settings = {
+    json = {
+      schemas = {
+        {
+          fileMatch = { "package.json" },
+          url = "https://json.schemastore.org/package.json",
+        },
+        {
+          fileMatch = { "tsconfig.json", "tsconfig.*.json" },
+          url = "http://json.schemastore.org/tsconfig",
+        },
+      },
+      format = { enable = false },
+      validate = { enable = true },
+    },
+  },
+})
+
 return {
-  -- add json to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "json", "jsonc" } },
   },
 
-  -- setup lspconfig
   {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        jsonls = {
-          settings = {
-            json = {
-              schemas = {
-                {
-                  fileMatch = { "package.json" },
-                  url = "https://json.schemastore.org/package.json",
-                },
-                {
-                  fileMatch = { "tsconfig.json", "tsconfig.*.json" },
-                  url = "http://json.schemastore.org/tsconfig",
-                },
-              },
-              format = { enable = false },
-              validate = { enable = true },
-            },
-          },
-        },
-      },
-    },
+    "mason-org/mason-lspconfig.nvim",
+    optional = true,
+    opts = { ensure_installed = { "jsonls" } },
   },
 
-  -- setup formatter
   {
     "stevearc/conform.nvim",
     opts = {

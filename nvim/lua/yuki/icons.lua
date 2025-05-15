@@ -1,10 +1,12 @@
 local M = {}
 
 M.diagnostics = {
-  Error = " ",
-  Warn = " ",
-  Hint = " ",
-  Info = " ",
+  debug = " ",
+  error = " ",
+  hint = " ",
+  info = " ",
+  trace = " ",
+  warn = " ",
 }
 
 M.git = {

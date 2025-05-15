@@ -5,13 +5,12 @@ vim.filetype.add({
 })
 
 return {
-  -- Add markdown to treesitter.
   {
     "nvim-treesitter/nvim-treesitter",
+    optional = true,
     opts = { ensure_installed = { "markdown" } },
   },
 
-  -- setup formatter
   {
     "stevearc/conform.nvim",
     optional = true,
@@ -22,8 +21,6 @@ return {
     },
   },
 
-  -- Markdown preivew in Neovim
-  -- https://github.com/MeanderingProgrammer/render-markdown.nvim
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {

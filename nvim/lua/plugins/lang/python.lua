@@ -1,34 +1,32 @@
+vim.lsp.config("basedpyright", {
+  disableOrganizeImports = true,
+})
+
+vim.lsp.config("ruff", {
+  cmd_env = { RUFF_TRACE = "messages" },
+  init_options = { settings = { logLevel = "error" } },
+})
+
 return {
-  -- add python to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    optional = true,
     opts = { ensure_installed = { "python" } },
   },
 
-  -- setup lspconfig
   {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        basedpyright = { disableOrganizeImports = true },
-        ruff = {
-          cmd_env = { RUFF_TRACE = "messages" },
-          init_options = { settings = { logLevel = "error" } },
-        },
-      },
-      setup = {
-        ruff = function()
-          Yuki.lsp.on_attach(function(client, _)
-            client.server_capabilities.hoverProvider = false
-          end, "ruff")
-        end,
-      },
-    },
+    "mason-org/mason-lspconfig.nvim",
+    optional = true,
+    opts = { ensure_installed = { "basedpyright", "ruff" } },
   },
 
-  -- setup formatter
   {
     "stevearc/conform.nvim",
-    opts = { formatters_by_ft = { python = { "ruff_fix", "ruff_format", "ruff_organize_imports" } } },
+    optional = true,
+    opts = {
+      formatters_by_ft = {
+        python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+      },
+    },
   },
 }
