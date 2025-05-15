@@ -1,8 +1,3 @@
--- Speed up loading Lua modules in Neovim
-if vim.loader then
-  vim.loader.enable()
-end
-
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -26,30 +21,19 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-_G.Yuki = require("utils")
-Yuki.configs = {
-  auto_format = true,
-  logo = [[
+_G.Yuki = require("yuki")
+Yuki.logo = [[
 ██╗   ██╗██╗   ██╗██╗  ██╗██╗
 ╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
  ╚████╔╝ ██║   ██║█████╔╝ ██║
   ╚██╔╝  ██║   ██║██╔═██╗ ██║
    ██║   ╚██████╔╝██║  ██╗██║
    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
-   ]],
-  icons = require("utils.icons"),
-}
+]]
 
--- use AI completion
-vim.g.ai_cmp = true
-
--- Setup lazy.nvim
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    { import = "plugins.ai.copilot" },
-
-    -- add supported langues
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
     { import = "plugins.lang.json" },
@@ -57,12 +41,10 @@ require("lazy").setup({
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
   },
-  install = { colorscheme = { "vercel-dark" } },
-  checker = { enabled = false },
 })
 
-require("core.autocmds")
+vim.cmd.colorscheme("vercel")
+
+require("core.autocmd")
 require("core.keymaps")
 require("core.options")
-
-Yuki.format.setup()

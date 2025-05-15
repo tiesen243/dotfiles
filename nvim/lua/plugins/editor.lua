@@ -1,31 +1,19 @@
 return {
-  -- file explorer
-  -- https://github.com/nvim-neo-tree/neo-tree.nvim
   {
     "nvim-neo-tree/neo-tree.nvim",
-    cmd = "Neotree",
-    dependencies = { "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    lazy = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
     keys = {
       {
         "<leader>e",
         function()
           require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
         end,
-        desc = "File Explorer (rwd)",
-      },
-      {
-        "<leader>E",
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
-        end,
-        desc = "File Explorer (cwd)",
-      },
-      {
-        "<leader>ge",
-        function()
-          require("neo-tree.command").execute({ source = "git_status", toggle = true })
-        end,
-        desc = "Git Explorer",
+        desc = "File Explorer",
       },
       {
         "<leader>be",
@@ -34,32 +22,31 @@ return {
         end,
         desc = "Buffer Explorer",
       },
+      {
+        "<leader>ge",
+        function()
+          require("neo-tree.command").execute({ source = "git_status", toggle = true })
+        end,
+        desc = "Git Explorer",
+      },
     },
     deactivate = function()
       vim.cmd([[Neotree close]])
     end,
-    init = function()
-      -- FIX: use `autocmd` for lazy-loading neo-tree instead of directly requiring it,
-      -- because `cwd` is not set up properly.
-      vim.api.nvim_create_autocmd("BufEnter", {
-        group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
-        desc = "Start Neo-tree with directory",
-        once = true,
-        callback = function()
-          if package.loaded["neo-tree"] then
-            return
-          else
-            local stats = vim.uv.fs_stat(vim.fn.argv(0))
-            if stats and stats.type == "directory" then
-              require("neo-tree")
-            end
-          end
-        end,
-      })
-    end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status" },
-      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
+      default_component_configs = {
+        icon = {
+          folder_closed = "",
+          folder_open = "",
+          folder_empty = "",
+        },
+        git_status = {
+          symbols = {
+            unstaged = "󰄱",
+            staged = "󰱒",
+          },
+        },
+      },
       filesystem = {
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
@@ -87,151 +74,63 @@ return {
           ["P"] = { "toggle_preview", config = { use_float = false } },
         },
       },
-      default_component_configs = {
-        indent = {
-          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-          expander_collapsed = "",
-          expander_expanded = "",
-          expander_highlight = "NeoTreeExpander",
-        },
-        icon = {
-          folder_closed = "",
-          folder_open = "",
-          folder_empty = "",
-        },
-        git_status = {
-          symbols = {
-            unstaged = "󰄱",
-            staged = "󰱒",
-          },
-        },
-      },
-    },
-    config = function(_, opts)
-      local function on_move(data)
-        Snacks.rename.on_rename_file(data.source, data.destination)
-      end
-
-      local events = require("neo-tree.events")
-      opts.event_handlers = opts.event_handlers or {}
-      vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED, handler = on_move },
-        { event = events.FILE_RENAMED, handler = on_move },
-        {
-          event = "file_open_requested",
-          handler = function()
-            vim.cmd("Neotree close")
-          end,
-        },
-      })
-      require("neo-tree").setup(opts)
-      vim.api.nvim_create_autocmd("TermClose", {
-        pattern = "*lazygit",
-        callback = function()
-          if package.loaded["neo-tree.sources.git_status"] then
-            require("neo-tree.sources.git_status").refresh()
-          end
-        end,
-      })
-    end,
-  },
-
-  -- which-key helps you remember key bindings by showing a popup
-  -- with the active keybindings of the command you started typing.
-  -- https://github.com/folke/which-key.nvim
-  {
-    "folke/which-key.nvim",
-    opts_extend = { "spec" },
-    opts = {
-      preset = "helix",
-      defaults = {},
-      spec = {
-        {
-          mode = { "n", "v" },
-          { "<leader>c", group = "code" },
-          { "<leader>f", group = "file/find" },
-          { "<leader>g", group = "git" },
-          { "<leader>q", group = "quit/session" },
-          { "<leader>u", group = "ui" },
-          { "[", group = "prev" },
-          { "]", group = "next" },
-          { "g", group = "goto" },
-          { "z", group = "fold" },
-          {
-            "<leader>b",
-            group = "buffer",
-            expand = function()
-              return require("which-key.extras").expand.buf()
-            end,
-          },
-          {
-            "<leader>w",
-            group = "windows",
-            proxy = "<c-w>",
-            expand = function()
-              return require("which-key.extras").expand.win()
-            end,
-          },
-          -- better descriptions
-          { "gx", desc = "Open with system app" },
-        },
-      },
     },
   },
 
-  -- code context
-  -- https://github.com/SmiteshP/nvim-navic
   {
-    "SmiteshP/nvim-navic",
-    lazy = true,
-    init = function()
-      vim.g.navic_silence = true
-      Yuki.lsp.on_attach(function(client, buffer)
-        if client.supports_method("textDocument/documentSymbol") then
-          require("nvim-navic").attach(client, buffer)
-        end
-      end)
-    end,
-    opts = {
-      icons = Yuki.configs.icons.kinds,
-      lsp = { auto_attach = true },
-      highlight = true,
-      separator = "  ",
-      depth_limit = 3,
-      lazy_update_context = true,
-      click = true,
-    },
-  },
-
-  -- QoL plugins for neovim.
-  -- https://github.com/folke/snacks.nvim
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
+    "saghen/blink.nvim",
     lazy = false,
     keys = {
+      {
+        ",",
+        function()
+          require("blink.chartoggle").toggle_char_eol(",")
+        end,
+        mode = { "n", "v" },
+        desc = "Toggle , at eol",
+      },
+    },
+    opts = {
+      chartoggle = { enabled = true },
+      pairs = { enabled = true },
+    },
+  },
+
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    priority = 1000,
+    keys = {
       -- stylua: ignore start
+      { "<leader><space>", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      -- Find
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Find by Grep" },
-      { "<leader>fh", function() Snacks.picker.help() end, desc = "Find Help" },
-      { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Find Keymaps" },
-      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Find Recents File" },
-      { "<leader>fs", function() Snacks.picker() end, desc = "Select Picker" },
-      { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Find by current [W]ord" },
-      { "<leader><leader>", function() Snacks.picker.buffers() end, desc = "Opening buffers" },
-      { "<leader>/", function() Snacks.picker.grep_buffers() end, desc = "Fuzzily search in current buffer" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+      { "<leader>fi", function() Snacks.picker.icons() end, desc = "Icons" },
+      -- Git
+      { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse (open)" },
+      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+      { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+      -- Code
       -- stylua: ignore end
     },
-
     opts = {
       bigfile = { enabled = true },
-      dashboard = { preset = { header = Yuki.configs.logo } },
-      explorer = { replace_netrw = true },
+      dashboard = { preset = { header = Yuki.logo } },
+      explorer = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
       picker = { enabled = true },
-      notifier = { enabled = true },
+      notifier = { enabled = true, icons = Yuki.icons.diagnostics },
       quickfile = { enabled = true },
+      scope = { enabled = true },
       scroll = { enabled = true },
       statuscolumn = { enabled = true },
       words = { enabled = true },
@@ -256,29 +155,26 @@ return {
         },
       },
     },
-  },
-
-  -- integration for git
-  -- https://github.com/lewis6991/gitsigns.nvim
-  {
-    "lewis6991/gitsigns.nvim",
-    keys = function()
-      local gitsigns = require("gitsigns")
-      return {
-        { "<leader>gs", gitsigns.stage_hunk, desc = "[G]it [s]tage Hunk" },
-        { "<leader>gS", gitsigns.stage_buffer, desc = "[G]it [S]tage Buffer" },
-        { "<leader>gr", gitsigns.reset_hunk, desc = "[G]it [r]eset Hunk" },
-        { "<leader>gR", gitsigns.reset_buffer, desc = "[G]it [R]eset Buffer" },
-        { "<leader>gu", gitsigns.undo_stage_hunk, desc = "[G]it [U]ndo Stage Hunk" },
-        { "<leader>gp", gitsigns.preview_hunk, desc = "[G]it [P]review Hunk" },
-        { "<leader>gd", gitsigns.diffthis, desc = "[G]it [D]iff against index" },
-      }
+    init = function()
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          -- Create some toggle mappings
+          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+          Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+          Snacks.toggle.diagnostics():map("<leader>ud")
+          Snacks.toggle.line_number():map("<leader>ul")
+          Snacks.toggle
+            .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+            :map("<leader>uc")
+          Snacks.toggle.treesitter():map("<leader>uT")
+          Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+          Snacks.toggle.inlay_hints():map("<leader>uh")
+          Snacks.toggle.indent():map("<leader>ug")
+          Snacks.toggle.dim():map("<leader>uD")
+        end,
+      })
     end,
-    opts = {
-      current_line_blame = true,
-      signs = Yuki.configs.icons.git_signs,
-      signs_staged = Yuki.configs.icons.git_signs_staged,
-      current_line_blame_opts = { delay = 500, ignore_whitespace = true },
-    },
   },
 }

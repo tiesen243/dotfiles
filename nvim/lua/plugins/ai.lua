@@ -1,5 +1,3 @@
-vim.g.ai_cmp = true
-
 return {
   -- Github Copilot for Neovim
   -- https://github.com/zbirenbaum/copilot.lua
@@ -10,10 +8,10 @@ return {
     event = "BufReadPost",
     opts = {
       suggestion = {
-        enabled = not vim.g.ai_cmp,
+        enabled = false,
         auto_trigger = true,
-        hide_during_completion = vim.g.ai_cmp,
-        keymap = { accept = vim.g.ai_cmp and false or "<C-y>", next = "<M-]>", prev = "<M-[>" },
+        hide_during_completion = true,
+        keymap = { accept = false },
       },
       panel = { enabled = false },
       filetypes = { markdown = true, help = true },
@@ -25,7 +23,6 @@ return {
   {
     "saghen/blink.cmp",
     optional = true,
-    enabled = vim.g.ai_cmp,
     dependencies = { "giuxtaposition/blink-cmp-copilot" },
     opts = {
       sources = {

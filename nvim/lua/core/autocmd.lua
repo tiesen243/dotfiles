@@ -2,8 +2,8 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("yuki_" .. name, { clear = true })
 end
 
--- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  desc = "Check if we need to reload the file when it changed",
   group = augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
@@ -12,16 +12,16 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
--- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Highlight when yanking (copying) text",
   group = augroup("highlight_yank"),
   callback = function()
-    (vim.hl or vim.highlight).on_yank()
+    vim.hl.on_yank()
   end,
 })
 
--- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
+  desc = "Resize splits if window got resized",
   group = augroup("resize_splits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
@@ -30,8 +30,8 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
+  desc = "Go to last loc when opening a buffer",
   group = augroup("last_loc"),
   callback = function(event)
     local exclude = { "gitcommit" }
@@ -48,8 +48,8 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "Close some filetypes with <q>",
   group = augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
@@ -83,8 +83,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- make it easier to close man-files when opened inline
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "Make it easier to close man-files when opened inline",
   group = augroup("man_unlisted"),
   pattern = { "man" },
   callback = function(event)
@@ -92,8 +92,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
+  desc = "Wrap and check for spell in text filetypes",
   group = augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
@@ -102,8 +102,8 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Fix conceallevel for json files
 vim.api.nvim_create_autocmd({ "FileType" }, {
+  desc = "Fix conceallevel for json files",
   group = augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
@@ -111,8 +111,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  desc = "Auto create dir when saving a file, in case some intermediate directory does not exist",
   group = augroup("auto_create_dir"),
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
