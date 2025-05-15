@@ -7,7 +7,6 @@ local function have(path)
 end
 
 return {
-  -- add some stuff to treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -45,21 +44,18 @@ return {
     end,
   },
 
-  -- setup lspconfig
   {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        bashls = {},
-      },
-    },
+    "mason-org/mason-lspconfig.nvim",
+    optional = true,
+    opts = { ensure_installed = { "bashls" } },
   },
 
-  -- add formatter
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
+    optional = true,
     opts = { ensure_installed = { "shfmt" } },
   },
+
   {
     "stevearc/conform.nvim",
     opts = {

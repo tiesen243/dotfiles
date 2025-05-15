@@ -1,97 +1,112 @@
 return {
-  -- auto completion
-  -- https://github.com/saghen/blink.cmp
   {
     "saghen/blink.cmp",
-    version = "*",
-    opts_extend = { "sources.default" },
     dependencies = { "rafamadriz/friendly-snippets" },
     event = "InsertEnter",
     opts = {
-      fuzzy = { implementation = "prefer_rust_with_warning" },
-
-      snippets = {
-        expand = function(snippet, _)
-          return Yuki.cmp.expand(snippet)
-        end,
-      },
-
-      appearance = {
-        use_nvim_cmp_as_default = false,
-        nerd_font_variant = "mono",
-        kind_icons = vim.tbl_extend("force", Yuki.configs.icons.kinds, { Color = "██" }),
-      },
-
+      appearance = { use_nvim_cmp_as_default = false, nerd_font_variant = "mono" },
       completion = {
-        accept = { auto_brackets = { enabled = true } },
-        menu = { draw = { treesitter = { "lsp" } } },
-        documentation = { auto_show = true, auto_show_delay_ms = 200 },
         ghost_text = { enabled = true },
-        list = { selection = { preselect = true, auto_insert = true } },
+        menu = {
+          draw = {
+            columns = {
+              { "kind_icon", "label" },
+              { "label_description" },
+            },
+            components = {
+              kind_icon = {
+                text = function(ctx)
+                  local icon = ctx.kind_icon
+                  if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                    local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                    if dev_icon then
+                      icon = dev_icon
+                    end
+                  else
+                    icon = Yuki.icons.kinds[ctx.kind]
+                  end
+                  return icon .. ctx.icon_gap
+                end,
+              },
+            },
+            treesitter = { "lsp" },
+          },
+        },
       },
-
+      keymap = { preset = "super-tab" },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
       },
-
-      keymap = { preset = "super-tab" },
+    },
+    opts_extend = { "sources.default" },
+  },
+  {
+    "saghen/blink.pairs",
+    version = "*",
+    build = "cargo build --release",
+    opts = {
+      mappings = { enabled = true },
+      highlights = {
+        enabled = true,
+        groups = {
+          "BlinkPairsOrange",
+          "BlinkPairsPurple",
+          "BlinkPairsBlue",
+        },
+        matchparen = { enabled = true },
+      },
     },
   },
-
-  -- formatter
-  -- https://github.com/stevearc/conform.nvim
   {
     "stevearc/conform.nvim",
-    dependencies = { "mason.nvim" },
-    lazy = true,
-    cmd = "ConformInfo",
-    keys = {
-      {
-        "<leader>cF",
-        function()
-          require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
-        end,
-        mode = { "n", "v" },
-        desc = "Format Injected Langs",
-      },
-    },
-    init = function()
-      Yuki.format.register({
-        name = "conform.nvim",
-        priority = 100,
-        primary = true,
-        format = function(buf)
-          require("conform").format({ bufnr = buf })
-        end,
-        sources = function(buf)
-          local ret = require("conform").list_formatters(buf)
-          return vim.tbl_map(function(v)
-            return v.name
-          end, ret)
-        end,
-      })
-    end,
     opts = {
-      default_format_opts = {
-        timeout_ms = 3000,
-        async = false,
-        quiet = false,
-        lsp_format = "fallback",
-      },
       formatters_by_ft = {
         lua = { "stylua" },
       },
-      formatters = {
-        injected = { options = { ignore_errors = true } },
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_format = "fallback",
       },
     },
   },
-
-  -- auto pairs
-  -- https://github.com/windwp/nvim-autopairs
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    opts = { check_ts = true, fast_wrap = {} },
+    "nvim-treesitter/nvim-treesitter",
+    version = false, -- last release is way too old and doesn't work on Windows
+    build = ":TSUpdate",
+    event = "VeryLazy",
+    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+    init = function(plugin)
+      require("lazy.core.loader").add_to_rtp(plugin)
+      require("nvim-treesitter.query_predicates")
+    end,
+    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+    keys = {
+      { "<c-space>", desc = "Increment Selection" },
+      { "<bs>", desc = "Decrement Selection", mode = "x" },
+    },
+    opts_extend = { "ensure_installed" },
+    opts = {
+      auto_install = false,
+      sync_install = true,
+      ensure_installed = { "bash", "lua", "hyprlang" },
+      highlight = { enable = true, additional_vim_regex_highlighting = true },
+      indent = { enable = true },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          scope_incremental = false,
+          node_decremental = "<bs>",
+        },
+      },
+    },
+    main = "nvim-treesitter.configs",
+  },
+  {
+    "tronikelis/ts-autotag.nvim",
+    event = "VeryLazy",
+    opts = {},
   },
 }
