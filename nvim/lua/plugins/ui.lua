@@ -93,6 +93,7 @@ return {
         lualine_z = { Yuki.utils.get_time }
       },
       -- stylua: ignore end
+      inactive_sections = {},
     },
   },
 }
