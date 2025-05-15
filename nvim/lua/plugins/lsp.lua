@@ -1,15 +1,15 @@
-local diagnosticsSigns = {
-  [vim.diagnostic.severity.ERROR] = Yuki.icons.diagnostics.error,
-  [vim.diagnostic.severity.WARN] = Yuki.icons.diagnostics.warn,
-  [vim.diagnostic.severity.HINT] = Yuki.icons.diagnostics.hint,
-  [vim.diagnostic.severity.INFO] = Yuki.icons.diagnostics.info,
-}
-
-for severity, icon in pairs(diagnosticsSigns) do
-  local name = vim.diagnostic.severity[severity]:lower():gsub("^%l", string.upper)
-  name = "DiagnosticSign" .. name
-  vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-end
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = Yuki.icons.diagnostics.error,
+      [vim.diagnostic.severity.WARN] = Yuki.icons.diagnostics.warn,
+      [vim.diagnostic.severity.HINT] = Yuki.icons.diagnostics.hint,
+      [vim.diagnostic.severity.INFO] = Yuki.icons.diagnostics.info,
+    },
+  },
+  virtual_text = false,
+  severity_sort = true,
+})
 
 return {
   {
@@ -103,9 +103,8 @@ return {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach",
     priority = 1000,
-    opts = function()
-      vim.diagnostic.config({ virtual_text = false })
-      return {}
-    end,
+    opts = {
+      preset = "amongus",
+    },
   },
 }

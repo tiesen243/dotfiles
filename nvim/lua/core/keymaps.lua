@@ -38,18 +38,11 @@ map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
--- paste without yanking in visual mode
-map("x", "p", [["_dP]], { desc = "Paste without yank" })
-
 -- better indenting
 map("n", "<", "<<")
 map("n", ">", ">>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
-
--- commenting
-map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
