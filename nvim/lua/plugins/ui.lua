@@ -11,6 +11,13 @@ return {
 
   {
     "akinsho/bufferline.nvim",
+    lazy = false,
+    keys = {
+      { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Pick Buffer" },
+      { "<leader>bP", "<cmd>BufferLinePickClose<cr>", desc = "Pick Close Buffer" },
+      { "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", desc = "Close Left Buffers" },
+      { "<leader>bh", "<cmd>BufferLineCloseRight<cr>", desc = "Close Right Buffers" },
+    },
     opts = {
       highlights = function()
         local status_ok, vercel = pcall(require, "vercel")
