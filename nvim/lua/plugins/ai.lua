@@ -1,3 +1,5 @@
+local ai_cmp = false
+
 return {
   -- Github Copilot for Neovim
   -- https://github.com/zbirenbaum/copilot.lua
@@ -8,13 +10,12 @@ return {
     event = "BufReadPost",
     opts = {
       suggestion = {
-        enabled = false,
+        enabled = not ai_cmp,
         auto_trigger = true,
         hide_during_completion = true,
-        keymap = { accept = false },
+        keymap = { accept = not ai_cmp and "<C-y>" or false },
       },
       panel = { enabled = false },
-      filetypes = { markdown = true, help = true },
     },
   },
 
@@ -22,6 +23,7 @@ return {
   -- https://github.com/giuxtaposition/blink-cmp-copilot
   {
     "saghen/blink.cmp",
+    enabled = ai_cmp,
     optional = true,
     dependencies = { "giuxtaposition/blink-cmp-copilot" },
     opts = {

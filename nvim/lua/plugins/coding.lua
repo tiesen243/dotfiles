@@ -51,6 +51,7 @@ return {
     },
     opts_extend = { "sources.default" },
   },
+
   {
     "saghen/blink.pairs",
     version = "*",
@@ -59,27 +60,24 @@ return {
       mappings = { enabled = true },
       highlights = {
         enabled = true,
-        groups = {
-          "BlinkPairsOrange",
-          "BlinkPairsPurple",
-          "BlinkPairsBlue",
-        },
         matchparen = { enabled = true },
       },
     },
   },
+
   {
     "stevearc/conform.nvim",
     opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-      },
       format_on_save = {
         timeout_ms = 500,
         lsp_format = "fallback",
       },
+      formatters_by_ft = {
+        lua = { "stylua" },
+      },
     },
   },
+
   {
     "nvim-treesitter/nvim-treesitter",
     version = false, -- last release is way too old and doesn't work on Windows
@@ -99,7 +97,7 @@ return {
     opts = {
       auto_install = false,
       sync_install = true,
-      ensure_installed = { "bash", "lua", "hyprlang" },
+      ensure_installed = { "lua" },
       highlight = { enable = true, additional_vim_regex_highlighting = true },
       indent = { enable = true },
       incremental_selection = {
@@ -114,6 +112,7 @@ return {
     },
     main = "nvim-treesitter.configs",
   },
+
   {
     "tronikelis/ts-autotag.nvim",
     event = "VeryLazy",

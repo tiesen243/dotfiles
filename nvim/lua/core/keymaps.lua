@@ -1,14 +1,21 @@
 local map = vim.keymap.set
 
 -- general
-map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Close File" })
-map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit Nvim" })
+map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
+map("n", "<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All" })
+map("n", "<leader>qs", "<cmd>wqall<cr>", { desc = "Save & Quit All" })
 map({ "n", "i", "v" }, "<C-s>", "<cmd>write<cr><esc>", { desc = "Save File" })
 map("x", "p", [["_dP]], { desc = "Paste without yank" })
 map({ "i", "n", "s" }, "<esc>", function()
   vim.cmd("noh")
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
+
+-- better up/down
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
 -- move to window using the <ctrl> hjkl keys
 if vim.fn.executable("kitty") == 1 then
@@ -43,6 +50,14 @@ map("n", "<", "<<")
 map("n", ">", ">>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
+
+-- buffers
+-- stylua: ignore start
+map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
+map("n", "<leader>bo", function() Snacks.bufdelete.other() end, { desc = "Delete Other Buffers" })
+map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+-- stylua: ignore end
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)

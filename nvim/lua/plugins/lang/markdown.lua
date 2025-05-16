@@ -23,6 +23,7 @@ return {
 
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    enabled = false,
     opts = {
       code = { width = "block", border = "thick" },
       completions = { blink = { enabled = true } },

@@ -41,14 +41,15 @@ return {
           map("gI", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
           map("gy", function() Snacks.picker.lsp_type_definitions() end, "Goto T[y]pe Definition")
           map("<C-k>", function () vim.lsp.buf.signature_help() end, "Signature Help", "i")
+          map("<C-d>", function () vim.diagnostic.open_float() end, "Cursor Diagnostic")
           map("<leader>ca", function () vim.lsp.buf.code_action() end, "Code Action")
           map("<leader>cd", function() Snacks.picker.diagnostics() end, "Diagnostics")
-          map("<leader>cD", function() Snacks.picker.diagnostics_buffer() end,"Buffer Diagnostics")
+          map("<leader>cD", function() Snacks.picker.diagnostics() end,"Buffer Diagnostics")
           map("<leader>cf", function () vim.lsp.buf.format() end, "Format")
           map("<leader>cr", function () vim.lsp.buf.rename() end, "Rename Variable")
           map("<leader>cR", function() Snacks.rename.rename_file() end, "Rename File")
           map("<leader>cs", function() Snacks.picker.lsp_symbols() end, "Symbols")
-          map("<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, "Workspace Symbols")
+          map("<leader>cS", function() Snacks.picker.lsp_workspace_symbols() end, "Workspace Symbols")
           map("]]", function() Snacks.words.jump(vim.v.count1) end,  "Next Reference")
           map("[[", function() Snacks.words.jump(-vim.v.count1) end,  "Previous Reference")
           -- stylua: ignore end
@@ -70,6 +71,7 @@ return {
       })
     end,
   },
+
   {
     "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },

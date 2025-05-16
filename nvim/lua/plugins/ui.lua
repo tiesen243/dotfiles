@@ -8,6 +8,7 @@ return {
       vim.cmd.colorscheme("vercel")
     end,
   },
+
   {
     "akinsho/bufferline.nvim",
     enabled = false,
@@ -33,6 +34,7 @@ return {
       },
     },
   },
+
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
