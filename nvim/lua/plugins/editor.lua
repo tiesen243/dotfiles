@@ -80,6 +80,7 @@ return {
       { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
       { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>fP", function() Snacks.picker.pick() end, desc = "Picker List" },
       { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
       { "<leader>fi", function() Snacks.picker.icons() end, desc = "Icons" },
       -- Git
