@@ -58,24 +58,35 @@ return {
     build = "cargo build --release",
     opts = {
       mappings = { enabled = true },
-      highlights = {
-        enabled = true,
-        matchparen = { enabled = true },
-      },
     },
   },
 
   {
     "stevearc/conform.nvim",
-    opts = {
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-      },
-      formatters_by_ft = {
-        lua = { "stylua" },
-      },
-    },
+    opts = function()
+      Yuki.format.register({
+        priority = 1000,
+        name = "Conform",
+        active = function(bufnr)
+          local ret = require("conform").list_formatters(bufnr)
+          return #(vim.tbl_map(function(v)
+            return v.name
+          end, ret)) > 0
+        end,
+        command = function(bufnr)
+          require("conform").format({
+            bufnr = bufnr,
+            timeout = 2000,
+            lsp_format = "fallback",
+          })
+        end,
+      })
+      return {
+        formatters_by_ft = {
+          lua = { "stylua" },
+        },
+      }
+    end,
   },
 
   {
