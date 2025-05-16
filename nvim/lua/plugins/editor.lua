@@ -30,21 +30,12 @@ return {
         desc = "Git Explorer",
       },
     },
-    deactivate = function()
-      vim.cmd([[Neotree close]])
-    end,
     opts = {
       default_component_configs = {
         icon = {
           folder_closed = "",
           folder_open = "",
           folder_empty = "",
-        },
-        git_status = {
-          symbols = {
-            unstaged = "󰄱",
-            staged = "󰱒",
-          },
         },
       },
       filesystem = {
@@ -54,45 +45,18 @@ return {
       },
       window = {
         mappings = {
-          ["l"] = "open",
           ["h"] = "close_node",
-          ["<space>"] = "none",
           ["Y"] = {
             function(state)
               local node = state.tree:get_node()
               local path = node:get_id()
               vim.fn.setreg("+", path, "c")
+              vim.notify("Path copied to clipboard", "info", { title = "NeoTree" })
             end,
             desc = "Copy Path to Clipboard",
           },
-          ["O"] = {
-            function(state)
-              require("lazy.util").open(state.tree:get_node().path, { system = true })
-            end,
-            desc = "Open with System Application",
-          },
-          ["P"] = { "toggle_preview", config = { use_float = false } },
         },
       },
-    },
-  },
-
-  {
-    "saghen/blink.nvim",
-    lazy = false,
-    keys = {
-      {
-        ",",
-        function()
-          require("blink.chartoggle").toggle_char_eol(",")
-        end,
-        mode = { "n", "v" },
-        desc = "Toggle , at eol",
-      },
-    },
-    opts = {
-      chartoggle = { enabled = true },
-      pairs = { enabled = true },
     },
   },
 
@@ -159,7 +123,6 @@ return {
       vim.api.nvim_create_autocmd("User", {
         pattern = "VeryLazy",
         callback = function()
-          -- Create some toggle mappings
           Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
           Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
           Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
@@ -170,9 +133,12 @@ return {
             :map("<leader>uc")
           Snacks.toggle.treesitter():map("<leader>uT")
           Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-          Snacks.toggle.inlay_hints():map("<leader>uh")
           Snacks.toggle.indent():map("<leader>ug")
           Snacks.toggle.dim():map("<leader>uD")
+
+          if vim.lsp.inlay_hint then
+            Snacks.toggle.inlay_hints():map("<leader>uh")
+          end
         end,
       })
     end,

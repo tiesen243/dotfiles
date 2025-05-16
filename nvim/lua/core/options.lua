@@ -4,6 +4,8 @@ local opt = vim.opt
 
 -- General UI options
 opt.autowrite = true
+opt.autoread = true
+opt.autochdir = true
 opt.breakindent = true
 vim.schedule(function()
   opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
@@ -61,3 +63,6 @@ opt.fillchars = {
   foldopen = "",
   foldsep = " ",
 }
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0

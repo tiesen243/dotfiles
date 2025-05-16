@@ -28,6 +28,7 @@ return {
       })
       vim.treesitter.language.register("bash", "kitty")
 
+      add("bash")
       add("git_config")
 
       if have("hypr") then
