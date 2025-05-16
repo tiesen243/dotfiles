@@ -1,8 +1,6 @@
 local ai_cmp = false
 
 return {
-  -- Github Copilot for Neovim
-  -- https://github.com/zbirenbaum/copilot.lua
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
@@ -19,15 +17,12 @@ return {
     },
   },
 
-  -- Integration completion for Copilot
-  -- https://github.com/giuxtaposition/blink-cmp-copilot
   {
     "saghen/blink.cmp",
-    enabled = ai_cmp,
     optional = true,
-    dependencies = { "giuxtaposition/blink-cmp-copilot" },
+    dependencies = { "giuxtaposition/blink-cmp-copilot", enabled = ai_cmp },
     opts = {
-      sources = {
+      sources = ai_cmp and {
         default = { "copilot" },
         providers = {
           copilot = {
@@ -37,15 +32,12 @@ return {
             async = true,
           },
         },
-      },
+      } or nil,
     },
   },
 
-  -- chat with gitHub copilot in neovim
-  -- https://github.com/CopilotC-Nvim/CopilotChat.nvim
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",
     cmd = "CopilotChat",
     keys = {
       { "<c-s>", "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
