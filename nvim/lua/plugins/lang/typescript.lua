@@ -31,11 +31,23 @@ vim.lsp.config("vtsls", {
   },
 })
 
-vim.lsp.config("eslint", {
-  settings = {
-    workingDirectories = { mode = "auto" },
-    format = true,
-  },
+Yuki.format.register({
+  priority = 200,
+  name = "LspEslintFixAll",
+  active = function(bufnr)
+    local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
+    return client ~= nil
+  end,
+  command = function(bufnr)
+    local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
+    if client then
+      local diag = vim.diagnostic.get(bufnr)
+      if #diag > 0 then
+        vim.cmd("LspEslintFixAll")
+        vim.cmd("sleep 100m")
+      end
+    end
+  end,
 })
 
 local supported = {

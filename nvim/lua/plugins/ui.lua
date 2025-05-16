@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      require("vercel").setup({ theme = "dark", transparent = false })
+      require("vercel").setup({ theme = "dark", transparent = true })
       vim.cmd.colorscheme("vercel")
     end,
   },

@@ -11,6 +11,12 @@ map({ "i", "n", "s" }, "<esc>", function()
   return "<esc>"
 end, { expr = true, desc = "Escape and Clear hlsearch" })
 
+-- toggle eol
+-- stylua: ignore start
+map("n", ",", function() Yuki.utils.toggle_eol(",") end, { desc = "Toggle ," })
+map("n", ";", function() Yuki.utils.toggle_eol(";") end, { desc = "Toggle ;" })
+-- stylua: ignore end
+
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })

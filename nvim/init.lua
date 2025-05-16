@@ -46,3 +46,5 @@ require("lazy").setup({
 require("core.autocmd")
 require("core.keymaps")
 require("core.options")
+
+Yuki.format.setup()

@@ -1,3 +1,4 @@
+vim.g.autoformat = true
 vim.g.snacks_animate = true
 
 local opt = vim.opt
@@ -15,7 +16,7 @@ opt.conceallevel = 2
 opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
-opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+opt.formatexpr = "v:lua.require('yuki').format.formatexpr()"
 opt.guicursor = {
   "n-v-c:block-Cursor/lCursor",
   "i-ci:ver25-Cursor/lCursor",
