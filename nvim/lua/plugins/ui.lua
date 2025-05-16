@@ -3,7 +3,35 @@ return {
     "tiesen243/vercel.nvim",
     lazy = false,
     priority = 1000,
-    opts = { transparent = true },
+    config = function()
+      require("vercel").setup({ theme = "dark", transparent = true })
+      vim.cmd.colorscheme("vercel")
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    enabled = false,
+    opts = {
+      highlights = function()
+        local status_ok, vercel = pcall(require, "vercel")
+        if not status_ok then
+          return {}
+        end
+        return vercel.highlights.bufferline
+      end,
+      options = {
+        diagnostics = "nvim_lsp",
+        offsets = {
+
+          {
+            filetype = "neo-tree",
+            text = "File Explorer",
+            highlight = "Directory",
+            text_align = "center",
+          },
+        },
+      },
+    },
   },
   {
     "folke/which-key.nvim",
