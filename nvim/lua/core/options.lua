@@ -14,6 +14,11 @@ opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
 opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+opt.guicursor = {
+  "n-v-c:block-Cursor/lCursor",
+  "i-ci:ver25-Cursor/lCursor",
+  "r-cr:hor20-Cursor/lCursor",
+}
 opt.mouse = "a"
 opt.number = true
 opt.relativenumber = true

@@ -43,8 +43,6 @@ require("lazy").setup({
   },
 })
 
-vim.cmd.colorscheme("vercel")
-
 require("core.autocmd")
 require("core.keymaps")
 require("core.options")
