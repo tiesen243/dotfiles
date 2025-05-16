@@ -45,7 +45,7 @@ return {
           map("<leader>ca", function () vim.lsp.buf.code_action() end, "Code Action")
           map("<leader>cd", function() Snacks.picker.diagnostics() end, "Diagnostics")
           map("<leader>cD", function() Snacks.picker.diagnostics() end,"Buffer Diagnostics")
-          map("<leader>cf", function () vim.lsp.buf.format() end, "Format")
+          map("<leader>cf", function () Yuki.format.format() end, "Format")
           map("<leader>cr", function () vim.lsp.buf.rename() end, "Rename Variable")
           map("<leader>cR", function() Snacks.rename.rename_file() end, "Rename File")
           map("<leader>cs", function() Snacks.picker.lsp_symbols() end, "Symbols")

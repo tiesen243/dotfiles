@@ -1,10 +1,6 @@
-local function augroup(name)
-  return vim.api.nvim_create_augroup("yuki_" .. name, { clear = true })
-end
-
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   desc = "Check if we need to reload the file when it changed",
-  group = augroup("checktime"),
+  group = Yuki.utils.create_augroup("checktime"),
   callback = function()
     if vim.o.buftype ~= "nofile" then
       vim.cmd("checktime")
@@ -14,7 +10,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
-  group = augroup("highlight_yank"),
+  group = Yuki.utils.create_augroup("highlight_yank"),
   callback = function()
     vim.hl.on_yank()
   end,
@@ -22,7 +18,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   desc = "Resize splits if window got resized",
-  group = augroup("resize_splits"),
+  group = Yuki.utils.create_augroup("resize_splits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
@@ -32,7 +28,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Go to last loc when opening a buffer",
-  group = augroup("last_loc"),
+  group = Yuki.utils.create_augroup("last_loc"),
   callback = function(event)
     local exclude = { "gitcommit" }
     local buf = event.buf
@@ -50,7 +46,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Close some filetypes with <q>",
-  group = augroup("close_with_q"),
+  group = Yuki.utils.create_augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
     "checkhealth",
@@ -85,7 +81,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Make it easier to close man-files when opened inline",
-  group = augroup("man_unlisted"),
+  group = Yuki.utils.create_augroup("man_unlisted"),
   pattern = { "man" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -94,7 +90,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Wrap and check for spell in text filetypes",
-  group = augroup("wrap_spell"),
+  group = Yuki.utils.create_augroup("wrap_spell"),
   pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
@@ -104,7 +100,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
   desc = "Fix conceallevel for json files",
-  group = augroup("json_conceal"),
+  group = Yuki.utils.create_augroup("json_conceal"),
   pattern = { "json", "jsonc", "json5" },
   callback = function()
     vim.opt_local.conceallevel = 0
@@ -113,7 +109,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   desc = "Auto create dir when saving a file, in case some intermediate directory does not exist",
-  group = augroup("auto_create_dir"),
+  group = Yuki.utils.create_augroup("auto_create_dir"),
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then
       return
