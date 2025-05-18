@@ -21,11 +21,13 @@ return {
       require("mason-lspconfig").setup(opts)
 
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("yuki-lsp-attach", { clear = true }),
-        callback = function(event)
+        group = Yuki.utils.create_augroup("lsp_attach"),
+        callback = function(args)
+          -- local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
           local map = function(keys, func, desc, mode)
             mode = mode or "n"
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+            vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
           end
 
           -- Disable default LSP keymaps
