@@ -53,15 +53,6 @@ return {
   },
 
   {
-    "saghen/blink.pairs",
-    version = "*",
-    build = "cargo build --release",
-    opts = {
-      mappings = { enabled = true },
-    },
-  },
-
-  {
     "stevearc/conform.nvim",
     opts = function()
       Yuki.format.register({
@@ -122,6 +113,12 @@ return {
       },
     },
     main = "nvim-treesitter.configs",
+  },
+
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
   },
 
   {
