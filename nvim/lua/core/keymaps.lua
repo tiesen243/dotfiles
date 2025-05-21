@@ -1,77 +1,78 @@
 ---@param key string
 ---@param lhs string|function
+---@param desc string?
 ---@param opts table?
----@param mode string|string[]?
-local map = function(key, lhs, opts, mode)
-  mode = mode or "n"
-  opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
+local map = function(key, lhs, desc, opts)
+  opts = vim.tbl_extend("force", { desc = desc, noremap = true, silent = true }, opts or {})
+  local mode = opts.mode or "n"
+  opts.mode = nil
   vim.keymap.set(mode, key, lhs, opts)
 end
 
 -- general
-map("<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
-map("<leader>qa", "<cmd>quitall<cr>", { desc = "Quit All" })
-map("<leader>qs", "<cmd>wqall<cr>", { desc = "Save & Quit All" })
-map("<C-s>", "<cmd>write<cr><esc>", { desc = "Save File" }, { "n", "i", "v" })
-map("p", [["_dP]], { desc = "Paste without yank" }, "x")
+map("<leader>qq", "<cmd>quit<cr>", "Quit")
+map("<leader>qa", "<cmd>quitall<cr>", "Quit All")
+map("<leader>qs", "<cmd>wqall<cr>", "Save & Quit All")
+map("<C-s>", "<cmd>write<cr><esc>", "Save File", { mode = { "n", "i", "v" } })
+map("p", [["_dP]], "Paste without yank", { mode = "x" })
 map("<esc>", function()
   vim.cmd("noh")
   return "<esc>"
-end, { expr = true, desc = "Escape and Clear hlsearch" }, { "i", "n", "s" })
+end, "Escape and Clear hlsearch", { mode = { "i", "n", "s" }, expr = true })
 
 -- toggle eol
 -- stylua: ignore start
-map(",", function() Yuki.utils.toggle_eol(",") end, { desc = "Toggle ," })
-map(";", function() Yuki.utils.toggle_eol(";") end, { desc = "Toggle ;" })
-map("<C-'>", function() Yuki.utils.toggle_eol("'") end, { desc = "Toggle '" })
+map(",", function() Yuki.utils.toggle_eol(",") end, "Toggle ," )
+map(";", function() Yuki.utils.toggle_eol(";") end,  "Toggle ;" )
+map("<C-'>", function() Yuki.utils.toggle_eol("'") end, "Toggle '" )
 -- stylua: ignore end
 
 -- better up/down
-map("j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true }, { "n", "x" })
-map("<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true }, { "n", "x" })
-map("k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true }, { "n", "x" })
-map("<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true }, { "n", "x" })
+map("j", "v:count == 0 ? 'gj' : 'j'", "Down", { mode = { "n", "x" }, expr = true })
+map("<Down>", "v:count == 0 ? 'gj' : 'j'", "Down", { mode = { "n", "x" }, expr = true })
+map("k", "v:count == 0 ? 'gk' : 'k'", "Up", { mode = { "n", "x" }, expr = true })
+map("<Up>", "v:count == 0 ? 'gk' : 'k'", "Up", { mode = { "n", "x" }, expr = true })
 
 -- move to window using the <ctrl> hjkl keys
 if vim.fn.executable("kitty") == 1 then
 	-- stylua: ignore start
-	map("<C-h>", function() Yuki.utils.navigate("h") end, { desc = "Go to Left Window", silent = true },{ "n", "v" })
-	map( "<C-j>", function() Yuki.utils.navigate("j") end, { desc = "Go to Lower Window", silent = true },{ "n", "v" })
-	map( "<C-k>", function() Yuki.utils.navigate("k") end, { desc = "Go to Upper Window", silent = true },{ "n", "v" })
-	map( "<C-l>", function() Yuki.utils.navigate("l") end, { desc = "Go to Right Window", silent = true },{ "n", "v" })
+	map("<C-h>", function() Yuki.utils.navigate("h") end, "Go to Left Window", { mode = { "n", "v" } })
+	map( "<C-j>", function() Yuki.utils.navigate("j") end, "Go to Lower Window", { mode = { "n", "v" } })
+	map( "<C-k>", function() Yuki.utils.navigate("k") end, "Go to Upper Window", { mode = { "n", "v" } })
+	map( "<C-l>", function() Yuki.utils.navigate("l") end, "Go to Right Window", { mode = { "n", "v" } })
   -- stylua: ignore end
 else
-  map("<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true }, { "n", "v" })
-  map("<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true }, { "n", "v" })
-  map("<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true }, { "n", "v" })
-  map("<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true }, { "n", "v" })
+  map("<C-h>", "<C-w>h", "Go to Left Window", { mode = { "n", "v" } })
+  map("<C-j>", "<C-w>j", "Go to Lower Window", { mode = { "n", "v" } })
+  map("<C-k>", "<C-w>k", "Go to Upper Window", { mode = { "n", "v" } })
+  map("<C-l>", "<C-w>l", "Go to Right Window", { mode = { "n", "v" } })
 end
 
 -- move lines
-map("<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" }, "i")
-map("<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" }, "i")
-map("<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" }, "v")
-map("<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" }, "v")
+map("<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", "Move Down")
+map("<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", "Move Up")
+map("<A-j>", "<esc><cmd>m .+1<cr>==gi", "Move Down", { mode = "i" })
+map("<A-k>", "<esc><cmd>m .-2<cr>==gi", "Move Up", { mode = "i" })
+map("<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", "Move Down", { mode = "v" })
+map("<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", "Move Up", { mode = "v" })
 
 -- add undo break-points
-map(",", ",<c-g>u", {}, "i")
-map(".", ".<c-g>u", {}, "i")
-map(";", ";<c-g>u", {}, "i")
+map(",", ",<c-g>u", "", { mode = "i" })
+map(".", ".<c-g>u", "", { mode = "i" })
+map(";", ";<c-g>u", "", { mode = "i" })
 
 -- better indenting
 map("<", "<<")
 map(">", ">>")
-map("<", "<gv", {}, "v")
-map(">", ">gv", {}, "v")
+map("<", "<gv", "", { mode = "v" })
+map(">", ">gv", "", { mode = "v" })
 
 -- buffers
 -- stylua: ignore start
-map("<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete Buffer" })
-map("<leader>bo", function() Snacks.bufdelete.other() end, { desc = "Delete Other Buffers" })
-map("<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+map("<leader>bb", "<cmd>e #<cr>",  "Switch to Other Buffer" )
+map("<leader>bd", function() Snacks.bufdelete() end,  "Delete Buffer" )
+map("<leader>bo", function() Snacks.bufdelete.other() end, "Delete Other Buffers" )
+map("<leader>bD", "<cmd>:bd<cr>", "Delete Buffer and Window" )
 -- stylua: ignore end
 
 -- diagnostic
@@ -83,24 +84,24 @@ local diagnostic_goto = function(next, severity)
     go({ severity = severity })
   end
 end
-map("]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("]d", diagnostic_goto(true), "Next Diagnostic")
+map("[d", diagnostic_goto(false), "Prev Diagnostic")
+map("]e", diagnostic_goto(true, "ERROR"), "Next Error")
+map("[e", diagnostic_goto(false, "ERROR"), "Prev Error")
+map("]w", diagnostic_goto(true, "WARN"), "Next Warning")
+map("[w", diagnostic_goto(false, "WARN"), "Prev Warning")
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map("n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
-map("n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" }, "x")
-map("n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" }, "o")
-map("N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
-map("N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" }, "x")
-map("N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" }, "o")
+map("n", "'Nn'[v:searchforward].'zv'", "Next Search Result", { expr = true })
+map("n", "'Nn'[v:searchforward]", "Next Search Result", { expr = true, mode = "x" })
+map("n", "'Nn'[v:searchforward]", "Next Search Result", { expr = true, mode = "o" })
+map("N", "'nN'[v:searchforward].'zv'", "Prev Search Result", { expr = true })
+map("N", "'nN'[v:searchforward]", "Prev Search Result", { expr = true, mode = "x" })
+map("N", "'nN'[v:searchforward]", "Prev Search Result", { expr = true, mode = "o" })
 
 -- highlights under cursor
-map("<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
+map("<leader>ui", vim.show_pos, "Inspect Pos")
+map("<leader>uI", "<cmd>InspectTree<cr>", "Inspect Tree")
 
 -- snacks toggle
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
@@ -127,25 +128,25 @@ map("<leader>xf", function()
   else
     vim.cmd("copen")
   end
-end, { desc = "Toggle Quickfix" })
+end, "Toggle Quickfix")
 map("<leader>xl", function()
   if vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 then
     vim.cmd("lclose")
   else
     vim.cmd("lopen")
   end
-end, { desc = "Toggle Location List" })
+end, "Toggle Location List")
 
 -- stylua: ignore start
 if vim.fn.executable("lazygit") == 1 then
   ---@diagnostic disable-next-line: missing-fields
-  map( "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, { desc = "Lazygit (Root Dir)" })
-  map("<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
+  map("<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, "Lazygit (Root Dir)")
+  map("<leader>gG", function() Snacks.lazygit() end, "Lazygit (cwd)")
 end
 -- stylua: ignore end
 
 -- Terminal Mappings
 map("<c-/>", function()
   Snacks.terminal(nil, { cwd = Snacks.git.get_root() })
-end, { desc = "Terminal (Root Dir)" })
-map("<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" }, "t")
+end, "Terminal (Root Dir)")
+map("<C-/>", "<cmd>close<cr>", "Hide Terminal", { mode = "t" })
