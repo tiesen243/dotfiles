@@ -1,6 +1,7 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+---@diagnostic disable-next-line: undefined-field
+if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
   if vim.v.shell_error ~= 0 then
@@ -37,11 +38,13 @@ require("lazy").setup({
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
     { import = "plugins.lang.json" },
+    { import = "plugins.lang.lua" },
     { import = "plugins.lang.markdown" },
     { import = "plugins.lang.rust" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
   },
+  install = { colorschema = "vercel" },
 })
 
 require("core.autocmd")
