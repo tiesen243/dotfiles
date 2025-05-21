@@ -1,9 +1,9 @@
 local M = {}
 
 ---@class YukiFormatter
----@field priority number
 ---@field name string
----@field active boolean | fun(bufnr?: number): boolean
+---@field priority number
+---@field active fun(bufnr: number): boolean
 ---@field command fun(bufnr: number)
 
 ---@type YukiFormatter[]
@@ -25,16 +25,14 @@ M.formatexpr = function()
   end
 end
 
+---@param opts? { buf?: number }
 M.format = function(opts)
   opts = opts or {}
   local bufnr = opts.buf or vim.api.nvim_get_current_buf()
   local have = false
 
   for _, formatter in ipairs(M.formatter) do
-    if
-      (type(formatter.active) == "function" and formatter.active())
-      or (type(formatter.active) ~= "function" and formatter.active)
-    then
+    if formatter.active(bufnr) then
       have = true
       local ok, err = pcall(formatter.command, bufnr)
       if not ok then

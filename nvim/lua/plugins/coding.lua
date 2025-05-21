@@ -1,6 +1,7 @@
 return {
   {
     "saghen/blink.cmp",
+    build = "cargo build --release",
     dependencies = { "rafamadriz/friendly-snippets" },
     event = "InsertEnter",
     opts = {
@@ -72,11 +73,7 @@ return {
           })
         end,
       })
-      return {
-        formatters_by_ft = {
-          lua = { "stylua" },
-        },
-      }
+      return {}
     end,
   },
 
@@ -99,7 +96,6 @@ return {
     opts = {
       auto_install = false,
       sync_install = true,
-      ensure_installed = { "lua" },
       highlight = { enable = true, additional_vim_regex_highlighting = true },
       indent = { enable = true },
       incremental_selection = {
