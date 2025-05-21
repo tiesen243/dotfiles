@@ -16,18 +16,28 @@ return {
     "mason-org/mason-lspconfig.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
     opts_extend = { "ensure_installed" },
-    opts = { ensure_installed = { "lua_ls" } },
     config = function(_, opts)
       require("mason-lspconfig").setup(opts)
 
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = Yuki.utils.create_augroup("lsp_attach"),
-        callback = function(args)
-          -- local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+      vim.lsp.config("*", {
+        capabilities = require("blink.cmp").get_lsp_capabilities(),
+        on_attach = function(client, bufnr)
+          if client.name == "lua_ls" then
+            client.settings = {
+              Lua = {
+                diagnostics = { globals = { "vim" } },
+                workspace = {
+                  library = vim.api.nvim_get_runtime_file("", true),
+                  checkThirdParty = false,
+                },
+                telemetry = { enable = false },
+              },
+            }
+          end
 
           local map = function(keys, func, desc, mode)
             mode = mode or "n"
-            vim.keymap.set(mode, keys, func, { buffer = args.buf, desc = "LSP: " .. desc })
+            vim.keymap.set(mode, keys, func, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: " .. desc })
           end
 
           -- Disable default LSP keymaps
@@ -36,25 +46,38 @@ return {
           pcall(vim.keymap.del, "n", "grn")
           pcall(vim.keymap.del, "n", "grr")
 
+          map("gd", Snacks.picker.lsp_definitions, "Goto Definition")
+          map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
+          map("gr", Snacks.picker.lsp_references, "References")
+          map("gI", Snacks.picker.lsp_implementations, "Goto Implementation")
+          map("gy", Snacks.picker.lsp_type_definitions, "Goto T[y]pe Definition")
+          map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
+          map("<C-d>", vim.diagnostic.open_float, "Cursor Diagnostic")
+          map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+          map("<leader>cd", Snacks.picker.diagnostics, "Diagnostics")
+          map("<leader>cD", Snacks.picker.diagnostics, "Buffer Diagnostics")
+          map("<leader>cf", Yuki.format.format, "Format")
+          map("<leader>cr", vim.lsp.buf.rename, "Rename Variable")
+          map("<leader>cR", Snacks.rename.rename_file, "Rename File")
+          map("<leader>cs", Snacks.picker.lsp_symbols, "Symbols")
+          map("<leader>cS", Snacks.picker.lsp_workspace_symbols, "Workspace Symbols")
           -- stylua: ignore start
-          map("gd", function() Snacks.picker.lsp_definitions() end, "Goto Definition")
-          map("gD", function() Snacks.picker.lsp_declarations() end, "Goto Declaration")
-          map("gr", function() Snacks.picker.lsp_references() end, "References")
-          map("gI", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
-          map("gy", function() Snacks.picker.lsp_type_definitions() end, "Goto T[y]pe Definition")
-          map("<C-k>", function () vim.lsp.buf.signature_help() end, "Signature Help", "i")
-          map("<C-d>", function () vim.diagnostic.open_float() end, "Cursor Diagnostic")
-          map("<leader>ca", function () vim.lsp.buf.code_action() end, "Code Action")
-          map("<leader>cd", function() Snacks.picker.diagnostics() end, "Diagnostics")
-          map("<leader>cD", function() Snacks.picker.diagnostics() end,"Buffer Diagnostics")
-          map("<leader>cf", function () Yuki.format.format() end, "Format")
-          map("<leader>cr", function () vim.lsp.buf.rename() end, "Rename Variable")
-          map("<leader>cR", function() Snacks.rename.rename_file() end, "Rename File")
-          map("<leader>cs", function() Snacks.picker.lsp_symbols() end, "Symbols")
-          map("<leader>cS", function() Snacks.picker.lsp_workspace_symbols() end, "Workspace Symbols")
-          map("]]", function() Snacks.words.jump(vim.v.count1) end,  "Next Reference")
-          map("[[", function() Snacks.words.jump(-vim.v.count1) end,  "Previous Reference")
+          map("]]", function() Snacks.words.jump(vim.v.count1) end, "Next Reference")
+          map("[[", function() Snacks.words.jump(-vim.v.count1) end, "Previous Reference")
           -- stylua: ignore end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("DiagnosticChanged", {
+        callback = function()
+          local winid = vim.api.nvim_get_current_win()
+          local loclist = vim.fn.getloclist(winid, { title = true })
+          loclist = vim.tbl_extend("force", loclist, {
+            severity = { min = vim.diagnostic.severity.WARN },
+          })
+
+          vim.diagnostic.setloclist(loclist)
+          vim.api.nvim_set_current_win(winid)
         end,
       })
 
@@ -66,6 +89,7 @@ return {
             title = "LSP Progress",
             opts = function(notif)
               notif.icon = ev.data.params.value.kind == "end" and " "
+                ---@diagnostic disable-next-line: undefined-field
                 or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
             end,
           })
@@ -107,8 +131,6 @@ return {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach",
     priority = 1000,
-    opts = {
-      preset = "amongus",
-    },
+    opts = {},
   },
 }

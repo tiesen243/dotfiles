@@ -74,26 +74,23 @@ return {
     lazy = false,
     priority = 1000,
     keys = {
-      -- stylua: ignore start
-      { "<leader><space>", function() Snacks.picker.buffers() end, desc = "Buffers" },
+      { "<leader><space>", Snacks.picker.buffers, desc = "Buffers" },
       -- Find
-      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
-      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
-      { "<leader>fP", function() Snacks.picker.pick() end, desc = "Picker List" },
-      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
-      { "<leader>fi", function() Snacks.picker.icons() end, desc = "Icons" },
+      { "<leader>fg", Snacks.picker.grep, desc = "Grep" },
+      { "<leader>ff", Snacks.picker.files, desc = "Find Files" },
+      { "<leader>fp", Snacks.picker.projects, desc = "Projects" },
+      { "<leader>fP", Snacks.picker.pick, desc = "Picker List" },
+      { "<leader>fr", Snacks.picker.recent, desc = "Recent" },
+      { "<leader>fi", Snacks.picker.icons, desc = "Icons" },
       -- Git
-      { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
-      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse (open)" },
-      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
-      { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
-      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-      { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
-      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
-      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
-      -- Code
-      -- stylua: ignore end
+      { "<leader>gb", Snacks.picker.git_branches, desc = "Git Branches" },
+      { "<leader>gB", Snacks.gitbrowse, desc = "Git Browse (open)" },
+      { "<leader>gl", Snacks.picker.git_log, desc = "Git Log" },
+      { "<leader>gL", Snacks.picker.git_log_line, desc = "Git Log Line" },
+      { "<leader>gs", Snacks.picker.git_status, desc = "Git Status" },
+      { "<leader>gS", Snacks.picker.git_stash, desc = "Git Stash" },
+      { "<leader>gd", Snacks.picker.git_diff, desc = "Git Diff (Hunks)" },
+      { "<leader>gf", Snacks.picker.git_log_file, desc = "Git Log File" },
     },
     opts = {
       bigfile = { enabled = true },
@@ -130,7 +127,8 @@ return {
       },
     },
     init = function()
-      vim.api.nvim_create_autocmd("User", {
+      vim.api.nvim_create_autocmd("Snacks Toggle", {
+        group = Yuki.utils.create_augroup("snacks_toggle"),
         pattern = "VeryLazy",
         callback = function()
           Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")

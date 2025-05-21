@@ -15,6 +15,7 @@ end, { expr = true, desc = "Escape and Clear hlsearch" })
 -- stylua: ignore start
 map("n", ",", function() Yuki.utils.toggle_eol(",") end, { desc = "Toggle ," })
 map("n", ";", function() Yuki.utils.toggle_eol(";") end, { desc = "Toggle ;" })
+map("n", "<C-'>", function() Yuki.utils.toggle_eol("'") end, { desc = "Toggle '" })
 -- stylua: ignore end
 
 -- better up/down
@@ -67,6 +68,7 @@ map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
+  ---@diagnostic disable-next-line: deprecated
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
@@ -94,6 +96,7 @@ map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
 
 -- stylua: ignore start
 if vim.fn.executable("lazygit") == 1 then
+  ---@diagnostic disable-next-line: missing-fields
   map("n", "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, { desc = "Lazygit (Root Dir)" })
   map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
 end
