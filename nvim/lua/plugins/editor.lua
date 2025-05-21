@@ -74,23 +74,25 @@ return {
     lazy = false,
     priority = 1000,
     keys = {
-      { "<leader><space>", Snacks.picker.buffers, desc = "Buffers" },
+      -- stylua: ignore start
+      { "<leader><space>", function() Snacks.picker.buffers() end, desc = "Buffers" },
       -- Find
-      { "<leader>fg", Snacks.picker.grep, desc = "Grep" },
-      { "<leader>ff", Snacks.picker.files, desc = "Find Files" },
-      { "<leader>fp", Snacks.picker.projects, desc = "Projects" },
-      { "<leader>fP", Snacks.picker.pick, desc = "Picker List" },
-      { "<leader>fr", Snacks.picker.recent, desc = "Recent" },
-      { "<leader>fi", Snacks.picker.icons, desc = "Icons" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+      { "<leader>fP", function() Snacks.picker.pick() end, desc = "Picker List" },
+      { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+      { "<leader>fi", function() Snacks.picker.icons() end, desc = "Icons" },
       -- Git
-      { "<leader>gb", Snacks.picker.git_branches, desc = "Git Branches" },
-      { "<leader>gB", Snacks.gitbrowse, desc = "Git Browse (open)" },
-      { "<leader>gl", Snacks.picker.git_log, desc = "Git Log" },
-      { "<leader>gL", Snacks.picker.git_log_line, desc = "Git Log Line" },
-      { "<leader>gs", Snacks.picker.git_status, desc = "Git Status" },
-      { "<leader>gS", Snacks.picker.git_stash, desc = "Git Stash" },
-      { "<leader>gd", Snacks.picker.git_diff, desc = "Git Diff (Hunks)" },
-      { "<leader>gf", Snacks.picker.git_log_file, desc = "Git Log File" },
+      { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+      { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse (open)" },
+      { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+      { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+      { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+      -- stylua: ignore end
     },
     opts = {
       bigfile = { enabled = true },
@@ -126,29 +128,5 @@ return {
         },
       },
     },
-    init = function()
-      vim.api.nvim_create_autocmd("Snacks Toggle", {
-        group = Yuki.utils.create_augroup("snacks_toggle"),
-        pattern = "VeryLazy",
-        callback = function()
-          Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-          Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-          Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-          Snacks.toggle.diagnostics():map("<leader>ud")
-          Snacks.toggle.line_number():map("<leader>ul")
-          Snacks.toggle
-            .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-            :map("<leader>uc")
-          Snacks.toggle.treesitter():map("<leader>uT")
-          Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-          Snacks.toggle.indent():map("<leader>ug")
-          Snacks.toggle.dim():map("<leader>uD")
-
-          if vim.lsp.inlay_hint then
-            Snacks.toggle.inlay_hints():map("<leader>uh")
-          end
-        end,
-      })
-    end,
   },
 }
