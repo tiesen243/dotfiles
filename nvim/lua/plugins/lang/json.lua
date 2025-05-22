@@ -22,6 +22,7 @@ vim.lsp.config("jsonls", {
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    optional = true,
     opts = { ensure_installed = { "json", "jsonc" } },
   },
 
@@ -33,6 +34,7 @@ return {
 
   {
     "stevearc/conform.nvim",
+    optional = true,
     opts = {
       formatters_by_ft = {
         ["json"] = { "prettier" },

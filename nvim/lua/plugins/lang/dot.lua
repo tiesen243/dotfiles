@@ -12,6 +12,7 @@ end
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    optional = true,
     opts = function(_, opts)
       local function add(lang)
         if type(opts.ensure_installed) == "table" then
@@ -56,6 +57,7 @@ return {
 
   {
     "stevearc/conform.nvim",
+    optional = true,
     opts = {
       formatters_by_ft = {
         sh = { "shfmt" },
