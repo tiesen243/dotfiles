@@ -1,7 +1,9 @@
+vim.lsp.enable("tailwindcss")
+
 return {
   {
-    "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "tailwindcss" } },
+    opts = { ensure_installed = { "tailwindcss-language-server" } },
   },
 }

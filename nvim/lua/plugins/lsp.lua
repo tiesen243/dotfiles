@@ -13,28 +13,11 @@ vim.diagnostic.config({
 
 return {
   {
-    "mason-org/mason-lspconfig.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
-    opts_extend = { "ensure_installed" },
-    config = function(_, opts)
-      require("mason-lspconfig").setup(opts)
-
+    "neovim/nvim-lspconfig",
+    config = function()
       vim.lsp.config("*", {
         capabilities = require("blink.cmp").get_lsp_capabilities(),
-        on_attach = function(client, bufnr)
-          if client.name == "lua_ls" then
-            client.settings = {
-              Lua = {
-                diagnostics = { globals = { "vim" } },
-                workspace = {
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  checkThirdParty = false,
-                },
-                telemetry = { enable = false },
-              },
-            }
-          end
-
+        on_attach = function(_, bufnr)
           local map = function(keys, func, desc, mode)
             mode = mode or "n"
             vim.keymap.set(mode, keys, func, { buffer = bufnr, noremap = true, silent = true, desc = "LSP: " .. desc })
@@ -74,6 +57,7 @@ return {
           local loclist = vim.fn.getloclist(winid, { title = true })
           loclist = vim.tbl_extend("force", loclist, {
             severity = { min = vim.diagnostic.severity.WARN },
+            open = false,
           })
 
           vim.diagnostic.setloclist(loclist)
@@ -84,7 +68,7 @@ return {
       vim.api.nvim_create_autocmd("LspProgress", {
         callback = function(ev)
           local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-          vim.notify(vim.lsp.status(), "info", {
+          vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
             id = "lsp_progress",
             title = "LSP Progress",
             opts = function(notif)
@@ -102,7 +86,7 @@ return {
     "mason-org/mason.nvim",
     opts_extend = { "ensure_installed" },
     opts = {
-      ensure_installed = { "stylua" },
+      ensure_installed = {},
       ui = {
         border = "rounded",
         icons = {
@@ -120,7 +104,9 @@ return {
         for _, tool in ipairs(opts.ensure_installed) do
           local p = mr.get_package(tool)
           if not p:is_installed() then
+            vim.notify("Installing " .. tool .. "...", vim.log.levels.INFO, { title = "Mason" })
             p:install()
+            vim.notify("Installed " .. tool .. "!", vim.log.levels.INFO, { title = "Mason" })
           end
         end
       end)
