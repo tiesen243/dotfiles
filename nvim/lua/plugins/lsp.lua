@@ -51,19 +51,18 @@ return {
         end,
       })
 
-      vim.api.nvim_create_autocmd("DiagnosticChanged", {
-        callback = function()
-          local winid = vim.api.nvim_get_current_win()
-          local loclist = vim.fn.getloclist(winid, { title = true })
-          loclist = vim.tbl_extend("force", loclist, {
-            severity = { min = vim.diagnostic.severity.WARN },
-            open = false,
-          })
-
-          vim.diagnostic.setloclist(loclist)
-          vim.api.nvim_set_current_win(winid)
-        end,
-      })
+      -- vim.api.nvim_create_autocmd("DiagnosticChanged", {
+      --   callback = function()
+      --     local winid = vim.api.nvim_get_current_win()
+      --     local loclist = vim.fn.getloclist(winid, { title = true })
+      --     loclist = vim.tbl_extend("force", loclist, {
+      --       severity = { min = vim.diagnostic.severity.WARN },
+      --       open = false,
+      --     })
+      --
+      --     vim.diagnostic.setloclist(loclist)
+      --   end,
+      -- })
 
       vim.api.nvim_create_autocmd("LspProgress", {
         callback = function(ev)
