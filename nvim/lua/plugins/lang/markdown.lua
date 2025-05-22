@@ -29,7 +29,7 @@ return {
       completions = { blink = { enabled = true } },
       indent = { enabled = true, skip_heading = true },
     },
-    ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
+    ft = { "markdown", "norg", "rmd", "org", "codecompanion", "copilot-chat" },
     config = function(_, opts)
       require("render-markdown").setup(opts)
       Snacks.toggle({
