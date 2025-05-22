@@ -1,3 +1,5 @@
+vim.lsp.enable("prismals")
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -6,9 +8,9 @@ return {
   },
 
   {
-    "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "prismals" } },
+    opts = { ensure_installed = { "prisma-language-server" } },
   },
 
   {

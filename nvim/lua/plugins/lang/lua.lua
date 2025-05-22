@@ -1,3 +1,18 @@
+vim.lsp.enable("lua_ls")
+
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      diagnostics = { globals = { "vim", "Snacks" } },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = { enable = false },
+    },
+  },
+})
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -6,9 +21,9 @@ return {
   },
 
   {
-    "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "lua_ls" } },
+    opts = { ensure_installed = { "lua-language-server", "stylua" } },
   },
 
   {
