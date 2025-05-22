@@ -1,3 +1,5 @@
+vim.lsp.enable("bashls")
+
 ---@type string
 local xdg_config = vim.env.XDG_CONFIG_HOME or vim.env.HOME .. "/.config"
 
@@ -47,15 +49,9 @@ return {
   },
 
   {
-    "mason-org/mason-lspconfig.nvim",
-    optional = true,
-    opts = { ensure_installed = { "bashls" } },
-  },
-
-  {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "shfmt" } },
+    opts = { ensure_installed = { "bash-language-server", "shfmt" } },
   },
 
   {

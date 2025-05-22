@@ -1,3 +1,6 @@
+vim.lsp.enable("vtsls")
+vim.lsp.enable("eslint")
+
 vim.lsp.config("vtsls", {
   settings = {
     complete_function_calls = true,
@@ -76,15 +79,9 @@ return {
   },
 
   {
-    "mason-org/mason-lspconfig.nvim",
-    optional = true,
-    opts = { ensure_installed = { "vtsls", "eslint" } },
-  },
-
-  {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "prettier" } },
+    opts = { ensure_installed = { "vtsls", "eslint-lsp", "prettier" } },
   },
 
   {

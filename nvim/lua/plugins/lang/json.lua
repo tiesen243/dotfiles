@@ -1,3 +1,5 @@
+vim.lsp.enable("jsonls")
+
 vim.lsp.config("jsonls", {
   settings = {
     json = {
@@ -24,9 +26,9 @@ return {
   },
 
   {
-    "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "jsonls" } },
+    opts = { ensure_installed = { "json-lsp" } },
   },
 
   {

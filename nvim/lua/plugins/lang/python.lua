@@ -1,3 +1,6 @@
+vim.lsp.enable("basedpyright")
+vim.lsp.enable("ruff")
+
 vim.lsp.config("basedpyright", {
   disableOrganizeImports = true,
 })
@@ -15,7 +18,7 @@ return {
   },
 
   {
-    "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     optional = true,
     opts = { ensure_installed = { "basedpyright", "ruff" } },
   },

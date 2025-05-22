@@ -1,3 +1,5 @@
+vim.lsp.enable("rust_analyzer")
+
 Yuki.format.register({
   priority = 200,
   name = "RustFmt",
@@ -21,8 +23,8 @@ return {
   },
 
   {
-    "mason-org/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "rust_analyzer" } },
+    opts = { ensure_installed = { "rust-analyzer" } },
   },
 }

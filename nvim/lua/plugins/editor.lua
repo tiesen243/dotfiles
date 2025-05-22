@@ -60,7 +60,7 @@ return {
               local node = state.tree:get_node()
               local path = node:get_id()
               vim.fn.setreg("+", path, "c")
-              vim.notify("Path copied to clipboard", "info", { title = "NeoTree" })
+              vim.notify("Path copied to clipboard", vim.log.levels.INFO, { title = "NeoTree" })
             end,
             desc = "Copy Path to Clipboard",
           },
