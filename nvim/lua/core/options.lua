@@ -11,7 +11,7 @@ opt.breakindent = true
 vim.schedule(function()
   opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 end)
-opt.completeopt = "menu,menuone,noselect"
+opt.completeopt = "menu,menuone,noselect,popup"
 opt.conceallevel = 2
 opt.confirm = true
 opt.cursorline = true
