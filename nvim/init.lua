@@ -49,5 +49,6 @@ require("lazy").setup({
 require("core.autocmd")
 require("core.keymaps")
 require("core.options")
+vim.cmd.colorscheme("vercel")
 
 Yuki.format.setup()
