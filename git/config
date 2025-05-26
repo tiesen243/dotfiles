@@ -11,34 +11,9 @@
   addEmptyPathspec = false
   pushNonFastForward = false
   statusHints = false
-[status]
-  branch = true
-  showStash = true
-  showUntrackedFiles = all
-[diff]
-  cotext = 3
-  renames = copies
-  interHunkContext = 10
 [interactive]
   singleKey = true
-[push]
-  autoSetupRemote = true
-  default = current
-  followTags = true
-[pull]
-  default = current
-  rebase = true
-[rebase]
-  autoStash = true
-  missingCommitsCheck = warn
-[log]
-  abbrevCommit = true
-  graphColors = blue,yellow,cyan,magenta,green,red
-[color "decorate"]
-  HEAD = red
-  branch = blue
-  tag = yellow
-  remoteBranch = magenta
+
 [branch]
   sort = -committerdate
 [tag]
@@ -49,3 +24,35 @@
   remote = yellow
   upstream = green
   plain = blue
+
+[status]
+  branch = true
+  showStash = true
+  showUntrackedFiles = all
+
+[diff]
+  context = 3
+  renames = copies
+  interHunkContext = 10
+
+[log]
+  abbrevCommit = true
+  graphColors = blue,yellow,cyan,magenta,green,red
+[color "decorate"]
+  HEAD = red
+  branch = blue
+  tag = yellow
+  remoteBranch = magenta
+
+[push]
+  autoSetupRemote = true
+  default = current
+  followTags = true
+
+[pull]
+  default = current
+  rebase = true
+
+[rebase]
+  autoStash = true
+  missingCommitsCheck = warn
