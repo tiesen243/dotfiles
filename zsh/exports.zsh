@@ -1,5 +1,6 @@
 export STARSHIP_CONFIG="$HOME/dotfiles/startship/starship.toml"
 export STARSHIP_CACHE="$HOME/.cache/starship/cache"
+export EDITOR="nvim"
 
 # >>> nvm initialize >>>
 if [ -d "$HOME/.nvm" ]; then
@@ -31,9 +32,3 @@ if [ -f "$HOME/.local/bin/env" ]; then
   eval "$(uv generate-shell-completion zsh)"
 fi
 # <<< uv initialize <<<
-
-# >>> arm initialize <<<
-if [[ -d "$HOME/.arm" ]]; then
-  export PATH="$HOME/.arm/bin:$PATH"
-fi
-# <<< arm initialize <<<
