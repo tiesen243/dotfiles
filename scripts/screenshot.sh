@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 if [ -d ~/OneDrive ]; then
   saveLocation=~/OneDrive/Pictures/Screenshots

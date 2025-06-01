@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Read the username alias from hyprlock.conf
 username=$(whoami)
