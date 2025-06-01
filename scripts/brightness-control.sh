@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 getCurrentBrightness() {
   current=$(cat /sys/class/backlight/*/brightness)

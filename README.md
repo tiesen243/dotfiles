@@ -96,6 +96,12 @@ ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
 
+Final, make all scripts in the dotfiles/scripts directory executable
+
+```bash
+sudo chmod +x ~/dotfiles/scripts/*
+```
+
 2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
 ```bash
