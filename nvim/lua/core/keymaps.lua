@@ -19,6 +19,7 @@ map("<esc>", function()
   vim.cmd("noh")
   return "<esc>"
 end, "Escape and Clear hlsearch", { mode = { "i", "n", "s" }, expr = true })
+map("<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and Replace", { mode = "n" })
 
 -- toggle eol
 -- stylua: ignore start
@@ -74,6 +75,14 @@ map("<leader>bd", function() Snacks.bufdelete() end,  "Delete Buffer" )
 map("<leader>bo", function() Snacks.bufdelete.other() end, "Delete Other Buffers" )
 map("<leader>bD", "<cmd>:bd<cr>", "Delete Buffer and Window" )
 -- stylua: ignore end
+
+-- tabs
+map("<leader>tn", "<cmd>tabnew<cr>", "New Tab")
+map("<leader>tf", "<cmd>tabnew %<cr>", "New Tab with Current File")
+map("<leader>tx", "<cmd>tabclose<cr>", "Close Tab")
+map("<leader>to", "<cmd>tabonly<cr>", "Close Other Tabs")
+map("[t", "<cmd>tabprevious<cr>", "Previous Tab")
+map("]t", "<cmd>tabnext<cr>", "Next Tab")
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
