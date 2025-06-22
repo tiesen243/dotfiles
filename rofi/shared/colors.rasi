@@ -10,6 +10,6 @@
 * {
     background-color:   #0a0a0a;
     foreground-color:   #fafafa;
-    primary-color:      #a96249;
-    secondary-color:    #461a0d;
+    primary-color:      #f2c185;
+    secondary-color:    #403222;
 }
