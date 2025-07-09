@@ -29,20 +29,14 @@ end
 M.format = function(opts)
   opts = opts or {}
   local bufnr = opts.buf or vim.api.nvim_get_current_buf()
-  local have = false
 
   for _, formatter in ipairs(M.formatter) do
     if formatter.active(bufnr) then
-      have = true
       local ok, err = pcall(formatter.command, bufnr)
       if not ok then
         vim.notify("Formatter " .. formatter.name .. " failed: " .. err, vim.log.levels.ERROR)
       end
     end
-  end
-
-  if not have then
-    vim.notify("No formatters available for this buffer.", vim.log.levels.WARN)
   end
 end
 
