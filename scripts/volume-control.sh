@@ -38,6 +38,12 @@ case $1 in
   ;;
 "--down")
   dunstctl close-all
+
+  if [ "$(getCurrentVolume)" = "0%" ]; then
+    notify-send "Volume is already at 0%"
+    exit 1
+  fi
+
   pactl set-sink-volume @DEFAULT_SINK@ -5%
   notify-send "Volume decreased to $(getCurrentVolume)"
   ;;
