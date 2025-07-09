@@ -38,7 +38,6 @@ yes | yay -S --answerclean All --answerdiff None \
   github-cli lazygit lsd ripgrep unzip \
   grim slurp cliphist wl-clipboard \
   ffmpeg pipewire wireplumber \
-  zen-browser-bin \
   thunar gvfs
 ```
 
@@ -89,9 +88,9 @@ Then, create the symbolic links to the config files
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{dunst,fastfetch,hypr,kitty,lazygit,lsd,nvim,rofi,Thunar}
+rm -rf ~/.config/{Thunar,dunst,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi}
 
-ln -s ~/dotfiles/{dunst,fastfetch,hypr,kitty,lazygit,lsd,nvim,rofi,Thunar} ~/.config
+ln -s ~/dotfiles/{Thunar,dunst,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```

@@ -6,7 +6,7 @@
 	<submenu></submenu>
 	<unique-id>1745878644848067-1</unique-id>
 	<command>kitty -d %f</command>
-	<description>Example for a custom action</description>
+  <description>Open a terminal in the current directory using Kitty.</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>

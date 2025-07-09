@@ -1,12 +1,3 @@
-/**
- *
- * Author : BinaryHarbinger
- * Github : BinaryHarbinger
- * 
- * Fonts
- *
- **/
-
 * {
     font: "GeistMono Nerd Font 12";
 }
