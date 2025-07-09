@@ -16,34 +16,6 @@
   transition: 200ms;
 }
 
-progressbar,
-progress,
-trough {
-  border-radius: 20px;
-}
-
-progressbar {
-  background-color: @primary;
-}
-
-trough {
-}
-
-trough highlight {
-  padding: 8px;
-  background: @foreground;
-  border: 2px solid @background;
-  border-radius: 20px;
-}
-
-trough slider {
-  outline: none;
-  border: none;
-}
-
-trough slider:hover {
-}
-
 .blank-window {
   background: transparent;
 }
@@ -51,7 +23,7 @@ trough slider:hover {
 /* ------------------------- Floating Notification ------------------------- */
 
 .floating-notifications.background .notification-row .notification-background {
-  background: alpha(@background, 0.55);
+  background: alpha(@background, 0.69);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
   border: 1px solid @primary;
   border-radius: 12px;
@@ -109,7 +81,7 @@ trough slider:hover {
 /* ------------------------- Control Center ------------------------- */
 
 .control-center {
-  background-color: alpha(@background, 0.55);
+  background-color: alpha(@background, 0.8);
   border-radius: 12px;
   border: 2px solid @primary;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
@@ -122,7 +94,7 @@ trough slider:hover {
   .notification-row
   .notification-background
   .notification.critical {
-  background-color: @background;
+  background-color: alpha(@background, 0.6);
   border-radius: 12px;
   margin: 4px 0px;
   padding: 4px;
@@ -340,4 +312,32 @@ slider {
 .widget-backlight button,
 .widget-volume button {
   padding: 0 4px;
+}
+
+progressbar,
+progress,
+trough {
+  border-radius: 20px;
+}
+
+progressbar {
+  background-color: @primary;
+}
+
+trough {
+}
+
+trough highlight {
+  padding: 8px;
+  background: @foreground;
+  border: 2px solid @background;
+  border-radius: 20px;
+}
+
+trough slider {
+  outline: none;
+  border: none;
+}
+
+trough slider:hover {
 }
