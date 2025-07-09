@@ -34,7 +34,7 @@ rm -rf ~/yay
 yes | yay -S --answerclean All --answerdiff None \
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  fastfetch zsh brightnessctl nwg-look playerctl libnotify \
+  fastfetch zsh brightnessctl nwg-look playerctl libnotify swaync \
   github-cli lazygit lsd ripgrep unzip \
   grim slurp cliphist wl-clipboard \
   ffmpeg pipewire wireplumber \
@@ -73,7 +73,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 6. Uninstall unnecessary packages (optional)
 
 ```bash
-sudo pacman -Runs htop nano vim wofi
+sudo pacman -Runs dunst htop nano vim wofi
 ```
 
 ## Usage
@@ -88,9 +88,9 @@ Then, create the symbolic links to the config files
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{Thunar,dunst,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi}
+rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync}
 
-ln -s ~/dotfiles/{Thunar,dunst,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi} ~/.config
+ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
