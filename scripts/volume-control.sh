@@ -26,8 +26,6 @@ fi
 
 case $1 in
 "--up")
-  dunstctl close-all
-
   if [ "$(getCurrentVolume)" = "100%" ]; then
     notify-send "Volume is already at 100%"
     exit 1
@@ -37,8 +35,6 @@ case $1 in
   notify-send "Volume increased to $(getCurrentVolume)"
   ;;
 "--down")
-  dunstctl close-all
-
   if [ "$(getCurrentVolume)" = "0%" ]; then
     notify-send "Volume is already at 0%"
     exit 1
@@ -48,7 +44,6 @@ case $1 in
   notify-send "Volume decreased to $(getCurrentVolume)"
   ;;
 "--toggle-volume")
-  dunstctl close-all
   pactl set-sink-mute @DEFAULT_SINK@ toggle
   notify-send "Volume $(getVolumeStatus)"
   ;;

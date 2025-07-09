@@ -1,0 +1,343 @@
+@define-color foreground      #fafafa;
+@define-color background      #101010;
+@define-color primary         #a96249;
+
+* {
+  all: unset;
+
+  font-family: "GeistMono Nerd Font", monospace;
+  font-weight: bold;
+  font-size: 14px;
+
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  transition: 200ms;
+}
+
+progressbar,
+progress,
+trough {
+  border-radius: 20px;
+}
+
+progressbar {
+  background-color: @primary;
+}
+
+trough {
+}
+
+trough highlight {
+  padding: 8px;
+  background: @foreground;
+  border: 2px solid @background;
+  border-radius: 20px;
+}
+
+trough slider {
+  outline: none;
+  border: none;
+}
+
+trough slider:hover {
+}
+
+.blank-window {
+  background: transparent;
+}
+
+/* ------------------------- Floating Notification ------------------------- */
+
+.floating-notifications.background .notification-row .notification-background {
+  background: alpha(@background, 0.55);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+  border: 1px solid @primary;
+  border-radius: 12px;
+  margin: 8px;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification {
+  padding: 8px;
+}
+
+.image {
+  margin: 10px 20px 10px 0px;
+}
+
+.summary {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.body {
+  font-size: 0.8rem;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button {
+  margin: 6px;
+  padding: 2px;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:hover {
+  background-color: @primary;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background-color: @primary;
+  color: @background;
+}
+
+/* ------------------------- Control Center ------------------------- */
+
+.control-center {
+  background-color: alpha(@background, 0.55);
+  border-radius: 12px;
+  border: 2px solid @primary;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
+  margin: 8px;
+  padding: 16px;
+}
+
+.control-center .notification-row .notification-background,
+.control-center
+  .notification-row
+  .notification-background
+  .notification.critical {
+  background-color: @background;
+  border-radius: 12px;
+  margin: 4px 0px;
+  padding: 4px;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content {
+  margin: 6px;
+  padding: 8px 6px 2px 2px;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > * {
+  min-height: 3.4em;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action {
+  background: alpha(@primary, 0.8);
+  color: @foreground;
+  border-radius: 12px;
+  margin: 6px;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover {
+  background: @primary;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:active {
+  background-color: @primary;
+}
+
+.control-center .notification-row .notification-background .close-button {
+  border-radius: 6px;
+  color: @foreground;
+  margin: 0px;
+  padding: 4px;
+}
+
+.control-center .notification-row .notification-background .close-button:hover {
+  background-color: @primary;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background-color: @primary;
+}
+
+/* ------------------------- Notification Group ------------------------- */
+
+.notification-group {
+  margin: 2px 8px 2px 8px;
+}
+.notification-group-headers {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: @foreground;
+  letter-spacing: 2px;
+}
+
+.notification-group-icon {
+  color: @foreground;
+  padding: 4px;
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: transparent;
+  color: @foreground;
+  margin: 4px;
+  border-radius: 6px;
+  padding: 4px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: @primary;
+}
+
+/* ------------------------- Widget ------------------------- */
+
+.widget-title {
+  color: @foreground;
+  margin: 6px;
+}
+
+.widget-title > * {
+  font-size: 1.5rem;
+}
+
+.widget-title button {
+  border-radius: 6px;
+  padding: 4px 12px;
+}
+
+.widget-title button:hover {
+  background-color: @primary;
+}
+
+.widget-title button:active {
+  background-color: @primary;
+}
+
+.widget-buttons-grid {
+  font-size: x-large;
+  margin: 12px 0;
+  border-radius: 20px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  margin: 0 6px;
+  padding: 1rem 3rem;
+  background: transparent;
+  border-radius: 8px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: alpha(@primary, 0.8);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
+  background: @primary;
+}
+
+.widget-mpris {
+  border-radius: 16px;
+  color: @foreground;
+  margin: 20px 6px;
+}
+
+.widget-mpris-player {
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.widget-mpris > box > button {
+  color: @foreground;
+  border-radius: 20px;
+}
+
+.widget-mpris button {
+  color: alpha(@text, 0.6);
+}
+
+.widget-mpris button:hover {
+  color: @foreground;
+}
+
+.widget-mpris-album-art {
+  border-radius: 16px;
+}
+
+.widget-mpris-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.widget-mpris-subtitle {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.widget-backlight,
+.widget-volume {
+  padding: 8px 16px;
+  margin: 0 0 8px 0;
+  border-radius: 20px;
+}
+
+slider {
+}
+
+.widget-backlight label,
+.widget-volume label {
+}
+
+.widget-backlight trough,
+.widget-volume trough {
+  background: alpha(@foreground, 0.2);
+  margin: 0 8px;
+}
+
+.widget-backlight trough highlight,
+.widget-volume trough highlight {
+  background: @primary;
+  border: unset;
+}
+
+.widget-backlight button,
+.widget-volume button {
+  padding: 0 4px;
+}
