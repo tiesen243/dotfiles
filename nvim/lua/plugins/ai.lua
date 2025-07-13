@@ -68,7 +68,7 @@ return {
         model = "claude-sonnet-4",
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
-        sticky = { "#files" },
+        sticky = { "#buffer" },
         window = {
           width = 0.4,
         },
