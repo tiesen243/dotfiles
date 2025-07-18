@@ -3,16 +3,8 @@ return {
     "tiesen243/vercel.nvim",
     lazy = false,
     priority = 1000,
+    -- dir = "~/Documents/vercel.nvim",
     opts = { theme = "dark", transparent = true },
-    config = function(_, opts)
-      require("vercel").setup(opts)
-      vim.cmd.colorscheme("vercel")
-
-      local colors = require("vercel").colors
-      vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = colors.border })
-      vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = colors.border })
-      vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { fg = colors.border })
-    end,
   },
 
   {
