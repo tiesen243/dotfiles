@@ -42,6 +42,7 @@ require("lazy").setup({
     { import = "plugins.lang.markdown" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
+    { import = "plugins.lang.vue" },
   },
   install = { colorschema = "vercel" },
 })
@@ -49,6 +50,5 @@ require("lazy").setup({
 require("core.autocmd")
 require("core.keymaps")
 require("core.options")
-vim.cmd.colorscheme("vercel")
 
 Yuki.format.setup()
