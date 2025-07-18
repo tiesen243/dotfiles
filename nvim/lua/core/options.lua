@@ -46,6 +46,7 @@ opt.undolevels = 10000
 opt.updatetime = 200
 opt.virtualedit = "block"
 opt.wildmode = "longest:full,full"
+opt.winborder = "rounded"
 opt.winminwidth = 5
 opt.wrap = false
 
