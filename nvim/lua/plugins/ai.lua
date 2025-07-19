@@ -12,6 +12,10 @@ return {
         keymap = { accept = "<C-y>" },
       },
       panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
     },
   },
 
