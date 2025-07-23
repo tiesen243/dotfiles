@@ -25,8 +25,7 @@
       "button-text": "󰆴"
     },
     "mpris": {
-      "image-size": 80,
-      "image-radius": 0
+      "image-size": 120
     },
     "volume": { "label": "󰕾 " },
     "backlight": { "label": "󰃟 " },
@@ -41,18 +40,18 @@
         },
         {
           "label": "󰝟",
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-          "type": "toggle"
+          "type": "toggle",
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
         },
         {
           "label": "󰍭",
-          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-          "type": "toggle"
+          "type": "toggle",
+          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
         },
         {
           "label": "󰤄",
-          "command": "swaync-client -d",
-          "type": "toggle"
+          "type": "toggle",
+          "command": "swaync-client -d"
         }
       ]
     }
