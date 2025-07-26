@@ -57,12 +57,12 @@ return {
         lualine_c = {
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", file_status = true, path = 1 },
-          { "diagnostics", symbols = Yuki.icons.diagnostics },
+          { "diagnostics", symbols = Yuki.configs.icons.diagnostics },
         },
         lualine_x = {
           {
             "diff",
-            symbols =  Yuki.icons.git,
+            symbols =  Yuki.configs.icons.git,
             sources = function()
               local gitsigns = vim.b.gitsigns_status_dict
               if gitsigns then return gitsigns end
@@ -125,8 +125,8 @@ return {
     "lewis6991/gitsigns.nvim",
     opts = {
       current_line_blame = true,
-      signs = Yuki.icons.git_signs,
-      signs_staged = Yuki.icons.git_signs_staged,
+      signs = Yuki.configs.icons.git_signs,
+      signs_staged = Yuki.configs.icons.git_signs_staged,
       current_line_blame_opts = { delay = 500, ignore_whitespace = true },
     },
   },
