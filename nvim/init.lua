@@ -23,14 +23,14 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 _G.Yuki = require("yuki")
-Yuki.logo = [[
-██╗   ██╗██╗   ██╗██╗  ██╗██╗
-╚██╗ ██╔╝██║   ██║██║ ██╔╝██║
- ╚████╔╝ ██║   ██║█████╔╝ ██║
-  ╚██╔╝  ██║   ██║██╔═██╗ ██║
-   ██║   ╚██████╔╝██║  ██╗██║
-   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝
-]]
+Yuki.configs.colorscheme = "vercel"
+Yuki.configs.logo = [[
+██╗   ██╗██╗   ██╗██╗  ██╗██╗██╗   ██╗██╗███╗   ███╗
+╚██╗ ██╔╝██║   ██║██║ ██╔╝██║██║   ██║██║████╗ ████║
+ ╚████╔╝ ██║   ██║█████╔╝ ██║██║   ██║██║██╔████╔██║
+  ╚██╔╝  ██║   ██║██╔═██╗ ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+   ██║   ╚██████╔╝██║  ██╗██║ ╚████╔╝ ██║██║ ╚═╝ ██║
+   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝]]
 
 require("lazy").setup({
   spec = {
@@ -44,12 +44,7 @@ require("lazy").setup({
     { import = "plugins.lang.typescript" },
     { import = "plugins.lang.vue" },
   },
-  install = { colorschema = "vercel" },
+  install = { colorschema = Yuki.configs.colorscheme },
 })
 
-require("core.autocmd")
-require("core.keymaps")
-require("core.options")
-vim.cmd.colorscheme("vercel")
-
-Yuki.format.setup()
+Yuki.setup()

@@ -24,7 +24,7 @@ return {
                       icon = dev_icon .. " "
                     end
                   else
-                    icon = Yuki.icons.kinds[ctx.kind] or " "
+                    icon = Yuki.configs.icons.kinds[ctx.kind] or " "
                   end
                   return icon .. ctx.icon_gap
                 end,

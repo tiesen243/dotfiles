@@ -1,10 +1,10 @@
 vim.diagnostic.config({
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = Yuki.icons.diagnostics.error,
-      [vim.diagnostic.severity.WARN] = Yuki.icons.diagnostics.warn,
-      [vim.diagnostic.severity.HINT] = Yuki.icons.diagnostics.hint,
-      [vim.diagnostic.severity.INFO] = Yuki.icons.diagnostics.info,
+      [vim.diagnostic.severity.ERROR] = Yuki.configs.icons.diagnostics.error,
+      [vim.diagnostic.severity.WARN] = Yuki.configs.icons.diagnostics.warn,
+      [vim.diagnostic.severity.HINT] = Yuki.configs.icons.diagnostics.hint,
+      [vim.diagnostic.severity.INFO] = Yuki.configs.icons.diagnostics.info,
     },
   },
   virtual_text = false,
