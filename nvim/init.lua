@@ -45,7 +45,6 @@ require("lazy").setup({
     { import = "plugins.lang.markdown" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
-    { import = "plugins.lang.vue" },
   },
   install = { colorschema = Yuki.configs.colorscheme },
 })
