@@ -40,6 +40,7 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
+    { import = "plugins.lang.java" },
     { import = "plugins.lang.json" },
     { import = "plugins.lang.lua" },
     { import = "plugins.lang.markdown" },

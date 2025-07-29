@@ -105,7 +105,6 @@ return {
           if not p:is_installed() then
             vim.notify("Installing " .. tool .. "...", vim.log.levels.INFO, { title = "Mason" })
             p:install()
-            vim.notify("Installed " .. tool .. "!", vim.log.levels.INFO, { title = "Mason" })
           end
         end
       end)
