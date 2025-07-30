@@ -12,13 +12,17 @@
 
 ![preview-03](./assets/preview-03.png)
 
-### Hyprlock
+## Notification center
 
 ![preview-04](./assets/preview-04.png)
 
-## Neovim (btw)
+### Hyprlock
 
 ![preview-05](./assets/preview-05.png)
+
+## Neovim (btw)
+
+![preview-06](./assets/preview-06.png)
 
 ## Installation
 
