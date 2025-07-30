@@ -101,8 +101,6 @@ rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync}
 ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
-
-sudo cp -r ~/dotfiles/sddm/eucalyptus-drop /usr/share/sddm/themes
 ```
 
 Final, make all scripts in the dotfiles/scripts directory executable
@@ -120,6 +118,24 @@ $path = /path/to/your/wallpaper
 Or change file in `~/dotfiles/assets/_background.png`
 
 3. Add your avatar to `~/dotfiles/assets/_profile.png` to show in the lock screen
+
+4. Change sddm theme
+
+Copy the `eucalyptus-drop` theme to the SDDM themes directory:
+
+```
+sudo cp -r ~/dotfiles/sddm/eucalyptus-drop /usr/share/sddm/themes
+```
+
+Change the SDDM theme in the SDDM configuration file:
+
+```bash
+# /usr/lib/sddm/sddm.conf.d/default.conf
+
+[Theme]
+# Current theme name
+Current=/usr/share/sddm/themes/eucalyptus-drop
+```
 
 ## Conclusion
 
