@@ -93,6 +93,8 @@ rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync}
 ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+
+sudo cp -r ~/dotfiles/sddm/eucalyptus-drop /usr/share/sddm/themes
 ```
 
 Final, make all scripts in the dotfiles/scripts directory executable
