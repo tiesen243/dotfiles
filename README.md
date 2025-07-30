@@ -16,6 +16,10 @@
 
 ![preview-04](./assets/preview-04.png)
 
+## Neovim (btw)
+
+![preview-05](./assets/preview-05.png)
+
 ## Installation
 
 1. Install `yay`
