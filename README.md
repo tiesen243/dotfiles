@@ -78,7 +78,15 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 ```
 
-6. Uninstall unnecessary packages (optional)
+6. Set up github
+
+Open the browser and login to your github account, then run the following command to set up the SSH key for your github account.
+
+```bash
+gh auth login
+```
+
+7. Uninstall unnecessary packages (optional)
 
 ```bash
 sudo pacman -Runs dunst htop nano vim wofi
