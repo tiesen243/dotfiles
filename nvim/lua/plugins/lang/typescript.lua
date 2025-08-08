@@ -66,6 +66,7 @@ local supported = {
   "less",
   "markdown",
   "scss",
+  "php",
   "typescript",
   "typescriptreact",
   "vue",
