@@ -1,15 +1,16 @@
+vim.lsp.enable("html")
 vim.lsp.enable("intelephense")
 
 return {
   {
     "nvim-treesitter/nvim-treesitter",
     optional = true,
-    opts = { ensure_installed = { "php" } },
+    opts = { ensure_installed = { "html", "php" } },
   },
 
   {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "intelephense" } },
+    opts = { ensure_installed = { "html-lsp", "intelephense" } },
   },
 }

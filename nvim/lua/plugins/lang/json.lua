@@ -9,6 +9,10 @@ vim.lsp.config("jsonls", {
           url = "https://json.schemastore.org/package.json",
         },
         {
+          fileMatch = { "composer.json" },
+          url = "https://getcomposer.org/schema.json",
+        },
+        {
           fileMatch = { "tsconfig.json", "tsconfig.*.json" },
           url = "http://json.schemastore.org/tsconfig",
         },
