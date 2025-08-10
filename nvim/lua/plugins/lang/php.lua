@@ -1,3 +1,4 @@
+vim.lsp.enable("cssls")
 vim.lsp.enable("html")
 vim.lsp.enable("intelephense")
 
@@ -11,6 +12,10 @@ return {
   {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "html-lsp", "intelephense" } },
+    opts = { ensure_installed = {
+      "css-lsp",
+      "html-lsp",
+      "intelephense",
+    } },
   },
 }
