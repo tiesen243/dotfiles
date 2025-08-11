@@ -45,6 +45,28 @@ return {
           folder_closed = "",
           folder_open = "",
           folder_empty = "",
+          provider = function(icon, node, state)
+            if node.type == "file" or node.type == "terminal" then
+              local success, web_devicons = pcall(require, "nvim-web-devicons")
+
+              local name = node.name
+              if node.type == "terminal" then
+                name = "terminal"
+              elseif node.name:match("^%.env") then
+                name = "env"
+              elseif node.name:match("^Dockerfile") then
+                name = "Dockerfile"
+              elseif node.name:match("^docker%-compose.*%.yml$") then
+                name = "docker-compose.yml"
+              end
+
+              if success then
+                local devicon, hl = web_devicons.get_icon(name)
+                icon.text = devicon or icon.text
+                icon.highlight = hl or icon.highlight
+              end
+            end
+          end,
         },
       },
       filesystem = {
