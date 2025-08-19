@@ -122,7 +122,7 @@ return {
   },
 
   {
-    "tronikelis/ts-autotag.nvim",
+    "windwp/nvim-ts-autotag",
     event = "VeryLazy",
     opts = {},
   },
