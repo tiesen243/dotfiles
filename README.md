@@ -104,9 +104,9 @@ Then, create the symbolic links to the config files
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync}
+rm -rf ~/.config/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync}
 
-ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync} ~/.config
+ln -s ~/dotfiles/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
