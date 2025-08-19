@@ -45,7 +45,7 @@ return {
           folder_closed = "",
           folder_open = "",
           folder_empty = "",
-          provider = function(icon, node, state)
+          provider = function(icon, node)
             if node.type == "file" or node.type == "terminal" then
               local success, web_devicons = pcall(require, "nvim-web-devicons")
 
@@ -69,6 +69,7 @@ return {
           end,
         },
       },
+      nesting_rules = Yuki.configs.nesting_rules,
       filesystem = {
         bind_to_cwd = false,
         follow_current_file = { enabled = true },
