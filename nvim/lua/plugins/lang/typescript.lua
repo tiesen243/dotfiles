@@ -55,6 +55,7 @@ Yuki.format.register({
 })
 
 local supported = {
+  "blade",
   "css",
   "graphql",
   "handlebars",
@@ -65,8 +66,8 @@ local supported = {
   "jsonc",
   "less",
   "markdown",
-  "scss",
   "php",
+  "scss",
   "typescript",
   "typescriptreact",
   "vue",
