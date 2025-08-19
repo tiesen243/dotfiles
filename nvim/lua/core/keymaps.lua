@@ -156,6 +156,6 @@ end
 
 -- Terminal Mappings
 map("<c-/>", function()
-  Snacks.terminal(nil, { cwd = Snacks.git.get_root() })
+  Snacks.terminal.toggle(nil, { cwd = Snacks.git.get_root() })
 end, "Terminal (Root Dir)")
 map("<C-/>", "<cmd>close<cr>", "Hide Terminal", { mode = "t" })
