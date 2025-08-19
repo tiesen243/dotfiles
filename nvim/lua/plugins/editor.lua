@@ -82,7 +82,7 @@ return {
       window = {
         width = 30,
         mappings = {
-          ["h"] = "close_node",
+          ["h"] = "toggle_hidden",
           ["l"] = "toggle_node",
           ["Y"] = {
             function(state)
@@ -93,6 +93,9 @@ return {
             end,
             desc = "Copy Path to Clipboard",
           },
+
+          ["H"] = "noop",
+          ["<space>"] = "noop",
         },
       },
     },
