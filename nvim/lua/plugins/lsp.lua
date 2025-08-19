@@ -28,6 +28,7 @@ return {
           pcall(vim.keymap.del, "n", "gri")
           pcall(vim.keymap.del, "n", "grn")
           pcall(vim.keymap.del, "n", "grr")
+          pcall(vim.keymap.del, "n", "grt")
 
           map("gd", Snacks.picker.lsp_definitions, "Goto Definition")
           map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
