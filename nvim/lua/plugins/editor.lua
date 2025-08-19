@@ -41,6 +41,10 @@ return {
     },
     opts = {
       default_component_configs = {
+        indent = {
+          with_expanders = false,
+          padding = 0,
+        },
         icon = {
           folder_closed = "",
           folder_open = "",

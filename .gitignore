@@ -4,8 +4,5 @@ _*.*
 # ignore log files
 *.log
 
-# ignore lock files
-lazy-lock.json
-
 # thunar config
 Thunar/accels.scm
