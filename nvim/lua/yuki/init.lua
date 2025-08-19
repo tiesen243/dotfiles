@@ -5,6 +5,7 @@ M.format = require("yuki.format")
 
 M.configs = {
   icons = require("yuki.icons"),
+  nesting_rules = require("yuki.nesting_rules"),
 }
 
 ---@param options {colorscheme: string, logo: string}

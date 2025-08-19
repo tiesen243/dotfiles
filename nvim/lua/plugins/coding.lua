@@ -8,6 +8,10 @@ return {
       appearance = { use_nvim_cmp_as_default = false, nerd_font_variant = "mono" },
       completion = {
         ghost_text = { enabled = true },
+        list = {
+          preselect = true,
+          auto_select = true,
+        },
         menu = {
           draw = {
             columns = {
