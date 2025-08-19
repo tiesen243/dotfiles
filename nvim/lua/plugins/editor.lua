@@ -83,6 +83,7 @@ return {
         width = 30,
         mappings = {
           ["h"] = "close_node",
+          ["l"] = "toggle_node",
           ["Y"] = {
             function(state)
               local node = state.tree:get_node()
@@ -127,6 +128,7 @@ return {
       dashboard = { preset = { header = Yuki.configs.logo } },
       explorer = { enabled = true },
       indent = { enabled = true },
+      image = { enabled = true },
       input = { enabled = true },
       picker = { enabled = true },
       notifier = { enabled = true, icons = Yuki.configs.icons.diagnostics },
