@@ -1,30 +1,37 @@
-/*
- * primary: #f2c185 -> rgb(242, 193, 133)
- * secondary: #403222 -> rgb(64, 50, 34)
- */
+@define-color primary         #f2c185;
+@define-color secondary       #403222;
 
 * {
   font-family: "GeistMono Nerd Font", monospace;
   font-size: 14px;
+  font-weight: 600;
 }
 
 window#waybar {
-  background-color: rgba(64, 50, 34, 0.8);
-  color: rgb(242, 193, 133);
+  background-color: alpha(@secondary, 0.8);
+  color: @primary;
 
-  border: 2px solid rgba(242, 193, 133, 0.6);
-  border-radius: 8px;
-
-  transition: background-color 150ms ease-in-out;
+  border: 2px solid alpha(@primary, 0.8);
+  border-radius: 10px;
+  animation: blink-border 3s linear infinite;
 }
 
-window#waybar.hidden {
-  opacity: 0.2;
+@keyframes blink-border {
+  0% {
+    border-color: alpha(@primary, 0.8);
+  }
+  50% {
+    border-color: alpha(@secondary, 0.8);
+  }
+  100% {
+    border-color: alpha(@primary, 0.8);
+  }
 }
 
 #custom-arch {
+  margin: 3px;
   padding-left: 12px;
-  padding-right: 10px;
+  border-radius: 8px;
 }
 
 #battery,
@@ -36,7 +43,6 @@ window#waybar.hidden {
 #custom-notification {
   padding-right: 12px;
 }
-
 #workspaces {
   margin: 3px 0;
 }
@@ -46,6 +52,10 @@ window#waybar.hidden {
   border-radius: 8px;
 }
 
+#workspaces button:hover {
+  color: alpha(@primary, 0.8);
+}
+
 #workspaces button.active {
-  color: rgb(242, 193, 133);
+  color: @primary;
 }
