@@ -1,0 +1,63 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "spacing": 4,
+  "margin-top": 4,
+  "margin-left": 4,
+  "margin-right": 4,
+  "mode": "dock",
+  "reload_style_on_change": true,
+
+  "modules-left": ["custom/arch", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["battery", "clock", "custom/notification"],
+
+  "custom/arch": {
+    "format": " ",
+    "tooltip-format": "I use Arch btw",
+  },
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+  },
+
+  "hyprland/window": {
+    "icon": true,
+    "swap-icon-label": false,
+    "max-length": 36,
+  },
+
+  "battery": {
+    "format": "{capacity}% {icon} ",
+    "format-icons": ["", "", "", "", ""],
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+  },
+
+  "clock": {
+    "format": "{:%H:%M}  ",
+    "format-alt": "{:%A, %B %d, %Y} 󰃰 ",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
+    },
+  },
+
+  "custom/notification": {
+    "format": "󰍥 ",
+    "on-click": "swaync-client -t -sw",
+  },
+}
