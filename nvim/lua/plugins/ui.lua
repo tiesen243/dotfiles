@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     -- dir = "~/Documents/vercel.nvim",
-    opts = { theme = "dark", transparent = false },
+    opts = { theme = "dark", transparent = true },
   },
 
   {

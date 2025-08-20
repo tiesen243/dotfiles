@@ -1,6 +1,6 @@
 @define-color foreground      #fafafa;
 @define-color background      #101010;
-@define-color primary         #a96249;
+@define-color primary         #f2c185;
 
 * {
   all: unset;
@@ -13,7 +13,7 @@
   padding: 0;
   margin: 0;
 
-  transition: 200ms;
+  transition: 150ms;
 }
 
 .blank-window {

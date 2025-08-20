@@ -7,7 +7,7 @@
   "margin-left": 4,
   "margin-right": 4,
   "mode": "dock",
-  "reload_style_on_change": true,
+  "reload_style_on_change": false,
 
   "modules-left": ["custom/arch", "hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
@@ -58,6 +58,7 @@
 
   "custom/notification": {
     "format": "󰍥 ",
+    "tooltip-format": "Notifications",
     "on-click": "swaync-client -t -sw",
   },
 }
