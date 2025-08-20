@@ -2,7 +2,7 @@
 
 ## Preview
 
-### Terminal
+### Home screen
 
 ![preview-01](./assets/preview-01.png)
 
@@ -40,7 +40,7 @@ rm -rf ~/yay
 
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
-  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland \
+  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland waybar \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   fastfetch zsh brightnessctl nwg-look playerctl libnotify swaync \
   github-cli lazygit lsd ripgrep unzip \
@@ -104,9 +104,9 @@ Then, create the symbolic links to the config files
 
 ```bash
 rm ~/.zshrc
-rm -rf ~/.config/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync}
+rm -rf ~/.config/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar}
 
-ln -s ~/dotfiles/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync} ~/.config
+ln -s ~/dotfiles/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar} ~/.config
 ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
 ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 ```
