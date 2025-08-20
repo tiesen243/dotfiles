@@ -1,9 +1,9 @@
-vim.bo.scrollback = 100000
 vim.bo.modified = false
+vim.bo.scrollback = 100000
 vim.wo.number = false
 vim.wo.relativenumber = false
-vim.wo.statuscolumn = ""
 vim.wo.signcolumn = "no"
+vim.wo.statuscolumn = ""
 
 local api = vim.api
 
