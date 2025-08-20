@@ -1,5 +1,4 @@
 vim.lsp.enable("cssls")
-vim.lsp.enable("html")
 vim.lsp.enable("intelephense")
 
 vim.filetype.add({
@@ -21,7 +20,6 @@ return {
     opts = {
       ensure_installed = {
         "css-lsp",
-        "html-lsp",
         "intelephense",
       },
     },

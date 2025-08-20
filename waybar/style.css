@@ -1,0 +1,51 @@
+/*
+ * primary: #f2c185 -> rgb(242, 193, 133)
+ * secondary: #403222 -> rgb(64, 50, 34)
+ */
+
+* {
+  font-family: "GeistMono Nerd Font", monospace;
+  font-size: 14px;
+}
+
+window#waybar {
+  background-color: rgba(64, 50, 34, 0.8);
+  color: rgb(242, 193, 133);
+
+  border: 2px solid rgba(242, 193, 133, 0.6);
+  border-radius: 8px;
+
+  transition: background-color 150ms ease-in-out;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#custom-arch {
+  padding-left: 12px;
+  padding-right: 10px;
+}
+
+#battery,
+#clock,
+#custom-notification {
+  padding-left: 10px;
+}
+
+#custom-notification {
+  padding-right: 12px;
+}
+
+#workspaces {
+  margin: 3px 0;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  border-radius: 8px;
+}
+
+#workspaces button.active {
+  color: rgb(242, 193, 133);
+}
