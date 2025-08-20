@@ -24,8 +24,10 @@
 
   "hyprland/window": {
     "icon": true,
+    "icon-size": 16,
     "swap-icon-label": false,
     "max-length": 36,
+    "rewrite": { "v": "neovim" },
   },
 
   "battery": {
