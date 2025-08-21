@@ -9,7 +9,7 @@ alias icat="kitten icat"
 
 # LSD
 alias ls="lsd"
-alias lt="ls --tree --depth 3"
+alias lt="ls --tree"
 
 # Bun
 alias bff="bun format:fix"
