@@ -127,7 +127,7 @@ $path = /path/to/your/wallpaper
 
 Or change file in `~/dotfiles/assets/_background.png`
 
-3. Add your avatar to `~/dotfiles/assets/_profile.png` to show in the lock screen
+3. Add your avatar to `~/dotfiles/assets/_avatar.png` to show in the lock screen
 
 ## Conclusion
 
