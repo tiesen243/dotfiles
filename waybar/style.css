@@ -3,29 +3,21 @@
 
 * {
   font-family: "GeistMono Nerd Font", monospace;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
+
+  all: unset;
+  border: 0;
+  min-height: 0;
 }
 
 window#waybar {
-  background-color: alpha(@secondary, 0.8);
+  background-color: alpha(@secondary, 0.9);
   color: @primary;
 
   border: 2px solid alpha(@primary, 0.8);
   border-radius: 10px;
   animation: blink-border 3s linear infinite;
-}
-
-@keyframes blink-border {
-  0% {
-    border-color: alpha(@primary, 0.8);
-  }
-  50% {
-    border-color: alpha(@secondary, 0.8);
-  }
-  100% {
-    border-color: alpha(@primary, 0.8);
-  }
 }
 
 #custom-arch {
@@ -48,7 +40,8 @@ window#waybar {
 }
 
 #workspaces button {
-  padding: 0 8px;
+  color: alpha(@primary, 0.6);
+  padding: 0 12px;
   border-radius: 8px;
 }
 
@@ -58,4 +51,17 @@ window#waybar {
 
 #workspaces button.active {
   color: @primary;
+  background-color: alpha(@secondary, 0.4);
+}
+
+@keyframes blink-border {
+  0% {
+    border-color: alpha(@primary, 0.8);
+  }
+  50% {
+    border-color: alpha(@secondary, 0.8);
+  }
+  100% {
+    border-color: alpha(@primary, 0.8);
+  }
 }
