@@ -2,10 +2,7 @@
   "layer": "top",
   "position": "top",
   "height": 36,
-  "spacing": 4,
-  "margin-top": 4,
-  "margin-left": 4,
-  "margin-right": 4,
+  "margin": 4,
   "mode": "dock",
   "reload_style_on_change": false,
 
