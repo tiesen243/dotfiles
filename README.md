@@ -40,13 +40,12 @@ rm -rf ~/yay
 
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
-  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland waybar \
+  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland waybar ffmpeg \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   fastfetch zsh brightnessctl nwg-look playerctl libnotify swaync \
-  github-cli lazygit lsd ripgrep unzip \
+  github-cli lazygit lsd ripgrep unzip 7zip \
   grim slurp cliphist wl-clipboard \
-  ffmpeg pipewire wireplumber \
-  thunar gvfs
+  thunar gvfs tumbler
 ```
 
 4. Install `oh-my-zsh`
