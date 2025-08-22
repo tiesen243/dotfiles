@@ -20,6 +20,14 @@ window#waybar {
   animation: blink-border 3s linear infinite;
 }
 
+tooltip {
+  background-color: alpha(@secondary, 0.8);
+  color: @primary;
+
+  border: 2px solid alpha(@primary, 0.8);
+  border-radius: 10px;
+}
+
 #custom-arch {
   margin: 3px;
   padding-left: 12px;
@@ -40,9 +48,9 @@ window#waybar {
 }
 
 #workspaces button {
-  color: alpha(@primary, 0.6);
   padding: 0 12px;
-  border-radius: 8px;
+
+  color: alpha(@primary, 0.6);
 }
 
 #workspaces button:hover {
@@ -51,7 +59,6 @@ window#waybar {
 
 #workspaces button.active {
   color: @primary;
-  background-color: alpha(@secondary, 0.4);
 }
 
 @keyframes blink-border {
