@@ -137,7 +137,7 @@ return {
     pattern = "(.*)%.mjs$",
   },
   ["*.module.ts"] = {
-    files = { "%1%.resolver%.ts", "%1%.controller%.ts", "%1%.service%.ts" },
+    files = { "%1%.resolver%.ts", "%1%.controller%.ts", "%1%.dto%.ts", "%1%.service%.ts", "%1%.schema%.ts" },
     pattern = "(.*)%.module%.ts$",
   },
   ["*.mts"] = {

@@ -35,6 +35,12 @@ vim.lsp.config("vtsls", {
   },
 })
 
+vim.filetype.add({
+  pattern = {
+    [".*%.ejs"] = "html",
+  },
+})
+
 Yuki.format.register({
   priority = 200,
   name = "LspEslintFixAll",
@@ -57,6 +63,7 @@ Yuki.format.register({
 local supported = {
   "blade",
   "css",
+  "ejs",
   "graphql",
   "handlebars",
   "html",
