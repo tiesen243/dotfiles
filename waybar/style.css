@@ -1,5 +1,6 @@
-@define-color primary         #f2c185;
-@define-color secondary       #403222;
+@define-color border          #926e31;
+@define-color primary         #ffbd58;
+@define-color secondary       #391409;
 
 * {
   font-family: "GeistMono Nerd Font", monospace;
@@ -12,19 +13,19 @@
 }
 
 window#waybar {
-  background-color: alpha(@secondary, 0.9);
+  background-color: alpha(@secondary, 0.6);
   color: @primary;
 
-  border: 2px solid alpha(@primary, 0.8);
+  border: 2px solid alpha(@border, 0.8);
   border-radius: 10px;
   animation: blink-border 3s linear infinite;
 }
 
 tooltip {
-  background-color: alpha(@secondary, 0.8);
+  background-color: alpha(@secondary, 0.6);
   color: @primary;
 
-  border: 2px solid alpha(@primary, 0.8);
+  border: 2px solid alpha(@border, 0.8);
   border-radius: 10px;
 }
 
@@ -50,11 +51,11 @@ tooltip {
 #workspaces button {
   padding: 0 12px;
 
-  color: alpha(@primary, 0.6);
+  color: alpha(@primary, 0.8);
 }
 
 #workspaces button:hover {
-  color: alpha(@primary, 0.8);
+  color: alpha(@primary, 0.6);
 }
 
 #workspaces button.active {
@@ -63,12 +64,12 @@ tooltip {
 
 @keyframes blink-border {
   0% {
-    border-color: alpha(@primary, 0.8);
+    border-color: alpha(@border, 0.8);
   }
   50% {
     border-color: alpha(@secondary, 0.8);
   }
   100% {
-    border-color: alpha(@primary, 0.8);
+    border-color: alpha(@border, 0.8);
   }
 }
