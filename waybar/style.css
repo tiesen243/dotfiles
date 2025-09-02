@@ -1,6 +1,5 @@
-@define-color border          #926e31;
-@define-color primary         #ffbd58;
-@define-color secondary       #391409;
+@define-color primary         #ab604e;
+@define-color secondary       #47110e;
 
 * {
   font-family: "GeistMono Nerd Font", monospace;
@@ -16,7 +15,7 @@ window#waybar {
   background-color: alpha(@secondary, 0.6);
   color: @primary;
 
-  border: 2px solid alpha(@border, 0.8);
+  border: 2px solid alpha(@primary, 0.8);
   border-radius: 10px;
   animation: blink-border 3s linear infinite;
 }
@@ -25,7 +24,7 @@ tooltip {
   background-color: alpha(@secondary, 0.6);
   color: @primary;
 
-  border: 2px solid alpha(@border, 0.8);
+  border: 2px solid alpha(@primary, 0.8);
   border-radius: 10px;
 }
 
