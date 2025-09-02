@@ -1,4 +1,3 @@
-vim.lsp.enable("cssls")
 vim.lsp.enable("intelephense")
 
 vim.filetype.add({
@@ -11,7 +10,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     optional = true,
-    opts = { ensure_installed = { "html", "php" } },
+    opts = { ensure_installed = { "php" } },
   },
 
   {
@@ -19,7 +18,6 @@ return {
     optional = true,
     opts = {
       ensure_installed = {
-        "css-lsp",
         "intelephense",
       },
     },
