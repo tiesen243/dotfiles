@@ -41,10 +41,10 @@ rm -rf ~/yay
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland waybar ffmpeg \
+  fastfetch zsh brightnessctl nwg-look playerctl power-profiles-daemon-git libnotify swaync \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  fastfetch zsh brightnessctl nwg-look playerctl libnotify swaync \
   github-cli lazygit lsd ripgrep unzip 7zip \
-  grim slurp cliphist wl-clipboard \
+  grim slurp jq cliphist wl-clipboard \
   thunar gvfs tumbler
 ```
 

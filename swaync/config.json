@@ -49,9 +49,11 @@
           "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
         },
         {
-          "label": "󰤄",
+          "label": "󰌪 ",
           "type": "toggle",
-          "command": "swaync-client -d"
+          "active": false,
+          "command": "sh -c '[[ $(powerprofilesctl get) == \"power-saver\" ]] && powerprofilesctl set balanced || powerprofilesctl set power-saver'",
+          "update-command": "sh -c '[[ $(powerprofilesctl get) == \"power-saver\" ]] && echo true || echo false'"
         }
       ]
     }
