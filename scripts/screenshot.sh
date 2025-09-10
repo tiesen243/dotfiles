@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 file_name="Screenshot_$(date +%Y-%m-%d_%H%M%S).png"
-output_dir="$HOME/Pictures/Screenshot"
+output_dir="$HOME/Pictures/Screenshots"
 mode="fullscreen"
 
 function help() {
@@ -21,6 +21,10 @@ function send_notify() {
     -i "${1}"
 }
 
+function grab_region() {
+  slurp -d
+}
+
 function grab_window() {
   local monitors=$(hyprctl -j monitors)
   local clients=$(hyprctl -j clients | jq -r '[.[] | select(.workspace.id | contains('$(echo $monitors | jq -r 'map(.activeWorkspace.id) | join(",")')'))]')
@@ -36,10 +40,14 @@ function take_screenshot() {
     grim "${output_dir}/${file_name}"
     ;;
   region)
-    grim -g "$(slurp -d)" "${output_dir}/${file_name}"
+    region_box="$(grab_region)"
+    if [[ -z "$region_box" ]]; then exit 1; fi
+    grim -g "$region_box" "${output_dir}/${file_name}"
     ;;
   window)
-    grim -g "$(grab_window)" "${output_dir}/${file_name}"
+    window_box="$(grab_window)"
+    if [[ -z "$window_box" ]]; then exit 1; fi
+    grim -g "$window_box" "${output_dir}/${file_name}"
     ;;
   *)
     echo "Invalid mode: $mode"
