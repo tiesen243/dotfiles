@@ -233,12 +233,13 @@
 .widget-buttons-grid > flowbox > flowboxchild > button {
   margin: 0 6px;
   padding: 1rem 3rem;
-  background: transparent;
+  background: alpha(@primary, 0.2);
   border-radius: 8px;
+  border: 2px solid transparent;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  background: alpha(@primary, 0.8);
+  border: 2px solid @primary;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
