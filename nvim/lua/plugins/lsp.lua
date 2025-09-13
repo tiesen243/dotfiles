@@ -41,6 +41,7 @@ return {
           map("<leader>cd", Snacks.picker.diagnostics, "Diagnostics")
           map("<leader>cD", Snacks.picker.diagnostics, "Buffer Diagnostics")
           map("<leader>cf", Yuki.format.format, "Format")
+          map("<leader>cF", vim.lsp.buf.format, "Format (LSP)")
           map("<leader>cr", vim.lsp.buf.rename, "Rename Variable")
           map("<leader>cR", Snacks.rename.rename_file, "Rename File")
           map("<leader>cs", Snacks.picker.lsp_symbols, "Symbols")
