@@ -21,7 +21,7 @@ M.formatexpr = function()
   if Yuki.utils.has("conform.nvim") then
     return require("conform").formatexpr()
   else
-    return vim.lsp.formatexpr({ timeout_ms = 3000 })
+    return vim.lsp.formatexpr({ timeout_ms = 2000 })
   end
 end
 

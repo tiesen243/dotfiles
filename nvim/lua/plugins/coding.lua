@@ -56,24 +56,33 @@ return {
   {
     "stevearc/conform.nvim",
     opts = function()
-      Yuki.format.register({
-        priority = 1000,
-        name = "Conform",
-        active = function(bufnr)
-          local ret = require("conform").list_formatters(bufnr)
-          return #(vim.tbl_map(function(v)
-            return v.name
-          end, ret)) > 0
-        end,
-        command = function(bufnr)
-          require("conform").format({
-            bufnr = bufnr,
-            timeout = 2000,
-            lsp_format = "fallback",
-          })
-        end,
-      })
-      return {}
+      -- Yuki.format.register({
+      --   priority = 1000,
+      --   name = "Conform",
+      --   active = function(bufnr)
+      --     local ret = require("conform").list_formatters(bufnr)
+      --     return #(vim.tbl_map(function(v)
+      --       return v.name
+      --     end, ret)) > 0
+      --   end,
+      --   command = function(bufnr)
+      --     require("conform").format({
+      --       bufnr = bufnr,
+      --       timeout = 5000,
+      --       async = true,
+      --       lsp_fallback = true,
+      --     })
+      --   end,
+      -- })
+      return {
+        default_format_opts = {
+          lsp_format = "fallback",
+        },
+        format_on_save = {
+          timeout_ms = 2000,
+          lsp_fallback = true,
+        },
+      }
     end,
   },
 
