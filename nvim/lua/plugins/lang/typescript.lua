@@ -52,24 +52,28 @@ vim.filetype.add({
   },
 })
 
--- Yuki.format.register({
---   priority = 200,
---   name = "LspEslintFixAll",
---   active = function(bufnr)
---     local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
---     return client ~= nil
---   end,
---   command = function(bufnr)
---     local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
---     if client then
---       local diag = vim.diagnostic.get(bufnr)
---       if #diag > 0 then
---         vim.cmd("LspEslintFixAll")
---         vim.cmd("sleep 100m")
---       end
---     end
---   end,
--- })
+Yuki.format.register({
+  priority = 200,
+  name = "LspEslintFixAll",
+  active = function(bufnr)
+    local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
+    return client ~= nil
+  end,
+  command = function(bufnr)
+    local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
+    if client then
+      local diag = vim.diagnostic.get(bufnr)
+
+      for _, d in ipairs(diag) do
+        if d.source == "eslint" then
+          vim.cmd("LspEslintFixAll")
+          vim.cmd("sleep 100m")
+          break
+        end
+      end
+    end
+  end,
+})
 
 local supported = {
   "blade",
@@ -112,7 +116,7 @@ return {
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       for _, ft in ipairs(supported) do
         opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "prettier")
+        table.insert(opts.formatters_by_ft[ft], "prettierd")
       end
     end,
   },

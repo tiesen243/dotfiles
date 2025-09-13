@@ -44,6 +44,7 @@ require("lazy").setup({
     { import = "plugins.lang.lua" },
     { import = "plugins.lang.markdown" },
     { import = "plugins.lang.php" },
+    { import = "plugins.lang.rust" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
   },
