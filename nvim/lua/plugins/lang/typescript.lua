@@ -23,6 +23,10 @@ vim.lsp.config("vtsls", {
         propertyDeclarationTypes = { enabled = true },
         variableTypes = { enabled = false },
       },
+      implementationsCodeLens = {
+        enabled = true,
+        showOnInterfaceMethods = true,
+      },
       preferences = {
         importModuleSpecifier = "non-relative",
         autoImportSpecifierExcludeRegexes = {
@@ -30,8 +34,15 @@ vim.lsp.config("vtsls", {
           "next/dist",
           "next/router",
         },
+        preferTypeOnlyAutoImports = true,
       },
     },
+  },
+})
+
+vim.lsp.config("eslint", {
+  settings = {
+    autoFixOnSave = true,
   },
 })
 
@@ -41,24 +52,24 @@ vim.filetype.add({
   },
 })
 
-Yuki.format.register({
-  priority = 200,
-  name = "LspEslintFixAll",
-  active = function(bufnr)
-    local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
-    return client ~= nil
-  end,
-  command = function(bufnr)
-    local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
-    if client then
-      local diag = vim.diagnostic.get(bufnr)
-      if #diag > 0 then
-        vim.cmd("LspEslintFixAll")
-        vim.cmd("sleep 100m")
-      end
-    end
-  end,
-})
+-- Yuki.format.register({
+--   priority = 200,
+--   name = "LspEslintFixAll",
+--   active = function(bufnr)
+--     local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
+--     return client ~= nil
+--   end,
+--   command = function(bufnr)
+--     local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
+--     if client then
+--       local diag = vim.diagnostic.get(bufnr)
+--       if #diag > 0 then
+--         vim.cmd("LspEslintFixAll")
+--         vim.cmd("sleep 100m")
+--       end
+--     end
+--   end,
+-- })
 
 local supported = {
   "blade",
