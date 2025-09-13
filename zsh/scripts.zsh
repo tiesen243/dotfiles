@@ -13,7 +13,7 @@ kill-port() {
     return 1
   fi
 
-  local pid=$(ss -tulpn | grep ":3000" | awk '{print $8}' | cut -d',' -f2 | cut -d'=' -f2)
+  local pid=$(ss -tulpn | grep ":$port" | grep -oP 'pid=\K[0-9]+')
 
   if [ -n "$pid" ]; then
     kill -9 $pid
