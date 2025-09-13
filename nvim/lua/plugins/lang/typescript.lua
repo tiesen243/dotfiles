@@ -1,3 +1,10 @@
+vim.filetype.add({
+  pattern = {
+    [".*%.ejs"] = "html",
+    [".*/typescript/.+%.json"] = "jsonc",
+  },
+})
+
 vim.lsp.enable("vtsls")
 vim.lsp.enable("eslint")
 
@@ -43,12 +50,6 @@ vim.lsp.config("vtsls", {
 vim.lsp.config("eslint", {
   settings = {
     autoFixOnSave = true,
-  },
-})
-
-vim.filetype.add({
-  pattern = {
-    [".*%.ejs"] = "html",
   },
 })
 
