@@ -1,5 +1,3 @@
-export STARSHIP_CONFIG="$HOME/dotfiles/startship/starship.toml"
-export STARSHIP_CACHE="$HOME/.cache/starship/cache"
 export EDITOR="nvim"
 
 # >>> nvm initialize >>>
