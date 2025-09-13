@@ -41,7 +41,6 @@ vim.lsp.config("vtsls", {
           "next/dist",
           "next/router",
         },
-        preferTypeOnlyAutoImports = true,
       },
     },
   },
