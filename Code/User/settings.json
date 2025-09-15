@@ -78,5 +78,6 @@
   "update.mode": "none",
   "extensions.ignoreRecommendations": true,
 
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "github.copilot.nextEditSuggestions.enabled": true
 }
