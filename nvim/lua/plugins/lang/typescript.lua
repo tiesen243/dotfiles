@@ -47,9 +47,7 @@ vim.lsp.config("vtsls", {
 })
 
 vim.lsp.config("eslint", {
-  settings = {
-    autoFixOnSave = true,
-  },
+  settings = {},
 })
 
 Yuki.format.register({
@@ -106,7 +104,7 @@ return {
   {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "vtsls", "eslint-lsp", "prettier" } },
+    opts = { ensure_installed = { "vtsls", "eslint-lsp", "prettierd" } },
   },
 
   {
@@ -116,7 +114,7 @@ return {
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       for _, ft in ipairs(supported) do
         opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "prettierd")
+        table.insert(opts.formatters_by_ft[ft], "prettier")
       end
     end,
   },
