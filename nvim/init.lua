@@ -38,6 +38,7 @@ Yuki.merge_config({
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    { import = "plugins.lang.c" },
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
     { import = "plugins.lang.json" },

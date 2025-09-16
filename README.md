@@ -41,7 +41,7 @@ rm -rf ~/yay
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland waybar ffmpeg \
-  fastfetch zsh brightnessctl nwg-look playerctl power-profiles-daemon-git libnotify swaync \
+  fastfetch zsh brightnessctl nwg-look playerctl libnotify swaync system76-power \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   github-cli lazygit lsd ripgrep unzip 7zip \
   grim slurp jq cliphist wl-clipboard \
@@ -95,38 +95,43 @@ sudo pacman -Runs dunst htop nano vim wofi
 
 1. To apply my config, you can run the following command:
 
-```bash
-git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
-```
+    ```bash
+    git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
+    ```
 
-Then, create the symbolic links to the config files
+    Then, create the symbolic links to the config files
 
-```bash
-rm ~/.zshrc
-rm -rf ~/.config/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar}
+    ```bash
+    rm ~/.zshrc
+    rm -rf ~/.config/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar}
 
-ln -s ~/dotfiles/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar} ~/.config
-ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
-ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+    ln -s ~/dotfiles/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar} ~/.config
+    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
+    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 
-ln -s ~/dotfiles/.local/share/{icons,themes} ~/.local/share
-```
+    ln -s ~/dotfiles/.local/share/{icons,themes} ~/.local/share
+    ```
 
-Final, make all scripts in the dotfiles/scripts directory executable
+    Final, make all scripts in the dotfiles/scripts directory executable
 
-```bash
-sudo chmod +x ~/dotfiles/scripts/*
-```
+    ```bash
+    sudo chmod +x ~/dotfiles/scripts/*
+    ```
 
 2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
-```bash
-$path = /path/to/your/wallpaper
-```
+   ```bash
+   $path = /path/to/your/wallpaper
+   ```
 
-Or change file in `~/dotfiles/assets/_background.png`
+   Or change file in `~/dotfiles/assets/_background.png`
 
 3. Add your avatar to `~/dotfiles/assets/_avatar.png` to show in the lock screen
+4. Enable `system76-power` service
+
+   ```bash
+   systemctl enable --now com.system76.PowerDaemon.service
+   ```
 
 ## Conclusion
 
