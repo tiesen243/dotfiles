@@ -24,6 +24,7 @@ function set_power_profile() {
   case "$profile" in
   battery | balanced | performance)
     system76-power profile "$profile"
+    notify-send "Power profile set to $profile"
     ;;
   *)
     echo "Invalid profile. Available profiles: battery, balanced, performance"
