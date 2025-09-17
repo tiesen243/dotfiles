@@ -52,8 +52,8 @@
           "label": "󰌪 ",
           "type": "toggle",
           "active": false,
-          "command": "sh -c '[[ \"$(~/dotfiles/scripts/power-profile.sh --get | xargs)\" == \"Battery\" ]] && ~/dotfiles/scripts/power-profile.sh --set balanced || ~/dotfiles/scripts/power-profile.sh --set battery'",
-          "update-command":"sh -c '[[ \"$(~/dotfiles/scripts/power-profile.sh --get | xargs)\" == \"Battery\" ]] && echo true || echo false'"
+          "command":"sh -c 'profile=$(sh ~/dotfiles/scripts/power-profile.sh --get); [[ \"$profile\" == \"Battery\" ]] && sh ~/dotfiles/scripts/power-profile.sh --set balanced || sh ~/dotfiles/scripts/power-profile.sh --set battery;'",
+          "update-command": "sh -c 'profile=$(sh ~/dotfiles/scripts/power-profile.sh --get); [[ \"$profile\" == \"Battery\" ]] && echo true || echo false;'"
         }
       ]
     }
