@@ -1,11 +1,5 @@
 vim.lsp.enable("intelephense")
 
-vim.filetype.add({
-  pattern = {
-    [".*%.tpl%.php"] = "blade",
-  },
-})
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -16,9 +10,15 @@ return {
   {
     "mason-org/mason.nvim",
     optional = true,
+    opts = { ensure_installed = { "intelephense" } },
+  },
+
+  {
+    "stevearc/conform.nvim",
+    optional = true,
     opts = {
-      ensure_installed = {
-        "intelephense",
+      formatters_by_ft = {
+        php = { "prettierd" },
       },
     },
   },
