@@ -7,8 +7,34 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.INFO] = Yuki.configs.icons.diagnostics.info,
     },
   },
-  virtual_text = false,
   severity_sort = true,
+  update_in_insert = false,
+  underline = false,
+  virtual_lines = false,
+  virtual_text = {
+    current_line = true,
+    severity = { min = vim.diagnostic.severity.WARN },
+    spacing = 0,
+    prefix = "",
+    format = function(diagnostic)
+      return string.format(
+        "%s %s",
+        Yuki.configs.icons.diagnostics[vim.diagnostic.severity[diagnostic.severity]:lower()],
+        diagnostic.message
+      )
+    end,
+  },
+  float = {
+    severity = { min = vim.diagnostic.severity.INFO },
+    format = function(diagnostic)
+      return string.format(
+        "%s %s",
+        Yuki.configs.icons.diagnostics[vim.diagnostic.severity[diagnostic.severity]:lower()],
+        diagnostic.message
+      )
+    end,
+    border = "rounded",
+  },
 })
 
 return {
@@ -30,13 +56,14 @@ return {
           pcall(vim.keymap.del, "n", "grr")
           pcall(vim.keymap.del, "n", "grt")
 
+          map("K", vim.lsp.buf.hover, "Hover Documentation")
+          map("L", vim.diagnostic.open_float, "Line Diagnostic")
           map("gd", Snacks.picker.lsp_definitions, "Goto Definition")
           map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
           map("gr", Snacks.picker.lsp_references, "References")
           map("gI", Snacks.picker.lsp_implementations, "Goto Implementation")
           map("gy", Snacks.picker.lsp_type_definitions, "Goto T[y]pe Definition")
           map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
-          map("<C-d>", vim.diagnostic.open_float, "Cursor Diagnostic")
           map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
           map("<leader>cd", Snacks.picker.diagnostics, "Diagnostics")
           map("<leader>cD", Snacks.picker.diagnostics, "Buffer Diagnostics")
@@ -53,20 +80,8 @@ return {
         end,
       })
 
-      -- vim.api.nvim_create_autocmd("DiagnosticChanged", {
-      --   callback = function()
-      --     local winid = vim.api.nvim_get_current_win()
-      --     local loclist = vim.fn.getloclist(winid, { title = true })
-      --     loclist = vim.tbl_extend("force", loclist, {
-      --       severity = { min = vim.diagnostic.severity.WARN },
-      --       open = false,
-      --     })
-      --
-      --     vim.diagnostic.setloclist(loclist)
-      --   end,
-      -- })
-
       vim.api.nvim_create_autocmd("LspProgress", {
+        group = Yuki.utils.create_augroup("lsp_progress"),
         callback = function(ev)
           local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
           vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
@@ -111,12 +126,5 @@ return {
         end
       end)
     end,
-  },
-
-  {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "LspAttach",
-    priority = 1000,
-    opts = {},
   },
 }
