@@ -1,3 +1,10 @@
+vim.filetype.add({
+  pattern = {
+    [".*%.json"] = "json5",
+    [".*%.jsonc"] = "json5",
+  },
+})
+
 vim.lsp.enable("jsonls")
 
 vim.lsp.config("jsonls", {
@@ -27,7 +34,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     optional = true,
-    opts = { ensure_installed = { "json", "jsonc" } },
+    opts = { ensure_installed = { "json5" } },
   },
 
   {

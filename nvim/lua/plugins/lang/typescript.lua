@@ -1,7 +1,6 @@
 vim.filetype.add({
   pattern = {
     [".*%.ejs"] = "html",
-    [".*/typescript/.+%.json"] = "jsonc",
   },
 })
 
@@ -46,10 +45,6 @@ vim.lsp.config("vtsls", {
   },
 })
 
-vim.lsp.config("eslint", {
-  settings = {},
-})
-
 Yuki.format.register({
   priority = 200,
   name = "LspEslintFixAll",
@@ -74,7 +69,6 @@ Yuki.format.register({
 })
 
 local supported = {
-  "blade",
   "css",
   "ejs",
   "graphql",
@@ -84,9 +78,9 @@ local supported = {
   "javascriptreact",
   "json",
   "jsonc",
+  "json5",
   "less",
   "markdown",
-  "php",
   "scss",
   "typescript",
   "typescriptreact",
