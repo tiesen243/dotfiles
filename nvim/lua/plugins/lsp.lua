@@ -25,7 +25,6 @@ vim.diagnostic.config({
     end,
   },
   float = {
-    severity = { min = vim.diagnostic.severity.INFO },
     format = function(diagnostic)
       return string.format(
         "%s %s",
