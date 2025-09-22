@@ -10,7 +10,7 @@ return {
   {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "intelephense" } },
+    opts = { ensure_installed = { "intelephense", "php-cs-fixer" } },
   },
 
   {
@@ -18,7 +18,12 @@ return {
     optional = true,
     opts = {
       formatters_by_ft = {
-        php = { "prettierd" },
+        php = { "php_cs_fixer" },
+      },
+      formatters = {
+        php_cs_fixer = {
+          env = { PHP_CS_FIXER_IGNORE_ENV = 1 },
+        },
       },
     },
   },
