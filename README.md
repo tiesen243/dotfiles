@@ -2,27 +2,29 @@
 
 ## Preview
 
-### Home screen
+### Hyprland + Waybar + Kitty
 
 ![preview-01](./assets/preview-01.png)
 
-### Rofi
-
 ![preview-02](./assets/preview-02.png)
+
+### Rofi
 
 ![preview-03](./assets/preview-03.png)
 
-## Notification center
-
 ![preview-04](./assets/preview-04.png)
 
-### Hyprlock
+## Notification center
 
 ![preview-05](./assets/preview-05.png)
 
-## Neovim (btw)
+### Hyprlock
 
 ![preview-06](./assets/preview-06.png)
+
+## Neovim
+
+![preview-07](./assets/preview-07.png)
 
 ## Installation
 
@@ -95,28 +97,28 @@ sudo pacman -Runs dunst htop nano vim wofi
 
 1. To apply my config, you can run the following command:
 
-    ```bash
-    git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
-    ```
+   ```bash
+   git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
+   ```
 
-    Then, create the symbolic links to the config files
+   Then, create the symbolic links to the config files
 
-    ```bash
-    rm ~/.zshrc
-    rm -rf ~/.config/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar}
+   ```bash
+   rm ~/.zshrc
+   rm -rf ~/.config/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar}
 
-    ln -s ~/dotfiles/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar} ~/.config
-    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
-    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+   ln -s ~/dotfiles/{Code,Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar} ~/.config
+   ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
+   ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 
-    ln -s ~/dotfiles/.local/share/{icons,themes} ~/.local/share
-    ```
+   ln -s ~/dotfiles/.local/share/{icons,themes} ~/.local/share
+   ```
 
-    Final, make all scripts in the dotfiles/scripts directory executable
+   Final, make all scripts in the dotfiles/scripts directory executable
 
-    ```bash
-    sudo chmod +x ~/dotfiles/scripts/*
-    ```
+   ```bash
+   sudo chmod +x ~/dotfiles/scripts/*
+   ```
 
 2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
 
