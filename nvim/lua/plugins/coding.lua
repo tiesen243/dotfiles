@@ -4,10 +4,25 @@ return {
     version = "1.*",
     dependencies = { "rafamadriz/friendly-snippets" },
     event = "InsertEnter",
+    opts_extend = { "sources.default", "sources.compat" },
     opts = {
-      appearance = { use_nvim_cmp_as_default = false, nerd_font_variant = "mono" },
+      snippets = {
+        expand = function(snippet, _)
+          return Yuki.cmp.expand(snippet)
+        end,
+      },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+        compat = {},
+      },
+      appearance = {
+        use_nvim_cmp_as_default = false,
+        nerd_font_variant = "mono",
+      },
       completion = {
-        ghost_text = { enabled = true },
+        accept = {
+          auto_brackets = { enabled = true },
+        },
         menu = {
           draw = {
             columns = {
@@ -43,14 +58,28 @@ return {
             treesitter = { "lsp" },
           },
         },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 200,
+        },
+        ghost_text = { enabled = false },
       },
+      cmdline = {
+        enabled = true,
+        keymap = { preset = "cmdline" },
+        completion = {
+          list = { selection = { preselect = false } },
+          menu = {
+            auto_show = function()
+              return vim.fn.getcmdtype() == ":"
+            end,
+          },
+          ghost_text = { enabled = false },
+        },
+      },
+      signature = { enabled = false },
       keymap = { preset = "super-tab" },
-      fuzzy = { implementation = "prefer_rust_with_warning" },
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-      },
     },
-    opts_extend = { "sources.default" },
   },
 
   {

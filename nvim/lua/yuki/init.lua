@@ -1,5 +1,6 @@
 local M = {}
 
+M.cmp = require("yuki.cmp")
 M.utils = require("yuki.utils")
 M.format = require("yuki.format")
 
