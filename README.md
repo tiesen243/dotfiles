@@ -43,7 +43,7 @@ rm -rf ~/yay
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland waybar ffmpeg \
-  fastfetch zsh brightnessctl nwg-look playerctl libnotify swaync system76-power \
+  fastfetch zsh brightnessctl nwg-look playerctl libnotify matugen-bin swaync system76-power \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   github-cli lazygit lsd ripgrep unzip 7zip \
   grim slurp jq cliphist wl-clipboard \
@@ -105,13 +105,15 @@ sudo pacman -Runs dunst htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar}
+   rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync,waybar}
 
-   ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,nvim,rofi,swaync,waybar} ~/.config
+   ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync,waybar} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 
    ln -s ~/dotfiles/.local/share/{icons,themes} ~/.local/share
+
+   cp -r ~/dotfiles/matugen/templates/GTK-colors ~/.local/share/themes/Matugen
    ```
 
    Final, make all scripts in the dotfiles/scripts directory executable
@@ -136,19 +138,12 @@ sudo pacman -Runs dunst htop nano vim wofi
    ```
 
 5. Generate `colorschema`
-   - Install `matugen` (AUR)
-     ```bash
-     yay -S matugen-bin
-     ```
-   - Create symbolic link for matugen config
-     ```bash
-     rm -rf ~/.config/matugen
-     ln -s ~/dotfiles/matugen ~/.config/matugen
-     ```
-   - Run `matugen` to generate colorscheme
-     ```bash
-     matugen image /path/to/your/wallpaper
-     ```
+
+   ```bash
+   matugen image /path/to/your/wallpaper
+   # or
+   matugen image ~/dotfiles/assets/_background.png
+   ```
 
 6. Restart your system and enjoy it!
 
