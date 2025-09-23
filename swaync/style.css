@@ -1,6 +1,4 @@
-@define-color foreground      #fafafa;
-@define-color background      #101010;
-@define-color primary         #47110e;
+@import "colors.css";
 
 * {
   all: unset;
@@ -25,7 +23,7 @@
 .floating-notifications.background .notification-row .notification-background {
   background: alpha(@background, 0.69);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
-  border: 1px solid @primary;
+  border: 1px solid @on_primary;
   border-radius: 12px;
   margin: 8px;
   margin-bottom: 0;
@@ -67,14 +65,14 @@
   .notification-row
   .notification-background
   .close-button:hover {
-  background-color: @primary;
+  background-color: @on_primary;
 }
 
 .floating-notifications.background
   .notification-row
   .notification-background
   .close-button:active {
-  background-color: @primary;
+  background-color: @on_primary;
   color: @background;
 }
 
@@ -83,7 +81,7 @@
 .control-center {
   background-color: alpha(@background, 0.8);
   border-radius: 12px;
-  border: 2px solid @primary;
+  border: 2px solid @on_primary;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
   margin: 8px;
   padding: 16px;
@@ -125,8 +123,8 @@
   > *:last-child
   > *
   .notification-action {
-  background: alpha(@primary, 0.8);
-  color: @foreground;
+  background: alpha(@on_primary, 0.8);
+  color: @on_surface;
   border-radius: 12px;
   margin: 6px;
 }
@@ -138,7 +136,7 @@
   > *:last-child
   > *
   .notification-action:hover {
-  background: @primary;
+  background: @on_primary;
 }
 
 .control-center
@@ -148,25 +146,25 @@
   > *:last-child
   > *
   .notification-action:active {
-  background-color: @primary;
+  background-color: @on_primary;
 }
 
 .control-center .notification-row .notification-background .close-button {
   border-radius: 6px;
-  color: @foreground;
+  color: @on_surface;
   margin: 0px;
   padding: 4px;
 }
 
 .control-center .notification-row .notification-background .close-button:hover {
-  background-color: @primary;
+  background-color: @on_primary;
 }
 
 .control-center
   .notification-row
   .notification-background
   .close-button:active {
-  background-color: @primary;
+  background-color: @on_primary;
 }
 
 /* ------------------------- Notification Group ------------------------- */
@@ -177,19 +175,19 @@
 .notification-group-headers {
   font-weight: bold;
   font-size: 1.25rem;
-  color: @foreground;
+  color: @on_surface;
   letter-spacing: 2px;
 }
 
 .notification-group-icon {
-  color: @foreground;
+  color: @on_surface;
   padding: 4px;
 }
 
 .notification-group-collapse-button,
 .notification-group-close-all-button {
   background: transparent;
-  color: @foreground;
+  color: @on_surface;
   margin: 4px;
   border-radius: 6px;
   padding: 4px;
@@ -197,13 +195,13 @@
 
 .notification-group-collapse-button:hover,
 .notification-group-close-all-button:hover {
-  background: @primary;
+  background: @on_primary;
 }
 
 /* ------------------------- Widget ------------------------- */
 
 .widget-title {
-  color: @foreground;
+  color: @on_surface;
   margin: 6px;
 }
 
@@ -217,11 +215,11 @@
 }
 
 .widget-title button:hover {
-  background-color: @primary;
+  background-color: @on_primary;
 }
 
 .widget-title button:active {
-  background-color: @primary;
+  background-color: @on_primary;
 }
 
 .widget-buttons-grid {
@@ -233,22 +231,22 @@
 .widget-buttons-grid > flowbox > flowboxchild > button {
   margin: 0 6px;
   padding: 1rem 3rem;
-  background: alpha(@primary, 0.2);
+  background: alpha(@on_primary, 0.2);
   border-radius: 8px;
   border: 2px solid transparent;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  border: 2px solid @primary;
+  border: 2px solid @on_primary;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button.toggle:checked {
-  background: @primary;
+  background: @on_primary;
 }
 
 .widget-mpris {
   border-radius: 16px;
-  color: @foreground;
+  color: @on_surface;
   margin: 20px 6px;
 }
 
@@ -258,7 +256,7 @@
 }
 
 .widget-mpris > box > button {
-  color: @foreground;
+  color: @on_surface;
   border-radius: 20px;
 }
 
@@ -267,7 +265,7 @@
 }
 
 .widget-mpris button:hover {
-  color: @foreground;
+  color: @on_surface;
 }
 
 .widget-mpris-album-art {
@@ -300,13 +298,13 @@ slider {
 
 .widget-backlight trough,
 .widget-volume trough {
-  background: alpha(@foreground, 0.2);
+  background: alpha(@on_surface, 0.2);
   margin: 0 8px;
 }
 
 .widget-backlight trough highlight,
 .widget-volume trough highlight {
-  background: @primary;
+  background: @on_primary;
   border: unset;
 }
 
@@ -322,7 +320,7 @@ trough {
 }
 
 progressbar {
-  background-color: @primary;
+  background-color: @on_primary;
 }
 
 trough {
@@ -330,7 +328,7 @@ trough {
 
 trough highlight {
   padding: 8px;
-  background: @foreground;
+  background: @on_surface;
   border: 2px solid @background;
   border-radius: 20px;
 }
