@@ -135,6 +135,23 @@ sudo pacman -Runs dunst htop nano vim wofi
    systemctl enable --now com.system76.PowerDaemon.service
    ```
 
+5. Generate `colorschema`
+   - Install `matugen` (AUR)
+     ```bash
+     yay -S matugen-bin
+     ```
+   - Create symbolic link for matugen config
+     ```bash
+     rm -rf ~/.config/matugen
+     ln -s ~/dotfiles/matugen ~/.config/matugen
+     ```
+   - Run `matugen` to generate colorscheme
+     ```bash
+     matugen image /path/to/your/wallpaper
+     ```
+
+6. Restart your system and enjoy it!
+
 ## Conclusion
 
 This is my personal config for my arch linux system. You can use it as a reference or clone it to your system. If you have any question, feel free to ask me.

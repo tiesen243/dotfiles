@@ -1,5 +1,4 @@
-@define-color primary         #ab604e;
-@define-color secondary       #47110e;
+@import "colors.css";
 
 * {
   font-family: "GeistMono Nerd Font", monospace;
@@ -12,19 +11,18 @@
 }
 
 window#waybar {
-  background-color: alpha(@secondary, 0.4);
+  background-color: alpha(@background, 0.4);
   color: @primary;
 
-  border: 2px solid alpha(@primary, 0.8);
+  border: 2px solid alpha(@on_primary, 0.8);
   border-radius: 10px;
-  animation: blink-border 3s linear infinite;
 }
 
 tooltip {
-  background-color: alpha(@secondary, 0.6);
+  background-color: alpha(@background, 0.6);
   color: @primary;
 
-  border: 2px solid alpha(@primary, 0.8);
+  border: 2px solid alpha(@on_primary, 0.8);
   border-radius: 10px;
 }
 
@@ -59,16 +57,4 @@ tooltip {
 
 #workspaces button.active {
   color: @primary;
-}
-
-@keyframes blink-border {
-  0% {
-    border-color: alpha(@border, 0.8);
-  }
-  50% {
-    border-color: alpha(@secondary, 0.8);
-  }
-  100% {
-    border-color: alpha(@border, 0.8);
-  }
 }
