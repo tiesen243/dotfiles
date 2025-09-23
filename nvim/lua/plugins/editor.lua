@@ -127,7 +127,7 @@ return {
     },
     opts = {
       bigfile = { enabled = true },
-      dashboard = { preset = { header = Yuki.configs.logo } },
+      dashboard = { example = "compact_files", preset = { header = Yuki.configs.logo } },
       explorer = { enabled = true },
       indent = { enabled = true },
       image = { enabled = true },
@@ -142,22 +142,7 @@ return {
 
       lazygit = {
         configure = false,
-        config = {
-          theme = {
-            [241] = { fg = "Special" },
-            activeBorderColor = { fg = "#ab604e", bold = true },
-            inactiveBorderColor = { fg = "#46120d" },
-            searchingActiveBorderColor = { fg = "#ab604e", bold = true },
-            optionsTextColor = { fg = "#f2f4f8" },
-            selectedLineBgColor = { bg = "#2a2a2a" },
-            cherryPickedCommitFgColor = { fg = "#ab604e" },
-            cherryPickedCommitBgColor = { bg = "#be95ff" },
-            markedBaseCommitFgColor = { fg = "#ab604e" },
-            markedBaseCommitBgColor = { bg = "#08bdba" },
-            unstagedChangesColor = { fg = "#ee5396" },
-            defaultFgColor = { fg = "#f2f4f8" },
-          },
-        },
+        theme_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/../lazygit/config.yml"),
       },
     },
   },
