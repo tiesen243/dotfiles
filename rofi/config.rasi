@@ -1,17 +1,17 @@
-/*****----- Configuration -----*****/
-configuration {
-    modi:                     "drun,run,filebrowser,window";
-    show-icons:               true;
-    display-drun:             "";
-    display-run:              "";
-    display-filebrowser:      "";
-    display-window:           "";
-    drun-display-format:      "{name}";
-    window-format:            "{w} · {c} · {t}";
-}
-
 /*****----- Global Properties -----*****/
 @import                          "colors.rasi"
+
+/*****----- Configuration -----*****/
+configuration {
+    modi:                        "drun,run,filebrowser,window";
+    show-icons:                  true;
+    display-drun:                "";
+    display-run:                 "";
+    display-filebrowser:         "";
+    display-window:              "";
+    drun-display-format:         "{name}";
+    window-format:               "{w} · {c} · {t}";
+}
 
 /*****----- Main Window -----*****/
 window {
