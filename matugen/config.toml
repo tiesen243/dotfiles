@@ -39,3 +39,22 @@ output_path = '~/.config/waybar/colors.css'
 [templates.preview]
 input_path = './templates/preview.html'
 output_path = './preview.html'
+
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/GTK-colors/gtk-3.0/gtk.css'
+output_path = '~/.local/share/themes/Matugen/gtk-3.0/gtk.css'
+[templates.gtk3-dark]
+input_path = '~/.config/matugen/templates/GTK-colors/gtk-3.0/gtk-dark.css'
+output_path = '~/.local/share/themes/Matugen/gtk-3.0/gtk-dark.css'
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/GTK-colors/gtk-4.0/gtk.css'
+output_path = '~/.local/share/themes/Matugen/gtk-4.0/gtk.css'
+[templates.gtk4-dark]
+input_path = '~/.config/matugen/templates/GTK-colors/gtk-4.0/gtk-dark.css'
+output_path = '~/.local/share/themes/Matugen/gtk-4.0/gtk-dark.css'
+[templates.gtk-cinnamon]
+input_path = '~/.config/matugen/templates/GTK-colors/cinnamon/cinnamon.css'
+output_path = '~/.local/share/themes/Matugen/cinnamon/cinnamon.css'
+[templates.gtk-gnome]
+input_path = '~/.config/matugen/templates/GTK-colors/gnome-shell/gnome-shell.css'
+output_path = '~/.local/share/themes/Matugen/gnome-shell/pad-osd.css'
