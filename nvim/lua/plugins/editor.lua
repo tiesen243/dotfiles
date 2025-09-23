@@ -127,7 +127,7 @@ return {
     },
     opts = {
       bigfile = { enabled = true },
-      dashboard = { example = "compact_files", preset = { header = Yuki.configs.logo } },
+      dashboard = { example = "doom", preset = { header = Yuki.configs.logo } },
       explorer = { enabled = true },
       indent = { enabled = true },
       image = { enabled = true },
