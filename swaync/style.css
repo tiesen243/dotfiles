@@ -21,8 +21,10 @@
 /* ------------------------- Floating Notification ------------------------- */
 
 .floating-notifications.background .notification-row .notification-background {
-  background: alpha(@background, 0.69);
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+  background: alpha(@background, 0.8);
+  box-shadow:
+    0px 1px 2px 0px hsl(0 0% 0% / 0.18),
+    0px 1px 2px -1px hsl(0 0% 0% / 0.18);
   border: 1px solid @on_primary;
   border-radius: 12px;
   margin: 8px;
@@ -82,7 +84,9 @@
   background-color: alpha(@background, 0.8);
   border-radius: 12px;
   border: 2px solid @on_primary;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0px 1px 2px 0px hsl(0 0% 0% / 0.18),
+    0px 1px 2px -1px hsl(0 0% 0% / 0.18);
   margin: 8px;
   padding: 16px;
 }
