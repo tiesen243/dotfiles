@@ -1,5 +1,11 @@
 vim.lsp.enable("intelephense")
 
+vim.filetype.add({
+  pattern = {
+    [".*%.tpl%.php"] = "blade",
+  },
+})
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -19,6 +25,7 @@ return {
     opts = {
       formatters_by_ft = {
         php = { "php_cs_fixer" },
+        blade = { "prettierd" },
       },
       formatters = {
         php_cs_fixer = {
