@@ -42,7 +42,7 @@ rm -rf ~/yay
 
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
-  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland-git rofi-wayland waybar ffmpeg \
+  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland rofi-wayland waybar ffmpeg \
   fastfetch zsh brightnessctl nwg-look playerctl libnotify matugen-bin swaync system76-power \
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   github-cli lazygit lsd ripgrep unzip 7zip \
