@@ -1,10 +1,3 @@
-vim.filetype.add({
-  pattern = {
-    [".*%.json"] = "json5",
-    [".*%.jsonc"] = "json5",
-  },
-})
-
 vim.lsp.enable("jsonls")
 
 vim.lsp.config("jsonls", {
@@ -23,6 +16,14 @@ vim.lsp.config("jsonls", {
           fileMatch = { "tsconfig.json", "tsconfig.*.json" },
           url = "http://json.schemastore.org/tsconfig",
         },
+      },
+      format = { enable = false },
+      validate = { enable = true },
+    },
+    jsonc = {
+      schemas = {
+        fileMatch = { "tsconfig.json", "tsconfig.*.json" },
+        url = "http://json.schemastore.org/tsconfig",
       },
       format = { enable = false },
       validate = { enable = true },

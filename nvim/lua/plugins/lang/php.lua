@@ -25,7 +25,8 @@ return {
     opts = {
       formatters_by_ft = {
         php = { "php_cs_fixer" },
-        blade = { "prettierd" },
+        blade = { "prettierd", "prettier" },
+        twig = { "prettierd", "prettier" },
       },
       formatters = {
         php_cs_fixer = {
