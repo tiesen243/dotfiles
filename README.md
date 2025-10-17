@@ -111,8 +111,6 @@ sudo pacman -Runs dunst htop nano vim wofi
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 
-   ln -s ~/dotfiles/.local/share/{icons,themes} ~/.local/share
-
    cp -r ~/dotfiles/matugen/templates/GTK-colors ~/.local/share/themes/Matugen
    ```
 
