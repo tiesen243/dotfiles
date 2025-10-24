@@ -42,12 +42,18 @@ rm -rf ~/yay
 
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
-  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland rofi-wayland waybar ffmpeg \
-  fastfetch zsh brightnessctl nwg-look playerctl libnotify matugen-bin swaync system76-power \
+  # Hyprland ecosystem
+  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland \
+  # UI & launchers
+  rofi waybar swaync thunar gvfs tumbler \
+  # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  github-cli lazygit lsd ripgrep unzip 7zip \
-  grim slurp jq cliphist wl-clipboard \
-  thunar gvfs tumbler
+  # Terminal & CLI tools
+  kitty fastfetch zsh lazygit lsd ripgrep unzip github-cli \
+  # Media & notifications
+  ffmpeg brightnessctl playerctl libnotify grim slurp cliphist wl-clipboard \
+  # Theming & power
+  matugen-bin system76-power
 ```
 
 4. Install `oh-my-zsh`

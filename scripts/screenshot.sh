@@ -8,7 +8,7 @@ function help() {
   cat <<EOF
 Usage: $0 [options]
 Options:
-  -m, --mode <mode>        Specify the screenshot mode: fullscreen, region, window (default: fullscreen)
+  -m, --mode <mode>        Specify the screenshot mode: fullscreen, region (default: fullscreen)
   -o, --output-dir <dir>   Specify the output directory (default: ~/Pictures/Screenshot)
   -n, --file-name <name>   Specify the file name (default: Screenshot_YYYY-MM-DD_HHMMSS.png)
   -h, --help               Show this help message and exit
@@ -23,13 +23,6 @@ function send_notify() {
 
 function grab_region() {
   slurp -d
-}
-
-function grab_window() {
-  local monitors=$(hyprctl -j monitors)
-  local clients=$(hyprctl -j clients | jq -r '[.[] | select(.workspace.id | contains('$(echo $monitors | jq -r 'map(.activeWorkspace.id) | join(",")')'))]')
-  local boxes="$(echo $clients | jq -r '.[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1]) \(.title)"' | cut -f1,2 -d' ')"
-  slurp -r <<<"$boxes"
 }
 
 function take_screenshot() {
