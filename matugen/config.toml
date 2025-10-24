@@ -12,49 +12,40 @@ block_postfix = ['}', '}']
 fontSans = "Geist Regular"
 fontMono = "GeistMono Nerd Font Regular"
 
+[templates.preview]
+input_path = '~/.config/matugen/templates/preview.html'
+output_path = '~/.config/matugen/preview.html'
+
 [templates.hyprland]
-input_path = './templates/hyprland.conf'
+input_path = '~/.config/matugen/templates/hyprland.conf'
 output_path = '~/.config/hypr/core/colors.conf'
 
 [templates.kitty]
-input_path = './templates/kitty.conf'
+input_path = '~/.config/matugen/templates/kitty.conf'
 output_path = '~/.config/kitty/colors.conf'
 
 [templates.lazygit]
-input_path = './templates/lazygit.yml'
+input_path = '~/.config/matugen/templates/lazygit.yml'
 output_path = '~/.config/lazygit/config.yml'
 
 [templates.rofi]
-input_path = './templates/rofi.rasi'
+input_path = '~/.config/matugen/templates/rofi.rasi'
 output_path = '~/.config/rofi/colors.rasi'
 
 [templates.swaync]
-input_path = './templates/colors.css'
+input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/colors.css'
+post_hook = 'swaync-client --reload-css'
 
 [templates.waybar]
-input_path = './templates/colors.css'
+input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
 
-[templates.preview]
-input_path = './templates/preview.html'
-output_path = './preview.html'
-
 [templates.gtk3]
-input_path = '~/.config/matugen/templates/GTK-colors/gtk-3.0/gtk.css'
-output_path = '~/.local/share/themes/Matugen/gtk-3.0/gtk.css'
-[templates.gtk3-dark]
-input_path = '~/.config/matugen/templates/GTK-colors/gtk-3.0/gtk-dark.css'
-output_path = '~/.local/share/themes/Matugen/gtk-3.0/gtk-dark.css'
+input_path = '~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-3.0/gtk.css'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
+
 [templates.gtk4]
-input_path = '~/.config/matugen/templates/GTK-colors/gtk-4.0/gtk.css'
-output_path = '~/.local/share/themes/Matugen/gtk-4.0/gtk.css'
-[templates.gtk4-dark]
-input_path = '~/.config/matugen/templates/GTK-colors/gtk-4.0/gtk-dark.css'
-output_path = '~/.local/share/themes/Matugen/gtk-4.0/gtk-dark.css'
-[templates.gtk-cinnamon]
-input_path = '~/.config/matugen/templates/GTK-colors/cinnamon/cinnamon.css'
-output_path = '~/.local/share/themes/Matugen/cinnamon/cinnamon.css'
-[templates.gtk-gnome]
-input_path = '~/.config/matugen/templates/GTK-colors/gnome-shell/gnome-shell.css'
-output_path = '~/.local/share/themes/Matugen/gnome-shell/pad-osd.css'
+input_path = '~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-4.0/gtk.css'
