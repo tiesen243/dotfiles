@@ -53,7 +53,7 @@ opt.wrap = false
 -- Fold options
 opt.foldexpr = "v:lua.require'yuki'.utils.foldexpr()"
 opt.foldmarker = "#region,#endregion"
-opt.foldmethod = "marker"
+opt.foldmethod = "expr"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldtext = ""
