@@ -19,7 +19,7 @@ map("<esc>", function()
   vim.cmd("noh")
   return "<esc>"
 end, "Escape and Clear hlsearch", { mode = { "i", "n", "s" }, expr = true })
-map("<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and Replace", { mode = "n" })
+map("<leader>h", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], "Search and Replace", { mode = "n" })
 
 -- toggle eol
 -- stylua: ignore start
@@ -77,12 +77,12 @@ map("<leader>bD", "<cmd>:bd<cr>", "Delete Buffer and Window" )
 -- stylua: ignore end
 
 -- tabs
-map("<leader>tn", "<cmd>tabnew<cr>", "New Tab")
-map("<leader>tf", "<cmd>tabnew %<cr>", "New Tab with Current File")
-map("<leader>tx", "<cmd>tabclose<cr>", "Close Tab")
-map("<leader>to", "<cmd>tabonly<cr>", "Close Other Tabs")
-map("[t", "<cmd>tabprevious<cr>", "Previous Tab")
-map("]t", "<cmd>tabnext<cr>", "Next Tab")
+-- map("<leader>tn", "<cmd>tabnew<cr>", "New Tab")
+-- map("<leader>tf", "<cmd>tabnew %<cr>", "New Tab with Current File")
+-- map("<leader>tx", "<cmd>tabclose<cr>", "Close Tab")
+-- map("<leader>to", "<cmd>tabonly<cr>", "Close Other Tabs")
+-- map("[t", "<cmd>tabprevious<cr>", "Previous Tab")
+-- map("]t", "<cmd>tabnext<cr>", "Next Tab")
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -131,20 +131,20 @@ if vim.lsp.inlay_hint then
 end
 
 -- quickfix / location list
-map("<leader>xf", function()
-  if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
-    vim.cmd("cclose")
-  else
-    vim.cmd("copen")
-  end
-end, "Toggle Quickfix")
-map("<leader>xl", function()
-  if vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 then
-    vim.cmd("lclose")
-  else
-    vim.cmd("lopen")
-  end
-end, "Toggle Location List")
+-- map("<leader>xf", function()
+--   if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+--     vim.cmd("cclose")
+--   else
+--     vim.cmd("copen")
+--   end
+-- end, "Toggle Quickfix")
+-- map("<leader>xl", function()
+--   if vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 then
+--     vim.cmd("lclose")
+--   else
+--     vim.cmd("lopen")
+--   end
+-- end, "Toggle Location List")
 
 -- stylua: ignore start
 if vim.fn.executable("lazygit") == 1 then

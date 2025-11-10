@@ -1,12 +1,3 @@
-vim.api.nvim_create_autocmd("TermClose", {
-  pattern = "*lazygit",
-  callback = function()
-    if package.loaded["neo-tree.sources.git_status"] then
-      require("neo-tree.sources.git_status").refresh()
-    end
-  end,
-})
-
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -20,9 +11,16 @@ return {
       {
         "<leader>e",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
         end,
         desc = "File Explorer",
+      },
+      {
+        "<leader>E",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
+        end,
+        desc = "File Explorer (root)",
       },
       {
         "<leader>be",
@@ -41,37 +39,8 @@ return {
     },
     opts = {
       default_component_configs = {
-        indent = {
-          with_expanders = false,
-          padding = 0,
-        },
-        icon = {
-          folder_closed = "",
-          folder_open = "",
-          folder_empty = "",
-          provider = function(icon, node)
-            if node.type == "file" or node.type == "terminal" then
-              local success, web_devicons = pcall(require, "nvim-web-devicons")
-
-              local name = node.name
-              if node.type == "terminal" then
-                name = "terminal"
-              elseif node.name:match("^%.env") then
-                name = "env"
-              elseif node.name:match("^Dockerfile") then
-                name = "Dockerfile"
-              elseif node.name:match("^docker%-compose.*%.yml$") then
-                name = "docker-compose.yml"
-              end
-
-              if success then
-                local devicon, hl = web_devicons.get_icon(name)
-                icon.text = devicon or icon.text
-                icon.highlight = hl or icon.highlight
-              end
-            end
-          end,
-        },
+        indent = { with_expanders = false },
+        icon = { folder_closed = "", folder_open = "", folder_empty = "" },
       },
       nesting_rules = Yuki.configs.nesting_rules,
       filesystem = {
@@ -93,8 +62,6 @@ return {
             end,
             desc = "Copy Path to Clipboard",
           },
-
-          ["<space>"] = "noop",
         },
       },
     },
@@ -106,14 +73,14 @@ return {
     priority = 1000,
     keys = {
       -- stylua: ignore start
-      { "<leader><space>", function() Snacks.picker.buffers() end, desc = "Buffers" },
       -- Find
-      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<leader>fi", function() Snacks.picker.icons() end, desc = "Icons" },
       { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       { "<leader>fP", function() Snacks.picker.pick() end, desc = "Picker List" },
       { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
-      { "<leader>fi", function() Snacks.picker.icons() end, desc = "Icons" },
       -- Git
       { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
       { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse (open)" },

@@ -89,13 +89,6 @@ return {
       preset = "helix",
       spec = {
         {
-          "<leader>?",
-          function()
-            require("which-key").show({ global = false })
-          end,
-          desc = "Buffer Local Keymaps (which-key)",
-        },
-        {
           "<leader>b",
           group = "Buffer",
           expand = function()
