@@ -42,13 +42,13 @@
           "label": "󰝟",
           "type": "toggle",
           "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-          "update-command": "pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo false || echo true"
+          "update-command": "pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo true || echo false"
         },
         {
           "label": "󰍭",
           "type": "toggle",
           "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-          "update-command": "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo false || echo true"
+          "update-command": "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo true || echo false"
         },
         {
           "label": "󰂛",
