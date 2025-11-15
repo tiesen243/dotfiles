@@ -52,8 +52,8 @@ yes | yay -S --answerclean All --answerdiff None \
   kitty fastfetch zsh lazygit lsd ripgrep unzip github-cli \
   # Media & notifications
   ffmpeg brightnessctl playerctl libnotify grim slurp cliphist wl-clipboard \
-  # Theming & power
-  matugen-bin system76-power
+  # Theming
+  matugen-bin
 ```
 
 4. Install `oh-my-zsh`
