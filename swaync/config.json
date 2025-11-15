@@ -41,19 +41,20 @@
         {
           "label": "󰝟",
           "type": "toggle",
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+          "update-command": "pactl get-sink-mute @DEFAULT_SINK@ | grep -q yes && echo false || echo true"
         },
         {
           "label": "󰍭",
           "type": "toggle",
-          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+          "update-command": "pactl get-source-mute @DEFAULT_SOURCE@ | grep -q yes && echo false || echo true"
         },
         {
-          "label": "󰌪 ",
+          "label": "󰂛",
           "type": "toggle",
-          "active": false,
-          "command":"sh -c 'profile=$(sh ~/dotfiles/scripts/power-profile.sh --get); [[ \"$profile\" == \"Battery\" ]] && sh ~/dotfiles/scripts/power-profile.sh --set balanced || sh ~/dotfiles/scripts/power-profile.sh --set battery;'",
-          "update-command": "sh -c 'profile=$(sh ~/dotfiles/scripts/power-profile.sh --get); [[ \"$profile\" == \"Battery\" ]] && echo true || echo false;'"
+          "command": "swaync-client --toggle-dnd",
+          "update-command": "swaync-client --get-dnd"
         }
       ]
     }
