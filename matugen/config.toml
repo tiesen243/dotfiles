@@ -1,16 +1,12 @@
 [config]
 version_check = false
-caching = false
+caching = true
 
-expr_prefix = ['<', '*']
-expr_postfix = ['*', '>']
+expr_prefix = "{{"
+expr_postfix = "}}"
 
-block_prefix = ['{', '{']
-block_postfix = ['}', '}']
-
-[config.custom_keywords]
-fontSans = "Geist Regular"
-fontMono = "GeistMono Nerd Font Regular"
+block_prefix = "<*"
+block_postfix = "*>"
 
 [templates.preview]
 input_path = '~/.config/matugen/templates/preview.html'
@@ -32,6 +28,10 @@ output_path = '~/.config/gtk-4.0/gtk.css'
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland.conf'
 output_path = '~/.config/hypr/core/colors.conf'
+
+[templates.hyprtoolkit]
+input_path = '~/.config/matugen/templates/hyprtoolkit.conf'
+output_path = '~/.config/hypr/hyprtoolkit.conf'
 
 [templates.kitty]
 input_path = '~/.config/matugen/templates/kitty.conf'
