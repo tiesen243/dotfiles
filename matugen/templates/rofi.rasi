@@ -3,7 +3,7 @@
  */
 
 * {
-    font: "{{custom.fontMono}} 12";
+    font: "GeistMono Nerd Font Regular 12";
     background: {{colors.background.default.hex}};
     primary: {{colors.primary.default.hex}};
     primary-fixed: {{colors.primary_fixed.default.hex}};
