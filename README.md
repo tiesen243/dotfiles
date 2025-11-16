@@ -45,7 +45,7 @@ yes | yay -S --answerclean All --answerdiff None \
   # Hyprland ecosystem
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland \
   # UI & launchers
-  rofi waybar swaync thunar gvfs tumbler \
+  rofi swaync thunar gvfs tumbler \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   # Terminal & CLI tools
@@ -111,9 +111,9 @@ sudo pacman -Runs dunst htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync,waybar}
+   rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
 
-   ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync,waybar} ~/.config
+   ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 
