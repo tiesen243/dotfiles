@@ -9,6 +9,7 @@ Thunar/accels.scm
 
 # Matugen generated files
 hypr/core/colors.conf
+hypr/hyprtoolkit.conf
 kitty/colors.conf
 lazygit/config.yml
 rofi/colors.rasi
