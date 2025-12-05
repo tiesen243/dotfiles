@@ -11,16 +11,16 @@ return {
       {
         "<leader>e",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+          require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
         end,
-        desc = "File Explorer",
+        desc = "File Explorer (root)",
       },
       {
         "<leader>E",
         function()
-          require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
+          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
         end,
-        desc = "File Explorer (root)",
+        desc = "File Explorer",
       },
       {
         "<leader>be",
@@ -38,17 +38,25 @@ return {
       },
     },
     opts = {
+      close_if_last_window = true,
+      clipboard = { sync = "global" },
+      use_libuv_file_watcher = false,
       default_component_configs = {
+        container = { enable_character_fade = true },
+        symlink_target = { enabled = true },
         indent = { with_expanders = false },
         icon = { folder_closed = "", folder_open = "", folder_empty = "" },
       },
       nesting_rules = Yuki.configs.nesting_rules,
       filesystem = {
-        bind_to_cwd = false,
-        follow_current_file = { enabled = true },
-        use_libuv_file_watcher = true,
+        filtered_items = {
+          hide_by_pattern = { "node_modules", "dist", "build" },
+          always_show_by_pattern = { ".env*" },
+        },
       },
+
       window = {
+        position = "left",
         width = 30,
         mappings = {
           ["h"] = "close_node",
