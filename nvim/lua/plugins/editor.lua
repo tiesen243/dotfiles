@@ -20,7 +20,7 @@ return {
         function()
           require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
         end,
-        desc = "File Explorer",
+        desc = "File Explorer (cwd)",
       },
       {
         "<leader>be",
@@ -49,12 +49,13 @@ return {
       },
       nesting_rules = Yuki.configs.nesting_rules,
       filesystem = {
+        bind_to_cwd = false,
+        follow_current_file = { enabled = false },
         filtered_items = {
           hide_by_pattern = { "node_modules", "dist", "build" },
           always_show_by_pattern = { ".env*" },
         },
       },
-
       window = {
         position = "left",
         width = 30,
