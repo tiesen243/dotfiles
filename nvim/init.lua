@@ -44,10 +44,10 @@ Yuki.setup({
     { import = "plugins.lang.json" },
     { import = "plugins.lang.lua" },
     { import = "plugins.lang.markdown" },
-    { import = "plugins.lang.php" },
-    { import = "plugins.lang.python" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
+
+    { import = "plugins.extras.oxc" },
   },
   install = { colorschema = Yuki.configs.colorscheme },
   performance = {

@@ -1,6 +1,4 @@
 vim.lsp.enable("vtsls")
-vim.lsp.enable("oxlint")
--- vim.lsp.enable("eslint")
 
 vim.lsp.config("vtsls", {
   settings = {
@@ -40,51 +38,6 @@ vim.lsp.config("vtsls", {
   },
 })
 
-vim.lsp.config("oxlint", {})
-
--- Yuki.format.register({
---   priority = 200,
---   name = "LspEslintFixAll",
---   active = function(bufnr)
---     local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
---     return client ~= nil
---   end,
---   command = function(bufnr)
---     local client = vim.lsp.get_clients({ name = "eslint", bufnr = bufnr })[1]
---     if client then
---       local diag = vim.diagnostic.get(bufnr)
---
---       for _, d in ipairs(diag) do
---         if d.source == "eslint" then
---           vim.cmd("LspEslintFixAll")
---           vim.cmd("sleep 100m")
---           break
---         end
---       end
---     end
---   end,
--- })
-
-local supported = {
-  "css",
-  "ejs",
-  "graphql",
-  "handlebars",
-  "html",
-  "javascript",
-  "javascriptreact",
-  "json",
-  "jsonc",
-  "json5",
-  "less",
-  "markdown",
-  "scss",
-  "typescript",
-  "typescriptreact",
-  "vue",
-  "yaml",
-}
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -95,19 +48,6 @@ return {
   {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "vtsls", "oxlint" } },
-  },
-
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.formatters_by_ft = opts.formatters_by_ft or {}
-      for _, ft in ipairs(supported) do
-        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "oxfmt")
-        table.insert(opts.formatters_by_ft[ft], "prettier")
-      end
-    end,
+    opts = { ensure_installed = { "vtsls" } },
   },
 }
