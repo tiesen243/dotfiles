@@ -25,7 +25,7 @@ vim.g.maplocalleader = "\\"
 _G.Yuki = require("yuki")
 Yuki.merge_config({
   colorscheme = "vercel",
-  transparentEnable = false,
+  transparentEnable = true,
   logo = [[
 ██╗   ██╗██╗   ██╗██╗  ██╗██╗██╗   ██╗██╗███╗   ███╗
 ╚██╗ ██╔╝██║   ██║██║ ██╔╝██║██║   ██║██║████╗ ████║
@@ -39,6 +39,7 @@ Yuki.merge_config({
 Yuki.setup({
   spec = {
     { import = "plugins" },
+
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.git" },
     { import = "plugins.lang.json" },
