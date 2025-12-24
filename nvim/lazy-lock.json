@@ -1,5 +1,5 @@
 {
-  "CopilotChat.nvim": { "branch": "main", "commit": "df5376c132382dd47e3e552612940cbf25b3580c" },
+  "CopilotChat.nvim": { "branch": "main", "commit": "ed94e56ee8292f5df351e17709ff4b178ca84200" },
   "blink.cmp": { "branch": "main", "commit": "b19413d214068f316c78978b08264ed1c41830ec" },
   "conform.nvim": { "branch": "master", "commit": "5420c4b5ea0aeb99c09cfbd4fd0b70d257b44f25" },
   "copilot.lua": { "branch": "master", "commit": "e78d1ffebdf6ccb6fd8be4e6898030c1cf5f9b64" },
@@ -11,7 +11,7 @@
   "neo-tree.nvim": { "branch": "main", "commit": "b0b73273b4f5a1f4b4aac8accd6e0c3b4b5a6967" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-autopairs": { "branch": "master", "commit": "c2a0dd0d931d0fb07665e1fedb1ea688da3b80b4" },
-  "nvim-lspconfig": { "branch": "master", "commit": "d20d83b3f24f5884da73a9fc92fdc47e778b8d0d" },
+  "nvim-lspconfig": { "branch": "master", "commit": "8973916a3d015d65a8c4614e141f4270a713cf33" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },
   "nvim-ts-autotag": { "branch": "main", "commit": "c4ca798ab95b316a768d51eaaaee48f64a4a46bc" },
   "nvim-web-devicons": { "branch": "master", "commit": "6788013bb9cb784e606ada44206b0e755e4323d7" },
