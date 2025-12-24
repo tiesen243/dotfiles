@@ -45,7 +45,6 @@ Yuki.setup({
     { import = "plugins.lang.json" },
     { import = "plugins.lang.lua" },
     { import = "plugins.lang.markdown" },
-    { import = "plugins.lang.php" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
 
@@ -57,9 +56,9 @@ Yuki.setup({
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
