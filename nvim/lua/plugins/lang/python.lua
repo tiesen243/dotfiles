@@ -1,5 +1,4 @@
-vim.lsp.enable("basedpyright")
-vim.lsp.enable("ruff")
+vim.lsp.enable({ "basedpyright", "ruff" })
 
 vim.lsp.config("basedpyright", {
   disableOrganizeImports = true,
