@@ -28,11 +28,7 @@ vim.lsp.config("vtsls", {
       },
       preferences = {
         importModuleSpecifier = "non-relative",
-        autoImportSpecifierExcludeRegexes = {
-          "@radix-ui",
-          "next/dist",
-          "next/router",
-        },
+        autoImportSpecifierExcludeRegexes = { "next/dist", "next/router" },
       },
     },
   },
