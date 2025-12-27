@@ -48,6 +48,7 @@ Yuki.setup({
     { import = "plugins.lang.rust" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
+    { import = "plugins.lang.vue" },
 
     { import = "plugins.extras.oxc" },
   },

@@ -5,8 +5,9 @@ vim.lsp.config("tailwindcss", {
     tailwindCSS = {
       experimental = {
         classRegex = {
-          "tw=\\'([^\\']*)",
           "cva\\(([^)]*)\\)",
+          "cn\\(([^)]*)\\)",
+          "tw=\\'([^\\']*)",
         },
       },
     },
