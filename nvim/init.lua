@@ -45,10 +45,9 @@ Yuki.setup({
     { import = "plugins.lang.json" },
     { import = "plugins.lang.lua" },
     { import = "plugins.lang.markdown" },
-    { import = "plugins.lang.rust" },
+    { import = "plugins.lang.php" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
-    { import = "plugins.lang.vue" },
 
     { import = "plugins.extras.oxc" },
   },
