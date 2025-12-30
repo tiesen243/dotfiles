@@ -49,7 +49,7 @@ yes | yay -S --answerclean All --answerdiff None \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   # Terminal & CLI tools
-  kitty fastfetch zsh lazygit lsd ripgrep unzip github-cli \
+  kitty btop fastfetch zsh lazygit lsd ripgrep unzip github-cli \
   # Media & notifications
   ffmpeg brightnessctl playerctl libnotify grim slurp cliphist wl-clipboard \
   # Theming
@@ -111,9 +111,9 @@ sudo pacman -Runs dunst htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
+   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
 
-   ln -s ~/dotfiles/{Thunar,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
+   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
 
