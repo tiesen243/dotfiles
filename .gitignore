@@ -8,6 +8,7 @@ _*.*
 Thunar/accels.scm
 
 # Matugen generated files
+btop/themes/matugen.theme
 hypr/core/colors.conf
 hypr/hyprtoolkit.conf
 kitty/colors.conf
