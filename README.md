@@ -2,29 +2,27 @@
 
 ## Preview
 
-### Hyprland + Waybar + Kitty
+### Hyprland + Kitty
 
 ![preview-01](./assets/preview-01.png)
 
-![preview-02](./assets/preview-02.png)
-
 ### Rofi
+
+![preview-02](./assets/preview-02.png)
 
 ![preview-03](./assets/preview-03.png)
 
-![preview-04](./assets/preview-04.png)
-
 ## Notification center
 
-![preview-05](./assets/preview-05.png)
+![preview-04](./assets/preview-04.png)
 
 ### Hyprlock
 
-![preview-06](./assets/preview-06.png)
+![preview-05](./assets/preview-05.png)
 
 ## Neovim
 
-![preview-07](./assets/preview-07.png)
+![preview-06](./assets/preview-06.png)
 
 ## Installation
 
