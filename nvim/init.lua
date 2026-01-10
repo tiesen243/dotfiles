@@ -42,6 +42,7 @@ Yuki.setup({
 
     { import = "plugins.lang.dot" },
     { import = "plugins.lang.json" },
+    { import = "plugins.lang.lua" },
     { import = "plugins.lang.markdown" },
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
