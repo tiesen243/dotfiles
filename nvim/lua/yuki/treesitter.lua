@@ -17,7 +17,7 @@ end
 
 ---@param lang string
 ---@param query string
-function M.have_query(lang, query)
+M.have_query = function(lang, query)
   local key = lang .. ":" .. query
   if M._queries[key] == nil then
     M._queries[key] = vim.treesitter.query.get(lang, query) ~= nil
@@ -51,7 +51,7 @@ local function win_find_cl()
 end
 
 ---@return boolean ok, yuki.treesitter.Health health
-function M.check()
+M.check = function()
   local is_win = vim.fn.has("win32") == 1
   ---@param tool string
   ---@param win boolean?
