@@ -4,7 +4,7 @@ return {
     version = "1.*",
     dependencies = { "rafamadriz/friendly-snippets" },
     event = "InsertEnter",
-    opts_extend = { "sources.default", "sources.compat" },
+    opts_extend = { "sources.default" },
     opts = {
       snippets = {
         expand = function(snippet, _)
@@ -13,7 +13,6 @@ return {
       },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
-        compat = {},
       },
       appearance = {
         use_nvim_cmp_as_default = false,
@@ -109,36 +108,66 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
     build = ":TSUpdate",
-    event = "VeryLazy",
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    init = function(plugin)
-      require("lazy.core.loader").add_to_rtp(plugin)
-      require("nvim-treesitter.query_predicates")
-    end,
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
-    },
+    lazy = false,
     opts_extend = { "ensure_installed" },
     opts = {
       auto_install = false,
       sync_install = true,
-      highlight = { enable = true, additional_vim_regex_highlighting = true },
+
       indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
-          scope_incremental = false,
-          node_decremental = "<bs>",
-        },
-      },
+      highlight = { enable = true },
+      folds = { enable = true },
+
+      ensure_installed = {},
     },
-    main = "nvim-treesitter.configs",
+    config = function(_, opts)
+      local TS = require("nvim-treesitter")
+
+      if not TS.get_installed then
+        return vim.notify("[nvim-treesitter] Your nvim-treesitter is outdated.", vim.log.levels.ERROR)
+      elseif type(opts.ensure_installed) ~= "table" then
+        return vim.notify("[nvim-treesitter] opts.ensure_installed must be a table.", vim.log.levels.ERROR)
+      end
+
+      TS.setup(opts)
+      Yuki.treesitter.get_installed(true)
+
+      local install = vim.tbl_filter(function(lang)
+        return not Yuki.treesitter.have(lang)
+      end, opts.ensure_installed or {})
+      if #install > 0 then
+        Yuki.treesitter.build(function()
+          TS.install(install, { summary = true }):await(function()
+            Yuki.treesitter.get_installed(true)
+          end)
+        end)
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = Yuki.utils.create_augroup("treesitter"),
+        callback = function(ev)
+          local ft, lang = ev.match, vim.treesitter.language.get_lang(ev.match)
+          if not Yuki.treesitter.have(ft) then
+            return
+          end
+
+          ---@param feat string
+          ---@param query string
+          local function enabled(feat, query)
+            local f = opts[feat] or {}
+            return f.enable ~= false
+              and not (type(f.disable) == "table" and vim.tbl_contains(f.disable, lang))
+              and Yuki.treesitter.have(ft, query)
+          end
+
+          -- highlighting
+          if enabled("highlight", "highlights") then
+            pcall(vim.treesitter.start, ev.buf)
+          end
+        end,
+      })
+    end,
   },
 
   {

@@ -51,12 +51,15 @@ opt.winminwidth = 5
 opt.wrap = false
 
 -- Fold options
-opt.foldexpr = "v:lua.require'yuki'.utils.foldexpr()"
+opt.foldexpr = "v:lua.require'yuki'.treesitter.foldexpr()"
 opt.foldmarker = "#region,#endregion"
 opt.foldmethod = "expr"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldtext = ""
+
+-- Indentation options
+indentexpr = "v:lua.require'yuki'.treesitter.indentexpr()"
 
 -- Fill characters
 opt.fillchars = {
