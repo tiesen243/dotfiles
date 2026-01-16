@@ -69,7 +69,7 @@ return {
 
       return {
         auto_insert_mode = true,
-        model = "gpt-4.1",
+        model = "gemini-2.5-pro",
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
         sticky = { "#buffer" },

@@ -47,6 +47,7 @@ Yuki.setup({
     { import = "plugins.lang.tailwind" },
     { import = "plugins.lang.typescript" },
 
+    { import = "plugins.extras.ai" },
     { import = "plugins.extras.oxc" },
   },
   install = { colorschema = Yuki.configs.colorscheme },
