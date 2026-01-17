@@ -13,11 +13,12 @@ alias lt="ls --tree"
 
 # Bun
 alias bff="bun format:fix"
-alias blf="bun lint:fix"
 alias bf="bun format"
+alias blf="bun lint:fix"
 alias bl="bun lint"
 alias ba="bun add"
 alias bi="bun install"
+alias bur="bun update --recursive --interactive"
 alias bu="bun update"
 alias br="bun remove"
 alias bx="bunx --bun"
