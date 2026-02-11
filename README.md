@@ -43,7 +43,7 @@ yes | yay -S --answerclean All --answerdiff None \
   # Hyprland ecosystem
   hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland \
   # UI & launchers
-  rofi swaync thunar gvfs tumbler \
+  rofi swaync \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   # Terminal & CLI tools
@@ -109,13 +109,11 @@ sudo pacman -Runs dunst htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
+   rm -rf ~/.config/{btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
 
-   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
+   ln -s ~/dotfiles/{btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
-
-   cp -r ~/dotfiles/matugen/templates/GTK-colors ~/.local/share/themes/Matugen
    ```
 
    Final, make all scripts in the dotfiles/scripts directory executable

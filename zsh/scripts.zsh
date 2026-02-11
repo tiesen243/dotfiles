@@ -22,3 +22,43 @@ kill-port() {
     echo "No process found on port $port"
   fi
 }
+
+get-pkm() {
+  if command -v yay &>/dev/null; then
+    echo "yay"
+  elif command -v paru &>/dev/null; then
+    echo "paru"
+  else
+    echo "sudo pacman"
+  fi
+}
+
+# package manager install
+pmi() {
+  pkm=$(get-pkm)
+  $pkm -S "$@"
+}
+
+# package manager update
+pmu() {
+  pkm=$(get-pkm)
+  $pkm -Syu
+}
+
+# package manager remove
+pmr() {
+  pkm=$(get-pkm)
+  $pkm -Rns "$@"
+}
+
+# package manager clean cache
+pmc() {
+  pkm=$(get-pkm)
+  $pkm -Scc
+}
+
+# package manager clean orphaned dependencies
+pmo() {
+  pkm=$(get-pkm)
+  $pkm -Qdtq | $pkm -Rns -
+}
