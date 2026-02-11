@@ -45,10 +45,3 @@ alias gap="git add --patch"
 alias gaa="git add ."
 alias ga="git add"
 alias gc="git commit -a"
-
-# Pacman | Yay
-alias yp="yay -Qdtq | yay -Rns -"
-alias yr="yay -Runs"
-alias yu="yay -Syu"
-alias yc="yay -Scc"
-alias yi="yay -S"
