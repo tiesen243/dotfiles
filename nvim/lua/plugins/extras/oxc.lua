@@ -26,7 +26,7 @@ return {
   {
     "mason-org/mason.nvim",
     optional = true,
-    opts = { ensure_installed = { "oxlint" } },
+    opts = { ensure_installed = { "oxfmt", "oxlint" } },
   },
 
   {
