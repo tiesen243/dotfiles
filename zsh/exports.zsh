@@ -30,10 +30,3 @@ if [ -f "$HOME/.local/bin/env" ]; then
   eval "$(uv generate-shell-completion zsh)"
 fi
 # <<< uv initialize <<<
-
-# >> android sdk initialize >>>
-if [ -d "/opt/android-sdk" ]; then
-  export ANDROID_HOME=/opt/android-sdk
-  export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
-  export PATH=$PATH:$ANDROID_HOME/platform-tools
-fi
