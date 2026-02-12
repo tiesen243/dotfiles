@@ -41,11 +41,11 @@ rm -rf ~/yay
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
   # Hyprland ecosystem
-  hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland \
-  # UI & launchers
-  rofi swaync \
+  hypridle hyprlock hyprpaper hyprpicker hyprpolkitagent xdg-desktop-portal-hyprland \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
+  # UI & launchers
+  rofi swaync \
   # Terminal & CLI tools
   kitty btop fastfetch zsh lazygit lsd ripgrep unzip github-cli \
   # Media & notifications
