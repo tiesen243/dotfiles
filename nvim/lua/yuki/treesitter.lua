@@ -1,3 +1,5 @@
+---@diagnostic disable: duplicate-set-field
+
 ---@class yuki.treesitter
 local M = {}
 
@@ -27,8 +29,8 @@ end
 
 ---@param what string|number|nil
 ---@param query? string
----@overload fun(buf?:number):boolean
----@overload fun(ft:string):boolean
+---@overload fun(ft: string|number|nil):boolean
+---@overload fun(ft: string|number|nil, query: string):boolean
 ---@return boolean
 M.have = function(what, query)
   what = what or vim.api.nvim_get_current_buf()
