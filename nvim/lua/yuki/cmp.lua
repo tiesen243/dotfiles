@@ -1,5 +1,6 @@
 local M = {}
 
+---@diagnostic disable-next-line: duplicate-doc-alias
 ---@alias Placeholder {n:number, text:string}
 
 ---@param snippet string
