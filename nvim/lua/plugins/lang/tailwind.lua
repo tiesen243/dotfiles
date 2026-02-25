@@ -3,13 +3,7 @@ vim.lsp.enable("tailwindcss")
 vim.lsp.config("tailwindcss", {
   settings = {
     tailwindCSS = {
-      experimental = {
-        classRegex = {
-          "cva\\(([^)]*)\\)",
-          "cn\\(([^)]*)\\)",
-          "tw=\\'([^\\']*)",
-        },
-      },
+      classFunctions = { "cva", "cx", "cn", "tw" },
     },
   },
 })
