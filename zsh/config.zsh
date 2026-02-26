@@ -3,7 +3,7 @@ export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 ZSH_THEME="yuki"
 
-plugins=(sudo vi-mode z zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(sudo vi-mode z zsh-autosuggestions zsh-syntax-highlighting fzf-tab)
 
 source $ZSH/oh-my-zsh.sh
 
