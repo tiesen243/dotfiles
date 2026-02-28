@@ -71,6 +71,27 @@ return {
             end,
             desc = "Copy Path to Clipboard",
           },
+          ["O"] = {
+            function(state)
+              local node = state.tree:get_node()
+              local path = node:get_id()
+
+              local open_cmd
+              if vim.fn.has("mac") == 1 then
+                open_cmd = "open"
+              elseif vim.fn.has("unix") == 1 then
+                open_cmd = "xdg-open"
+              elseif vim.fn.has("win32") == 1 then
+                open_cmd = "start"
+              else
+                vim.notify("Unsupported OS for opening files", vim.log.levels.ERROR, { title = "NeoTree" })
+                return
+              end
+
+              vim.fn.jobstart({ open_cmd, path }, { detach = true })
+            end,
+            desc = "Open in Default Application",
+          },
         },
       },
     },
