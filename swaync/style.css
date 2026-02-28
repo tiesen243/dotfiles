@@ -32,15 +32,14 @@
   padding: 0;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification {
+.floating-notifications.background .notification-row .notification-background .notification {
   padding: 8px;
 }
 
 .image {
-  margin: 10px 20px 10px 0px;
+  width: 24px;
+  margin: 10px;
+  margin-left: 0px;
 }
 
 .summary {
@@ -52,10 +51,7 @@
   font-size: 0.8rem;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .close-button {
+.floating-notifications.background .notification-row .notification-background .close-button {
   margin: 6px;
   padding: 2px;
   border-radius: 6px;
@@ -63,17 +59,11 @@
   border: 1px solid transparent;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .close-button:hover {
+.floating-notifications.background .notification-row .notification-background .close-button:hover {
   background-color: @on_primary;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .close-button:active {
+.floating-notifications.background .notification-row .notification-background .close-button:active {
   background-color: @on_primary;
   color: @background;
 }
@@ -92,31 +82,19 @@
 }
 
 .control-center .notification-row .notification-background,
-.control-center
-  .notification-row
-  .notification-background
-  .notification.critical {
+.control-center .notification-row .notification-background .notification.critical {
   background-color: alpha(@background, 0.6);
   border-radius: 12px;
   margin: 4px 0px;
   padding: 4px;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  .notification-content {
+.control-center .notification-row .notification-background .notification .notification-content {
   margin: 6px;
   padding: 8px 6px 2px 2px;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > * {
+.control-center .notification-row .notification-background .notification > *:last-child > * {
   min-height: 3.4em;
 }
 
@@ -164,10 +142,7 @@
   background-color: @on_primary;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .close-button:active {
+.control-center .notification-row .notification-background .close-button:active {
   background-color: @on_primary;
 }
 
