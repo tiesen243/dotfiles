@@ -28,7 +28,10 @@ if [ -z "$wifi_info" ]; then
 fi
 
 # Extract SSID
-ssid=$(echo "$wifi_info" | cut -d':' -f2)
+ssid="Connected"
+if [ "$show_ssid" = true ]; then
+  ssid=$(echo "$wifi_info" | cut -d':' -f2)
+fi
 
 # Extract signal strength
 signal_strength=$(echo "$wifi_info" | cut -d':' -f3)
@@ -45,11 +48,4 @@ icon_index=$((signal_strength / 25))
 # Get the corresponding icon
 wifi_icon=${wifi_icons[$icon_index]}
 
-# Output based on show_ssid variable
-if [ "$show_ssid" = true ]; then
-  # Show SSID
-  echo "$wifi_icon $ssid"
-else
-  # Show "Connected"
-  echo "$wifi_icon Connected"
-fi
+echo "$wifi_icon $ssid"

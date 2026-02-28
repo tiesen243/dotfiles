@@ -1,5 +1,7 @@
 #!/bin/bash
 
+icon=$HOME/dotfiles/assets/icons/brightness.png
+
 getCurrentBrightness() {
   current=$(cat /sys/class/backlight/*/brightness)
   max=$(cat /sys/class/backlight/*/max_brightness)
@@ -19,11 +21,11 @@ case $1 in
 "--up")
   dunstctl close-all
   brightnessctl s +5%
-  notify-send "Brightness increased to $(getCurrentBrightness)"
+  notify-send -i "$icon" "Brightness increased to $(getCurrentBrightness)"
   ;;
 "--down")
   dunstctl close-all
   brightnessctl s 5%-
-  notify-send "Brightness decreased to $(getCurrentBrightness)"
+  notify-send -i "$icon" "Brightness decreased to $(getCurrentBrightness)"
   ;;
 esac

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+icon=$HOME/dotfiles/assets/icons/volume.png
+up_icon=$HOME/dotfiles/assets/icons/volume-up.png
+down_icon=$HOME/dotfiles/assets/icons/volume-down.png
+muted_icon=$HOME/dotfiles/assets/icons/volume-mute.png
+
 getCurrentVolume() {
   volume=$(pactl list sinks | grep 'Volume:' | head -n 1 | awk '{print $5}')
   echo "$volume"
@@ -27,27 +32,31 @@ fi
 case $1 in
 "--up")
   if [ "$(getCurrentVolume)" = "100%" ]; then
-    notify-send "Volume is already at 100%"
+    notify-send -i "$up_icon" "Volume is already at 100%"
     exit 1
   fi
 
   pactl set-sink-volume @DEFAULT_SINK@ +5%
-  notify-send "Volume increased to $(getCurrentVolume)"
+  notify-send -i "$up_icon" "Volume increased to $(getCurrentVolume)"
   ;;
 "--down")
   if [ "$(getCurrentVolume)" = "0%" ]; then
-    notify-send "Volume is already at 0%"
+    notify-send -i "$muted_icon" "Volume is already at 0%"
     exit 1
   fi
 
   pactl set-sink-volume @DEFAULT_SINK@ -5%
-  notify-send "Volume decreased to $(getCurrentVolume)"
+  notify-send -i "$down_icon" "Volume decreased to $(getCurrentVolume)"
   ;;
 "--toggle-volume")
   pactl set-sink-mute @DEFAULT_SINK@ toggle
-  notify-send "Volume $(getVolumeStatus)"
+  if [ "$(getVolumeStatus)" = "muted" ]; then
+    notify-send -i "$muted_icon" "Volume muted"
+  else
+    notify-send -i "$icon" "Volume unmuted"
+  fi
   ;;
 "--show")
-  notify-send "Volume: $(getCurrentVolume)"
+  notify-send -i "$icon" "Volume: $(getCurrentVolume)"
   ;;
 esac
