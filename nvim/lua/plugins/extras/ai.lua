@@ -69,7 +69,7 @@ return {
 
       return {
         auto_insert_mode = true,
-        model = "gemini-2.5-pro",
+        model = "gemini-3.1-pro-preview",
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
         sticky = { "#buffer" },
