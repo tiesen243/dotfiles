@@ -9,7 +9,7 @@ fi
 # <<< nvm initialize <<<
 
 # >>> bun initialize >>>
-if [ -d "$HOME/.bun" ]; then
+if (($+commands[git])); then
   export PATH="$HOME/.bun/bin:$PATH"
 
   # If the completion file doesn't exist yet, we need to autoload it and
@@ -20,7 +20,7 @@ if [ -d "$HOME/.bun" ]; then
     _comps[bun]=_bun
   fi
 
-  SHELL=zsh bun completions >|"$ZSH_CACHE_DIR/completions/_bun" && compinit
+  SHELL=zsh bun completions >| "$ZSH_CACHE_DIR/completions/_bun" &|
 fi
 # <<< bun initialize <<<
 
