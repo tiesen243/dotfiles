@@ -51,7 +51,9 @@ yes | yay -S --answerclean All --answerdiff None \
   # Media & notifications
   ffmpeg brightnessctl playerctl libnotify grim slurp cliphist wl-clipboard \
   # Theming
-  adw-gtk-theme capitaine-cursors matugen
+  adw-gtk-theme capitaine-cursors matugen \
+  # File manager
+  thunar thunar-volman gvfs tumbler
 ```
 
 4. Install `oh-my-zsh`
@@ -95,7 +97,7 @@ gh auth login
 7. Uninstall unnecessary packages (optional)
 
 ```bash
-sudo pacman -Runs dunst htop nano vim wofi
+sudo pacman -Runs dunst dolphin htop nano vim wofi
 ```
 
 ## Usage
