@@ -47,11 +47,11 @@ yes | yay -S --answerclean All --answerdiff None \
   # UI & launchers
   rofi swaync \
   # Terminal & CLI tools
-  kitty btop fastfetch zsh lazygit lsd ripgrep unzip github-cli \
+  kitty btop fastfetch fzf zsh lazygit lsd ripgrep unzip github-cli \
   # Media & notifications
   ffmpeg brightnessctl playerctl libnotify grim slurp cliphist wl-clipboard \
   # Theming
-  matugen-bin
+  adw-gtk-theme capitaine-cursors matugen
 ```
 
 4. Install `oh-my-zsh`
@@ -132,13 +132,8 @@ sudo pacman -Runs dunst htop nano vim wofi
    Or change file in `~/dotfiles/assets/_background.png`
 
 3. Add your avatar to `~/dotfiles/assets/_avatar.png` to show in the lock screen
-4. Enable `system76-power` service
 
-   ```bash
-   systemctl enable --now com.system76.PowerDaemon.service
-   ```
-
-5. Generate `colorschema`
+4. Generate `colorschema`
 
    ```bash
    matugen image /path/to/your/wallpaper
@@ -146,7 +141,7 @@ sudo pacman -Runs dunst htop nano vim wofi
    matugen image ~/dotfiles/assets/_background.png
    ```
 
-6. Restart your system and enjoy it!
+5. Restart your system and enjoy it!
 
 ## Conclusion
 
