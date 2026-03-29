@@ -54,6 +54,8 @@ yes | yay -S --answerclean All --answerdiff None \
   adw-gtk-theme capitaine-cursors matugen \
   # File manager
   thunar thunar-volman gvfs tumbler
+  # Vietnamese input method (optional)
+  fcitx5-lotus-bin fcitx5-config-qt
 ```
 
 4. Install `oh-my-zsh`
@@ -117,6 +119,7 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
    ln -s ~/dotfiles/{btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
+   ln -s ~/dotfiles/zsh/.zprofile ~/.zprofile # for fcitx config (optional)
    ```
 
    Final, make all scripts in the dotfiles/scripts directory executable
