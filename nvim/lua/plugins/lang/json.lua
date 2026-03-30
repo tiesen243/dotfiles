@@ -1,6 +1,7 @@
 vim.filetype.add({
   pattern = {
     [".*/typescript/.*%.json"] = "jsonc",
+    [".*/oxc/.*%.json"] = "jsonc",
   },
 })
 
