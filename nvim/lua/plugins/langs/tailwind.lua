@@ -10,8 +10,7 @@ vim.lsp.config("tailwindcss", {
 
 return {
   {
-    "mason-org/mason.nvim",
-    optional = true,
+    { name = "mason", override = true },
     opts = { ensure_installed = { "tailwindcss-language-server" } },
   },
 }
