@@ -9,6 +9,7 @@ require("yuki").setup({
     "plugins.langs.json",
     "plugins.langs.lua",
     "plugins.langs.markdown",
+    "plugins.langs.tailwind",
     "plugins.langs.typescript",
 
     "plugins.extras.ai",

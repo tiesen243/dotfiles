@@ -11,20 +11,17 @@ vim.lsp.config("ruff", {
 
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    optional = true,
+    { name = "nvim-treesitter", override = true },
     opts = { ensure_installed = { "python" } },
   },
 
   {
-    "mason-org/mason.nvim",
-    optional = true,
+    { name = "mason", override = true },
     opts = { ensure_installed = { "basedpyright", "ruff" } },
   },
 
   {
-    "stevearc/conform.nvim",
-    optional = true,
+    { name = "conform", override = true },
     opts = {
       formatters_by_ft = {
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
