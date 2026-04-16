@@ -19,7 +19,6 @@ opt.virtualedit = "block"
 -- display & appearance
 opt.cursorcolumn = false
 opt.cursorline = true
-opt.laststatus = 3
 opt.number = true
 opt.relativenumber = true
 opt.termguicolors = true

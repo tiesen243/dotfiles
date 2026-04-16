@@ -1,6 +1,9 @@
 return {
   {
-    { src = "https://github.com/zbirenbaum/copilot.lua" },
+    {
+      name = "copilot",
+      src = "https://github.com/zbirenbaum/copilot.lua",
+    },
     opts = {
       suggestion = {
         enabled = true,
