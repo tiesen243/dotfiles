@@ -20,14 +20,12 @@ local supported = {
 
 return {
   {
-    "mason-org/mason.nvim",
-    optional = true,
+    { name = "mason", override = true },
     opts = { ensure_installed = { "prettier" } },
   },
 
   {
-    "stevearc/conform.nvim",
-    optional = true,
+    { name = "conform", override = true },
     opts = function(_, opts)
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       for _, ft in ipairs(supported) do

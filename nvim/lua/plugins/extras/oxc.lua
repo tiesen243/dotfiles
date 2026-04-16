@@ -24,21 +24,23 @@ local supported = {
 
 return {
   {
-    "mason-org/mason.nvim",
-    optional = true,
+    { name = "mason", override = true },
     opts = { ensure_installed = { "oxfmt", "oxlint" } },
   },
 
   {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.formatters_by_ft = opts.formatters_by_ft or {}
+    { name = "conform", override = true },
+    opts = function()
+      local formatters_by_ft = {}
       for _, ft in ipairs(supported) do
-        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "oxfmt")
-        table.insert(opts.formatters_by_ft[ft], "oxlint")
+        formatters_by_ft[ft] = formatters_by_ft[ft] or {}
+        table.insert(formatters_by_ft[ft], "oxfmt")
+        table.insert(formatters_by_ft[ft], "oxlint")
       end
+
+      return {
+        formatters_by_ft = formatters_by_ft,
+      }
     end,
   },
 }
