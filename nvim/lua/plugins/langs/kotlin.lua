@@ -1,17 +1,19 @@
-vim.lsp.enable("clangd")
+vim.lsp.enable("kotlin_lsp")
+
+vim.lsp.config("kotlin_lsp", {})
 
 return {
   {
     { name = "nvim-treesitter", override = true },
     opts = {
-      ensure_installed = { "c", "cpp" },
+      ensure_installed = { "kotlin" },
     },
   },
 
   {
     { name = "mason", override = true },
     opts = {
-      ensure_installed = { "clangd", "clang-format" },
+      ensure_installed = { "kotlin-lsp", "ktfmt" },
     },
   },
 
@@ -19,8 +21,7 @@ return {
     { name = "conform", override = true },
     opts = {
       formatters_by_ft = {
-        c = { "clang-format" },
-        cpp = { "clang-format" },
+        kotlin = { "ktfmt" },
       },
     },
   },
