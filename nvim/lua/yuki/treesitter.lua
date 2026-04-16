@@ -1,5 +1,3 @@
----@diagnostic disable: duplicate-set-field
-
 ---@class yuki.treesitter
 local M = {}
 

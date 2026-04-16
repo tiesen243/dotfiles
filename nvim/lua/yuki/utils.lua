@@ -1,5 +1,6 @@
 local M = {}
 
+---@param name string
 M.create_augroup = function(name)
   return vim.api.nvim_create_augroup("yuki_" .. name, { clear = true })
 end
@@ -16,6 +17,7 @@ M.navigate = function(direction)
   end
 end
 
+---@param char string
 M.toggle_eol = function(char)
   local line = vim.api.nvim_get_current_line()
   if line:sub(-1) == char then
@@ -25,6 +27,10 @@ M.toggle_eol = function(char)
   end
 end
 
+---@param key string
+---@param lhs string | function
+---@param desc string
+---@param opts table | nil
 M.map = function(key, lhs, desc, opts)
   opts = vim.tbl_extend("force", { desc = desc, noremap = true, silent = true }, opts or {})
   local mode = opts.mode or "n"
@@ -52,6 +58,8 @@ M.map = function(key, lhs, desc, opts)
   end
 end
 
+---@param a table
+---@param b table
 M.merge = function(a, b)
   if type(a) ~= "table" then
     return b

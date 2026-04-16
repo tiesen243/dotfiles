@@ -56,8 +56,8 @@ Yuki.utils.map(".", ".<c-g>u", "", { mode = "i" })
 Yuki.utils.map(";", ";<c-g>u", "", { mode = "i" })
 
 -- better indenting
-Yuki.utils.map("<", "<<")
-Yuki.utils.map(">", ">>")
+Yuki.utils.map("<", "<<", "")
+Yuki.utils.map(">", ">>", "")
 Yuki.utils.map("<", "<gv", "", { mode = "v" })
 Yuki.utils.map(">", ">gv", "", { mode = "v" })
 
