@@ -1,15 +1,18 @@
 return {
   {
-    "tiesen243/vercel.nvim",
-    lazy = false,
-    priority = 1000,
-    -- dir = "~/Documents/vercel.nvim", -- for local development
-    opts = { transparent = Yuki.configs.transparentEnable },
+    {
+      name = "vercel",
+      src = "https://github.com/tiesen243/vercel.nvim",
+    },
+    opts = function()
+      return {
+        transparent = true,
+      }
+    end,
   },
 
   {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
+    { src = "https://github.com/nvim-lualine/lualine.nvim" },
     opts = {
       options = {
         icons_enabled = true,
@@ -51,8 +54,7 @@ return {
   },
 
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
+    { src = "https://github.com/folke/which-key.nvim" },
     opts = {
       preset = "helix",
       spec = {
@@ -83,7 +85,7 @@ return {
   },
 
   {
-    "lewis6991/gitsigns.nvim",
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
     opts = {
       current_line_blame = true,
       signs = Yuki.configs.icons.git_signs,

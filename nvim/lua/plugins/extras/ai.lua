@@ -1,9 +1,6 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "BufReadPost",
+    { src = "https://github.com/zbirenbaum/copilot.lua" },
     opts = {
       suggestion = {
         enabled = true,
@@ -20,27 +17,29 @@ return {
   },
 
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = "CopilotChat",
+    { src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim" },
     keys = {
-      { "<c-s>", "<CR>", ft = "copilot-chat", desc = "Submit Prompt", remap = true },
-      { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
+      { "<c-s>", "<CR>", { ft = "copilot-chat", desc = "Submit Prompt", remap = true } },
+      { "<leader>a", "", { desc = "+ai", mode = { "n", "v" } } },
       {
         "<leader>aa",
         function()
           return require("CopilotChat").toggle()
         end,
-        desc = "Toggle (CopilotChat)",
-        mode = { "n", "v" },
+        {
+          desc = "Toggle (CopilotChat)",
+          mode = { "n", "v" },
+        },
       },
       {
         "<leader>ax",
         function()
           return require("CopilotChat").reset()
         end,
-        desc = "Clear (CopilotChat)",
-        mode = { "n", "v" },
+        {
+          desc = "Clear (CopilotChat)",
+          mode = { "n", "v" },
+        },
       },
       {
         "<leader>aq",
@@ -51,16 +50,20 @@ return {
             end
           end)
         end,
-        desc = "Quick Chat (CopilotChat)",
-        mode = { "n", "v" },
+        {
+          desc = "Quick Chat (CopilotChat)",
+          mode = { "n", "v" },
+        },
       },
       {
         "<leader>ap",
         function()
           require("CopilotChat").select_prompt()
         end,
-        desc = "Prompt Actions (CopilotChat)",
-        mode = { "n", "v" },
+        {
+          desc = "Prompt Actions (CopilotChat)",
+          mode = { "n", "v" },
+        },
       },
     },
     opts = function()

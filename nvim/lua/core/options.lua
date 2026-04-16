@@ -1,56 +1,58 @@
-vim.g.autoformat = true
-vim.g.snacks_animate = true
-
 local opt = vim.opt
 
--- General UI options
-opt.autowrite = true
-opt.autoread = true
-opt.autochdir = true
-opt.breakindent = true
-vim.schedule(function()
-  opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
-end)
+vim.g.mapleader = " "
+
+-- editing & formatting
+opt.autoindent = true
 opt.completeopt = "menu,menuone,noselect,popup"
 opt.conceallevel = 2
-opt.confirm = true
-opt.cursorline = true
+opt.copyindent = true
 opt.expandtab = true
 opt.formatexpr = "v:lua.require('yuki').format.formatexpr()"
-opt.guicursor = {
-  "n-v-c:block-Cursor/lCursor",
-  "i-ci:ver25-Cursor/lCursor",
-  "r-cr:hor20-Cursor/lCursor",
-}
-opt.mouse = "a"
-opt.number = true
-opt.relativenumber = true
-opt.ruler = false
+opt.preserveindent = true
 opt.shiftround = true
 opt.shiftwidth = 2
-opt.showmode = false
-opt.signcolumn = "yes"
-opt.smartcase = true
 opt.smartindent = true
-opt.smoothscroll = true
-opt.splitbelow = true
-opt.splitkeep = "screen"
-opt.splitright = true
-opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
-opt.swapfile = false
 opt.tabstop = 2
-opt.termguicolors = true
-opt.timeoutlen = 300
-opt.undofile = true
-opt.undolevels = 10000
-opt.updatetime = 200
 opt.virtualedit = "block"
+
+-- display & appearance
+opt.cursorcolumn = false
+opt.cursorline = true
+opt.laststatus = 3
+opt.number = true
+opt.relativenumber = true
+opt.termguicolors = true
+opt.signcolumn = "yes"
+opt.showmode = false
+opt.smoothscroll = true
 opt.wildmode = "longest:full,full"
 opt.winborder = "rounded"
 opt.winminwidth = 5
 opt.wrap = false
 
--- Fold options
+-- files, buffers & backup
+opt.autochdir = false
+opt.autoread = true
+opt.autowrite = true
+opt.fileencoding = "utf-8"
+opt.undofile = true
+opt.undolevels = 1000
+opt.swapfile = false
+
+-- search & patterns
+opt.hlsearch = true
+opt.ignorecase = true
+opt.incsearch = true
+opt.smartcase = true
+opt.wrapscan = true
+
+-- windows splitting
+opt.splitbelow = true
+opt.splitkeep = "screen"
+opt.splitright = true
+
+-- folding
 opt.foldexpr = "v:lua.require'yuki'.treesitter.foldexpr()"
 opt.foldmarker = "#region,#endregion"
 opt.foldmethod = "expr"
@@ -58,8 +60,13 @@ opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldtext = ""
 
--- Indentation options
-indentexpr = "v:lua.require'yuki'.treesitter.indentexpr()"
+-- system & misc
+opt.clipboard = "unnamedplus"
+opt.encoding = "utf-8"
+opt.history = 1000
+opt.mouse = "a"
+opt.timeoutlen = 300
+opt.updatetime = 200
 
 -- Fill characters
 opt.fillchars = {

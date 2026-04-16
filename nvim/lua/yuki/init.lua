@@ -1,37 +1,25 @@
 local M = {}
 
-M.cmp = require("yuki.cmp")
-M.utils = require("yuki.utils")
-M.format = require("yuki.format")
-M.treesitter = require("yuki.treesitter")
+_G.Yuki = {}
 
-M.configs = {
-  colorscheme = "default",
-  transparentEnable = false,
-  icons = require("yuki.icons"),
-  nesting_rules = require("yuki.nesting_rules"),
-}
+M.setup = function(opts)
+  Yuki.configs = require("yuki.configs")
+  Yuki.cmp = require("yuki.cmp")
+  Yuki.format = require("yuki.format")
+  Yuki.treesitter = require("yuki.treesitter")
+  Yuki.utils = require("yuki.utils")
 
----@param options {colorscheme: string, transparentEnable: boolean, logo: string}
-M.merge_config = function(options)
-  M.configs = vim.tbl_deep_extend("force", M.configs, options or {})
-end
-
---- @param lazyOpts table|nil
-M.setup = function(lazyOpts)
-  -- Load configuration
   require("core.options")
-  require("lazy").setup(lazyOpts or {})
-
-  -- Load autocmd and keymaps
-  require("core.autocmd")
+  require("core.autocmds")
   require("core.keymaps")
 
-  -- Apply colorscheme
-  vim.cmd.colorscheme(M.configs.colorscheme)
+  require("yuki.plugin").load(opts.plugins)
 
-  -- Initialize formatting
-  M.format.setup()
+  vim.api.nvim_create_user_command("YukiPlugins", function()
+    require("yuki.plugin").open()
+  end, {})
+
+  Yuki.format.setup()
 end
 
 return M

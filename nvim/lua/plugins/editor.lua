@@ -1,52 +1,24 @@
 return {
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/MunifTanjim/nui.nvim",
+  "https://github.com/nvim-tree/nvim-web-devicons",
+
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-    keys = {
-      {
-        "<leader>e",
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = Snacks.git.get_root() })
-        end,
-        desc = "File Explorer (root)",
-      },
-      {
-        "<leader>E",
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
-        end,
-        desc = "File Explorer (cwd)",
-      },
-      {
-        "<leader>be",
-        function()
-          require("neo-tree.command").execute({ source = "buffers", toggle = true })
-        end,
-        desc = "Buffer Explorer",
-      },
-      {
-        "<leader>ge",
-        function()
-          require("neo-tree.command").execute({ source = "git_status", toggle = true })
-        end,
-        desc = "Git Explorer",
-      },
+    {
+      name = "neo-tree",
+      src = "https://github.com/nvim-neo-tree/neo-tree.nvim",
+      version = vim.version.range("3"),
     },
     opts = {
-      close_if_last_window = true,
-      clipboard = { sync = "global" },
-      use_libuv_file_watcher = false,
       default_component_configs = {
         container = { enable_character_fade = true },
         symlink_target = { enabled = true },
         indent = { with_expanders = false },
         icon = { folder_closed = "", folder_open = "", folder_empty = "" },
       },
+      close_if_last_window = true,
+      clipboard = { sync = "global" },
+      use_libuv_file_watcher = false,
       nesting_rules = Yuki.configs.nesting_rules,
       filesystem = {
         bind_to_cwd = false,
@@ -95,12 +67,33 @@ return {
         },
       },
     },
+    keys = {
+      {
+        "<leader>e",
+        function()
+          require("neo-tree.command").execute({ toggle = true })
+        end,
+        { desc = "File Explorer" },
+      },
+      {
+        "<leader>be",
+        function()
+          require("neo-tree.command").execute({ source = "buffers", toggle = true })
+        end,
+        { desc = "Buffer Explorer" },
+      },
+      {
+        "<leader>ge",
+        function()
+          require("neo-tree.command").execute({ source = "git_status", toggle = true })
+        end,
+        { desc = "Git Explorer" },
+      },
+    },
   },
 
   {
-    "folke/snacks.nvim",
-    lazy = false,
-    priority = 1000,
+    { src = "https://github.com/folke/snacks.nvim" },
     keys = {
       -- stylua: ignore start
       -- Find
@@ -124,7 +117,13 @@ return {
     },
     opts = {
       bigfile = { enabled = true },
-      dashboard = { example = "doom", preset = { header = Yuki.configs.logo } },
+      dashboard = {
+        preset = { header = Yuki.configs.logo },
+        sections = {
+          { section = "header" },
+          { section = "keys", gap = 1, padding = 1 },
+        },
+      },
       explorer = { enabled = true },
       indent = { enabled = true },
       image = { enabled = true },
@@ -141,6 +140,47 @@ return {
         configure = false,
         theme_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/../lazygit/config.yml"),
       },
+
+      postinstall = function()
+			  -- buffers
+        -- stylua: ignore start
+        Yuki.utils.map("<leader>bb", "<cmd>e #<cr>",  "Switch to Other Buffer" )
+        Yuki.utils.map("<leader>bd", function() Snacks.bufdelete() end,  "Delete Buffer" )
+        Yuki.utils.map("<leader>bo", function() Snacks.bufdelete.other() end, "Delete Other Buffers" )
+        Yuki.utils.map("<leader>bD", "<cmd>:bd<cr>", "Delete Buffer and Window" )
+        -- stylua: ignore end
+
+        Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+        Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+        Snacks.toggle.diagnostics():map("<leader>ud")
+        Snacks.toggle.line_number():map("<leader>ul")
+        Snacks.toggle
+          .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
+          :map("<leader>uc")
+        Snacks.toggle.treesitter():map("<leader>uT")
+        Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
+        Snacks.toggle.indent():map("<leader>ug")
+        Snacks.toggle.dim():map("<leader>uD")
+
+        if vim.lsp.inlay_hint then
+          Snacks.toggle.inlay_hints():map("<leader>uh")
+        end
+
+        -- stylua: ignore start
+        if vim.fn.executable("lazygit") == 1 then
+          ---@diagnostic disable-next-line: missing-fields
+        Yuki.utils.map("<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, "Lazygit (Root Dir)")
+        Yuki.utils.map("<leader>gG", function() Snacks.lazygit() end, "Lazygit (cwd)")
+        end
+        -- stylua: ignore end
+
+        -- Terminal Mappings
+        Yuki.utils.map("<c-/>", function()
+          Snacks.terminal.toggle(nil, { cwd = Snacks.git.get_root() })
+        end, "Terminal (Root Dir)")
+        Yuki.utils.map("<C-/>", "<cmd>close<cr>", "Hide Terminal", { mode = "t" })
+      end,
     },
   },
 }

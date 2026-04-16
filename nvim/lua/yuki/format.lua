@@ -30,6 +30,10 @@ M.format = function(opts)
   opts = opts or {}
   local bufnr = opts.buf or vim.api.nvim_get_current_buf()
 
+  if not vim.bo[bufnr].modified then
+    return
+  end
+
   for _, formatter in ipairs(M.formatter) do
     if formatter.active(bufnr) then
       local ok, err = pcall(formatter.command, bufnr)

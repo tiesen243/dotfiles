@@ -25,8 +25,7 @@ Yuki.format.register({
 
 return {
   {
-    "mason-org/mason.nvim",
-    optional = true,
+    { name = "mason", override = true },
     opts = { ensure_installed = { "eslint_lsp" } },
   },
 }
