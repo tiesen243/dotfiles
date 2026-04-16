@@ -9,22 +9,30 @@ local vue_plugin = {
 }
 
 vim.lsp.config("vtsls", {
-  settings = { vtsls = { tsserver = { globalPlugins = { vue_plugin } } } },
   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+  settings = {
+    vtsls = {
+      tsserver = {
+        globalPlugins = { vue_plugin },
+      },
+    },
+  },
 })
 
 vim.lsp.config("vue_ls", {})
 
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    optional = true,
-    opts = { ensure_installed = { "vue" } },
+    { name = "nvim-treesitter", override = true },
+    opts = {
+      ensure_installed = { "vue" },
+    },
   },
 
   {
-    "mason-org/mason.nvim",
-    optional = true,
-    opts = { ensure_installed = { "vue-language-server" } },
+    { name = "mason", override = true },
+    opts = {
+      ensure_installed = { "vue-language-server" },
+    },
   },
 }

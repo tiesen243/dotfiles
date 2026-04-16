@@ -12,12 +12,16 @@ vim.lsp.config("ruff", {
 return {
   {
     { name = "nvim-treesitter", override = true },
-    opts = { ensure_installed = { "python" } },
+    opts = {
+      ensure_installed = { "python" },
+    },
   },
 
   {
     { name = "mason", override = true },
-    opts = { ensure_installed = { "basedpyright", "ruff" } },
+    opts = {
+      ensure_installed = { "basedpyright", "ruff" },
+    },
   },
 
   {

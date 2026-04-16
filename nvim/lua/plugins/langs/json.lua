@@ -41,21 +41,15 @@ vim.lsp.config("jsonls", {
 return {
   {
     { name = "nvim-treesitter", override = true },
-    opts = { ensure_installed = { "json5" } },
+    opts = {
+      ensure_installed = { "json5" },
+    },
   },
 
   {
     { name = "mason", override = true },
-    opts = { ensure_installed = { "json-lsp" } },
-  },
-
-  {
-    { name = "conform", override = true },
     opts = {
-      formatters_by_ft = {
-        ["json"] = { "prettier" },
-        ["jsonc"] = { "prettier" },
-      },
+      ensure_installed = { "json-lsp" },
     },
   },
 }

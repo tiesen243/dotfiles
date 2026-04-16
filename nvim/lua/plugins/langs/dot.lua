@@ -46,7 +46,9 @@ return {
 
   {
     { name = "mason", override = true },
-    opts = { ensure_installed = { "bash-language-server", "shfmt" } },
+    opts = {
+      ensure_installed = { "bash-language-server", "shfmt" },
+    },
   },
 
   {
