@@ -1,17 +1,17 @@
-vim.lsp.enable("clangd")
+vim.lsp.enable("rust_analyzer")
 
 return {
   {
     { name = "nvim-treesitter", override = true },
     opts = {
-      ensure_installed = { "c", "cpp" },
+      ensure_installed = { "rust" },
     },
   },
 
   {
     { name = "mason", override = true },
     opts = {
-      ensure_installed = { "clangd", "clang-format" },
+      ensure_installed = { "rust-analyzer" },
     },
   },
 
@@ -19,8 +19,7 @@ return {
     { name = "conform", override = true },
     opts = {
       formatters_by_ft = {
-        c = { "clang-format" },
-        cpp = { "clang-format" },
+        rust = { "rustfmt" },
       },
     },
   },

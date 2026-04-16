@@ -28,7 +28,12 @@ vim.lsp.config("vtsls", {
       },
       preferences = {
         importModuleSpecifier = "non-relative",
-        autoImportSpecifierExcludeRegexes = { "next/dist", "next/router" },
+        autoImportSpecifierExcludeRegexes = {
+          "@base-ui/react",
+          "radix-ui",
+          "next/dist",
+          "next/router",
+        },
       },
     },
   },
@@ -37,7 +42,9 @@ vim.lsp.config("vtsls", {
 return {
   {
     { name = "nvim-treesitter", override = true },
-    opts = { ensure_installed = { "javascript", "typescript", "tsx" } },
+    opts = {
+      ensure_installed = { "javascript", "typescript", "tsx" },
+    },
   },
 
   {
