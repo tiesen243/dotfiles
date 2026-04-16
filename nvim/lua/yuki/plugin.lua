@@ -6,6 +6,7 @@ local KEYS = {}
 
 M.stats = {
   loaded = 0,
+  total = 0,
   time = 0,
 }
 
@@ -119,7 +120,8 @@ M.format_plugins = function()
     )
   end
 
-  return nodes, #data
+  M.stats.total = #data
+  return nodes
 end
 
 M.open = function()
@@ -127,7 +129,7 @@ M.open = function()
   local Tree = require("nui.tree")
   local Line = require("nui.line")
 
-  local nodes, count = M.format_plugins()
+  local nodes = M.format_plugins()
 
   local popup = Popup({
     enter = true,
@@ -135,9 +137,9 @@ M.open = function()
     border = {
       style = "rounded",
       text = {
-        top = " Yuki Plugins (" .. count .. ")",
+        top = " Yuki Plugins (" .. M.stats.total .. ")",
         top_align = "center",
-        bottom = string.format(" ⚡ %d / %d plugins loaded in %.2f ms ", M.stats.loaded, count, M.stats.time),
+        bottom = string.format(" ⚡ %d / %d plugins loaded in %.2f ms ", M.stats.loaded, M.stats.total, M.stats.time),
         bottom_align = "center",
       },
       padding = { 0, 2 },
@@ -222,6 +224,14 @@ M.open = function()
       tree:render()
     end
   end, { buffer = popup.bufnr })
+end
+
+M.setup = function(plugins)
+  M.load(plugins)
+
+  vim.api.nvim_create_user_command("YukiPlugins", function()
+    M.open()
+  end, {})
 end
 
 return M

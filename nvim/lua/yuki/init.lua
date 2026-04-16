@@ -13,12 +13,7 @@ M.setup = function(opts)
   require("core.autocmds")
   require("core.keymaps")
 
-  require("yuki.plugin").load(opts.plugins)
-
-  vim.api.nvim_create_user_command("YukiPlugins", function()
-    require("yuki.plugin").open()
-  end, {})
-
+  require("yuki.plugin").setup(opts.plugins)
   Yuki.format.setup()
 end
 

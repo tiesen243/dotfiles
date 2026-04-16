@@ -1,10 +1,7 @@
 local M = {}
 
----@diagnostic disable-next-line: duplicate-doc-alias
----@alias Placeholder {n:number, text:string}
-
 ---@param snippet string
----@param fn fun(placeholder:Placeholder):string
+---@param fn fun(placeholder:{n:number, text:string}):string
 ---@return string
 M.snippet_replace = function(snippet, fn)
   return snippet:gsub("%$%b{}", function(m)
