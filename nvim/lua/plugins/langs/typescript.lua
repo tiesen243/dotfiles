@@ -26,6 +26,9 @@ vim.lsp.config("vtsls", {
         enabled = true,
         showOnInterfaceMethods = true,
       },
+      referencesCodeLens = {
+        enabled = true,
+      },
       preferences = {
         importModuleSpecifier = "non-relative",
         autoImportSpecifierExcludeRegexes = {
@@ -37,6 +40,18 @@ vim.lsp.config("vtsls", {
       },
     },
   },
+  on_attach = function(client, bufnr)
+    if not vim.lsp.commands["editor.action.showReferences"] then
+      vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
+        local locations = command.arguments[3]
+        if locations and #locations > 0 then
+          Snacks.picker.lsp_references({
+            items = locations,
+          })
+        end
+      end
+    end
+  end,
 })
 
 return {
