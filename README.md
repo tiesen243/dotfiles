@@ -106,6 +106,8 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
 1. To apply my config, you can run the following command:
 
+   1.1. For Linux
+
    ```bash
    git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
    ```
@@ -126,6 +128,22 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
    ```bash
    sudo chmod +x ~/dotfiles/scripts/*
+   ```
+
+   1.1. For Windows
+
+   ```powershell
+   git clone git clone git@github.com:tiesen243/dotfiles.git $HOME\dotfiles
+   ```
+
+   Then, create the symbolic links to the config files (make sure to run Terminal as administrator)
+
+   ```powershell
+   Remove-Item -Force -Recurse $HOME\Documents\WindowsPowerShell
+   Remove-Item -Force -Recurse $HOME\AppData\Local\nvim
+
+   New-Item -ItemType SymbolicLink -Path $HOME\Documents\WindowsPowerShell -Target $HOME\dotfiles\powershell
+   New-Item -ItemType SymbolicLink -Path $HOME\AppData\Local\nvim -Target $HOME\dotfiles\nvim
    ```
 
 2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
