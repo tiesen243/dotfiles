@@ -1,19 +1,3 @@
-vim.api.nvim_create_autocmd("LspProgress", {
-  group = Yuki.utils.create_augroup("lsp_progress"),
-  callback = function(ev)
-    local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-    vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
-      id = "lsp_progress",
-      title = "LSP Progress",
-      opts = function(notif)
-        notif.icon = ev.data.params.value.kind == "end" and " "
-          ---@diagnostic disable-next-line: undefined-field
-          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-      end,
-    })
-  end,
-})
-
 vim.diagnostic.config({
   signs = {
     text = {
@@ -73,7 +57,7 @@ return {
       postinstall = function(opts)
         vim.lsp.config("*", {
           capabilities = require("blink.cmp").get_lsp_capabilities(),
-          on_attach = function(_, bufnr)
+          on_attach = function(client, bufnr)
             local map = function(key, func, desc, mode)
               Yuki.utils.map(key, func, "LSP: " .. desc, { buffer = bufnr, mode = mode, noremap = true })
             end
@@ -84,6 +68,7 @@ return {
             pcall(vim.keymap.del, "n", "grn")
             pcall(vim.keymap.del, "n", "grr")
             pcall(vim.keymap.del, "n", "grt")
+            pcall(vim.keymap.del, "n", "grx")
 
 	          -- stylua: ignore start
 	          map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -103,9 +88,39 @@ return {
 	          map("<leader>cR", Snacks.rename.rename_file, "Rename File")
 	          map("<leader>cs", Snacks.picker.lsp_symbols, "Symbols")
 	          map("<leader>cS", Snacks.picker.lsp_workspace_symbols, "Workspace Symbols")
+	          map("<leader>cx", vim.lsp.codelens.run, "Run Code Lens")
 	          map("]]", function() Snacks.words.jump(vim.v.count1) end, "Next Reference")
 	          map("[[", function() Snacks.words.jump(-vim.v.count1) end, "Previous Reference")
             -- stylua: ignore end
+
+            -- Refresh code lenses on certain events
+            if client.server_capabilities.codeLensProvider then
+              vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                group = Yuki.utils.create_augroup("lsp_codelens_refresh"),
+                buffer = bufnr,
+                callback = function(ev)
+                  vim.lsp.codelens.enable(true, { bufnr = ev.buf })
+                end,
+              })
+            end
+
+            -- LSP status
+            vim.api.nvim_create_autocmd("LspProgress", {
+              group = Yuki.utils.create_augroup("lsp_progress"),
+              buffer = bufnr,
+              callback = function(ev)
+                local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+                vim.notify(vim.lsp.status(), vim.log.levels.INFO, {
+                  id = "lsp_progress",
+                  title = "LSP Progress",
+                  opts = function(notif)
+                    notif.icon = ev.data.params.value.kind == "end" and " "
+                      ---@diagnostic disable-next-line: undefined-field
+                      or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+                  end,
+                })
+              end,
+            })
           end,
         })
 

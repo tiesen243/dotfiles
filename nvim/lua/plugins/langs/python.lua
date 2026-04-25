@@ -1,6 +1,14 @@
 vim.lsp.enable({ "basedpyright", "ruff" })
 
 vim.lsp.config("basedpyright", {
+  settings = {
+    basedpyright = {
+      analysis = {
+        typeCheckingMode = "basic",
+        diagnosticMode = "openFilesOnly",
+      },
+    },
+  },
   disableOrganizeImports = true,
 })
 
