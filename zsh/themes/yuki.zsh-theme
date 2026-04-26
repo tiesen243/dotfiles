@@ -81,8 +81,8 @@ PROMPT+='%F{yellow}%B$(yuki_directory)'
 # }}}
 
 # Async git segment {{{
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{foreground}on %F{blue} %B"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{foreground}on%B "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%b%f "
 
 yuki_git_status() {
   ((!YUKI_DISPLAY_GIT)) && return
@@ -104,7 +104,7 @@ yuki_git_status() {
       color="%F{green}"
     fi
 
-    echo -n "${ZSH_THEME_GIT_PROMPT_PREFIX}${color}${branch}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+    echo -n "${ZSH_THEME_GIT_PROMPT_PREFIX}${color} ${branch}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
   fi
 }
 
