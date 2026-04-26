@@ -120,7 +120,9 @@ return {
       highlight = { enable = true },
       folds = { enable = true },
 
-      ensure_installed = {},
+      ensure_installed = {
+        "diff",
+      },
       postinstall = function(opts)
         local TS = require("nvim-treesitter")
 
