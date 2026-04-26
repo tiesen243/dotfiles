@@ -1,4 +1,6 @@
 require("yuki").setup({
+  theme = "vercel",
+
   plugins = {
     "plugins.coding",
     "plugins.editor",
@@ -19,5 +21,3 @@ require("yuki").setup({
     "plugins.extras.oxc",
   },
 })
-
-vim.cmd.colorscheme("vercel")

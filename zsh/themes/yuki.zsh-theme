@@ -1,14 +1,9 @@
-# -*- mode: sh; -*-
-# vim: set ft=sh :
 # Yuki Theme v1.0.0
 #
-# Copyright 2024, All rights reserved
+# Copyright 2026, All rights reserved
 #
 # Code licensed under the MIT license
 # http://github.com/tiesen243/dotfiles/blob/main/LICENSE
-#
-# @author Tiesen <ttien56906@gmail.com>
-# @website https://tiesen.id.vn
 
 # Initialization {{{
 source ~/dotfiles/zsh/themes/async.zsh
@@ -24,13 +19,10 @@ YUKI_DISPLAY_GIT=${YUKI_DISPLAY_GIT:-1}
 
 # Set to 1 to show the date
 YUKI_DISPLAY_TIME=${YUKI_DISPLAY_TIME:-0}
+YUKI_TIME_FORMAT="%H:%M"
 
 # Set to 1 to show the 'context' segment
 YUKI_DISPLAY_CONTEXT=${YUKI_DISPLAY_CONTEXT:-1}
-
-# Changes the triangle icon
-YUKI_ARROW_ICON=${YUKI_ARROW_ICON:-󰣇 }
-YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-}
 
 # Set to 1 to use a new line for commands
 YUKI_DISPLAY_NEW_LINE=${YUKI_DISPLAY_NEW_LINE:-0}
@@ -38,41 +30,9 @@ YUKI_DISPLAY_NEW_LINE=${YUKI_DISPLAY_NEW_LINE:-0}
 # Set to 1 to show full path of current working directory
 YUKI_DISPLAY_FULL_CWD=${YUKI_DISPLAY_FULL_CWD:-0}
 
-# function to detect if git has support for --no-optional-locks
-yuki_test_git_optional_lock() {
-  local git_version=${DEBUG_OVERRIDE_V:-"$(git version | cut -d' ' -f3)"}
-  local git_version="$(git version | cut -d' ' -f3)"
-  # test for git versions < 2.14.0
-  case "$git_version" in
-  [0-1].*)
-    echo 0
-    return 1
-    ;;
-  2.[0-9].*)
-    echo 0
-    return 1
-    ;;
-  2.1[0-3].*)
-    echo 0
-    return 1
-    ;;
-  esac
-
-  # if version > 2.14.0 return true
-  echo 1
-}
-
-# use --no-optional-locks flag on git
-YUKI_GIT_NOLOCK=${YUKI_GIT_NOLOCK:-$(yuki_test_git_optional_lock)}
-
-# time format string
-if [[ -z "$YUKI_TIME_FORMAT" ]]; then
-  YUKI_TIME_FORMAT="%H:%M"
-  # check if locale uses AM and PM
-  if locale -ck LC_TIME 2>/dev/null | grep -q '^t_fmt="%r"$'; then
-    YUKI_TIME_FORMAT="%-I:%M%p"
-  fi
-fi
+# Icons
+YUKI_ARROW_ICON=${YUKI_ARROW_ICON:-󰣇 }
+YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-}
 # }}}
 
 # Status segment {{{
@@ -121,14 +81,18 @@ PROMPT+='%F{yellow}%B$(yuki_directory)'
 # }}}
 
 # Async git segment {{{
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{foreground}on %F{blue} %B"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}%B✔ "
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}%B✗ "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f%b"
+
 yuki_git_status() {
   ((!YUKI_DISPLAY_GIT)) && return
   cd "$1"
 
   local ref branch lockflag
 
-  ((YUKI_GIT_NOLOCK)) && lockflag="--no-optional-locks"
-
+  lockflag="--no-optional-locks"
   ref=$(=git $lockflag symbolic-ref --quiet HEAD 2>/dev/null)
 
   case $? in
@@ -170,16 +134,6 @@ yuki_git_async() {
 add-zsh-hook precmd yuki_git_async
 
 PROMPT+='$YUKI_GIT_STATUS'
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{foreground}on %F{blue} %B"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}%B✔ "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}%B✗ "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%f%b"
 # }}}
 
-# Linebreak {{{
-PROMPT+='%(1V:%F{yellow}:%(?:%F{foreground}:%F{red}))%B$(yuki_arrow end)'
-# }}}
-
-# Ensure effects are reset
-PROMPT+='%f%b$YUKI_EXECUTED_ICON'
+PROMPT+='%(1V:%F{yellow}:%(?:%F{foreground}:%F{red}))%B$(yuki_arrow end)%f%b$YUKI_EXECUTED_ICON'
