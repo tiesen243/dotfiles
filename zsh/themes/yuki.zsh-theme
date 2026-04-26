@@ -32,7 +32,7 @@ YUKI_DISPLAY_FULL_CWD=${YUKI_DISPLAY_FULL_CWD:-0}
 
 # Icons
 YUKI_ARROW_ICON=${YUKI_ARROW_ICON:-󰣇 }
-YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-}
+YUKI_EXECUTED_ICON=${YUKI_EXECUTED_ICON:-λ }
 # }}}
 
 # Status segment {{{
@@ -82,40 +82,29 @@ PROMPT+='%F{yellow}%B$(yuki_directory)'
 
 # Async git segment {{{
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{foreground}on %F{blue} %B"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %F{green}%B✔ "
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{yellow}%B✗ "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%f%b"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
 
 yuki_git_status() {
   ((!YUKI_DISPLAY_GIT)) && return
-  cd "$1"
+  cd "$1" 2>/dev/null || return
 
-  local ref branch lockflag
-
+  local ref branch lockflag git_status color
   lockflag="--no-optional-locks"
   ref=$(=git $lockflag symbolic-ref --quiet HEAD 2>/dev/null)
-
   case $? in
-  0) ;;
-  128) return ;;
-  *) ref=$(=git $lockflag rev-parse --short HEAD 2>/dev/null) || return ;;
+    0) branch=${ref#refs/heads/} ;;
+    128) return ;;
+    *) branch=$(=git $lockflag rev-parse --short HEAD 2>/dev/null) || return ;;
   esac
 
-  branch=${ref#refs/heads/}
-
   if [[ -n $branch ]]; then
-    echo -n "${ZSH_THEME_GIT_PROMPT_PREFIX}${branch}"
-
-    local git_status icon
-    git_status="$(LC_ALL=C =git $lockflag status 2>&1)"
-
-    if [[ "$git_status" =~ 'new file:|deleted:|modified:|renamed:|Untracked files:' ]]; then
-      echo -n "$ZSH_THEME_GIT_PROMPT_DIRTY"
+    if [[ -n "$(=git $lockflag status --porcelain 2>/dev/null)" ]]; then
+      color="%F{yellow}"
     else
-      echo -n "$ZSH_THEME_GIT_PROMPT_CLEAN"
+      color="%F{green}"
     fi
 
-    echo -n "$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    echo -n "${ZSH_THEME_GIT_PROMPT_PREFIX}${color}${branch}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
   fi
 }
 

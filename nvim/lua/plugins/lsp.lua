@@ -56,7 +56,7 @@ return {
       ensure_installed = { "tree-sitter-cli" },
       postinstall = function(opts)
         vim.lsp.config("*", {
-          capabilities = require("blink.cmp").get_lsp_capabilities(),
+          capabilities = require("blink-cmp").get_lsp_capabilities(),
           on_attach = function(client, bufnr)
             local map = function(key, func, desc, mode)
               Yuki.utils.map(key, func, "LSP: " .. desc, { buffer = bufnr, mode = mode, noremap = true })

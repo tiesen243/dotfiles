@@ -1,4 +1,5 @@
 export EDITOR="nvim"
+export PATH="/home/tiesen/.local/share/../bin:$PATH"
 
 # >>> nvm initialize >>>
 if [ -d "$HOME/.config/nvm" ]; then
@@ -23,13 +24,6 @@ if (($+commands[git])); then
   SHELL=zsh bun completions >| "$ZSH_CACHE_DIR/completions/_bun" &|
 fi
 # <<< bun initialize <<<
-
-# >>> uv initialize >>>
-if [ -f "$HOME/.local/bin/env" ]; then
-  . "$HOME/.local/bin/env"
-  eval "$(uv generate-shell-completion zsh)"
-fi
-# <<< uv initialize <<<
 
 # >>> android-sdk initialize >>>
 if [ -d "/opt/android-sdk" ]; then
