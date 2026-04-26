@@ -116,9 +116,9 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
+   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
 
-   ln -s ~/dotfiles/{btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
+   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
    ln -s ~/dotfiles/zsh/.zprofile ~/.zprofile # for fcitx config (optional)
