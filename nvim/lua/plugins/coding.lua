@@ -2,7 +2,11 @@ return {
   "https://github.com/rafamadriz/friendly-snippets",
 
   {
-    { src = "https://github.com/saghen/blink.cmp" },
+    {
+      name = "blink-cmp",
+      src = "https://github.com/saghen/blink.cmp",
+      version = "v1"
+    },
     opts = {
       snippets = {
         expand = function(snippet, _)
