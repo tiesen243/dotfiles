@@ -35,7 +35,7 @@ menu() {
   # Execute the corresponding command based on the selected option
   case $chosen in
   "")
-    hyprlock --immediate
+    hyprlock
     ;;
   "")
     hyprctl dispatch exit 0
