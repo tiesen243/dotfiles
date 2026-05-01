@@ -23,11 +23,11 @@ vim.lsp.config("vtsls", {
         variableTypes = { enabled = false },
       },
       implementationsCodeLens = {
-        enabled = true,
+        enabled = false,
         showOnInterfaceMethods = true,
       },
       referencesCodeLens = {
-        enabled = true,
+        enabled = false,
       },
       preferences = {
         importModuleSpecifier = "non-relative",
@@ -40,18 +40,18 @@ vim.lsp.config("vtsls", {
       },
     },
   },
-  on_attach = function(client, bufnr)
-    if not vim.lsp.commands["editor.action.showReferences"] then
-      vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
-        local locations = command.arguments[3]
-        if locations and #locations > 0 then
-          Snacks.picker.lsp_references({
-            items = locations,
-          })
-        end
-      end
-    end
-  end,
+  -- on_attach = function(_, bufnr)
+  --   if not vim.lsp.commands["editor.action.showReferences"] then
+  --     vim.lsp.commands["editor.action.showReferences"] = function(command, ctx)
+  --       local locations = command.arguments[3]
+  --       if locations and #locations > 0 then
+  --         Snacks.picker.lsp_references({
+  --           items = locations,
+  --         })
+  --       end
+  --     end
+  --   end
+  -- end,
 })
 
 return {
