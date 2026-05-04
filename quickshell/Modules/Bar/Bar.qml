@@ -4,7 +4,6 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
-import Quickshell.Services.Mpris
 
 import qs.Colors
 import qs.Modules.Widgets.Player
@@ -41,14 +40,18 @@ Scope {
   property string batteryStat: ""
   Process {
     id: batteryProc
-    command: ["sh", "-c", "cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n 1"]
+    command: ["sh", "-c", "echo $(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n 1) $(cat /sys/class/power_supply/BAT*/status 2>/dev/null | head -n 1)"]
     stdout: SplitParser {
       onRead: data => {
-        var level = data.trim();
-        if (level === "") return
+        var parts = data.trim().split(" ");
+        if (parts.length === 0 || parts[0] === "") return;
+
+        var level = parseInt(parts[0]);
+        var status = parts.length > 1 ? parts[1] : "";
 
         var icon = "󰁻 "
-        if (level == 100) icon = "󰁹 "
+        if (status === "Charging") icon = "󰂄 "
+        else if (level == 100) icon = "󰁹 "
         else if (level >= 80) icon = "󰂁 "
         else if (level >= 60) icon = "󰁿 "
         else if (level >= 40) icon = "󰁽 "
@@ -108,7 +111,7 @@ Scope {
 
       anchors.left: parent.left
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: menu.width + 12
+      anchors.margins: menu.width + 16
 
       Repeater {
         model: 9
@@ -133,7 +136,7 @@ Scope {
 
       anchors.left: parent.left
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: menu.width + workspaceSwitcher.width + 24
+      anchors.margins: menu.width + workspaceSwitcher.width + 32
     }
 
     // Window Title
@@ -151,7 +154,7 @@ Scope {
 
       anchors.right: parent.right
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: battery.width + clock.width + wifi.width + 36
+      anchors.margins: battery.width + clock.width + wifi.width + 48
     }
 
     // WiFi
@@ -160,7 +163,7 @@ Scope {
 
       anchors.right: parent.right
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: battery.width + clock.width + 24
+      anchors.margins: battery.width + clock.width + 32
       text: bar.wifiStat
       color: colors.primary
       font { pixelSize: bar.fontSize; family: bar.fontFamily }
@@ -184,7 +187,7 @@ Scope {
 
       anchors.right: parent.right
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: battery.width + 12
+      anchors.margins: battery.width + 16
       text: Qt.formatDateTime(new Date(), "ddd, MMM dd - hh:mm:ss")
       color: colors.primary
       font { pixelSize: bar.fontSize; family: bar.fontFamily }
@@ -202,10 +205,19 @@ Scope {
         anchor.rect.x: parentWindow.width
         anchor.rect.y: parentWindow.height + 4
 
+        visible: false
         implicitWidth: 200
-        implicitHeight: 200
+        implicitHeight: 160
         color: "transparent"
         HyprlandWindow.opacity: 0.86
+
+        HyprlandFocusGrab {
+          active: celendar.visible
+          windows: [celendar]
+          onCleared: {
+            celendar.visible = false
+          }
+        }
 
         onVisibleChanged: {
           if (visible) {
@@ -215,8 +227,7 @@ Scope {
         }
 
         Rectangle {
-          implicitWidth: 200
-          implicitHeight: 200
+          anchors.fill: parent
           color: colors.background
           
           radius: 8
@@ -233,7 +244,12 @@ Scope {
             id: calProc
             command: ['cal']
             stdout: SplitParser {
-              onRead: data => celendar.calContent += data + "\n"
+              onRead: data => {
+                var today = new Date().getDate().toString();
+                var regex = new RegExp("(\\b|\\s)" + today + "(\\b|\\s)");
+                var styledLine = data.replace(regex, "$1<u><b><font color='" + colors.primary + "'>" + today + "</font></b></u>$2");
+                celendar.calContent += "<br>" + styledLine.replace(/ /g, "&nbsp;") 
+              }
             }
           }
         }
