@@ -20,6 +20,7 @@ Item {
 
     Text {
       id: previousTrackIndicator
+      visible: player.currentPlayer && player.currentPlayer.canGoPrevious
 
       anchors.left: parent.left
       anchors.verticalCenter: parent.verticalCenter
@@ -42,7 +43,9 @@ Item {
 
       anchors.left: parent.left
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: previousTrackIndicator.width + 12
+      anchors.margins: (player.currentPlayer && player.currentPlayer.canGoPrevious)
+        ? previousTrackIndicator.width + 12
+        : 0
 
       text: {
         if (!player.currentPlayer || !player.currentPlayer.metadata)
@@ -82,6 +85,7 @@ Item {
 
     Text {
       id: nextTrackIndicator
+      visible: player.currentPlayer && player.currentPlayer.canGoNext
 
       anchors.left: playerContent.left
       anchors.verticalCenter: parent.verticalCenter
