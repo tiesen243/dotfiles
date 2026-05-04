@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd ~
-
 # Usage Information
 usage() {
   echo "Usage: $0 [--drun | --run | --menu]"
