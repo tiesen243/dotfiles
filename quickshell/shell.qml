@@ -10,16 +10,16 @@ ShellRoot {
 
   Loader {
     active: true
+    sourceComponent: Background { id: background }
+  }
+
+  Loader {
+    active: true
     sourceComponent: Bar { id: bar }
   }
 
   Loader {
     active: false
     sourceComponent: Sidebar { id: sidebar }
-  }
-
-  Loader {
-    active: true
-    sourceComponent: Background { id: background }
   }
 }
