@@ -70,7 +70,7 @@ Scope {
     anchors.right: true
     implicitHeight: 24
     color: colors.background
-    HyprlandWindow.opacity: 0.86
+    HyprlandWindow.opacity: 0.8
 
     // Menu button
     Text {
@@ -209,7 +209,7 @@ Scope {
         implicitWidth: 200
         implicitHeight: 160
         color: "transparent"
-        HyprlandWindow.opacity: 0.86
+        HyprlandWindow.opacity: 0.8
 
         HyprlandFocusGrab {
           active: celendar.visible

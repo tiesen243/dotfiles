@@ -3,6 +3,7 @@ import Quickshell
 
 import qs.Modules.Background
 import qs.Modules.Bar
+import qs.Modules.Notification
 import qs.Modules.Sidebar
 
 ShellRoot {
@@ -21,5 +22,10 @@ ShellRoot {
   Loader {
     active: false
     sourceComponent: Sidebar { id: sidebar }
+  }
+
+  Loader {
+    active: true
+    sourceComponent: Notification { id: notification }
   }
 }

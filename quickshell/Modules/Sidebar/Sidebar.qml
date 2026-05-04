@@ -19,7 +19,7 @@ Scope {
     anchors.bottom: true
     implicitWidth: 64
     color: colors.background
-    HyprlandWindow.opacity: 0.86
+    HyprlandWindow.opacity: 0.8
 
     Column {
       anchors.fill: parent
