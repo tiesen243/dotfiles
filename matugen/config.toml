@@ -41,13 +41,17 @@ output_path = '~/.config/kitty/colors.conf'
 input_path = '~/.config/matugen/templates/lazygit.yml'
 output_path = '~/.config/lazygit/config.yml'
 
+[templates.quickshell]
+input_path = '~/.config/matugen/templates/quickshell.qml'
+output_path = '~/.config/quickshell/Colors/Colors.qml'
+
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi.rasi'
 output_path = '~/.config/rofi/colors.rasi'
 
-[templates.swaync]
-input_path = '~/.config/matugen/templates/colors.css'
-output_path = '~/.config/swaync/colors.css'
+# [templates.swaync]
+# input_path = '~/.config/matugen/templates/colors.css'
+# output_path = '~/.config/swaync/colors.css'
 
 # [templates.waybar]
 # input_path = '~/.config/matugen/templates/colors.css'
