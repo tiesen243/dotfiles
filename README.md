@@ -41,7 +41,7 @@ rm -rf ~/yay
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
   # Hyprland ecosystem
-  hypridle hyprlock hyprpaper hyprpicker hyprpolkitagent xdg-desktop-portal-hyprland \
+  hypridle hyprlock hyprpicker hyprpolkitagent xdg-desktop-portal-hyprland \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   # UI & launchers
@@ -146,10 +146,29 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
    New-Item -ItemType SymbolicLink -Path $HOME\AppData\Local\nvim -Target $HOME\dotfiles\nvim
    ```
 
-2. Change Wallpaper in `~/dotfiles/hypr/hyprpaper.conf`
+2. Change Wallpaper
+
+   2.1. For `hyprpaper`
 
    ```bash
+   # ~/dotfiles/hypr/hyprpaper.conf
    $path = /path/to/your/wallpaper
+   ```
+
+   2.2. For `quickshell`
+
+   ```qml
+   // ~/dotfiles/quickshell/Modules/Background/Background.qml
+   Scope {
+    // ...
+    PanelWindow {
+      // ...
+      Image {
+        // ...
+        source: background.getWallpaper(fileName)
+      }
+    }
+   }
    ```
 
    Or change file in `~/dotfiles/assets/_background.png`

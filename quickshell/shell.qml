@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 
+import qs.Modules.Background
 import qs.Modules.Bar
 import qs.Modules.Sidebar
 
@@ -15,5 +16,10 @@ ShellRoot {
   Loader {
     active: false
     sourceComponent: Sidebar { id: sidebar }
+  }
+
+  Loader {
+    active: true
+    sourceComponent: Background { id: background }
   }
 }
