@@ -1,4 +1,4 @@
-# My arch linux config with Hyprland
+# Arch Linux / CachyOS config with Hyprland
 
 ## Preview
 
