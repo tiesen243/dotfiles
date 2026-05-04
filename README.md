@@ -45,7 +45,7 @@ yes | yay -S --answerclean All --answerdiff None \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   # UI & launchers
-  rofi swaync \
+  rofi quickshell \
   # Terminal & CLI tools
   kitty btop fastfetch fzf zsh lazygit lsd ripgrep unzip github-cli \
   # Media & notifications
@@ -116,9 +116,9 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync}
+   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,rofi}
 
-   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,rofi,swaync} ~/.config
+   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,rofi} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
    ln -s ~/dotfiles/zsh/.zprofile ~/.zprofile # for fcitx config (optional)
