@@ -19,11 +19,11 @@ Scope {
   property string wifiStat: ""
   Process {
     id: wifiProc
-    command: ["/bin/bash", "-c", "nmcli -t -f active,ssid,bars dev wifi | grep '^yes' | cut -d: -f2-"]
+    command: ["/bin/bash", "-c", "nmcli -t -f active,rate,bars dev wifi | grep '^yes' | cut -d: -f2-"]
     stdout: SplitParser {
       onRead: data => {
         var parts = data.trim().split(':')
-        var ssid = parts[0] ? parts[0] : "Not Connected"
+        var speed = parts[0] ? parts[0] : "Not Connected"
         var str = parts.length > 1 ? parts[1] : ""
 
         var icon = "󰤟 "
@@ -31,7 +31,7 @@ Scope {
         else if (str.includes("▂▄▆")) icon = "󰤥 "
         else if (str.includes("▂▄")) icon = "󰤢 "
 
-        bar.wifiStat = icon + ssid
+        bar.wifiStat = icon + speed
       }
     }
     Component.onCompleted: running = true

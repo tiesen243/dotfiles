@@ -2,17 +2,17 @@
 
 ## Preview
 
-### Hyprland + Kitty
+### Overview
 
 ![preview-01](./assets/preview-01.png)
 
-### Rofi
+### Kitty terminal
 
 ![preview-02](./assets/preview-02.png)
 
-![preview-03](./assets/preview-03.png)
+## Rofi launcher
 
-## Notification center
+![preview-03](./assets/preview-03.png)
 
 ![preview-04](./assets/preview-04.png)
 
