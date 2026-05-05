@@ -6,6 +6,7 @@ import Quickshell.Io
 import Quickshell.Hyprland
 
 import qs.Colors
+import qs.Modules.StartMenu
 import qs.Modules.Widgets.Player
 import qs.Modules.Widgets.Volume
 
@@ -70,44 +71,18 @@ Scope {
   PanelWindow {
     id: panel
 
-    anchors.top: true
-    anchors.left: true
-    anchors.right: true
+    anchors { top: true; left: true; right: true }
     implicitHeight: 24
     color: colors.background
     HyprlandWindow.opacity: 0.8
 
-    // Menu button
-    Text {
-      id: menu
 
-      anchors.left: parent.left
-      anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: 8
-      text: "󰣇"
-      color: colors.primary
-      font { pixelSize: bar.fontSize; family: bar.fontFamily; bold: true }
+    StartMenu {
+      id: startMenu
+      anchor: panel
 
-      MouseArea {
-        anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        onClicked: mouse => {
-          if (mouse.button === Qt.LeftButton)
-            rofiDrunProc.running = !rofiDrunProc.running
-          else if (mouse.button === Qt.RightButton)
-            rofiMenuProc.running = !rofiMenuProc.running
-        } 
-      }
-
-      Process {
-        id: rofiDrunProc
-        command: ['sh', '-c', '~/dotfiles/scripts/rofilaunch.sh --drun']
-      }
-
-      Process {
-        id: rofiMenuProc
-        command: ['sh', '-c', '~/dotfiles/scripts/rofilaunch.sh --menu']
-      }
+      fontSize: bar.fontSize * 1.5
+      fontFamily: bar.fontFamily
     }
 
     // Workspace Switcher
@@ -116,7 +91,7 @@ Scope {
 
       anchors.left: parent.left
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: menu.width + 16
+      anchors.margins: startMenu.width + 16
 
       Repeater {
         model: 9
@@ -141,7 +116,7 @@ Scope {
 
       anchors.left: parent.left
       anchors.verticalCenter: parent.verticalCenter
-      anchors.margins: menu.width + workspaceSwitcher.width + 32
+      anchors.margins: startMenu.width + workspaceSwitcher.width + 16 * 2
     }
 
     // Window Title
@@ -193,7 +168,7 @@ Scope {
       anchors.right: parent.right
       anchors.verticalCenter: parent.verticalCenter
       anchors.margins: battery.width + 16
-      text: Qt.formatDateTime(new Date(), "ddd, MMM dd - hh:mm:ss")
+      text: Qt.formatDateTime(new Date(), "ddd, MMM dd - hh:mm")
       color: colors.primary
       font { pixelSize: bar.fontSize; family: bar.fontFamily }
 
@@ -202,15 +177,23 @@ Scope {
         onClicked: celendar.visible = !celendar.visible
       }
 
+      Timer {
+        interval: 60 * 1000
+        running: true
+        repeat: true
+        onTriggered: clock.text = Qt.formatDateTime(new Date(), "ddd, MMM dd - hh:mm")
+      }
+
       PopupWindow {
         id: celendar
+        visible: false
+
         property string calContent: ""
 
         anchor.window: panel
         anchor.rect.x: parentWindow.width
         anchor.rect.y: parentWindow.height + 4
 
-        visible: false
         implicitWidth: 200
         implicitHeight: 160
         color: "transparent"
