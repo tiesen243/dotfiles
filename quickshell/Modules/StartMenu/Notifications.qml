@@ -29,10 +29,10 @@ Item {
 
   RowLayout {
     id: notificationHeader
-    implicitWidth: availableWidth
+
+    anchors { left: parent.left; right: parent.right }
 
     Text {
-      Layout.fillWidth: true
       text: "Notifications"
       color: colors.primary
       font { pixelSize: startMenu.fontSize; family: startMenu.fontFamily; bold: true }
@@ -67,11 +67,11 @@ Item {
     id: notificationWrapper
 
     anchors { 
-      margins: 12
       top: notificationHeader.bottom
       left: parent.left
       right: parent.right
       bottom: parent.bottom
+      topMargin: 12
     }
 
     ColumnLayout {

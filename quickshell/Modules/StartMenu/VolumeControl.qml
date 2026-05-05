@@ -34,19 +34,20 @@ RowLayout {
     property int volumeValue: defaultAudioSink && defaultAudioSink.audio
       ? Math.round(defaultAudioSink.audio.volume * 100)
       : 0
+
     PwObjectTracker {
-          objects: [Pipewire.defaultAudioSink]
-        }
-
-        from: 0
-        to: 100
-        value: volumeValue
-
-        onValueChanged: {
-          if (!volumeSlider.defaultAudioSink || !volumeSlider.defaultAudioSink.audio) 
-            return
-
-          volumeSlider.defaultAudioSink.audio.volume = Math.max(0.0, Math.min(1.0, volumeSlider.value / 100));
-        }
-      }
+      objects: [Pipewire.defaultAudioSink]
     }
+
+    from: 0
+    to: 100
+    value: volumeValue
+
+    onValueChanged: {
+      if (!volumeSlider.defaultAudioSink || !volumeSlider.defaultAudioSink.audio || !volumeSlider.pressed) 
+        return
+
+      volumeSlider.defaultAudioSink.audio.volume = Math.max(0.0, Math.min(1.0, volumeSlider.value / 100));
+    }
+  }
+}
