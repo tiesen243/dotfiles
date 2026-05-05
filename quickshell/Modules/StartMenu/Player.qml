@@ -18,7 +18,7 @@ Rectangle {
   implicitHeight: currentPlayer && currentPlayer.metadata ? 80 : 0
   implicitWidth: parent.width - 24
   radius: 8
-  color: colors.primary_container
+  color: colors.on_primary_fixed
   clip: true
 
   function truncateText(text, maxLength) {
