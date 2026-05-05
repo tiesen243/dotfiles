@@ -86,7 +86,7 @@ Item {
       ]
 
       Rectangle {
-        color: modelData.isActive ? colors.primary : colors.on_primary
+        color: modelData.isActive ? colors.primary_fixed : colors.on_primary_fixed
         implicitWidth: (startMenuContent.width / 4) - 16
         implicitHeight: 40
         radius: 6
@@ -94,7 +94,7 @@ Item {
         Text {
           anchors.centerIn: parent
           text: modelData.icon
-          color: modelData.isActive ? colors.on_primary : colors.primary
+          color: modelData.isActive ? colors.on_primary_fixed : colors.primary_fixed
           font { pixelSize: startMenu.fontSize }
         }
 

@@ -45,12 +45,12 @@ Item {
       implicitWidth: 32
       implicitHeight: 32
       radius: 8
-      color: clearButtonArea.pressed ? colors.on_secondary : colors.on_primary
+      color: clearButtonArea.pressed ? colors.on_primary : colors.on_primary_fixed
 
       Text {
         anchors.centerIn: parent
         text: ""
-        color: colors.primary
+        color: colors.primary_fixed
         font { pixelSize: startMenu.fontSize / 1.5; family: startMenu.fontFamily }
       }
 
