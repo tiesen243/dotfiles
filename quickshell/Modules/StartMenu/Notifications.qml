@@ -109,7 +109,7 @@ Item {
                 colors.error : model.urgency === NotificationUrgency.Low ?
                 colors.secondary : colors.primary
               font { pixelSize: startMenu.fontSize / 2; family: startMenu.fontFamily; bold: true }
-              width: parent.width
+              Layout.fillWidth: true
               elide: Text.ElideRight
             }
 
@@ -119,7 +119,7 @@ Item {
                 colors.error : model.urgency === NotificationUrgency.Low ?
                 colors.secondary : colors.primary
               font { pixelSize: startMenu.fontSize / 1.5; family: startMenu.fontFamily }
-              width: parent.width
+              Layout.fillWidth: true
               wrapMode: Text.Wrap
             }
           }

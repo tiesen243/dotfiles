@@ -3,6 +3,8 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 
+import QtCore
+
 Item {
   id: toggleButtons
 
@@ -10,7 +12,8 @@ Item {
 
   property bool wifiEnable: true
   property bool bluetoothEnable: true
-  property bool powerSavingEnable: true
+  property bool powerSavingEnable: false
+  property bool dndEnable: false
 
   Process {
     id: wifiProc
@@ -70,20 +73,21 @@ Item {
 
     anchors { top: parent.top; left: parent.left; margins: 12 }
     columnSpacing: 12
-    columns: 3
+    columns: 4
     rowSpacing: 12
-    rows: 2
+    rows: 1
 
     Repeater {
       model: [
         { icon: '', isActive: toggleButtons.wifiEnable, toggle: toggleWifiProc },
         { icon: '󰂯', isActive: toggleButtons.bluetoothEnable, toggle: toggleBluetoothProc },
-        { icon: '', isActive: toggleButtons.powerSavingEnable, toggle: togglePowerSavingProc }
+        { icon: '', isActive: toggleButtons.powerSavingEnable, toggle: togglePowerSavingProc },
+        { icon: '', isActive: false, toggle: null }
       ]
 
       Rectangle {
         color: modelData.isActive ? colors.primary : colors.on_primary
-        implicitWidth: (startMenuContent.width / 3) - 16
+        implicitWidth: (startMenuContent.width / 4) - 16
         implicitHeight: 40
         radius: 6
 
