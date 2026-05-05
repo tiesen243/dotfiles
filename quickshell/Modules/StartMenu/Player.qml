@@ -21,8 +21,13 @@ Rectangle {
   color: colors.primary_container
   clip: true
 
+  function truncateText(text, maxLength) {
+    if (text.length <= maxLength) return text
+    return text.substring(0, maxLength - 1) + "…"
+  }
+
   ClippingRectangle {
-    id: clippingRect
+    id: artContainer
 
     anchors { 
       left: parent.left
@@ -43,12 +48,11 @@ Rectangle {
     }
   }
 
-
   ColumnLayout {
     id: playerInfo
 
     anchors { 
-      left: clippingRect.right; 
+      left: artContainer.right; 
       top: parent.top; 
       bottom: parent.bottom; 
       right: parent.right; 
@@ -58,12 +62,12 @@ Rectangle {
     Text {
       id: playerContent
 
-      text: player.currentPlayer.metadata["xesam:title"] || "No player"
+      text: player.currentPlayer && player.currentPlayer.metadata["xesam:title"] ? truncateText(player.currentPlayer.metadata["xesam:title"], 36) : ""
       color: colors.primary
     }
 
     Text {
-      text: player.currentPlayer.metadata["xesam:artist"] 
+      text: player.currentPlayer && player.currentPlayer.metadata["xesam:artist"] 
         ? player.currentPlayer.metadata["xesam:artist"].join(", ") 
         : ""
       color: colors.primary
@@ -77,7 +81,7 @@ Rectangle {
         visible: player.currentPlayer && player.currentPlayer.canGoPrevious
         text: ""
         color: colors.primary
-        font { pixelSize: startMenu.fontSize; family: startMenu.fontFamily }
+        font { pixelSize: startMenu.fontSize / 1.5; family: startMenu.fontFamily }
 
         MouseArea {
           anchors.fill: parent
@@ -89,10 +93,11 @@ Rectangle {
       }
 
       Text {
-        text: player.currentPlayer.playbackState === MprisPlaybackState.Playing ? "" :
-              player.currentPlayer.playbackState === MprisPlaybackState.Paused ? "" : ""
+        text: player.currentPlayer && player.currentPlayer.playbackState === MprisPlaybackState.Playing ? 
+          "" : player.currentPlayer && player.currentPlayer.playbackState === MprisPlaybackState.Paused 
+          ? "" : ""
         color: colors.primary
-        font { pixelSize: startMenu.fontSize; family: startMenu.fontFamily }
+        font { pixelSize: startMenu.fontSize / 1.5; family: startMenu.fontFamily }
 
         MouseArea {
           anchors.fill: parent
@@ -109,7 +114,7 @@ Rectangle {
         visible: player.currentPlayer && player.currentPlayer.canGoNext
         text: ""
         color: colors.primary
-        font { pixelSize: startMenu.fontSize; family: startMenu.fontFamily }
+        font { pixelSize: startMenu.fontSize / 1.5; family: startMenu.fontFamily }
 
         MouseArea {
           anchors.fill: parent
