@@ -88,14 +88,8 @@ Item {
           implicitHeight: contentColumn.implicitHeight + 16
           radius: 8
           color: model.urgency === NotificationUrgency.Critical ?
-            colors.error_container : model.urgency === NotificationUrgency.Low ?
-            colors.secondary_container : colors.primary_container
-          border { 
-            color: model.urgency === NotificationUrgency.Critical ?
-              colors.on_error : model.urgency === NotificationUrgency.Low ?
-              colors.on_secondary : colors.on_primary
-            width: 2
-          }
+            colors.on_error : model.urgency === NotificationUrgency.Low ?
+            colors.on_secondary_fixed : colors.on_primary_fixed
 
           ColumnLayout {
             id: contentColumn
