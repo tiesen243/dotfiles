@@ -32,9 +32,9 @@ fi
 
 send_notification() {
   if [ "$icon_show" = "true" ]; then
-    notify-send -i "$1" "$2"
+    notify-send -i "$1" "Volume Control" "$2"
   else
-    notify-send "$2"
+    notify-send "Volume Control" "$2"
   fi
 }
 
