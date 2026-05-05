@@ -20,7 +20,9 @@ fi
 
 notify_args=()
 if [[ "$icon_show" == "true" ]]; then
-  notify_args+=("-i" "$icon")
+  notify_args+=("-i" "$icon" "Brightness Control")
+else
+  notify_args+=("Brightness Control")
 fi
 
 case $1 in
