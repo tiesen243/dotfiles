@@ -40,7 +40,7 @@ Item {
     font { pixelSize: bar.fontSize; family: bar.fontFamily }
 
     Timer {
-      interval: 5000
+      interval: 10 * 60 * 1000
       running: true
       repeat: true
       onTriggered: batteryProc.running = true
