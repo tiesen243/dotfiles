@@ -17,10 +17,6 @@ require("yuki").setup({
 
     "plugins.langs.python",
 
-    "plugins.langs.qml",
-
-    "plugins.langs.rust",
-
     "plugins.extras.ai",
     "plugins.extras.oxc",
   },
