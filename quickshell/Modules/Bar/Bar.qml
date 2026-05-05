@@ -62,6 +62,11 @@ Scope {
     Component.onCompleted: running = true
   }
 
+  function truncateText(text, maxLength) {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength - 1) + "…";
+  }
+
   PanelWindow {
     id: panel
 
@@ -143,7 +148,7 @@ Scope {
     Text {
       anchors.horizontalCenter: parent.horizontalCenter
       anchors.verticalCenter: parent.verticalCenter
-      text: Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
+      text: Hyprland.activeToplevel ? bar.truncateText(Hyprland.activeToplevel.title, 50) : ""
       color: colors.primary
       font { pixelSize: bar.fontSize; family: bar.fontFamily }
     }
