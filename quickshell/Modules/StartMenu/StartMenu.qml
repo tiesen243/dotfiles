@@ -73,7 +73,7 @@ Item {
       Text {
         id: clock
         anchors { top: parent.top; left: parent.left; margins: 12 }
-        text: Qt.formatDateTime(new Date(), "hh:mm:ss")
+        text: Qt.formatDateTime(new Date(), "dddd, MMM dd - hh:mm:ss")
         color: colors.primary
         font { pixelSize: startMenu.fontSize; family: startMenu.fontFamily; bold: true }
 
@@ -81,7 +81,7 @@ Item {
           interval: 1000
           running: true
           repeat: true
-          onTriggered: clock.text = Qt.formatDateTime(new Date(), "hh:mm:ss")
+          onTriggered: clock.text = Qt.formatDateTime(new Date(), "dddd, MMM dd - hh:mm:ss")
         }
       }
 

@@ -8,7 +8,7 @@ Text {
   id: clock
 
   anchors { right: battery.left; verticalCenter: parent.verticalCenter; margins: 12 }
-  text: Qt.formatDateTime(new Date(), "ddd, MMM dd - hh:mm")
+  text: Qt.formatTime(new Date(), "hh:mm")
   color: colors.primary
   font { pixelSize: bar.fontSize; family: bar.fontFamily }
 
@@ -18,10 +18,13 @@ Text {
   }
 
   Timer {
-    interval: 60 * 1000
+    interval: (60 - new Date().getSeconds()) * 1000
     running: true
     repeat: true
-    onTriggered: clock.text = Qt.formatDateTime(new Date(), "ddd, MMM dd - hh:mm")
+    onTriggered: {
+      clock.text = Qt.formatDateTime(new Date(), "hh:mm")
+      clockTimer.interval = (60 - new Date().getSeconds()) * 1000
+    }
   }
 
   PopupWindow {

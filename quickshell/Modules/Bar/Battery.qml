@@ -43,7 +43,7 @@ Item {
       interval: 5000
       running: true
       repeat: true
-      onTriggered: batteryContent.text = battery.stat
+      onTriggered: batteryProc.running = true
     }
   }
 }
