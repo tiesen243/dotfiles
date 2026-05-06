@@ -56,6 +56,11 @@ Item {
       onCleared: root.isOpen = false
     }
 
+    Shortcut {
+      sequence: "Escape"
+      onActivated: root.isOpen = false
+    }
+
     Rectangle {
       id: startMenuContent
 
