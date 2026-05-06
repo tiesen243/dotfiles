@@ -1,6 +1,7 @@
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
+import QtQuick
 
 Scope {
   id: root
@@ -9,7 +10,7 @@ Scope {
     target: "lockscreen"
 
     function lock(): void {
-      lock.locked = true
+      lockTimer.running = true
     }
   }
 
@@ -29,5 +30,11 @@ Scope {
 				context: lockContext
 			}
 		}
+	}
+
+	Timer {
+	  id: lockTimer
+	  interval: 200
+	  onTriggered: lock.locked = true
 	}
 }
