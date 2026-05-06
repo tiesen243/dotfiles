@@ -7,12 +7,7 @@ import qs.Colors
 
 Scope {
   id: root
-
   Colors { id: colors }
-
-  function getWallpaper(fileName: string): string {
-    return StandardPaths.standardLocations(StandardPaths.HomeLocation)[0] + "/dotfiles/assets/" + fileName
-  }
 
   Variants {
     model: Quickshell.screens
@@ -44,5 +39,9 @@ Scope {
         fillMode: Image.PreserveAspectCrop
       }
     }
+  }
+
+  function getWallpaper(fileName: string): string {
+    return StandardPaths.standardLocations(StandardPaths.HomeLocation)[0] + "/dotfiles/assets/" + fileName
   }
 }

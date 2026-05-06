@@ -5,7 +5,7 @@ import qs.Modules.Background
 import qs.Modules.Bar
 import qs.Modules.Lockscreen
 import qs.Modules.Notification
-import qs.Modules.Sidebar
+import qs.Modules.OSD
 
 ShellRoot {
   id: root
@@ -26,12 +26,12 @@ ShellRoot {
   }
 
   Loader {
-    active: false
-    sourceComponent: Sidebar { id: sidebar }
+    active: true
+    sourceComponent: Notification { id: notification }
   }
 
   Loader {
     active: true
-    sourceComponent: Notification { id: notification }
+    sourceComponent: OSD { id: osd }
   }
 }
