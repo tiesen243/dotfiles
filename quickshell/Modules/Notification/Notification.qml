@@ -1,19 +1,21 @@
-import Quickshell
+import Quickshell.Services.Notifications
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import Quickshell.Io
-import Quickshell.Services.Notifications
-import QtQuick
+import Quickshell
 import QtQuick.Layouts
+import QtQuick
 
 import qs.Colors
 
 Scope {
   id: notification
+  property font rootFont: Qt.font({
+    pixelSize: 14,
+    family: "GeistMono Nerd Font"
+  })
 
-  property string fontFamily: "GeistMono Nerd Font"
-  property int fontSize: 14
   Colors { id: colors }
 
   IpcHandler {
@@ -29,293 +31,291 @@ Scope {
   }
 
   Variants {
-      model: Quickshell.screens
+    model: Quickshell.screens
 
-      PanelWindow {
-          id: notifWindow
-          required property var modelData
-          screen: modelData
-          HyprlandWindow.opacity: 0.8
+    PanelWindow {
+      id: notifWindow
+      required property var modelData
+      screen: modelData
+      HyprlandWindow.opacity: 0.8
 
-          visible: NotificationService.notifications.length > 0
-          focusable: false
-          color: "transparent"
+      visible: NotificationService.notifications.length > 0
+      focusable: false
+      color: "transparent"
 
-          WlrLayershell.layer: WlrLayer.Overlay
-          WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-          WlrLayershell.namespace: "quickshell-notifications"
+      WlrLayershell.layer: WlrLayer.Overlay
+      WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+      WlrLayershell.namespace: "quickshell-notifications"
 
-          exclusionMode: ExclusionMode.Ignore
+      exclusionMode: ExclusionMode.Ignore
 
-          anchors {
-              top: true
-              right: true
+      anchors { top: true; right: true }
+
+      implicitWidth: 380
+      implicitHeight: notifColumn.implicitHeight + 20
+
+      ColumnLayout {
+        id: notifColumn
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 3
+        anchors.rightMargin: 8
+        width: 360
+        spacing: 8
+
+        Repeater {
+          model: ScriptModel {
+            values: NotificationService.notifications
+            objectProp: "seqId"
           }
 
-          implicitWidth: 380
-          implicitHeight: notifColumn.implicitHeight + 20
+          Rectangle {
+            id: notifCard
+            required property var modelData
+            required property int index
 
-          ColumnLayout {
-              id: notifColumn
-              anchors.top: parent.top
-              anchors.right: parent.right
-              anchors.topMargin: 28
-              anchors.rightMargin: 8
-              width: 360
-              spacing: 8
+            Layout.fillWidth: true
+            Layout.preferredHeight: cardContent.implicitHeight + 24
+            radius: 12
+            color: colors.background
+            border.color: modelData.urgency === NotificationUrgency.Critical 
+              ? colors.primary : modelData.urgency === NotificationUrgency.Low     
+              ? colors.primary : colors.surface
+            border.width: 1
+            clip: true
 
-              Repeater {
-                  model: ScriptModel {
-                      values: NotificationService.notifications
-                      objectProp: "seqId"
+            Accessible.role: Accessible.StaticText
+            Accessible.name: (modelData.urgency === NotificationUrgency.Critical 
+              ? "[Critical] " : modelData.urgency === NotificationUrgency.Low      
+              ? "[Low] " : "") + (modelData.appName || "Notification") + ": " + modelData.summary
+
+            HoverHandler {
+              id: cardHover
+              onHoveredChanged: notifCard.modelData.hovered = hovered
+            }
+
+            NumberAnimation on opacity {
+              id: entryAnim
+              from: 0; to: 1
+              duration: 200
+              easing.type: Easing.OutCubic
+              running: false
+            }
+            Component.onCompleted: entryAnim.start()
+
+            Rectangle {
+              width: 3
+              height: parent.height - 16
+              radius: 2
+              anchors.left: parent.left
+              anchors.leftMargin: 6
+              anchors.verticalCenter: parent.verticalCenter
+              color: notifCard.modelData.urgency === NotificationUrgency.Critical 
+                ? colors.primary : notifCard.modelData.urgency === NotificationUrgency.Low
+                ? colors.primary : colors.primary
+            }
+
+            ColumnLayout {
+              id: cardContent
+              anchors.fill: parent
+              anchors.leftMargin: 16
+              anchors.rightMargin: 12
+              anchors.topMargin: 12
+              anchors.bottomMargin: 12
+              spacing: 6
+
+              RowLayout {
+                Layout.fillWidth: true
+                spacing: 8
+
+                Item {
+                  Layout.preferredWidth: 16
+                  Layout.preferredHeight: 16
+                  Layout.alignment: Qt.AlignVCenter
+
+                  IconImage {
+                    anchors.centerIn: parent
+                    source: Quickshell.iconPath(notifCard.modelData.appIcon, true)
+                    implicitSize: 16
+                    visible: notifCard.modelData.appIcon !== ""
                   }
+
+                  Text {
+                    anchors.centerIn: parent
+                    visible: notifCard.modelData.appIcon === ""
+                    text: {
+                      const name = notifCard.modelData.appName.toLowerCase();
+                      if (notifCard.modelData.urgency === NotificationUrgency.Critical) return "󰀦";
+                      return "󰂚";
+                    }
+                    color: notifCard.modelData.urgency === NotificationUrgency.Critical
+                      ? colors.primary : colors.primary
+                    font: root.rootFont
+                  }
+                }
+
+                Text {
+                  text: notifCard.modelData.appName || "Notification"
+                  color: colors.primary
+                  font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
+                  Layout.alignment: Qt.AlignVCenter
+                }
+
+                Item { Layout.fillWidth: true }
+
+                Rectangle {
+                  width: 20
+                  height: 20
+                  radius: 10
+                  color: closeHover.containsMouse ? colors.surface : "transparent"
+                  Layout.alignment: Qt.AlignVCenter
+                  Accessible.role: Accessible.Button
+                  Accessible.name: "Dismiss notification"
+
+                  Text {
+                    anchors.centerIn: parent
+                    text: "󰅖"
+                    color: closeHover.containsMouse ? colors.primary : colors.primary
+                    font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
+                  }
+
+                  MouseArea {
+                    id: closeHover
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: notifCard.modelData.dismiss()
+                  }
+                }
+              }
+
+              Text {
+                text: notifCard.modelData.summary.replace(/[^\x00-\x7F]/g, "").trim()
+                color: colors.primary
+                font { pixelSize: notification.fontSize; family: notification.fontFamily; bold: true }
+                elide: Text.ElideRight
+                Layout.fillWidth: true
+                visible: text !== ""
+              }
+
+              RowLayout {
+                Layout.fillWidth: true
+                spacing: 8
+                visible: notifCard.modelData.body !== "" || notifCard.modelData.image !== ""
+
+                Text {
+                  text: notifCard.modelData.body
+                  color: colors.primary
+                  font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
+                  wrapMode: Text.Wrap
+                  maximumLineCount: 3
+                  elide: Text.ElideRight
+                  Layout.fillWidth: true
+                  visible: text !== ""
+                  textFormat: Text.PlainText
+                }
+
+                Rectangle {
+                  Layout.preferredWidth: 24
+                  Layout.preferredHeight: 24
+                  radius: 4
+                  color: "transparent"
+                  clip: true
+                  visible: notifCard.modelData.image !== ""
+
+                  Image {
+                    anchors.fill: parent
+                    source: notifCard.modelData.image
+                    fillMode: Image.PreserveAspectCrop
+                    sourceSize.width: 24
+                    sourceSize.height: 24
+                  }
+                }
+              }
+
+              RowLayout {
+                Layout.fillWidth: true
+                spacing: 6
+                visible: notifCard.modelData.actions.length > 0
+
+                Repeater {
+                  model: notifCard.modelData.actions
 
                   Rectangle {
-                      id: notifCard
-                      required property var modelData
-                      required property int index
+                    id: actionBtn
+                    required property var modelData
 
-                      Layout.fillWidth: true
-                      Layout.preferredHeight: cardContent.implicitHeight + 24
-                      radius: 12
-                      color: colors.background
-                      border.color: modelData.urgency === NotificationUrgency.Critical ? colors.primary :
-                                    modelData.urgency === NotificationUrgency.Low     ? colors.primary     : colors.surface
-                      border.width: 1
-                      clip: true
+                    Layout.preferredHeight: 26
+                    Layout.preferredWidth: actionText.width + 16
+                    radius: 6
+                    color: actionHover.containsMouse ? colors.surface : colors.surface
+                    Behavior on color {
+                      ColorAnimation { duration: 100 }
+                    }
 
-                      Accessible.role: Accessible.StaticText
-                      Accessible.name: (modelData.urgency === NotificationUrgency.Critical ? "[Critical] " :
-                                        modelData.urgency === NotificationUrgency.Low       ? "[Low] "      : "") +
-                                        (modelData.appName || "Notification") + ": " + modelData.summary
+                    Accessible.role: Accessible.Button
+                    Accessible.name: actionBtn.modelData.text || ""
 
-                      HoverHandler {
-                          id: cardHover
-                          onHoveredChanged: notifCard.modelData.hovered = hovered
-                      }
+                    Text {
+                      id: actionText
+                      anchors.centerIn: parent
+                      text: actionBtn.modelData.text || ""
+                      color: colors.primary
+                      font { pixelSize: notification.fontSize * 0.6; family: notification.fontFamily }
+                    }
 
-                      NumberAnimation on opacity {
-                          id: entryAnim
-                          from: 0; to: 1
-                          duration: 200
-                          easing.type: Easing.OutCubic
-                          running: false
-                      }
-                      Component.onCompleted: entryAnim.start()
-
-                      Rectangle {
-                          width: 3
-                          height: parent.height - 16
-                          radius: 2
-                          anchors.left: parent.left
-                          anchors.leftMargin: 6
-                          anchors.verticalCenter: parent.verticalCenter
-                          color: notifCard.modelData.urgency === NotificationUrgency.Critical ? colors.primary :
-                                  notifCard.modelData.urgency === NotificationUrgency.Low      ? colors.primary      : colors.primary
-                      }
-
-                      ColumnLayout {
-                          id: cardContent
-                          anchors.fill: parent
-                          anchors.leftMargin: 16
-                          anchors.rightMargin: 12
-                          anchors.topMargin: 12
-                          anchors.bottomMargin: 12
-                          spacing: 6
-
-                          RowLayout {
-                              Layout.fillWidth: true
-                              spacing: 8
-
-                              Item {
-                                  Layout.preferredWidth: 16
-                                  Layout.preferredHeight: 16
-                                  Layout.alignment: Qt.AlignVCenter
-
-                                  IconImage {
-                                      anchors.centerIn: parent
-                                      source: Quickshell.iconPath(notifCard.modelData.appIcon, true)
-                                      implicitSize: 16
-                                      visible: notifCard.modelData.appIcon !== ""
-                                  }
-
-                                  Text {
-                                      anchors.centerIn: parent
-                                      visible: notifCard.modelData.appIcon === ""
-                                      text: {
-                                          const name = notifCard.modelData.appName.toLowerCase();
-                                          if (notifCard.modelData.urgency === NotificationUrgency.Critical) return "󰀦";
-                                          return "󰂚";
-                                      }
-                                      color: notifCard.modelData.urgency === NotificationUrgency.Critical
-                                              ? colors.primary : colors.primary
-                                      font { pixelSize: notification.fontSize; family: notification.fontFamily }
-                                  }
-                              }
-
-                              Text {
-                                  text: notifCard.modelData.appName || "Notification"
-                                  color: colors.primary
-                                  font { pixelSize: notification.fontSize - 2; family: notification.fontFamily }
-                                  Layout.alignment: Qt.AlignVCenter
-                              }
-
-                              Item { Layout.fillWidth: true }
-
-                              Rectangle {
-                                  width: 20
-                                  height: 20
-                                  radius: 10
-                                  color: closeHover.containsMouse ? colors.surface : "transparent"
-                                  Layout.alignment: Qt.AlignVCenter
-                                  Accessible.role: Accessible.Button
-                                  Accessible.name: "Dismiss notification"
-
-                                  Text {
-                                      anchors.centerIn: parent
-                                      text: "󰅖"
-                                      color: closeHover.containsMouse ? colors.primary : colors.primary
-                                      font { pixelSize: notification.fontSize - 2; family: notification.fontFamily }
-                                  }
-
-                                  MouseArea {
-                                      id: closeHover
-                                      anchors.fill: parent
-                                      hoverEnabled: true
-                                      cursorShape: Qt.PointingHandCursor
-                                      onClicked: notifCard.modelData.dismiss()
-                                  }
-                              }
-                          }
-
-                          Text {
-                              text: notifCard.modelData.summary.replace(/[^\x00-\x7F]/g, "").trim()
-                              color: colors.primary
-                              font { pixelSize: notification.fontSize; family: notification.fontFamily }
-                              font.bold: true
-                              elide: Text.ElideRight
-                              Layout.fillWidth: true
-                              visible: text !== ""
-                          }
-
-                          RowLayout {
-                              Layout.fillWidth: true
-                              spacing: 8
-                              visible: notifCard.modelData.body !== "" || notifCard.modelData.image !== ""
-
-                              Text {
-                                  text: notifCard.modelData.body
-                                  color: colors.primary
-                                  font { pixelSize: notification.fontSize - 2; family: notification.fontFamily }
-                                  wrapMode: Text.Wrap
-                                  maximumLineCount: 3
-                                  elide: Text.ElideRight
-                                  Layout.fillWidth: true
-                                  visible: text !== ""
-                                  textFormat: Text.PlainText
-                              }
-
-                              Rectangle {
-                                  Layout.preferredWidth: 24
-                                  Layout.preferredHeight: 24
-                                  radius: 4
-                                  color: "transparent"
-                                  clip: true
-                                  visible: notifCard.modelData.image !== ""
-
-                                  Image {
-                                      anchors.fill: parent
-                                      source: notifCard.modelData.image
-                                      fillMode: Image.PreserveAspectCrop
-                                      sourceSize.width: 24
-                                      sourceSize.height: 24
-                                  }
-                              }
-                          }
-
-                          RowLayout {
-                              Layout.fillWidth: true
-                              spacing: 6
-                              visible: notifCard.modelData.actions.length > 0
-
-                              Repeater {
-                                  model: notifCard.modelData.actions
-
-                                  Rectangle {
-                                      id: actionBtn
-                                      required property var modelData
-
-                                      Layout.preferredHeight: 26
-                                      Layout.preferredWidth: actionText.width + 16
-                                      radius: 6
-                                      color: actionHover.containsMouse ? colors.surface : colors.surface
-                                      Behavior on color {
-                                          ColorAnimation { duration: 100 }
-                                      }
-
-                                      Accessible.role: Accessible.Button
-                                      Accessible.name: actionBtn.modelData.text || ""
-
-                                      Text {
-                                          id: actionText
-                                          anchors.centerIn: parent
-                                          text: actionBtn.modelData.text || ""
-                                          color: colors.primary
-                                          font.pixelSize: 11
-                                      }
-
-                                      MouseArea {
-                                          id: actionHover
-                                          anchors.fill: parent
-                                          hoverEnabled: true
-                                          cursorShape: Qt.PointingHandCursor
-                                          onClicked: notifCard.modelData.invokeAction(actionBtn.modelData.identifier)
-                                      }
-                                  }
-                              }
-                          }
-
-                          Rectangle {
-                              Layout.fillWidth: true
-                              height: 2
-                              radius: 1
-                              color: colors.surface
-                              Layout.topMargin: 2
-
-                              Rectangle {
-                                  id: progressBar
-                                  height: parent.height
-                                  width: parent.width
-                                  radius: 1
-                                  color: notifCard.modelData.urgency === NotificationUrgency.Critical
-                                          ? colors.primary : colors.primary
-                                  opacity: 0.6
-                                  SequentialAnimation {
-                                      running: notifCard.modelData.urgency !== NotificationUrgency.Critical
-                                      PauseAnimation { duration: 50 }
-                                      NumberAnimation {
-                                          target: progressBar
-                                          property: "width"
-                                          to: 0
-                                          duration: notifCard.modelData.expireTimeout > 0
-                                                    ? notifCard.modelData.expireTimeout * 1000
-                                                    : 5000
-                                      }
-                                  }
-                              }
-                          }
-                      }
-
-                      MouseArea {
-                          anchors.fill: parent
-                          anchors.topMargin: 30
-                          z: -1
-                          onClicked: notifCard.modelData.dismiss()
-                          cursorShape: Qt.PointingHandCursor
-                      }
+                    MouseArea {
+                      id: actionHover
+                      anchors.fill: parent
+                      hoverEnabled: true
+                      cursorShape: Qt.PointingHandCursor
+                      onClicked: notifCard.modelData.invokeAction(actionBtn.modelData.identifier)
+                    }
                   }
+                }
               }
+
+              Rectangle {
+                Layout.fillWidth: true
+                height: 2
+                radius: 1
+                color: colors.surface
+                Layout.topMargin: 2
+
+                Rectangle {
+                  id: progressBar
+                  height: parent.height
+                  width: parent.width
+                  radius: 1
+                  color: notifCard.modelData.urgency === NotificationUrgency.Critical
+                          ? colors.primary : colors.primary
+                  opacity: 0.6
+                  SequentialAnimation {
+                    running: notifCard.modelData.urgency !== NotificationUrgency.Critical
+                    PauseAnimation { duration: 50 }
+                    NumberAnimation {
+                      target: progressBar
+                      property: "width"
+                      to: 0
+                      duration: notifCard.modelData.expireTimeout > 0
+                        ? notifCard.modelData.expireTimeout * 1000
+                        : 5000
+                    }
+                  }
+                }
+              }
+            }
+
+            MouseArea {
+              anchors.fill: parent
+              anchors.topMargin: 30
+              z: -1
+              onClicked: notifCard.modelData.dismiss()
+              cursorShape: Qt.PointingHandCursor
+            }
           }
+        }
       }
+    }
   }
 }
