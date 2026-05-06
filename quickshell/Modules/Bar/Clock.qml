@@ -1,39 +1,40 @@
-import Quickshell
-import Quickshell.Io
-
-import QtQuick
 import Quickshell.Hyprland
+import Quickshell.Io
+import Quickshell
+import QtQuick
 
-Text {
-  id: clock
+import qs.Colors
 
-  anchors { right: battery.left; verticalCenter: parent.verticalCenter; margins: 12 }
-  text: Qt.formatTime(new Date(), "hh:mm")
-  color: colors.primary
-  font { pixelSize: bar.fontSize; family: bar.fontFamily }
+Item {
+  id: root
+  Colors { id: colors }
+  property font rootFont
+  property var popupAnchor
 
-  MouseArea {
-    anchors.fill: parent
-    onClicked: celendar.visible = !celendar.visible
-  }
+  implicitWidth: clock.width
 
-  Timer {
-    interval: (60 - new Date().getSeconds()) * 1000
-    running: true
-    repeat: true
-    onTriggered: {
-      clock.text = Qt.formatDateTime(new Date(), "hh:mm")
-      clockTimer.interval = (60 - new Date().getSeconds()) * 1000
+  Text {
+    id: clock
+    Accessible.role: Accessible.StaticText
+    Accessible.name: "Current time: " + clock.text
+
+    anchors.centerIn: parent
+    text: Qt.formatTime(new Date(), "hh:mm")
+    color: colors.primary
+    font: rootFont
+
+    MouseArea {
+      anchors.fill: parent
+      onClicked: celendar.visible = !celendar.visible
     }
   }
 
   PopupWindow {
     id: celendar
     visible: false
+    property string content: ""
 
-    property string calContent: ""
-
-    anchor.window: panel
+    anchor.window: root.popupAnchor
     anchor.rect.x: parentWindow.width
     anchor.rect.y: parentWindow.height + 4
 
@@ -42,48 +43,48 @@ Text {
     color: "transparent"
     HyprlandWindow.opacity: 0.8
 
-    HyprlandFocusGrab {
-      active: celendar.visible
-      windows: [celendar]
-      onCleared: {
-        celendar.visible = false
+    Rectangle {
+      anchors.fill: parent
+      color: colors.surface
+      border { color: colors.on_primary; width: 1 }
+      radius: 8
+      Text {
+        anchors.centerIn: parent
+        text: celendar.content
+        textFormat: Text.RichText
+        color: colors.primary
+        font: rootFont
       }
     }
 
     onVisibleChanged: {
       if (visible) {
-        celendar.calContent = ""
-        calProc.running = true
-      }
-    }
-
-    Rectangle {
-      anchors.fill: parent
-      color: colors.background
-      
-      radius: 8
-      border { color: colors.primary; width: 2 }
-
-      Text {
-        anchors.centerIn: parent
-        text: celendar.calContent
-        color: colors.primary
-        font { pixelSize: bar.fontSize; family: bar.fontFamily }
-      }
-
-      Process {
-        id: calProc
-        command: ['cal']
-        stdout: SplitParser {
-          onRead: data => {
-            var today = new Date().getDate().toString();
-            var regex = new RegExp("(\\b|\\s)" + today + "(\\b|\\s)");
-            var styledLine = data.replace(regex, "$1<u><b><font color='" + colors.primary + "'>" + today + "</font></b></u>$2");
-            celendar.calContent += "<br>" + styledLine.replace(/ /g, "&nbsp;") 
-          }
-        }
+        celendar.content = ""
+        celendarProc.running = true
       }
     }
   }
-}
 
+  Process {
+    id: celendarProc
+    command: ["cal"]
+    stdout: SplitParser {
+      onRead: data => {
+        const today = new Date().getDate().toString()
+        const regex = new RegExp("(\\b|\\s)" + today + "(\\b|\\s)")
+        const styledLine = data.replace(regex, "$1<u><b><font color='" + colors.primary + "'>" + today + "</font></b></u>$2")
+        celendar.content += "<br>" + styledLine.replace(/ /g, "&nbsp;")
+      }
+    }
+  }
+
+  Timer {
+    interval: (60 - new Date().getSeconds()) * 1000
+    running: true
+    repeat: true
+    onTriggered: {
+      clock.text = Qt.formatTime(new Date(), "hh:mm")
+      clockTimer.interval = (60 - new Date().getSeconds()) * 1000
+    } 
+  }
+}
