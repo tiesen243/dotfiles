@@ -27,15 +27,9 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     implicitWidth: 600
     implicitHeight: playerInfo.implicitHeight + 32
-    color: "transparent"
-
-    Rectangle {
-      anchors.fill: parent
-      color: colors.surface
-      border { color: colors.on_primary; width: 1 }
-      radius: 16
-      opacity: 0.4
-    }
+    color: colors.surface + 'cc'
+    border { color: colors.on_primary; width: 2 }
+    radius: 16
 
     RowLayout {
       id: playerInfo

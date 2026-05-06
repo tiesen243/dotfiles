@@ -24,6 +24,7 @@ Item {
 
       implicitWidth: 128
       implicitHeight: implicitWidth
+      border { color: colors.on_primary; width: 2 }
       radius: 16
 
       Image {

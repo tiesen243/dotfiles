@@ -73,7 +73,7 @@ Item {
         implicitHeight: 16
         radius: 8
         color: volumeSlider.pressed ? colors.primary_container : colors.primary
-        border { color: colors.primary_fixed; width: 2 }
+        border { color: colors.primary_fixed; width: 1 }
       }
 
       onMoved: {
