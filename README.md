@@ -1,22 +1,24 @@
 # Arch Linux / CachyOS config with Hyprland
 
+This repository contains my personal dotfiles for configuring Linux. The setup uses Hyprland as the primary desktop environment (Wayland compositor) and Quickshell for building custom desktop components.
+
 ## Preview
 
 ### Overview
 
 ![preview-01](./assets/preview-01.png)
 
-### Kitty terminal
-
 ![preview-02](./assets/preview-02.png)
 
-## Rofi launcher
+### Kitty terminal
 
 ![preview-03](./assets/preview-03.png)
 
+## Rofi launcher
+
 ![preview-04](./assets/preview-04.png)
 
-### Hyprlock
+### Lock screen
 
 ![preview-05](./assets/preview-05.png)
 
@@ -41,7 +43,7 @@ rm -rf ~/yay
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
   # Hyprland ecosystem
-  hypridle hyprlock hyprpolkitagent xdg-desktop-portal-hyprland \
+  hypridle hyprpolkitagent xdg-desktop-portal-hyprland \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   # UI & launchers

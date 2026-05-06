@@ -52,13 +52,13 @@ Scope {
       anchors { top: true; right: true }
 
       implicitWidth: 380
-      implicitHeight: notifColumn.implicitHeight + 20
+      implicitHeight: notifColumn.implicitHeight + 32
 
       ColumnLayout {
         id: notifColumn
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.topMargin: 3
+        anchors.topMargin: 32
         anchors.rightMargin: 8
         width: 360
         spacing: 8
@@ -212,7 +212,7 @@ Scope {
                   elide: Text.ElideRight
                   Layout.fillWidth: true
                   visible: text !== ""
-                  textFormat: Text.PlainText
+                  textFormat: Text.RichText
                 }
 
                 Rectangle {
