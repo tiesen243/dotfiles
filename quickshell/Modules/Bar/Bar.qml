@@ -1,18 +1,31 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Hyprland
+import Quickshell.Io
 import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
+import qs.Modules.StartMenu
 import qs.Colors
 
 Scope {
   id: root
   Colors { id: colors }
+  property bool isOpen: true
 
   property font rootFont: Qt.font({
     pixelSize: 14,
     family: "GeistMono Nerd Font"
   })
+
+  IpcHandler {
+    target: "bar"
+
+    function toggle(): void {
+      root.isOpen = !root.isOpen
+    }
+  }
 
   Variants {
     model: Quickshell.screens
@@ -21,6 +34,7 @@ Scope {
       id: bar
       required property var modelData
       screen: modelData
+      visible: root.isOpen
 
       anchors { top: true; left: true; right: true }
       implicitHeight: 28
@@ -36,13 +50,15 @@ Scope {
         }
         spacing: 12
 
+        StartMenu {
+          id: startMenu
+          rootFont: root.rootFont
+          popupAnchor: bar
+        }
+
         Workspace {
           id: workspace
           rootFont: root.rootFont
-          anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-          }
         }
       }
 
@@ -74,8 +90,8 @@ Scope {
           rootFont: root.rootFont
         }
 
-        Clock {
-          id: clock
+        Time {
+          id: time
           rootFont: root.rootFont
           popupAnchor: bar
         }

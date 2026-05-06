@@ -12,7 +12,8 @@ Item {
   property string type: ""
   property string icon: ""
 
-  implicitWidth: wifi.width
+  implicitWidth: wifi.implicitWidth
+  implicitHeight: wifi.implicitHeight
 
   Text {
     id: wifi
@@ -23,10 +24,9 @@ Item {
       else return "Not connected to any network"
     }
 
-    anchors.centerIn: parent
     text: root.icon
     color: colors.primary
-    font: rootFont
+    font: root.rootFont
 
     MouseArea {
       anchors.fill: parent

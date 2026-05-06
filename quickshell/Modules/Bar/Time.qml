@@ -11,21 +11,23 @@ Item {
   property font rootFont
   property var popupAnchor
 
-  implicitWidth: clock.width
+  implicitWidth: clock.implicitWidth
+  implicitHeight: clock.implicitHeight
 
   Text {
     id: clock
     Accessible.role: Accessible.StaticText
     Accessible.name: "Current time: " + clock.text
 
-    anchors.centerIn: parent
     text: Qt.formatTime(new Date(), "hh:mm")
     color: colors.primary
-    font: rootFont
+    font: root.rootFont
 
     MouseArea {
       anchors.fill: parent
-      onClicked: celendar.visible = !celendar.visible
+      hoverEnabled: true
+      onEntered: celendar.visible = true
+      onExited: celendar.visible = false
     }
   }
 
@@ -35,8 +37,8 @@ Item {
     property string content: ""
 
     anchor.window: root.popupAnchor
-    anchor.rect.x: parentWindow.width
-    anchor.rect.y: parentWindow.height + 4
+    anchor.rect.x: root.popupAnchor.width
+    anchor.rect.y: parentWindow.implicitHeight + 4
 
     implicitWidth: 200
     implicitHeight: 160
@@ -53,7 +55,7 @@ Item {
         text: celendar.content
         textFormat: Text.RichText
         color: colors.primary
-        font: rootFont
+        font: root.rootFont
       }
     }
 
@@ -79,6 +81,7 @@ Item {
   }
 
   Timer {
+    id: clockTimer
     interval: (60 - new Date().getSeconds()) * 1000
     running: true
     repeat: true

@@ -12,7 +12,19 @@ Item {
   property bool isCharging: false
   property string icon: "󰁺"
 
-  implicitWidth: battery.width
+  implicitWidth: battery.implicitWidth
+  implicitHeight: battery.implicitHeight
+
+
+  Text {
+    id: battery
+    Accessible.role: Accessible.StaticText
+    Accessible.name: "Battery level: " + root.level + (root.isCharging ? ", charging" : ", discharging")
+
+    text: root.icon + " " + root.level + "%"
+    color: colors.primary
+    font: root.rootFont
+  }
 
   Process {
     id: batteryProc
@@ -40,17 +52,6 @@ Item {
       }
     }
     Component.onCompleted: running = true
-  }
-
-  Text {
-    id: battery
-    Accessible.role: Accessible.StaticText
-    Accessible.name: "Battery level: " + root.level + (root.isCharging ? ", charging" : ", discharging")
-
-    anchors.centerIn: parent
-    text: root.icon + " " + root.level + "%"
-    color: colors.primary
-    font: rootFont
   }
 
   Timer {
