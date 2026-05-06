@@ -26,13 +26,18 @@ Item {
         Accessible.role: Accessible.Button
         Accessible.name: "Workspace " + modelData.id + (modelData.focused ? ", active" : "") + (modelData.urgent ? ", urgent" : "")
 
-        implicitWidth: root.rootFont.pixelSize * 1.5
+        implicitWidth: root.rootFont.pixelSize * (modelData.focused ? 2 : 1.5)
         implicitHeight: root.rootFont.pixelSize * 1.5
-        color: modelData.focused ? colors.primary : colors.surface
+        color: modelData.focused ? colors.primary : (workspaceItemMouseArea.containsMouse 
+          ? colors.primary_container : colors.surface)
         radius: 4
 
         Behavior on color {
           ColorAnimation { duration: 150 }
+        }
+
+        Behavior on width {
+          NumberAnimation { duration: 150 }
         }
 
         Text {
@@ -44,6 +49,17 @@ Item {
             : colors.on_surface
           font: root.rootFont
           anchors.centerIn: parent
+
+          Behavior on color {
+            ColorAnimation { duration: 150 }
+          }
+        }
+
+        MouseArea {
+          id: workspaceItemMouseArea
+          anchors.fill: parent
+          hoverEnabled: true
+          onClicked: workspaceItem.modelData.activate()
         }
       }
     }
