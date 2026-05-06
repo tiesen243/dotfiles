@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Quickshell
@@ -12,15 +14,15 @@ Item {
   property font rootFont
 
   implicitWidth: tray.implicitWidth
+  implicitHeight: tray.implicitHeight
 
   Rectangle {
     id: tray
     Accessible.role: Accessible.StaticText
     Accessible.name: "System tray"
 
-    anchors.verticalCenter: parent.verticalCenter
     implicitWidth: trayItems.implicitWidth
-    implicitHeight: 24
+    implicitHeight: trayItems.implicitHeight
     color: colors.surface
 
     RowLayout {
@@ -43,24 +45,22 @@ Item {
           IconImage {
             id: trayItemIcon
             anchors.centerIn: parent
-            source: modelData.icon
+            source: trayItem.modelData.icon
             implicitSize: root.rootFont.pixelSize
           }
 
           QsMenuAnchor {
             id: trayItemAnchor
-            menu: modelData.menu
+            menu: trayItem.modelData.menu
 
-            anchor {
-              window: trayItem.QsWindow.window
-              adjustment: PopupAdjustment.Flip
-              onAnchoring: {
-                const window = trayItem.QsWindow.window;
-                const widgetRect =  window.contentItem.mapFromItem(
-                  trayItem, 0, trayItem.implicitHeight,
-                  trayItem.implicitWidth, trayItem.implicitHeight);
-                trayItemAnchor.anchor.rect = widgetRect;
-              }
+            anchor. window: trayItem.QsWindow.window
+            anchor.adjustment: PopupAdjustment.Flip
+            anchor. onAnchoring: {
+              const window = trayItem.QsWindow.window;
+              const widgetRect =  window.contentItem.mapFromItem(
+                trayItem, 0, trayItem.implicitHeight,
+                trayItem.implicitWidth, trayItem.implicitHeight);
+              trayItemAnchor.anchor.rect = widgetRect;
             }
           }
 

@@ -1,53 +1,85 @@
 import Quickshell.Services.Pipewire
-
-import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick
 
-RowLayout {
-  id: volumeControl
+import qs.Colors
 
-  anchors { left: parent.left; right: parent.right; margins: 12 }
-  spacing: 8
+Item {
+  id: root
+  Colors { id: colors }
+  property font rootFont
 
-  Text {
-    text: "󰕾 " + Math.round(volumeSlider.value)
-    color: colors.primary
-    font { pixelSize: startMenu.fontSize / 1.5; family: startMenu.fontFamily }
+  implicitHeight: volumeControl.implicitHeight
+
+  property var audioSink: Pipewire.defaultAudioSink
+  property int value: audioSink && audioSink.audio
+    ? Math.round(audioSink.audio.volume * 100)
+    : 0
+  property bool isMuted: audioSink && audioSink.audio
+    ? audioSink.audio.muted
+    : false
+
+  PwObjectTracker {
+    objects: [Pipewire.defaultAudioSink]
   }
 
-  Slider {
-    id: volumeSlider
-    Layout.fillWidth: true
+  RowLayout {
+    id: volumeControl
 
-    handle: Rectangle {
-      x: volumeSlider.leftPadding + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
-      y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
-      width: 16
-      height: 16
-      radius: 8
+    anchors.fill: parent
+    spacing: 12
+
+    Text {
+      id: volumeValue
+      Accessible.role: Accessible.StaticText
+      Accessible.name: "Volume Value: " + root.value + "%" + root.isMuted ? ", muted" : ""
+
+      text: (root.isMuted ? "󰖁 " : "󰕾 ") + root.value
       color: colors.primary
-      border { color: colors.on_primary; width: 2 }
+      font: root.rootFont
+
+      MouseArea {
+        anchors.fill: parent
+        onClicked: {
+          if (!root.audioSink || !root.audioSink.audio) return
+
+          root.isMuted = !root.isMuted
+          root.audioSink.audio.muted = root.isMuted
+        }
+      }
     }
 
-    property var defaultAudioSink: Pipewire.defaultAudioSink
-    property int volumeValue: defaultAudioSink && defaultAudioSink.audio
-      ? Math.round(defaultAudioSink.audio.volume * 100)
-      : 0
+    Slider {
+      id: volumeSlider
+      Accessible.role: Accessible.Slider
+      Accessible.name: "Volume Level"
 
-    PwObjectTracker {
-      objects: [Pipewire.defaultAudioSink]
-    }
+      Layout.fillWidth: true
+      from: 0
+      to: 100
+      value: root.value
 
-    from: 0
-    to: 100
-    value: volumeValue
+      background: Rectangle {
+        anchors.fill: parent
+        color: colors.surface_variant
+        radius: height / 2
+      }
 
-    onValueChanged: {
-      if (!volumeSlider.defaultAudioSink || !volumeSlider.defaultAudioSink.audio || !volumeSlider.pressed) 
-        return
+      handle: Rectangle {
+        x: volumeSlider.leftPadding + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
+        y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
+        implicitWidth: 16
+        implicitHeight: 16
+        radius: 8
+        color: volumeSlider.pressed ? colors.primary_container : colors.primary
+        border { color: colors.primary_fixed; width: 2 }
+      }
 
-      volumeSlider.defaultAudioSink.audio.volume = Math.max(0.0, Math.min(1.0, volumeSlider.value / 100));
+      onMoved: {
+        if (root.audioSink && root.audioSink.audio)
+          root.audioSink.audio.volume = value / 100
+      }
     }
   }
 }

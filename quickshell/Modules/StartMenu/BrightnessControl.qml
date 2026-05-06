@@ -1,54 +1,108 @@
 import Quickshell.Io
-
-import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick
 
-RowLayout {
-  id: brightnessControl
+import qs.Colors
 
-  anchors { left: parent.left; right: parent.right; margins: 12 }
-  spacing: 8
+Item {
+  id: root
+  Colors { id: colors }
+  property font rootFont
 
-  property int brightnessValue: 0
-  Process {
-    id: brightnessProc
-    command: ["brightnessctl", "get"]
-    stdout: SplitParser {
-      onRead: data => brightnessControl.brightnessValue = parseInt(data.trim())
-    }
-    Component.onCompleted: running = true
-  }
+  implicitHeight: brightnessControl.implicitHeight
 
-  Process { id: setBrightnessProc }
+  property int value: 0
+  property int maxBrightness: 1
 
-  Text {
-    text: "󰃠 " + Math.round(brightnessControl.brightnessValue / 192)
-    color: colors.primary
-    font { pixelSize: startMenu.fontSize / 1.5; family: startMenu.fontFamily }
-  }
+  RowLayout {
+    id: brightnessControl
 
-  Slider {
-    id: brightnessSlider
-    Layout.fillWidth: true
-    handle: Rectangle {
-      x: brightnessSlider.leftPadding + brightnessSlider.visualPosition * (brightnessSlider.availableWidth - width)
-      y: brightnessSlider.topPadding + brightnessSlider.availableHeight / 2 - height / 2
-      width: 16
-      height: 16
-      radius: 8
+    anchors.fill: parent
+    spacing: 12
+
+    Text {
+      id: brightnessValue
+      Accessible.role: Accessible.StaticText
+      Accessible.name: "Brightness Value: " + root.value + "%"
+
+      text: "󰃟 " + root.value
       color: colors.primary
-      border { color: colors.on_primary; width: 2 }
+      font: root.rootFont
     }
 
-    from: 0
-    to: 100
-    value: brightnessControl.brightnessValue / 192
+    Slider {
+      id: brightnessSlider
+      Accessible.role: Accessible.Slider
+      Accessible.name: "Brightness Level"
 
-    onValueChanged: {
-      brightnessControl.brightnessValue = Math.round(brightnessSlider.value * 192)
-      setBrightnessProc.command = ["brightnessctl", "set", brightnessControl.brightnessValue.toString()]
-      setBrightnessProc.running = true
+      Layout.fillWidth: true
+      from: 0
+      to: 100
+      value: root.value
+
+      background: Rectangle {
+        anchors.fill: parent
+        color: colors.surface_variant
+        radius: height / 2
+      }
+
+      handle: Rectangle {
+        x: brightnessSlider.leftPadding + brightnessSlider.visualPosition * (brightnessSlider.availableWidth - width)
+        y: brightnessSlider.topPadding + brightnessSlider.availableHeight / 2 - height / 2
+        implicitWidth: 16
+        implicitHeight: 16
+        radius: 8
+        color: brightnessSlider.pressed ? colors.primary_container : colors.primary
+        border { color: colors.primary_fixed; width: 1 }
+      }
+
+      onMoved: {
+        brightnessSetProc.command = ["brightnessctl", "set", Math.round(value) + "%"]
+        brightnessSetProc.running = true
+      }
+    }
+  }
+
+  FileView {
+    id: brightnessFile
+    path: ""
+    watchChanges: true
+    onFileChanged: brightnessGetProc.running = true
+  }
+
+  Process {
+    id: brightnessGetProc
+    command: ["brightnessctl", "get"]
+    running: false
+    stdout: StdioCollector {
+      onStreamFinished: {
+        const val = parseInt(text.trim())
+        if (!isNaN(val) && root.maxBrightness > 0)
+          root.value = (val / root.maxBrightness) * 100
+      }
+    }
+  }
+
+  Process {
+    id: brightnessSetProc
+    command: []
+  }
+
+  Process {
+    id: backlightDiscovery
+    command: ["sh", "-c", "p=$(ls -d /sys/class/backlight/*/brightness 2>/dev/null | head -1); [ -n \"$p\" ] && echo $p && cat ${p%brightness}max_brightness"]
+    running: true
+    stdout: StdioCollector {
+      onStreamFinished: {
+        const lines = text.trim().split("\n")
+        if (lines.length >= 2) {
+          const max = parseInt(lines[1])
+          if (!isNaN(max) && max > 0) root.maxBrightness = max
+          brightnessFile.path = lines[0]
+          brightnessGetProc.running = true
+        }
+      }
     }
   }
 }
