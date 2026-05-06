@@ -7,7 +7,7 @@ import Quickshell.Wayland
 import qs.Colors
 
 Scope {
-  id: background
+  id: root
 
   Colors { id: colors }
 
@@ -15,27 +15,35 @@ Scope {
     return StandardPaths.standardLocations(StandardPaths.HomeLocation)[0] + "/dotfiles/assets/" + fileName
   }
 
-  PanelWindow {
-    id: backgroundContainer
-    WlrLayershell.layer: WlrLayershell.Background
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+  Variants {
+    model: Quickshell.screens
 
-    anchors.top: true
-    anchors.left: true
-    anchors.right: true
-    anchors.bottom: true
+    PanelWindow {
+      id: background
+      required property var modelData
+      screen: modelData
 
-    exclusiveZone: -1
-    color: colors.background
+      WlrLayershell.layer: WlrLayershell.Background
+      WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
-    Image {
-      id: wallpaper
+      anchors.top: true
+      anchors.left: true
+      anchors.right: true
+      anchors.bottom: true
 
-      anchors.fill: parent
-      cache: true
+      exclusiveZone: -1
+      color: colors.surface
 
-      source: background.getWallpaper("_background.png")
-      fillMode: Image.PreserveAspectCrop
+      Image {
+        id: backgroundImage
+
+        anchors.fill: parent
+        cache: true
+        smooth: true
+
+        source: root.getWallpaper("_background.png")
+        fillMode: Image.PreserveAspectCrop
+      }
     }
   }
 }

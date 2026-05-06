@@ -1,51 +1,67 @@
-import Quickshell
 import Quickshell.Io
-import Quickshell.Hyprland
-
 import QtQuick
 
-Item {
-  id: wifi
+import qs.Colors
 
-  property string stat: ""
+Item {
+  id: root
+  Colors { id: colors }
+  property font rootFont
+
+  property string info: ""
+  property string type: ""
+  property string icon: ""
+
+  implicitWidth: wifi.width
+
+  Text {
+    id: wifi
+    Accessible.role: Accessible.StaticText
+    Accessible.name: {
+      if (root.type === "ethernet") return "Connected to Ethernet"
+      else if (root.type === "wifi") return "Connected to Wi-Fi network: " + root.info
+      else return "Not connected to any network"
+    }
+
+    anchors.centerIn: parent
+    text: root.icon
+    color: colors.primary
+    font: rootFont
+
+    MouseArea {
+      anchors.fill: parent
+      onClicked: nmtuiProc.running = !nmtuiProc.running
+    }
+  }
+
   Process {
     id: wifiProc
-    command: ["/bin/bash", "-c", "nmcli -t -f active,rate,bars dev wifi | grep '^yes' | cut -d: -f2-"]
-    stdout: SplitParser {
-      onRead: data => {
-        var parts = data.trim().split(':')
-        var speed = parts[0] ? parts[0] : "Not Connected"
-        var str = parts.length > 1 ? parts[1] : ""
+    command: ["sh", "-c", "eth=$(nmcli -t -f type,state dev 2>/dev/null | grep '^ethernet:connected'); if [ -n \"$eth\" ]; then echo 'ethernet:Ethernet'; else wifi=$(nmcli -t -f active,ssid dev wifi 2>/dev/null | grep '^yes' | cut -d: -f2); if [ -n \"$wifi\" ]; then echo \"wifi:$wifi\"; else echo 'disconnected:'; fi; fi"]
+    stdout: StdioCollector {
+      onStreamFinished: {
+        const output = text.trim()
 
-        var icon = "󰤟 "
-        if (str.includes("▂▄▆█")) icon = "󰤨 "
-        else if (str.includes("▂▄▆")) icon = "󰤥 "
-        else if (str.includes("▂▄")) icon = "󰤢 "
+        const colonIdx = output.indexOf(':')
+        const type = output.substring(0, colonIdx)
+        const info = output.substring(colonIdx + 1)
 
-        wifi.stat = icon + speed
+        root.type = type
+        root.info = info || "Disconnected"
+        root.icon = type === "ethernet" ? "󰈀" : type === "wifi" ? "󰖩" : "󰖪"
       }
     }
     Component.onCompleted: running = true
   }
 
-  Text {
-    id: wifiContent
+  Process {
+    id: nmtuiProc
+    command: ["kitty", "--class=nmtui", "-e", "nmtui"]
+  }
 
-    anchors { right: parent.right; verticalCenter: parent.verticalCenter }
-    text: wifi.stat
-    color: colors.primary
-    font { pixelSize: bar.fontSize; family: bar.fontFamily }
-
-    Timer {
-      interval: 10 * 1000
-      running: true
-      repeat: true
-      onTriggered: wifiContent.text = wifi.stat
-    }
-
-    MouseArea {
-      anchors.fill: parent
-      onClicked: Hyprland.dispatch("exec kitty --class=nmtui -e nmtui")
-    }
+  Timer {
+    interval: 1000
+    running: true
+    repeat: true
+    onTriggered: wifiProc.running = true
   }
 }

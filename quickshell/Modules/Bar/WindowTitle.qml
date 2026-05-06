@@ -1,15 +1,26 @@
 import Quickshell.Hyprland
-
 import QtQuick
 
+import qs.Colors
 
-Text {
-  function truncateText(text, maxLength) {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength - 1) + "…";
+Item {
+  id: root
+  Colors { id: colors }
+  property font rootFont
+
+  function truncateTitle(title, maxLength) {
+    if (title.length <= maxLength) return title
+    return title.substring(0, maxLength - 1) + "…"
   }
 
-  text: Hyprland.activeToplevel ? truncateText(Hyprland.activeToplevel.title, 50) : ""
-  color: colors.primary
-  font { pixelSize: bar.fontSize; family: bar.fontFamily }
+  Text {
+    id: title
+    Accessible.role: Accessible.StaticText
+    Accessible.name: Hyprland.activeToplevel ? "Active window: " + Hyprland.activeToplevel.title : "No active window"
+
+    anchors.centerIn: parent
+    text: Hyprland.activeToplevel ? truncateTitle(Hyprland.activeToplevel.title, 50) : ""
+    color: colors.primary
+    font: rootFont
+  }
 }
