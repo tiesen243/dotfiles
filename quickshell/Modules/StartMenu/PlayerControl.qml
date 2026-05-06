@@ -34,8 +34,6 @@ Item {
 
   Rectangle {
     id: playerControl
-    Accessible.role: Accessible.Group
-    Accessible.name: "Media player controls for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") + " by " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist")
 
     anchors.fill: parent
     implicitHeight: playerControlContainer.implicitHeight + 24
@@ -44,16 +42,14 @@ Item {
 
     RowLayout {
       id: playerControlContainer
-      Accessible.role: Accessible.Group
-      Accessible.name: "Media player information and controls"
 
       anchors { fill: parent; margins: 12 }
       spacing: 12
 
       ClippingRectangle {
         id: trackAlbum
-        Accessible.role: Accessible.Image
-        Accessible.name: "Album art for " + (root.activePlayer.metadata["xesam:title"] || "unknown track")
+        Accessible.role: Accessible.Graphic
+        Accessible.name: root.activePlayer ? "Album art for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") : "No active media player"
 
         implicitWidth: playerControlContainer.implicitHeight
         implicitHeight: implicitWidth
@@ -62,42 +58,40 @@ Item {
 
         Image {
           id: trackAlbumImage
-          Accessible.role: Accessible.Image
-          Accessible.name: "Album art for " + (root.activePlayer.metadata["xesam:title"] || "unknown track")
+          Accessible.role: Accessible.Graphic
+          Accessible.name: root.activePlayer ? "Album art for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") : "No active media player"
 
           anchors.fill: parent
-          source: root.activePlayer.trackArtUrl
+          source: root.activePlayer && root.activePlayer.trackArtUrl ? root.activePlayer.trackArtUrl : ""
           fillMode: Image.PreserveAspectCrop
-          visible: root.activePlayer.trackArtUrl !== ""
+          visible: root.activePlayer && root.activePlayer.trackArtUrl !== ""
         }
 
         Text {
           id: trackAlbumFallback
           Accessible.role: Accessible.StaticText
-          Accessible.name: "No album art available for " + (root.activePlayer.metadata["xesam:title"] || "unknown track")
+          Accessible.name: root.activePlayer ? "No album art available for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") : "No active media player"
 
           anchors.centerIn: parent
           text: "󰎆"
           color: colors.primary
           font: root.rootFont
-          visible: root.activePlayer.trackArtUrl === ""
+          visible: root.activePlayer && root.activePlayer.trackArtUrl === ""
         }
       }
 
       ColumnLayout {
         id: trackInfoContainer
-        Accessible.role: Accessible.Group
-        Accessible.name: "Track information for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") + " by " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist")
 
         spacing: 4
 
         Text {
           id: trackInfoTitle
           Accessible.role: Accessible.StaticText
-          Accessible.name: "Track title: " + (root.activePlayer.metadata["xesam:title"] || "unknown title")
+          Accessible.name: root.activePlayer ? "Track title: " + (root.activePlayer.metadata["xesam:title"] || "unknown title") : "No active player"
 
           Layout.fillWidth: true
-          text: root.activePlayer.metadata["xesam:title"] || "Unknown Title"
+          text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
           color: colors.primary
           font: root.rootFont
           elide: Text.ElideRight
@@ -106,10 +100,10 @@ Item {
         Text {
           id: trackInfoArtist
           Accessible.role: Accessible.StaticText
-          Accessible.name: "Track artist: " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist")
+          Accessible.name: root.activePlayer ? "Track artist: " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist") : "No active player"
 
           Layout.fillWidth: true
-          text: root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : ""
+          text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
           color: colors.primary
           font: root.rootFont
           elide: Text.ElideRight
@@ -119,17 +113,15 @@ Item {
 
         RowLayout {
           id: trackTimeline
-          Accessible.role: Accessible.Group
-          Accessible.name: "Track timeline for " + (root.activePlayer.metadata["xesam:title"] || "unknown track")
 
           spacing: 8
 
           Text {
             id: trackPosition
             Accessible.role: Accessible.StaticText
-            Accessible.name: "Current position in track: " + root.formatTime(root.activePlayer.position)
+            Accessible.name: "Current position in track: " + (root.activePlayer ? root.formatTime(root.activePlayer.position) : "N/A")
 
-            text: root.formatTime(root.activePlayer.position)
+            text: root.activePlayer ? root.formatTime(root.activePlayer.position) : "N/A"
             color: colors.primary
             font: root.rootFont
           }
@@ -137,7 +129,7 @@ Item {
           Rectangle {
             id: trackProgressBar
             Accessible.role: Accessible.ProgressBar
-            Accessible.name: "Track progress for " + (root.activePlayer.metadata["xesam:title"] || "unknown track")
+            Accessible.name: root.activePlayer ? "Track progress for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") : "No active media player"
 
             Layout.fillWidth: true
             implicitHeight: trackTimeline.implicitHeight / 4
@@ -148,7 +140,7 @@ Item {
             Rectangle {
               id: trackProgressBarFill
 
-              width: root.activePlayer.length > 0 
+              width: root.activePlayer && root.activePlayer.length > 0 
                 ? parent.width * (root.activePlayer.position / root.activePlayer.length)
                 : 0
               anchors.verticalCenter: parent.verticalCenter
@@ -176,9 +168,9 @@ Item {
           Text {
             id: trackLength
             Accessible.role: Accessible.StaticText
-            Accessible.name: "Total length of track: " + root.formatTime(root.activePlayer.length)
+            Accessible.name: "Total length of track: " + (root.activePlayer ? root.formatTime(root.activePlayer.length) : "N/A")
 
-            text: root.formatTime(root.activePlayer.length)
+            text: root.activePlayer ? root.formatTime(root.activePlayer.length) : "N/A"
             color: colors.primary
             font: root.rootFont
           }
@@ -186,25 +178,23 @@ Item {
 
         RowLayout {
           id: trackControl
-          Accessible.role: Accessible.Group
-          Accessible.name: "Playback controls for " + (root.activePlayer.metadata["xesam:title"] || "unknown track")
 
           Repeater {
             model: [
               { 
                 name: "Previous",
                 icon: "󰒫",
-                cmd: root.activePlayer.previous
+                cmd: root.activePlayer && root.activePlayer.previous
               },
               { 
                 name: "Play/Pause",
-                icon: root.activePlayer.isPlaying ? "" : "",
-                cmd: root.activePlayer.togglePlaying
+                icon: root.activePlayer && root.activePlayer.isPlaying ? "" : "",
+                cmd: root.activePlayer && root.activePlayer.togglePlaying
               },
               { 
                 name: "Next",
                 icon: "󰒬",
-                cmd: root.activePlayer.next
+                cmd: root.activePlayer && root.activePlayer.next
               }
             ]
 

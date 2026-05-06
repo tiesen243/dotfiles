@@ -34,7 +34,7 @@ Item {
 
         Image {
           id: userAvatarImage
-          Accessible.role: Accessible.Item
+          Accessible.role: Accessible.Graphic
           Accessible.name: root.username + "'s avatar"
 
           anchors.fill: parent
@@ -65,7 +65,7 @@ Item {
 
       Repeater {
         model: [
-          { name: "Lock Session", icon: "", cmd: "loginctl lock-session" },
+          { name: "Lock Session", icon: "", cmd: "quickshell ipc call lockscreen lock" },
           { name: "Power Off", icon: "", cmd: "systemctl poweroff" },
           { name: "Reboot", icon: "", cmd: "systemctl reboot" },
           { name: "Log Out", icon: "󰍃", cmd: "hyprctl dispatch exit 0" }

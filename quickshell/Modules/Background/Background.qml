@@ -1,8 +1,7 @@
+import Quickshell.Wayland
+import Quickshell
 import QtQuick
 import QtCore
-
-import Quickshell
-import Quickshell.Wayland
 
 import qs.Colors
 
