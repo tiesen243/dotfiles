@@ -63,7 +63,7 @@ Item {
       anchors.fill: parent
       color: colors.surface
       radius: 8
-      border { color: colors.on_primary; width: 1 }
+      border { color: colors.on_primary; width: 2 }
       clip: true
 
       ColumnLayout {

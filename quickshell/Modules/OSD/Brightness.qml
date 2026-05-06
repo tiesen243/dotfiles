@@ -15,7 +15,7 @@ Rectangle {
   height: 200
   radius: 24
   color: colors.surface
-  border { color: colors.on_primary; width: 1 }
+  border { color: colors.on_primary; width: 2 }
   opacity: showBrightness ? 1 : 0
 
   Behavior on opacity { NumberAnimation { duration: 150 } }
@@ -44,7 +44,7 @@ Rectangle {
       width: 8
       radius: 4
       color: colors.surface
-      border { color: colors.on_primary; width: 1 }
+      border { color: colors.on_primary; width: 2 }
       clip: true
 
       Rectangle {

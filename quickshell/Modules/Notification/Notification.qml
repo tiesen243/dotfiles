@@ -79,9 +79,9 @@ Scope {
             radius: 12
             color: colors.background
             border.color: modelData.urgency === NotificationUrgency.Critical 
-              ? colors.primary : modelData.urgency === NotificationUrgency.Low     
+              ? colors.error : modelData.urgency === NotificationUrgency.Low     
               ? colors.primary : colors.surface
-            border.width: 1
+            border.width: 2
             clip: true
 
             Accessible.role: Accessible.StaticText

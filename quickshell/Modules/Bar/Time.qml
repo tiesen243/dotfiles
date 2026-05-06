@@ -48,7 +48,7 @@ Item {
     Rectangle {
       anchors.fill: parent
       color: colors.surface
-      border { color: colors.on_primary; width: 1 }
+      border { color: colors.on_primary; width: 2 }
       radius: 8
       Text {
         anchors.centerIn: parent

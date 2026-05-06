@@ -14,8 +14,8 @@ Item {
 
 	ColumnLayout {
 	  id: lockscreenInput
+		// visible: Window.active
 
-		visible: Window.active
 		anchors.horizontalCenter: parent.horizontalCenter
 
 		RowLayout {
@@ -39,8 +39,11 @@ Item {
 
 				background: Rectangle {
 					radius: 8
-					color: colors.on_surface
-					border { color: colors.on_primary; width: 1 }
+					color: colors.surface + 'cc'
+					border { 
+					  color: root.context.showFailure ? colors.error_container : colors.on_primary
+					  width: 2
+					}
 				}
 
 				opacity: enabled ? 1.0 : 0.5
@@ -72,12 +75,11 @@ Item {
 
 					text: parent.text
 					font: root.rootFont
-					color: colors.primary
+					color: colors.primary_fixed
 				}
 
 				background: Rectangle {
-					color: colors.on_primary
-					border { color: colors.on_primary; width: 1 }
+					color: colors.primary_container
 					radius: 8
 					
 					opacity: !parent.enabled ? 0.5 : (parent.down ? 0.8 : 1.0) 
@@ -94,7 +96,7 @@ Item {
 
 	Timer {
     id: errorTimer
-    interval: 5000
+    interval: 10 * 000
     running: root.context.showFailure
     onTriggered: root.context.showFailure = false
   }
