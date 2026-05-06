@@ -49,7 +49,7 @@ Item {
       anchors.fill: parent
       color: colors.surface
       border { color: colors.on_primary; width: 2 }
-      radius: 8
+      radius: 12
       Text {
         anchors.centerIn: parent
         text: celendar.content
@@ -83,7 +83,7 @@ Item {
   Timer {
     id: clockTimer
     interval: (60 - new Date().getSeconds()) * 1000
-    running: true
+    running: root.visible
     repeat: true
     onTriggered: {
       clock.text = Qt.formatTime(new Date(), "hh:mm")

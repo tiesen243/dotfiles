@@ -47,9 +47,8 @@ Item {
     anchor.rect.x: 0
     anchor.rect.y: parentWindow.implicitHeight + 4
     implicitWidth: 1920 / 4
-    implicitHeight: 1080 / 1.5
+    implicitHeight: 1080 / 2
     color: "transparent"
-    HyprlandWindow.opacity: 0.9
 
     HyprlandFocusGrab {
       active: startMenuContainer.visible
@@ -62,7 +61,7 @@ Item {
 
       anchors.fill: parent
       color: colors.surface
-      radius: 8
+      radius: 12
       border { color: colors.on_primary; width: 2 }
       clip: true
 
@@ -70,14 +69,6 @@ Item {
         id: startMenuLayout
         anchors { fill: parent; margins: 16 }
         spacing: 12
-
-        Clock {
-          id: clock
-          rootFont: root.rootFont
-          isOpen: root.isOpen
-
-          Layout.fillWidth: true
-        }
 
         Buttons {
           id: buttons
