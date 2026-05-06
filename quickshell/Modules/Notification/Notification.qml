@@ -11,12 +11,12 @@ import qs.Colors
 
 Scope {
   id: notification
+  Colors { id: colors }
   property font rootFont: Qt.font({
     pixelSize: 14,
     family: "GeistMono Nerd Font"
   })
 
-  Colors { id: colors }
 
   IpcHandler {
     target: "notifications"
