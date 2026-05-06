@@ -42,93 +42,87 @@ Item {
   LazyLoader {
     active: root.isOpen
 
-    Variants {
-      model: Quickshell.screens
+    PopupWindow {
+      id: startMenuContainer
+      visible: root.isOpen
 
-      PopupWindow {
-        id: startMenuContainer
-        required property var modelData
-        screen: modelData
-        visible: root.isOpen
+      anchor.window: root.popupAnchor
+      anchor.rect.x: 0
+      anchor.rect.y: parentWindow.implicitHeight + 4
+      implicitWidth: 1920 / 4
+      implicitHeight: 1080 / 1.5
+      color: "transparent"
+      HyprlandWindow.opacity: 0.9
 
-        anchor.window: root.popupAnchor
-        anchor.rect.x: 0
-        anchor.rect.y: parentWindow.implicitHeight + 4
-        implicitWidth: 1920 / 4
-        implicitHeight: 1080 / 1.5
-        color: "transparent"
-        HyprlandWindow.opacity: 0.9
+      HyprlandFocusGrab {
+        active: startMenuContainer.visible
+        windows: [startMenuContainer]
+        onCleared: root.isOpen = false
+      }
 
-        HyprlandFocusGrab {
-          active: startMenuContainer.visible
-          windows: [startMenuContainer]
-          onCleared: root.isOpen = false
-        }
+      Rectangle {
+        id: startMenuContent
 
-        Rectangle {
-          id: startMenuContent
+        anchors.fill: parent
+        color: colors.surface
+        radius: 8
+        border { color: colors.on_primary; width: 1 }
+        clip: true
 
-          anchors.fill: parent
-          color: colors.surface
-          radius: 8
-          border { color: colors.on_primary; width: 1 }
-          clip: true
+        ColumnLayout {
+          id: startMenuLayout
+          anchors { fill: parent; margins: 16 }
+          spacing: 12
 
-          ColumnLayout {
-            id: startMenuLayout
-            anchors { fill: parent; margins: 16 }
-            spacing: 12
+          Clock {
+            id: clock
+            rootFont: root.rootFont
+            isOpen: root.isOpen
 
-            Clock {
-              id: clock
-              rootFont: root.rootFont
-              isOpen: root.isOpen
+            Layout.fillWidth: true
+          }
 
-              Layout.fillWidth: true
-            }
+          Buttons {
+            id: buttons
+            rootFont: root.rootFont
 
-            Buttons {
-              id: buttons
-              rootFont: root.rootFont
+            Layout.fillWidth: true
+          }
 
-              Layout.fillWidth: true
-            }
+          PlayerControl {
+            id: playerControl
+            rootFont: root.rootFont
 
-            PlayerControl {
-              id: playerControl
-              rootFont: root.rootFont
+            Layout.fillWidth: true
+          }
 
-              Layout.fillWidth: true
-            }
+          VolumeControl {
+            id: volumeControl
+            rootFont: root.rootFont
 
-            VolumeControl {
-              id: volumeControl
-              rootFont: root.rootFont
+            Layout.fillWidth: true
+          }
 
-              Layout.fillWidth: true
-            }
+          BrightnessControl {
+            id: brightnessControl
+            rootFont: root.rootFont
 
-            BrightnessControl {
-              id: brightnessControl
-              rootFont: root.rootFont
+            Layout.fillWidth: true
+          }
 
-              Layout.fillWidth: true
-            }
+          Notification {
+            id: notification
+            rootFont: root.rootFont
 
-            Notification {
-              id: notification
-              rootFont: root.rootFont
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+          }
 
-              Layout.fillWidth: true
-              Layout.fillHeight: true
-            }
+          Footer {
+            id: footer
+            rootFont: root.rootFont
 
-            Footer {
-              id: footer
-              rootFont: root.rootFont
-
-              Layout.fillWidth: true
-            }
+            Layout.fillWidth: true
           }
         }
       }
