@@ -5,6 +5,7 @@ import Quickshell.Services.Pipewire
 import QtQuick
 import QtQuick.Layouts
 
+import "../../Services"
 import qs.Colors
 
 Scope {
@@ -35,7 +36,7 @@ Scope {
 
     function onVolumeChanged() {
       root.volumeValue = Pipewire.defaultAudioSink.audio.volume;
-      if (root._volumeReady) {
+      if (root._volumeReady && !GlobalState.isStartMenuOpen) {
         root.showVolume = true;
         volumeHideTimer.restart();
       }
@@ -44,7 +45,7 @@ Scope {
 
     function onMutedChanged() {
       root.volumeMuted = Pipewire.defaultAudioSink.audio.muted;
-      if (root._volumeReady) {
+      if (root._volumeReady && !GlobalState.isStartMenuOpen) {
         root.showVolume = true;
         volumeHideTimer.restart();
       }
@@ -75,7 +76,7 @@ Scope {
         if (!isNaN(val) && root.maxBrightness > 0) {
           root.brightnessValue = val / root.maxBrightness;
 
-          if (root._brightnessReady) {
+          if (root._brightnessReady && !GlobalState.isStartMenuOpen) {
             root.showBrightness = true
             brightnessHideTimer.restart();
           }
