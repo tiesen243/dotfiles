@@ -10,6 +10,7 @@ Item {
   id: root
   Colors { id: colors }
   property font rootFont
+  property bool isOpen: GlobalState.isStartMenuOpen
 
   implicitHeight: buttons.implicitHeight
 
