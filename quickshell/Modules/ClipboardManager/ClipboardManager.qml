@@ -5,12 +5,12 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick
 
+import "../../Services"
 import qs.Colors
 
 Scope {
   id: root
   Colors { id: colors }
-  property bool isOpen: false
   property int currnetItem: -1
 
   property font rootFont: Qt.font({
@@ -22,7 +22,8 @@ Scope {
     target: "clipboardManager"
 
     function toggle(): void {
-      root.isOpen = !root.isOpen
+      GlobalState.closeAllPopups('clipboard')
+      GlobalState.isClipboardOpen = !GlobalState.isClipboardOpen
     }
 
     function clearHistory(): void {
@@ -61,7 +62,7 @@ Scope {
       id: clipboardManager
       required property var modelData
       screen: modelData
-      visible: root.isOpen
+      visible: GlobalState.isClipboardOpen
 
       anchors { top: true; left: true; right: true; bottom: true }
       color: "transparent"
@@ -81,7 +82,7 @@ Scope {
 
         MouseArea {
           anchors.fill: parent
-          onClicked: root.isOpen = false
+          onClicked: GlobalState.isClipboardOpen = false
         }
       }
 
@@ -118,7 +119,7 @@ Scope {
 
             Keys.onPressed: (event) => {
               if (event.key === Qt.Key_Escape) {
-                root.isOpen = false
+                GlobalState.isClipboardOpen = false
                 event.accepted = true
                 return
               }
@@ -130,7 +131,7 @@ Scope {
                   root.copyToClipboard(selectedItem.id, selectedItem.text)
                 }
 
-                root.isOpen = false
+                GlobalState.isClipboardOpen = false
                 event.accepted = true
                 return
               }
@@ -208,7 +209,7 @@ Scope {
     const escapedText = text.replace(/'/g, "'\\''")
     setClipProc.command = ["sh", "-c", `printf "%s\t%s\n" '${id}' '${escapedText}' | cliphist decode | wl-copy`]
     setClipProc.running = true
-    root.isOpen = false
+    GlobalState.isClipboardOpen = false
   }
 
   Process {

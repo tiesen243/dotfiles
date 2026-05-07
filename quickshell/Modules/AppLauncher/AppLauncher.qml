@@ -5,12 +5,12 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import QtQuick
 
+import "../../Services"
 import qs.Colors
 
 Scope {
   id: root
   Colors { id: colors }
-  property bool isOpen: false
 
   property font rootFont: Qt.font({
     pixelSize: 14,
@@ -21,7 +21,8 @@ Scope {
     target: "appLauncher"
 
     function toggle(): void {
-      root.isOpen = !root.isOpen
+      GlobalState.closeAllPopups('appLauncher')
+      GlobalState.isAppLauncherOpen = !GlobalState.isAppLauncherOpen
     }
   }
 
@@ -55,7 +56,7 @@ Scope {
       id: appLauncherWindow
       required property var modelData
       screen: modelData
-      visible: root.isOpen
+      visible: GlobalState.isAppLauncherOpen
 
       anchors { top: true; left: true; right: true; bottom: true }
       color: "transparent"
@@ -80,7 +81,7 @@ Scope {
 
         MouseArea {
           anchors.fill: parent
-          onClicked: root.isOpen = false
+          onClicked: GlobalState.isAppLauncherOpen = false
         }
       }
 
@@ -117,7 +118,7 @@ Scope {
 
             Keys.onPressed: (event) => {
               if (event.key === Qt.Key_Escape) {
-                root.isOpen = false
+                GlobalState.isAppLauncherOpen = false
                 event.accepted = true
                 return
               }
@@ -126,7 +127,7 @@ Scope {
                 const selectedItem = filteredAppModel.get(appList.currentIndex)
                 if (selectedItem) root.launchApp(selectedItem.exec, selectedItem.terminal)
 
-                root.isOpen = false
+                GlobalState.isAppLauncherOpen = false
                 event.accepted = true
                 return
               }
@@ -218,7 +219,6 @@ Scope {
     else launchProc.command = ["sh", "-c", `hyprctl dispatch exec "${cleanExec}"`]
 
     launchProc.running = true
-    root.isOpen = false
   }
 
   Process {

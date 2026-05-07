@@ -7,6 +7,7 @@ import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
+import "../../Services"
 import qs.Colors
 
 Scope {
@@ -39,7 +40,7 @@ Scope {
       screen: modelData
       HyprlandWindow.opacity: 0.8
 
-      visible: NotificationService.notifications.length > 0
+      visible: !GlobalState.isStartMenuOpen && NotificationService.notifications.length > 0
       focusable: false
       color: "transparent"
 

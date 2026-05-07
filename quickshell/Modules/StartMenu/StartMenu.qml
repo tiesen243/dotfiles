@@ -7,13 +7,13 @@ import QtQuick.Layouts
 import QtQuick
 
 import qs.Colors
+import '../../Services'
 
 Item {
   id: root
   Colors { id: colors }
   property font rootFont
   property var popupAnchor
-  property bool isOpen: false
 
   implicitWidth: startMenuTrigger.width
   implicitHeight: startMenuTrigger.height
@@ -22,7 +22,8 @@ Item {
     target: "startMenu"
 
     function toggle(): void {
-      root.isOpen = !root.isOpen
+      GlobalState.closeAllPopups("startmenu")
+      GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
     }
   }
 
@@ -35,13 +36,13 @@ Item {
 
     MouseArea {
       anchors.fill: parent
-      onClicked: root.isOpen = !root.isOpen
+      onClicked: GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
     }
   }
 
   PopupWindow {
     id: startMenuContainer
-    visible: root.isOpen
+    visible: GlobalState.isStartMenuOpen
 
     anchor.window: root.popupAnchor
     anchor.rect.x: 0
@@ -78,7 +79,7 @@ Item {
         Buttons {
           id: buttons
           rootFont: root.rootFont
-          isOpen: root.isOpen
+          isOpen: GlobalState.isStartMenuOpen
 
           Layout.fillWidth: true
         }
