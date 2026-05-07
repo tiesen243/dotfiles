@@ -33,7 +33,7 @@ Rectangle {
     spacing: 8
 
     Text {
-      text: root.volumeMuted ? "Mute" : Math.round(root.volumeValue * 100) + "%"
+      text: Math.round(root.volumeValue * 100)
       color: colors.secondary
       font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
       Layout.alignment: Qt.AlignHCenter
@@ -53,7 +53,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 2
-        height: Math.max(0, (parent.height - 4) * Math.max(0, Math.min(1, root.volumeMuted ? 0 : root.volumeValue)))
+        height: Math.max(0, (parent.height - 4) * Math.max(0, Math.min(1, root.volumeValue)))
         radius: 3
         color: root.volumeMuted ? colors.secondary : colors.primary
 

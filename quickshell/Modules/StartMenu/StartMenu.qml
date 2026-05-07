@@ -78,6 +78,7 @@ Item {
         Buttons {
           id: buttons
           rootFont: root.rootFont
+          isOpen: root.isOpen
 
           Layout.fillWidth: true
         }
