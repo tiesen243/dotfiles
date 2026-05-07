@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell.Widgets
+import Quickshell.Hyprland
 import Quickshell.Io
 import QtQuick.Layouts
 import QtQuick
@@ -65,10 +66,10 @@ Item {
 
       Repeater {
         model: [
-          { name: "Lock Session", icon: "", cmd: "quickshell ipc call lockscreen lock" },
-          { name: "Power Off", icon: "", cmd: "systemctl poweroff" },
-          { name: "Reboot", icon: "", cmd: "systemctl reboot" },
-          { name: "Log Out", icon: "󰍃", cmd: "hyprctl dispatch exit 0" }
+          { name: "Lock Session", icon: "", cmd: "quickshell ipc call lockscreen lock", shortcut: "L" },
+          { name: "Power Off", icon: "", cmd: "systemctl poweroff", shortcut: "P" },
+          { name: "Reboot", icon: "", cmd: "systemctl reboot", shortcut: "R" },
+          { name: "Log Out", icon: "󰍃", cmd: "hyprctl dispatch exit 0", shortcut: "Q" }
         ]
 
         delegate: Rectangle {
@@ -80,7 +81,7 @@ Item {
 
           implicitWidth: 28
           implicitHeight: implicitWidth
-          color: buttonMouse.pressed ? colors.on_primary : colors.primary
+          color: buttonMouseArea.pressed ? colors.on_primary : colors.primary
           radius: 8
 
           Behavior on color {
@@ -94,7 +95,7 @@ Item {
 
             anchors.centerIn: parent
             text: button.modelData.icon
-            color: buttonMouse.pressed ? colors.primary : colors.on_primary
+            color: buttonMouseArea.pressed ? colors.primary : colors.on_primary
 
             Behavior on color {
               ColorAnimation { duration: 150 }
@@ -102,9 +103,18 @@ Item {
           }
 
           MouseArea {
-            id: buttonMouse
+            id: buttonMouseArea
             anchors.fill: parent
             onClicked: {
+              if (button.modelData.cmd === "") return
+              actionProc.command = ["sh", "-c", button.modelData.cmd + " && quickshell ipc call startMenu toggle"]
+              actionProc.running = true
+            }
+          }
+
+          Shortcut {
+            sequence: button.modelData.shortcut
+            onActivated: {
               if (button.modelData.cmd === "") return
               actionProc.command = ["sh", "-c", button.modelData.cmd + " && quickshell ipc call startMenu toggle"]
               actionProc.running = true
