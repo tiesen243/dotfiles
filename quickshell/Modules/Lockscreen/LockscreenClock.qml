@@ -32,8 +32,8 @@ Item {
 
       Layout.alignment: Qt.AlignHCenter
 	    text: Qt.formatDate(root.date, "dddd, MMMM dd yyyy")
-	    font.pointSize: root.rootFont.pointSize
-	    font.family: root.rootFont.family
+	    color: colors.on_secondary
+	    font: root.rootFont
 	  }
 	}
 
