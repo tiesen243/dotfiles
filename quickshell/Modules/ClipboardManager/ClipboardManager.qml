@@ -127,8 +127,7 @@ Scope {
                 const selectedItem = filteredClipboardHistory.get(clipboardList.currentIndex)
                 if (selectedItem) {
                   const escapedText = selectedItem.text.replace(/'/g, "'\\''")
-                  setClipProc.command = ["sh", "-c", `printf "%s\t%s\n" '${selectedItem.id}' '${escapedText}' | cliphist decode | wl-copy`]
-                  setClipProc.running = true
+                  root.copyToClipboard(selectedItem.id, selectedItem.text)
                 }
 
                 root.isOpen = false
@@ -171,6 +170,10 @@ Scope {
               border { color: colors.on_primary; width: 2 }
               radius: 4
 
+              Behavior on color { 
+                ColorAnimation { duration: 150 }
+              }
+
               Text {
                 id: clipboardText
 
@@ -184,12 +187,28 @@ Scope {
                 color: clipboardItem.ListView.isCurrentItem ? colors.on_primary : colors.on_surface
                 font: root.rootFont
                 elide: Text.ElideRight
+
+                Behavior on color { 
+                  ColorAnimation { duration: 150 }
+                }
+
+                MouseArea {
+                  anchors.fill: parent
+                  onClicked: root.copyToClipboard(clipboardItem.modelData.id, clipboardItem.modelData.text)
+                }
               }
             }
           }
         }
       }
     }
+  }
+
+  function copyToClipboard(id, text) {
+    const escapedText = text.replace(/'/g, "'\\''")
+    setClipProc.command = ["sh", "-c", `printf "%s\t%s\n" '${id}' '${escapedText}' | cliphist decode | wl-copy`]
+    setClipProc.running = true
+    root.isOpen = false
   }
 
   Process {
