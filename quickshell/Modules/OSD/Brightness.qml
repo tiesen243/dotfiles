@@ -32,7 +32,7 @@ Rectangle {
     spacing: 8
 
     Text {
-      text: Math.round(root.brightnessValue * 100) + "%"
+      text: Math.round(root.brightnessValue * 100)
       color: colors.secondary
       font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
       Layout.alignment: Qt.AlignHCenter

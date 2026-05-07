@@ -10,6 +10,7 @@ Item {
   id: root
   Colors { id: colors }
   property font rootFont
+  property bool isOpen: false
 
   implicitHeight: buttons.implicitHeight
 
@@ -129,6 +130,14 @@ Item {
           }
           Component.onCompleted: {
             if (command.length > 0) running = true
+          }
+        }
+
+        Connections {
+          target: root
+          onIsOpenChanged: {
+            if (root.isOpen && button.modelData.getCmd !== "")
+              buttonGetProc.running = true
           }
         }
 
