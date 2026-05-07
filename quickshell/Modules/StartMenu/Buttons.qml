@@ -10,7 +10,6 @@ Item {
   id: root
   Colors { id: colors }
   property font rootFont
-  property bool isOpen: false
 
   implicitHeight: buttons.implicitHeight
 
@@ -136,7 +135,7 @@ Item {
         Connections {
           target: root
           function onIsOpenChanged() {
-            if (root.isOpen && button.modelData.getCmd !== "")
+            if (GlobalState.isStartMenuOpen && button.modelData.getCmd !== "")
               buttonGetProc.running = true
           }
         }

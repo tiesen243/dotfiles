@@ -53,12 +53,12 @@ Item {
     HyprlandFocusGrab {
       active: startMenuContainer.visible
       windows: [startMenuContainer]
-      onCleared: root.isOpen = false
+      onCleared: GlobalState.isStartMenuOpen = false
     }
 
     Shortcut {
       sequence: "Escape"
-      onActivated: root.isOpen = false
+      onActivated: GlobalState.isStartMenuOpen = false
     }
 
     Rectangle {
@@ -78,7 +78,6 @@ Item {
         Buttons {
           id: buttons
           rootFont: root.rootFont
-          isOpen: GlobalState.isStartMenuOpen
 
           Layout.fillWidth: true
         }
