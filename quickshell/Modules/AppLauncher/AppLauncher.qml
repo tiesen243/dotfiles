@@ -206,7 +206,6 @@ Scope {
 
   Process {
     id: appProc
-    // command: ["sh", "-c", "find /usr/share/applications ~/.local/share/applications -name '*.desktop' 2>/dev/null | while read -r file; do name=$(grep -m1 '^Name=' \"$file\" | cut -d= -f2-); exec=$(grep -m1 '^Exec=' \"$file\" | cut -d= -f2-); [ -n \"$name\" ] && [ -n \"$exec\" ] && echo \"$name|$exec\"; done | sort -u"]
     command: ["sh", "-c", "find /usr/share/applications ~/.local/share/applications -name '*.desktop' 2>/dev/null | while read -r file; do name=$(grep -m1 '^Name=' \"$file\" | cut -d= -f2-); exec=$(grep -m1 '^Exec=' \"$file\" | cut -d= -f2-); icon=$(grep -m1 '^Icon=' \"$file\" | cut -d= -f2-); [ -n \"$name\" ] && [ -n \"$exec\" ] && echo \"$name|$exec|$icon\"; done | sort -u"]
     stdout: StdioCollector {
       onStreamFinished: {
@@ -224,6 +223,9 @@ Scope {
           const name = parts[0].trim();
           const exec = parts[1].trim();
           const icon = parts[2] ? "image://icon/" + parts[2].trim() : "";
+
+          if (!name || !exec) continue;
+          if (appModel.get(0, item => item.name === name)) continue;
           
           if (name && exec) items.push({ icon: icon, name: name, exec: exec })
         }

@@ -207,8 +207,9 @@ Scope {
         for (const line of lines) {
           const tabIndex = line.indexOf("\t")
           const id = parseInt(line.substring(0, tabIndex).trim())
-          const textItem = line.substring(tabIndex + 1).trim()
-          items.push({ id: id, text: textItem })
+          const text = line.substring(tabIndex + 1).trim()
+          if (!text || items.some(item => item.text === text)) continue
+          items.push({ id: id, text: text })
         }
 
         clipboardHistory.append(items)
