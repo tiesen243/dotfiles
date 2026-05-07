@@ -26,12 +26,12 @@ ShellRoot {
   }
 
   Loader {
-    active: true
+    active: false
     sourceComponent: Notification { id: notification }
   }
 
   Loader {
-    active: true
+    active: false
     sourceComponent: OSD { id: osd }
   }
 }

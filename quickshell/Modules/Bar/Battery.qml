@@ -1,4 +1,4 @@
-import Quickshell.Io
+import Quickshell.Services.UPower
 import QtQuick
 
 import qs.Colors
@@ -8,56 +8,34 @@ Item {
   Colors { id: colors }
   property font rootFont
 
-  property int level: 0
-  property bool isCharging: false
-  property string icon: "󰁺"
-
   implicitWidth: battery.implicitWidth
   implicitHeight: battery.implicitHeight
 
+  property var upower: UPower
 
   Text {
     id: battery
     Accessible.role: Accessible.StaticText
     Accessible.name: "Battery level: " + root.level + (root.isCharging ? ", charging" : ", discharging")
 
-    text: root.icon + " " + root.level + "%"
+    text: {
+      const batteryLevel = upower.displayDevice.percentage * 100
+      var icon = "󰁺 "
+
+      if (upower.displayDevice.state === UPowerDeviceState.Charging) icon = "󰂄 "
+      else if (batteryLevel >= 90) icon = "󰁹 "
+      else if (batteryLevel >= 80) icon = "󰂂 "
+      else if (batteryLevel >= 70) icon = "󰂁 "
+      else if (batteryLevel >= 60) icon = "󰂀 "
+      else if (batteryLevel >= 50) icon = "󰁿 "
+      else if (batteryLevel >= 40) icon = "󰁾 "
+      else if (batteryLevel >= 30) icon = "󰁽 "
+      else if (batteryLevel >= 20) icon = "󰁼 "
+      else if (batteryLevel >= 10) icon = "󰁻 "
+
+      return icon + batteryLevel + "%"
+    }
     color: colors.primary
     font: root.rootFont
-  }
-
-  Process {
-    id: batteryProc
-    command: ["sh", "-c", "printf '%s\\n%s' \"$(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null || echo '99')\" \"$(cat /sys/class/power_supply/BAT*/status 2>/dev/null || echo 'Discharging')\""]
-    stdout: StdioCollector {
-      onStreamFinished: {
-        const lines = text.trim().split("\n")
-        const level = parseInt(lines[0]) || 0
-        const status = (lines[1] || "Discharging").trim()
-
-        root.level = level
-        root.isCharging = status === "Charging"
-
-        if (status === "Charging") root.icon = "󰂄"
-        else if (level >= 90) root.icon = "󰁹"
-        else if (level >= 80) root.icon = "󰂂"
-        else if (level >= 70) root.icon = "󰂁"
-        else if (level >= 60) root.icon = "󰂀"
-        else if (level >= 50) root.icon = "󰁿"
-        else if (level >= 40) root.icon = "󰁾"
-        else if (level >= 30) root.icon = "󰁽"
-        else if (level >= 20) root.icon = "󰁼"
-        else if (level >= 10) root.icon = "󰁻"
-        else root.icon = "󰁺"
-      }
-    }
-    Component.onCompleted: running = true
-  }
-
-  Timer {
-    interval: 10 * 1000
-    running: true
-    repeat: true
-    onTriggered: batteryProc.running = true
   }
 }

@@ -85,11 +85,6 @@ Scope {
           rootFont: root.rootFont
         }
 
-        WiFi {
-          id: wifi
-          rootFont: root.rootFont
-        }
-
         Time {
           id: time
           rootFont: root.rootFont
