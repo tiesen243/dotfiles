@@ -5,25 +5,20 @@ import "../../Services"
 
 Rectangle {
   id: root
-  property font rootFont
-
-  property bool showVolume: false
-  property real volumeValue: 0
-  property bool volumeMuted: false
-
   Colors { id: colors }
+  property font rootFont
 
   width: 36
   height: 200
   radius: 24
   color: colors.surface
   border { color: colors.on_primary; width: 2 }
-  opacity: showVolume ? 1 : 0
+  opacity: VolumeService.isShow ? 1 : 0
 
   Behavior on opacity { NumberAnimation { duration: 150 } }
 
   Accessible.role: Accessible.ProgressBar
-  Accessible.name: volumeMuted ? "Volume: muted" : "Volume: " + Math.round(volumeValue * 100) + "%"
+  Accessible.name: VolumeService.isMuted ? "Volume: muted" : "Volume: " + Math.round(VolumeService.value * 100) + "%"
 
   ColumnLayout {
     anchors.fill: parent
@@ -34,7 +29,7 @@ Rectangle {
     spacing: 8
 
     Text {
-      text: Math.round(root.volumeValue * 100)
+      text: Math.round(VolumeService.value * 100).toString().padStart(2, '0')
       color: colors.secondary
       font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
       Layout.alignment: Qt.AlignHCenter
@@ -43,6 +38,7 @@ Rectangle {
     Rectangle {
       Layout.fillHeight: true
       Layout.alignment: Qt.AlignHCenter
+
       width: 8
       radius: 4
       color: colors.surface
@@ -54,22 +50,17 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 2
-        height: Math.max(0, (parent.height - 4) * Math.max(0, Math.min(1, root.volumeValue)))
+        height: Math.max(0, (parent.height - 4) * Math.max(0, Math.min(1, VolumeService.value)))
         radius: 3
-        color: root.volumeMuted ? colors.secondary : colors.primary
+        color: VolumeService.isMuted ? colors.secondary : colors.primary
 
         Behavior on height { NumberAnimation { duration: 100; easing.type: Easing.OutCubic } }
       }
     }
 
     Text {
-      text: {
-        if (root.volumeMuted || root.volumeValue <= 0) return "󰖁";
-        if (root.volumeValue < 0.33) return "󰕿";
-        if (root.volumeValue < 0.66) return "󰖀";
-        return "󰕾";
-      }
-      color: root.volumeMuted ? colors.secondary : colors.primary
+      text: VolumeService.getIcon()
+      color: VolumeService.isMuted ? colors.secondary : colors.primary
       font: root.rootFont
       Layout.alignment: Qt.AlignHCenter
     }

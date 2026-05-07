@@ -1,2 +1,4 @@
-Colors      1.0 Colors.qml
-singleton GlobalState 1.0 GlobalState.qml
+Colors                        1.0 Colors.qml
+singleton BrightnessService   1.0 BrightnessService.qml
+singleton GlobalState         1.0 GlobalState.qml
+singleton VolumeService       1.0 VolumeService.qml

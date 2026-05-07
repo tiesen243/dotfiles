@@ -5,24 +5,20 @@ import "../../Services"
 
 Rectangle {
   id: root
-  property font rootFont
-
-  property bool showBrightness: false
-  property real brightnessValue: 0
-
   Colors { id: colors }
+  property font rootFont
 
   width: 36
   height: 200
   radius: 24
   color: colors.surface
   border { color: colors.on_primary; width: 2 }
-  opacity: showBrightness ? 1 : 0
+  opacity: BrightnessService.isShow ? 1 : 0
 
   Behavior on opacity { NumberAnimation { duration: 150 } }
 
   Accessible.role: Accessible.ProgressBar
-  Accessible.name: "Brightness: " + Math.round(brightnessValue * 100) + "%"
+  Accessible.name: "Brightness: " + BrightnessService.value + "%"
 
   ColumnLayout {
     anchors.fill: parent
@@ -33,15 +29,17 @@ Rectangle {
     spacing: 8
 
     Text {
-      text: Math.round(root.brightnessValue * 100)
+      Layout.alignment: Qt.AlignHCenter
+
+      text: BrightnessService.value.toString().padStart(2, '0')
       color: colors.secondary
       font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
-      Layout.alignment: Qt.AlignHCenter
     }
 
     Rectangle {
       Layout.fillHeight: true
       Layout.alignment: Qt.AlignHCenter
+
       width: 8
       radius: 4
       color: colors.surface
@@ -53,7 +51,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.margins: 2
-        height: Math.max(0, (parent.height - 4) * Math.max(0, Math.min(1, root.brightnessValue)))
+        height: Math.max(0, (parent.height - 4) * Math.max(0, Math.min(1, BrightnessService.value / 100)))
         radius: 3
         color: colors.primary
 
@@ -62,7 +60,7 @@ Rectangle {
     }
 
     Text {
-      text: "󰃠"
+      text: BrightnessService.getIcon()
       color: colors.primary
       font: root.rootFont
       Layout.alignment: Qt.AlignHCenter

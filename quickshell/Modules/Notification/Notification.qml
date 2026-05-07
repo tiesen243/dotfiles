@@ -25,6 +25,10 @@ Scope {
       NotificationService.dismissAll();
     }
 
+    function dnd_status(): bool {
+      return NotificationService.doNotDisturb;
+    }
+
     function dnd_toggle(): void {
       NotificationService.doNotDisturb = !NotificationService.doNotDisturb;
     }

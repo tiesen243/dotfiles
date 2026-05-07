@@ -1,4 +1,3 @@
-import Quickshell.Services.Pipewire
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick
@@ -12,18 +11,6 @@ Item {
 
   implicitHeight: volumeControl.implicitHeight
 
-  property var audioSink: Pipewire.defaultAudioSink
-  property int value: audioSink && audioSink.audio
-    ? Math.round(audioSink.audio.volume * 100)
-    : 0
-  property bool isMuted: audioSink && audioSink.audio
-    ? audioSink.audio.muted
-    : false
-
-  PwObjectTracker {
-    objects: [Pipewire.defaultAudioSink]
-  }
-
   RowLayout {
     id: volumeControl
 
@@ -33,20 +20,15 @@ Item {
     Text {
       id: volumeValue
       Accessible.role: Accessible.StaticText
-      Accessible.name: "Volume Value: " + root.value + "%" + root.isMuted ? ", muted" : ""
+      Accessible.name: "Volume Value: " + VolumeService.value + "%" + VolumeService.isMuted ? ", muted" : ""
 
-      text: (root.isMuted ? "󰖁 " : "󰕾 ") + root.value
+      text: VolumeService.getIcon() + " " + Math.round(VolumeService.value * 100).toString().padStart(2, '0')
       color: colors.primary
       font: root.rootFont
 
       MouseArea {
         anchors.fill: parent
-        onClicked: {
-          if (!root.audioSink || !root.audioSink.audio) return
-
-          root.isMuted = !root.isMuted
-          root.audioSink.audio.muted = root.isMuted
-        }
+        onClicked: VolumeService.toggleMute()
       }
     }
 
@@ -58,7 +40,7 @@ Item {
       Layout.fillWidth: true
       from: 0
       to: 100
-      value: root.value
+      value: VolumeService.value * 100
 
       background: Rectangle {
         anchors.fill: parent
@@ -76,10 +58,7 @@ Item {
         border { color: colors.primary_fixed; width: 1 }
       }
 
-      onMoved: {
-        if (root.audioSink && root.audioSink.audio)
-          root.audioSink.audio.volume = value / 100
-      }
+      onMoved: VolumeService.set(value)
     }
   }
 }
