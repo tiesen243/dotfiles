@@ -96,7 +96,7 @@ Item {
 
 	Timer {
     id: errorTimer
-    interval: 10 * 000
+    interval: 10 * 1000
     running: root.context.showFailure
     onTriggered: root.context.showFailure = false
   }
