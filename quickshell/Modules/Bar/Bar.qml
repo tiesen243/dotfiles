@@ -38,62 +38,68 @@ Scope {
 
       anchors { top: true; left: true; right: true }
       implicitHeight: 28
-      color: colors.surface
-      HyprlandWindow.opacity: 0.8
+      color: "transparent"
 
-      RowLayout {
-        id: leftRow
-        anchors {
-          left: parent.left
-          verticalCenter: parent.verticalCenter
-          margins: 8
+      Rectangle {
+        id: barContainer
+        anchors.fill: parent
+        color: colors.surface
+        opacity: 0.8
+
+        RowLayout {
+          id: leftRow
+          anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+            margins: 8
+          }
+          spacing: 12
+
+          StartMenu {
+            id: startMenu
+            rootFont: root.rootFont
+            popupAnchor: bar
+          }
+
+          Workspace {
+            id: workspace
+            rootFont: root.rootFont
+          }
         }
-        spacing: 12
 
-        StartMenu {
-          id: startMenu
+        WindowTitle {
+          id: windowTitle
           rootFont: root.rootFont
-          popupAnchor: bar
+          anchors {
+            horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
+          }
         }
 
-        Workspace {
-          id: workspace
-          rootFont: root.rootFont
-        }
-      }
+        RowLayout {
+          id: rightRow
+          anchors {
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+            margins: 8
+          }
+          spacing: 12
 
-      WindowTitle {
-        id: windowTitle
-        rootFont: root.rootFont
-        anchors {
-          horizontalCenter: parent.horizontalCenter
-          verticalCenter: parent.verticalCenter
-        }
-      }
+          Tray {
+            id: tray
+            rootFont: root.rootFont
+          }
 
-      RowLayout {
-        id: rightRow
-        anchors {
-          right: parent.right
-          verticalCenter: parent.verticalCenter
-          margins: 8
-        }
-        spacing: 12
+          Time {
+            id: time
+            rootFont: root.rootFont
+            popupAnchor: bar
+          }
 
-        Tray {
-          id: tray
-          rootFont: root.rootFont
-        }
-
-        Time {
-          id: time
-          rootFont: root.rootFont
-          popupAnchor: bar
-        }
-
-        Battery {
-          id: battery
-          rootFont: root.rootFont
+          Battery {
+            id: battery
+            rootFont: root.rootFont
+          }
         }
       }
     }

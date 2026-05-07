@@ -3,6 +3,7 @@ import Quickshell
 
 import qs.Modules.Background
 import qs.Modules.Bar
+import qs.Modules.ClipboardManager
 import qs.Modules.Lockscreen
 import qs.Modules.Notification
 import qs.Modules.OSD
@@ -23,6 +24,11 @@ ShellRoot {
   Loader {
     active: true
     sourceComponent: Bar { id: bar }
+  }
+
+  Loader {
+    active: true
+    sourceComponent: ClipboardManager { id: clipboardManager }
   }
 
   Loader {
