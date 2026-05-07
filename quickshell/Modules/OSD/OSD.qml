@@ -20,6 +20,7 @@ Scope {
 
   property real volumeValue: 0
   property bool volumeMuted: false
+  property bool _volumeReady: false
 
   property real brightnessValue: 0
   property real maxBrightness: 1
@@ -34,14 +35,20 @@ Scope {
 
     function onVolumeChanged() {
       root.volumeValue = Pipewire.defaultAudioSink.audio.volume;
-      root.showVolume = true;
-      volumeHideTimer.restart();
+      if (root._volumeReady) {
+        root.showVolume = true;
+        volumeHideTimer.restart();
+      }
+      root._volumeReady = true;
     }
 
     function onMutedChanged() {
       root.volumeMuted = Pipewire.defaultAudioSink.audio.muted;
-      root.showVolume = true;
-      volumeHideTimer.restart();
+      if (root._volumeReady) {
+        root.showVolume = true;
+        volumeHideTimer.restart();
+      }
+      root._volumeReady = true;
     }
   }
 
