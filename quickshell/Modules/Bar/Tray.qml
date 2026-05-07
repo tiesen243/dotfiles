@@ -23,7 +23,7 @@ Item {
 
     implicitWidth: trayItems.implicitWidth
     implicitHeight: trayItems.implicitHeight
-    color: colors.surface
+    color: "transparent"
 
     RowLayout {
       id: trayItems
