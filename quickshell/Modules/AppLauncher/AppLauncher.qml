@@ -124,12 +124,7 @@ Scope {
 
               if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                 const selectedItem = filteredAppModel.get(appList.currentIndex)
-                if (selectedItem) {
-                  // Execute the application, removing any %U, %F, etc. from the Exec line
-                  const cleanExec = selectedItem.exec.replace(/%[a-zA-Z]/g, "").trim()
-                  launchProc.command = ["sh", "-c", `hyprctl dispatch exec "${cleanExec}"`]
-                  launchProc.running = true
-                }
+                if (selectedItem) root.launchApp(selectedItem.exec, selectedItem.terminal)
 
                 root.isOpen = false
                 event.accepted = true
@@ -171,6 +166,10 @@ Scope {
               border { color: colors.on_primary; width: 2 }
               radius: 4
 
+              Behavior on color { 
+                ColorAnimation { duration: 150 }
+              }
+
               RowLayout {
                 anchors { 
                   left: parent.left
@@ -195,6 +194,15 @@ Scope {
                   color: appItem.ListView.isCurrentItem ? colors.on_primary : colors.on_surface
                   font: root.rootFont
                   elide: Text.ElideRight
+
+                  Behavior on color { 
+                    ColorAnimation { duration: 150 }
+                  }
+
+                  MouseArea {
+                    anchors.fill: parent
+                    onClicked: root.launchApp(appItem.modelData.exec, appItem.modelData.terminal)
+                  }
                 }
               }
             }
@@ -204,9 +212,18 @@ Scope {
     }
   }
 
+  function launchApp(exec, terminal = false): void {
+    const cleanExec = exec.replace(/%[a-zA-Z]/g, "").trim()
+    if (terminal) launchProc.command = ["sh", "-c", `kitty "${cleanExec}"`]
+    else launchProc.command = ["sh", "-c", `hyprctl dispatch exec "${cleanExec}"`]
+
+    launchProc.running = true
+    root.isOpen = false
+  }
+
   Process {
     id: appProc
-    command: ["sh", "-c", "find /usr/share/applications ~/.local/share/applications -name '*.desktop' 2>/dev/null | while read -r file; do name=$(grep -m1 '^Name=' \"$file\" | cut -d= -f2-); exec=$(grep -m1 '^Exec=' \"$file\" | cut -d= -f2-); icon=$(grep -m1 '^Icon=' \"$file\" | cut -d= -f2-); [ -n \"$name\" ] && [ -n \"$exec\" ] && echo \"$name|$exec|$icon\"; done | sort -u"]
+    command: ["sh", "-c", "find /usr/share/applications ~/.local/share/applications -name '*.desktop' 2>/dev/null | while read -r file; do name=$(grep -m1 '^Name=' \"$file\" | cut -d= -f2-); exec=$(grep -m1 '^Exec=' \"$file\" | cut -d= -f2-); icon=$(grep -m1 '^Icon=' \"$file\" | cut -d= -f2-); terminal=$(grep -m1 '^Terminal=' \"$file\" | cut -d= -f2-); [ -n \"$name\" ] && [ -n \"$exec\" ] && echo \"$name|$exec|$icon|$terminal\"; done | sort -u"]
     stdout: StdioCollector {
       onStreamFinished: {
         const lines = text.trim().split("\n");
@@ -223,11 +240,12 @@ Scope {
           const name = parts[0].trim();
           const exec = parts[1].trim();
           const icon = parts[2] ? "image://icon/" + parts[2].trim() : "";
+          const terminal = parts[3] ? parts[3].trim().toLowerCase() === "true" : false;
 
           if (!name || !exec) continue;
           if (appModel.get(0, item => item.name === name)) continue;
           
-          if (name && exec) items.push({ icon: icon, name: name, exec: exec })
+          if (name && exec) items.push({ icon: icon, name: name, exec: exec, terminal: terminal })
         }
 
         appModel.append(items)
