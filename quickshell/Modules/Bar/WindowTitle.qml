@@ -1,7 +1,7 @@
 import Quickshell.Hyprland
 import QtQuick
 
-import qs.Colors
+import "../../Services"
 
 Item {
   id: root

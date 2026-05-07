@@ -6,7 +6,6 @@ import QtQuick.Controls
 import QtQuick
 
 import "../../Services"
-import qs.Colors
 
 Scope {
   id: root

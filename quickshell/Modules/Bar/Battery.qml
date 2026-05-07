@@ -1,7 +1,7 @@
 import Quickshell.Services.UPower
 import QtQuick
 
-import qs.Colors
+import "../../Services"
 
 Item {
   id: root

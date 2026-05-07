@@ -3,7 +3,7 @@ import Quickshell
 import QtQuick
 import QtCore
 
-import qs.Colors
+import "../../Services"
 
 Scope {
   id: root

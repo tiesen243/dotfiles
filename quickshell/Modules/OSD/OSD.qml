@@ -1,12 +1,11 @@
-import Quickshell
-import Quickshell.Io
-import Quickshell.Wayland
 import Quickshell.Services.Pipewire
-import QtQuick
+import Quickshell.Wayland
+import Quickshell.Io
+import Quickshell
 import QtQuick.Layouts
+import QtQuick
 
 import "../../Services"
-import qs.Colors
 
 Scope {
   id: root

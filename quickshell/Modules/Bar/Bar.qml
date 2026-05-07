@@ -6,8 +6,8 @@ import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
+import "../../Services"
 import qs.Modules.StartMenu
-import qs.Colors
 
 Scope {
   id: root

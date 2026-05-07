@@ -3,7 +3,7 @@ import QtQuick.Effects
 import QtQuick
 import QtCore
 
-import qs.Colors
+import "../../Services"
 
 Rectangle {
 	id: root
