@@ -46,12 +46,10 @@ rm -rf ~/yay
 
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
-  # Hyprland ecosystem
-  hypridle hyprpolkitagent xdg-desktop-portal-hyprland \
+  # Hyprland & Shell components
+  hypridle hyprpolkitagent quickshell xdg-desktop-portal-hyprland \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  # UI & launchers
-  quickshell \
   # Terminal & CLI tools
   kitty btop fastfetch fzf zsh lazygit lsd ripgrep unzip github-cli \
   # Media & notifications
