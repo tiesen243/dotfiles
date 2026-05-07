@@ -85,6 +85,9 @@ Scope {
       }
 
       Rectangle {
+        Accessible.role: Accessible.Dialog
+        Accessible.name: "Application Launcher"
+
         anchors.centerIn: parent
         implicitWidth: 1920 / 3
         implicitHeight: 1080 / 3
@@ -93,12 +96,17 @@ Scope {
         radius: 8
 
         ColumnLayout {
+          Accessible.role: Accessible.List
+          Accessible.name: "Application List"
+
           anchors.fill: parent
           anchors.margins: 16
           spacing: 16
 
           TextField {
             id: searchField
+            Accessible.role: Accessible.EditableText
+            Accessible.name: "Search Applications"
 
             Layout.fillWidth: true
             padding: 8
@@ -150,6 +158,8 @@ Scope {
           ListView {
             id: appList
             model: filteredAppModel
+            Accessible.role: Accessible.List
+            Accessible.name: "Filtered Application List"
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -159,16 +169,14 @@ Scope {
             delegate: Rectangle {
               id: appItem
               required property var modelData
+              Accessible.role: Accessible.ListItem
+              Accessible.name: modelData.name
 
               implicitWidth: parent.width
               implicitHeight: appText.implicitHeight + 16
               color: ListView.isCurrentItem ? colors.primary : colors.on_secondary
               border { color: colors.on_primary; width: 2 }
               radius: 4
-
-              Behavior on color { 
-                ColorAnimation { duration: 150 }
-              }
 
               RowLayout {
                 anchors { 
@@ -194,10 +202,6 @@ Scope {
                   color: appItem.ListView.isCurrentItem ? colors.on_primary : colors.on_surface
                   font: root.rootFont
                   elide: Text.ElideRight
-
-                  Behavior on color { 
-                    ColorAnimation { duration: 150 }
-                  }
 
                   MouseArea {
                     anchors.fill: parent

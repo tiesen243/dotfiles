@@ -86,6 +86,9 @@ Scope {
       }
 
       Rectangle {
+        Accessible.role: Accessible.Dialog
+        Accessible.name: "Clipboard Manager"
+
         anchors.centerIn: parent
         implicitWidth: 1920 / 3
         implicitHeight: 1080 / 3
@@ -94,12 +97,17 @@ Scope {
         radius: 8
 
         ColumnLayout {
+          Accessible.role: Accessible.List
+          Accessible.name: "Clipboard Manager Content"
+
           anchors.fill: parent
           anchors.margins: 16
           spacing: 16
 
           TextField {
             id: searchField
+            Accessible.role: Accessible.EditableText
+            Accessible.name: "Search Clipboard History"
 
             Layout.fillWidth: true
             padding: 8
@@ -154,6 +162,8 @@ Scope {
           ListView {
             id: clipboardList
             model: filteredClipboardHistory
+            Accessible.role: Accessible.List
+            Accessible.name: "Filtered Clipboard History"
 
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -163,16 +173,14 @@ Scope {
             delegate: Rectangle {
               id: clipboardItem
               required property var modelData
+              Accessible.role: Accessible.ListItem
+              Accessible.name: modelData.text
 
               implicitWidth: parent.width
               implicitHeight: clipboardText.implicitHeight + 16
               color: ListView.isCurrentItem ? colors.primary : colors.on_secondary
               border { color: colors.on_primary; width: 2 }
               radius: 4
-
-              Behavior on color { 
-                ColorAnimation { duration: 150 }
-              }
 
               Text {
                 id: clipboardText
@@ -187,10 +195,6 @@ Scope {
                 color: clipboardItem.ListView.isCurrentItem ? colors.on_primary : colors.on_surface
                 font: root.rootFont
                 elide: Text.ElideRight
-
-                Behavior on color { 
-                  ColorAnimation { duration: 150 }
-                }
 
                 MouseArea {
                   anchors.fill: parent
