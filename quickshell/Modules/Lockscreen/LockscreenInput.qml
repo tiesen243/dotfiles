@@ -31,6 +31,7 @@ Item {
 				enabled: !root.context.unlockInProgress
 				echoMode: TextInput.Password
 				inputMethodHints: Qt.ImhSensitiveData
+				placeholderText: "Enter password"
 
 				font: root.rootFont
 				color: colors.surface

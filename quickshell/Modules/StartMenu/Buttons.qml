@@ -135,7 +135,7 @@ Item {
 
         Connections {
           target: root
-          onIsOpenChanged: {
+          function onIsOpenChanged() {
             if (root.isOpen && button.modelData.getCmd !== "")
               buttonGetProc.running = true
           }
