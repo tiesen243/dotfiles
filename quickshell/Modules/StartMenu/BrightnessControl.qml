@@ -1,4 +1,3 @@
-import Quickshell.Io
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick
@@ -12,9 +11,6 @@ Item {
 
   implicitHeight: brightnessControl.implicitHeight
 
-  property int value: 0
-  property int maxBrightness: 1
-
   RowLayout {
     id: brightnessControl
 
@@ -24,9 +20,9 @@ Item {
     Text {
       id: brightnessValue
       Accessible.role: Accessible.StaticText
-      Accessible.name: "Brightness Value: " + root.value + "%"
+      Accessible.name: "Brightness Value: " + BrightnessService.value + "%"
 
-      text: "󰃟 " + root.value
+      text: BrightnessService.getIcon() + " " + BrightnessService.value.toString().padStart(2, '0')
       color: colors.primary
       font: root.rootFont
     }
@@ -39,7 +35,7 @@ Item {
       Layout.fillWidth: true
       from: 0
       to: 100
-      value: root.value
+      value: BrightnessService.value
 
       background: Rectangle {
         anchors.fill: parent
@@ -57,52 +53,7 @@ Item {
         border { color: colors.primary_fixed; width: 1 }
       }
 
-      onMoved: {
-        brightnessSetProc.command = ["brightnessctl", "set", Math.round(value) + "%"]
-        brightnessSetProc.running = true
-      }
-    }
-  }
-
-  FileView {
-    id: brightnessFile
-    path: ""
-    watchChanges: true
-    onFileChanged: brightnessGetProc.running = true
-  }
-
-  Process {
-    id: brightnessGetProc
-    command: ["brightnessctl", "get"]
-    running: false
-    stdout: StdioCollector {
-      onStreamFinished: {
-        const val = parseInt(text.trim())
-        if (!isNaN(val) && root.maxBrightness > 0)
-          root.value = (val / root.maxBrightness) * 100
-      }
-    }
-  }
-
-  Process {
-    id: brightnessSetProc
-    command: []
-  }
-
-  Process {
-    id: backlightDiscovery
-    command: ["sh", "-c", "p=$(ls -d /sys/class/backlight/*/brightness 2>/dev/null | head -1); [ -n \"$p\" ] && echo $p && cat ${p%brightness}max_brightness"]
-    running: true
-    stdout: StdioCollector {
-      onStreamFinished: {
-        const lines = text.trim().split("\n")
-        if (lines.length >= 2) {
-          const max = parseInt(lines[1])
-          if (!isNaN(max) && max > 0) root.maxBrightness = max
-          brightnessFile.path = lines[0]
-          brightnessGetProc.running = true
-        }
-      }
+      onMoved: BrightnessService.set(value)
     }
   }
 }

@@ -22,6 +22,7 @@ Item {
       isChecked: false;
       getCmd: "nmcli radio wifi | grep -qw enabled && echo true || echo false";
       setCmd: "nmcli radio wifi | grep -qw enabled && nmcli radio wifi off || nmcli radio wifi on";
+      shortcut: "w";
     }
     ListElement { 
       icon: ""; 
@@ -29,6 +30,7 @@ Item {
       isChecked: false;
       getCmd: "bluetoothctl show | grep -q 'Powered: yes' && echo true || echo false";
       setCmd: "bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on";
+      shortcut: "b";
     }
     ListElement { 
       icon: ""; 
@@ -36,13 +38,15 @@ Item {
       isChecked: false;
       getCmd: "[ \"$(powerprofilesctl get)\" = \"power-saver\" ] && echo true || echo false";
       setCmd: "[ \"$(powerprofilesctl get)\" = \"power-saver\" ] && powerprofilesctl set balanced || powerprofilesctl set power-saver";
+      shortcut: "p";
     }
     ListElement { 
       icon: "󰂛"; 
       name: "Do Not Disturb"; 
       isChecked: false;
-      getCmd: "";
-      setCmd: "";
+      getCmd: "quickshell ipc call notifications dnd_status";
+      setCmd: "quickshell ipc call notifications dnd_toggle";
+      shortcut: "d";
     }
     ListElement { 
       icon: ""; 
@@ -50,6 +54,7 @@ Item {
       isChecked: false;
       getCmd: "rfkill list all | grep -q 'Soft blocked: no' && echo false || echo true";
       setCmd: "rfkill list all | grep -q 'Soft blocked: no' && rfkill block all || rfkill unblock all";
+      shortcut: "a";
     }
     ListElement { 
       icon: ""; 
@@ -57,6 +62,7 @@ Item {
       isChecked: false;
       getCmd: "";
       setCmd: "kitty";
+      shortcut: "";
     }
     ListElement { 
       icon: ""; 
@@ -64,6 +70,7 @@ Item {
       isChecked: false;
       getCmd: "";
       setCmd: "thunar";
+      shortcut: "";
     }
     ListElement { 
       icon: ""; 
@@ -71,6 +78,7 @@ Item {
       isChecked: false;
       getCmd: "";
       setCmd: "zen-browser";
+      shortcut: "";
     }
   }
   
@@ -105,7 +113,7 @@ Item {
           Accessible.name: button.modelData.name + " Icon"
 
           anchors.centerIn: parent
-          text: button.modelData.icon
+          text: button.modelData.icon 
           color: button.modelData.isChecked ? colors.on_primary : colors.primary
           font: root.rootFont
         }
@@ -115,6 +123,16 @@ Item {
           onClicked: {
             if (button.modelData.setCmd === "") return
               
+            buttonSetProc.running = true
+            if (button.modelData.getCmd !== "") 
+              items.setProperty(button.modelData.index, "isChecked", !button.modelData.isChecked)
+          }
+        }
+
+        Shortcut {
+          sequence: button.modelData.shortcut
+          onActivated: {
+            if (button.modelData.setCmd === "") return
             buttonSetProc.running = true
             if (button.modelData.getCmd !== "") 
               items.setProperty(button.modelData.index, "isChecked", !button.modelData.isChecked)
