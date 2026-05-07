@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 
+import qs.Modules.AppLauncher
 import qs.Modules.Background
 import qs.Modules.Bar
 import qs.Modules.ClipboardManager
@@ -24,6 +25,11 @@ ShellRoot {
   Loader {
     active: true
     sourceComponent: Bar { id: bar }
+  }
+
+  Loader {
+    active: true
+    sourceComponent: AppLauncher { id: appLauncher }
   }
 
   Loader {

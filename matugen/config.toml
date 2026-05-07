@@ -45,9 +45,9 @@ output_path = '~/.config/lazygit/config.yml'
 input_path = '~/.config/matugen/templates/quickshell.qml'
 output_path = '~/.config/quickshell/Colors/Colors.qml'
 
-[templates.rofi]
-input_path = '~/.config/matugen/templates/rofi.rasi'
-output_path = '~/.config/rofi/colors.rasi'
+# [templates.rofi]
+# input_path = '~/.config/matugen/templates/rofi.rasi'
+# output_path = '~/.config/rofi/colors.rasi'
 
 # [templates.swaync]
 # input_path = '~/.config/matugen/templates/colors.css'

@@ -14,17 +14,21 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 
 ![preview-03](./assets/preview-03.png)
 
-## Rofi launcher
+## App launcher
 
 ![preview-04](./assets/preview-04.png)
 
-### Lock screen
+## Clipboard manager
 
 ![preview-05](./assets/preview-05.png)
 
-## Neovim
+### Lock screen
 
 ![preview-06](./assets/preview-06.png)
+
+## Neovim
+
+![preview-07](./assets/preview-07.png)
 
 ## Installation
 
@@ -47,7 +51,7 @@ yes | yay -S --answerclean All --answerdiff None \
   # Fonts
   noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
   # UI & launchers
-  rofi quickshell \
+  quickshell \
   # Terminal & CLI tools
   kitty btop fastfetch fzf zsh lazygit lsd ripgrep unzip github-cli \
   # Media & notifications
@@ -118,9 +122,9 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,rofi}
+   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell}
 
-   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,rofi} ~/.config
+   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
    ln -s ~/dotfiles/zsh/.zprofile ~/.zprofile # for fcitx config (optional)
