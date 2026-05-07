@@ -81,35 +81,40 @@ Item {
       }
 
       ColumnLayout {
-        id: trackInfoContainer
+        id: trackInfo
 
-        spacing: 4
+        spacing: 12
 
-        Text {
-          id: trackInfoTitle
-          Accessible.role: Accessible.StaticText
-          Accessible.name: root.activePlayer ? "Track title: " + (root.activePlayer.metadata["xesam:title"] || "unknown title") : "No active player"
+        ColumnLayout {
+          id: trackInfoContent
 
-          Layout.fillWidth: true
-          text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
-          color: colors.primary
-          font: root.rootFont
-          elide: Text.ElideRight
+          Layout.fillHeight: true
+          spacing: 8
+
+          Text {
+            id: trackInfoTitle
+            Accessible.role: Accessible.StaticText
+            Accessible.name: root.activePlayer ? "Track title: " + (root.activePlayer.metadata["xesam:title"] || "unknown title") : "No active player"
+
+            Layout.fillWidth: true
+            text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
+            color: colors.primary
+            font: root.rootFont
+            elide: Text.ElideRight
+          }
+
+          Text {
+            id: trackInfoArtist
+            Accessible.role: Accessible.StaticText
+            Accessible.name: root.activePlayer ? "Track artist: " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist") : "No active player"
+
+            Layout.fillWidth: true
+            text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
+            color: colors.primary
+            font: root.rootFont
+            elide: Text.ElideRight
+          }
         }
-
-        Text {
-          id: trackInfoArtist
-          Accessible.role: Accessible.StaticText
-          Accessible.name: root.activePlayer ? "Track artist: " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist") : "No active player"
-
-          Layout.fillWidth: true
-          text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
-          color: colors.primary
-          font: root.rootFont
-          elide: Text.ElideRight
-        }
-
-        Item { Layout.fillHeight: true }
 
         RowLayout {
           id: trackTimeline
@@ -178,6 +183,9 @@ Item {
 
         RowLayout {
           id: trackControl
+
+          Layout.alignment: Qt.AlignHCenter
+          spacing: 16
 
           Repeater {
             model: [
