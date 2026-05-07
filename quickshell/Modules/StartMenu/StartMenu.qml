@@ -6,7 +6,6 @@ import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
-import qs.Colors
 import '../../Services'
 
 Item {

@@ -3,7 +3,7 @@ import Quickshell.Io
 import Quickshell
 import QtQuick
 
-import qs.Colors
+import "../../Services"
 
 Item {
   id: root

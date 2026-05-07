@@ -8,7 +8,6 @@ import QtQuick.Layouts
 import QtQuick
 
 import "../../Services"
-import qs.Colors
 
 Scope {
   id: notification
