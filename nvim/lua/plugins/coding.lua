@@ -5,7 +5,7 @@ return {
     {
       name = "blink-cmp",
       src = "https://github.com/saghen/blink.cmp",
-      version = "v1"
+      version = "v1",
     },
     opts = {
       snippets = {

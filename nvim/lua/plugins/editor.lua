@@ -163,10 +163,6 @@ return {
         Snacks.toggle.indent():map("<leader>ug")
         Snacks.toggle.dim():map("<leader>uD")
 
-        if vim.lsp.inlay_hint then
-          Snacks.toggle.inlay_hints():map("<leader>uh")
-        end
-
         -- stylua: ignore start
         if vim.fn.executable("lazygit") == 1 then
           ---@diagnostic disable-next-line: missing-fields

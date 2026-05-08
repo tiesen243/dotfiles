@@ -20,6 +20,7 @@ return {
       ensure_installed = { "lua-language-server", "stylua" },
     },
   },
+
   {
     { name = "conform", override = true },
     opts = {
