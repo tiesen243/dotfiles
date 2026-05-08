@@ -70,38 +70,39 @@ return {
             pcall(vim.keymap.del, "n", "grt")
             pcall(vim.keymap.del, "n", "grx")
 
-	          -- stylua: ignore start
-	          map("K", vim.lsp.buf.hover, "Hover Documentation")
-	          map("L", vim.diagnostic.open_float, "Line Diagnostic")
-	          map("gd", Snacks.picker.lsp_definitions, "Goto Definition")
-	          map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
-	          map("gr", Snacks.picker.lsp_references, "References")
-	          map("gI", Snacks.picker.lsp_implementations, "Goto Implementation")
-	          map("gy", Snacks.picker.lsp_type_definitions, "Goto T[y]pe Definition")
-	          map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
-	          map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-	          map("<leader>cd", Snacks.picker.diagnostics, "Diagnostics")
-	          map("<leader>cD", Snacks.picker.diagnostics, "Buffer Diagnostics")
-	          map("<leader>cf", Yuki.format.format, "Format")
-	          map("<leader>cF", vim.lsp.buf.format, "Format (LSP)")
-	          map("<leader>cr", vim.lsp.buf.rename, "Rename Variable")
-	          map("<leader>cR", Snacks.rename.rename_file, "Rename File")
-	          map("<leader>cs", Snacks.picker.lsp_symbols, "Symbols")
-	          map("<leader>cS", Snacks.picker.lsp_workspace_symbols, "Workspace Symbols")
-	          map("<leader>cx", vim.lsp.codelens.run, "Run Code Lens")
-	          map("]]", function() Snacks.words.jump(vim.v.count1) end, "Next Reference")
-	          map("[[", function() Snacks.words.jump(-vim.v.count1) end, "Previous Reference")
+            -- stylua: ignore start
+            map("K", vim.lsp.buf.hover, "Hover Documentation")
+            map("gl", vim.diagnostic.open_float, "Line Diagnostic")
+            map("gd", Snacks.picker.lsp_definitions, "Goto Definition")
+            map("gD", Snacks.picker.lsp_declarations, "Goto Declaration")
+            map("gr", Snacks.picker.lsp_references, "References")
+            map("gI", Snacks.picker.lsp_implementations, "Goto Implementation")
+            map("gy", Snacks.picker.lsp_type_definitions, "Goto T[y]pe Definition")
+            map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
+            map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+            map("<leader>cd", Snacks.picker.diagnostics, "Diagnostics")
+            map("<leader>cD", Snacks.picker.diagnostics, "Buffer Diagnostics")
+            map("<leader>cf", Yuki.format.format, "Format")
+            map("<leader>cF", vim.lsp.buf.format, "Format (LSP)")
+            map("<leader>cr", vim.lsp.buf.rename, "Rename Variable")
+            map("<leader>cR", Snacks.rename.rename_file, "Rename File")
+            map("<leader>cs", Snacks.picker.lsp_symbols, "Symbols")
+            map("<leader>cS", Snacks.picker.lsp_workspace_symbols, "Workspace Symbols")
+            map("<leader>cx", vim.lsp.codelens.run, "Run Code Lens")
+            map("]]", function() Snacks.words.jump(vim.v.count1) end, "Next Reference")
+            map("[[", function() Snacks.words.jump(-vim.v.count1) end, "Previous Reference")
             -- stylua: ignore end
 
-            -- Refresh code lenses on certain events
+            if client.server_capabilities.inlayHintProvider then
+              Snacks.toggle.inlay_hints():map("<leader>uh")
+            end
+
             if client.server_capabilities.codeLensProvider then
-              vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-                group = Yuki.utils.create_augroup("lsp_codelens_refresh"),
-                buffer = bufnr,
-                callback = function(ev)
-                  vim.lsp.codelens.enable(true, { bufnr = ev.buf })
-                end,
-              })
+              Snacks.toggle({
+                name = "code_lens",
+                get = vim.lsp.codelens.is_enabled,
+                set = vim.lsp.codelens.enable,
+              }):map("<leader>uc")
             end
 
             -- LSP status

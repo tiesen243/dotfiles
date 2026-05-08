@@ -7,9 +7,8 @@ require("yuki").setup({
     "plugins.lsp",
     "plugins.ui",
 
-    "plugins.langs.dot",
-    "plugins.langs.lua",
     "plugins.langs.json",
+    "plugins.langs.lua",
     "plugins.langs.markdown",
 
     "plugins.langs.tailwind",
