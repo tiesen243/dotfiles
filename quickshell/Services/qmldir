@@ -1,4 +1,8 @@
 Colors                        1.0 Colors.qml
-singleton BrightnessService   1.0 BrightnessService.qml
 singleton GlobalState         1.0 GlobalState.qml
+
+NotificationEntity            1.0 NotificationEntity.qml
+singleton NotificationService 1.0 NotificationService.qml
+
+singleton BrightnessService   1.0 BrightnessService.qml
 singleton VolumeService       1.0 VolumeService.qml
