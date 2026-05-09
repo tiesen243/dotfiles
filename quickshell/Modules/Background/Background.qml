@@ -20,11 +20,7 @@ Scope {
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
-      anchors.top: true
-      anchors.left: true
-      anchors.right: true
-      anchors.bottom: true
-
+      anchors { top: true; left: true; right: true; bottom: true }
       exclusiveZone: -1
       color: Matugen.surface
 
@@ -32,11 +28,14 @@ Scope {
         id: backgroundImage
 
         anchors.fill: parent
+        source: GlobalState.dotfiles + "/assets/_background.png" + "?v=" + BackgroundService.wallpaperVersion
+        fillMode: Image.PreserveAspectCrop
         cache: true
         smooth: true
+      }
 
-        source: GlobalState.dotfiles + "/assets/_background.png"
-        fillMode: Image.PreserveAspectCrop
+      BackgroundSelector {
+        id: backgroundSelector
       }
     }
   }

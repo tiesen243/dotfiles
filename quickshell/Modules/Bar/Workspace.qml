@@ -8,7 +8,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitWidth: workspace.implicitWidth
@@ -28,8 +27,8 @@ Item {
 
         implicitWidth: root.rootFont.pixelSize * (modelData.focused ? 2 : 1.5)
         implicitHeight: root.rootFont.pixelSize * 1.5
-        color: modelData.focused ? colors.primary : (workspaceItemMouseArea.containsMouse 
-          ? colors.on_secondary : colors.surface)
+        color: modelData.focused ? Matugen.primary : (workspaceItemMouseArea.containsMouse 
+          ? Matugen.on_secondary : Matugen.surface)
         radius: 4
 
         Behavior on color {
@@ -45,8 +44,8 @@ Item {
 
           text: workspaceItem.modelData.id
           color: workspaceItem.modelData.focused 
-            ? colors.on_primary 
-            : colors.on_surface
+            ? Matugen.on_primary 
+            : Matugen.on_surface
           font: root.rootFont
           anchors.centerIn: parent
 
