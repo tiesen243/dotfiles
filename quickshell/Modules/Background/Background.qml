@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import Quickshell.Wayland
 import Quickshell
 import QtQuick
-import QtCore
 
 import "../../Services"
 
@@ -37,13 +36,9 @@ Scope {
         cache: true
         smooth: true
 
-        source: root.getWallpaper("_background.png")
+        source: GlobalState.dotfiles + "/assets/_background.png"
         fillMode: Image.PreserveAspectCrop
       }
     }
-  }
-
-  function getWallpaper(fileName: string): string {
-    return StandardPaths.standardLocations(StandardPaths.HomeLocation)[0] + "/dotfiles/assets/" + fileName
   }
 }
