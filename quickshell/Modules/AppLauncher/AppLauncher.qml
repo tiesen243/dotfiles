@@ -174,7 +174,7 @@ Scope {
               Accessible.role: Accessible.ListItem
               Accessible.name: modelData.name
 
-              implicitWidth: parent.width
+              implicitWidth: searchField.width
               implicitHeight: appText.implicitHeight + 24
               color: ListView.isCurrentItem ? Matugen.surface_bright : Matugen.surface
               border { color: Matugen.on_secondary; width: 2 }

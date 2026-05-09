@@ -180,7 +180,7 @@ Scope {
               Accessible.role: Accessible.ListItem
               Accessible.name: modelData.text
 
-              implicitWidth: parent.width
+              implicitWidth: searchField.width
               implicitHeight: clipboardText.implicitHeight + 24
               color: ListView.isCurrentItem ? Matugen.surface_bright : Matugen.surface
               border { color: Matugen.on_secondary; width: 2 }

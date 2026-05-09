@@ -2,6 +2,7 @@ pragma Singleton
 
 import Quickshell.Io
 import Quickshell
+import QtQuick
 
 Singleton {
   id: root
@@ -48,5 +49,6 @@ Singleton {
         root.on_error = colors.on_error || root.on_error
       }
     }
+    Component.onCompleted: updateColorsProc.running = true
   }
 }
