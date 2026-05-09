@@ -77,7 +77,7 @@ Item {
       isChecked: false;
       getCmd: "";
       setCmd: "quickshell ipc call wallpaper toggle";
-      shortcut: "q";
+      shortcut: "";
     }
   }
   

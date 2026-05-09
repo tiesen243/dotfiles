@@ -73,7 +73,7 @@ Item {
 
           anchors.centerIn: parent
           text: "󰎆"
-          color: Matugen.primary
+          color: Matugen.secondary
           font: root.rootFont
           visible: root.activePlayer && root.activePlayer.trackArtUrl === ""
         }
