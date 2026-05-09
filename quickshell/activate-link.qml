@@ -14,15 +14,8 @@ ShellRoot {
 			property var modelData
 			screen: modelData
 
-			anchors {
-				right: true
-				bottom: true
-			}
-
-			margins {
-				right: 50
-				bottom: 50
-			}
+			anchors { right: true; bottom: true }
+			margins { right: 50; bottom: 50 }
 
 			implicitWidth: content.width
 			implicitHeight: content.height

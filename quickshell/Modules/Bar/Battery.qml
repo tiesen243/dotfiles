@@ -16,13 +16,15 @@ Item {
   Text {
     id: battery
     Accessible.role: Accessible.StaticText
-    Accessible.name: "Battery level: " + root.level + (root.isCharging ? ", charging" : ", discharging")
+    Accessible.name: "Battery level: " + 
+      (root.upower.displayDevice.percentage * 100) + 
+      (root.upower.displayDevice.state === UPowerDeviceState.Charging ? ", charging" : ", discharging")
 
     text: {
-      const batteryLevel = upower.displayDevice.percentage * 100
+      const batteryLevel = root.upower.displayDevice.percentage * 100
       var icon = "󰁺 "
 
-      if (upower.displayDevice.state === UPowerDeviceState.Charging) icon = "󰂄 "
+      if (root.upower.displayDevice.state === UPowerDeviceState.Charging) icon = "󰂄 "
       else if (batteryLevel >= 90) icon = "󰁹 "
       else if (batteryLevel >= 80) icon = "󰂂 "
       else if (batteryLevel >= 70) icon = "󰂁 "

@@ -161,7 +161,7 @@ Item {
             MouseArea {
               anchors.fill: parent
               cursorShape: Qt.PointingHandCursor
-              onClicked: {
+              onClicked: mouse => {
                 if (root.activePlayer.length > 0) {
                   const clickPosition = mouse.x / trackProgressBar.width;
                   root.activePlayer.position = Math.floor(clickPosition * root.activePlayer.length);
