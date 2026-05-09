@@ -62,13 +62,16 @@ Item {
 
           anchors.centerIn: parent
           text: "󰎆"
-          color: Matugen.primary
+          color: Matugen.secondary
           font: root.rootFont
           visible: root.activePlayer && root.activePlayer.trackArtUrl === ""
         }
       }
 
       ColumnLayout {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+
         Text {
           Accessible.role: Accessible.StaticText
           Accessible.name: root.activePlayer ? "Current track: " + (root.activePlayer.metadata["xesam:title"] || "unknown title") : "No active player"
@@ -83,6 +86,7 @@ Item {
           }
           elide: Text.ElideRight
         }
+
         Text {
           Accessible.role: Accessible.StaticText
           Accessible.name: root.activePlayer ? "Track artist: " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist") : "No active player"
@@ -92,6 +96,7 @@ Item {
           color: Matugen.on_primary
           font: root.rootFont
           elide: Text.ElideRight
+          visible: text !== ""
         }
       }
     }
