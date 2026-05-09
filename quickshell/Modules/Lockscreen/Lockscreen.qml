@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell

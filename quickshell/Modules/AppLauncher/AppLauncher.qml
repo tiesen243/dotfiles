@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
@@ -34,18 +36,16 @@ Scope {
   }
 
   function filterApps(query = ""): void {
-    filteredAppModel.clear();
-    const lowerQuery = query.toLowerCase();
-    const filtered = [];
+    filteredAppModel.clear()
+    const lowerQuery = query.toLowerCase()
+    const filtered = []
 
     for (let i = 0; i < appModel.count; i++) {
-      const item = appModel.get(i);
+      const item = appModel.get(i)
       if (!query || item.name.toLowerCase().includes(lowerQuery)) filtered.push(item)
     }
 
     if (filtered.length > 0) filteredAppModel.append(filtered)
-
-    appList.currentIndex = 0;
   }
 
   Variants {
@@ -69,7 +69,7 @@ Scope {
 
         searchField.forceActiveFocus()
         if (appModel.count === 0) {
-            appProc.running = true;
+            appProc.running = true
         }
       }
 
@@ -121,7 +121,10 @@ Scope {
               radius: 4
             }
 
-            onTextChanged: filterApps(text)
+            onTextChanged: {
+              root.filterApps(text)
+              appList.currentIndex = 0
+            }
 
             Keys.onPressed: (event) => {
               if (event.key === Qt.Key_Escape) {
@@ -139,14 +142,14 @@ Scope {
                 return
               }
 
-              if (filteredAppModel.count === 0) return;
+              if (filteredAppModel.count === 0) return
               const isNext = event.key === Qt.Key_Down || event.key === Qt.Key_Tab || (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_N)
               const isPrev = event.key === Qt.Key_Up || event.key === Qt.Key_Backtab || (event.key === Qt.Key_Tab && (event.modifiers & Qt.ShiftModifier)) || (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_P)
 
               if (isNext || isPrev) {
                 event.accepted = true
 
-                let idx = appList.currentIndex;
+                let idx = appList.currentIndex
                 if (isNext) idx = Math.min(idx + 1, filteredAppModel.count - 1)
                 else if (isPrev) idx = Math.max(idx - 1, 0)
 
@@ -172,7 +175,7 @@ Scope {
               Accessible.role: Accessible.ListItem
               Accessible.name: modelData.name
 
-              implicitWidth: parent.width
+              Layout.fillWidth: true
               implicitHeight: appText.implicitHeight + 16
               color: ListView.isCurrentItem ? colors.primary : colors.on_secondary
               border { color: colors.on_primary; width: 2 }
@@ -188,9 +191,9 @@ Scope {
 
                 Image {
                   id: appIcon
-                  visible: modelData.icon !== ""
+                  visible: appItem.modelData.icon !== ""
 
-                  source: modelData.icon
+                  source: appItem.modelData.icon
                   sourceSize: Qt.size(24, 24)
                 }
 
@@ -229,30 +232,31 @@ Scope {
     command: ["sh", "-c", "find /usr/share/applications ~/.local/share/applications -name '*.desktop' 2>/dev/null | while read -r file; do name=$(grep -m1 '^Name=' \"$file\" | cut -d= -f2-); exec=$(grep -m1 '^Exec=' \"$file\" | cut -d= -f2-); icon=$(grep -m1 '^Icon=' \"$file\" | cut -d= -f2-); terminal=$(grep -m1 '^Terminal=' \"$file\" | cut -d= -f2-); [ -n \"$name\" ] && [ -n \"$exec\" ] && echo \"$name|$exec|$icon|$terminal\"; done | sort -u"]
     stdout: StdioCollector {
       onStreamFinished: {
-        const lines = text.trim().split("\n");
-        appModel.clear();
+        const lines = text.split("\n")
+        appModel.clear()
 
         if (lines.length === 0 || (lines.length === 1 && lines[0] === ""))
-          return filterApps("")
+          return root.filterApps("")
 
         const items = []
-        for (const line of lines) {
-          const parts = line.split("|");
-          if (parts.length < 2) continue;
-          
-          const name = parts[0].trim();
-          const exec = parts[1].trim();
-          const icon = parts[2] ? "image://icon/" + parts[2].trim() : "";
-          const terminal = parts[3] ? parts[3].trim().toLowerCase() === "true" : false;
+        const seen = new Set()
 
-          if (!name || !exec) continue;
-          if (appModel.get(0, item => item.name === name)) continue;
+        for (const line of lines) {
+          const parts = line.split("|")
+          if (parts.length < 2) continue
           
+          const name = parts[0].trim()
+          if (seen.has(name)) continue
+
+          const exec = parts[1].trim()
+          const icon = parts[2] ? "image://icon/" + parts[2].trim() : ""
+          const terminal = parts[3] ? parts[3].trim().toLowerCase() === "true" : false
+
           if (name && exec) items.push({ icon: icon, name: name, exec: exec, terminal: terminal })
         }
 
         appModel.append(items)
-        filterApps("")
+        root.filterApps("")
       }
     }
   }

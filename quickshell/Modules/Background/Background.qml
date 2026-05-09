@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Wayland
 import Quickshell
 import QtQuick
@@ -17,7 +19,7 @@ Scope {
       required property var modelData
       screen: modelData
 
-      WlrLayershell.layer: WlrLayershell.Background
+      WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
       anchors.top: true

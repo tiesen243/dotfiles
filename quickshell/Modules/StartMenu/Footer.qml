@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell.Widgets
-import Quickshell.Hyprland
 import Quickshell.Io
 import QtQuick.Layouts
 import QtQuick
@@ -91,7 +90,7 @@ Item {
           Text {
             id: buttonText
             Accessible.role: Accessible.StaticText
-            Accessible.name: modelData.icon
+            Accessible.name: button.modelData.icon
 
             anchors.centerIn: parent
             text: button.modelData.icon

@@ -1,8 +1,5 @@
-import Quickshell.Services.Pipewire
 import Quickshell.Wayland
-import Quickshell.Io
 import Quickshell
-import QtQuick.Layouts
 import QtQuick
 
 import "../../Services"

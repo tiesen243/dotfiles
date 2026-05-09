@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
@@ -50,8 +52,6 @@ Scope {
     }
 
     if (filtered.length > 0) filteredClipboardHistory.append(filtered)
-
-    clipboardList.currentIndex = 0;
   }
 
   Variants {
@@ -122,7 +122,12 @@ Scope {
               radius: 4
             }
 
-            onTextChanged: filterClipboardHistory(text)
+            onTextChanged: {
+              root.filterClipboardHistory(text)
+              clipboardList.currentIndex = 0
+            }
+              
+
 
             Keys.onPressed: (event) => {
               if (event.key === Qt.Key_Escape) {
@@ -176,7 +181,7 @@ Scope {
               Accessible.role: Accessible.ListItem
               Accessible.name: modelData.text
 
-              implicitWidth: parent.width
+              Layout.fillWidth: true
               implicitHeight: clipboardText.implicitHeight + 16
               color: ListView.isCurrentItem ? colors.primary : colors.on_secondary
               border { color: colors.on_primary; width: 2 }
@@ -224,7 +229,7 @@ Scope {
         clipboardHistory.clear();
 
         if (lines.length === 0 || (lines.length === 1 && lines[0] === ""))
-          return filterClipboardHistory("")
+          return root.filterClipboardHistory("")
 
         const items = []
         for (const line of lines) {
@@ -236,7 +241,7 @@ Scope {
         }
 
         clipboardHistory.append(items)
-        filterClipboardHistory("")
+        root.filterClipboardHistory("")
       }
     }
   }
