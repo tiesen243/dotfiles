@@ -6,7 +6,6 @@ import "../../Services"
 
 Scope {
   id: root
-  Colors { id: colors }
   property font rootFont: Qt.font({
     pixelSize: 14,
     family: "GeistMono Nerd Font"

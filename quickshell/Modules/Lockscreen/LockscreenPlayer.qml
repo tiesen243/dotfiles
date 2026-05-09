@@ -7,7 +7,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitHeight: lockscreenPlayer.implicitHeight
@@ -27,8 +26,8 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     implicitWidth: 600
     implicitHeight: playerInfo.implicitHeight + 32
-    color: colors.surface + 'cc'
-    border { color: colors.on_primary; width: 2 }
+    color: Matugen.surface + 'cc'
+    border { color: Matugen.on_primary; width: 2 }
     radius: 16
 
     RowLayout {
@@ -42,7 +41,7 @@ Item {
 
         implicitWidth: 64
         implicitHeight: implicitWidth
-        color: colors.on_primary_fixed
+        color: Matugen.on_secondary
         radius: 8
 
         Image {
@@ -63,7 +62,7 @@ Item {
 
           anchors.centerIn: parent
           text: "󰎆"
-          color: colors.primary
+          color: Matugen.primary
           font: root.rootFont
           visible: root.activePlayer && root.activePlayer.trackArtUrl === ""
         }
@@ -76,7 +75,7 @@ Item {
 
           Layout.fillWidth: true
           text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
-          color: colors.on_primary
+          color: Matugen.on_primary
           font {
             pixelSize: root.rootFont.pixelSize * 1.25
             family: root.rootFont.family
@@ -90,7 +89,7 @@ Item {
 
           Layout.fillWidth: true
           text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
-          color: colors.on_primary
+          color: Matugen.on_primary
           font: root.rootFont
           elide: Text.ElideRight
         }

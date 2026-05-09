@@ -9,7 +9,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   visible: activePlayer !== null
@@ -37,7 +36,7 @@ Item {
 
     anchors.fill: parent
     implicitHeight: playerControlContainer.implicitHeight + 24
-    color: colors.on_primary
+    color: Matugen.on_primary
     radius: 8
 
     RowLayout {
@@ -53,7 +52,7 @@ Item {
 
         implicitWidth: playerControlContainer.implicitHeight
         implicitHeight: implicitWidth
-        color: colors.on_primary_fixed
+        color: Matugen.on_secondary
         radius: 6
 
         Image {
@@ -74,7 +73,7 @@ Item {
 
           anchors.centerIn: parent
           text: "󰎆"
-          color: colors.primary
+          color: Matugen.primary
           font: root.rootFont
           visible: root.activePlayer && root.activePlayer.trackArtUrl === ""
         }
@@ -98,7 +97,7 @@ Item {
 
             Layout.fillWidth: true
             text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
-            color: colors.primary
+            color: Matugen.primary
             font: root.rootFont
             elide: Text.ElideRight
           }
@@ -110,7 +109,7 @@ Item {
 
             Layout.fillWidth: true
             text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
-            color: colors.primary
+            color: Matugen.primary
             font: root.rootFont
             elide: Text.ElideRight
           }
@@ -127,7 +126,7 @@ Item {
             Accessible.name: "Current position in track: " + (root.activePlayer ? root.formatTime(root.activePlayer.position) : "N/A")
 
             text: root.activePlayer ? root.formatTime(root.activePlayer.position) : "N/A"
-            color: colors.primary
+            color: Matugen.primary
             font: root.rootFont
           }
 
@@ -139,7 +138,7 @@ Item {
             Layout.fillWidth: true
             implicitHeight: trackTimeline.implicitHeight / 4
 
-            color: colors.primary
+            color: Matugen.primary
             radius: height / 2
 
             Rectangle {
@@ -150,7 +149,7 @@ Item {
                 : 0
               anchors.verticalCenter: parent.verticalCenter
               implicitHeight: parent.height
-              color: colors.on_primary_fixed
+              color: Matugen.on_secondary
               radius: height / 2
 
               Behavior on width {
@@ -176,7 +175,7 @@ Item {
             Accessible.name: "Total length of track: " + (root.activePlayer ? root.formatTime(root.activePlayer.length) : "N/A")
 
             text: root.activePlayer ? root.formatTime(root.activePlayer.length) : "N/A"
-            color: colors.primary
+            color: Matugen.primary
             font: root.rootFont
           }
         }
@@ -214,7 +213,7 @@ Item {
 
               implicitWidth: root.rootFont.pixelSize * 1.5
               implicitHeight: implicitWidth
-              color: buttonMouseArea.pressed ? colors.on_primary : colors.primary
+              color: buttonMouseArea.pressed ? Matugen.on_primary : Matugen.primary
               radius: implicitHeight / 2
 
               Behavior on color {
@@ -224,7 +223,7 @@ Item {
               Text {
                 anchors.centerIn: parent
                 text: button.modelData.icon
-                color: buttonMouseArea.pressed ? colors.primary : colors.on_primary
+                color: buttonMouseArea.pressed ? Matugen.primary : Matugen.on_primary
                 font: root.rootFont
 
                 Behavior on color {

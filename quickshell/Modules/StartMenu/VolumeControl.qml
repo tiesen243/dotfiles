@@ -6,7 +6,6 @@ import '../../Services'
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitHeight: volumeControl.implicitHeight
@@ -23,7 +22,7 @@ Item {
       Accessible.name: "Volume Value: " + VolumeService.value + "%" + VolumeService.isMuted ? ", muted" : ""
 
       text: VolumeService.getIcon() + " " + Math.round(VolumeService.value * 100).toString().padStart(2, '0')
-      color: colors.primary
+      color: Matugen.primary
       font: root.rootFont
 
       MouseArea {
@@ -44,7 +43,7 @@ Item {
 
       background: Rectangle {
         anchors.fill: parent
-        color: colors.surface_variant
+        color: Matugen.on_secondary
         radius: height / 2
       }
 
@@ -54,8 +53,8 @@ Item {
         implicitWidth: 16
         implicitHeight: 16
         radius: 8
-        color: volumeSlider.pressed ? colors.primary_container : colors.primary
-        border { color: colors.primary_fixed; width: 1 }
+        color: volumeSlider.pressed ? Matugen.secondary : Matugen.primary
+        border { color: Matugen.on_secondary; width: 1 }
       }
 
       onMoved: VolumeService.set(value)

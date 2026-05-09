@@ -10,7 +10,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   ColumnLayout {
@@ -29,7 +28,7 @@ Item {
 
         Layout.fillWidth: true
         text: " Notifications"
-        color: colors.primary
+        color: Matugen.primary
         font {
           pixelSize: root.rootFont.pixelSize * 1.5
           family: root.rootFont.family
@@ -44,7 +43,7 @@ Item {
 
         implicitWidth: root.rootFont.pixelSize * 1.5
         implicitHeight: root.rootFont.pixelSize * 1.5
-        color: notificationClearMouse.pressed ? colors.on_primary : colors.primary
+        color: notificationClearMouse.pressed ? Matugen.on_primary : Matugen.primary
         radius: 6
 
         Text {
@@ -54,7 +53,7 @@ Item {
 
           anchors.centerIn: parent
           text: "󰎟"
-          color: notificationClearMouse.pressed ? colors.primary : colors.on_primary
+          color: notificationClearMouse.pressed ? Matugen.primary : Matugen.on_primary
           font: root.rootFont
         }
 
@@ -86,7 +85,7 @@ Item {
 
         implicitWidth: ListView.view.width
         implicitHeight: notificationItemContent.implicitHeight + 16
-        color: colors.surface_bright
+        color: Matugen.surface_bright
         radius: 8
 
         Accessible.role: Accessible.StaticText
@@ -119,7 +118,7 @@ Item {
               Text {
                 anchors.centerIn: parent
                 text: notificationItem.modelData.getIcon()
-                color: colors.primary
+                color: Matugen.primary
                 font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
                 visible: notificationItem.modelData.appIcon === ""
               }
@@ -127,7 +126,7 @@ Item {
 
             Text {
               text: notificationItem.modelData.appName || "Notification"
-              color: colors.primary
+              color: Matugen.primary
               font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family; bold: true }
               Layout.alignment: Qt.AlignVCenter
             }
@@ -139,13 +138,13 @@ Item {
 
               implicitWidth: root.rootFont.pixelSize * 1.5
               implicitHeight: root.rootFont.pixelSize * 1.5
-              color: notificationItemDismissMouseArea.containsMouse ? colors.surface_bright : colors.surface
+              color: notificationItemDismissMouseArea.containsMouse ? Matugen.surface_bright : Matugen.surface
               radius: root.rootFont.pixelSize / 2
 
               Text {
                 anchors.centerIn: parent
                 text: ""
-                color: notificationItemDismissMouseArea.containsMouse ? colors.primary_fixed : colors.primary
+                color: notificationItemDismissMouseArea.containsMouse ? Matugen.primary : Matugen.secondary
                 font: root.rootFont
               }
 
@@ -162,7 +161,7 @@ Item {
           Text {
             Layout.fillWidth: true
             text: notificationItem.modelData.summary.replace(/[^\x00-\x7F]/g, "").trim() 
-            color: colors.primary
+            color: Matugen.primary
             font: root.rootFont
             elide: Text.ElideRight
             visible: text !== ""
@@ -177,7 +176,7 @@ Item {
               id: notificationItemBody
               Layout.fillWidth: true
               text: notificationItem.modelData.body.replace(/[^\x00-\x7F]/g, "").trim() 
-              color: colors.secondary
+              color: Matugen.secondary
               font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
               wrapMode: Text.Wrap
               elide: Text.ElideRight

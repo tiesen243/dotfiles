@@ -1,5 +1,5 @@
-Colors                        1.0 Colors.qml
 singleton GlobalState         1.0 GlobalState.qml
+singleton Matugen             1.0 Matugen.qml
 
 NotificationEntity            1.0 NotificationEntity.qml
 singleton NotificationService 1.0 NotificationService.qml

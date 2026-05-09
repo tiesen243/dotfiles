@@ -29,7 +29,7 @@ Item {
         implicitWidth: root.rootFont.pixelSize * (modelData.focused ? 2 : 1.5)
         implicitHeight: root.rootFont.pixelSize * 1.5
         color: modelData.focused ? colors.primary : (workspaceItemMouseArea.containsMouse 
-          ? colors.primary_container : colors.surface)
+          ? colors.on_secondary : colors.surface)
         radius: 4
 
         Behavior on color {

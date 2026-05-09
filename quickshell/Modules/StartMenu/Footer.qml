@@ -9,7 +9,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitHeight: footer.implicitHeight
@@ -49,7 +48,7 @@ Item {
         Accessible.name: "Current user: " + root.username
 
         text: root.username
-        color: colors.primary
+        color: Matugen.primary
         font {
           pixelSize: root.rootFont.pixelSize
           family: root.rootFont.family
@@ -80,7 +79,7 @@ Item {
 
           implicitWidth: 28
           implicitHeight: implicitWidth
-          color: buttonMouseArea.pressed ? colors.on_primary : colors.primary
+          color: buttonMouseArea.pressed ? Matugen.on_primary : Matugen.primary
           radius: 8
 
           Behavior on color {
@@ -94,7 +93,7 @@ Item {
 
             anchors.centerIn: parent
             text: button.modelData.icon
-            color: buttonMouseArea.pressed ? colors.primary : colors.on_primary
+            color: buttonMouseArea.pressed ? Matugen.primary : Matugen.on_primary
 
             Behavior on color {
               ColorAnimation { duration: 150 }

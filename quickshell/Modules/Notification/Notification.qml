@@ -12,7 +12,6 @@ import "../../Services"
 
 Scope {
   id: root
-  Colors { id: colors }
   property font rootFont: Qt.font({
     pixelSize: 14,
     family: "GeistMono Nerd Font"
@@ -74,8 +73,8 @@ Scope {
 
             Layout.fillWidth: true
             Layout.preferredHeight: notificationItemContent.implicitHeight + 28
-            color: colors.surface
-            border { color: colors.on_primary; width: 2 }
+            color: Matugen.surface
+            border { color: Matugen.on_primary; width: 2 }
             radius: 12
             clip: true
 
@@ -113,7 +112,7 @@ Scope {
                   Text {
                     anchors.centerIn: parent
                     text: notificationItem.modelData.getIcon()
-                    color: colors.primary
+                    color: Matugen.primary
                     font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
                     visible: notificationItem.modelData.appIcon === ""
                   }
@@ -121,7 +120,7 @@ Scope {
 
                 Text {
                   text: notificationItem.modelData.appName || "Notification"
-                  color: colors.primary
+                  color: Matugen.primary
                   font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family; bold: true }
                   Layout.alignment: Qt.AlignVCenter
                 }
@@ -133,13 +132,13 @@ Scope {
 
                   implicitWidth: root.rootFont.pixelSize * 1.5
                   implicitHeight: root.rootFont.pixelSize * 1.5
-                  color: notificationItemDismissMouseArea.containsMouse ? colors.surface_bright : colors.surface
+                  color: notificationItemDismissMouseArea.containsMouse ? Matugen.surface_bright : Matugen.surface
                   radius: root.rootFont.pixelSize / 2
 
                   Text {
                     anchors.centerIn: parent
                     text: ""
-                    color: notificationItemDismissMouseArea.containsMouse ? colors.primary_fixed : colors.primary
+                    color: notificationItemDismissMouseArea.containsMouse ? Matugen.primary : Matugen.secondary
                     font: root.rootFont
                   }
 
@@ -156,7 +155,7 @@ Scope {
               Text {
                 Layout.fillWidth: true
                 text: notificationItem.modelData.summary.replace(/[^\x00-\x7F]/g, "").trim() 
-                color: colors.primary
+                color: Matugen.primary
                 font: root.rootFont
                 elide: Text.ElideRight
                 visible: text !== ""
@@ -171,7 +170,7 @@ Scope {
                   id: notificationItemBody
                   Layout.fillWidth: true
                   text: notificationItem.modelData.body.replace(/[^\x00-\x7F]/g, "").trim() 
-                  color: colors.secondary
+                  color: Matugen.secondary
                   font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
                   wrapMode: Text.Wrap
                   elide: Text.ElideRight
@@ -201,13 +200,13 @@ Scope {
                 Layout.topMargin: 2
                 implicitHeight: 2
                 radius: 1
-                color: colors.surface
+                color: Matugen.surface
 
                 Rectangle {
                   id: notificationItemProgress
                   implicitHeight: parent.height
                   implicitWidth: parent.width
-                  color: colors.primary
+                  color: Matugen.primary
                   opacity: 0.6
 
                   SequentialAnimation {

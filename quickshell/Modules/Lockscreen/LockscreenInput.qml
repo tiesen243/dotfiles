@@ -6,7 +6,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
   property LockscreenContext context
 
@@ -34,15 +33,15 @@ Item {
 				placeholderText: "Enter password"
 
 				font: root.rootFont
-				color: colors.surface
-				selectionColor: colors.primary
-				selectedTextColor: colors.on_primary
+				color: Matugen.surface
+				selectionColor: Matugen.primary
+				selectedTextColor: Matugen.on_primary
 
 				background: Rectangle {
 					radius: 8
-					color: colors.surface + 'cc'
+					color: Matugen.surface + 'cc'
 					border { 
-					  color: root.context.showFailure ? colors.error_container : colors.on_primary
+					  color: root.context.showFailure ? Matugen.on_error : Matugen.on_primary
 					  width: 2
 					}
 				}
@@ -76,11 +75,11 @@ Item {
 
 					text: parent.text
 					font: root.rootFont
-					color: colors.primary_fixed
+					color: Matugen.primary
 				}
 
 				background: Rectangle {
-					color: colors.primary_container
+					color: Matugen.surface
 					radius: 8
 					
 					opacity: !parent.enabled ? 0.5 : (parent.down ? 0.8 : 1.0) 
@@ -91,7 +90,7 @@ Item {
 		Label {
 			visible: root.context.showFailure
 			text: "Incorrect password"
-			color: colors.on_error
+			color: Matugen.on_error
 		}
 	}
 
