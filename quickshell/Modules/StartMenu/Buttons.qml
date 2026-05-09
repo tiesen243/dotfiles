@@ -44,8 +44,8 @@ Item {
       icon: "󰂛"; 
       name: "Do Not Disturb"; 
       isChecked: false;
-      getCmd: "quickshell ipc call notifications dnd_status";
-      setCmd: "quickshell ipc call notifications dnd_toggle";
+      getCmd: "quickshell ipc call notifications is_dnd";
+      setCmd: "quickshell ipc call notifications toggle_dnd";
       shortcut: "d";
     }
     ListElement { 

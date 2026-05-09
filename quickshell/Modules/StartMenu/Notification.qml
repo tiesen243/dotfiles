@@ -1,6 +1,8 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell.Services.Notifications
+import Quickshell.Widgets
+import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
@@ -10,23 +12,6 @@ Item {
   id: root
   Colors { id: colors }
   property font rootFont
-
-  ListModel {
-    id: notificationList
-  }
-
-  NotificationServer {
-    id: notificationServer
-    onNotification: notification => {
-      notificationList.insert(0, {
-        id: notification.id,
-        urgency: notification.urgency,
-        appName: notification.appName,
-        summary: notification.summary.replace(/[^\x00-\x7F]/g, "").trim(),
-        body: notification.body 
-      })
-    }
-  } 
 
   ColumnLayout {
     id: notification
@@ -76,7 +61,7 @@ Item {
         MouseArea {
           id: notificationClearMouse
           anchors.fill: parent
-          onClicked: notificationList.clear()
+          onClicked: NotificationService.clearAll()
         }
       }
     }
@@ -85,7 +70,10 @@ Item {
       id: notificationContent
       Accessible.role: Accessible.List
       Accessible.name: "Notification List"
-      model: notificationList
+      model: ScriptModel {
+        values: NotificationService.notificationHistory
+        objectProp: "seqId"
+      }
       spacing: 12
 
       Layout.fillWidth: true
@@ -98,38 +86,120 @@ Item {
 
         implicitWidth: ListView.view.width
         implicitHeight: notificationItemContent.implicitHeight + 16
-        color: colors.on_primary
+        color: colors.surface_bright
         radius: 8
+
+        Accessible.role: Accessible.StaticText
+        Accessible.name: (modelData.urgency === NotificationUrgency.Critical 
+          ? "[Critical] " : modelData.urgency === NotificationUrgency.Low      
+          ? "[Low] " : "") + (modelData.appName || "Notification") + ": " + modelData.summary
+
 
         ColumnLayout {
           id: notificationItemContent
 
-          anchors.fill: parent
-          anchors.margins: 8
+          anchors { fill: parent; margins: 8; leftMargin: 12 }
 
-          Text {
-            id: notificationContentTitle
-            text: {
-              const icon = " "
-              if (notificationItem.modelData.urgency === NotificationUrgency.Critical) icon = " "
-              else if (notificationItem.modelData.urgency === NotificationUrgency.Low) icon = " "
-              return icon + notificationItem.modelData.summary
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: 8
+
+            Item {
+              Layout.preferredWidth: root.rootFont.pixelSize * 0.8
+              Layout.preferredHeight: root.rootFont.pixelSize * 0.8
+              Layout.alignment: Qt.AlignVCenter
+
+              IconImage {
+                anchors.centerIn: parent
+                source: Quickshell.iconPath(notificationItem.modelData.appIcon, true)
+                implicitSize: root.rootFont.pixelSize * 0.8
+                visible: notificationItem.modelData.appIcon !== ""
+              }
+
+              Text {
+                anchors.centerIn: parent
+                text: notificationItem.modelData.getIcon()
+                color: colors.primary
+                font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
+                visible: notificationItem.modelData.appIcon === ""
+              }
             }
-            color: colors.primary
-            font {
-              pixelSize: root.rootFont.pixelSize / 1.5
-              family: root.rootFont.family
+
+            Text {
+              text: notificationItem.modelData.appName || "Notification"
+              color: colors.primary
+              font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family; bold: true }
+              Layout.alignment: Qt.AlignVCenter
+            }
+
+            Item { Layout.fillWidth: true }
+
+            Rectangle {
+              id: notificationItemDismiss
+
+              implicitWidth: root.rootFont.pixelSize * 1.5
+              implicitHeight: root.rootFont.pixelSize * 1.5
+              color: notificationItemDismissMouseArea.containsMouse ? colors.surface_bright : colors.surface
+              radius: root.rootFont.pixelSize / 2
+
+              Text {
+                anchors.centerIn: parent
+                text: ""
+                color: notificationItemDismissMouseArea.containsMouse ? colors.primary_fixed : colors.primary
+                font: root.rootFont
+              }
+
+              MouseArea {
+                id: notificationItemDismissMouseArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+                onClicked: NotificationService.clear(notificationItem.modelData)
+              }
             }
           }
 
           Text {
-            id: notificationContentDescription
-
             Layout.fillWidth: true
-            text: notificationItem.modelData.body
+            text: notificationItem.modelData.summary.replace(/[^\x00-\x7F]/g, "").trim() 
             color: colors.primary
             font: root.rootFont
-            wrapMode: Text.Wrap
+            elide: Text.ElideRight
+            visible: text !== ""
+          }
+
+          RowLayout {
+            Layout.fillWidth: true
+            spacing: 8
+            visible: notificationItem.modelData.body !== "" || notificationItem.modelData.image !== ""
+
+            Text {
+              id: notificationItemBody
+              Layout.fillWidth: true
+              text: notificationItem.modelData.body.replace(/[^\x00-\x7F]/g, "").trim() 
+              color: colors.secondary
+              font { pixelSize: root.rootFont.pixelSize * 0.8; family: root.rootFont.family }
+              wrapMode: Text.Wrap
+              elide: Text.ElideRight
+              maximumLineCount: 2
+              visible: text !== ""
+            }
+
+            ClippingRectangle {
+              Layout.preferredWidth: notificationItemBody.implicitHeight ?? 24
+              Layout.preferredHeight: notificationItemBody.implicitHeight ?? 24
+              radius: 4
+              color: "transparent"
+              clip: true
+              visible: notificationItem.modelData.image !== ""
+
+              Image {
+                anchors.fill: parent
+                source: notificationItem.modelData.image
+                fillMode: Image.PreserveAspectCrop
+                sourceSize: Qt.size(notificationItemBody.implicitHeight ?? 24, notificationItemBody.implicitHeight ?? 24)
+              }
+            }
           }
         }
       }
