@@ -1,7 +1,6 @@
 import QtQuick.Layouts
 import QtQuick.Effects
 import QtQuick
-import QtCore
 
 import "../../Services"
 
@@ -24,7 +23,7 @@ Rectangle {
     cache: true
     smooth: true
 
-    source: root.getWallpaper("_background.png")
+    source: GlobalState.dotfiles + "/assets/_background.png"
     fillMode: Image.PreserveAspectCrop
 
     layer.enabled: true
@@ -74,8 +73,4 @@ Rectangle {
       Layout.fillWidth: true
     }
 	}
-
-	function getWallpaper(fileName: string): string {
-    return StandardPaths.standardLocations(StandardPaths.HomeLocation)[0] + "/dotfiles/assets/" + fileName
-  }
 }
