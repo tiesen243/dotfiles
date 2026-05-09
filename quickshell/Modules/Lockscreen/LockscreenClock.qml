@@ -6,7 +6,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitHeight: lockscreenClock.implicitHeight
@@ -24,7 +23,7 @@ Item {
 		  text: Qt.formatTime(root.date, "hh:mm")
 		  font.pointSize: root.rootFont.pointSize * 8
 		  font.family: root.rootFont.family
-		  color: colors.on_primary
+		  color: Matugen.on_primary
 	  }
 
 	  Label {
@@ -32,7 +31,7 @@ Item {
 
       Layout.alignment: Qt.AlignHCenter
 	    text: Qt.formatDate(root.date, "dddd, MMMM dd yyyy")
-	    color: colors.on_secondary
+	    color: Matugen.on_secondary
 	    font: root.rootFont
 	  }
 	}

@@ -5,7 +5,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitWidth: title.implicitWidth
@@ -24,7 +23,7 @@ Item {
     text: Hyprland.activeToplevel 
       ? root.truncateTitle(Hyprland.activeToplevel.title, 50) 
       : ""
-    color: colors.primary
+    color: Matugen.primary
     font: root.rootFont
   }
 }

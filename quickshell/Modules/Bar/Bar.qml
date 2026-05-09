@@ -10,7 +10,6 @@ import qs.Modules.StartMenu
 
 Scope {
   id: root
-  Colors { id: colors }
   property bool isOpen: true
 
   property font rootFont: Qt.font({
@@ -42,7 +41,7 @@ Scope {
       Rectangle {
         id: barContainer
         anchors.fill: parent
-        color: colors.surface
+        color: Matugen.surface
         opacity: 0.8
 
         RowLayout {

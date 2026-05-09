@@ -8,7 +8,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
   property bool isOpen: GlobalState.isStartMenuOpen
 
@@ -104,7 +103,7 @@ Item {
 
         Layout.fillWidth: true
         implicitHeight: 40
-        color: modelData.isChecked ? colors.primary : colors.on_primary
+        color: modelData.isChecked ? Matugen.primary : Matugen.on_primary
         radius: 8
 
         Text {
@@ -114,7 +113,7 @@ Item {
 
           anchors.centerIn: parent
           text: button.modelData.icon 
-          color: button.modelData.isChecked ? colors.on_primary : colors.primary
+          color: button.modelData.isChecked ? Matugen.on_primary : Matugen.primary
           font: root.rootFont
         }
 

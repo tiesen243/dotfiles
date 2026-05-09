@@ -8,7 +8,6 @@ import "../../Services"
 
 Scope {
   id: root
-  Colors { id: colors }
 
   Variants {
     model: Quickshell.screens
@@ -27,7 +26,7 @@ Scope {
       anchors.bottom: true
 
       exclusiveZone: -1
-      color: colors.surface
+      color: Matugen.surface
 
       Image {
         id: backgroundImage

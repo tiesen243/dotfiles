@@ -5,7 +5,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitWidth: battery.implicitWidth
@@ -37,7 +36,7 @@ Item {
 
       return icon + batteryLevel + "%"
     }
-    color: colors.primary
+    color: Matugen.primary
     font: root.rootFont
   }
 }

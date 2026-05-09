@@ -7,7 +7,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
   property var popupAnchor
 
@@ -20,7 +19,7 @@ Item {
     Accessible.name: "Current time: " + clock.text
 
     text: Qt.formatTime(new Date(), "hh:mm")
-    color: colors.primary
+    color: Matugen.primary
     font: root.rootFont
 
     MouseArea {
@@ -47,14 +46,14 @@ Item {
 
     Rectangle {
       anchors.fill: parent
-      color: colors.surface
-      border { color: colors.on_primary; width: 2 }
+      color: Matugen.surface
+      border { color: Matugen.on_primary; width: 1 }
       radius: 12
       Text {
         anchors.centerIn: parent
         text: celendar.content
         textFormat: Text.RichText
-        color: colors.primary
+        color: Matugen.primary
         font: root.rootFont
       }
     }
@@ -74,7 +73,7 @@ Item {
       onRead: data => {
         const today = new Date().getDate().toString()
         const regex = new RegExp("(\\b|\\s)" + today + "(\\b|\\s)")
-        const styledLine = data.replace(regex, "$1<u><b><font color='" + colors.primary + "'>" + today + "</font></b></u>$2")
+        const styledLine = data.replace(regex, "$1<u><b><font color='" + Matugen.primary + "'>" + today + "</font></b></u>$2")
         celendar.content += "<br>" + styledLine.replace(/ /g, "&nbsp;")
       }
     }

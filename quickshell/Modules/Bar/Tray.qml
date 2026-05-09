@@ -6,11 +6,8 @@ import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
-import "../../Services"
-
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitWidth: tray.implicitWidth

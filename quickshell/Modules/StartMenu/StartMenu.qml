@@ -10,7 +10,6 @@ import '../../Services'
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
   property var popupAnchor
 
@@ -30,7 +29,7 @@ Item {
     id: startMenuTrigger
 
     text: "󰣇"
-    color: colors.primary
+    color: Matugen.primary
     font: root.rootFont
 
     MouseArea {
@@ -65,9 +64,9 @@ Item {
       id: startMenuContent
 
       anchors.fill: parent
-      color: colors.surface
+      color: Matugen.surface
       radius: 12
-      border { color: colors.on_primary; width: 2 }
+      border { color: Matugen.on_primary; width: 2 }
       clip: true
 
       ColumnLayout {

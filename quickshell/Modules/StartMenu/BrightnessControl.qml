@@ -6,7 +6,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitHeight: brightnessControl.implicitHeight
@@ -23,7 +22,7 @@ Item {
       Accessible.name: "Brightness Value: " + BrightnessService.value + "%"
 
       text: BrightnessService.getIcon() + " " + BrightnessService.value.toString().padStart(2, '0')
-      color: colors.primary
+      color: Matugen.primary
       font: root.rootFont
     }
 
@@ -39,7 +38,7 @@ Item {
 
       background: Rectangle {
         anchors.fill: parent
-        color: colors.surface_variant
+        color: Matugen.on_secondary
         radius: height / 2
       }
 
@@ -49,8 +48,8 @@ Item {
         implicitWidth: 16
         implicitHeight: 16
         radius: 8
-        color: brightnessSlider.pressed ? colors.primary_container : colors.primary
-        border { color: colors.primary_fixed; width: 1 }
+        color: brightnessSlider.pressed ? Matugen.secondary : Matugen.primary
+        border { color: Matugen.on_secondary; width: 1 }
       }
 
       onMoved: BrightnessService.set(value)

@@ -7,7 +7,6 @@ import "../../Services"
 
 Item {
   id: root
-  Colors { id: colors }
   property font rootFont
 
   implicitHeight: lockscreenInfo.implicitHeight
@@ -24,7 +23,7 @@ Item {
 
       implicitWidth: 128
       implicitHeight: implicitWidth
-      border { color: colors.on_primary; width: 2 }
+      border { color: Matugen.on_primary; width: 1 }
       radius: 16
 
       Image {
@@ -45,7 +44,7 @@ Item {
         Accessible.name: "Current user: " + root.username
 
         text: root.username
-        color: colors.on_primary
+        color: Matugen.on_primary
         font {
           pixelSize: root.rootFont.pixelSize * 4
           family: root.rootFont.family
@@ -59,7 +58,7 @@ Item {
         Accessible.name: "Current host: " + root.hostname
 
         text: root.hostname
-        color: colors.on_primary
+        color: Matugen.on_primary
         font {
           pixelSize: root.rootFont.pixelSize * 2
           family: root.rootFont.family

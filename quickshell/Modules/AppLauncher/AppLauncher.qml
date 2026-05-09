@@ -11,7 +11,6 @@ import "../../Services"
 
 Scope {
   id: root
-  Colors { id: colors }
 
   property font rootFont: Qt.font({
     pixelSize: 14,
@@ -75,7 +74,7 @@ Scope {
 
       Rectangle {
         anchors.fill: parent
-        color: colors.surface
+        color: Matugen.surface
         opacity: 0.8
 
         MouseArea {
@@ -91,8 +90,8 @@ Scope {
         anchors.centerIn: parent
         implicitWidth: 1920 / 3
         implicitHeight: 1080 / 3
-        color: colors.surface
-        border { color: colors.on_primary; width: 2 }
+        color: Matugen.surface
+        border { color: Matugen.on_primary; width: 1 }
         radius: 8
 
         ColumnLayout {
@@ -116,8 +115,8 @@ Scope {
 
             background: Rectangle {
               anchors.fill: parent
-              color: colors.surface_variant
-              border { color: colors.on_primary; width: 2 }
+              color: Matugen.surface
+              border { color: Matugen.on_secondary; width: 2 }
               radius: 4
             }
 
@@ -175,10 +174,10 @@ Scope {
               Accessible.role: Accessible.ListItem
               Accessible.name: modelData.name
 
-              Layout.fillWidth: true
-              implicitHeight: appText.implicitHeight + 16
-              color: ListView.isCurrentItem ? colors.primary : colors.on_secondary
-              border { color: colors.on_primary; width: 2 }
+              implicitWidth: parent.width
+              implicitHeight: appText.implicitHeight + 24
+              color: ListView.isCurrentItem ? Matugen.surface_bright : Matugen.surface
+              border { color: Matugen.on_secondary; width: 2 }
               radius: 4
 
               RowLayout {
@@ -202,13 +201,16 @@ Scope {
 
                   Layout.fillWidth: true
                   text: appItem.modelData.name
-                  color: appItem.ListView.isCurrentItem ? colors.on_primary : colors.on_surface
+                  color: appItem.ListView.isCurrentItem ? Matugen.primary : Matugen.on_surface
                   font: root.rootFont
                   elide: Text.ElideRight
 
                   MouseArea {
                     anchors.fill: parent
-                    onClicked: root.launchApp(appItem.modelData.exec, appItem.modelData.terminal)
+                    onClicked: {
+                      root.launchApp(appItem.modelData.exec, appItem.modelData.terminal)
+                      GlobalState.isAppLauncherOpen = false
+                    }
                   }
                 }
               }

@@ -42,8 +42,8 @@ input_path = '~/.config/matugen/templates/lazygit.yml'
 output_path = '~/.config/lazygit/config.yml'
 
 [templates.quickshell]
-input_path = '~/.config/matugen/templates/quickshell.qml'
-output_path = '~/.config/quickshell/Services/Colors.qml'
+input_path = '~/.config/matugen/templates/quickshell.json'
+output_path = '~/.config/quickshell/colors.json'
 
 # [templates.rofi]
 # input_path = '~/.config/matugen/templates/rofi.rasi'
