@@ -15,7 +15,7 @@ Singleton {
   function setWallpaper(path) {
     const dest = GlobalState.dotfiles + "/assets/_background.png"
 
-    setWallpaperProc.command = ["sh", "-c", `cp "${path}" "${dest}" && matugen image "${dest}" --prefer saturation`]
+    setWallpaperProc.command = ["sh", "-c", `cp "${path}" "${dest}" && matugen image "${dest}" --source-color-index 1`]
     setWallpaperProc.running = true
   }
 
