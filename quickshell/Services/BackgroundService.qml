@@ -4,8 +4,6 @@ import Quickshell.Io
 import Quickshell
 import QtQuick
 
-import "../../Services"
-
 Singleton {
   id: root
 
@@ -24,13 +22,13 @@ Singleton {
   Process {
     id: scanWallpapersProc
     command: ["sh", "-c", "ls " + root.wallpaperDir]
-    running: root.isOpen
     stdout: StdioCollector {
       onStreamFinished: {
         const lines = text.trim().split("\n")
         root.wallpapers = lines.map(line => root.wallpaperDir + "/" + line)
       }
     }
+    Component.onCompleted: running = true
   }
 
   Process {

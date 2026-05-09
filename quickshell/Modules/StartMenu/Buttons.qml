@@ -56,14 +56,6 @@ Item {
       shortcut: "a";
     }
     ListElement { 
-      icon: ""; 
-      name: "Terminal"; 
-      isChecked: false;
-      getCmd: "";
-      setCmd: "kitty";
-      shortcut: "";
-    }
-    ListElement { 
       icon: ""; 
       name: "File Explorer"; 
       isChecked: false;
@@ -78,6 +70,14 @@ Item {
       getCmd: "";
       setCmd: "zen-browser";
       shortcut: "";
+    }
+    ListElement { 
+      icon: "󰸉"; 
+      name: "Wallpaper"; 
+      isChecked: false;
+      getCmd: "";
+      setCmd: "quickshell ipc call wallpaper toggle";
+      shortcut: "q";
     }
   }
   

@@ -50,7 +50,7 @@ Item {
     color: "transparent"
 
     HyprlandFocusGrab {
-      active: startMenuContainer.visible
+      active: startMenuContainer.visible && !BackgroundService.isOpen
       windows: [startMenuContainer]
       onCleared: GlobalState.isStartMenuOpen = false
     }
