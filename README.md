@@ -32,7 +32,7 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 
 ### Wallpaper selector
 
-![wallpaper-selector](./assets/wallpaper-selector.mp4)
+<video src="./assets/wallpaper-selector.mp4" width="100%" autoplay loop muted></video>
 
 ## Installation
 
