@@ -23,7 +23,6 @@ Scope {
     target: "clipboardManager"
 
     function toggle(): void {
-      GlobalState.closeAllPopups('clipboard')
       GlobalState.isClipboardOpen = !GlobalState.isClipboardOpen
     }
 
@@ -61,9 +60,9 @@ Scope {
       id: clipboardManager
       required property var modelData
       screen: modelData
-      visible: GlobalState.isClipboardOpen || clipboardContainer.opacity > 0
+      visible: GlobalState.isClipboardOpen || clipboardContainer.implicitHeight > 0
 
-      anchors { bottom: true }
+      anchors.bottom: true
       implicitWidth: 1920 / 2
       implicitHeight: 1080 / 2
       color: "transparent"
@@ -81,7 +80,7 @@ Scope {
       }
 
       HyprlandFocusGrab {
-        active: clipboardManager.visible && !BackgroundService.isOpen
+        active: clipboardManager.visible
         windows: [clipboardManager]
         onCleared: GlobalState.isClipboardOpen = false
       }
@@ -91,20 +90,16 @@ Scope {
         Accessible.role: Accessible.Dialog
         Accessible.name: "Clipboard Manager"
 
+        anchors.bottom: parent.bottom
         implicitWidth: parent.width
-        implicitHeight: parent.height
+        implicitHeight: GlobalState.isClipboardOpen ? parent.height : 0
         color: Matugen.surface
         topRightRadius: 12
         topLeftRadius: 12
         clip: true
 
-        opacity: GlobalState.isClipboardOpen ? 1 : 0
-        Behavior on opacity {
-          NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
-        }
-        y: GlobalState.isClipboardOpen ? 0 : implicitHeight
-        Behavior on y {
-          NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+        Behavior on implicitHeight {
+          NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
         }
 
         ColumnLayout {

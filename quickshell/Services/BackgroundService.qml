@@ -11,7 +11,6 @@ Singleton {
   readonly property string wallpaperDir: GlobalState.dotfiles + "/assets/_background.png"
   property list<string> wallpapers: []
   property int wallpaperVersion: 0
-  property bool isOpen: false
 
   function setWallpaper(path) {
     setWallpaperProc.command = [

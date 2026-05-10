@@ -20,7 +20,6 @@ Item {
     target: "startMenu"
 
     function toggle(): void {
-      GlobalState.closeAllPopups("startmenu")
       GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
     }
   }
@@ -40,7 +39,7 @@ Item {
 
   PopupWindow {
     id: startMenuContainer
-    visible: GlobalState.isStartMenuOpen || startMenuContent.opacity > 0
+    visible: GlobalState.isStartMenuOpen || startMenuContent.implicitHeight > 0
 
     anchor.window: root.popupAnchor
     anchor.rect.x: 8
@@ -50,7 +49,7 @@ Item {
     color: "transparent"
 
     HyprlandFocusGrab {
-      active: startMenuContainer.visible && !BackgroundService.isOpen
+      active: startMenuContainer.visible
       windows: [startMenuContainer]
       onCleared: GlobalState.isStartMenuOpen = false
     }
@@ -63,19 +62,15 @@ Item {
     Rectangle {
       id: startMenuContent
 
+      anchors.top: parent.top
       implicitWidth: parent.width
-      implicitHeight: parent.height
+      implicitHeight: GlobalState.isStartMenuOpen ? parent.height : 0
       color: Matugen.surface
       bottomRightRadius: 12
       clip: true
 
-      opacity: GlobalState.isStartMenuOpen ? 1 : 0
-      Behavior on opacity {
-        NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
-      }
-      y: GlobalState.isStartMenuOpen ? 0 : -implicitHeight
-      Behavior on y {
-        NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+      Behavior on implicitHeight {
+        NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
       }
 
       ColumnLayout {

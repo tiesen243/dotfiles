@@ -15,7 +15,7 @@ Item {
 
   property var actions: ({
     'toggle-wallpaper-selector': () => {
-      BackgroundService.isOpen = !BackgroundService.isOpen
+      GlobalState.isBackgroundSelectorOpen = !GlobalState.isBackgroundSelectorOpen
     }
   })
 

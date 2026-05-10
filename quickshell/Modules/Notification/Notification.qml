@@ -59,7 +59,7 @@ Scope {
         visible: !GlobalState.isStartMenuOpen
 
         anchors { fill: parent; topMargin: 32; rightMargin: 12 }
-        implicitWidth: 300
+        implicitWidth: parent.width
         spacing: 8
 
         Repeater {
@@ -78,6 +78,12 @@ Scope {
             border { color: Matugen.on_primary; width: 2 }
             radius: 12
             clip: true
+
+            x: 1920 / 5
+            Component.onCompleted: x = 0
+            Behavior on x { 
+              NumberAnimation { duration: 250; easing.type: Easing.OutCubic } 
+            }
 
             Accessible.role: Accessible.StaticText
             Accessible.name: (modelData.urgency === NotificationUrgency.Critical 

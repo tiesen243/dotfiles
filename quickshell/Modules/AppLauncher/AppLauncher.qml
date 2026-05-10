@@ -22,7 +22,6 @@ Scope {
     target: "appLauncher"
 
     function toggle(): void {
-      GlobalState.closeAllPopups('appLauncher')
       GlobalState.isAppLauncherOpen = !GlobalState.isAppLauncherOpen
     }
   }
@@ -55,9 +54,9 @@ Scope {
       id: appLauncherWindow
       required property var modelData
       screen: modelData
-      visible: GlobalState.isAppLauncherOpen || appLauncherContent.opacity > 0
+      visible: GlobalState.isAppLauncherOpen || appLauncherContent.implicitHeight > 0
 
-      anchors { bottom: true }
+      anchors.bottom: true
       implicitWidth: 1920 / 2
       implicitHeight: 1080 / 2
       color: "transparent"
@@ -75,7 +74,7 @@ Scope {
       }
 
       HyprlandFocusGrab {
-        active: appLauncherWindow.visible && !BackgroundService.isOpen
+        active: appLauncherWindow.visible
         windows: [appLauncherWindow]
         onCleared: GlobalState.isAppLauncherOpen = false
       }
@@ -85,20 +84,16 @@ Scope {
         Accessible.role: Accessible.Dialog
         Accessible.name: "Application Launcher"
 
+        anchors.bottom: parent.bottom
         implicitWidth: parent.width
-        implicitHeight: parent.height
+        implicitHeight: GlobalState.isAppLauncherOpen ? parent.height : 0
         color: Matugen.surface
         topRightRadius: 12
         topLeftRadius: 12
         clip: true
 
-        opacity: GlobalState.isAppLauncherOpen ? 1 : 0
-        Behavior on opacity {
-          NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
-        }
-        y: GlobalState.isAppLauncherOpen ? 0 : implicitHeight
-        Behavior on y {
-          NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+        Behavior on implicitHeight {
+          NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
         }
 
         ColumnLayout {
