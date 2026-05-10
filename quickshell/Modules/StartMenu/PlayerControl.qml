@@ -144,12 +144,12 @@ Item {
             Rectangle {
               id: trackProgressBarFill
 
-              width: root.activePlayer && root.activePlayer.length > 0 
+              anchors.verticalCenter: parent.verticalCenter
+              implicitWidth: root.activePlayer && root.activePlayer.length > 0 
                 ? parent.width * (root.activePlayer.position / root.activePlayer.length)
                 : 0
-              anchors.verticalCenter: parent.verticalCenter
               implicitHeight: parent.height
-              color: Matugen.on_secondary
+              color: Matugen.surface
               radius: height / 2
 
               Behavior on width {
@@ -160,12 +160,17 @@ Item {
             MouseArea {
               anchors.fill: parent
               cursorShape: Qt.PointingHandCursor
-              onClicked: mouse => {
+              preventStealing: true
+
+              function handleSeek(mouse) {
                 if (root.activePlayer.length > 0) {
-                  const clickPosition = mouse.x / trackProgressBar.width;
-                  root.activePlayer.position = Math.floor(clickPosition * root.activePlayer.length);
+                  const clickPosition = mouse.x / trackProgressBar.width
+                  root.activePlayer.position = Math.floor(clickPosition * root.activePlayer.length)
                 }
               }
+
+              onClicked: mouse => handleSeek(mouse)
+              onPositionChanged: mouse => pressed && handleSeek(mouse)
             }
           }
 

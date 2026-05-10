@@ -58,6 +58,16 @@ Item {
       }
 
       onMoved: VolumeService.set(value)
+
+      MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.NoButton
+        onWheel: event => {
+          const step = event.angleDelta.y > 0 ? 5 : -5
+          const newValue = Math.max(volumeSlider.from, Math.min(volumeSlider.to, volumeSlider.value + step))
+          VolumeService.set(Math.round(newValue))
+        }
+      }
     }
   }
 }

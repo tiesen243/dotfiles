@@ -53,6 +53,16 @@ Item {
       }
 
       onMoved: BrightnessService.set(value)
+
+      MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.NoButton
+        onWheel: event => {
+          const step = event.angleDelta.y > 0 ? 5 : -5
+          const newValue = Math.max(brightnessSlider.from, Math.min(brightnessSlider.to, brightnessSlider.value + step))
+          BrightnessService.set(Math.round(newValue))
+        }
+      }
     }
   }
 }
