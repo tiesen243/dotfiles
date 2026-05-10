@@ -14,11 +14,11 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 
 ![preview-03](./assets/preview-03.png)
 
-## App launcher
+### App launcher
 
 ![preview-04](./assets/preview-04.png)
 
-## Clipboard manager
+### Clipboard manager
 
 ![preview-05](./assets/preview-05.png)
 
@@ -26,9 +26,13 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 
 ![preview-06](./assets/preview-06.png)
 
-## Neovim
+### Neovim
 
 ![preview-07](./assets/preview-07.png)
+
+### Wallpaper selector
+
+![wallpaper-selector](./assets/wallpaper-selector.mp4)
 
 ## Installation
 
@@ -152,30 +156,15 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
 2. Change Wallpaper
 
-   2.1. For `hyprpaper`
+Add your preferred wallpapers to ~/dotfiles/assets/wallpapers/. You can then toggle the wallpaper selector in two ways:
 
-   ```bash
-   # ~/dotfiles/hypr/hyprpaper.conf
-   $path = /path/to/your/wallpaper
-   ```
+2.1. Via command line
 
-   2.2. For `quickshell`
+```bash
+quickshell ipc call wallpaper toggle
+```
 
-   ```qml
-   // ~/dotfiles/quickshell/Modules/Background/Background.qml
-   Scope {
-    // ...
-    PanelWindow {
-      // ...
-      Image {
-        // ...
-        source: background.getWallpaper(fileName)
-      }
-    }
-   }
-   ```
-
-   Or change file in `~/dotfiles/assets/_background.png`
+2.2. Via UI: Open the Start Menu using Super+A and click the Wallpaper Selector icon (located at the bottom-right corner of the quick action buttons).
 
 3. Add your avatar to `~/dotfiles/assets/_avatar.png` to show in the lock screen
 

@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
@@ -29,6 +30,12 @@ PanelWindow {
 
   Region { id: clickCatcher }
   mask: visible ? null : clickCatcher
+
+  HyprlandFocusGrab {
+    active: BackgroundService.isOpen
+    windows: [root]
+    onCleared: BackgroundService.isOpen = false
+  }
 
   Rectangle {
     id: selector
