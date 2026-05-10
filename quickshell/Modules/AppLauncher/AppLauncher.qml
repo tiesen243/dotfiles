@@ -115,8 +115,8 @@ Scope {
             Accessible.name: "Search Applications"
 
             Layout.fillWidth: true
-            padding: 8
-            leftPadding: searchIcon.width + 16
+            padding: 12
+            leftPadding: searchIcon.width + 24
             focus: true
 
             placeholderText: "Search applications..."
@@ -129,13 +129,13 @@ Scope {
               anchors.fill: parent
               color: Matugen.surface
               border { color: Matugen.on_secondary; width: 2 }
-              radius: 4
+              radius: 8
 
               Text {
                 id: searchIcon
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                anchors.leftMargin: 8
+                anchors.leftMargin: 12
                 text: ""
                 font: root.rootFont
                 color: Matugen.on_surface
@@ -200,7 +200,7 @@ Scope {
               implicitHeight: appText.implicitHeight + 24
               color: ListView.isCurrentItem ? Matugen.surface_bright : Matugen.surface
               border { color: Matugen.on_secondary; width: 2 }
-              radius: 4
+              radius: 8
 
               RowLayout {
                 anchors { 
