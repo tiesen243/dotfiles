@@ -13,6 +13,12 @@ Item {
 
   implicitHeight: buttons.implicitHeight
 
+  property var actions: ({
+    'toggle-wallpaper-selector': () => {
+      BackgroundService.isOpen = !BackgroundService.isOpen
+    }
+  })
+
   ListModel {
     id: items
     ListElement { 
@@ -76,7 +82,7 @@ Item {
       name: "Wallpaper"; 
       isChecked: false;
       getCmd: "";
-      setCmd: "quickshell ipc call wallpaper toggle";
+      setCmd: "toggle-wallpaper-selector";
       shortcut: "";
     }
   }
@@ -121,8 +127,11 @@ Item {
           anchors.fill: parent
           onClicked: {
             if (button.modelData.setCmd === "") return
-              
-            buttonSetProc.running = true
+
+            if (root.actions[button.modelData.setCmd])
+              root.actions[button.modelData.setCmd]()
+            else buttonSetProc.running = true
+
             if (button.modelData.getCmd !== "") 
               items.setProperty(button.modelData.index, "isChecked", !button.modelData.isChecked)
           }
@@ -160,7 +169,8 @@ Item {
 
         Process {
           id: buttonSetProc
-          command: button.modelData.setCmd ? ["sh", "-c", button.modelData.setCmd] : [];
+          command: button.modelData.setCmd && root.actions[button.modelData.setCmd] === undefined
+            ? ["sh", "-c", button.modelData.setCmd] : [];
         }
       }
     }

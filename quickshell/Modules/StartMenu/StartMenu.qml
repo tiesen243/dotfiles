@@ -40,11 +40,11 @@ Item {
 
   PopupWindow {
     id: startMenuContainer
-    visible: GlobalState.isStartMenuOpen
+    visible: GlobalState.isStartMenuOpen || startMenuContent.opacity > 0
 
     anchor.window: root.popupAnchor
-    anchor.rect.x: 0
-    anchor.rect.y: parentWindow.implicitHeight + 4
+    anchor.rect.x: 8
+    anchor.rect.y: parentWindow.implicitHeight
     implicitWidth: 1920 / 4
     implicitHeight: 1080 / 2
     color: "transparent"
@@ -63,11 +63,20 @@ Item {
     Rectangle {
       id: startMenuContent
 
-      anchors.fill: parent
+      implicitWidth: parent.width
+      implicitHeight: parent.height
       color: Matugen.surface
-      radius: 12
-      border { color: Matugen.on_primary; width: 2 }
+      bottomRightRadius: 12
       clip: true
+
+      opacity: GlobalState.isStartMenuOpen ? 1 : 0
+      Behavior on opacity {
+        NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
+      }
+      y: GlobalState.isStartMenuOpen ? 0 : -implicitHeight
+      Behavior on y {
+        NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+      }
 
       ColumnLayout {
         id: startMenuLayout

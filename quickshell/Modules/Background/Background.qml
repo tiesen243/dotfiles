@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell.Wayland
+import Quickshell.Widgets
 import Quickshell
 import QtQuick
 
@@ -24,14 +25,21 @@ Scope {
       exclusiveZone: -1
       color: Matugen.surface
 
-      Image {
-        id: backgroundImage
-
+      ClippingRectangle {
         anchors.fill: parent
-        source: BackgroundService.wallpaperDir + "?v=" + BackgroundService.wallpaperVersion
-        fillMode: Image.PreserveAspectCrop
-        cache: true
-        smooth: true
+        anchors.margins: 8
+        anchors.topMargin: 28
+        radius: 12
+
+        Image {
+          id: backgroundImage
+
+          anchors.fill: parent
+          source: BackgroundService.wallpaperDir + "?v=" + BackgroundService.wallpaperVersion
+          fillMode: Image.PreserveAspectCrop
+          cache: true
+          smooth: true
+        }
       }
 
       BackgroundSelector {

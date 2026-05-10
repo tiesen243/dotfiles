@@ -1,4 +1,3 @@
-import Quickshell.Hyprland
 import Quickshell.Io
 import Quickshell
 import QtQuick
@@ -13,6 +12,8 @@ Item {
   implicitWidth: clock.implicitWidth
   implicitHeight: clock.implicitHeight
 
+  property bool isOpen: false
+
   Text {
     id: clock
     Accessible.role: Accessible.StaticText
@@ -25,30 +26,41 @@ Item {
     MouseArea {
       anchors.fill: parent
       hoverEnabled: true
-      onEntered: celendar.visible = true
-      onExited: celendar.visible = false
+      onEntered: root.isOpen = true
+      onExited: root.isOpen = false
     }
   }
 
   PopupWindow {
     id: celendar
-    visible: false
+    visible: root.isOpen || celendarContainer.opacity > 0
     property string content: ""
 
     anchor.window: root.popupAnchor
     anchor.rect.x: root.popupAnchor.width
-    anchor.rect.y: parentWindow.implicitHeight + 4
+    anchor.rect.y: parentWindow.height
 
     implicitWidth: 200
     implicitHeight: 160
     color: "transparent"
-    HyprlandWindow.opacity: 0.8
 
     Rectangle {
-      anchors.fill: parent
+      id: celendarContainer
+
+      implicitWidth: parent.width
+      implicitHeight: parent.height
       color: Matugen.surface
-      border { color: Matugen.on_primary; width: 1 }
-      radius: 12
+      bottomLeftRadius: 12
+
+      opacity: root.isOpen ? 1 : 0
+      Behavior on opacity {
+        NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
+      }
+      y: root.isOpen ? 0 : -implicitHeight
+      Behavior on y {
+        NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+      }
+
       Text {
         anchors.centerIn: parent
         text: celendar.content

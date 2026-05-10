@@ -42,7 +42,6 @@ Scope {
         id: barContainer
         anchors.fill: parent
         color: Matugen.surface
-        opacity: 0.8
 
         RowLayout {
           id: leftRow
