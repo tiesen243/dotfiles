@@ -8,13 +8,13 @@ import QtQuick
 
 import '../../Services'
 
-Item {
+Scope {
   id: root
-  property font rootFont
-  property var popupAnchor
 
-  implicitWidth: startMenuTrigger.width
-  implicitHeight: startMenuTrigger.height
+  property font rootFont: Qt.font({
+    pixelSize: 14,
+    family: "GeistMono Nerd Font"
+  })
 
   IpcHandler {
     target: "startMenu"
@@ -24,32 +24,18 @@ Item {
     }
   }
 
-  Text {
-    id: startMenuTrigger
-
-    text: "󰣇"
-    color: Matugen.primary
-    font: root.rootFont
-
-    MouseArea {
-      anchors.fill: parent
-      onClicked: GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
-    }
-  }
-
-  PopupWindow {
+  PanelWindow {
     id: startMenuContainer
     visible: GlobalState.isStartMenuOpen || startMenuContent.implicitHeight > 0
 
-    anchor.window: root.popupAnchor
-    anchor.rect.x: 8
-    anchor.rect.y: parentWindow.implicitHeight
+    anchors.top: true
+    anchors.left: true
     implicitWidth: 1920 / 4
     implicitHeight: 1080 / 2
     color: "transparent"
 
     HyprlandFocusGrab {
-      active: startMenuContainer.visible
+      active: GlobalState.isStartMenuOpen
       windows: [startMenuContainer]
       onCleared: GlobalState.isStartMenuOpen = false
     }

@@ -52,10 +52,17 @@ Scope {
           }
           spacing: 12
 
-          StartMenu {
-            id: startMenu
-            rootFont: root.rootFont
-            popupAnchor: bar
+          Text {
+            id: logo
+
+            text: "󰣇"
+            color: Matugen.primary
+            font: root.rootFont
+
+            MouseArea {
+              anchors.fill: parent
+              onClicked: GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
+            }
           }
 
           Workspace {
