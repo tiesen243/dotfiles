@@ -14,17 +14,12 @@ Singleton {
   property bool isStartMenuOpen: false
   property bool isAppLauncherOpen: false
   property bool isClipboardOpen: false
+  property bool isBackgroundSelectorOpen: false
 
   property var popups: ({
     "startmenu": "isStartMenuOpen",
     "appLauncher": "isAppLauncherOpen",
-    "clipboard": "isClipboardOpen"
+    "clipboard": "isClipboardOpen",
+    "backgroundSelector": "isBackgroundSelectorOpen"
   })
-
-  function closeAllPopups(except: string): void {
-    for (let key in popups) {
-      if (key !== except)
-        root[popups[key]] = false
-    }  
-  }
 }

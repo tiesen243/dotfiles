@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 
 import Quickshell.Hyprland
 import Quickshell.Wayland
-import Quickshell.Io
 import Quickshell
 import QtQuick
 
@@ -10,47 +9,39 @@ import "../../Services"
 
 PanelWindow {
   id: root
-  visible: BackgroundService.isOpen || selector.opacity > 0
-
-  IpcHandler {
-    target: 'wallpaper'
-
-    function toggle() {
-      BackgroundService.isOpen = !BackgroundService.isOpen
-    }
-  }
+  visible: GlobalState.isBackgroundSelectorOpen || selector.implicitHeight > 0
 
   WlrLayershell.layer: WlrLayer.Overlay
   WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
   WlrLayershell.exclusiveZone: -1
 
   anchors { left: true; right: true; bottom: true }
-  implicitHeight: selector.implicitHeight
+  implicitHeight: 232
   color: "transparent"
 
   Region { id: clickCatcher }
   mask: visible ? null : clickCatcher
 
   HyprlandFocusGrab {
-    active: BackgroundService.isOpen
+    active: GlobalState.isBackgroundSelectorOpen
     windows: [root]
-    onCleared: BackgroundService.isOpen = false
+    onCleared: GlobalState.isBackgroundSelectorOpen = false
   }
 
   Rectangle {
     id: selector
 
+    anchors.bottom: parent.bottom
     implicitWidth: parent.width
-    implicitHeight: 232
+    implicitHeight: GlobalState.isBackgroundSelectorOpen ? parent.height : 0
     color: Matugen.surface
 
-    opacity: BackgroundService.isOpen ? 1 : 0
-    Behavior on opacity {
-      NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
-    }
-    y: BackgroundService.isOpen ? 0 : implicitHeight
-    Behavior on y {
-      NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+    Behavior on implicitHeight {
+      NumberAnimation {
+        id: heightAnimation
+        duration: 250; 
+        easing.type: Easing.OutCubic 
+      }
     }
 
     ListView {
@@ -69,18 +60,22 @@ PanelWindow {
         implicitWidth: implicitHeight * 16 / 9
         implicitHeight: 200
         color: Matugen.secondary
+        radius: 12
 
         Image {
           anchors.fill: parent
           source: wallpaperItem.modelData
           fillMode: Image.PreserveAspectCrop
+          sourceSize: Qt.size(355, 200)
+          asynchronous: true
         }
 
         MouseArea {
+          enabled: GlobalState.isBackgroundSelectorOpen && !heightAnimation.running
           anchors.fill: parent
           onClicked: {
             BackgroundService.setWallpaper(wallpaperItem.modelData)
-            BackgroundService.isOpen = false
+            GlobalState.isBackgroundSelectorOpen = false
           }
         }
       }

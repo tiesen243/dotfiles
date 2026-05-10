@@ -33,7 +33,7 @@ Item {
 
   PopupWindow {
     id: celendar
-    visible: root.isOpen || celendarContainer.opacity > 0
+    visible: root.isOpen || celendarContainer.implicitHeight > 0
     property string content: ""
 
     anchor.window: root.popupAnchor
@@ -48,17 +48,13 @@ Item {
       id: celendarContainer
 
       implicitWidth: parent.width
-      implicitHeight: parent.height
+      implicitHeight: root.isOpen ? parent.height : 0
       color: Matugen.surface
       bottomLeftRadius: 12
+      clip: true
 
-      opacity: root.isOpen ? 1 : 0
-      Behavior on opacity {
-        NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
-      }
-      y: root.isOpen ? 0 : -implicitHeight
-      Behavior on y {
-        NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+      Behavior on implicitHeight {
+        NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
       }
 
       Text {
