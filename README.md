@@ -4,6 +4,8 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 
 ## Preview
 
+https://github.com/user-attachments/assets/636ef905-7797-4593-ac2e-2e380577f474
+
 ### Overview
 
 ![preview-01](./assets/preview-01.png)
@@ -29,10 +31,6 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 ### Neovim
 
 ![preview-07](./assets/preview-07.png)
-
-### Wallpaper selector
-
-https://github.com/user-attachments/assets/6f4eb7ba-9d97-4227-9951-60115aad34f4
 
 ## Installation
 
