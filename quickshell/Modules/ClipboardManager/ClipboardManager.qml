@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
@@ -60,12 +61,15 @@ Scope {
       id: clipboardManager
       required property var modelData
       screen: modelData
-      visible: GlobalState.isClipboardOpen
+      visible: GlobalState.isClipboardOpen || clipboardContainer.opacity > 0
 
-      anchors { top: true; left: true; right: true; bottom: true }
+      anchors { bottom: true }
+      implicitWidth: 1920 / 2
+      implicitHeight: 1080 / 2
       color: "transparent"
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
+      WlrLayershell.exclusiveZone: -1
       onVisibleChanged: {
         if (!visible) return
 
@@ -73,27 +77,32 @@ Scope {
         cliphistProc.running = true;
       }
 
-      Rectangle {
-        anchors.fill: parent
-        color: Matugen.surface
-        opacity: 0.8
-
-        MouseArea {
-          anchors.fill: parent
-          onClicked: GlobalState.isClipboardOpen = false
-        }
+      HyprlandFocusGrab {
+        active: clipboardManager.visible && !BackgroundService.isOpen
+        windows: [clipboardManager]
+        onCleared: GlobalState.isClipboardOpen = false
       }
 
       Rectangle {
+        id: clipboardContainer
         Accessible.role: Accessible.Dialog
         Accessible.name: "Clipboard Manager"
 
-        anchors.centerIn: parent
-        implicitWidth: 1920 / 3
-        implicitHeight: 1080 / 3
+        implicitWidth: parent.width
+        implicitHeight: parent.height
         color: Matugen.surface
-        border { color: Matugen.on_primary; width: 1 }
-        radius: 8
+        topRightRadius: 12
+        topLeftRadius: 12
+        clip: true
+
+        opacity: GlobalState.isClipboardOpen ? 1 : 0
+        Behavior on opacity {
+          NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
+        }
+        y: GlobalState.isClipboardOpen ? 0 : implicitHeight
+        Behavior on y {
+          NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+        }
 
         ColumnLayout {
           Accessible.role: Accessible.List
@@ -110,15 +119,30 @@ Scope {
 
             Layout.fillWidth: true
             padding: 8
+            leftPadding: searchIcon.width + 16
+            focus: true
+
             placeholderText: "Search clipboard history..."
             font: root.rootFont
-            focus: true
+            color: Matugen.on_surface
+            selectionColor: Matugen.primary
+            selectedTextColor: Matugen.on_primary
 
             background: Rectangle {
               anchors.fill: parent
               color: Matugen.surface
               border { color: Matugen.on_secondary; width: 2 }
               radius: 4
+
+              Text {
+                id: searchIcon
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 8
+                text: "󱘢"
+                font: root.rootFont
+                color: Matugen.on_surface
+              }
             }
 
             onTextChanged: {
@@ -126,8 +150,6 @@ Scope {
               clipboardList.currentIndex = 0
             }
               
-
-
             Keys.onPressed: (event) => {
               if (event.key === Qt.Key_Escape) {
                 GlobalState.isClipboardOpen = false

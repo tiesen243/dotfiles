@@ -9,7 +9,7 @@ import "../../Services"
 
 PanelWindow {
   id: root
-  visible: BackgroundService.isOpen
+  visible: BackgroundService.isOpen || selector.opacity > 0
 
   IpcHandler {
     target: 'wallpaper'
@@ -21,18 +21,28 @@ PanelWindow {
 
   WlrLayershell.layer: WlrLayer.Overlay
   WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+  WlrLayershell.exclusiveZone: -1
 
-  anchors { top: true; left: true; right: true; bottom: true }
+  anchors { left: true; right: true; bottom: true }
+  implicitHeight: selector.implicitHeight
   color: "transparent"
+  mask: BackgroundService.isOpen ? undefined : Qt.rect(0,0,0,0)
 
   Rectangle {
     id: selector
 
-    anchors { left: parent.left; right: parent.right; bottom: parent.bottom; margins: 8 } 
+    implicitWidth: parent.width
     implicitHeight: 232
     color: Matugen.surface
-    radius: 8
-    border { color: Matugen.on_primary; width: 1 }
+
+    opacity: BackgroundService.isOpen ? 1 : 0
+    Behavior on opacity {
+      NumberAnimation { duration: 200; easing.type: Easing.InOutCubic }
+    }
+    y: BackgroundService.isOpen ? 0 : implicitHeight
+    Behavior on y {
+      NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+    }
 
     ListView {
       id: wallpaperList
