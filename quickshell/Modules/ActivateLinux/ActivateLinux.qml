@@ -1,16 +1,16 @@
-import QtQuick
-import QtQuick.Layouts
-import Quickshell
 import Quickshell.Wayland
+import Quickshell
+import QtQuick.Layouts
+import QtQuick
 
-ShellRoot {
+Scope {
+  id: root
+
 	Variants {
-		// Create the panel once on each monitor.
 		model: Quickshell.screens
 
 		PanelWindow {
-			id: w
-
+			id: activateLinux
 			property var modelData
 			screen: modelData
 
@@ -19,14 +19,9 @@ ShellRoot {
 
 			implicitWidth: content.width
 			implicitHeight: content.height
-
 			color: "transparent"
-
-			// Give the window an empty click mask so all clicks pass through it.
 			mask: Region {}
 
-			// Use the wlroots specific layer property to ensure it displays over
-			// fullscreen windows.
 			WlrLayershell.layer: WlrLayer.Overlay
 
 			ColumnLayout {
@@ -34,13 +29,13 @@ ShellRoot {
 
 				Text {
 					text: "Activate Linux"
-					color: "#50ffffff"
+					color: Matugen.secondary
 					font.pointSize: 22
 				}
 
 				Text {
 					text: "Go to Settings to activate Linux"
-					color: "#50ffffff"
+					color: Matugen.secondary
 					font.pointSize: 14
 				}
 			}

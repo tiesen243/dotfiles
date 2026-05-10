@@ -61,7 +61,9 @@ Scope {
       implicitWidth: 1920 / 2
       implicitHeight: 1080 / 2
       color: "transparent"
-      mask: GlobalState.isAppLauncherOpen ? undefined : Qt.rect(0,0,0,0)
+
+      Region { id: clickCatcher }
+      mask: visible ? null : clickCatcher
 
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
       WlrLayershell.exclusiveZone: -1

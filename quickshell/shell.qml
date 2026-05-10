@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 
+import qs.Modules.ActivateLinux
 import qs.Modules.AppLauncher
 import qs.Modules.Background
 import qs.Modules.Bar
@@ -45,5 +46,10 @@ ShellRoot {
   Loader {
     active: true
     sourceComponent: OSD { id: osd }
+  }
+
+  Loader {
+    active: false
+    sourceComponent: ActivateLinux { id: activateLinux }
   }
 }
