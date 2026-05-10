@@ -26,7 +26,9 @@ PanelWindow {
   anchors { left: true; right: true; bottom: true }
   implicitHeight: selector.implicitHeight
   color: "transparent"
-  mask: BackgroundService.isOpen ? undefined : Qt.rect(0,0,0,0)
+
+  Region { id: clickCatcher }
+  mask: visible ? null : clickCatcher
 
   Rectangle {
     id: selector

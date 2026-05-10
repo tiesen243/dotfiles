@@ -68,6 +68,9 @@ Scope {
       implicitHeight: 1080 / 2
       color: "transparent"
 
+      Region { id: clickCatcher }
+      mask: visible ? null : clickCatcher
+
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
       WlrLayershell.exclusiveZone: -1
       onVisibleChanged: {
