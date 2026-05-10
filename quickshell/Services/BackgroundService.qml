@@ -7,25 +7,28 @@ import QtQuick
 Singleton {
   id: root
 
-  readonly property string wallpaperDir: GlobalState.dotfiles + "/assets/wallpapers"
+  readonly property string wallpaperFolderDir: GlobalState.dotfiles + "/assets/wallpapers"
+  readonly property string wallpaperDir: GlobalState.dotfiles + "/assets/_background.png"
   property list<string> wallpapers: []
   property int wallpaperVersion: 0
   property bool isOpen: false
 
   function setWallpaper(path) {
-    const dest = GlobalState.dotfiles + "/assets/_background.png"
-
-    setWallpaperProc.command = ["sh", "-c", `cp "${path}" "${dest}" && matugen image "${dest}" --source-color-index 1`]
+    setWallpaperProc.command = [
+      "sh", 
+      "-c", 
+      `cp "${path}" "${root.wallpaperDir}" && matugen image "${root.wallpaperDir}" --source-color-index 1`
+    ]
     setWallpaperProc.running = true
   }
 
   Process {
     id: scanWallpapersProc
-    command: ["sh", "-c", "ls " + root.wallpaperDir]
+    command: ["sh", "-c", "ls " + root.wallpaperFolderDir]
     stdout: StdioCollector {
       onStreamFinished: {
         const lines = text.trim().split("\n")
-        root.wallpapers = lines.map(line => root.wallpaperDir + "/" + line)
+        root.wallpapers = lines.map(line => root.wallpaperFolderDir + "/" + line)
       }
     }
     Component.onCompleted: running = true
