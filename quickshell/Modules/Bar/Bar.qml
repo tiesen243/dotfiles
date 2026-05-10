@@ -48,7 +48,7 @@ Scope {
           anchors {
             left: parent.left
             verticalCenter: parent.verticalCenter
-            margins: 8
+            margins: 16
           }
           spacing: 12
 
@@ -78,7 +78,7 @@ Scope {
           anchors {
             right: parent.right
             verticalCenter: parent.verticalCenter
-            margins: 8
+            margins: 16
           }
           spacing: 12
 
