@@ -40,12 +40,13 @@ Scope {
       id: notificationPanel
       required property var modelData
       screen: modelData
+      visible: NotificationService.notifications.length > 0
 
       WlrLayershell.layer: WlrLayer.Overlay
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+      WlrLayershell.exclusiveZone: -1
       WlrLayershell.namespace: "notifications"
       exclusionMode: ExclusionMode.Ignore
-      visible: NotificationService.notifications.length > 0
 
       anchors { top: true; right: true; }
       focusable: false
@@ -57,7 +58,7 @@ Scope {
         id: notificationLayout
         visible: !GlobalState.isStartMenuOpen
 
-        anchors { fill: parent; topMargin: 32; rightMargin: 4 }
+        anchors { fill: parent; topMargin: 32; rightMargin: 12 }
         implicitWidth: 300
         spacing: 8
 
