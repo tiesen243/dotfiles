@@ -28,7 +28,7 @@ Scope {
         id: backgroundImage
 
         anchors.fill: parent
-        source: GlobalState.dotfiles + "/assets/_background.png" + "?v=" + BackgroundService.wallpaperVersion
+        source: BackgroundService.wallpaperDir + "?v=" + BackgroundService.wallpaperVersion
         fillMode: Image.PreserveAspectCrop
         cache: true
         smooth: true
