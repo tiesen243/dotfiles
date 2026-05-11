@@ -22,11 +22,6 @@ hl.on("hyprland.start", function()
 		"fcitx5 -d --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
 	)
 
-	-- Appearance
-	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
-	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'")
-	hl.exec_cmd("gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'")
-
 	-- User applications
 	hl.exec_cmd("quickshell")
 end)
