@@ -7,7 +7,7 @@ import qs.Modules.Background
 import qs.Modules.Bar
 import qs.Modules.ClipboardManager
 import qs.Modules.Lockscreen
-import qs.Modules.Notification
+import qs.Modules.NotificationPopup
 import qs.Modules.OSD
 import qs.Modules.StartMenu
 
@@ -31,12 +31,12 @@ ShellRoot {
 
   Loader {
     active: true
-    sourceComponent: StartMenu { id: startMenu }
+    sourceComponent: NotificationPopup { id: notificationPopup }
   }
 
   Loader {
     active: true
-    sourceComponent: Notification { id: notification }
+    sourceComponent: StartMenu { id: startMenu }
   }
 
   Loader {

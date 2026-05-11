@@ -56,7 +56,7 @@ Scope {
 
       ColumnLayout {
         id: notificationLayout
-        visible: !GlobalState.isStartMenuOpen
+        visible: !GlobalState.isStartMenuOpen && NotificationService.notifications.length > 0
 
         anchors { fill: parent; topMargin: 32; rightMargin: 12 }
         implicitWidth: parent.width
