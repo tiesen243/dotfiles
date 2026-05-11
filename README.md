@@ -122,9 +122,9 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
    ```bash
    rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell}
+   rm -rf ~/.config/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell}
 
-   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell} ~/.config
+   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell} ~/.config
    ln -s ~/dotfiles/zsh/themes/yuki.zsh-theme ~/.oh-my-zsh/custom/themes
    ln -s ~/dotfiles/zsh/config.zsh ~/.zshrc
    ln -s ~/dotfiles/zsh/.zprofile ~/.zprofile # for fcitx config (optional)
@@ -154,27 +154,11 @@ sudo pacman -Runs dunst dolphin htop nano vim wofi
 
 2. Change Wallpaper
 
-Add your preferred wallpapers to ~/dotfiles/assets/wallpapers/. You can then toggle the wallpaper selector in two ways:
+Add your preferred wallpapers to ~/dotfiles/assets/wallpapers/. You can then toggle the wallpaper selector by open the Start Menu using Super+A and click the Wallpaper Selector icon (located at the bottom-right corner of the quick action buttons). After changing the wallpaper, it automatically generates color schemes based on the wallpaper and applies it to the system by using Matugen.
 
-2.1. Via command line
+3. Add your avatar to `/usr/share/sddm/faces/$USER.face.icon` to show in the lock screen
 
-```bash
-quickshell ipc call wallpaper toggle
-```
-
-2.2. Via UI: Open the Start Menu using Super+A and click the Wallpaper Selector icon (located at the bottom-right corner of the quick action buttons).
-
-3. Add your avatar to `~/dotfiles/assets/_avatar.png` to show in the lock screen
-
-4. Generate `colorschema`
-
-   ```bash
-   matugen image /path/to/your/wallpaper
-   # or
-   matugen image ~/dotfiles/assets/_background.png
-   ```
-
-5. Restart your system and enjoy it!
+4. Restart your system and enjoy it!
 
 ## Conclusion
 
