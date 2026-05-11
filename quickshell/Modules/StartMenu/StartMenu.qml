@@ -92,12 +92,15 @@ Scope {
           Layout.fillWidth: true
         }
 
-        Notification {
-          id: notification
-          rootFont: root.rootFont
-
+        Loader {
+          active: GlobalState.isStartMenuOpen
           Layout.fillWidth: true
           Layout.fillHeight: true
+
+          sourceComponent: Notification {
+            id: notification
+            rootFont: root.rootFont
+          }
         }
 
         Footer {
