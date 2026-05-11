@@ -18,12 +18,12 @@ output_path = '~/.config/btop/themes/matugen.theme'
 
 [templates.gtk3]
 input_path = '~/.config/matugen/templates/gtk-colors.css.tpl'
-output_path = '~/.config/gtk-3.0/gtk.css'
+output_path = '~/.config/gtk-3.0/colors.css'
 post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
 
 [templates.gtk4]
 input_path = '~/.config/matugen/templates/gtk-colors.css.tpl'
-output_path = '~/.config/gtk-4.0/gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
 post_hook = '~/dotfiles/scripts/gtk-reload.sh'
 
 [templates.hyprland]

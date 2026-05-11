@@ -2,7 +2,6 @@
 assets/_*.*
 assets/wallpapers/*.png
 
-
 # ignore log files
 *.log
 
@@ -10,14 +9,11 @@ assets/wallpapers/*.png
 Thunar/accels.scm
 
 # Matugen generated files
+**/colors.*
 btop/themes/matugen.theme
-hypr/modules/colors.lua
 hypr/hyprtoolkit.conf
-kitty/colors.conf
 lazygit/config.yml
-rofi/colors.rasi
-swaync/colors.css
-waybar/colors.css
 matugen/preview.html
-quickshell/colors.json
+
+# misc
 quickshell/.qmlls.ini
