@@ -20,6 +20,7 @@ Scope {
 
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+      WlrLayershell.exclusiveZone: -1
 
       anchors { top: true; left: true; right: true; bottom: true }
       exclusiveZone: -1

@@ -24,7 +24,7 @@ Singleton {
     if (isNaN(percent) || percent < 0 || percent > 100 || root.maxValue <= 0) return
 
     const val = Math.round((percent / 100) * root.maxValue)
-    brightnessSetProc.command = ["brightnessctl", "set", String(val)]
+    brightnessSetProc.command = ["brightnessctl", "set", "-n2", String(val)]
     brightnessSetProc.running = true
   }
 

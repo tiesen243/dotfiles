@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell.Hyprland
+import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
 import QtQuick.Layouts
@@ -29,6 +30,7 @@ Scope {
     id: startMenuContainer
     visible: GlobalState.isStartMenuOpen || startMenuContent.implicitHeight > 0
 
+	  WlrLayershell.layer: WlrLayer.Overlay
     anchors.top: true
     anchors.left: true
     implicitWidth: 1920 / 4

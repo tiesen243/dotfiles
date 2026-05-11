@@ -70,6 +70,7 @@ Scope {
       Region { id: clickCatcher }
       mask: visible ? null : clickCatcher
 
+      WlrLayershell.layer: WlrLayer.Overlay
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
       WlrLayershell.exclusiveZone: -1
       onVisibleChanged: {
