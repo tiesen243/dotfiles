@@ -42,7 +42,7 @@ Scope {
 
   function filterClipboardHistory(query = ""): void {
     filteredClipboardHistory.clear();
-    const lowerQuery = query.toLowerCase();
+    const lowerQuery = query.toLowerCase().trim();
     const filtered = [];
 
     for (let i = 0; i < clipboardHistory.count; i++) {
@@ -74,7 +74,7 @@ Scope {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
       WlrLayershell.exclusiveZone: -1
       onVisibleChanged: {
-        if (!visible) return
+        if (!visible) return searchField.text = ""
 
         searchField.forceActiveFocus()
         cliphistProc.running = true;
