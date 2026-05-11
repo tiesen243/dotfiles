@@ -10,6 +10,7 @@ import "../../Services"
 Item {
   id: root
   property font rootFont
+  property bool isOpen
 
   implicitHeight: footer.implicitHeight
 
@@ -111,6 +112,7 @@ Item {
           }
 
           Shortcut {
+            enabled: button.modelData.shortcut !== "" && root.isOpen
             sequence: button.modelData.shortcut
             onActivated: {
               if (button.modelData.cmd === "") return

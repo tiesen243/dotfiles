@@ -9,40 +9,41 @@ block_prefix = "<*"
 block_postfix = "*>"
 
 [templates.preview]
-input_path = '~/.config/matugen/templates/preview.html'
+input_path = '~/.config/matugen/templates/preview.html.tpl'
 output_path = '~/.config/matugen/preview.html'
 
 [templates.btop]
-input_path = '~/.config/matugen/templates/btop.theme'
+input_path = '~/.config/matugen/templates/btop.theme.tpl'
 output_path = '~/.config/btop/themes/matugen.theme'
 
 [templates.gtk3]
-input_path = '~/.config/matugen/templates/gtk-colors.css'
+input_path = '~/.config/matugen/templates/gtk-colors.css.tpl'
 output_path = '~/.config/gtk-3.0/gtk.css'
 post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
 
 [templates.gtk4]
-input_path = '~/.config/matugen/templates/gtk-colors.css'
+input_path = '~/.config/matugen/templates/gtk-colors.css.tpl'
 output_path = '~/.config/gtk-4.0/gtk.css'
+post_hook = '~/dotfiles/scripts/gtk-reload.sh'
 
 [templates.hyprland]
-input_path = '~/.config/matugen/templates/hyprland.conf'
-output_path = '~/.config/hypr/core/colors.conf'
+input_path = '~/.config/matugen/templates/hyprland.lua.tpl'
+output_path = '~/.config/hypr/modules/colors.lua'
 
-[templates.hyprtoolkit]
-input_path = '~/.config/matugen/templates/hyprtoolkit.conf'
-output_path = '~/.config/hypr/hyprtoolkit.conf'
+# [templates.hyprtoolkit]
+# input_path = '~/.config/matugen/templates/hyprtoolkit.conf'
+# output_path = '~/.config/hypr/hyprtoolkit.conf'
 
 [templates.kitty]
-input_path = '~/.config/matugen/templates/kitty.conf'
+input_path = '~/.config/matugen/templates/kitty.conf.tpl'
 output_path = '~/.config/kitty/colors.conf'
 
 [templates.lazygit]
-input_path = '~/.config/matugen/templates/lazygit.yml'
+input_path = '~/.config/matugen/templates/lazygit.yml.tpl'
 output_path = '~/.config/lazygit/config.yml'
 
 [templates.quickshell]
-input_path = '~/.config/matugen/templates/quickshell.json'
+input_path = '~/.config/matugen/templates/quickshell.json.tpl'
 output_path = '~/.config/quickshell/colors.json'
 
 # [templates.rofi]

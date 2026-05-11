@@ -11,7 +11,7 @@ Thunar/accels.scm
 
 # Matugen generated files
 btop/themes/matugen.theme
-hypr/core/colors.conf
+hypr/modules/colors.lua
 hypr/hyprtoolkit.conf
 kitty/colors.conf
 lazygit/config.yml
