@@ -46,7 +46,6 @@ Scope {
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
       WlrLayershell.exclusiveZone: -1
       WlrLayershell.namespace: "notifications"
-      exclusionMode: ExclusionMode.Ignore
 
       anchors { top: true; right: true; }
       focusable: false
