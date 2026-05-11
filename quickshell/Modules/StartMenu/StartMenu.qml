@@ -11,6 +11,7 @@ import '../../Services'
 Scope {
   id: root
 
+  readonly property bool isOpen: GlobalState.isStartMenuOpen && startMenuContent.implicitHeight > 0
   property font rootFont: Qt.font({
     pixelSize: 14,
     family: "GeistMono Nerd Font"
@@ -42,6 +43,7 @@ Scope {
 
     Shortcut {
       sequence: "Escape"
+      enabled: GlobalState.isStartMenuOpen && startMenuContent.implicitHeight > 0
       onActivated: GlobalState.isStartMenuOpen = false
     }
 
@@ -67,6 +69,7 @@ Scope {
         Buttons {
           id: buttons
           rootFont: root.rootFont
+          isOpen: GlobalState.isStartMenuOpen && startMenuContent.implicitHeight > 0
 
           Layout.fillWidth: true
         }
@@ -106,6 +109,7 @@ Scope {
         Footer {
           id: footer
           rootFont: root.rootFont
+          isOpen: GlobalState.isStartMenuOpen && startMenuContent.implicitHeight > 0
 
           Layout.fillWidth: true
         }

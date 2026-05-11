@@ -9,7 +9,7 @@ import "../../Services"
 Item {
   id: root
   property font rootFont
-  property bool isOpen: GlobalState.isStartMenuOpen
+  property bool isOpen
 
   implicitHeight: buttons.implicitHeight
 

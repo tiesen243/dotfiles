@@ -1,12 +1,10 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Io
 import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
 import "../../Services"
-import qs.Modules.StartMenu
 
 Scope {
   id: root
@@ -16,14 +14,6 @@ Scope {
     pixelSize: 14,
     family: "GeistMono Nerd Font"
   })
-
-  IpcHandler {
-    target: "bar"
-
-    function toggle(): void {
-      root.isOpen = !root.isOpen
-    }
-  }
 
   Variants {
     model: Quickshell.screens
