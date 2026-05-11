@@ -6,61 +6,61 @@ local colors = require("modules.colors")
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
-	general = {
-		gaps_in = 2,
-		gaps_out = { top = 4, right = 12, bottom = 12, left = 12 },
+  general = {
+    gaps_in = 2,
+    gaps_out = { top = 4, right = 12, bottom = 12, left = 12 },
 
-		border_size = 2,
-		col = {
-			active_border = { colors = { colors.on_primary, colors.on_secondary }, angle = 45 },
-			inactive_border = colors.on_tertiary,
-		},
+    border_size = 2,
+    col = {
+      active_border = { colors = { colors.on_primary, colors.on_secondary }, angle = 45 },
+      inactive_border = colors.on_tertiary,
+    },
 
-		-- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-		resize_on_border = true,
-		extend_border_grab_area = 8,
-		hover_icon_on_border = true,
+    -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
+    resize_on_border = true,
+    extend_border_grab_area = 8,
+    hover_icon_on_border = true,
 
-		-- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-		allow_tearing = false,
+    -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
+    allow_tearing = false,
 
-		-- @see https://wiki.hypr.land/Configuring/Variables/#snap
-		snap = {
-			enabled = false,
-			window_gap = 4,
-			monitor_gap = 4,
-			border_overlap = false,
-			respect_gaps = true,
-		},
-	},
+    -- @see https://wiki.hypr.land/Configuring/Variables/#snap
+    snap = {
+      enabled = false,
+      window_gap = 4,
+      monitor_gap = 4,
+      border_overlap = false,
+      respect_gaps = true,
+    },
+  },
 
-	decoration = {
-		rounding = 8,
-		rounding_power = 2,
+  decoration = {
+    rounding = 8,
+    rounding_power = 2,
 
-		-- Change transparency of focused and unfocused windows
-		active_opacity = 0.94,
-		inactive_opacity = 1.0,
-		fullscreen_opacity = 1.0,
+    -- Change transparency of focused and unfocused windows
+    active_opacity = 0.94,
+    inactive_opacity = 1.0,
+    fullscreen_opacity = 1.0,
 
-		shadow = {
-			enabled = false,
-			range = 4,
-			render_power = 3,
-			color = 0xee1a1a1a,
-		},
+    shadow = {
+      enabled = false,
+      range = 4,
+      render_power = 3,
+      color = 0xee1a1a1a,
+    },
 
-		blur = {
-			enabled = false,
-			size = 3,
-			passes = 1,
-			vibrancy = 0.1696,
-		},
-	},
+    blur = {
+      enabled = false,
+      size = 3,
+      passes = 1,
+      vibrancy = 0.1696,
+    },
+  },
 
-	animations = {
-		enabled = false,
-	},
+  animations = {
+    enabled = false,
+  },
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/

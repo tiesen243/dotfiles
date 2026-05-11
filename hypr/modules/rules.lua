@@ -4,25 +4,25 @@
 
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 local suppressMaximizeRule = hl.window_rule({
-	name = "suppress-maximize-events",
-	match = { class = ".*" },
+  name = "suppress-maximize-events",
+  match = { class = ".*" },
 
-	suppress_event = "maximize",
+  suppress_event = "maximize",
 })
 suppressMaximizeRule:set_enabled(false)
 
 hl.window_rule({
-	name = "fix-xwayland-drags",
-	match = {
-		class = "^$",
-		title = "^$",
-		xwayland = true,
-		float = true,
-		fullscreen = false,
-		pin = false,
-	},
+  name = "fix-xwayland-drags",
+  match = {
+    class = "^$",
+    title = "^$",
+    xwayland = true,
+    float = true,
+    fullscreen = false,
+    pin = false,
+  },
 
-	no_focus = true,
+  no_focus = true,
 })
 
 -- hl.window_rule({
@@ -40,33 +40,33 @@ hl.window_rule({
 -- })
 
 hl.window_rule({
-	name = "floating-file-utility",
-	match = { class = "^xdg-desktop-portal-gtk", title = "^File$" },
-	float = true,
-	center = true,
-	size = { 640, 480 },
+  name = "floating-file-utility",
+  match = { class = "^xdg-desktop-portal-gtk", title = "^File$" },
+  float = true,
+  center = true,
+  size = { 640, 480 },
 })
 
 hl.window_rule({
-	name = "floating-rename",
-	match = { class = "^thunar$", title = "^Rename$" },
-	float = true,
-	center = true,
-	size = { 400, 150 },
+  name = "floating-rename",
+  match = { class = "^thunar$", title = "^Rename$" },
+  float = true,
+  center = true,
+  size = { 400, 150 },
 })
 
 hl.window_rule({
-	name = "floating-picture-in-picture",
-	match = { title = "^Picture-in-Picture$" },
-	float = true,
-	size = { 540, 300 },
-	move = { 1920 - 540 - 16, 1080 - 300 - 16 },
+  name = "floating-picture-in-picture",
+  match = { title = "^Picture-in-Picture$" },
+  float = true,
+  size = { 540, 300 },
+  move = { 1920 - 540 - 16, 1080 - 300 - 16 },
 })
 
 hl.window_rule({
-	name = "no-opacity-for-browser",
-	match = { class = "^zen$" },
-	opacity = "1.0 override",
+  name = "no-opacity-for-browser",
+  match = { class = "^zen$" },
+  opacity = "1.0 override",
 })
 
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
