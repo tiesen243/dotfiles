@@ -4,7 +4,7 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 
 ## Preview
 
-https://github.com/user-attachments/assets/16d57f4e-a318-4a4a-a20d-21718fd2d15b
+https://github.com/user-attachments/assets/335b0dc0-46db-4cf3-91a2-a33d711e60d3
 
 ### Overview
 
