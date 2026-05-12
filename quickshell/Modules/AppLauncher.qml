@@ -159,6 +159,12 @@ Scope {
                 return
               }
 
+              if (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_R) {
+                appProc.running = true
+                event.accepted = true
+                return
+              }
+
               if (filteredAppModel.count === 0) return
               const isNext = event.key === Qt.Key_Down || event.key === Qt.Key_Tab || (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_N)
               const isPrev = event.key === Qt.Key_Up || event.key === Qt.Key_Backtab || (event.key === Qt.Key_Tab && (event.modifiers & Qt.ShiftModifier)) || (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_P)
@@ -241,10 +247,8 @@ Scope {
 
   function launchApp(exec, terminal = false): void {
     const cleanExec = exec.replace(/%[a-zA-Z]/g, "").trim()
-    if (terminal) launchProc.command = ["sh", "-c", `kitty "${cleanExec}"`]
-    else launchProc.command = ["hyprctl", "dispatch", `hl.dsp.exec_cmd("${cleanExec}")`]
-
-    launchProc.running = true
+    if (terminal) Hyprland.dispatch(`hl.dsp.exec_cmd("kitty ${cleanExec}")`)
+    else Hyprland.dispatch(`hl.dsp.exec_cmd("${cleanExec}")`)
   }
 
   Process {
@@ -279,9 +283,5 @@ Scope {
         root.filterApps("")
       }
     }
-  }
-
-  Process {
-    id: launchProc
   }
 }
