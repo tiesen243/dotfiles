@@ -8,7 +8,7 @@ import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
-import "../../Services"
+import "../Services"
 
 Scope {
   id: root

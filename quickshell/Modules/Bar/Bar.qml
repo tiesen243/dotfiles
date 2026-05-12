@@ -26,6 +26,8 @@ Scope {
       visible: root.isOpen
 
 			WlrLayershell.layer: WlrLayer.Top
+			WlrLayershell.namespace: "quickshell-bar"
+
       anchors { top: true; left: true; right: true }
       implicitHeight: 28
       color: "transparent"

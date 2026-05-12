@@ -10,6 +10,7 @@
 hl.on("hyprland.start", function()
   -- Hyprland components
   hl.exec_cmd("hypridle")
+  -- hl.exec_cmd("hyprpaper")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
   -- Clipboard managers
