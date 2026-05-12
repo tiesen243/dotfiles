@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell.Hyprland
+import Quickshell.Io
 import QtQuick.Layouts
 import QtQuick
 
@@ -58,7 +59,12 @@ Item {
           id: workspaceItemMouseArea
           anchors.fill: parent
           hoverEnabled: true
-          onClicked: workspaceItem.modelData.activate()
+          onClicked: switchToWorkspaceProc.running = true
+        }
+
+        Process {
+          id: switchToWorkspaceProc
+          command: ["hyprctl", "dispatch", `hl.dsp.focus({ workspace = ${workspaceItem.modelData.id} })`]
         }
       }
     }

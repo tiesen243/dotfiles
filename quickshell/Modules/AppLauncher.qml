@@ -241,7 +241,6 @@ Scope {
 
   function launchApp(exec, terminal = false): void {
     const cleanExec = exec.replace(/%[a-zA-Z]/g, "").trim()
-    console.log(cleanExec)
     if (terminal) launchProc.command = ["sh", "-c", `kitty "${cleanExec}"`]
     else launchProc.command = ["hyprctl", "dispatch", `hl.dsp.exec_cmd("${cleanExec}")`]
 
