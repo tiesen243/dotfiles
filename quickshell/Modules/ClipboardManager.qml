@@ -25,11 +25,6 @@ Scope {
     function toggle(): void {
       GlobalState.isClipboardOpen = !GlobalState.isClipboardOpen
     }
-
-    function clearHistory(): void {
-      cliphistProc.command = ["cliphist", "wipe"]
-      cliphistProc.running = true
-    }
   }
 
   ListModel {

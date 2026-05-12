@@ -9,7 +9,6 @@ import "../../Services"
 
 Scope {
   id: root
-  property bool isOpen: true
 
   property font rootFont: Qt.font({
     pixelSize: 14,
@@ -23,7 +22,6 @@ Scope {
       id: bar
       required property var modelData
       screen: modelData
-      visible: root.isOpen
 
 			WlrLayershell.layer: WlrLayer.Top
 			WlrLayershell.namespace: "quickshell-bar"
