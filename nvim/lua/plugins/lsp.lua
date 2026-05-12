@@ -53,7 +53,7 @@ return {
           package_uninstalled = "✗",
         },
       },
-      ensure_installed = { "tree-sitter-cli" },
+      ensure_installed = {},
       postinstall = function(opts)
         vim.lsp.config("*", {
           capabilities = require("blink-cmp").get_lsp_capabilities(),

@@ -1,15 +1,12 @@
 import QtQuick
 import Quickshell
 
-import qs.Modules.ActivateLinux
-import qs.Modules.AppLauncher
-import qs.Modules.Background
 import qs.Modules.Bar
-import qs.Modules.ClipboardManager
 import qs.Modules.Lockscreen
-import qs.Modules.NotificationPopup
 import qs.Modules.OSD
 import qs.Modules.StartMenu
+
+import "./Modules"
 
 ShellRoot {
   id: root
@@ -37,6 +34,11 @@ ShellRoot {
   Loader {
     active: true
     sourceComponent: StartMenu { id: startMenu }
+  }
+
+  Loader {
+    active: true
+    sourceComponent: BackgroundSelector { id: backgroundSelector }
   }
 
   Loader {

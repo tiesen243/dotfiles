@@ -1,11 +1,9 @@
-pragma ComponentBehavior: Bound
-
 import Quickshell.Wayland
 import Quickshell.Widgets
 import Quickshell
 import QtQuick
 
-import "../../Services"
+import "../Services"
 
 Scope {
   id: root
@@ -17,34 +15,29 @@ Scope {
       id: background
       required property var modelData
       screen: modelData
+      visible: true
 
       WlrLayershell.layer: WlrLayer.Background
+      WlrLayershell.namespace: "quickshell-background"
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
-      WlrLayershell.exclusiveZone: -1
 
       anchors { top: true; left: true; right: true; bottom: true }
       exclusiveZone: -1
       color: Matugen.surface
 
-      ClippingRectangle {
+      ClippingWrapperRectangle {
         anchors.fill: parent
         anchors.margins: 8
         anchors.topMargin: 28
+        color: Matugen.on_primary
         radius: 12
+        clip: true
 
         Image {
-          id: backgroundImage
-
           anchors.fill: parent
           source: BackgroundService.wallpaperDir + "?v=" + BackgroundService.wallpaperVersion
           fillMode: Image.PreserveAspectCrop
-          cache: true
-          smooth: true
         }
-      }
-
-      BackgroundSelector {
-        id: backgroundSelector
       }
     }
   }
