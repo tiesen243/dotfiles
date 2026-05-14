@@ -19,6 +19,7 @@ M.setup = function(opts)
   require("core.keymaps")
 
   require("yuki.plugin").setup(opts.plugins)
+  require("yuki.lsp").setup()
   Yuki.format.setup()
 
   vim.cmd.colorscheme(opts.theme or "habamax")

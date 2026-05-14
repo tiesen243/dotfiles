@@ -85,4 +85,31 @@ M.merge = function(a, b)
   return result
 end
 
+--- @param root_files string[] List of root-marker files to append to.
+--- @param new_names string[] Potential root-marker filenames (e.g. `{ 'package.json', 'package.json5' }`) to inspect for the given `field`.
+--- @param field string Field to search for in the given `new_names` files.
+--- @param fname string Full path of the current buffer name to start searching upwards from.
+function M.root_markers_with_field(root_files, new_names, field, fname)
+  local path = vim.fn.fnamemodify(fname, ":h")
+  local found = vim.fs.find(new_names, { path = path, upward = true, type = "file" })
+
+  for _, f in ipairs(found or {}) do
+    -- Match the given `field`.
+    local file = assert(io.open(f, "r"))
+    for line in file:lines() do
+      if line:find(field) then
+        root_files[#root_files + 1] = vim.fs.basename(f)
+        break
+      end
+    end
+    file:close()
+  end
+
+  return root_files
+end
+
+function M.insert_package_json(root_files, field, fname)
+  return M.root_markers_with_field(root_files, { "package.json", "package.json5" }, field, fname)
+end
+
 return M

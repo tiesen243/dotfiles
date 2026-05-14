@@ -1,22 +1,5 @@
 vim.lsp.enable({ "basedpyright", "ruff" })
 
-vim.lsp.config("basedpyright", {
-  settings = {
-    basedpyright = {
-      analysis = {
-        typeCheckingMode = "basic",
-        diagnosticMode = "openFilesOnly",
-      },
-    },
-  },
-  disableOrganizeImports = true,
-})
-
-vim.lsp.config("ruff", {
-  cmd_env = { RUFF_TRACE = "messages" },
-  init_options = { settings = { logLevel = "error" } },
-})
-
 return {
   {
     { name = "nvim-treesitter", override = true },

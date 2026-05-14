@@ -1,21 +1,5 @@
 vim.lsp.enable("lua_ls")
 
-vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      diagnostics = { globals = { "Snacks", "hl", "vim" } },
-      workspace = {
-        library = {
-          vim.api.nvim_get_runtime_file("", true),
-          "/usr/share/hypr/stubs",
-        },
-        checkThirdParty = false,
-      },
-      telemetry = { enable = false },
-    },
-  },
-})
-
 return {
   {
     { name = "mason", override = true },

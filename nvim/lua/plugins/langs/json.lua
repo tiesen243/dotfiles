@@ -1,42 +1,4 @@
-vim.filetype.add({
-  pattern = {
-    [".*/typescript/.*%.json"] = "jsonc",
-    [".*/oxc/.*%.json"] = "jsonc",
-  },
-})
-
 vim.lsp.enable("jsonls")
-
-vim.lsp.config("jsonls", {
-  settings = {
-    json = {
-      schemas = {
-        {
-          fileMatch = { "package.json" },
-          url = "https://json.schemastore.org/package.json",
-        },
-        {
-          fileMatch = { "composer.json" },
-          url = "https://getcomposer.org/schema.json",
-        },
-        {
-          fileMatch = { "tsconfig.json", "tsconfig.*.json" },
-          url = "http://json.schemastore.org/tsconfig",
-        },
-      },
-      format = { enable = false },
-      validate = { enable = true },
-    },
-    jsonc = {
-      schemas = {
-        fileMatch = { "tsconfig.json", "tsconfig.*.json" },
-        url = "http://json.schemastore.org/tsconfig",
-      },
-      format = { enable = false },
-      validate = { enable = true },
-    },
-  },
-})
 
 return {
   {
