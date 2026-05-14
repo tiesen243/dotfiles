@@ -46,10 +46,6 @@
       "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
-    "nvim-lspconfig": {
-      "rev": "8fde495949782bb61c2605174e231d145a048d8c",
-      "src": "https://github.com/neovim/nvim-lspconfig"
-    },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"

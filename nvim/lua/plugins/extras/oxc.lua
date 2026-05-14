@@ -1,6 +1,5 @@
+vim.lsp.enable("oxfmt")
 vim.lsp.enable("oxlint")
-
-vim.lsp.config("oxlint", {})
 
 local supported = {
   "css",
