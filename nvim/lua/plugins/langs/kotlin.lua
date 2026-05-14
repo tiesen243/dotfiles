@@ -1,7 +1,5 @@
 vim.lsp.enable("kotlin_lsp")
 
-vim.lsp.config("kotlin_lsp", {})
-
 return {
   {
     { name = "nvim-treesitter", override = true },

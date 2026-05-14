@@ -4,7 +4,7 @@ require("yuki").setup({
   plugins = {
     "plugins.coding",
     "plugins.editor",
-    "plugins.lsp",
+    "plugins.mason",
     "plugins.ui",
 
     "plugins.langs.json",
@@ -15,8 +15,7 @@ require("yuki").setup({
     "plugins.langs.typescript",
 
     "plugins.langs.python",
-
-    "plugins.langs.qml",
+    "plugins.langs.rust",
 
     "plugins.extras.ai",
     "plugins.extras.oxc",

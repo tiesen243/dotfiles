@@ -25,6 +25,12 @@ if (($+commands[git])); then
 fi
 # <<< bun initialize <<<
 
+# >>> cargo initialize >>>
+if [ -d "$HOME/.cargo/bin" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+# <<< cargo initialize <<<
+
 # >>> android-sdk initialize >>>
 if [ -d "/opt/android-sdk" ]; then
   export ANDROID_HOME="/opt/android-sdk"

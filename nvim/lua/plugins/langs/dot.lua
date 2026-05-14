@@ -1,12 +1,4 @@
 vim.lsp.enable("bashls")
-vim.filetype.add({
-  extension = { rasi = "conf", rofi = "conf", wofi = "conf" },
-  pattern = {
-    [".*/kitty/.+%.conf"] = "kitty",
-    ["%.env%.[%w_.-]+"] = "sh",
-  },
-})
-vim.treesitter.language.register("bash", "kitty")
 
 return {
   {
