@@ -1,5 +1,7 @@
 local M = {}
 
+M.ai_cmp = false
+
 M.icons = require("yuki.configs.icons")
 M.nesting_rules = require("yuki.configs.nesting-rules")
 

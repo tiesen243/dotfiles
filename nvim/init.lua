@@ -1,5 +1,8 @@
 require("yuki").setup({
   theme = "vercel",
+  config = {
+    ai_cmp = true,
+  },
 
   plugins = {
     "plugins.coding",

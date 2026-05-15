@@ -24,6 +24,15 @@ return {
         accept = {
           auto_brackets = { enabled = true },
         },
+        list = {
+          selection = {
+            preselect = function()
+              return not require("blink.cmp").snippet_active({ direction = 1 })
+            end,
+            auto_insert = not Yuki.configs.ai_cmp,
+          },
+        },
+        ghost_text = { enabled = Yuki.configs.ai_cmp },
         menu = {
           draw = {
             columns = {
