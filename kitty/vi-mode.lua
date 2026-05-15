@@ -19,5 +19,12 @@ api.nvim_set_current_buf(orig_buf)
 api.nvim_buf_delete(term_buf, { force = true })
 api.nvim_win_set_cursor(0, { api.nvim_buf_line_count(0), 0 })
 
-vim.keymap.set("n", "q", "<cmd>qa!<cr>", { silent = true, buffer = buf })
-vim.keymap.set("n", "<esc>", "<cmd>qa!<cr>", { silent = true, buffer = buf })
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+	pattern = "*",
+	callback = function()
+		vim.cmd("Copilot disable")
+	end,
+})
+
+vim.keymap.set("n", "q", "<cmd>qa!<cr>", { silent = true })
+vim.keymap.set("n", "<esc>", "<cmd>qa!<cr>", { silent = true })

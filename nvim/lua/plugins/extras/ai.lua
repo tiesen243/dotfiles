@@ -1,4 +1,4 @@
-return {
+local M = {
   {
     {
       name = "copilot",
@@ -6,7 +6,7 @@ return {
     },
     opts = {
       suggestion = {
-        enabled = true,
+        enabled = not Yuki.configs.ai_cmp,
         auto_trigger = true,
         hide_during_completion = true,
         keymap = { accept = "<C-y>" },
@@ -87,3 +87,25 @@ return {
     end,
   },
 }
+
+if Yuki.configs.ai_cmp then
+  table.insert(M, "https://github.com/fang2hou/blink-copilot")
+  table.insert(M, {
+    { name = "blink-cmp", override = true },
+    opts = {
+      sources = {
+        default = { "copilot" },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-copilot",
+            score_offset = 100,
+            async = true,
+          },
+        },
+      },
+    },
+  })
+end
+
+return M
