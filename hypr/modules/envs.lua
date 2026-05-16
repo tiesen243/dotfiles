@@ -41,6 +41,8 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("__GL_SHADER_DISK_CACHE_PATH", os.getenv("HOME") .. "/.cache/nvidia")
+hl.env("CUDA_CACHE_PATH", os.getenv("HOME") .. "/.cache/nvidia/ComputeCache")
 
 -- ZSH
 hl.env("ZDOTDIR", os.getenv("HOME") .. "/.config/zsh")

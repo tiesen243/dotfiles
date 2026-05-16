@@ -74,20 +74,6 @@ yes | yay -S --answerclean All --answerdiff None \
   gh auth login
   ```
 
-### 3. Optional: Install some stuffs
-
-- UV (Python package manager)
-
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-- NVM (Node Version Manager)
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-```
-
 ## Usage
 
 ### 1. To apply my config, you can run the following command:

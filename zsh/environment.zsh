@@ -2,8 +2,8 @@ mkdir -p "$XDG_CACHE_HOME/zsh"
 fpath=("$XDG_CACHE_HOME/zsh" $fpath)
 
 # >>> nvm initialize >>>
-if [ -d "$HOME/.nvm" ]; then
-  export NVM_DIR="$HOME/.nvm"
+if [ -d "$HOME/.config/nvm" ]; then
+  export NVM_DIR="$HOME/.config/nvm"
 
   nvm() {
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
@@ -19,7 +19,7 @@ fi
 
 # >>> bun initialize >>>
 if (( $+commands[bun] )); then
-  export BUN_INSTALL="$HOME/.bun"
+  export BUN_INSTALL="$HOME/.cache/bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
 
   # If the completion file doesn't exist yet, we need to autoload it and
