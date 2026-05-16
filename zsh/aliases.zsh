@@ -76,8 +76,8 @@ if (( $+commands[git] )); then
     local types="(feat|fix|chore|docs|style|refactor|perf|test|ci)"
     
     if [[ -z "$1" || -z "$2" ]]; then
-      echo "❌ Syntax error! Usage: gcm <type> '<message>'" >&2
-      echo "Example: gcm chore 'optimize zsh config'" >&2
+      echo "❌ Syntax error! Usage: gcm <type> <message>" >&2
+      echo "Example: gcm chore update zsh config" >&2
       return 1
     fi
 
@@ -87,7 +87,11 @@ if (( $+commands[git] )); then
       return 1
     fi
 
-    git commit -m "$1: $2"
+    local type="$1"
+    shift
+    local msg="$*"
+
+    git commit -m "$type: $msg"
   }
 
   _gcm_completion() {
