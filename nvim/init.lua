@@ -18,7 +18,6 @@ require("yuki").setup({
     "plugins.langs.typescript",
 
     "plugins.langs.python",
-    "plugins.langs.rust",
 
     "plugins.extras.ai",
     "plugins.extras.oxc",
