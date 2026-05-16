@@ -34,7 +34,7 @@ https://github.com/user-attachments/assets/335b0dc0-46db-4cf3-91a2-a33d711e60d3
 
 ## Installation
 
-1. Install `yay`
+### 1. Install `yay` and necessary packages
 
 ```bash
 pacman -Syu --needed git base-devel
@@ -43,8 +43,6 @@ cd ~/yay
 makepkg -si
 rm -rf ~/yay
 ```
-
-3. Install all packages
 
 ```bash
 yes | yay -S --answerclean All --answerdiff None \
@@ -64,13 +62,19 @@ yes | yay -S --answerclean All --answerdiff None \
   fcitx5-lotus-bin fcitx5-config-qt
 ```
 
-3.1. Set `zsh` as the default shell
+- Set `zsh` as the default shell
 
-```bash
-chsh -s $(which zsh)
-```
+  ```bash
+  chsh -s $(which zsh)
+  ```
 
-4. Optional: Install some stuffs
+- Open the browser and login to your github account, then run the following command to set up the SSH key for your github account.
+
+  ```bash
+  gh auth login
+  ```
+
+### 3. Optional: Install some stuffs
 
 - UV (Python package manager)
 
@@ -84,67 +88,52 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 ```
 
-5. Set up github
-
-Open the browser and login to your github account, then run the following command to set up the SSH key for your github account.
-
-```bash
-gh auth login
-```
-
-6. Uninstall unnecessary packages (optional)
-
-```bash
-sudo pacman -Runs dunst dolphin htop nano vim wofi
-```
-
 ## Usage
 
-1. To apply my config, you can run the following command:
+### 1. To apply my config, you can run the following command:
 
-   1.1. For Linux
+1.1. For Linux
 
-   ```bash
-   git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
-   ```
+```bash
+git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
+```
 
-   Then, create the symbolic links to the config files
+Then, create the symbolic links to the config files
 
-   ```bash
-   rm ~/.zshrc
-   rm -rf ~/.config/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh,user-dirs.dirs}
-   ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh,user-dirs.dirs} ~/.config
-   ```
+```bash
+rm -rf ~/{.cache,.config,.local,.zshrc}
+mkdir -p ~/.config && ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh,user-dirs.dirs} ~/.config
 
-   Final, make all scripts in the dotfiles/scripts directory executable
+rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos} && xdg-user-dirs-update
+```
 
-   ```bash
-   sudo chmod +x ~/dotfiles/scripts/*
-   ```
+Final, make all scripts in the `dotfiles/scripts` directory executable:
 
-   1.1. For Windows
+```bash
+sudo chmod +x ~/dotfiles/scripts/*
+```
 
-   ```powershell
-   git clone git clone git@github.com:tiesen243/dotfiles.git $HOME\dotfiles
-   ```
+1.2. For Windows
 
-   Then, create the symbolic links to the config files (make sure to run Terminal as administrator)
+```powershell
+git clone git clone git@github.com:tiesen243/dotfiles.git $HOME\dotfiles
+```
 
-   ```powershell
-   Remove-Item -Force -Recurse $HOME\Documents\WindowsPowerShell
-   Remove-Item -Force -Recurse $HOME\AppData\Local\nvim
+Then, create the symbolic links to the config files (make sure to run Terminal as administrator)
 
-   New-Item -ItemType SymbolicLink -Path $HOME\Documents\WindowsPowerShell -Target $HOME\dotfiles\powershell
-   New-Item -ItemType SymbolicLink -Path $HOME\AppData\Local\nvim -Target $HOME\dotfiles\nvim
-   ```
+```powershell
+Remove-Item -Force -Recurse $HOME\Documents\WindowsPowerShell
+Remove-Item -Force -Recurse $HOME\AppData\Local\nvim
 
-2. Change Wallpaper
+New-Item -ItemType SymbolicLink -Path $HOME\Documents\WindowsPowerShell -Target $HOME\dotfiles\powershell
+New-Item -ItemType SymbolicLink -Path $HOME\AppData\Local\nvim -Target $HOME\dotfiles\nvim
+```
+
+### 2. Change Wallpaper
 
 Add your preferred wallpapers to ~/dotfiles/assets/wallpapers/. You can then toggle the wallpaper selector by open the Start Menu using Super+A and click the Wallpaper Selector icon (located at the bottom-right corner of the quick action buttons). After changing the wallpaper, it automatically generates color schemes based on the wallpaper and applies it to the system by using Matugen.
 
-3. Add your avatar to `/usr/share/sddm/faces/$USER.face.icon` to show in the lock screen
-
-4. Restart your system and enjoy it!
+### 3. Add your avatar to `/usr/share/sddm/faces/$USER.face.icon` to show in the lock screen
 
 ## Conclusion
 

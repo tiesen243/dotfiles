@@ -52,7 +52,6 @@ if (( $+commands[git] )); then
   # Thêm và Commit
   alias ga='git add'
   alias gaa='git add --all'
-  alias gc='git commit -m'
   alias gca='git commit --amend'
   
   alias gsw='git switch'
@@ -72,7 +71,7 @@ if (( $+commands[git] )); then
   alias gst='git stash'
   alias gstp='git stash pop'
 
-  gcm() {
+  gc() {
     local types="(feat|fix|chore|docs|style|refactor|perf|test|ci)"
     
     if [[ -z "$1" || -z "$2" ]]; then
@@ -94,7 +93,7 @@ if (( $+commands[git] )); then
     git commit -m "$type: $msg"
   }
 
-  _gcm_completion() {
+  _gc_completion() {
     local -a commit_types
     commit_types=(
       'feat:A new feature'
@@ -111,7 +110,7 @@ if (( $+commands[git] )); then
     _describe 'commit types' commit_types
   }
 
-  compdef _gcm_completion gcm
+  compdef _gc_completion gc
 fi
 
 if (( $+commands[lazygit] )); then
