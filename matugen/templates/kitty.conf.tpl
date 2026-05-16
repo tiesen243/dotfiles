@@ -19,9 +19,9 @@ inactive_tab_foreground         {{colors.secondary.default.hex}}
 inactive_tab_background         {{colors.on_secondary.default.hex}}
 
 # Border colors
-active_border_color             {{colors.primary.default.hex}}
-inactive_border_color           {{colors.secondary.default.hex}}
-bell_border_color               {{colors.error.default.hex}}
+active_border_color             {{colors.on_primary.default.hex}}
+inactive_border_color           {{colors.on_secondary.default.hex}}
+bell_border_color               {{colors.on_error.default.hex}}
 # visual_bell_color                  none
 
 #: black
