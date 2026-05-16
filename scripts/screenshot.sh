@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-output_dir="$HOME/Pictures/Screenshots"
+output_dir="$HOME/pictures/screenshots"
 file_name="Screenshot_$(date +%Y-%m-%d_%H%M%S).png"
 
 mode="fullscreen"
