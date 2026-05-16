@@ -71,6 +71,43 @@ if (( $+commands[git] )); then
   
   alias gst='git stash'
   alias gstp='git stash pop'
+
+  gcm() {
+    local types="(feat|fix|chore|docs|style|refactor|perf|test|ci)"
+    
+    if [[ -z "$1" || -z "$2" ]]; then
+      echo "❌ Syntax error! Usage: gcm <type> '<message>'" >&2
+      echo "Example: gcm chore 'optimize zsh config'" >&2
+      return 1
+    fi
+
+    if [[ ! "$1" =~ ^$types$ ]]; then
+      echo "❌ Invalid commit type '$1'!" >&2
+      echo "Valid types: feat, fix, chore, docs, style, refactor, perf, test, ci" >&2
+      return 1
+    fi
+
+    git commit -m "$1: $2"
+  }
+
+  _gcm_completion() {
+    local -a commit_types
+    commit_types=(
+      'feat:A new feature'
+      'fix:A bug fix'
+      'chore:Changes to the build process or auxiliary tools and libraries'
+      'docs:Documentation only changes'
+      'style:Changes that do not affect the meaning of the code'
+      'refactor:A code change that neither fixes a bug nor adds a feature'
+      'perf:A code change that improves performance'
+      'test:Adding missing tests or correcting existing tests'
+      'ci:Changes to CI configuration files and scripts'
+    )
+
+    _describe 'commit types' commit_types
+  }
+
+  compdef _gcm_completion gcm
 fi
 
 if (( $+commands[lazygit] )); then

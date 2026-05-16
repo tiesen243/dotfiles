@@ -15,15 +15,15 @@ setopt AUTOCD
 setopt NOBEEP
 setopt NUMERIC_GLOB_SORT
 
-# ------------       Modules        ------------
-source "$XDG_CONFIG_HOME/zsh/environment.zsh"
-source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
-source "$XDG_CONFIG_HOME/zsh/plugins.zsh"
-source "$XDG_CONFIG_HOME/zsh/plugins/yuki/yuki.zsh-theme"
-
 # ------------      Completions     ------------
 autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# ------------       Modules        ------------
+source "$XDG_CONFIG_HOME/zsh/environment.zsh"
+source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
+source "$XDG_CONFIG_HOME/zsh/plugins.zsh"
+source "$XDG_CONFIG_HOME/zsh/plugins/yuki/yuki.zsh-theme"
