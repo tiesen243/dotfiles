@@ -104,7 +104,7 @@ Then, create the symbolic links to the config files
 rm -rf ~/{.cache,.config,.local,.zshrc}
 mkdir -p ~/.config && ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh,user-dirs.dirs} ~/.config
 
-rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos} && xdg-user-dirs-update
+rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos} && xdg-user-dirs-update
 ```
 
 Final, make all scripts in the `dotfiles/scripts` directory executable:
