@@ -19,6 +19,7 @@ setopt NUMERIC_GLOB_SORT
 source "$XDG_CONFIG_HOME/zsh/environment.zsh"
 source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
 source "$XDG_CONFIG_HOME/zsh/plugins.zsh"
+source "$XDG_CONFIG_HOME/zsh/plugins/yuki/yuki.zsh-theme"
 
 # ------------      Completions     ------------
 autoload -Uz compinit
