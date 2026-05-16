@@ -2,20 +2,21 @@ ZPLUGINDIR="${ZDOTDIR:-$HOME/.config/zsh}/plugins"
 
 _zplugin_load() {
   local plugin_path="$ZPLUGINDIR/$2"
+
   if  [[ ! -d "$plugin_path" ]]; then
     mkdir -p "$ZPLUGINDIR"
     echo "Cloning $2 from $1..."
     git clone --depth=1 "https://github.com/$1/$2.git" "$plugin_path" \
       || { echo "Failed to clone $2 from $1." >&2; return 1; }
+  fi
 
-    if [[ -f "$plugin_path/$2.zsh" ]]; then
-      source "$plugin_path/$2.zsh"
-    elif [[ -f "$plugin_path/$2.plugin.zsh" ]]; then
-      source "$plugin_path/$2.plugin.zsh"
-    else
-      echo "Failed to source $2: No valid entry point found." >&2
-      return 1
-    fi
+  if [[ -f "$plugin_path/$2.zsh" ]]; then
+    source "$plugin_path/$2.zsh"
+  elif [[ -f "$plugin_path/$2.plugin.zsh" ]]; then
+    source "$plugin_path/$2.plugin.zsh"
+  else
+    echo "Failed to source $2: No valid entry point found." >&2
+    return 1
   fi
 }
 
