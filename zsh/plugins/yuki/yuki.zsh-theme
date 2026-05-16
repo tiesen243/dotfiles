@@ -6,7 +6,7 @@
 # http://github.com/tiesen243/dotfiles/blob/main/LICENSE
 
 # Initialization {{{
-source ~/dotfiles/zsh/themes/async.zsh
+source $XDG_CONFIG_HOME/zsh/plugins/yuki/async.zsh
 autoload -Uz add-zsh-hook
 setopt PROMPT_SUBST
 async_init

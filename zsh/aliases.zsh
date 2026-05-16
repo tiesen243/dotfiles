@@ -1,54 +1,93 @@
-# General
-alias rmf="rm -rf"
-alias cls="clear"
-alias v="nvim"
-alias q="exit"
-
-# Kitty
+# ------------       General        ------------
+alias icon="kitten unicode-input"
 alias icat="kitten icat"
+alias cls="clear"
+alias q="exit"
+alias v="nvim"
 
-# LSD
-alias ls="lsd"
-alias lt="ls --tree"
-alias la="ls -lAh 2>/dev/null"
+# ------------    Pacman / Yay      ------------
+if (( $+commands[yay] )); then
+  alias y='yay'
+  alias yu='yay -Syu'
+  alias ys='yay -Ss'
+  alias yi='yay -S'
+  alias yr='yay -Rns'
+  alias yc='yay -Yc'
+else
+  alias y='sudo pacman'
+  alias yu='sudo pacman -Syu'
+  alias ys='pacman -Ss'
+  alias yi='sudo pacman -S'
+  alias yr='sudo pacman -Rns'
+  alias yc='sudo pacman -Rns $(pacman -Qtdq)'
+fi
 
-# Bun
-alias bff="bun format:fix"
-alias bf="bun format"
-alias blf="bun lint:fix"
-alias bl="bun lint"
-alias ba="bun add"
-alias bi="bun install"
-alias bur="bun update --recursive --interactive"
-alias bu="bun update"
-alias br="bun remove"
-alias bx="bunx --bun"
-alias bb="bun run build"
-alias bs="bun start"
-alias bd="bun dev"
-alias b="bun"
+alias yq='pacman -Qi'
+alias yl='pacman -Ql'
 
-# Git
-alias grc="gh repo create"
-alias grd="gh repo delete"
-alias gcl="gh repo clone"
-alias lzg="lazygit"
-alias g="git"
+# ------------          LS          ------------
+if (( $+commands[lsd] )); then
+  alias ls='lsd'
+  
+  alias lld='lsd -l --directory-only'
+  alias lt='lsd --tree --depth 3'
+  alias lla='lsd -la'
+  alias la='lsd -a'
+  alias l='lsd -l'
+else
+  alias l='ls -lh'
+  alias la='ls -A'
+  alias lla='ls -lah'
+fi
 
-alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
-alias gl="git log --all --graph --decorate --pretty=format:'%C(magenta)%h %C(white) %an - %ar%C(auto) %D%n%s%n'"
-alias gs="git switch"
-alias gp="git push"
-alias gu="git pull"
+# ------------        Git           ------------
+if (( $+commands[git] )); then
+  alias g='git'
+  
+  # Xem trạng thái & Lịch sử
+  alias gs='git status -sb'
+  alias gl='git log --oneline --graph --decorate'
+  alias gd='git diff'
+  
+  # Thêm và Commit
+  alias ga='git add'
+  alias gaa='git add --all'
+  alias gc='git commit -m'
+  alias gca='git commit --amend'
+  
+  alias gsw='git switch'
+  alias gsc='git switch -c'
+  alias gsm='git switch main'
+  alias gsd='git switch dev'
+  alias gswb='git switch -'
+  
+  alias grs='git restore'
+  alias grss='git restore --staged'
+  
+  alias gp='git push'
+  alias gpf='git push --force-with-lease'
+  alias gpl='git pull'
+  alias gf='git fetch'
+  
+  alias gst='git stash'
+  alias gstp='git stash pop'
+fi
 
-alias gst="git status"
-alias gap="git add --patch"
-alias gaa="git add ."
-alias ga="git add"
-alias gc="git commit -a"
+# ------------         Bun          ------------
+if (( $+commands[bun] )); then
+  alias bi='bun install'
+  alias ba='bun add'
+  alias bad='bun add -d'
+  alias brm='bun remove'
+  alias bu='bun update'
+  alias bur='bun update --interactive --recursive'
 
-alias pmi="yay -S"
-alias pmu="yay -Syu"
-alias pmr="yay -Rns"
-alias pmc="yay -Scc"
-alias pmo="yay -Qtdq | yay -Rns -"
+  alias bx='bunx --bun'
+  alias bd='bun --bun run dev'
+  alias bb='bun --bun run build'
+  alias br='bun --bun run'
+
+  alias b='bun'
+  alias bw='bun --hot'
+  alias btest='bun test'
+fi

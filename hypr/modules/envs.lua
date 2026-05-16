@@ -42,6 +42,9 @@ hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 
+-- ZSH
+hl.env("ZDOTDIR", os.getenv("HOME") .. "/.config/zsh")
+
 -----------------------
 ----- PERMISSIONS -----
 -----------------------
