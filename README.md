@@ -64,22 +64,13 @@ yes | yay -S --answerclean All --answerdiff None \
   fcitx5-lotus-bin fcitx5-config-qt
 ```
 
-4. Install `oh-my-zsh`
+3.1. Set `zsh` as the default shell
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+chsh -s $(which zsh)
 ```
 
-> Remember to choose `zsh` as your default shell
-
-Then, install zsh plugins
-
-```bash
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-```
-
-5. Optional: Install some stuffs
+4. Optional: Install some stuffs
 
 - UV (Python package manager)
 
@@ -93,7 +84,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 ```
 
-6. Set up github
+5. Set up github
 
 Open the browser and login to your github account, then run the following command to set up the SSH key for your github account.
 
@@ -101,7 +92,7 @@ Open the browser and login to your github account, then run the following comman
 gh auth login
 ```
 
-7. Uninstall unnecessary packages (optional)
+6. Uninstall unnecessary packages (optional)
 
 ```bash
 sudo pacman -Runs dunst dolphin htop nano vim wofi
