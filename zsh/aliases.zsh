@@ -73,6 +73,10 @@ if (( $+commands[git] )); then
   alias gstp='git stash pop'
 fi
 
+if (( $+commands[lazygit] )); then
+  alias lg='lazygit'
+fi
+
 # ------------         Bun          ------------
 if (( $+commands[bun] )); then
   alias bi='bun install'
