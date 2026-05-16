@@ -39,6 +39,13 @@ hl.window_rule({
 -- 	rounding = 0,
 -- })
 
+-- hl.window_rule({
+--   match = { class = ".*" },
+--   float = true,
+--   center = true,
+--   size = { 1920 / 2, 1080 / 2 },
+-- })
+
 hl.window_rule({
   name = "floating-file-utility",
   match = { class = "^xdg-desktop-portal-gtk", title = "^File$" },
