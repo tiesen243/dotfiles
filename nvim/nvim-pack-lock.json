@@ -9,10 +9,6 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "'v1'"
     },
-    "blink-copilot": {
-      "rev": "7ad8209b2f880a2840c94cdcd80ab4dc511d4f39",
-      "src": "https://github.com/fang2hou/blink-copilot"
-    },
     "conform": {
       "rev": "1c4a1537db60ba05e61360db8b674158c9cf4169",
       "src": "https://github.com/stevearc/conform.nvim"

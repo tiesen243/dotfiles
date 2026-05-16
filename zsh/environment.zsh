@@ -1,27 +1,38 @@
-export EDITOR="nvim"
-export PATH="/home/tiesen/.local/share/../bin:$PATH"
+mkdir -p "$XDG_CACHE_HOME/zsh"
+fpath=("$XDG_CACHE_HOME/zsh" $fpath)
 
 # >>> nvm initialize >>>
-if [ -d "$HOME/.config/nvm" ]; then
-  export NVM_DIR="$HOME/.config/nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+if [ -d "$HOME/.nvm" ]; then
+  export NVM_DIR="$HOME/.nvm"
+
+  nvm() {
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+    nvm $@
+  }
+
+  local -a node_paths=($NVM_DIR/versions/node/*(/))
+  if (( ${#node_paths} > 0 )); then
+    export PATH="${node_paths[1]}/bin:$PATH"
+  fi
 fi
 # <<< nvm initialize <<<
 
 # >>> bun initialize >>>
-if (($+commands[git])); then
-  export PATH="$HOME/.bun/bin:$PATH"
+if (( $+commands[bun] )); then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
 
   # If the completion file doesn't exist yet, we need to autoload it and
   # bind it to `bun`. Otherwise, compinit will have already done that.
-  if [[ ! -f "$ZSH_CACHE_DIR/completions/_bun" ]]; then
+  if [[ ! -f "$XDG_CACHE_HOME/zsh/_bun" ]]; then
     typeset -g -A _comps
     autoload -Uz _bun
     _comps[bun]=_bun
   fi
 
-  SHELL=zsh bun completions >| "$ZSH_CACHE_DIR/completions/_bun" &|
+  if [[ ! -s "$XDG_CACHE_HOME/zsh/_bun" ]]; then
+    SHELL=zsh bun completions >| "$XDG_CACHE_HOME/zsh/_bun" &|
+  fi
 fi
 # <<< bun initialize <<<
 
