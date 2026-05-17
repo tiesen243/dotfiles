@@ -88,6 +88,11 @@ done
 # Create the symbolic links
 ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config/
 
+# Generate default theme
+if command -v matugen &> /dev/null; then
+  matugen color hex 3f5ec2
+fi
+
 # 7. Configure lowercase user directories
 read -p "Do you want to use lowercase user directories? (e.g., downloads, pictures) [y/N]: " answer
 
