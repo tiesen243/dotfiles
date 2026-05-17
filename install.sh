@@ -6,9 +6,18 @@ echo "========================================="
 echo "       STARTING DOTFILES INSTALLATION    "
 echo "========================================="
 
-# 1. Update system and install base-devel and git
-echo "--> Updating system and installing git & base-devel..."
-sudo pacman -Syu --needed --noconfirm git base-devel
+# 1. System Update Option & Core Packages
+echo "-----------------------------------------"
+read -p "Do you want to perform a full system upgrade? (pacman -Syu) [y/N]: " upgrade_choice
+echo "-----------------------------------------"
+
+if [[ "$upgrade_choice" =~ ^[Yy]$ ]]; then
+  echo "--> Updating system and installing git & base-devel..."
+  sudo pacman -Syu --needed --noconfirm git base-devel
+else
+  echo "--> Installing git & base-devel without system upgrade..."
+  sudo pacman -S -needed --noconfirm git base-devel
+fi
 
 # 2. Install yay (AUR helper)
 if ! command -v yay &> /dev/null; then
@@ -25,13 +34,16 @@ fi
 # 3. Clone Dotfiles
 echo "--> Cloning dotfiles from GitHub..."
 if [ -d "$HOME/dotfiles" ]; then
-    echo "--> ~/dotfiles directory already exists. Pulling latest updates..."
-    cd ~/dotfiles && git pull && cd ~
+  echo "--> ~/dotfiles directory already exists. Pulling latest updates..."
+  cd ~/dotfiles && git pull && cd ~
 else
-    git clone https://github.com/tiesen243/dotfiles.git ~/dotfiles
+  git clone https://github.com/tiesen243/dotfiles.git ~/dotfiles
 fi
 
 # 4. Install packages
+echo "-----------------------------------------"
+echo "         BROWSER SELECTION               "
+echo "-----------------------------------------"
 echo "Select a web browser to install:"
 echo "1) Zen Browser (zen-browser-bin)"
 echo "2) Firefox (firefox)"
@@ -52,12 +64,16 @@ case $browser_choice in
 esac
 
 echo "--> Installing packages from the list..."
-if [ -f "$HOME/dotfiles/package.txt" ]; then
+if [ -f "$HOME/dotfiles/packages.txt" ]; then
     yay -S --needed --noconfirm --answerclean All --answerdiff None \
-      $(grep -v '^#' ~/dotfiles/package.txt) \
-      $browser_pkg
+        $(grep -v '^#' ~/dotfiles/packages.txt) $browser_pkg
 else
-    echo "⚠️ Warning: ~/dotfiles/package.txt not found!"
+    if [ -n "$browser_pkg" ]; then
+        echo "--> Installing selected browser..."
+        yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg
+    else
+        echo "⚠️ Warning: ~/dotfiles/packages.txt not found and no browser selected!"
+    fi
 fi
 
 # 5. Set ZSH as the default shell
@@ -79,11 +95,16 @@ mkdir -p "$HOME/.config"
 
 # Define the specific folders you want to link
 config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lazygit lsd matugen nvim quickshell zsh)
+
+# Move ONLY the specific target folders to the backup directory if they exist
 for item in "${config_items[@]}"; do
   if [ -e "$HOME/.config/$item" ] || [ -L "$HOME/.config/$item" ]; then
     mv "$HOME/.config/$item" "$BACKUP_DIR/"
   fi
 done
+
+# Clean up backup directory if it ends up empty
+rmdir "$BACKUP_DIR" 2>/dev/null || echo "--> Existing configs backed up to $BACKUP_DIR"
 
 # Create the symbolic links
 ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config/
@@ -97,7 +118,9 @@ else
 fi
 
 # 7. Configure lowercase user directories
+echo "-----------------------------------------"
 read -p "Do you want to use lowercase user directories? (e.g., downloads, pictures) [y/N]: " answer
+echo "-----------------------------------------"
 
 if [[ "$answer" =~ ^[Yy]$ ]]; then
   echo "--> Configuring lowercase user directories..."
