@@ -34,6 +34,16 @@ https://github.com/user-attachments/assets/335b0dc0-46db-4cf3-91a2-a33d711e60d3
 
 ## Installation
 
+You can easily set up everything using the automated installation script, or follow the breakdown steps below to do it manually.
+
+### Automated One-Liner (Recommended)
+
+To download and run the installer automatically, copy and paste the following command into your terminal.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/tiesen243/dotfiles/main/install.sh | bash
+```
+
 ### 1. Install `yay` and necessary packages
 
 ```bash
@@ -45,21 +55,7 @@ rm -rf ~/yay
 ```
 
 ```bash
-yes | yay -S --answerclean All --answerdiff None \
-  # Hyprland & Shell components
-  hypridle hyprpolkitagent quickshell xdg-desktop-portal-hyprland \
-  # Fonts
-  noto-fonts noto-fonts-cjk noto-fonts-emoji otf-geist otf-geist-mono-nerd \
-  # Terminal & CLI tools
-  kitty btop fastfetch fzf zsh lazygit lsd ripgrep unzip github-cli \
-  # Media & notifications
-  ffmpeg brightnessctl playerctl libnotify grim slurp cliphist wl-clipboard \
-  # Theming
-  adw-gtk-theme capitaine-cursors matugen \
-  # File manager
-  thunar thunar-volman gvfs tumbler
-  # Vietnamese input method (optional)
-  fcitx5-lotus-bin fcitx5-config-qt
+yay -S --needed --noconfirm --answerclean All --answerdiff --None $(grep -v '^#' ~/dotfiles/package.txt)
 ```
 
 - Set `zsh` as the default shell
@@ -88,9 +84,11 @@ Then, create the symbolic links to the config files
 
 ```bash
 rm -rf ~/{.cache,.config,.local,.zshrc}
-mkdir -p ~/.config && ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh,user-dirs.dirs} ~/.config
+mkdir -p ~/.config && ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config
 
-rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos} && xdg-user-dirs-update
+# For who like lowercase stuffs
+rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos}
+ln -s ~/dotfiles/user-dirs.dirs ~/.config && xdg-user-dirs-update
 ```
 
 Final, make all scripts in the `dotfiles/scripts` directory executable:

@@ -1,0 +1,47 @@
+# Hyprland & Shell components
+hypridle
+hyprpolkitagent
+quickshell
+xdg-desktop-portal-hyprland
+
+# Fonts
+noto-fonts
+noto-fonts-cjk noto-fonts-emoji
+otf-geist otf-geist-mono-nerd
+
+# Terminal & CLI tools
+kitty
+btop
+fastfetch
+fzf
+zsh
+lazygit
+lsd
+ripgrep
+unzip
+github-cli 
+
+# Media & notifications
+ffmpeg
+brightnessctl
+playerctl
+libnotify
+grim
+slurp
+cliphist
+wl-clipboard
+
+# Theming
+adw-gtk-theme 
+capitaine-cursors
+matugen 
+
+# File manager
+thunar
+thunar-volman 
+gvfs 
+tumbler
+
+# Vietnamese input method
+fcitx5-lotus-bin 
+fcitx5-config-qt
