@@ -90,7 +90,10 @@ ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,l
 
 # Generate default theme
 if command -v matugen &> /dev/null; then
+  echo "--> Generating default theme..."
   matugen color hex 3f5ec2
+else
+  echo "⚠️ Warning: matugen is not installed, skipping generate theme."
 fi
 
 # 7. Configure lowercase user directories
