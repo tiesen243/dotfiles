@@ -87,7 +87,18 @@ ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,l
 
 # For who like lowercase stuffs
 rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos}
-ln -s ~/dotfiles/user-dirs.dirs ~/.config && xdg-user-dirs-update
+cat <<EOF > "$HOME/.config/user-dirs.dirs"
+XDG_DESKTOP_DIR="\$HOME/"
+XDG_DOWNLOAD_DIR="\$HOME/downloads"
+XDG_TEMPLATES_DIR="\$HOME/"
+XDG_PUBLICSHARE_DIR="\$HOME/"
+XDG_DOCUMENTS_DIR="\$HOME/documents"
+XDG_MUSIC_DIR="\$HOME/"
+XDG_PICTURES_DIR="\$HOME/pictures"
+XDG_VIDEOS_DIR="\$HOME/videos"
+XDG_PROJECTS_DIR="\$HOME/projects"
+EOF
+xdg-user-dirs-update
 ```
 
 Final, make all scripts in the `dotfiles/scripts` directory executable:

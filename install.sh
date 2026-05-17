@@ -12,17 +12,17 @@ sudo pacman -Syu --needed --noconfirm git base-devel
 
 # 2. Install yay (AUR helper)
 if ! command -v yay &> /dev/null; then
-    echo "--> yay not found. Installing yay..."
-    git clone https://aur.archlinux.org/yay.git ~/yay
-    cd ~/yay
-    makepkg -si --noconfirm
-    cd ~
-    rm -rf ~/yay
+  echo "--> yay not found. Installing yay..."
+  git clone https://aur.archlinux.org/yay.git ~/yay
+  cd ~/yay
+  makepkg -si --noconfirm
+  cd ~
+  rm -rf ~/yay
 else
-    echo "--> yay is already installed."
+  echo "--> yay is already installed."
 fi
 
-# 3. Clone Dotfiles (Using HTTPS since GitHub login step is removed)
+# 3. Clone Dotfiles
 echo "--> Cloning dotfiles from GitHub..."
 if [ -d "$HOME/dotfiles" ]; then
     echo "--> ~/dotfiles directory already exists. Pulling latest updates..."
@@ -59,29 +59,39 @@ mkdir -p "$HOME/.config"
 # Define the specific folders you want to link
 config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lazygit lsd matugen nvim quickshell zsh)
 for item in "${config_items[@]}"; do
-    if [ -e "$HOME/.config/$item" ] || [ -L "$HOME/.config/$item" ]; then
-        mv "$HOME/.config/$item" "$BACKUP_DIR/"
-    fi
+  if [ -e "$HOME/.config/$item" ] || [ -L "$HOME/.config/$item" ]; then
+    mv "$HOME/.config/$item" "$BACKUP_DIR/"
+  fi
 done
 
 # Create the symbolic links
 ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config/
 
 # 7. Configure lowercase user directories
-echo "--> Configuring lowercase user directories..."
 read -p "Do you want to use lowercase user directories? (e.g., downloads, pictures) [y/N]: " answer
 
 if [[ "$answer" =~ ^[Yy]$ ]]; then
-    echo "--> Configuring lowercase user directories..."
-    rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos}
-    mkdir -p ~/{documents,downloads,pictures,projects,videos}
+  echo "--> Configuring lowercase user directories..."
+  rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos}
+  mkdir -p ~/{documents,downloads,pictures,projects,videos}
 
-    ln -sf ~/dotfiles/user-dirs.dirs ~/.config/
-    if command -v xdg-user-dirs-update &> /dev/null; then
-        xdg-user-dirs-update
-    else
-        echo "⚠️ Warning: xdg-user-dirs is not installed, skipping user-dirs update."
-    fi
+  cat <<EOF > "$HOME/.config/user-dirs.dirs"
+XDG_DESKTOP_DIR="\$HOME/"
+XDG_DOWNLOAD_DIR="\$HOME/downloads"
+XDG_TEMPLATES_DIR="\$HOME/"
+XDG_PUBLICSHARE_DIR="\$HOME/"
+XDG_DOCUMENTS_DIR="\$HOME/documents"
+XDG_MUSIC_DIR="\$HOME/"
+XDG_PICTURES_DIR="\$HOME/pictures"
+XDG_VIDEOS_DIR="\$HOME/videos"
+XDG_PROJECTS_DIR="\$HOME/projects"
+EOF
+
+  if command -v xdg-user-dirs-update &> /dev/null; then
+    xdg-user-dirs-update
+  else
+      echo "⚠️ Warning: xdg-user-dirs is not installed, skipping user-dirs update."
+  fi
 else
     echo "--> Skipping lowercase user directories configuration."
 fi
