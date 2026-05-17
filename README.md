@@ -44,7 +44,9 @@ bash <(curl -fsSL "https://raw.githubusercontent.com/tiesen243/dotfiles/main/ins
 
 If you prefer to inspect what goes onto your system, want to customize the setup, or need to troubleshoot a specific step, you can follow the step-by-step breakdown below.
 
-### 1. Install `yay` and necessary packages
+### 1. Install necessary packages
+
+- Install `yay`
 
 ```bash
 pacman -Syu --needed git base-devel
@@ -54,8 +56,11 @@ makepkg -si
 rm -rf ~/yay
 ```
 
+- Install packages from `package.txt`
+
 ```bash
-yay -S --needed --noconfirm --answerclean All --answerdiff --None $(grep -v '^#' ~/dotfiles/package.txt)
+yay -S --needed --noconfirm --answerclean All --answerdiff --None \
+  $(grep -v '^#' ~/dotfiles/package.txt)
 ```
 
 - Set `zsh` as the default shell
@@ -78,7 +83,7 @@ yay -S --needed --noconfirm --answerclean All --answerdiff --None $(grep -v '^#'
 git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
 ```
 
-Then, create the symbolic links to the config files
+Then, remove existed config and create the symbolic links to the config files
 
 ```bash
 rm -rf ~/{.cache,.local,.zshrc}
