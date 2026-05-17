@@ -42,7 +42,7 @@ bash <(curl -fsSL "https://raw.githubusercontent.com/tiesen243/dotfiles/main/ins
 
 ## Manual installation
 
-You can easily set up everything using the automated installation script, or follow the breakdown steps below to do it manually.
+If you prefer to inspect what goes onto your system, want to customize the setup, or need to troubleshoot a specific step, you can follow the step-by-step breakdown below.
 
 ### 1. Install `yay` and necessary packages
 
