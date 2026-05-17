@@ -46,7 +46,7 @@ If you prefer to inspect what goes onto your system, want to customize the setup
 
 ### 1. Install necessary packages
 
-- Install `yay`
+1.1. Install `yay`
 
 ```bash
 pacman -Syu --needed git base-devel
@@ -56,24 +56,17 @@ makepkg -si
 rm -rf ~/yay
 ```
 
-- Install packages from `package.txt`
+1.2. Install packages from `package.txt`
 
 ```bash
-yay -S --needed --noconfirm --answerclean All --answerdiff --None \
-  $(grep -v '^#' ~/dotfiles/package.txt)
+yay -S --needed --noconfirm --answerclean All --answerdiff --None $(grep -v '^#' ~/dotfiles/package.txt)
 ```
 
-- Set `zsh` as the default shell
+1.3. Set `zsh` as the default shell
 
-  ```bash
-  chsh -s $(which zsh)
-  ```
-
-- Open the browser and login to your github account, then run the following command to set up the SSH key for your github account.
-
-  ```bash
-  gh auth login
-  ```
+```bash
+chsh -s $(which zsh)
+```
 
 ### 2. Apply configuration
 
