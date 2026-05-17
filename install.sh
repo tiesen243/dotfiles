@@ -31,10 +31,31 @@ else
     git clone https://github.com/tiesen243/dotfiles.git ~/dotfiles
 fi
 
-# 4. Install packages from package.txt
+# 4. Install packages
+echo "Select a web browser to install:"
+echo "1) Zen Browser (zen-browser-bin)"
+echo "2) Firefox (firefox)"
+echo "3) Chromium (chromium)"
+echo "4) Google Chrome (google-chrome)"
+echo "5) Brave (brave-bin)"
+echo "6) Skip browser installation"
+echo "-----------------------------------------"
+read -p "Enter your choice (1-6): " browser_choice
+
+case $browser_choice in
+    1) browser_pkg="zen-browser-bin" ;;
+    2) browser_pkg="firefox" ;;
+    3) browser_pkg="chromium" ;;
+    4) browser_pkg="google-chrome" ;;
+    5) browser_pkg="brave-bin" ;;
+    *) browser_pkg="" ;;
+esac
+
 echo "--> Installing packages from the list..."
 if [ -f "$HOME/dotfiles/package.txt" ]; then
-    yay -S --needed --noconfirm --answerclean All --answerdiff None $(grep -v '^#' ~/dotfiles/package.txt)
+    yay -S --needed --noconfirm --answerclean All --answerdiff None \
+      $(grep -v '^#' ~/dotfiles/package.txt) \
+      $browser_pkg
 else
     echo "⚠️ Warning: ~/dotfiles/package.txt not found!"
 fi
