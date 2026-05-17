@@ -34,9 +34,9 @@ fi
 # 4. Install packages from package.txt
 echo "--> Installing packages from the list..."
 if [ -f "$HOME/dotfiles/package.txt" ]; then
-    yay -S --needed --noconfirm --answerclean All --answerdiff None $(grep -v '^#' ~/dotfiles/packages.txt)
+    yay -S --needed --noconfirm --answerclean All --answerdiff None $(grep -v '^#' ~/dotfiles/package.txt)
 else
-    echo "⚠️ Warning: ~/dotfiles/packages.txt not found!"
+    echo "⚠️ Warning: ~/dotfiles/package.txt not found!"
 fi
 
 # 5. Set ZSH as the default shell
