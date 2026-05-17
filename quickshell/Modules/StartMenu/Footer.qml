@@ -80,8 +80,9 @@ Item {
 
           implicitWidth: 28
           implicitHeight: implicitWidth
-          color: buttonMouseArea.pressed ? Matugen.on_primary : Matugen.primary
+          color: Matugen.primary
           radius: 8
+          opacity: buttonMouseArea.pressed ? 0.8 : 1.0
 
           Behavior on color {
             ColorAnimation { duration: 150 }
@@ -94,7 +95,7 @@ Item {
 
             anchors.centerIn: parent
             text: button.modelData.icon
-            color: buttonMouseArea.pressed ? Matugen.primary : Matugen.on_primary
+            color: Matugen.on_primary
 
             Behavior on color {
               ColorAnimation { duration: 150 }

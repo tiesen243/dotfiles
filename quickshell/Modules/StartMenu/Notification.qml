@@ -43,8 +43,9 @@ Item {
 
         implicitWidth: root.rootFont.pixelSize * 1.5
         implicitHeight: root.rootFont.pixelSize * 1.5
-        color: notificationClearMouse.pressed ? Matugen.on_primary : Matugen.primary
+        color: Matugen.primary
         radius: 6
+        opacity: notificationClearMouse.pressed ? 0.8 : 1.0
 
         Text {
           id: notificationClearContent
@@ -53,7 +54,7 @@ Item {
 
           anchors.centerIn: parent
           text: "󰎟"
-          color: notificationClearMouse.pressed ? Matugen.primary : Matugen.on_primary
+          color: Matugen.on_primary
           font: root.rootFont
         }
 
