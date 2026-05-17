@@ -83,8 +83,9 @@ git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
 Then, create the symbolic links to the config files
 
 ```bash
-rm -rf ~/{.cache,.config,.local,.zshrc}
-mkdir -p ~/.config && ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config
+rm -rf ~/{.cache,.local,.zshrc}
+rm -rf ~/.config/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh}
+ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config
 
 # For who like lowercase stuffs
 rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos}
