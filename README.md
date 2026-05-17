@@ -37,7 +37,7 @@ https://github.com/user-attachments/assets/335b0dc0-46db-4cf3-91a2-a33d711e60d3
 To download and run the installer automatically, copy and paste the following command into your terminal.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/tiesen243/dotfiles/main/install.sh | bash
+bash <(curl -fsSL "https://raw.githubusercontent.com/tiesen243/dotfiles/main/install.sh")
 ```
 
 ## Manual installation
