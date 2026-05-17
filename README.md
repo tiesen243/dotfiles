@@ -32,17 +32,17 @@ https://github.com/user-attachments/assets/335b0dc0-46db-4cf3-91a2-a33d711e60d3
 
 ![preview-07](./assets/preview-07.png)
 
-## Installation
-
-You can easily set up everything using the automated installation script, or follow the breakdown steps below to do it manually.
-
-### Automated One-Liner (Recommended)
+## Automatic install (Recommended)
 
 To download and run the installer automatically, copy and paste the following command into your terminal.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/tiesen243/dotfiles/main/install.sh | bash
 ```
+
+## Manual installation
+
+You can easily set up everything using the automated installation script, or follow the breakdown steps below to do it manually.
 
 ### 1. Install `yay` and necessary packages
 
@@ -70,11 +70,9 @@ yay -S --needed --noconfirm --answerclean All --answerdiff --None $(grep -v '^#'
   gh auth login
   ```
 
-## Usage
+### 2. Apply configuration
 
-### 1. To apply my config, you can run the following command:
-
-1.1. For Linux
+2.1. For Linux
 
 ```bash
 git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
@@ -98,7 +96,7 @@ Final, make all scripts in the `dotfiles/scripts` directory executable:
 sudo chmod +x ~/dotfiles/scripts/*
 ```
 
-1.2. For Windows
+2.2. For Windows
 
 ```powershell
 git clone git clone git@github.com:tiesen243/dotfiles.git $HOME\dotfiles
@@ -114,11 +112,11 @@ New-Item -ItemType SymbolicLink -Path $HOME\Documents\WindowsPowerShell -Target 
 New-Item -ItemType SymbolicLink -Path $HOME\AppData\Local\nvim -Target $HOME\dotfiles\nvim
 ```
 
-### 2. Change Wallpaper
+### 3. Change Wallpaper
 
 Add your preferred wallpapers to ~/dotfiles/assets/wallpapers/. You can then toggle the wallpaper selector by open the Start Menu using Super+A and click the Wallpaper Selector icon (located at the bottom-right corner of the quick action buttons). After changing the wallpaper, it automatically generates color schemes based on the wallpaper and applies it to the system by using Matugen.
 
-### 3. Add your avatar to `/usr/share/sddm/faces/$USER.face.icon` to show in the lock screen
+### 4. Add your avatar to `/usr/share/sddm/faces/$USER.face.icon` to show in the lock screen
 
 ## Conclusion
 
