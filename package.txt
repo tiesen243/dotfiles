@@ -1,15 +1,16 @@
+# System utilities
+btrfs-assistant
+power-profiles-daemon
+snapper
+ufw
+upower
+
 # Hyprland & Shell components
 hypridle
 hyprland
 hyprpolkitagent
-power-profiles-daemon
 quickshell
-upower
 xdg-desktop-portal-hyprland
-
-# System utilities
-btrfs-assistant
-snapper
 
 # Fonts
 noto-fonts

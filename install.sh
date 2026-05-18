@@ -170,6 +170,26 @@ else
   echo "⚠️ Warning: power-profiles-daemon is not installed, skipping service setup."
 fi
 
+# 10. Setup UFW Firewall
+if command -v ufw &> /dev/null; then
+  echo "--> Configuring UFW Firewall..."
+  # Default rules
+  sudo ufw default deny incoming
+  sudo ufw default allow outgoing
+  sudo ufw default deny routed
+
+  # Enable low logging
+  sudo ufw logging on
+  sudo ufw logging low
+  
+  # Enable ufw service
+  sudo ufw --force enable
+  sudo systemctl enable --now ufw.service
+  echo "--> UFW Firewall is enabled and running."
+else
+  echo "⚠️ Warning: UFW is not installed, skipping firewall setup."
+fi
+
 echo "--> Making dotfiles scripts executable..."
 if [ -d "$HOME/dotfiles/scripts" ]; then
     sudo chmod +x ~/dotfiles/scripts/*
