@@ -1,4 +1,5 @@
 # Hyprland & Shell components
+btrfs-assistant
 hypridle
 hyprland
 hyprpolkitagent
@@ -17,8 +18,7 @@ otf-geist-mono-nerd
 # Terminal & CLI tools
 7zip
 btop
-fastfetch
-fzf
+fastfetch fzf
 github-cli
 kitty
 lazygit
