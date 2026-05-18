@@ -55,33 +55,33 @@ echo "-----------------------------------------"
 read -p "Enter your choice (1-6): " browser_choice
 
 case $browser_choice in
-    1) browser_pkg="zen-browser-bin" ;;
-    2) browser_pkg="firefox" ;;
-    3) browser_pkg="chromium" ;;
-    4) browser_pkg="google-chrome" ;;
-    5) browser_pkg="brave-bin" ;;
-    *) browser_pkg="" ;;
+  1) browser_pkg="zen-browser-bin" ;;
+  2) browser_pkg="firefox" ;;
+  3) browser_pkg="chromium" ;;
+  4) browser_pkg="google-chrome" ;;
+  5) browser_pkg="brave-bin" ;;
+  *) browser_pkg="" ;;
 esac
 
 echo "--> Installing packages from the list..."
-if [ -f "$HOME/dotfiles/packages.txt" ]; then
-    yay -S --needed --noconfirm --answerclean All --answerdiff None \
-        $(grep -v '^#' ~/dotfiles/packages.txt) $browser_pkg
+if [ -f "$HOME/dotfiles/package.txt" ]; then
+  yes | yay -S --needed --noconfirm --answerclean All --answerdiff None \
+    $(grep -v '^#' ~/dotfiles/package.txt) $browser_pkg
 else
-    if [ -n "$browser_pkg" ]; then
-        echo "--> Installing selected browser..."
-        yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg
-    else
-        echo "⚠️ Warning: ~/dotfiles/packages.txt not found and no browser selected!"
-    fi
+  if [ -n "$browser_pkg" ]; then
+    echo "--> Installing selected browser..."
+    yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg
+  else
+    echo "⚠️ Warning: ~/dotfiles/packages.txt not found and no browser selected!"
+  fi
 fi
 
 # 5. Set ZSH as the default shell
 if [ "$SHELL" != "$(which zsh)" ]; then
-    echo "--> Setting zsh as the default shell..."
-    chsh -s $(which zsh)
+  echo "--> Setting zsh as the default shell..."
+  chsh -s $(which zsh)
 else
-    echo "--> zsh is already the default shell."
+  echo "--> zsh is already the default shell."
 fi
 
 # 6. Backup specific configs and create symlinks
