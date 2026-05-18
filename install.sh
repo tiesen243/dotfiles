@@ -190,6 +190,14 @@ else
   echo "⚠️ Warning: UFW is not installed, skipping firewall setup."
 fi
 
+# 11. Setup Bluetooth
+if command -v bluetoothctl &> /dev/null; then
+  echo "--> Enabling Bluetooth service..."
+  sudo systemctl enable --now bluetooth.service
+else
+  echo "⚠️ Warning: Bluetooth is not installed, skipping service setup."
+fi
+
 echo "--> Making dotfiles scripts executable..."
 if [ -d "$HOME/dotfiles/scripts" ]; then
     sudo chmod +x ~/dotfiles/scripts/*
