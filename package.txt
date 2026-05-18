@@ -1,5 +1,4 @@
 # Hyprland & Shell components
-btrfs-assistant
 hypridle
 hyprland
 hyprpolkitagent
@@ -7,6 +6,10 @@ power-profiles-daemon
 quickshell
 upower
 xdg-desktop-portal-hyprland
+
+# System utilities
+btrfs-assistant
+snapper
 
 # Fonts
 noto-fonts
