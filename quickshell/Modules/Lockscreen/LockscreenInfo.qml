@@ -43,6 +43,7 @@ Item {
         Accessible.role: Accessible.StaticText
         Accessible.name: "Current user: " + root.username
 
+        anchors.margins: 0
         text: root.username
         color: Matugen.on_primary
         font {
@@ -79,9 +80,12 @@ Item {
 
   Process {
     id: hostnameProc
-    command: ["hostname"]
+    command: ["hostnamectl"]
     stdout: SplitParser {
-      onRead: data => root.hostname = data.trim()
+      onRead: data => {
+        const match = data.match(/Static hostname:\s*(\S+)/)
+        if (match) root.hostname = match[1]
+      }
     }
     Component.onCompleted: running = true
   }

@@ -65,7 +65,7 @@ Item {
 
       Repeater {
         model: [
-          { name: "Lock Session", icon: "", cmd: "loginctl lock-session", shortcut: "L" },
+          { name: "Lock Session", icon: "", cmd: "quickshell ipc call lockscreen lock", shortcut: "L" },
           { name: "Power Off", icon: "", cmd: "systemctl poweroff", shortcut: "S" },
           { name: "Reboot", icon: "", cmd: "systemctl reboot", shortcut: "R" },
           { name: "Log Out", icon: "󰍃", cmd: "hyprctl dispatch 'hl.dsp.exit()'", shortcut: "Q" }
