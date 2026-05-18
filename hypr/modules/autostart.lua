@@ -19,9 +19,7 @@ hl.on("hyprland.start", function()
 
   -- Input method
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-  hl.exec_cmd(
-    "fcitx5 -d --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --wayland-text-input-version=3"
-  )
+  hl.exec_cmd("fcitx5 -d")
 
   -- Theme
   hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
