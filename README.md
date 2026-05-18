@@ -102,12 +102,24 @@ xdg-user-dirs-update
 Next, enable some services
 
 ```bash
-# docker
-sudo systemctl enable --now docker.service
-sudo usermod -aG docker $USER
+# ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw default deny routed
+sudo ufw logging on
+sudo ufw logging low
+sudo ufw --force enable
+sudo systemctl enable --now ufw.service
+
+# bluetooth
+sudo systemctl enable --now bluetooth.service
 
 # power-profiles-daemon
 sudo systemctl enable --now power-profiles-daemon.service
+
+# docker
+sudo systemctl enable --now docker.service
+sudo usermod -aG docker $USER
 ```
 
 Final, make all scripts in the `dotfiles/scripts` directory executable:
