@@ -148,29 +148,7 @@ else
     echo "--> Skipping lowercase user directories configuration."
 fi
 
-# 8. Setup Docker (Services & Permissions)
-if command -v docker &> /dev/null; then
-  echo "--> Configuring Docker service and user groups..."
-  sudo systemctl enable --now docker.service
-  
-  # Thêm user hiện tại vào group docker để không cần gõ sudo khi chạy docker
-  if ! groups $USER | grep -q '\bdocker\b'; then
-    sudo usermod -aG docker $USER
-    echo "--> Added $USER to the docker group. (Will take effect after reboot)"
-  fi
-else
-  echo "⚠️ Warning: Docker is not installed, skipping service setup."
-fi
-
-# 9. Setup Power Profiles Daemon
-if command -v powerprofilesctl &> /dev/null; then
-  echo "--> Enabling Power Profiles Daemon service..."
-  sudo systemctl enable --now power-profiles-daemon.service
-else
-  echo "⚠️ Warning: power-profiles-daemon is not installed, skipping service setup."
-fi
-
-# 10. Setup UFW Firewall
+# 8. Setup UFW Firewall
 if command -v ufw &> /dev/null; then
   echo "--> Configuring UFW Firewall..."
   # Default rules
@@ -190,12 +168,34 @@ else
   echo "⚠️ Warning: UFW is not installed, skipping firewall setup."
 fi
 
-# 11. Setup Bluetooth
+# 9. Setup Bluetooth
 if command -v bluetoothctl &> /dev/null; then
   echo "--> Enabling Bluetooth service..."
   sudo systemctl enable --now bluetooth.service
 else
   echo "⚠️ Warning: Bluetooth is not installed, skipping service setup."
+fi
+
+# 10. Setup Docker (Services & Permissions)
+if command -v docker &> /dev/null; then
+  echo "--> Configuring Docker service and user groups..."
+  sudo systemctl enable --now docker.service
+  
+  # Add current user to the docker group if not already a member
+  if ! groups $USER | grep -q '\bdocker\b'; then
+    sudo usermod -aG docker $USER
+    echo "--> Added $USER to the docker group. (Will take effect after reboot)"
+  fi
+else
+  echo "⚠️ Warning: Docker is not installed, skipping service setup."
+fi
+
+# 11. Setup Power Profiles Daemon
+if command -v powerprofilesctl &> /dev/null; then
+  echo "--> Enabling Power Profiles Daemon service..."
+  sudo systemctl enable --now power-profiles-daemon.service
+else
+  echo "⚠️ Warning: power-profiles-daemon is not installed, skipping service setup."
 fi
 
 echo "--> Making dotfiles scripts executable..."
