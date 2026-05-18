@@ -14,16 +14,16 @@ if (( $+commands[yay] )); then
   alias yr='yay -Rns'
   alias yc='yay -Yc'
 else
-  alias y='sudo pacman'
-  alias yu='sudo pacman -Syu'
-  alias ys='pacman -Ss'
-  alias yi='sudo pacman -S'
-  alias yr='sudo pacman -Rns'
-  alias yc='sudo pacman -Rns $(pacman -Qtdq)'
+  alias p='sudo pacman'
+  alias pu='sudo pacman -Syu'
+  alias ps='pacman -Ss'
+  alias pi='sudo pacman -S'
+  alias pr='sudo pacman -Rns'
+  alias pc='sudo pacman -Rns $(pacman -Qtdq)'
 fi
 
-alias yq='pacman -Qi'
-alias yl='pacman -Ql'
+alias pq='pacman -Qi'
+alias pl='pacman -Ql'
 
 # ------------          LS          ------------
 if (( $+commands[lsd] )); then
