@@ -99,6 +99,17 @@ EOF
 xdg-user-dirs-update
 ```
 
+Next, enable some services
+
+```bash
+# docker
+sudo systemctl enable --now docker.service
+sudo usermod -aG docker $USER
+
+# power-profiles-daemon
+sudo systemctl enable --now power-profiles-daemon.service
+```
+
 Final, make all scripts in the `dotfiles/scripts` directory executable:
 
 ```bash

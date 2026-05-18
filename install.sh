@@ -148,6 +148,28 @@ else
     echo "--> Skipping lowercase user directories configuration."
 fi
 
+# 8. Setup Docker (Services & Permissions)
+if command -v docker &> /dev/null; then
+  echo "--> Configuring Docker service and user groups..."
+  sudo systemctl enable --now docker.service
+  
+  # Thêm user hiện tại vào group docker để không cần gõ sudo khi chạy docker
+  if ! groups $USER | grep -q '\bdocker\b'; then
+    sudo usermod -aG docker $USER
+    echo "--> Added $USER to the docker group. (Will take effect after reboot)"
+  fi
+else
+  echo "⚠️ Warning: Docker is not installed, skipping service setup."
+fi
+
+# 9. Setup Power Profiles Daemon
+if command -v powerprofilesctl &> /dev/null; then
+  echo "--> Enabling Power Profiles Daemon service..."
+  sudo systemctl enable --now power-profiles-daemon.service
+else
+  echo "⚠️ Warning: power-profiles-daemon is not installed, skipping service setup."
+fi
+
 echo "--> Making dotfiles scripts executable..."
 if [ -d "$HOME/dotfiles/scripts" ]; then
     sudo chmod +x ~/dotfiles/scripts/*
