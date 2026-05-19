@@ -18,7 +18,7 @@ return {
           package_uninstalled = "✗",
         },
       },
-      ensure_installed = {},
+      ensure_installed = { "tree-sitter-cli" },
       postinstall = function(opts)
         local mr = require("mason-registry")
         mr.refresh(function()

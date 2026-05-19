@@ -3,7 +3,6 @@ bluez
 bluez-utils
 btrfs-assistant
 power-profiles-daemon
-snapper
 ufw
 upower
 
