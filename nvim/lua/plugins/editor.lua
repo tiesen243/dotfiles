@@ -29,6 +29,7 @@ return {
         position = "left",
         width = 30,
         mappings = {
+          ["h"] = "close_node",
           ["l"] = "toggle_node",
           ["Y"] = {
             function(state)
