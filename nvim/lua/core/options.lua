@@ -9,6 +9,7 @@ opt.conceallevel = 2
 opt.copyindent = true
 opt.expandtab = true
 opt.formatexpr = "v:lua.require('yuki').format.formatexpr()"
+opt.inccommand = "split"
 opt.preserveindent = true
 opt.shiftround = true
 opt.shiftwidth = 2
@@ -34,7 +35,9 @@ opt.wrap = false
 opt.autochdir = false
 opt.autoread = true
 opt.autowrite = true
+opt.backup = false
 opt.fileencoding = "utf-8"
+opt.undodir = vim.fn.stdpath("data") .. "/undo"
 opt.undofile = true
 opt.undolevels = 1000
 opt.swapfile = false
@@ -60,9 +63,10 @@ opt.foldlevelstart = 99
 opt.foldtext = ""
 
 -- system & misc
-opt.clipboard = "unnamedplus"
+opt.clipboard:append("unnamedplus")
 opt.encoding = "utf-8"
 opt.history = 1000
+opt.isfname:append("@-@")
 opt.mouse = "a"
 opt.timeoutlen = 300
 opt.updatetime = 200

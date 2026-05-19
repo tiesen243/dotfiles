@@ -124,6 +124,7 @@ return {
     {
       name = "nvim-treesitter",
       src = "https://github.com/nvim-treesitter/nvim-treesitter",
+      branch = "main",
     },
     opts = {
       auto_install = false,

@@ -7,16 +7,13 @@ return {
     {
       name = "neo-tree",
       src = "https://github.com/nvim-neo-tree/neo-tree.nvim",
-      version = vim.version.range("3"),
     },
     opts = {
       default_component_configs = {
-        container = { enable_character_fade = true },
         symlink_target = { enabled = true },
         indent = { with_expanders = false },
         icon = { folder_closed = "", folder_open = "", folder_empty = "" },
       },
-      close_if_last_window = true,
       clipboard = { sync = "global" },
       use_libuv_file_watcher = false,
       nesting_rules = Yuki.configs.nesting_rules,
@@ -32,7 +29,6 @@ return {
         position = "left",
         width = 30,
         mappings = {
-          ["h"] = "close_node",
           ["l"] = "toggle_node",
           ["Y"] = {
             function(state)
@@ -42,27 +38,6 @@ return {
               vim.notify("Path copied to clipboard", vim.log.levels.INFO, { title = "NeoTree" })
             end,
             desc = "Copy Path to Clipboard",
-          },
-          ["O"] = {
-            function(state)
-              local node = state.tree:get_node()
-              local path = node:get_id()
-
-              local open_cmd
-              if vim.fn.has("mac") == 1 then
-                open_cmd = "open"
-              elseif vim.fn.has("unix") == 1 then
-                open_cmd = "xdg-open"
-              elseif vim.fn.has("win32") == 1 then
-                open_cmd = "start"
-              else
-                vim.notify("Unsupported OS for opening files", vim.log.levels.ERROR, { title = "NeoTree" })
-                return
-              end
-
-              vim.fn.jobstart({ open_cmd, path }, { detach = true })
-            end,
-            desc = "Open in Default Application",
           },
         },
       },
@@ -152,24 +127,14 @@ return {
 
         Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
         Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-        Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
         Snacks.toggle.diagnostics():map("<leader>ud")
-        Snacks.toggle.line_number():map("<leader>ul")
-        Snacks.toggle
-          .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
-          :map("<leader>uc")
-        Snacks.toggle.treesitter():map("<leader>uT")
         Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-        Snacks.toggle.indent():map("<leader>ug")
-        Snacks.toggle.dim():map("<leader>uD")
 
-        -- stylua: ignore start
         if vim.fn.executable("lazygit") == 1 then
-          ---@diagnostic disable-next-line: missing-fields
-        Yuki.utils.map("<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, "Lazygit (Root Dir)")
-        Yuki.utils.map("<leader>gG", function() Snacks.lazygit() end, "Lazygit (cwd)")
+          Yuki.utils.map("<leader>gg", function()
+            Snacks.lazygit({ cwd = Snacks.git.get_root() })
+          end, "Lazygit")
         end
-        -- stylua: ignore end
 
         -- Terminal Mappings
         Yuki.utils.map("<c-/>", function()

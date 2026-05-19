@@ -1,18 +1,21 @@
+-- general keymaps
+
 Yuki.utils.map("<C-s>", "<esc><cmd>write<cr>", "Saved", { mode = { "n", "i", "v" } })
+Yuki.utils.map("p", [["_dP]], "Paste without yank", { mode = "x" })
 
 Yuki.utils.map("<leader>qq", "<cmd>quit<cr>", "Quit")
 Yuki.utils.map("<leader>qa", "<cmd>quitall<cr>", "Quit All")
 Yuki.utils.map("<leader>qs", "<cmnd>wq<cr>", "Save & Quit")
 Yuki.utils.map("<leader>qA", "<cmnd>wqall<cr>", "Save & Quit All")
 
-Yuki.utils.map("p", [["_dP]], "Paste without yank", { mode = "x" })
-
-Yuki.utils.map("<Esc>", "<C-\\><C-N>", "Exit terminal mode", { mode = "t" })
+Yuki.utils.map("<C-d>", "<C-d>zz", "Scroll Down")
+Yuki.utils.map("<C-u>", "<C-u>zz", "Scroll Up")
 
 Yuki.utils.map("<esc>", function()
   vim.cmd("noh")
   return "<esc>"
 end, "Escape and Clear hlsearch", { mode = { "i", "n", "s" }, expr = true })
+
 Yuki.utils.map(
   "<leader>h",
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
@@ -93,3 +96,8 @@ Yuki.utils.map("N", "'nN'[v:searchforward]", "Prev Search Result", { expr = true
 -- highlights under cursor
 Yuki.utils.map("<leader>ui", vim.show_pos, "Inspect Pos")
 Yuki.utils.map("<leader>uI", "<cmd>InspectTree<cr>", "Inspect Tree")
+
+Yuki.utils.map("<leader>ut", function()
+  vim.cmd.packadd("nvim.undotree")
+  require("undotree").open()
+end, "Toggle UndoTree")
