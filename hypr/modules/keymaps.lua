@@ -12,59 +12,63 @@ local terminal = "kitty"
 ---------------------
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local priMod = "SUPER"
+local secMod = "SUPER + SHIFT"
 local scripts = os.getenv("HOME") .. "/dotfiles/scripts"
 
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(priMod .. " + Q", hl.dsp.window.close())
+hl.bind(priMod .. " + T", hl.dsp.exec_cmd(terminal))
+hl.bind(priMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(priMod .. " + B", hl.dsp.exec_cmd(browser))
 
 -- Quickshell
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("quickshell ipc call appLauncher toggle"))
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("quickshell ipc call clipboardManager toggle"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call startMenu toggle"))
+hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("quickshell ipc call appLauncher toggle"))
+hl.bind(priMod .. " + V", hl.dsp.exec_cmd("quickshell ipc call clipboardManager toggle"))
+hl.bind(priMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call startMenu toggle"))
 
 -- Layout
-hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }))
-hl.bind(mainMod .. " + O", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(priMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(secMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(priMod .. " + O", hl.dsp.window.pseudo())
+hl.bind(secMod .. " + O", hl.dsp.layout("togglesplit"))
 
--- Focus with mainMod + h/j/k/l
--- Move active windows with mainMod + SHIFT + h/j/k/l
--- Resize windows with mainMod + ALT + h/j/k/l
+-- Focus with priMod + h/j/k/l
+-- Move active windows with secMod + h/j/k/l
+-- Resize windows with priMod + ALT + h/j/k/l
 local directions = { h = "left", j = "down", k = "up", l = "right" }
 for key, direction in pairs(directions) do
-  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ direction = direction }))
-  hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ direction = direction }))
-  -- hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.window.resize({ direction = direction }))
+  hl.bind(priMod .. " + " .. key, hl.dsp.focus({ direction = direction }))
+  hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ direction = direction }))
+  hl.bind(
+    priMod .. " + ALT + " .. key,
+    hl.dsp.window.resize({
+      x = key == "h" and -10 or key == "l" and 10 or 0,
+      y = key == "j" and 10 or key == "k" and -10 or 0,
+      relative = true,
+    }),
+    { repeating = true }
+  )
 end
 
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
+-- Switch workspaces with priMod + [0-9]
+-- Move active window to a workspace with secMod + [0-9]
 for i = 1, 10 do
   local key = i % 10 -- 10 maps to key 0
-  hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
+  hl.bind(priMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+  hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
--- Scroll window with mainMod + [ and ]
--- Swap window with mainMod + SHIFT + [ and ]
--- for _, key in ipairs({ "[", "]" }) do
--- end
-
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + M", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(priMod .. " + M", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(secMod .. " + M", hl.dsp.window.move({ workspace = "special:magic" }))
 
--- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+-- Scroll through existing workspaces with priMod + scroll
+hl.bind(priMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(priMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
--- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+-- Move/resize windows with priMod + LMB/RMB and dragging
+hl.bind(priMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(priMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind(
@@ -96,8 +100,7 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
--- Screenshot with NONE/SHIFT + PrintScreen key or mainMod + NONE/SHIFT + S
+-- Screenshot with PrintScreen key or priMod/secMod + S
 hl.bind("PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
-hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode fullscreen"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode fullscreen"))
+hl.bind(priMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
+hl.bind(secMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode fullscreen"))

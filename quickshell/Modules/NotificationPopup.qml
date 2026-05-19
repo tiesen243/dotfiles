@@ -57,7 +57,11 @@ Scope {
         id: notificationLayout
         visible: !GlobalState.isStartMenuOpen && NotificationService.notifications.length > 0
 
-        anchors { fill: parent; topMargin: 32; rightMargin: 12 }
+        anchors { 
+          fill: parent
+          topMargin: 28
+          rightMargin: Quickshell.env("AROUND_BORDER") === "1" ? 12 : 4
+        }
         implicitWidth: parent.width
         spacing: 8
 
@@ -74,7 +78,7 @@ Scope {
             Layout.fillWidth: true
             Layout.preferredHeight: notificationItemContent.implicitHeight + 28
             color: Matugen.surface
-            border { color: Matugen.on_primary; width: 2 }
+            border { color: Matugen.primary; width: 2 }
             radius: 12
             clip: true
 

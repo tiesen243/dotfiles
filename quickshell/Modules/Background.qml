@@ -7,6 +7,7 @@ import "../Services"
 
 Scope {
   id: root
+  property bool isBorder: Quickshell.env("AROUND_BORDER") === "1"
 
   Variants {
     model: Quickshell.screens
@@ -27,10 +28,10 @@ Scope {
 
       ClippingWrapperRectangle {
         anchors.fill: parent
-        anchors.margins: 8
-        anchors.topMargin: 28
+        anchors.margins: root.isBorder ? 8 : 0
+        anchors.topMargin: root.isBorder ? 28 : 0
         color: Matugen.on_primary
-        radius: 12
+        radius: root.isBorder ? 12 : 0
         clip: true
 
         Image {

@@ -1,5 +1,6 @@
 import Quickshell.Hyprland
 import QtQuick
+import QtQuick.Shapes
 
 import "../../Services"
 

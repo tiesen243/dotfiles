@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import Quickshell.Widgets
 import Quickshell.Io
+import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick
 
@@ -65,10 +66,10 @@ Item {
 
       Repeater {
         model: [
-          { name: "Lock Session", icon: "", cmd: "quickshell ipc call lockscreen lock", shortcut: "L" },
+          { name: "Lock Session", icon: "", cmd: "loginctl lock-session", shortcut: "L" },
+          { name: "Log Out", icon: "󰍃", cmd: "hyprctl dispatch 'hl.dsp.exit()'", shortcut: "Q" },
           { name: "Power Off", icon: "", cmd: "systemctl poweroff", shortcut: "S" },
-          { name: "Reboot", icon: "", cmd: "systemctl reboot", shortcut: "R" },
-          { name: "Log Out", icon: "󰍃", cmd: "hyprctl dispatch 'hl.dsp.exit()'", shortcut: "Q" }
+          { name: "Reboot", icon: "", cmd: "systemctl reboot", shortcut: "R" }
         ]
 
         delegate: Rectangle {
@@ -83,6 +84,25 @@ Item {
           color: Matugen.primary
           radius: 8
           opacity: buttonMouseArea.pressed ? 0.8 : 1.0
+
+          HoverHandler { id: hoverHandler }
+
+          ToolTip {
+            visible: hoverHandler.hovered
+            y: -height - 4
+
+            background: Rectangle {
+              color: Matugen.on_primary
+              radius: 4
+            }
+
+            contentItem: Text {
+              text: `${button.modelData.name} (${button.modelData.shortcut})`
+              color: Matugen.primary
+              font.pixelSize: root.rootFont.pixelSize * 0.9
+              font.family: root.rootFont.family
+            }
+          }
 
           Behavior on color {
             ColorAnimation { duration: 150 }

@@ -8,12 +8,12 @@ local colors = require("modules.colors")
 hl.config({
   general = {
     gaps_in = 2,
-    gaps_out = { top = 4, right = 12, bottom = 12, left = 12 },
+    gaps_out = os.getenv("AROUND_BORDER") == "1" and { top = 8, right = 12, bottom = 12, left = 12 } or 4,
 
     border_size = 2,
     col = {
       active_border = {
-        colors = { colors.on_primary, colors.on_secondary, colors.on_tertiary },
+        colors = { colors.primary, colors.secondary, colors.tertiary },
         angle = 45,
       },
       inactive_border = colors.on_tertiary,
@@ -62,7 +62,7 @@ hl.config({
   },
 
   animations = {
-    enabled = false,
+    enabled = true,
   },
 })
 

@@ -23,7 +23,7 @@ Item {
 		  text: Qt.formatTime(root.date, "hh:mm")
 		  font.pointSize: root.rootFont.pointSize * 8
 		  font.family: root.rootFont.family
-		  color: Matugen.on_primary
+		  color: Matugen.primary
 	  }
 
 	  Label {
@@ -31,7 +31,7 @@ Item {
 
       Layout.alignment: Qt.AlignHCenter
 	    text: Qt.formatDate(root.date, "dddd, MMMM dd yyyy")
-	    color: Matugen.on_secondary
+	    color: Matugen.secondary
 	    font: root.rootFont
 	  }
 	}

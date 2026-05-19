@@ -23,7 +23,7 @@ Item {
 
       implicitWidth: 128
       implicitHeight: implicitWidth
-      border { color: Matugen.on_primary; width: 1 }
+      border { color: Matugen.primary; width: 1 }
       radius: 16
 
       Image {
@@ -45,7 +45,7 @@ Item {
 
         anchors.margins: 0
         text: root.username
-        color: Matugen.on_primary
+        color: Matugen.primary
         font {
           pixelSize: root.rootFont.pixelSize * 4
           family: root.rootFont.family
@@ -59,7 +59,7 @@ Item {
         Accessible.name: "Current host: " + root.hostname
 
         text: root.hostname
-        color: Matugen.on_primary
+        color: Matugen.primary
         font {
           pixelSize: root.rootFont.pixelSize * 2
           family: root.rootFont.family

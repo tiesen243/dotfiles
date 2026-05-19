@@ -10,6 +10,7 @@ import "../../Services"
 Scope {
   id: root
 
+  property bool isBorder: Quickshell.env("AROUND_BORDER") === "1"
   property font rootFont: Qt.font({
     pixelSize: 14,
     family: "GeistMono Nerd Font"
@@ -27,75 +28,69 @@ Scope {
 			WlrLayershell.namespace: "quickshell-bar"
 
       anchors { top: true; left: true; right: true }
-      implicitHeight: 28
-      color: "transparent"
+      implicitHeight: 24
+      color: Matugen.surface
 
-      Rectangle {
-        id: barContainer
-        anchors.fill: parent
-        color: Matugen.surface
+      RowLayout {
+        id: leftRow
+        anchors {
+          left: parent.left
+          verticalCenter: parent.verticalCenter
+          margins: root.isBorder ? 16 : 12
+        }
+        spacing: 12
 
-        RowLayout {
-          id: leftRow
-          anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-            margins: 16
-          }
-          spacing: 12
+        Text {
+          id: logo
 
-          Text {
-            id: logo
+          text: "󰣇"
+          color: Matugen.primary
+          font: root.rootFont
 
-            text: "󰣇"
-            color: Matugen.primary
-            font: root.rootFont
-
-            MouseArea {
-              anchors.fill: parent
-              onClicked: GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
-            }
-          }
-
-          Workspace {
-            id: workspace
-            rootFont: root.rootFont
+          MouseArea {
+            anchors.fill: parent
+            onClicked: GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
           }
         }
 
-        WindowTitle {
-          id: windowTitle
+        Workspace {
+          id: workspace
           rootFont: root.rootFont
-          anchors {
-            horizontalCenter: parent.horizontalCenter
-            verticalCenter: parent.verticalCenter
-          }
+        }
+      }
+
+      WindowTitle {
+        id: windowTitle
+        rootFont: root.rootFont
+        anchors {
+          horizontalCenter: parent.horizontalCenter
+          verticalCenter: parent.verticalCenter
+        }
+      }
+
+      RowLayout {
+        id: rightRow
+        anchors {
+          right: parent.right
+          verticalCenter: parent.verticalCenter
+          margins: root.isBorder ? 16 : 12
+        }
+        spacing: 12
+
+        Tray {
+          id: tray
+          rootFont: root.rootFont
         }
 
-        RowLayout {
-          id: rightRow
-          anchors {
-            right: parent.right
-            verticalCenter: parent.verticalCenter
-            margins: 16
-          }
-          spacing: 12
+        Time {
+          id: time
+          rootFont: root.rootFont
+          popupAnchor: bar
+        }
 
-          Tray {
-            id: tray
-            rootFont: root.rootFont
-          }
-
-          Time {
-            id: time
-            rootFont: root.rootFont
-            popupAnchor: bar
-          }
-
-          Battery {
-            id: battery
-            rootFont: root.rootFont
-          }
+        Battery {
+          id: battery
+          rootFont: root.rootFont
         }
       }
     }

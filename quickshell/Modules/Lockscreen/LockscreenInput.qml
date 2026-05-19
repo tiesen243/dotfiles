@@ -33,15 +33,15 @@ Item {
 				placeholderText: "Enter password"
 
 				font: root.rootFont
-				color: Matugen.surface
-				selectionColor: Matugen.primary
-				selectedTextColor: Matugen.on_primary
+				color: Matugen.on_surface
+				selectionColor: Matugen.on_primary
+				selectedTextColor: Matugen.primary
 
 				background: Rectangle {
 					radius: 8
-					color: Matugen.surface + 'cc'
+					color: Matugen.surface
 					border { 
-					  color: root.context.showFailure ? Matugen.on_error : Matugen.on_primary
+					  color: root.context.showFailure ? Matugen.error : Matugen.primary
 					  width: 2
 					}
 				}
@@ -80,6 +80,10 @@ Item {
 
 				background: Rectangle {
 					color: Matugen.surface
+					border { 
+            color: Matugen.primary
+            width: 2
+          }
 					radius: 8
 					
 					opacity: !parent.enabled ? 0.5 : (parent.down ? 0.8 : 1.0) 
@@ -90,7 +94,7 @@ Item {
 		Label {
 			visible: root.context.showFailure
 			text: "Incorrect password"
-			color: Matugen.on_error
+			color: Matugen.error
 		}
 	}
 

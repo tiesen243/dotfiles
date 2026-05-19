@@ -26,8 +26,8 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     implicitWidth: 600
     implicitHeight: playerInfo.implicitHeight + 32
-    color: Matugen.surface + 'cc'
-    border { color: Matugen.on_primary; width: 2 }
+    color: Matugen.surface
+    border { color: Matugen.primary; width: 2 }
     radius: 16
 
     RowLayout {
@@ -41,7 +41,7 @@ Item {
 
         implicitWidth: 64
         implicitHeight: implicitWidth
-        color: Matugen.on_secondary
+        color: Matugen.secondary
         radius: 8
 
         Image {
@@ -78,7 +78,7 @@ Item {
 
           Layout.fillWidth: true
           text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
-          color: Matugen.on_primary
+          color: Matugen.primary
           font {
             pixelSize: root.rootFont.pixelSize * 1.25
             family: root.rootFont.family
@@ -93,7 +93,7 @@ Item {
 
           Layout.fillWidth: true
           text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
-          color: Matugen.on_primary
+          color: Matugen.primary
           font: root.rootFont
           elide: Text.ElideRight
           visible: text !== ""

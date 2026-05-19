@@ -30,6 +30,8 @@ Rectangle {
       blurEnabled: true
       blurMax: 32
       blur: 1.0
+
+      brightness: -0.4
     }
   }
 
