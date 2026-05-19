@@ -24,7 +24,7 @@ if (( $+commands[bun] )); then
 
   # If the completion file doesn't exist yet, we need to autoload it and
   # bind it to `bun`. Otherwise, compinit will have already done that.
-  if [[ ! -f "$XDG_CACHE_HOME/zsh/_bun" ]]; then
+  if [[ -f "$XDG_CACHE_HOME/zsh/_bun" ]]; then
     typeset -g -A _comps
     autoload -Uz _bun
     _comps[bun]=_bun
