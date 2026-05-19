@@ -6,24 +6,21 @@ alias q="exit"
 alias v="nvim"
 
 # ------------    Pacman / Yay      ------------
+alias pu='sudo pacman -Syu'
+alias ps='pacman -Ss'
+alias pi='sudo pacman -S'
+alias pr='sudo pacman -Rns'
+alias pc='sudo pacman -Rns $(pacman -Qtdq)'
+alias pq='pacman -Qi'
+alias pl='pacman -Ql'
+
 if (( $+commands[yay] )); then
-  alias y='yay'
   alias yu='yay -Syu'
   alias ys='yay -Ss'
   alias yi='yay -S'
   alias yr='yay -Rns'
   alias yc='yay -Yc'
-else
-  alias p='sudo pacman'
-  alias pu='sudo pacman -Syu'
-  alias ps='pacman -Ss'
-  alias pi='sudo pacman -S'
-  alias pr='sudo pacman -Rns'
-  alias pc='sudo pacman -Rns $(pacman -Qtdq)'
 fi
-
-alias pq='pacman -Qi'
-alias pl='pacman -Ql'
 
 # ------------          LS          ------------
 if (( $+commands[lsd] )); then
@@ -33,9 +30,9 @@ if (( $+commands[lsd] )); then
   alias lt='lsd --tree --depth 3'
   alias lla='lsd -la'
   alias la='lsd -a'
-  alias l='lsd -l'
+  alias ll='lsd -l'
 else
-  alias l='ls -lh'
+  alias ll='ls -lh'
   alias la='ls -A'
   alias lla='ls -lah'
 fi
@@ -44,12 +41,10 @@ fi
 if (( $+commands[git] )); then
   alias g='git'
   
-  # Xem trạng thái & Lịch sử
   alias gs='git status -sb'
   alias gl='git log --oneline --graph --decorate'
   alias gd='git diff'
   
-  # Thêm và Commit
   alias ga='git add'
   alias gaa='git add --all'
   alias gca='git commit --amend'
@@ -61,8 +56,21 @@ if (( $+commands[git] )); then
   alias gswb='git switch -'
   
   alias grs='git restore'
+  alias grsh='git restore --hard'
   alias grss='git restore --staged'
   
+  if (( $+commands[gh] )); then
+    alias gr='gh repo'
+    alias grc='gh repo create'
+    alias grd='gh repo delete'
+    alias grf='gh repo fork'
+    alias grl='gh repo clone'
+    alias grv='gh repo view'
+    alias grr='gh repo rename'
+  else
+    alias grl='git clone'
+  fi
+
   alias gp='git push'
   alias gpf='git push --force-with-lease'
   alias gpl='git pull'
@@ -133,5 +141,7 @@ if (( $+commands[bun] )); then
 
   alias b='bun'
   alias bw='bun --hot'
-  alias btest='bun test'
+  alias bf='bun --bun run format'
+  alias bl='bun --bun run lint'
+  alias bt='bun test'
 fi
