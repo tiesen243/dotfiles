@@ -25,12 +25,23 @@ hl.bind(priMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("quickshell ipc call appLauncher toggle"))
 hl.bind(priMod .. " + V", hl.dsp.exec_cmd("quickshell ipc call clipboardManager toggle"))
 hl.bind(priMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call startMenu toggle"))
+hl.bind(secMod .. " + B", hl.dsp.exec_cmd("quickshell ipc call bar toggle"))
 
 -- Layout
-hl.bind(priMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(priMod .. " + F", function()
+  hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+  hl.dispatch(hl.dsp.window.resize({ x = 960, y = 540 }))
+  hl.dispatch(hl.dsp.window.move({ x = 480, y = 270 }))
+end)
 hl.bind(secMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(priMod .. " + O", hl.dsp.window.pseudo())
-hl.bind(secMod .. " + O", hl.dsp.layout("togglesplit"))
+hl.bind(secMod .. " + O", function()
+  local layout = hl.get_config("general.layout")
+
+  if layout == "dwindle" then
+    hl.dsp.layout("togglesplit")
+  end
+end)
 
 -- Focus with priMod + h/j/k/l
 -- Move active windows with secMod + h/j/k/l
@@ -40,7 +51,7 @@ for key, direction in pairs(directions) do
   hl.bind(priMod .. " + " .. key, hl.dsp.focus({ direction = direction }))
   hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ direction = direction }))
   hl.bind(
-    priMod .. " + ALT + " .. key,
+    priMod .. " + ALT +" .. key,
     hl.dsp.window.resize({
       x = key == "h" and -10 or key == "l" and 10 or 0,
       y = key == "j" and 10 or key == "k" and -10 or 0,
@@ -49,6 +60,70 @@ for key, direction in pairs(directions) do
     { repeating = true }
   )
 end
+
+-- Change workspace layout or swap columns with priMod/secMod + comma/period, behavior depends on current layout
+hl.bind(priMod .. " + period", function()
+  local layout = hl.get_config("general.layout")
+
+  if layout == "monocle" then
+    hl.dispatch(hl.dsp.layout("cyclenext"))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("move +col"))
+  end
+end)
+
+hl.bind(priMod .. " + comma", function()
+  local layout = hl.get_config("general.layout")
+
+  if layout == "monocle" then
+    hl.dispatch(hl.dsp.layout("cycleprev"))
+  elseif layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("move -col"))
+  end
+end)
+
+hl.bind(secMod .. " + period", function()
+  local layout = hl.get_config("general.layout")
+
+  if layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("swapcol l"))
+  end
+end)
+
+hl.bind(secMod .. " + comma", function()
+  local layout = hl.get_config("general.layout")
+
+  if layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("swapcol r"))
+  end
+end)
+
+-- Switch workspace layout with priMod + D > D/M/O/S
+hl.bind(priMod .. " + D", hl.dsp.submap("layout"))
+hl.define_submap("layout", function()
+  hl.bind("D", function()
+    hl.config({ general = { layout = "dwindle" } })
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("M", function()
+    hl.config({ general = { layout = "master" } })
+
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("O", function()
+    hl.config({ general = { layout = "monocle" } })
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("S", function()
+    hl.config({ general = { layout = "scrolling" } })
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("ESCAPE", hl.dsp.submap("reset"))
+end)
 
 -- Switch workspaces with priMod + [0-9]
 -- Move active window to a workspace with secMod + [0-9]

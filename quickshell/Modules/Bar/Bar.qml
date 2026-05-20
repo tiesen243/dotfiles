@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell.Wayland
+import Quickshell.Io
 import Quickshell
 import QtQuick.Layouts
 import QtQuick
@@ -16,6 +17,14 @@ Scope {
     family: "GeistMono Nerd Font"
   })
 
+  IpcHandler {
+    target: "bar"
+
+    function toggle(): void {
+      GlobalState.isBarOpen = !GlobalState.isBarOpen
+    }
+  }
+
   Variants {
     model: Quickshell.screens
 
@@ -23,6 +32,7 @@ Scope {
       id: bar
       required property var modelData
       screen: modelData
+      visible: GlobalState.isBarOpen
 
 			WlrLayershell.layer: WlrLayer.Top
 			WlrLayershell.namespace: "quickshell-bar"

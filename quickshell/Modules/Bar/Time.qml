@@ -31,14 +31,13 @@ Item {
     }
   }
 
-  PopupWindow {
+  PanelWindow {
     id: celendar
     visible: root.isOpen || celendarContainer.implicitHeight > 0
     property string content: ""
 
-    anchor.window: root.popupAnchor
-    anchor.rect.x: root.popupAnchor.width
-    anchor.rect.y: parentWindow.height
+    anchors.top: clock.bottom
+    anchors.right: clock.right
 
     implicitWidth: 200
     implicitHeight: 160

@@ -25,6 +25,7 @@ Item {
         Accessible.role: Accessible.Button
         Accessible.name: "Workspace " + modelData.id + (modelData.focused ? ", active" : "") + (modelData.urgent ? ", urgent" : "")
 
+        visible: modelData.id !== -98
         implicitWidth: root.rootFont.pixelSize * (modelData.focused ? 2 : 1.5)
         implicitHeight: root.rootFont.pixelSize * 1.5
         color: modelData.focused ? Matugen.primary : (workspaceItemMouseArea.containsMouse 
@@ -42,7 +43,7 @@ Item {
         Text {
           id: workspaceLabel
 
-          text: workspaceItem.modelData.id
+          text: workspaceItem.modelData.name
           color: workspaceItem.modelData.focused 
             ? Matugen.on_primary 
             : Matugen.on_surface

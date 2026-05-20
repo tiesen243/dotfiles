@@ -11,6 +11,7 @@ Singleton {
   readonly property string videos: Quickshell.env("XDG_VIDEOS_DIR") || `${home}/Videos`
   readonly property string dotfiles: `${home}/dotfiles`
 
+  property bool isBarOpen: true
   property bool isStartMenuOpen: false
   property bool isAppLauncherOpen: false
   property bool isClipboardOpen: false
