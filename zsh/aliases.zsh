@@ -47,6 +47,7 @@ if (( $+commands[git] )); then
   
   alias ga='git add'
   alias gaa='git add --all'
+  alias gc='git commit -m'
   alias gca='git commit --amend'
   
   alias gsw='git switch'
@@ -79,46 +80,31 @@ if (( $+commands[git] )); then
   alias gst='git stash'
   alias gstp='git stash pop'
 
-  gc() {
-    local types="(feat|fix|chore|docs|style|refactor|perf|test|ci)"
-    
-    if [[ -z "$1" || -z "$2" ]]; then
-      echo "❌ Syntax error! Usage: gcm <type> <message>" >&2
-      echo "Example: gcm chore update zsh config" >&2
+  function gcm() {
+    local types=(feat chore style fix docs refactor test ci build perf revert)
+    local type=$(print -l "${types[@]}" | fzf --height=40% --layout=reverse --prompt="Select commit type: ")
+    if [[ -z "$type" ]]; then
       return 1
     fi
 
-    if [[ ! "$1" =~ ^$types$ ]]; then
-      echo "❌ Invalid commit type '$1'!" >&2
-      echo "Valid types: feat, fix, chore, docs, style, refactor, perf, test, ci" >&2
+    print -n "Enter scope (optional, e.g., auth, api): " && read scope
+    scope=$(echo "$scope" | tr -d '[:space:]')
+
+    print -n "Enter commit message: " && read message
+    if [[ -z "$message" ]]; then
+      echo "❌ Error: Commit message is required."
       return 1
     fi
 
-    local type="$1"
-    shift
-    local msg="$*"
+    local final_msg=""
+    if [[ -n "$scope" ]]; then
+      final_msg="${type}(${scope}): ${message}"
+    else
+      final_msg="${type}: ${message}"
+    fi
 
-    git commit -m "$type: $msg"
+    git commit -m "$final_msg"
   }
-
-  _gc_completion() {
-    local -a commit_types
-    commit_types=(
-      'feat:A new feature'
-      'fix:A bug fix'
-      'chore:Changes to the build process or auxiliary tools and libraries'
-      'docs:Documentation only changes'
-      'style:Changes that do not affect the meaning of the code'
-      'refactor:A code change that neither fixes a bug nor adds a feature'
-      'perf:A code change that improves performance'
-      'test:Adding missing tests or correcting existing tests'
-      'ci:Changes to CI configuration files and scripts'
-    )
-
-    _describe 'commit types' commit_types
-  }
-
-  compdef _gc_completion gc
 fi
 
 if (( $+commands[lazygit] )); then
