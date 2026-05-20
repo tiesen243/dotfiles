@@ -20,7 +20,7 @@ Item {
       (root.upower.displayDevice.state === UPowerDeviceState.Charging ? ", charging" : ", discharging")
 
     text: {
-      const batteryLevel = root.upower.displayDevice.percentage * 100
+      const batteryLevel = Math.round(root.upower.displayDevice.percentage * 100)
       var icon = "󰁺 "
 
       if (root.upower.displayDevice.state === UPowerDeviceState.Charging) icon = "󰂄 "
