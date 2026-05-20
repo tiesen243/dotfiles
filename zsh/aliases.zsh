@@ -49,6 +49,11 @@ if (( $+commands[git] )); then
   alias gaa='git add --all'
   alias gc='git commit -m'
   alias gca='git commit --amend'
+
+  alias gp='git push'
+  alias gu='git pull'
+  alias gf='git fetch'
+  
   
   alias gsw='git switch'
   alias gsc='git switch -c'
@@ -59,6 +64,9 @@ if (( $+commands[git] )); then
   alias grs='git restore'
   alias grsh='git restore --hard'
   alias grss='git restore --staged'
+  
+  alias gst='git stash'
+  alias gstp='git stash pop'
   
   if (( $+commands[gh] )); then
     alias gr='gh repo'
@@ -71,14 +79,6 @@ if (( $+commands[git] )); then
   else
     alias grl='git clone'
   fi
-
-  alias gp='git push'
-  alias gpf='git push --force-with-lease'
-  alias gpl='git pull'
-  alias gf='git fetch'
-  
-  alias gst='git stash'
-  alias gstp='git stash pop'
 
   function gcm() {
     local types=(feat chore style fix docs refactor test ci build perf revert)
