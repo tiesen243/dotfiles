@@ -2,6 +2,8 @@
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
 
+local gap = os.getenv("AROUND_BORDER") == "1" and 14 or 4
+
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 local suppressMaximizeRule = hl.window_rule({
   name = "suppress-maximize-events",
@@ -25,27 +27,6 @@ hl.window_rule({
   no_focus = true,
 })
 
--- hl.window_rule({
--- 	name = "no-gaps-wtv1",
--- 	match = { float = false, workspace = "w[tv1]" },
--- 	border_size = 0,
--- 	rounding = 0,
--- })
-
--- hl.window_rule({
--- 	name = "no-gaps-f1",
--- 	match = { float = false, workspace = "f[1]" },
--- 	border_size = 0,
--- 	rounding = 0,
--- })
-
--- hl.window_rule({
---   match = { class = ".*" },
---   float = true,
---   center = true,
---   size = { 1920 / 2, 1080 / 2 },
--- })
-
 hl.window_rule({
   name = "floating-file-utility",
   match = { class = "^xdg-desktop-portal-gtk", title = "^File$" },
@@ -56,7 +37,7 @@ hl.window_rule({
 
 hl.window_rule({
   name = "floating-rename",
-  match = { class = "^thunar$", title = "^Rename$" },
+  match = { class = "^thunar", title = "^(Rename.*)$" },
   float = true,
   center = true,
   size = { 400, 150 },
@@ -64,10 +45,10 @@ hl.window_rule({
 
 hl.window_rule({
   name = "floating-picture-in-picture",
-  match = { title = "^Picture-in-Picture$" },
+  match = { title = "^(Picture-in-Picture)$" },
   float = true,
-  size = { 540, 300 },
-  move = { 1920 - 540 - 16, 1080 - 300 - 16 },
+  size = { 640, 360 },
+  move = { 1920 - 640 - gap, 1080 - 360 - gap },
 })
 
 hl.window_rule({

@@ -4,12 +4,70 @@
 	<icon>utilities-terminal</icon>
 	<name>Open Terminal Here</name>
 	<submenu></submenu>
-	<unique-id>1745878644848067-1</unique-id>
+	<unique-id>1779324489700326-3</unique-id>
 	<command>kitty -d %f</command>
-  <description>Open a terminal in the current directory using Kitty.</description>
+	<description>Open a terminal in the current directory using Kitty.</description>
 	<range></range>
 	<patterns>*</patterns>
-	<startup-notify/>
 	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>Extract here</name>
+	<submenu></submenu>
+	<unique-id>1779325576651203-1</unique-id>
+	<command>bash -c &apos;if [[ &quot;$1&quot; == *.tar.gz ]]; then tar -f &quot;$1&quot; -x -v --one-top-level; else 7z x &quot;$1&quot;; fi&apos; _ %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*.7z;*.rar;*.tar.gz;*.zip</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>.7z</name>
+	<submenu>Create archive...</submenu>
+	<unique-id>1779325640980721-2</unique-id>
+	<command>bash -c &apos;7z a &quot;${1%/}.7z&quot; &quot;$1&quot;&apos; _ %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>.tar.gz</name>
+	<submenu>Create archive...</submenu>
+	<unique-id>1779325663365430-3</unique-id>
+	<command>bash -c &apos;7z a -ttar -so _ &quot;${1%/}&quot; | 7z a -tgzip -si &quot;${1%/}.tar.gz&quot;&apos; _ %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>.zip</name>
+	<submenu>Create archive...</submenu>
+	<unique-id>1779325701601843-4</unique-id>
+	<command>bash -c &apos;7z a -tzip &quot;${1%/}.zip&quot; &quot;$1&quot;&apos; _ %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
 </action>
 </actions>
