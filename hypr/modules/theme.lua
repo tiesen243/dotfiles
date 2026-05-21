@@ -8,12 +8,12 @@ local colors = require("modules.colors")
 hl.config({
   general = {
     gaps_in = 2,
-    gaps_out = os.getenv("AROUND_BORDER") == "1" and { top = 8, right = 12, bottom = 12, left = 12 } or 4,
+    gaps_out = 4,
 
     border_size = 2,
     col = {
       active_border = {
-        colors = { colors.primary, colors.secondary, colors.tertiary },
+        colors = { colors.primary, colors.tertiary, colors.primary },
         angle = 45,
       },
       inactive_border = colors.on_tertiary,
@@ -46,18 +46,18 @@ hl.config({
     inactive_opacity = 1.0,
     fullscreen_opacity = 1.0,
 
-    shadow = {
-      enabled = false,
-      range = 4,
-      render_power = 3,
-      color = 0xee1a1a1a,
-    },
-
     blur = {
       enabled = false,
       size = 3,
       passes = 1,
       vibrancy = 0.1696,
+    },
+
+    shadow = {
+      enabled = false,
+      range = 8,
+      render_power = 2,
+      color = colors.shadow,
     },
   },
 

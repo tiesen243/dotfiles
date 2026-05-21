@@ -11,7 +11,6 @@ import "../../Services"
 Scope {
   id: root
 
-  property bool isBorder: Quickshell.env("AROUND_BORDER") === "1"
   property font rootFont: Qt.font({
     pixelSize: 14,
     family: "GeistMono Nerd Font"
@@ -46,7 +45,7 @@ Scope {
         anchors {
           left: parent.left
           verticalCenter: parent.verticalCenter
-          margins: root.isBorder ? 16 : 12
+          margins: 12
         }
         spacing: 12
 
@@ -83,7 +82,7 @@ Scope {
         anchors {
           right: parent.right
           verticalCenter: parent.verticalCenter
-          margins: root.isBorder ? 16 : 12
+          margins: 12
         }
         spacing: 12
 

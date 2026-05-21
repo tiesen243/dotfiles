@@ -2,7 +2,7 @@
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
 
-local gap = os.getenv("AROUND_BORDER") == "1" and 14 or 4
+local gap = 4
 
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
 local suppressMaximizeRule = hl.window_rule({
@@ -59,8 +59,8 @@ hl.window_rule({
 
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0 })
+-- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0, border_size = 0, no_rounding = true })
+-- hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0, border_size = 0, no_rounding = true })
 
 -- Layer rules also return a handle.
 -- local overlayLayerRule = hl.layer_rule({

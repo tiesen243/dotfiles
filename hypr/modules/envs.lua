@@ -9,7 +9,6 @@ hl.env("XCURSOR_THEME", "capitaine-cursors")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("GTK_THEME", "adw-gtk3")
-hl.env("AROUND_BORDER", "0")
 
 -- Aquamarine
 hl.env("AQ_TRACE", "1")

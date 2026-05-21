@@ -51,7 +51,7 @@ Scope {
       focusable: false
       color: "transparent"
       implicitWidth: 1920 / 5
-      implicitHeight: notificationLayout.implicitHeight + 32
+      implicitHeight: notificationLayout.implicitHeight + (GlobalState.isBarOpen ? 28 : 4)
 
       ColumnLayout {
         id: notificationLayout
@@ -59,10 +59,10 @@ Scope {
 
         anchors { 
           fill: parent
-          topMargin: 28
-          rightMargin: Quickshell.env("AROUND_BORDER") === "1" ? 12 : 4
+          topMargin: GlobalState.isBarOpen ? 28 : 4
+          rightMargin: 4
         }
-        implicitWidth: parent.width
+        implicitWidth: parent.width - 4
         spacing: 8
 
         Repeater {
@@ -80,7 +80,6 @@ Scope {
             color: Matugen.surface
             border { color: Matugen.primary; width: 2 }
             radius: 12
-            clip: true
 
             x: 1920 / 5
             Component.onCompleted: x = 0
