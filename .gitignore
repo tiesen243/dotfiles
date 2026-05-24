@@ -18,3 +18,4 @@ matugen/preview.html
 # misc
 quickshell/.qmlls.ini
 gtk-3.0/bookmarks
+nvim/nvim-pack-lock.json

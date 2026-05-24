@@ -26,9 +26,7 @@ return {
         },
         list = {
           selection = {
-            preselect = function()
-              return not require("blink.cmp").snippet_active({ direction = 1 })
-            end,
+            preselect = true,
             auto_insert = not Yuki.configs.ai_cmp,
           },
         },
