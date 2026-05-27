@@ -1,0 +1,8 @@
+include "./modules/output.kdl"
+include "./modules/input.kdl"
+include "./modules/envs.kdl"
+
+include "./modules/window-rules.kdl"
+include "./modules/autostart.kdl"
+include "./modules/interface.kdl"
+include "./modules/keymaps.kdl"

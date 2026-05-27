@@ -1,4 +1,36 @@
 -----------------------
+----   LAYOUTS     ----
+-----------------------
+
+hl.config({
+  general = {
+    layout = "scrolling",
+  },
+})
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+hl.config({
+  dwindle = {
+    preserve_split = true,
+  },
+})
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
+hl.config({
+  master = {
+    new_status = "master",
+  },
+})
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
+hl.config({
+  scrolling = {
+    fullscreen_on_one_column = true,
+    explicit_column_widths = "0.5, 1.0",
+  },
+})
+
+-----------------------
 ---- LOOK AND FEEL ----
 -----------------------
 
@@ -42,7 +74,7 @@ hl.config({
     rounding_power = 2,
 
     -- Change transparency of focused and unfocused windows
-    active_opacity = 0.94,
+    active_opacity = 1.0,
     inactive_opacity = 1.0,
     fullscreen_opacity = 1.0,
 
@@ -62,7 +94,7 @@ hl.config({
   },
 
   animations = {
-    enabled = false,
+    enabled = true,
   },
 })
 
@@ -73,7 +105,7 @@ hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 1
 hl.animation({ leaf = "global", enabled = true, speed = 3, spring = "easy" })
 hl.animation({ leaf = "layers", enabled = false })
 
-hl.animation({ leaf = "windows", enabled = true, speed = 3, bezier = "fluent", style = "popin 60%" })
+hl.animation({ leaf = "windows", enabled = true, speed = 3, bezier = "fluent", style = "popin 80%" })
 hl.animation({ leaf = "windowsMove", enabled = true, speed = 3.5, bezier = "fluent" })
 
 hl.animation({ leaf = "fade", enabled = true, speed = 2, bezier = "fluent" })

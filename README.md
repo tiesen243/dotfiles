@@ -82,6 +82,7 @@ Then, remove existed config and create the symbolic links to the config files
 rm -rf ~/{.cache,.local,.zshrc}
 rm -rf ~/.config/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh}
 ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config
+ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv
 
 # For who like lowercase stuffs
 rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos} && mkdir -p ~/{documents,downloads,pictures,projects,videos}

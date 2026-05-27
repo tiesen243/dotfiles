@@ -17,7 +17,7 @@ hl.env("AQ_FORCE_LINEAR_BLIT", "0")
 hl.env("AQ_MGPU_NO_EXPLICIT", "1")
 hl.env("AQ_NO_MODIFIERS", "1")
 
--- Toolkit backend
+-- Toolkit backends
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("SDL_VIDEODRIVER", "wayland")

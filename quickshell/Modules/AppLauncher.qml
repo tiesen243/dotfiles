@@ -247,8 +247,10 @@ Scope {
 
   function launchApp(exec, terminal = false): void {
     const cleanExec = exec.replace(/%[a-zA-Z]/g, "").trim()
-    if (terminal) Hyprland.dispatch(`hl.dsp.exec_cmd("kitty ${cleanExec}")`)
-    else Hyprland.dispatch(`hl.dsp.exec_cmd("${cleanExec}")`)
+
+    if (terminal) launcheProc.command = ["sh", "-c", `kitty -e ${cleanExec}`]
+    else launcheProc.command = ["sh", "-c", cleanExec]
+    launcheProc.running = true
   }
 
   Process {
@@ -283,5 +285,9 @@ Scope {
         root.filterApps("")
       }
     }
+  }
+
+  Process {
+    id: launcheProc
   }
 }

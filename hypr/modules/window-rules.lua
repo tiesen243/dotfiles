@@ -55,7 +55,7 @@ hl.window_rule({
   name = "no-opacity-for-browser",
   match = { class = "^zen$" },
   opacity = "1.0 override",
-})
+}):set_enabled(false)
 
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"

@@ -28,12 +28,12 @@ hl.bind(priMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call startMenu toggle"
 hl.bind(secMod .. " + B", hl.dsp.exec_cmd("quickshell ipc call bar toggle"))
 
 -- Layout
-hl.bind(priMod .. " + F", function()
+hl.bind(secMod .. " + F", function()
   hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
   hl.dispatch(hl.dsp.window.resize({ x = 960, y = 540 }))
   hl.dispatch(hl.dsp.window.move({ x = 480, y = 270 }))
 end)
-hl.bind(secMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(secMod .. " + CTRL + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 hl.bind(priMod .. " + O", hl.dsp.window.pseudo())
 hl.bind(secMod .. " + O", function()
   local layout = hl.get_config("general.layout")
@@ -45,13 +45,13 @@ end)
 
 -- Focus with priMod + h/j/k/l
 -- Move active windows with secMod + h/j/k/l
--- Resize windows with priMod + ALT + h/j/k/l
+-- Resize windows with secMod + CTRL + h/j/k/l
 local directions = { h = "left", j = "down", k = "up", l = "right" }
 for key, direction in pairs(directions) do
   hl.bind(priMod .. " + " .. key, hl.dsp.focus({ direction = direction }))
   hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ direction = direction }))
   hl.bind(
-    priMod .. " + ALT +" .. key,
+    secMod .. " + CTRL +" .. key,
     hl.dsp.window.resize({
       x = key == "h" and -10 or key == "l" and 10 or 0,
       y = key == "j" and 10 or key == "k" and -10 or 0,
@@ -60,6 +60,12 @@ for key, direction in pairs(directions) do
     { repeating = true }
   )
 end
+
+-- Full width with priMod + F
+hl.bind(priMod .. " + F", hl.dsp.layout("colresize +conf"))
+
+-- Center active window with priMod + C
+hl.bind(priMod .. " + C", hl.dsp.window.center())
 
 -- Change workspace layout or swap columns with priMod/secMod + comma/period, behavior depends on current layout
 hl.bind(priMod .. " + period", function()
@@ -169,7 +175,7 @@ hl.bind(
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -n2 set 5%+"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -n2 set 5%-"), { locked = true, repeating = true })
 
--- Requires playerctl
+-- Playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
