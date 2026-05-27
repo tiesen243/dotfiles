@@ -1,5 +1,6 @@
 singleton GlobalState         1.0 GlobalState.qml
 singleton Matugen             1.0 Matugen.qml
+singleton Niri                1.0 Niri.qml
 
 singleton BackgroundService   1.0 BackgroundService.qml
 

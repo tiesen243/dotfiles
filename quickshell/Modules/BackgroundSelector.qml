@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell
 import QtQuick
@@ -29,12 +28,6 @@ Scope {
 
       Region { id: clickCatcher }
       mask: visible ? null : clickCatcher
-
-      HyprlandFocusGrab {
-        active: GlobalState.isBackgroundSelectorOpen
-        windows: [backgroundSelector]
-        onCleared: GlobalState.isBackgroundSelectorOpen = false
-      }
 
       Rectangle {
         id: selector

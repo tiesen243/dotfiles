@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
@@ -72,12 +71,6 @@ Scope {
 
         searchField.forceActiveFocus()
         if (appModel.count === 0) appProc.running = true
-      }
-
-      HyprlandFocusGrab {
-        active: appLauncherWindow.visible
-        windows: [appLauncherWindow]
-        onCleared: GlobalState.isAppLauncherOpen = false
       }
 
       Rectangle {

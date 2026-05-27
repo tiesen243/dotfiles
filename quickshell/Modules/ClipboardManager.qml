@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
@@ -73,12 +72,6 @@ Scope {
 
         searchField.forceActiveFocus()
         cliphistProc.running = true;
-      }
-
-      HyprlandFocusGrab {
-        active: clipboardManager.visible
-        windows: [clipboardManager]
-        onCleared: GlobalState.isClipboardOpen = false
       }
 
       Rectangle {

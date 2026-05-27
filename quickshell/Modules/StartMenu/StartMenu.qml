@@ -1,6 +1,5 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Hyprland
 import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell
@@ -36,12 +35,6 @@ Scope {
     implicitWidth: 1920 / 4
     implicitHeight: 1080 / 2
     color: "transparent"
-
-    HyprlandFocusGrab {
-      active: GlobalState.isStartMenuOpen
-      windows: [startMenuContainer]
-      onCleared: GlobalState.isStartMenuOpen = false
-    }
 
     Shortcut {
       sequence: "Escape"

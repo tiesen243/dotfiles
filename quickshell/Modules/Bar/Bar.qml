@@ -62,18 +62,43 @@ Scope {
           }
         }
 
-        Workspace {
-          id: workspace
+        Loader {
+          active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Hyprland"
+
+          sourceComponent: HyprlandWorkspace {
+            id: hyprlandWorkspace
+            rootFont: root.rootFont
+          }
+        }
+
+        Loader {
+          active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri"
+          sourceComponent: NiriWorkspace {
+            id: niriWorkspace
+            rootFont: root.rootFont
+          }
+        }
+      }
+
+      Loader {
+        active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Hyprland"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+
+        sourceComponent: HyprlandWindowTitle {
+          id: hyprlandWindowTitle
           rootFont: root.rootFont
         }
       }
 
-      WindowTitle {
-        id: windowTitle
-        rootFont: root.rootFont
-        anchors {
-          horizontalCenter: parent.horizontalCenter
-          verticalCenter: parent.verticalCenter
+      Loader {
+        active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+
+        sourceComponent: NiriWindowTitle {
+          id: niriWindowTitle
+          rootFont: root.rootFont
         }
       }
 
