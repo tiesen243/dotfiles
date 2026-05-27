@@ -255,7 +255,7 @@ Scope {
 
   Process {
     id: appProc
-    command: ["sh", "-c", "find /usr/share/applications ~/.local/share/applications -name '*.desktop' 2>/dev/null | while read -r file; do name=$(grep -m1 '^Name=' \"$file\" | cut -d= -f2-); exec=$(grep -m1 '^Exec=' \"$file\" | cut -d= -f2-); icon=$(grep -m1 '^Icon=' \"$file\" | cut -d= -f2-); terminal=$(grep -m1 '^Terminal=' \"$file\" | cut -d= -f2-); [ -n \"$name\" ] && [ -n \"$exec\" ] && echo \"$name|$exec|$icon|$terminal\"; done | sort -u"]
+    command: ["sh", "-c", "find /usr/share/applications ~/.local/share/applications -name '*.desktop' 2>/dev/null | while read -r file; do name=$(grep -m1 '^Name=' \"$file\" | cut -d= -f2-); exec=$(grep -m1 '^Exec=' \"$file\" | cut -d= -f2-); icon=$(grep -m1 '^Icon=' \"$file\" | cut -d= -f2-); terminal=$(grep -m1 '^Terminal=' \"$file\" | cut -d= -f2-); nodisplay=$(grep -m1 '^NoDisplay=' \"$file\" | cut -d= -f2-); [ -n \"$name\" ] && [ -n \"$exec\" ] && echo \"$name|$exec|$icon|$terminal|$nodisplay\"; done | sort -u"]
     stdout: StdioCollector {
       onStreamFinished: {
         const lines = text.split("\n")
@@ -270,15 +270,21 @@ Scope {
         for (const line of lines) {
           const parts = line.split("|")
           if (parts.length < 2) continue
-          
-          const name = parts[0].trim()
-          if (seen.has(name)) continue
 
+          const noDisplay = parts[4] ? parts[4].trim().toLowerCase() === "true" : false
+          if (noDisplay) continue
+          
           const exec = parts[1].trim()
+          if (seen.has(exec)) continue
+
+          const name = parts[0].trim()
           const icon = parts[2] ? "image://icon/" + parts[2].trim() : ""
           const terminal = parts[3] ? parts[3].trim().toLowerCase() === "true" : false
 
-          if (name && exec) items.push({ icon: icon, name: name, exec: exec, terminal: terminal })
+          if (name && exec) {
+            items.push({ icon: icon, name: name, exec: exec, terminal: terminal })
+            seen.add(exec)
+          }
         }
 
         appModel.append(items)
