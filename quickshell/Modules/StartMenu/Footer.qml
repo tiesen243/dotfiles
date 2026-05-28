@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import Quickshell.Widgets
 import Quickshell.Io
+import Quickshell
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick
@@ -66,8 +67,15 @@ Item {
 
       Repeater {
         model: [
-          { name: "Lock Session", icon: "", cmd: "loginctl lock-session", shortcut: "L" },
-          { name: "Log Out", icon: "󰍃", cmd: "hyprctl dispatch 'hl.dsp.exit()'", shortcut: "Q" },
+          { name: "Lock Session", icon: "", cmd: "quickshell ipc call lockscreen lock", shortcut: "L" },
+          { 
+            name: "Log Out", 
+            icon: "󰍃", 
+            cmd: Quickshell.env("XDG_DESKTOP_SESSION") === "hyprland" ?
+              "hyprctl dispatch 'hl.dsp.exit()'" : Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri" ?
+              "niri msg action quit" : "loginctl logout",
+            shortcut: "Q" 
+          },
           { name: "Power Off", icon: "", cmd: "systemctl poweroff", shortcut: "S" },
           { name: "Reboot", icon: "", cmd: "systemctl reboot", shortcut: "R" }
         ]
