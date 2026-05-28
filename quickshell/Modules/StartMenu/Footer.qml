@@ -71,7 +71,7 @@ Item {
           { 
             name: "Log Out", 
             icon: "󰍃", 
-            cmd: Quickshell.env("XDG_DESKTOP_SESSION") === "hyprland" ?
+            cmd: Quickshell.env("XDG_DESKTOP_SESSION") === "Hyprland" ?
               "hyprctl dispatch 'hl.dsp.exit()'" : Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri" ?
               "niri msg action quit" : "loginctl logout",
             shortcut: "Q" 
