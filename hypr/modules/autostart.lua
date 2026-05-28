@@ -8,9 +8,7 @@
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function()
-  -- Hyprland components
-  hl.exec_cmd("hypridle")
-  -- hl.exec_cmd("hyprpaper")
+  -- Polkit agent
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
   -- Clipboard managers
@@ -25,6 +23,8 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
   hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme '" .. os.getenv("GTK_THEME") .. "'")
 
-  -- User applications
+  -- Compositors
   hl.exec_cmd("quickshell")
+  hl.exec_cmd("hypridle -c " .. os.getenv("HOME") .. "/.config/hypr/hypridle.conf")
+  -- hl.exec_cmd("hyprpaper")
 end)

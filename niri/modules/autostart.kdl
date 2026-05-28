@@ -3,6 +3,9 @@
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
+// Polkit agent
+spawn-sh-at-startup "systemctl --user start hyprpolkitagent"
+
 // Clipboard managers
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
@@ -14,8 +17,8 @@ spawn-sh-at-startup "fcitx5 -d"
 // Theme
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'"
-spawn-sh-at-startup "gsettings set org.gnome.desktop.interface cursor-theme 'capitaine-cursors'"
 
 // Compositor
 spawn-sh-at-startup "quickshell"
+spawn-sh-at-startup "hypridle -c ~/.config/niri/hypridle.conf"
 
