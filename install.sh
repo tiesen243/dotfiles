@@ -40,9 +40,9 @@ echo "3) Both"
 echo "-----------------------------------------"
 read -p "Enter your choice (1-3): " wm_choice
 case $wm_choice in
-  1) wm_pkg="hyprland" ;;
-  2) wm_pkg="niri" ;;
-  3) wm_pkg="hyprland niri" ;;
+  1) wm_pkg="hyprland xdg-desktop-portal-hyprland" ;;
+  2) wm_pkg="niri xdg-desktop-portal-wlr" ;;
+  3) wm_pkg="hyprland niri xdg-desktop-portal-hyprland xdg-desktop-portal-wlr" ;;
   *) wm_pkg="" ;;
 esac
 
@@ -79,6 +79,16 @@ else
   else
     echo "⚠️ Warning: ~/dotfiles/packages.txt not found and no browser selected!"
   fi
+fi
+
+if [ "$wm_choice" = "2" ] || [ "$wm_choice" = "3" ]; then
+  echo "--> Configuring niri-portals.conf..."
+  sudo mkdir -p /usr/share/xdg-desktop-portal
+  sudo tee /usr/share/xdg-desktop-portal/niri-portals.conf > /dev/null <<EOF
+[preferred]
+default=wlr;gtk
+EOF
+  echo "--> niri-portals.conf has been updated successfully."
 fi
 
 # 5. Set ZSH as the default shell

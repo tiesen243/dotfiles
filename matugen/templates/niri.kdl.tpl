@@ -1,3 +1,7 @@
+overview {
+  backdrop-color "{{colors.surface_bright.default.hex}}"
+}
+
 layout {
   focus-ring {
     active-gradient from="{{colors.primary.default.hex}}" to="{{colors.tertiary.default.hex}}" angle=135
