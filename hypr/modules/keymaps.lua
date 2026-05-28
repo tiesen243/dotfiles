@@ -31,25 +31,35 @@ hl.bind(secMod .. " + B", hl.dsp.exec_cmd("quickshell ipc call bar toggle"))
 hl.bind(secMod .. " + F", function()
   hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
   hl.dispatch(hl.dsp.window.resize({ x = 960, y = 540 }))
-  hl.dispatch(hl.dsp.window.move({ x = 480, y = 270 }))
 end)
 hl.bind(secMod .. " + CTRL + F", hl.dsp.window.fullscreen({ action = "toggle" }))
-hl.bind(priMod .. " + O", hl.dsp.window.pseudo())
-hl.bind(secMod .. " + O", function()
-  local layout = hl.get_config("general.layout")
-
-  if layout == "dwindle" then
-    hl.dsp.layout("togglesplit")
-  end
-end)
 
 -- Focus with priMod + h/j/k/l
 -- Move active windows with secMod + h/j/k/l
 -- Resize windows with secMod + CTRL + h/j/k/l
 local directions = { h = "left", j = "down", k = "up", l = "right" }
 for key, direction in pairs(directions) do
-  hl.bind(priMod .. " + " .. key, hl.dsp.focus({ direction = direction }))
-  hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ direction = direction }))
+  hl.bind(priMod .. " + " .. key, function()
+    local layout = hl.get_config("general.layout")
+
+    if layout == "scrolling" and (key == "h" or key == "l") then
+      hl.dispatch(hl.dsp.layout("move " .. (key == "h" and "-col" or "+col")))
+    elseif layout == "monocle" and (key == "h" or key == "l") then
+      hl.dispatch(hl.dsp.layout("cycle" .. (key == "h" and "prev" or "next")))
+    else
+      hl.dispatch(hl.dsp.focus({ direction = direction }))
+    end
+  end)
+
+  hl.bind(secMod .. " + " .. key, function()
+    local layout = hl.get_config("general.layout")
+
+    if layout == "scrolling" and (key == "h" or key == "l") then
+      hl.dispatch(hl.dsp.layout("swapcol " .. (key == "h" and "l" or "r")))
+    else
+      hl.dispatch(hl.dsp.window.move({ direction = direction }))
+    end
+  end)
   hl.bind(
     secMod .. " + CTRL +" .. key,
     hl.dsp.window.resize({
@@ -61,48 +71,35 @@ for key, direction in pairs(directions) do
   )
 end
 
--- Full width with priMod + F
-hl.bind(priMod .. " + F", hl.dsp.layout("colresize +conf"))
-
--- Center active window with priMod + C
-hl.bind(priMod .. " + C", hl.dsp.window.center())
-
--- Change workspace layout or swap columns with priMod/secMod + comma/period, behavior depends on current layout
 hl.bind(priMod .. " + period", function()
   local layout = hl.get_config("general.layout")
 
-  if layout == "monocle" then
-    hl.dispatch(hl.dsp.layout("cyclenext"))
-  elseif layout == "scrolling" then
-    hl.dispatch(hl.dsp.layout("move +col"))
+  if layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
   end
 end)
 
 hl.bind(priMod .. " + comma", function()
   local layout = hl.get_config("general.layout")
 
-  if layout == "monocle" then
-    hl.dispatch(hl.dsp.layout("cycleprev"))
-  elseif layout == "scrolling" then
-    hl.dispatch(hl.dsp.layout("move -col"))
+  if layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("consume_or_expel next"))
   end
 end)
 
-hl.bind(secMod .. " + period", function()
+-- Full width with priMod + F
+hl.bind(priMod .. " + F", function()
   local layout = hl.get_config("general.layout")
 
   if layout == "scrolling" then
-    hl.dispatch(hl.dsp.layout("swapcol l"))
+    hl.dispatch(hl.dsp.layout("colresize +conf"))
+  elseif layout == "dwindle" then
+    hl.dispatch(hl.dsp.layout("togglesplit"))
   end
 end)
 
-hl.bind(secMod .. " + comma", function()
-  local layout = hl.get_config("general.layout")
-
-  if layout == "scrolling" then
-    hl.dispatch(hl.dsp.layout("swapcol r"))
-  end
-end)
+-- Center active window with priMod + C
+hl.bind(priMod .. " + C", hl.dsp.window.center())
 
 -- Switch workspace layout with priMod + D > D/M/O/S
 hl.bind(priMod .. " + D", hl.dsp.submap("layout"))

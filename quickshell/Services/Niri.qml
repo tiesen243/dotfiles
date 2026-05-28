@@ -36,7 +36,8 @@ Singleton {
     stdout: StdioCollector {
       onStreamFinished: {
         const lines = text.trim().split("\n")
-        root.workspaces = JSON.parse(lines[lines.length - 1])
+        const workspaces = JSON.parse(lines[lines.length - 1])
+        root.workspaces = workspaces.sort((a, b) => a.id - b.id)
       }
     }
     Component.onCompleted: niriWorkspacesProc.running = true
