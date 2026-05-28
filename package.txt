@@ -9,7 +9,6 @@ upower
 
 # Hyprland & Shell components
 hypridle
-hyprland
 hyprpolkitagent
 quickshell
 xdg-desktop-portal-hyprland

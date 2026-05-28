@@ -6,20 +6,9 @@ echo "========================================="
 echo "       STARTING DOTFILES INSTALLATION    "
 echo "========================================="
 
-# 1. System Update Option & Core Packages
-echo "-----------------------------------------"
-read -p "Do you want to perform a full system upgrade? (pacman -Syu) [y/N]: " upgrade_choice
-echo "-----------------------------------------"
-
-if [[ "$upgrade_choice" =~ ^[Yy]$ ]]; then
-  echo "--> Updating system and installing git & base-devel..."
-  sudo pacman -Syu --needed --noconfirm git base-devel
-else
-  echo "--> Installing git & base-devel without system upgrade..."
-  sudo pacman -S -needed --noconfirm git base-devel
-fi
-
 # 2. Install yay (AUR helper)
+sudo pacman -Syu --needed --noconfirm git base-devel
+
 if ! command -v yay &> /dev/null; then
   echo "--> yay not found. Installing yay..."
   git clone https://aur.archlinux.org/yay.git ~/yay
@@ -41,6 +30,22 @@ else
 fi
 
 # 4. Install packages
+echo "-----------------------------------------"
+echo "           WM SELECTION                  "
+echo "-----------------------------------------"
+echo "Select a window manager to install:"
+echo "1) Hyprland"
+echo "2) Niri"
+echo "3) Both"
+echo "-----------------------------------------"
+read -p "Enter your choice (1-3): " wm_choice
+case $wm_choice in
+  1) wm_pkg="hyprland" ;;
+  2) wm_pkg="niri" ;;
+  3) wm_pkg="hyprland niri" ;;
+  *) wm_pkg="" ;;
+esac
+
 echo "-----------------------------------------"
 echo "         BROWSER SELECTION               "
 echo "-----------------------------------------"
@@ -66,11 +71,11 @@ esac
 echo "--> Installing packages from the list..."
 if [ -f "$HOME/dotfiles/package.txt" ]; then
   yes | yay -S --needed --noconfirm --answerclean All --answerdiff None \
-    $(grep -v '^#' ~/dotfiles/package.txt) $browser_pkg
+    $(grep -v '^#' ~/dotfiles/package.txt) $browser_pkg $wm_pkg
 else
-  if [ -n "$browser_pkg" ]; then
+  if [ -n "$browser_pkg" ] || [ -n "$wm_pkg" ]; then
     echo "--> Installing selected browser..."
-    yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg
+    yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg $wm_pkg
   else
     echo "⚠️ Warning: ~/dotfiles/packages.txt not found and no browser selected!"
   fi
