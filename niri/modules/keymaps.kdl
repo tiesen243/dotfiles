@@ -23,10 +23,10 @@ binds {
   Mod+Shift+K     { move-window-up; }
   Mod+Shift+L     { move-column-right; }
 
-  Mod+Ctrl+Shift+H { set-column-width  "-10%"; }
-  Mod+Ctrl+Shift+J { set-window-height "-10%"; }
-  Mod+Ctrl+Shift+K { set-window-height "+10%"; }
-  Mod+Ctrl+Shift+L { set-column-width  "+10%"; }
+  Mod+Ctrl+Shift+H { set-column-width  "-1%"; }
+  Mod+Ctrl+Shift+J { set-window-height "-1%"; }
+  Mod+Ctrl+Shift+K { set-window-height "+1%"; }
+  Mod+Ctrl+Shift+L { set-column-width  "+1%"; }
 
   // Workspaces switch and movement
   Mod+1 { focus-workspace 1; }

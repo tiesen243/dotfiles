@@ -4,33 +4,27 @@ This repository contains my personal dotfiles for configuring Linux. The setup u
 
 ## Preview
 
-https://github.com/user-attachments/assets/335b0dc0-46db-4cf3-91a2-a33d711e60d3
-
 ### Overview
 
 ![preview-01](./assets/preview-01.png)
 
 ![preview-02](./assets/preview-02.png)
 
-### Kitty terminal
+### App launcher
 
 ![preview-03](./assets/preview-03.png)
 
-### App launcher
+### Clipboard manager
 
 ![preview-04](./assets/preview-04.png)
 
-### Clipboard manager
+### Lock screen
 
 ![preview-05](./assets/preview-05.png)
 
-### Lock screen
-
-![preview-06](./assets/preview-06.png)
-
 ### Neovim
 
-![preview-07](./assets/preview-07.png)
+![preview-06](./assets/preview-06.png)
 
 ## Automatic install (Recommended)
 
