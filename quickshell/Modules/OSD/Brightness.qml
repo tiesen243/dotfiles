@@ -11,7 +11,7 @@ Rectangle {
   height: 200
   radius: 24
   color: Matugen.surface
-  border { color: Matugen.on_primary; width: 2 }
+  border { color: Matugen.on_primary; width: 1 }
   opacity: BrightnessService.isShow ? 1 : 0
 
   Behavior on opacity { NumberAnimation { duration: 150 } }
@@ -42,7 +42,7 @@ Rectangle {
       width: 8
       radius: 4
       color: Matugen.surface
-      border { color: Matugen.on_primary; width: 2 }
+      border { color: Matugen.on_primary; width: 1 }
       clip: true
 
       Rectangle {

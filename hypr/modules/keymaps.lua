@@ -17,6 +17,7 @@ local secMod = "SUPER + SHIFT"
 local scripts = os.getenv("HOME") .. "/dotfiles/scripts"
 
 hl.bind(priMod .. " + Q", hl.dsp.window.close())
+hl.bind(secMod .. " + Q", hl.dsp.exit())
 hl.bind(priMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(priMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(priMod .. " + B", hl.dsp.exec_cmd(browser))
@@ -27,16 +28,7 @@ hl.bind(priMod .. " + V", hl.dsp.exec_cmd("quickshell ipc call clipboardManager 
 hl.bind(priMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call startMenu toggle"))
 hl.bind(secMod .. " + B", hl.dsp.exec_cmd("quickshell ipc call bar toggle"))
 
--- Layout
-hl.bind(secMod .. " + F", function()
-  hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
-  hl.dispatch(hl.dsp.window.resize({ x = 960, y = 540 }))
-end)
-hl.bind(secMod .. " + CTRL + F", hl.dsp.window.fullscreen({ action = "toggle" }))
-
--- Focus with priMod + h/j/k/l
--- Move active windows with secMod + h/j/k/l
--- Resize windows with secMod + CTRL + h/j/k/l
+-- Window focus and movement
 local directions = { h = "left", j = "down", k = "up", l = "right" }
 for key, direction in pairs(directions) do
   hl.bind(priMod .. " + " .. key, function()
@@ -60,6 +52,7 @@ for key, direction in pairs(directions) do
       hl.dispatch(hl.dsp.window.move({ direction = direction }))
     end
   end)
+
   hl.bind(
     secMod .. " + CTRL +" .. key,
     hl.dsp.window.resize({
@@ -69,6 +62,14 @@ for key, direction in pairs(directions) do
     }),
     { repeating = true }
   )
+end
+
+-- Switch workspaces with priMod + [0-9]
+-- Move active window to a workspace with secMod + [0-9]
+for i = 1, 10 do
+  local key = i % 10 -- 10 maps to key 0
+  hl.bind(priMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+  hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 hl.bind(priMod .. " + period", function()
@@ -87,64 +88,32 @@ hl.bind(priMod .. " + comma", function()
   end
 end)
 
--- Full width with priMod + F
-hl.bind(priMod .. " + F", function()
+hl.bind(priMod .. " + R", function()
   local layout = hl.get_config("general.layout")
 
   if layout == "scrolling" then
     hl.dispatch(hl.dsp.layout("colresize +conf"))
-  elseif layout == "dwindle" then
-    hl.dispatch(hl.dsp.layout("togglesplit"))
   end
 end)
 
--- Center active window with priMod + C
-hl.bind(priMod .. " + C", hl.dsp.window.center())
+hl.bind(secMod .. " + R", function()
+  local layout = hl.get_config("general.layout")
 
--- Switch workspace layout with priMod + D > D/M/O/S
-hl.bind(priMod .. " + D", hl.dsp.submap("layout"))
-hl.define_submap("layout", function()
-  hl.bind("D", function()
-    hl.config({ general = { layout = "dwindle" } })
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("M", function()
-    hl.config({ general = { layout = "master" } })
-
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("O", function()
-    hl.config({ general = { layout = "monocle" } })
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("S", function()
-    hl.config({ general = { layout = "scrolling" } })
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("ESCAPE", hl.dsp.submap("reset"))
+  if layout == "scrolling" then
+    hl.dispatch(hl.dsp.layout("colresize -conf"))
+  end
 end)
 
--- Switch workspaces with priMod + [0-9]
--- Move active window to a workspace with secMod + [0-9]
-for i = 1, 10 do
-  local key = i % 10 -- 10 maps to key 0
-  hl.bind(priMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ workspace = i }))
-end
-
--- Example special workspace (scratchpad)
-hl.bind(priMod .. " + M", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(secMod .. " + M", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(priMod .. " + C", hl.dsp.window.center())
+hl.bind(priMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind(secMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(priMod .. " + CTRL + F", hl.dsp.window.float({ action = "toggle" }))
 
 -- Scroll through existing workspaces with priMod + scroll
 hl.bind(priMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(priMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
--- Move/resize windows with priMod + LMB/RMB and dragging
+-- Move/resize windows
 hl.bind(priMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(priMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
@@ -178,7 +147,34 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
--- Screenshot with PrintScreen key or priMod/secMod + S
+-- Screenshot
 hl.bind("PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
 hl.bind(priMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
 hl.bind(secMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode fullscreen"))
+
+-- Switch workspace layout with priMod + D > D/M/O/S
+hl.bind(priMod .. " + D", hl.dsp.submap("layout"))
+hl.define_submap("layout", function()
+  hl.bind("D", function()
+    hl.config({ general = { layout = "dwindle" } })
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("M", function()
+    hl.config({ general = { layout = "master" } })
+
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("O", function()
+    hl.config({ general = { layout = "monocle" } })
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("S", function()
+    hl.config({ general = { layout = "scrolling" } })
+    hl.dispatch(hl.dsp.submap("reset"))
+  end)
+
+  hl.bind("ESCAPE", hl.dsp.submap("reset"))
+end)

@@ -34,7 +34,7 @@ Scope {
 
       Column {
         anchors.right: parent.right
-        anchors.rightMargin: 10
+        anchors.rightMargin: 4
         anchors.verticalCenter: parent.verticalCenter
         spacing: 12
 

@@ -9,9 +9,9 @@ Rectangle {
 
   width: 36
   height: 200
-  radius: 24
+  radius: 16
   color: Matugen.surface
-  border { color: Matugen.on_primary; width: 2 }
+  border { color: Matugen.on_primary; width: 1 }
   opacity: VolumeService.isShow ? 1 : 0
 
   Behavior on opacity { NumberAnimation { duration: 150 } }
@@ -41,7 +41,7 @@ Rectangle {
       width: 8
       radius: 4
       color: Matugen.surface
-      border { color: Matugen.on_primary; width: 2 }
+      border { color: Matugen.on_primary; width: 1 }
       clip: true
 
       Rectangle {

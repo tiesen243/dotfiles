@@ -1,17 +1,7 @@
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
-
-local gap = 4
-
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/
-local suppressMaximizeRule = hl.window_rule({
-  name = "suppress-maximize-events",
-  match = { class = ".*" },
-
-  suppress_event = "maximize",
-})
-suppressMaximizeRule:set_enabled(false)
 
 hl.window_rule({
   name = "fix-xwayland-drags",
@@ -48,24 +38,5 @@ hl.window_rule({
   match = { title = "^(Picture-in-Picture)$" },
   float = true,
   size = { 640, 360 },
-  move = { 1920 - 640 - gap, 1080 - 360 - gap },
+  move = { 1920 - 640 - 4, 1080 - 360 - 4 },
 })
-
-hl.window_rule({
-  name = "no-opacity-for-browser",
-  match = { class = "^zen$" },
-  opacity = "1.0 override",
-}):set_enabled(false)
-
--- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0, border_size = 0, no_rounding = true })
--- hl.workspace_rule({ workspace = "f[1]", gaps_out = 0, gaps_in = 0, border_size = 0, no_rounding = true })
-
--- Layer rules also return a handle.
--- local overlayLayerRule = hl.layer_rule({
---     name  = "no-anim-overlay",
---     match = { namespace = "^my-overlay$" },
---     no_anim = true,
--- })
--- overlayLayerRule:set_enabled(false)

@@ -21,6 +21,7 @@ Scope {
     target: "appLauncher"
 
     function toggle(): void {
+      GlobalState.closeAllPanels({ appLauncher: true })
       GlobalState.isAppLauncherOpen = !GlobalState.isAppLauncherOpen
     }
   }
@@ -59,9 +60,6 @@ Scope {
       implicitWidth: 1920 / 2
       implicitHeight: 1080 / 2
       color: "transparent"
-
-      Region { id: clickCatcher }
-      mask: visible ? null : clickCatcher
 
       WlrLayershell.layer: WlrLayer.Overlay
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
@@ -117,7 +115,7 @@ Scope {
             background: Rectangle {
               anchors.fill: parent
               color: Matugen.surface
-              border { color: Matugen.on_secondary; width: 2 }
+              border { color: Matugen.on_secondary; width: 1 }
               radius: 8
 
               Text {
@@ -194,7 +192,7 @@ Scope {
               implicitWidth: searchField.width
               implicitHeight: appText.implicitHeight + 24
               color: ListView.isCurrentItem ? Matugen.surface_bright : Matugen.surface
-              border { color: Matugen.on_secondary; width: 2 }
+              border { color: Matugen.on_secondary; width: 1 }
               radius: 8
 
               RowLayout {

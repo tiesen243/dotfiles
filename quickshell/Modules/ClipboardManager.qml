@@ -22,6 +22,7 @@ Scope {
     target: "clipboardManager"
 
     function toggle(): void {
+      GlobalState.closeAllPanels({ clipboard: true })
       GlobalState.isClipboardOpen = !GlobalState.isClipboardOpen
     }
   }
@@ -118,7 +119,7 @@ Scope {
             background: Rectangle {
               anchors.fill: parent
               color: Matugen.surface
-              border { color: Matugen.on_secondary; width: 2 }
+              border { color: Matugen.on_secondary; width: 1 }
               radius: 8
 
               Text {
@@ -192,7 +193,7 @@ Scope {
               implicitWidth: searchField.width
               implicitHeight: clipboardText.implicitHeight + 24
               color: ListView.isCurrentItem ? Matugen.surface_bright : Matugen.surface
-              border { color: Matugen.on_secondary; width: 2 }
+              border { color: Matugen.on_secondary; width: 1 }
               radius: 8
 
               Text {

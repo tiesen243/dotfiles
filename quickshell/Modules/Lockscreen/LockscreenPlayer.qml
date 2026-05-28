@@ -27,7 +27,7 @@ Item {
     implicitWidth: 600
     implicitHeight: playerInfo.implicitHeight + 32
     color: Matugen.surface
-    border { color: Matugen.primary; width: 2 }
+    border { color: Matugen.primary; width: 1 }
     radius: 16
 
     RowLayout {

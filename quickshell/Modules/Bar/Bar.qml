@@ -64,6 +64,7 @@ Scope {
 
         Loader {
           active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Hyprland"
+          visible: active
 
           sourceComponent: HyprlandWorkspace {
             id: hyprlandWorkspace
@@ -73,6 +74,8 @@ Scope {
 
         Loader {
           active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri"
+          visible: active
+
           sourceComponent: NiriWorkspace {
             id: niriWorkspace
             rootFont: root.rootFont

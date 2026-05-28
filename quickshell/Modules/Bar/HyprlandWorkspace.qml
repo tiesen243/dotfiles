@@ -29,7 +29,7 @@ Item {
         implicitWidth: root.rootFont.pixelSize * (modelData.focused ? 2 : 1.5)
         implicitHeight: root.rootFont.pixelSize * 1.5
         color: modelData.focused ? Matugen.primary : (workspaceItemMouseArea.containsMouse 
-          ? Matugen.on_secondary : Matugen.surface)
+          ? Matugen.on_secondary : Matugen.surface_bright)
         radius: 4
 
         Behavior on color {

@@ -21,6 +21,7 @@ Scope {
     target: "startMenu"
 
     function toggle(): void {
+      GlobalState.closeAllPanels({ startMenu: true })
       GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
     }
   }
@@ -35,6 +36,8 @@ Scope {
     implicitWidth: 1920 / 4
     implicitHeight: 1080 / 2
     color: "transparent"
+
+    focusable: true
 
     Shortcut {
       sequence: "Escape"

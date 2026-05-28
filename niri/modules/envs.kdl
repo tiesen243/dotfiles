@@ -1,3 +1,5 @@
+// @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#environment
+
 environment {
   // Theme
   XCURSOR_THEME "capitaine-cursors"
@@ -27,7 +29,5 @@ environment {
   // NVIDIA
   __GLX_VENDOR_LIBRARY_NAME "nvidia"
   LIBVA_DRIVER_NAME "nvidia"
-
-  SCRIPTS "~/dotfiles/scripts"
 }
 

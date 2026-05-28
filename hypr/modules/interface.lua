@@ -1,36 +1,4 @@
 -----------------------
-----   LAYOUTS     ----
------------------------
-
-hl.config({
-  general = {
-    layout = "scrolling",
-  },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
-hl.config({
-  dwindle = {
-    preserve_split = true,
-  },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
-hl.config({
-  master = {
-    new_status = "master",
-  },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
-hl.config({
-  scrolling = {
-    fullscreen_on_one_column = true,
-    explicit_column_widths = "0.5, 1.0",
-  },
-})
-
------------------------
 ---- LOOK AND FEEL ----
 -----------------------
 
@@ -42,13 +10,16 @@ hl.config({
     gaps_in = 2,
     gaps_out = 4,
 
-    border_size = 2,
+    border_size = 1,
     col = {
       active_border = {
-        colors = { colors.primary, colors.tertiary, colors.primary },
+        colors = { colors.primary, colors.tertiary },
         angle = 45,
       },
-      inactive_border = colors.on_tertiary,
+      inactive_border = {
+        colors = { colors.on_primary, colors.on_tertiary },
+        angle = 45,
+      },
     },
 
     -- Set to true to enable resizing windows by clicking and dragging on borders and gaps

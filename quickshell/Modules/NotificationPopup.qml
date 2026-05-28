@@ -78,7 +78,7 @@ Scope {
             Layout.fillWidth: true
             Layout.preferredHeight: notificationItemContent.implicitHeight + 28
             color: Matugen.surface
-            border { color: Matugen.primary; width: 2 }
+            border { color: Matugen.primary; width: 1 }
             radius: 12
 
             x: 1920 / 5

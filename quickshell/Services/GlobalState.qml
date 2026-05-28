@@ -17,10 +17,17 @@ Singleton {
   property bool isClipboardOpen: false
   property bool isBackgroundSelectorOpen: false
 
-  property var popups: ({
-    "startmenu": "isStartMenuOpen",
-    "appLauncher": "isAppLauncherOpen",
-    "clipboard": "isClipboardOpen",
-    "backgroundSelector": "isBackgroundSelectorOpen"
-  })
+  function closeAllPanels(
+    except = {
+      startMenu: false,
+      appLauncher: false,
+      clipboard: false,
+      backgroundSelector: false
+    }
+  ): void {
+    if (!except.startMenu) root.isStartMenuOpen = false
+    if (!except.appLauncher) root.isAppLauncherOpen = false
+    if (!except.clipboard) root.isClipboardOpen = false
+    if (!except.backgroundSelector) root.isBackgroundSelectorOpen = false
+  }
 }

@@ -42,7 +42,7 @@ Item {
 					color: Matugen.surface
 					border { 
 					  color: root.context.showFailure ? Matugen.error : Matugen.primary
-					  width: 2
+					  width: 1
 					}
 				}
 
@@ -82,7 +82,7 @@ Item {
 					color: Matugen.surface
 					border { 
             color: Matugen.primary
-            width: 2
+            width: 1
           }
 					radius: 8
 					

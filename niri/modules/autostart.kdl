@@ -1,7 +1,5 @@
-// Add lines like this to spawn processes at startup.
-// Note that running niri as a session supports xdg-desktop-autostart,
-// which may be more convenient to use.
-// See the binds section below for more spawn examples.
+// @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#spawn-at-startup
+// @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#spawn-sh-at-startup
 
 // Polkit agent
 spawn-sh-at-startup "systemctl --user start hyprpolkitagent"

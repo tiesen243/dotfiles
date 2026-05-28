@@ -73,7 +73,7 @@ Item {
             icon: "󰍃", 
             cmd: Quickshell.env("XDG_CURRENT_DESKTOP") === "Hyprland" ?
               "hyprctl dispatch 'hl.dsp.exit()'" : Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri" ?
-              "niri msg action quit" : "loginctl logout",
+              "niri msg action quit --skip-confirmation" : "loginctl logout",
             shortcut: "Q" 
           },
           { name: "Power Off", icon: "", cmd: "systemctl poweroff", shortcut: "S" },
