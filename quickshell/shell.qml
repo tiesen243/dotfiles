@@ -61,7 +61,7 @@ ShellRoot {
   }
 
   Loader {
-    active: true
+    active: false
     sourceComponent: ActivateLinux { id: activateLinux }
   }
 }
