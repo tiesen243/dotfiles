@@ -3,6 +3,8 @@ import Quickshell
 import QtQuick.Layouts
 import QtQuick
 
+import "../Services"
+
 Scope {
   id: root
 
@@ -29,13 +31,13 @@ Scope {
 
 				Text {
 					text: "Activate Linux"
-					color: Matugen.secondary
+					color: Matugen.surface_bright
 					font.pointSize: 22
 				}
 
 				Text {
 					text: "Go to Settings to activate Linux"
-					color: Matugen.secondary
+					color: Matugen.surface_bright
 					font.pointSize: 14
 				}
 			}

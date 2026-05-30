@@ -6,14 +6,10 @@ import "../../Services"
 
 Rectangle {
 	id: root
+  property font rootFont
 	required property LockscreenContext context
 
 	color: Matugen.surface
-  property font rootFont: Qt.font({
-    pixelSize: 14,
-    family: "GeistMono Nerd Font"
-  })
-
 
   Image {
     id: backgroundImage

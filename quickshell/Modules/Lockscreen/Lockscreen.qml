@@ -7,6 +7,7 @@ import QtQuick
 
 Scope {
   id: root
+  property font rootFont
 
   IpcHandler {
     target: "lockscreen"
@@ -15,7 +16,6 @@ Scope {
       lockTimer.running = true
     }
   }
-
 
 	LockscreenContext {
 		id: lockContext
@@ -28,6 +28,8 @@ Scope {
 
 		WlSessionLockSurface {
 			LockscreenSurface {
+			  rootFont: root.rootFont
+
 				anchors.fill: parent
 				context: lockContext
 			}

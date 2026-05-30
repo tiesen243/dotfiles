@@ -12,10 +12,7 @@ import "../Services"
 
 Scope {
   id: root
-  property font rootFont: Qt.font({
-    pixelSize: 14,
-    family: "GeistMono Nerd Font"
-  })
+  property font rootFont
 
   IpcHandler {
     target: 'notification'
@@ -79,7 +76,7 @@ Scope {
             Layout.preferredHeight: notificationItemContent.implicitHeight + 28
             color: Matugen.surface
             border { color: Matugen.primary; width: 1 }
-            radius: 12
+            radius: 8
 
             x: 1920 / 5
             Component.onCompleted: x = 0

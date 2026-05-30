@@ -18,5 +18,6 @@ spawn-sh-at-startup "gsettings set org.gnome.desktop.interface gtk-theme 'adw-gt
 
 // Compositor
 spawn-sh-at-startup "quickshell"
+// spawn-sh-at-startup "swaybg --image ~/dotfiles/assets/_background.png --mode fill"
 spawn-sh-at-startup "hypridle -c ~/.config/niri/hypridle.conf"
 

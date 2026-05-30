@@ -10,12 +10,7 @@ import '../../Services'
 
 Scope {
   id: root
-
-  readonly property bool isOpen: GlobalState.isStartMenuOpen && startMenuContent.implicitHeight > 0
-  property font rootFont: Qt.font({
-    pixelSize: 14,
-    family: "GeistMono Nerd Font"
-  })
+  property font rootFont
 
   IpcHandler {
     target: "startMenu"
@@ -25,6 +20,8 @@ Scope {
       GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
     }
   }
+
+  readonly property bool isOpen: GlobalState.isStartMenuOpen && startMenuContent.implicitHeight > 0
 
   PanelWindow {
     id: startMenuContainer

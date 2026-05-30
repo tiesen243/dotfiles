@@ -41,7 +41,7 @@ Item {
         Text {
           id: workspaceLabel
 
-          text: workspaceItem.modelData
+          text: workspaceItem.modelData.name
           color: workspaceItem.modelData.is_focused 
             ? Matugen.on_primary 
             : Matugen.on_surface

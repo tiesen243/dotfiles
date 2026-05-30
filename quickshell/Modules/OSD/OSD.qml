@@ -6,10 +6,7 @@ import "../../Services"
 
 Scope {
   id: root
-  property font rootFont: Qt.font({
-    pixelSize: 14,
-    family: "GeistMono Nerd Font"
-  })
+  property font rootFont
 
   Variants {
     model: Quickshell.screens
