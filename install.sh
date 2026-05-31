@@ -77,7 +77,7 @@ else
     echo "--> Installing selected browser..."
     yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg $wm_pkg
   else
-    echo "⚠️ Warning: ~/dotfiles/packages.txt not found and no browser selected!"
+    echo "⚠️ Warning: ~/dotfiles/package.txt not found and no browser selected!"
   fi
 fi
 
@@ -109,20 +109,19 @@ mkdir -p "$BACKUP_DIR"
 mkdir -p "$HOME/.config"
 
 # Define the specific folders you want to link
-config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lazygit lsd matugen nvim quickshell zsh)
+config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lazygit lsd matugen niri nvim quickshell zsh)
 
 # Move ONLY the specific target folders to the backup directory if they exist
+# And then create symlinks for those specific folders
 for item in "${config_items[@]}"; do
   if [ -e "$HOME/.config/$item" ] || [ -L "$HOME/.config/$item" ]; then
     mv "$HOME/.config/$item" "$BACKUP_DIR/"
+    ln -s ~/dotfiles/$item ~/.config/
   fi
 done
 
 # Clean up backup directory if it ends up empty
 rmdir "$BACKUP_DIR" 2>/dev/null || echo "--> Existing configs backed up to $BACKUP_DIR"
-
-# Create the symbolic links
-ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config/
 
 # Generate default theme
 if command -v matugen &> /dev/null; then

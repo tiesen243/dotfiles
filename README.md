@@ -1,6 +1,6 @@
 # Arch Linux / CachyOS config with Hyprland
 
-This repository contains my personal dotfiles for configuring Linux. The setup uses Hyprland as the primary desktop environment (Wayland compositor) and Quickshell for building custom desktop components.
+This repository contains my personal dotfiles for configuring Linux. The setup uses Hyprland / Niri as the desktop environment (Wayland compositor) and Quickshell for building custom desktop components.
 
 ## Preview
 
@@ -149,7 +149,7 @@ Add your preferred wallpapers to ~/dotfiles/assets/wallpapers/. You can then tog
 
 This is my personal config for my arch linux system. You can use it as a reference or clone it to your system. If you have any question, feel free to ask me.
 
-My blog: [here](https://tiesen.id.vn/blogs/arch-linux-hyprland-setup/)
+My blog: [here](https://tiesen.id.vn/blogs/arch-linux-setup/)
 
 ## License
 
