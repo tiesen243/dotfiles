@@ -94,6 +94,15 @@ EOF
 xdg-user-dirs-update
 ```
 
+
+Next, configure git by creating `~/.config/git/config.local` with the following content (replace the name and email with your own):
+
+```bash
+[user]
+  name = arch-btw
+  email = example@arch.btw
+```
+
 Next, enable some services
 
 ```bash
