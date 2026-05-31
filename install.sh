@@ -6,7 +6,7 @@ echo "========================================="
 echo "       STARTING DOTFILES INSTALLATION    "
 echo "========================================="
 
-# 2. Install yay (AUR helper)
+# 1. Install yay (AUR helper)
 sudo pacman -Syu --needed --noconfirm git base-devel
 
 if ! command -v yay &> /dev/null; then
@@ -19,6 +19,17 @@ if ! command -v yay &> /dev/null; then
 else
   echo "--> yay is already installed."
 fi
+
+# 2. Setup Git configuration
+echo "-----------------------------------------"
+echo "           GIT CONFIGURATION             "
+echo "-----------------------------------------"
+read -p "Enter Git Username [$USER]: " git_name
+git_name="${git_name:-$USER}"
+
+read -p "Enter Git Email [example@arch.btw]: " git_email
+git_email="${git_email:-example@arch.btw}"
+echo "-----------------------------------------"
 
 # 3. Clone Dotfiles
 echo "--> Cloning dotfiles from GitHub..."
@@ -122,6 +133,14 @@ done
 
 # Clean up backup directory if it ends up empty
 rmdir "$BACKUP_DIR" 2>/dev/null || echo "--> Existing configs backed up to $BACKUP_DIR"
+
+# Update git config with user input
+cat <<EOF > "$HOME/.config/git/config.local"
+[user]
+  name = $git_name
+  email = $git_email
+EOF
+echo "--> Git configuration has been updated successfully."
 
 # Generate default theme
 if command -v matugen &> /dev/null; then

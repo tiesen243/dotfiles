@@ -1,8 +1,5 @@
 [init]
 	defaultBranch = main
-[user]
-	name = tiesen243
-  email = ttien56906@gmail.com
 [core]
   compression = 9
   whitespace = error
@@ -56,3 +53,6 @@
 [rebase]
   autoStash = true
   missingCommitsCheck = warn
+
+[include]
+  path = config.local

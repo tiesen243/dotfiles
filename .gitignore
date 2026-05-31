@@ -5,9 +5,6 @@ assets/wallpapers/*.png
 # ignore log files
 *.log
 
-# thunar config
-Thunar/accels.scm
-
 # Matugen generated files
 **/colors.*
 btop/themes/matugen.theme
@@ -16,6 +13,9 @@ lazygit/config.yml
 matugen/preview.html
 
 # misc
-quickshell/.qmlls.ini
+Thunar/accels.scm
+git/config.local
 gtk-3.0/bookmarks
 nvim/nvim-pack-lock.json
+quickshell/.qmlls.ini
+
