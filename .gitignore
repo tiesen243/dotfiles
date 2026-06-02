@@ -18,4 +18,5 @@ git/config.local
 gtk-3.0/bookmarks
 nvim/nvim-pack-lock.json
 quickshell/.qmlls.ini
+*.bak
 
