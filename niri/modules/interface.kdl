@@ -5,6 +5,13 @@ hotkey-overlay {
   skip-at-startup
 }
 
+// @see https://niri-wm.github.io/niri/Configuration%3A-Gestures.html#hot-corners
+gestures {
+  hot-corners {
+    off
+  }
+}
+
 // @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#prefer-no-csd
 prefer-no-csd
 
