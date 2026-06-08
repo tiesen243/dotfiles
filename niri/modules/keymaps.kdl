@@ -8,9 +8,9 @@ binds {
   Mod+B hotkey-overlay-title="Open a Web Browser: zen-browser" { spawn "zen-browser"; }
 
   // Quickshell
-  Mod+Space   { spawn-sh "quickshell ipc call appLauncher toggle"; }
-  Mod+V       { spawn-sh "quickshell ipc call clipboardManager toggle"; }
-  Mod+A       { spawn-sh "quickshell ipc call startMenu toggle"; }
+  Mod+Space   { spawn-sh "quickshell ipc call app-launcher toggle"; }
+  Mod+V       { spawn-sh "quickshell ipc call clipboard-manager toggle"; }
+  Mod+A       { spawn-sh "quickshell ipc call control-center toggle"; }
   Mod+Shift+B { spawn-sh "quickshell ipc call bar toggle"; }
 
   // Window focus and movement

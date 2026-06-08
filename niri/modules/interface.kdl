@@ -25,6 +25,7 @@ cursor {
 layout {
   gaps 4
 
+  background-color "transparent"
   center-focused-column "never"
 
   default-column-width { proportion 0.5; }

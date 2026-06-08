@@ -2,11 +2,10 @@ import Quickshell.Wayland
 import Quickshell
 import QtQuick
 
-import "../../Services"
+import qs.Services
 
 Scope {
   id: root
-  property font rootFont
 
   Variants {
     model: Quickshell.screens
@@ -15,16 +14,15 @@ Scope {
       required property var modelData
       screen: modelData
 
-      visible: VolumeService.isShow || BrightnessService.isShow
+      visible: Volume.isShow || Brightness.isShow
       focusable: false
       color: "transparent"
 
       WlrLayershell.layer: WlrLayer.Overlay
-      WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
       WlrLayershell.namespace: "quickshell-osd"
+      WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
       exclusionMode: ExclusionMode.Ignore
-      mask: Region {}
 
       anchors { right: true; top: true; bottom: true }
       implicitWidth: 70
@@ -35,15 +33,9 @@ Scope {
         anchors.verticalCenter: parent.verticalCenter
         spacing: 12
 
-        Volume {
-          id: volumePill
-          rootFont: root.rootFont
-        }
+        VolumeOSD {}
 
-        Brightness {
-          id: brightnessPill
-          rootFont: root.rootFont
-        }
+        BrightnessOSD {}
       }
     }
   }

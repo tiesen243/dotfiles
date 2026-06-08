@@ -20,3 +20,8 @@ window-rule {
   open-floating true
 }
 
+layer-rule {
+  match namespace="^quickshell-background$" 
+  place-within-backdrop true
+}
+

@@ -3,11 +3,10 @@ import Quickshell.Widgets
 import QtQuick.Layouts
 import QtQuick
 
-import "../../Services"
+import qs.Commons
 
 Item {
   id: root
-  property font rootFont
 
   implicitHeight: lockscreenPlayer.implicitHeight
 
@@ -26,8 +25,8 @@ Item {
     anchors.horizontalCenter: parent.horizontalCenter
     implicitWidth: 600
     implicitHeight: playerInfo.implicitHeight + 32
-    color: Matugen.surface
-    border { color: Matugen.primary; width: 1 }
+    color: Colors.surface
+    border { color: Colors.primary; width: 1 }
     radius: 16
 
     RowLayout {
@@ -41,7 +40,7 @@ Item {
 
         implicitWidth: 64
         implicitHeight: implicitWidth
-        color: Matugen.secondary
+        color: Colors.secondary
         radius: 8
 
         Image {
@@ -62,8 +61,8 @@ Item {
 
           anchors.centerIn: parent
           text: "󰎆"
-          color: Matugen.secondary
-          font: root.rootFont
+          color: Colors.secondary
+          font: Settings.getFont()
           visible: root.activePlayer && root.activePlayer.trackArtUrl === ""
         }
       }
@@ -78,12 +77,8 @@ Item {
 
           Layout.fillWidth: true
           text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
-          color: Matugen.primary
-          font {
-            pixelSize: root.rootFont.pixelSize * 1.25
-            family: root.rootFont.family
-            bold: true
-          }
+          color: Colors.primary
+          font: Settings.getFont(18, true)
           elide: Text.ElideRight
         }
 
@@ -93,8 +88,8 @@ Item {
 
           Layout.fillWidth: true
           text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
-          color: Matugen.primary
-          font: root.rootFont
+          color: Colors.primary
+          font: Settings.getFont()
           elide: Text.ElideRight
           visible: text !== ""
         }

@@ -3,11 +3,10 @@ import Quickshell.Io
 import QtQuick.Layouts
 import QtQuick
 
-import "../../Services"
+import qs.Commons
 
 Item {
   id: root
-  property font rootFont
 
   implicitHeight: lockscreenInfo.implicitHeight
 
@@ -23,7 +22,7 @@ Item {
 
       implicitWidth: 128
       implicitHeight: implicitWidth
-      border { color: Matugen.primary; width: 1 }
+      border { color: Colors.primary; width: 1 }
       radius: 16
 
       Image {
@@ -45,12 +44,8 @@ Item {
 
         anchors.margins: 0
         text: root.username
-        color: Matugen.primary
-        font {
-          pixelSize: root.rootFont.pixelSize * 4
-          family: root.rootFont.family
-          bold: true
-        }
+        color: Colors.primary
+        font: Settings.getFont(54, true)
       }
 
       Text {
@@ -59,12 +54,8 @@ Item {
         Accessible.name: "Current host: " + root.hostname
 
         text: root.hostname
-        color: Matugen.primary
-        font {
-          pixelSize: root.rootFont.pixelSize * 2
-          family: root.rootFont.family
-          bold: true
-        }
+        color: Colors.primary
+        font: Settings.getFont(28, true)
       }
     }
   }

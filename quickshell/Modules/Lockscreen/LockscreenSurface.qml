@@ -2,14 +2,13 @@ import QtQuick.Layouts
 import QtQuick.Effects
 import QtQuick
 
-import "../../Services"
+import qs.Commons
 
 Rectangle {
 	id: root
-  property font rootFont
 	required property LockscreenContext context
 
-	color: Matugen.surface
+	color: Colors.surface
 
   Image {
     id: backgroundImage
@@ -18,7 +17,7 @@ Rectangle {
     cache: true
     smooth: true
 
-    source: GlobalState.dotfiles + "/assets/_background.png"
+    source: Settings.home + "/dotfiles/assets/_background.png"
     fillMode: Image.PreserveAspectCrop
 
     layer.enabled: true
@@ -40,14 +39,12 @@ Rectangle {
 
     LockscreenInfo {
       id: lockscreenInfo
-      rootFont: root.rootFont
 
       Layout.fillWidth: true
     }
 
     LockscreenClock {
       id: lockscreenClock
-      rootFont: root.rootFont
 
       Layout.fillWidth: true
     }
@@ -57,14 +54,12 @@ Rectangle {
 
     LockscreenPlayer {
       id: lockscreenPlayer
-      rootFont: root.rootFont
 
       Layout.fillWidth: true
     }
 
     LockscreenInput {
       id: lockscreenInput
-      rootFont: root.rootFont
       context: root.context
 
       Layout.fillWidth: true

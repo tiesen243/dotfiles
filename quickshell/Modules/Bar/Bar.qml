@@ -1,130 +1,83 @@
-pragma ComponentBehavior: Bound
-
 import Quickshell.Wayland
-import Quickshell.Io
 import Quickshell
-import QtQuick.Layouts
 import QtQuick
+import QtQuick.Layouts
 
-import "../../Services"
+import qs.Commons
+import qs.Modules.Bar.Widgets
 
-Scope {
+Item {
   id: root
-  property font rootFont
-
-  IpcHandler {
-    target: "bar"
-
-    function toggle(): void {
-      GlobalState.isBarOpen = !GlobalState.isBarOpen
-    }
-  }
 
   Variants {
     model: Quickshell.screens
 
     PanelWindow {
       id: bar
-      required property var modelData
+      required property ShellScreen modelData
       screen: modelData
-      visible: GlobalState.isBarOpen
 
-			WlrLayershell.layer: WlrLayer.Top
-			WlrLayershell.namespace: "quickshell-bar"
+      WlrLayershell.layer: WlrLayer.Top
+      WlrLayershell.namespace: "quickshell-bar"
+      WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
 
-      anchors { top: true; left: true; right: true }
-      implicitHeight: 24
-      color: Matugen.surface
+      anchors.top: Settings.bar.position !== "bottom" ? true : 0
+      anchors.left: Settings.bar.position !== "right" ? true : 0
+      anchors.right: Settings.bar.position !== "left" ? true : 0
+      anchors.bottom: Settings.bar.position !== "top" ? true : 0
+      implicitHeight: Settings.isBarHorizontal ? Settings.bar.size : 0
+      implicitWidth: !Settings.isBarHorizontal ? Settings.bar.size * 2.5 : 0
+      color: Colors.surface
 
-      RowLayout {
-        id: leftRow
+      AutoLayout {
+        id: left
         anchors {
-          left: parent.left
-          verticalCenter: parent.verticalCenter
-          margins: 12
+          left: Settings.isBarHorizontal ? parent.left : undefined
+          top: !Settings.isBarHorizontal ? parent.top : undefined
+          verticalCenter: Settings.isBarHorizontal ? parent.verticalCenter : undefined
+          horizontalCenter: !Settings.isBarHorizontal ? parent.horizontalCenter : undefined
+          margins: Settings.style.margin
         }
-        spacing: 12
 
-        Text {
-          id: logo
+        Logo {}
+      }
 
-          text: "󰣇"
-          color: Matugen.primary
-          font: root.rootFont
-
-          MouseArea {
-            anchors.fill: parent
-            onClicked: GlobalState.isStartMenuOpen = !GlobalState.isStartMenuOpen
-          }
+      AutoLayout {
+        id: center
+        anchors {
+          horizontalCenter: parent.horizontalCenter
+          verticalCenter: parent.verticalCenter
+          margins: Settings.style.margin
         }
 
         Loader {
-          active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Hyprland"
+          active: Settings.isHyprland
           visible: active
-
-          sourceComponent: HyprlandWorkspace {
-            id: hyprlandWorkspace
-            rootFont: root.rootFont
-          }
+          sourceComponent: HyprlandWorkspaces {}
         }
 
         Loader {
-          active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri"
+          active: Settings.isNiri
           visible: active
-
-          sourceComponent: NiriWorkspace {
-            id: niriWorkspace
-            rootFont: root.rootFont
-          }
+          sourceComponent: NiriWorkspaces {}
         }
       }
 
-      Loader {
-        active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Hyprland"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-
-        sourceComponent: HyprlandWindowTitle {
-          id: hyprlandWindowTitle
-          rootFont: root.rootFont
-        }
-      }
-
-      Loader {
-        active: Quickshell.env("XDG_CURRENT_DESKTOP") === "Niri"
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
-
-        sourceComponent: NiriWindowTitle {
-          id: niriWindowTitle
-          rootFont: root.rootFont
-        }
-      }
-
-      RowLayout {
-        id: rightRow
+      AutoLayout {
+        id: right
         anchors {
-          right: parent.right
-          verticalCenter: parent.verticalCenter
-          margins: 12
-        }
-        spacing: 12
-
-        Tray {
-          id: tray
-          rootFont: root.rootFont
+          right: Settings.isBarHorizontal ? parent.right : undefined
+          bottom: !Settings.isBarHorizontal ? parent.bottom : undefined
+          verticalCenter: Settings.isBarHorizontal ? parent.verticalCenter : undefined
+          horizontalCenter: !Settings.isBarHorizontal ? parent.horizontalCenter : undefined
+          margins: Settings.style.margin
         }
 
-        Time {
-          id: time
-          rootFont: root.rootFont
-          popupAnchor: bar
-        }
+        Tray {}
 
-        Battery {
-          id: battery
-          rootFont: root.rootFont
-        }
+        Clock {}
+
+        UPower {}
       }
     }
   }

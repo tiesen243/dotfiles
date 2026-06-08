@@ -2,11 +2,10 @@ import QtQuick.Controls.Fusion
 import QtQuick.Layouts
 import QtQuick
 
-import "../../Services"
+import qs.Commons
 
 Item {
   id: root
-  property font rootFont
   property LockscreenContext context
 
   implicitHeight: lockscreenInput.implicitHeight
@@ -32,16 +31,16 @@ Item {
 				inputMethodHints: Qt.ImhSensitiveData
 				placeholderText: "Enter password"
 
-				font: root.rootFont
-				color: Matugen.on_surface
-				selectionColor: Matugen.on_primary
-				selectedTextColor: Matugen.primary
+				font: Settings.getFont()
+				color: Colors.on_surface
+				selectionColor: Colors.on_primary
+				selectedTextColor: Colors.primary
 
 				background: Rectangle {
 					radius: 8
-					color: Matugen.surface
+					color: Colors.surface
 					border { 
-					  color: root.context.showFailure ? Matugen.error : Matugen.primary
+					  color: root.context.showFailure ? Colors.error : Colors.primary
 					  width: 1
 					}
 				}
@@ -74,14 +73,14 @@ Item {
 					verticalAlignment: Text.AlignVCenter
 
 					text: parent.text
-					font: root.rootFont
-					color: Matugen.primary
+					font: Settings.getFont()
+					color: Colors.primary
 				}
 
 				background: Rectangle {
-					color: Matugen.surface
+					color: Colors.surface
 					border { 
-            color: Matugen.primary
+            color: Colors.primary
             width: 1
           }
 					radius: 8
@@ -94,7 +93,7 @@ Item {
 		Label {
 			visible: root.context.showFailure
 			text: "Incorrect password"
-			color: Matugen.error
+			color: Colors.error
 		}
 	}
 

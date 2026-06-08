@@ -2,11 +2,10 @@ import QtQuick.Controls.Fusion
 import QtQuick.Layouts
 import QtQuick
 
-import "../../Services"
+import qs.Commons
 
 Item {
   id: root
-  property font rootFont
 
   implicitHeight: lockscreenClock.implicitHeight
 
@@ -21,9 +20,8 @@ Item {
 
       Layout.alignment: Qt.AlignHCenter
 		  text: Qt.formatTime(root.date, "hh:mm")
-		  font.pointSize: root.rootFont.pointSize * 8
-		  font.family: root.rootFont.family
-		  color: Matugen.primary
+		  font: Settings.getFont(112, true)
+		  color: Colors.primary
 	  }
 
 	  Label {
@@ -31,8 +29,8 @@ Item {
 
       Layout.alignment: Qt.AlignHCenter
 	    text: Qt.formatDate(root.date, "dddd, MMMM dd yyyy")
-	    color: Matugen.secondary
-	    font: root.rootFont
+	    color: Colors.secondary
+	    font: Settings.getFont()
 	  }
 	}
 

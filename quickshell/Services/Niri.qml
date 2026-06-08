@@ -11,8 +11,13 @@ Singleton {
   property var activeToplevel: null
 
   function switchToWorkspace(id) {
-    niriSwitchProc.command = ["niri", "msg", "action", "focus-workspace", id]
-    niriSwitchProc.running = true
+    niriProc.command = ["niri", "msg", "action", "focus-workspace", id]
+    niriProc.running = true
+  }
+
+  function toggleOverview() {
+    niriProc.command = ["niri", "msg", "action", "toggle-overview"]
+    niriProc.running = true
   }
 
   Process {
@@ -59,6 +64,6 @@ Singleton {
   }
 
   Process {
-    id: niriSwitchProc
+    id: niriProc
   }
 }

@@ -1,67 +1,57 @@
-import QtQuick
+//@ pragma UseQApplication
+
 import Quickshell
+import QtQuick
 
 import qs.Modules.Bar
+import qs.Modules.Background
+import qs.Modules.ControlCenter
+import qs.Modules.AppLauncher
 import qs.Modules.Lockscreen
 import qs.Modules.OSD
-import qs.Modules.StartMenu
-
-import "./Modules"
+import qs.Modules.ClipboardManager
+import qs.Modules.NotificationPopup
 
 ShellRoot {
   id: root
-  property font rootFont: Qt.font({
-    pixelSize: 14,
-    family: "GeistMono Nerd Font Propo"
-  })
 
   Loader {
-    active: true
-    sourceComponent: Lockscreen { id: lockscreen; rootFont: root.rootFont }
+    id: bar
+    sourceComponent: Bar {}
   }
 
   Loader {
-    active: true
-    sourceComponent: Background { id: background }
+    id: background
+    sourceComponent: Background {}
   }
 
   Loader {
-    active: true
-    sourceComponent: Bar { id: bar; rootFont: root.rootFont }
+    id: controlCenter
+    sourceComponent: ControlCenter {}
   }
 
   Loader {
-    active: true
-    sourceComponent: NotificationPopup { id: notificationPopup; rootFont: root.rootFont }
+    id: appLauncher
+    sourceComponent: AppLauncher {}
   }
 
   Loader {
-    active: true
-    sourceComponent: StartMenu { id: startMenu; rootFont: root.rootFont }
+    id: clipboardManager
+    sourceComponent: ClipboardManager {}
   }
 
   Loader {
-    active: true
-    sourceComponent: BackgroundSelector { id: backgroundSelector }
+    id: lockscreen
+    sourceComponent: Lockscreen {}
   }
 
   Loader {
-    active: true
-    sourceComponent: AppLauncher { id: appLauncher; rootFont: root.rootFont }
+    id: osd
+    sourceComponent: OSD {}
   }
 
   Loader {
-    active: true
-    sourceComponent: ClipboardManager { id: clipboardManager; rootFont: root.rootFont }
-  }
-
-  Loader {
-    active: true
-    sourceComponent: OSD { id: osd; rootFont: root.rootFont }
-  }
-
-  Loader {
-    active: false
-    sourceComponent: ActivateLinux { id: activateLinux }
+    id: notificationPopup
+    sourceComponent: NotificationPopup {}
   }
 }
