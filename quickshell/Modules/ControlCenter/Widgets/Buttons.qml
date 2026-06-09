@@ -34,6 +34,7 @@ Item {
         implicitHeight: 42
         color: button.modelData.isChecked ? Colors.primary : Colors.on_primary
         radius: Settings.style.radius
+        opacity: buttonMouseArea.pressed ? 0.8 : 1.0
 
         Text {
           id: buttonLabel

@@ -36,6 +36,7 @@ Item {
         implicitHeight: 18
         color: Colors.primary
         radius: Settings.style.radius / 2
+        opacity: notificationsHeaderClearButtonMouseArea.pressed ? 0.8 : 1.0
 
         Text {
           anchors.centerIn: parent
@@ -45,6 +46,7 @@ Item {
         }
 
         MouseArea {
+          id: notificationsHeaderClearButtonMouseArea
           anchors.fill: parent
           cursorShape: Qt.PointingHandCursor
           onClicked: NotificationService.clearAll()

@@ -84,7 +84,7 @@ Item {
           implicitWidth: 28
           implicitHeight: implicitWidth
           color: Colors.primary
-          radius: 8
+          radius: Settings.style.radius
           opacity: buttonMouseArea.pressed ? 0.8 : 1.0
 
           HoverHandler { id: hoverHandler }
