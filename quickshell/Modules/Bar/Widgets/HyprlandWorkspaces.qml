@@ -20,16 +20,16 @@ Item {
         id: workspaceItem
         required property var modelData
         Accessible.role: Accessible.Button
-        Accessible.name: "Workspace " + modelData.id + (modelData.is_focused ? ", active" : "") + (modelData.is_urgent ? ", urgent" : "")
+        Accessible.name: "Workspace " + modelData.id + (modelData.focused ? ", active" : "") + (modelData.urgent ? ", urgent" : "")
 
         visible: modelData.id !== -98
         implicitWidth: Settings.isBarHorizontal 
-          ? modelData.is_focused ? Settings.bar.size * 1.5 : Settings.bar.size / 1.5
+          ? modelData.focused ? Settings.bar.size * 1.5 : Settings.bar.size / 1.5
           : Settings.bar.size / 2
         implicitHeight: Settings.isBarHorizontal
           ? Settings.bar.size / 2
-          : modelData.is_focused ? Settings.bar.size * 1.5 : Settings.bar.size / 1.5
-        color: modelData.is_focused ? Colors.on_surface 
+          : modelData.focused ? Settings.bar.size * 1.5 : Settings.bar.size / 1.5
+        color: modelData.focused ? Colors.on_surface 
           : (workspaceItemMouseArea.containsMouse ? Colors.on_muted : Colors.surface_bright)
         radius: Settings.style.radius
 

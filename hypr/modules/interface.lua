@@ -81,5 +81,11 @@ hl.animation({ leaf = "windowsMove", enabled = true, speed = 3.5, bezier = "flue
 
 hl.animation({ leaf = "fade", enabled = true, speed = 2, bezier = "fluent" })
 
-hl.animation({ leaf = "workspaces", enabled = true, speed = 3.5, bezier = "expo", style = "slidefadevert" })
+hl.animation({
+  leaf = "workspaces",
+  enabled = true,
+  speed = 3.5,
+  bezier = "expo",
+  style = hl.get_config("general.layout") == "scrolling" and "slidefadevert" or "slidefade",
+})
 hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 3, bezier = "fluent", style = "fade" })

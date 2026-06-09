@@ -23,10 +23,9 @@ hl.bind(priMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(priMod .. " + B", hl.dsp.exec_cmd(browser))
 
 -- Quickshell
-hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("quickshell ipc call appLauncher toggle"))
-hl.bind(priMod .. " + V", hl.dsp.exec_cmd("quickshell ipc call clipboardManager toggle"))
-hl.bind(priMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call startMenu toggle"))
-hl.bind(secMod .. " + B", hl.dsp.exec_cmd("quickshell ipc call bar toggle"))
+hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("quickshell ipc call app-launcher toggle"))
+hl.bind(priMod .. " + V", hl.dsp.exec_cmd("quickshell ipc call clipboard-manager toggle"))
+hl.bind(priMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call control-center toggle"))
 
 -- Window focus and movement
 local directions = { h = "left", j = "down", k = "up", l = "right" }
@@ -152,30 +151,3 @@ hl.bind("XF86AudioStop", hl.dsp.exec_cmd("playerctl stop"), { locked = true })
 hl.bind("PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
 hl.bind(priMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
 hl.bind(secMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode fullscreen"))
-
--- Switch workspace layout with priMod + D > D/M/O/S
-hl.bind(priMod .. " + D", hl.dsp.submap("layout"))
-hl.define_submap("layout", function()
-  hl.bind("D", function()
-    hl.config({ general = { layout = "dwindle" } })
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("M", function()
-    hl.config({ general = { layout = "master" } })
-
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("O", function()
-    hl.config({ general = { layout = "monocle" } })
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("S", function()
-    hl.config({ general = { layout = "scrolling" } })
-    hl.dispatch(hl.dsp.submap("reset"))
-  end)
-
-  hl.bind("ESCAPE", hl.dsp.submap("reset"))
-end)

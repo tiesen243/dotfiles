@@ -76,8 +76,36 @@ hl.config({
 
 hl.gesture({
   fingers = 3,
-  direction = "horizontal",
+  direction = hl.get_config("general.layout") == "scrolling" and "vertical" or "horizontal",
   action = "workspace",
+})
+
+hl.gesture({
+  fingers = 3,
+  direction = hl.get_config("general.layout") == "scrolling" and "left" or "up",
+  action = function()
+    local layout = hl.get_config("general.layout")
+
+    if layout == "scrolling" then
+      hl.dispatch(hl.dsp.layout("move +col"))
+    elseif layout == "monocle" then
+      hl.dispatch(hl.dsp.layout("cyclenext"))
+    end
+  end,
+})
+
+hl.gesture({
+  fingers = 3,
+  direction = hl.get_config("general.layout") == "scrolling" and "right" or "down",
+  action = function()
+    local layout = hl.get_config("general.layout")
+
+    if layout == "scrolling" then
+      hl.dispatch(hl.dsp.layout("move -col"))
+    elseif layout == "monocle" then
+      hl.dispatch(hl.dsp.layout("cycleprev"))
+    end
+  end,
 })
 
 -- Example per-device config
