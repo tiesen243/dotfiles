@@ -32,20 +32,17 @@ Singleton {
 
     stdout: StdioCollector {
       onStreamFinished: {
-        if (!text) {
-          root.list = [];
-          return;
-        }
+        if (!text) return root.list = []
 
-        const lines = text.trim().split("\n");
-        const parsedItems = [];
+        const lines = text.trim().split("\n")
+        const parsedItems = []
 
         for (let i = 0; i < lines.length; i++) {
-          const line = lines[i].trim();
-          if (line === "") continue;
+          const line = lines[i].trim()
+          if (line === "") continue
 
-          const parts = line.split("|");
-          if (parts.length < 3) continue;
+          const parts = line.split("|")
+          if (parts.length < 3) continue
 
           parsedItems.push({
             "id": parts[0],
@@ -54,7 +51,7 @@ Singleton {
           });
         }
 
-        root.list = parsedItems;
+        root.list = parsedItems
       }
     }
   }

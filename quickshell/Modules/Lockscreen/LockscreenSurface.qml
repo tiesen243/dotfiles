@@ -17,8 +17,9 @@ Rectangle {
     cache: true
     smooth: true
 
-    source: Settings.home + "/dotfiles/assets/_background.png"
+    source: Background.wallpaperDir
     fillMode: Image.PreserveAspectCrop
+    asynchronous: true
 
     layer.enabled: true
     layer.effect: MultiEffect {

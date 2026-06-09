@@ -65,6 +65,7 @@ Scope {
       color: "transparent"
 
       WlrLayershell.layer: WlrLayer.Overlay
+      WlrLayershell.namespace: "quickshell-clipboard-manager"
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
       WlrLayershell.exclusiveZone: -1
       

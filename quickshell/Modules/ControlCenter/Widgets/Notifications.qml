@@ -65,7 +65,7 @@ Item {
       }
 
       displaced: Transition {
-        NumberAnimation { properties: "x,y"; duration: 200; easing.type: Easing.OutQuad }
+        NumberAnimation { properties: "x,y"; duration: 200; easing.type: Easing.OutCubic }
       }
 
       delegate: Item {
@@ -79,10 +79,7 @@ Item {
         ListView.delayRemove: isRemoved
 
         Behavior on implicitHeight {
-          NumberAnimation { 
-            duration: 220 
-            easing.type: Easing.InOutQuad
-          }
+          NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
         }
 
         Rectangle {

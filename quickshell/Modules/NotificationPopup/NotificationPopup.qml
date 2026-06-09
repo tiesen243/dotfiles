@@ -37,9 +37,9 @@ Scope {
       visible: NotificationService.notifications.length > 0
 
       WlrLayershell.layer: WlrLayer.Overlay
+      WlrLayershell.namespace: "quickshell-notification-popup"
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
       WlrLayershell.exclusiveZone: -1
-      WlrLayershell.namespace: "notifications"
 
       anchors { top: true; right: true; }
       focusable: false

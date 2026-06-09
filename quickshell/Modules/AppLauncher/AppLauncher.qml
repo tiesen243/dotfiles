@@ -134,6 +134,7 @@ Scope {
       color: "transparent"
 
       WlrLayershell.layer: WlrLayer.Overlay
+      WlrLayershell.namespace: "quickshell-app-launcher"
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
       WlrLayershell.exclusiveZone: -1
       

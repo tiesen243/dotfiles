@@ -3,26 +3,59 @@
 import Quickshell
 import QtQuick
 
-import qs.Modules.Bar
+// --- 1. System & Background Layer ---
 import qs.Modules.Background
-import qs.Modules.ControlCenter
-import qs.Modules.AppLauncher
+import qs.Modules.WallpaperSelector
+
+// --- 2. Desktop UI Layer ---
+import qs.Modules.Bar
 import qs.Modules.Lockscreen
-import qs.Modules.OSD
+
+// --- 3. Windows & Popups Layer ---
+import qs.Modules.AppLauncher
+import qs.Modules.ControlCenter
 import qs.Modules.ClipboardManager
+
+// --- 4. System Overlays & Notifications ---
 import qs.Modules.NotificationPopup
+import qs.Modules.OSD
 
 ShellRoot {
   id: root
 
+  // ==========================================
+  // 1. SYSTEM & BACKGROUND LAYER
+  // ==========================================
+  Loader {
+    id: background
+    sourceComponent: Background {}
+  }
+
+  Loader {
+    id: wallpaperSelector
+    sourceComponent: WallpaperSelector {}
+  }
+
+  // ==========================================
+  // 2. DESKTOP UI LAYER
+  // ==========================================
   Loader {
     id: bar
     sourceComponent: Bar {}
   }
 
   Loader {
-    id: background
-    sourceComponent: Background {}
+    id: lockscreen
+    sourceComponent: Lockscreen {}
+  }
+
+
+  // ==========================================
+  // 3. WINDOWS & POPUPS LAYER
+  // ==========================================
+  Loader {
+    id: appLauncher
+    sourceComponent: AppLauncher {}
   }
 
   Loader {
@@ -31,20 +64,13 @@ ShellRoot {
   }
 
   Loader {
-    id: appLauncher
-    sourceComponent: AppLauncher {}
-  }
-
-  Loader {
     id: clipboardManager
     sourceComponent: ClipboardManager {}
   }
 
-  Loader {
-    id: lockscreen
-    sourceComponent: Lockscreen {}
-  }
-
+  // ==========================================
+  // 4. SYSTEM OVERLAYS & NOTIFICATIONS
+  // ==========================================
   Loader {
     id: osd
     sourceComponent: OSD {}

@@ -3,6 +3,7 @@ import Quickshell.Widgets
 import Quickshell
 import QtQuick
 
+import qs.Services
 import qs.Commons
 
 Scope {
@@ -37,8 +38,11 @@ Scope {
 
         Image {
           anchors.fill: parent
-          source: Settings.home + "/dotfiles/assets/_background.png"
+          source: Background.wallpaperDir + "?v=" + Background.wallpaperVer
           fillMode: Image.PreserveAspectCrop
+          asynchronous: true
+          cache: true
+          smooth: true
         }
       }
     }

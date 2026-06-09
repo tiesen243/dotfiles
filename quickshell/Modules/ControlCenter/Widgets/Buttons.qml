@@ -169,6 +169,7 @@ Item {
 
   property var actions: ({
     'toggle-wallpaper-selector': () => {
+      GlobalState.toggleWallpaperSelector()
     }
   })
 }
