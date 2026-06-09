@@ -13,15 +13,14 @@ Item {
   property font rootFont
   property bool isOpen
 
-  implicitWidth: footer.implicitWidth
+  Layout.fillWidth: true
   implicitHeight: footer.implicitHeight
 
   property string username
 
   RowLayout {
     id: footer
-
-    width: (1920 / 4) - Settings.style.margin * 2
+    anchors.fill: parent
 
     RowLayout {
       id: user

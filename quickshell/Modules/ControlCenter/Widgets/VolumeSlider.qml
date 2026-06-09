@@ -8,18 +8,19 @@ import qs.Services
 Item {
   id: root
 
-  implicitWidth: volumeSlider.implicitWidth
+  Layout.fillWidth: true
   implicitHeight: volumeSlider.implicitHeight
+  anchors.margins: Settings.style.margin
 
   RowLayout {
     id: volumeSlider
     spacing: Settings.style.margin
-    anchors.margins: Settings.style.margin
+    anchors.fill: parent
 
     Rectangle {
       id: volumeSliderLabel
 
-      implicitWidth: 60
+      implicitWidth: 55
       implicitHeight: volumeSliderLabelText.implicitHeight
       color: "transparent"
 
@@ -44,8 +45,7 @@ Item {
       id: volumeSliderControl
       Accessible.role: Accessible.Slider
       Accessible.name: "Volume control, current value: " + Math.round(Volume.value * 100) + (Volume.isMuted ? ", muted" : "")
-
-      implicitWidth: (1920 / 4) - Settings.style.margin * 3 - volumeSliderLabel.implicitWidth
+      Layout.fillWidth: true
 
       from: 0
       to: 100

@@ -11,7 +11,7 @@ Item {
 
   property bool isOpen: GlobalState.isControlCenterVisible
 
-  implicitWidth: buttons.implicitWidth
+  Layout.fillWidth: true
   implicitHeight: buttons.implicitHeight
 
   GridLayout {
@@ -129,8 +129,8 @@ Item {
       icon: "󰂛"; 
       name: "Do Not Disturb"; 
       isChecked: false;
-      getCmd: "quickshell ipc call notifications is_dnd";
-      setCmd: "quickshell ipc call notifications toggle_dnd";
+      getCmd: "quickshell ipc call notification is_dnd";
+      setCmd: "quickshell ipc call notification toggle_dnd";
       shortcut: "d";
     }
     ListElement { 

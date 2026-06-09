@@ -7,7 +7,7 @@ import QtQuick
 import qs.Commons
 import qs.Modules.ControlCenter.Widgets
 
-Item {
+Scope {
   id: root
 
   IpcHandler {
@@ -90,7 +90,7 @@ Item {
 
           BrightnessSlider {}
 
-          Item { Layout.fillHeight: true }
+          Notifications {}
 
           Footer {}
         }

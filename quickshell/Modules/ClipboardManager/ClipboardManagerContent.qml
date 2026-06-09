@@ -109,7 +109,7 @@ Rectangle {
       highlightFollowsCurrentItem: true
       keyNavigationEnabled: true
 
-      delegate: ClipboardDelegate {
+      delegate: ClipboardManagerDelegate {
         required property string clipId
         required property string type
         required property string content

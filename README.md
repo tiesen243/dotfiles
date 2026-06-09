@@ -1,4 +1,4 @@
-# Arch Linux / CachyOS config with Hyprland
+# Arch Linux / CachyOS config
 
 This repository contains my personal dotfiles for configuring Linux. The setup uses Hyprland / Niri as the desktop environment (Wayland compositor) and Quickshell for building custom desktop components.
 
@@ -93,7 +93,6 @@ XDG_PROJECTS_DIR="\$HOME/projects"
 EOF
 xdg-user-dirs-update
 ```
-
 
 Next, configure git by creating `~/.config/git/config.local` with the following content (replace the name and email with your own):
 

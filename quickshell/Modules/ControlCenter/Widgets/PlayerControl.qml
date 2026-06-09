@@ -10,15 +10,14 @@ import qs.Services
 Item {
   id: root
 
-  implicitWidth: playerControl.width
-  implicitHeight: playerControl.height
+  Layout.fillWidth: true
+  implicitHeight: 120
   visible: Player.activePlayer !== null
 
   Rectangle {
     id: playerControl
 
-    width: (1920 / 4) - Settings.style.margin * 2
-    height: 120
+    anchors.fill: parent
     color: Colors.on_primary
     radius: Settings.style.radius
 

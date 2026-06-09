@@ -6,7 +6,7 @@ import QtQuick.Layouts
 import qs.Commons
 import qs.Modules.Bar.Widgets
 
-Item {
+Scope {
   id: root
 
   Variants {

@@ -5,7 +5,7 @@ import QtQuick
 
 import qs.Commons
 
-Item {
+Scope {
   id: root
 
   Variants {

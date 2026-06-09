@@ -16,6 +16,20 @@ Singleton {
   property bool isReady: false
   property bool isShow: false
 
+  Binding {
+    target: root
+    property: "value"
+    value: root.defaultSink?.audio?.volume ?? 0
+    restoreMode: Binding.RestoreNone
+  }
+
+  Binding {
+    target: root
+    property: "isMuted"
+    value: root.defaultSink?.audio?.muted ?? false
+    restoreMode: Binding.RestoreNone
+  }
+
   function getIcon(): string {
     if (root.isMuted || root.value <= 0) return "󰖁"
     if (root.value < 0.33) return "󰕿"
@@ -38,7 +52,7 @@ Singleton {
     root.defaultSink.audio.muted = !root.isMuted
   }
 
-    PwObjectTracker {
+  PwObjectTracker {
     objects: [root.defaultSink]
   }
 
@@ -46,7 +60,6 @@ Singleton {
     target: root.defaultSink?.audio ?? null
 
     function onVolumeChanged() {
-      root.value = root.defaultSink.audio.volume
       if (root.isReady && !GlobalState.isControlCenterVisible) {
         root.isShow = true
         volumeHideTimer.restart()
@@ -55,7 +68,6 @@ Singleton {
     }
 
     function onMutedChanged() {
-      root.isMuted = root.defaultSink.audio.muted
       if (root.isReady && !GlobalState.isControlCenterVisible) {
         root.isShow = true
         volumeHideTimer.restart()

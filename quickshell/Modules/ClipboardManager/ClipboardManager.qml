@@ -57,7 +57,7 @@ Scope {
       id: clipboardWindow
       required property var modelData
       screen: modelData
-      visible: GlobalState.isClipboardVisible || clipboardContent.implicitHeight > 0
+      visible: GlobalState.isClipboardVisible || clipboardManagerContent.implicitHeight > 0
 
       anchors.bottom: true
       implicitWidth: 1920 / 2
@@ -71,13 +71,13 @@ Scope {
       onVisibleChanged: {
         if (!visible) return root.searchQuery = ""
 
-        clipboardContent.searchFieldFocus = true
+        clipboardManagerContent.searchFieldFocus = true
         Clipboard.refresh() 
         root.filterClips(root.searchQuery)
       }
 
-      ClipboardContent {
-        id: clipboardContent
+      ClipboardManagerContent {
+        id: clipboardManagerContent
       }
     }
   }

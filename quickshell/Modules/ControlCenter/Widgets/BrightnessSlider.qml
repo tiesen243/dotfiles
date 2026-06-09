@@ -8,18 +8,19 @@ import qs.Services
 Item {
   id: root
 
-  implicitWidth: brightnessSlider.implicitWidth
+  Layout.fillWidth: true
   implicitHeight: brightnessSlider.implicitHeight
+  anchors.margins: Settings.style.margin
 
   RowLayout {
     id: brightnessSlider
     spacing: Settings.style.margin
-    anchors.margins: Settings.style.margin
+    anchors.fill: parent
 
     Rectangle {
       id: brightnessSliderLabel
 
-      implicitWidth: 60
+      implicitWidth: 55
       implicitHeight: volumeSliderLabelText.implicitHeight
       color: "transparent"
 
@@ -44,8 +45,7 @@ Item {
       id: brightnessSliderControl
       Accessible.role: Accessible.Slider
       Accessible.name: "Brightness control, current value: " + Brightness.value
-
-      implicitWidth: (1920 / 4) - Settings.style.margin * 3 - brightnessSliderLabel.implicitWidth
+      Layout.fillWidth: true
 
       from: 0
       to: 100
