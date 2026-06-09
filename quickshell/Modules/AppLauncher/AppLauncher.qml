@@ -12,6 +12,7 @@ Scope {
   id: root
 
   property string searchQuery: ""
+  property string searchMode: "app" 
 
   IpcHandler {
     target: "app-launcher"
@@ -21,29 +22,94 @@ Scope {
   }
 
   ListModel {
-    id: filteredAppModel
+    id: searchResultModel
   }
 
   function filterApps(query = ""): void {
-    filteredAppModel.clear()
-    const lowerQuery = query.toLowerCase().trim()
+    searchResultModel.clear()
+    const trimmed = query.trim()
+
+    if (trimmed.startsWith("?")) {
+      searchMode = "web"
+      processWebSearch(trimmed.substring(1).trim())
+    } else if (trimmed.startsWith("=")) {
+      searchMode = "calc"
+      processCalc(trimmed.substring(1).trim())
+    } else {
+      searchMode = "app"
+      processAppSearch(trimmed)
+    }
+  }
+
+  function processAppSearch(query): void {
+    const lowerQuery = query.toLowerCase()
     const filtered = []
 
     for (let i = 0; i < Apps.list.length; i++) {
       const item = Apps.list[i]
       if (!query || item.name.toLowerCase().includes(lowerQuery)) {
         filtered.push({
+          type: "app",
           name: item.name,
-          exec: item.exec,
-          icon: item.icon ? "image://icon/" + item.icon : "",
+          details: item.exec,
+          icon: item.icon ? "image://icon/" + item.icon : "application-x-executable",
           terminal: item.terminal
         })
       }
     }
 
-    if (filtered.length > 0) {
-      filteredAppModel.append(filtered)
+    if (filtered.length > 0) searchResultModel.append(filtered)
+  }
+
+  function processWebSearch(query): void {
+    if (!query) return
+    
+    searchResultModel.append({
+      type: "web",
+      name: "Search Google for: \"" + query + "\"",
+      details: "https://www.google.com/search?q=" + encodeURIComponent(query),
+      icon: "image://icon/web-browser",
+      terminal: false
+    })
+  }
+
+  function processCalc(query): void {
+    if (!query) return
+    
+    try {
+      const sanitized = query.replace(/[^0-9\+\-\*\/\(\)\.\s]/g, '')
+      if (sanitized.length === 0) return
+
+      const result = Function('"use strict"; return (' + sanitized + ')')()
+      
+      if (result !== undefined && !isNaN(result)) {
+        searchResultModel.append({
+          type: "calc",
+          name: "= " + result,
+          details: result.toString(),
+          icon: "image://icon/accessories-calculator",
+          terminal: false
+        })
+      }
+    } catch (e) {
+      searchResultModel.append({
+        type: "calc_error",
+        name: "Invalid expression",
+        details: "",
+        icon: "image://icon/accessories-calculator",
+        terminal: false
+      })
     }
+  }
+
+  function executeResult(item): void {
+    if (!item) return
+
+    if (item.type === "app") Apps.launch(item.details, item.terminal)
+    else if (item.type === "web") Apps.launch("xdg-open '" + item.details + "'", false)
+    else if (item.type === "calc") Apps.launch("wl-copy '" + item.details + "'", false)
+
+    GlobalState.toggleAppLauncher()
   }
 
   Connections {

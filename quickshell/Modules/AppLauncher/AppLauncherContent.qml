@@ -1,8 +1,9 @@
 pragma ComponentBehavior: Bound
 
-import QtQuick
-import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick
+
 import qs.Commons
 import qs.Services
 
@@ -45,7 +46,9 @@ Rectangle {
       leftPadding: searchIcon.width + Settings.style.margin * 3
 
       text: root.searchQuery
-      placeholderText: "Search applications..."
+      placeholderText: root.searchMode === "web" ? "Web search (prefix with '?', e.g. '?quickshell')..." :
+        root.searchMode === "calc" ? "Calculator (prefix with '=', e.g. '=2+2')..." : "Search applications..."
+      
       font: Settings.getFont()
       color: Colors.on_surface
       selectionColor: Colors.primary
@@ -82,10 +85,10 @@ Rectangle {
         }
 
         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-          const selectedItem = filteredAppModel.get(appList.currentIndex)
-          if (selectedItem) Apps.launch(selectedItem.exec, selectedItem.terminal)
-
-          GlobalState.toggleAppLauncher()
+          const selectedItem = searchResultModel.get(appList.currentIndex)
+          if (selectedItem) {
+            root.executeResult(selectedItem) // Gọi bộ xử lý trung tâm ở AppLauncher.qml
+          }
           event.accepted = true
           return
         }
@@ -96,14 +99,14 @@ Rectangle {
           return
         }
 
-        if (filteredAppModel.count === 0) return
+        if (searchResultModel.count === 0) return
         const isNext = event.key === Qt.Key_Down || event.key === Qt.Key_Tab || (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_N)
         const isPrev = event.key === Qt.Key_Up || event.key === Qt.Key_Backtab || (event.key === Qt.Key_Tab && (event.modifiers & Qt.ShiftModifier)) || (event.modifiers & Qt.ControlModifier && event.key === Qt.Key_P)
 
         if (isNext || isPrev) {
           event.accepted = true
           let idx = appList.currentIndex
-          if (isNext) idx = Math.min(idx + 1, filteredAppModel.count - 1)
+          if (isNext) idx = Math.min(idx + 1, searchResultModel.count - 1)
           else if (isPrev) idx = Math.max(idx - 1, 0)
           appList.currentIndex = idx
         }
@@ -112,9 +115,9 @@ Rectangle {
 
     ListView {
       id: appList
-      model: filteredAppModel
+      model: searchResultModel // Sử dụng model chung mới
       Accessible.role: Accessible.List
-      Accessible.name: "Filtered Application List"
+      Accessible.name: "Filtered Search List"
 
       Layout.fillWidth: true
       Layout.fillHeight: true
@@ -125,21 +128,22 @@ Rectangle {
       keyNavigationEnabled: true
 
       delegate: AppLauncherDelegate {
+        required property string type
         required property string name
-        required property string exec
+        required property string details
         required property string icon
         required property bool terminal
 
         modelData: {
+          "type": type,
           "name": name,
-          "exec": exec,
+          "details": details,
           "icon": icon,
           "terminal": terminal
         }
         
         onClicked: {
-          Apps.launch(exec, terminal)
-          GlobalState.toggleAppLauncher()
+          root.executeResult(modelData)
         }
       }
     }
