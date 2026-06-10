@@ -41,17 +41,21 @@ Item {
 
         Image {
           id: trackAlbumImage
-          anchors.fill: parent
+          Accessible.role: Accessible.Graphic
+          Accessible.name: Player.track ? "Album art for " + Player.trackTitle : "No track playing"
 
+          anchors.fill: parent
+          source: Player.trackArtUrl
           fillMode: Image.PreserveAspectCrop
-          source: Player.trackArtUrl || ""
           visible: source != "" 
         }
 
         Text {
           id: trackAlbumFallback
-          anchors.centerIn: parent
+          Accessible.role: Accessible.StaticText
+          Accessible.name: Player.track ? "No album art available for " + Player.trackTitle : "No track playing"
 
+          anchors.centerIn: parent
           text: "󰎆"
           color: Colors.secondary
           font: Settings.getFont(24)
@@ -66,7 +70,10 @@ Item {
         Layout.alignment: Qt.AlignVCenter
 
         Text {
-          text: Player.trackTitle || "Unknown Title"
+          Accessible.role: Accessible.StaticText
+          Accessible.name: Player.track ? "Track title: " + Player.trackTitle : "No track playing"
+
+          text: Player.trackTitle
           color: Colors.on_surface
           font: Settings.getFont()
           
@@ -75,7 +82,10 @@ Item {
         }
 
         Text {
-          text: Player.trackArtist || "Unknown Artist"
+          Accessible.role: Accessible.StaticText
+          Accessible.name: Player.track ? "Artist(s): " + Player.trackArtist : "No track playing"
+
+          text: Player.trackArtist
           color: Colors.on_surface
           font: Settings.getFont()
           Layout.fillWidth: true
@@ -83,7 +93,10 @@ Item {
         }
 
         Text {
-          text: Player.trackAlbum || "Unknown Album"
+          Accessible.role: Accessible.StaticText
+          Accessible.name: Player.track ? "Album: " + Player.trackAlbum : "No track playing"
+
+          text: Player.trackAlbum
           color: Colors.on_surface
           font: Settings.getFont()
           Layout.fillWidth: true
@@ -97,6 +110,8 @@ Item {
 
           Text {
             id: previousButton
+            Accessible.role: Accessible.Button
+            Accessible.name: "Previous track button, " + (Player.activePlayer && Player.activePlayer && Player.activePlayer.canGoPrevious ? "can go to previous track" : "cannot go to previous track")
 
             text: ""
             color: Colors.on_surface
@@ -111,6 +126,8 @@ Item {
 
           Text {
             id: playPauseButton
+            Accessible.role: Accessible.Button
+            Accessible.name: "Play/Pause button, currently " + (Player.state === MprisPlaybackState.Playing ? "playing" : Player.state === MprisPlaybackState.Paused ? "paused" : "stopped")
 
             text: Player.state === MprisPlaybackState.Playing ? "" : Player.state === MprisPlaybackState.Paused ? "" : ""
             color: Colors.on_surface
@@ -125,6 +142,8 @@ Item {
 
           Text {
             id: nextButton
+            Accessible.role: Accessible.Button
+            Accessible.name: "Next track button, " + (Player.activePlayer && Player.activePlayer && Player.activePlayer.canGoNext ? "can go to next track" : "cannot go to next track")
 
             text: ""
             color: Colors.on_surface
@@ -167,6 +186,8 @@ Item {
 
           Text {
             id: positionLabel
+            Accessible.role: Accessible.StaticText
+            Accessible.name: Player.activePlayer ? "Current track position: " + Utils.formatTime(Player.activePlayer.position) + " out of " + Utils.formatTime(Player.trackLength) : "Current track position: no active player"
 
             text: Player.activePlayer ? `${Utils.formatTime(Player.activePlayer.position)} / ${Utils.formatTime(Player.trackLength)}` : "00:00 / 00:00"
             color: Colors.on_surface

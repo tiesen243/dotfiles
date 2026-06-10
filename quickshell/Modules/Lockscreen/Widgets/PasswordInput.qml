@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick
 
 import qs.Commons
+import qs.Modules.Lockscreen
 
 Item {
   id: root

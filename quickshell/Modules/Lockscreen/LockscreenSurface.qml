@@ -5,6 +5,8 @@ import QtQuick
 import qs.Commons
 import qs.Services
 
+import qs.Modules.Lockscreen.Widgets
+
 Rectangle {
 	id: root
 	required property LockscreenContext context
@@ -39,13 +41,13 @@ Rectangle {
     anchors.margins: 32
     spacing: 32
 
-    LockscreenInfo {
+    Information {
       id: lockscreenInfo
 
       Layout.fillWidth: true
     }
 
-    LockscreenClock {
+    Clock {
       id: lockscreenClock
 
       Layout.fillWidth: true
@@ -54,13 +56,13 @@ Rectangle {
 
     Item { Layout.fillHeight: true }
 
-    LockscreenPlayer {
+    Player {
       id: lockscreenPlayer
 
       Layout.fillWidth: true
     }
 
-    LockscreenInput {
+    PasswordInput {
       id: lockscreenInput
       context: root.context
 

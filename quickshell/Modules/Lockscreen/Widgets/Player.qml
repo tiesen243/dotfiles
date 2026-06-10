@@ -4,20 +4,13 @@ import QtQuick.Layouts
 import QtQuick
 
 import qs.Commons
+import qs.Services
 
 Item {
   id: root
 
   implicitHeight: lockscreenPlayer.implicitHeight
-
-  property var activePlayer: {
-    const players = Mpris.players.values;
-    if (!players || players.length === 0) return null;
-
-    for (const player of players)
-      if (player.playbackState === MprisPlaybackState.Playing) return player;
-    return players[0];
-  }
+  visible: Player.activePlayer !== null
 
   Rectangle {
     id: lockscreenPlayer
@@ -41,29 +34,29 @@ Item {
         implicitWidth: 64
         implicitHeight: implicitWidth
         color: Colors.secondary
-        radius: 8
+        radius: Settings.style.radius
 
         Image {
           id: trackAlbumImage
           Accessible.role: Accessible.Graphic
-          Accessible.name: root.activePlayer ? "Album art for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") : "No active media player"
+          Accessible.name: Player.activePlayer ? "Album art for " + Player.trackTitle : "No active media player"
 
           anchors.fill: parent
-          source: root.activePlayer && root.activePlayer.trackArtUrl ? root.activePlayer.trackArtUrl : ""
+          source: Player.trackArtUrl || ""
           fillMode: Image.PreserveAspectCrop
-          visible: root.activePlayer && root.activePlayer.trackArtUrl !== ""
+          visible: source != ""
         }
 
         Text {
           id: trackAlbumFallback
           Accessible.role: Accessible.StaticText
-          Accessible.name: root.activePlayer ? "No album art available for " + (root.activePlayer.metadata["xesam:title"] || "unknown track") : "No active media player"
+          Accessible.name: Player.activePlayer ? "No album art available for " + Player.trackTitle : "No active media player"
 
           anchors.centerIn: parent
           text: "󰎆"
-          color: Colors.secondary
-          font: Settings.getFont()
-          visible: root.activePlayer && root.activePlayer.trackArtUrl === ""
+          color: Colors.on_secondary
+          font: Settings.getFont(20)
+          visible: trackAlbumImage.status != Image.Ready
         }
       }
 
@@ -73,10 +66,10 @@ Item {
 
         Text {
           Accessible.role: Accessible.StaticText
-          Accessible.name: root.activePlayer ? "Current track: " + (root.activePlayer.metadata["xesam:title"] || "unknown title") : "No active player"
+          Accessible.name: Player.activePlayer ? "Track title: " + Player.trackTitle : "No active player"
 
           Layout.fillWidth: true
-          text: root.activePlayer ? root.activePlayer.metadata["xesam:title"] || "Unknown Title" : "No active player"
+          text: Player.trackTitle
           color: Colors.primary
           font: Settings.getFont(18, true)
           elide: Text.ElideRight
@@ -84,10 +77,10 @@ Item {
 
         Text {
           Accessible.role: Accessible.StaticText
-          Accessible.name: root.activePlayer ? "Track artist: " + (root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "unknown artist") : "No active player"
+          Accessible.name: Player.activePlayer ? "Artist(s): " + Player.trackArtist : "No active player"
 
           Layout.fillWidth: true
-          text: root.activePlayer && root.activePlayer.metadata["xesam:artist"] ? root.activePlayer.metadata["xesam:artist"].join(", ") : "" 
+          text: Player.trackArtist
           color: Colors.primary
           font: Settings.getFont()
           elide: Text.ElideRight
