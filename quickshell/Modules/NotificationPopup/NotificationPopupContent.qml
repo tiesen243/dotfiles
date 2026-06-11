@@ -13,7 +13,7 @@ ColumnLayout {
 
   anchors { 
     fill: parent
-    topMargin: GlobalState.isBarVisible ? Settings.bar.size : 4
+    topMargin: GlobalState.isBarVisible ? Settings.bar.size + 4 : 4
     rightMargin: 4
   }
   implicitWidth: parent.width - 4

@@ -45,7 +45,7 @@ Scope {
       focusable: false
       color: "transparent"
       implicitWidth: 1920 / 5
-      implicitHeight: popupContent.implicitHeight + (GlobalState.isBarVisible ? Settings.bar.size : 4)
+      implicitHeight: popupContent.implicitHeight + (GlobalState.isBarVisible ? Settings.bar.size + 4 : 4)
 
       NotificationPopupContent {
         id: popupContent
