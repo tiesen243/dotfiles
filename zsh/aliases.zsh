@@ -127,7 +127,5 @@ if (( $+commands[bun] )); then
   alias br='bun run'
 
   alias b='bun'
-  alias bf='bun --bun run format'
-  alias bl='bun --bun run lint'
   alias bt='bun test'
 fi
