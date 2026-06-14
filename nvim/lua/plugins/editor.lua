@@ -100,7 +100,7 @@ return {
           { section = "keys", gap = 1, padding = 1 },
         },
       },
-      explorer = { enabled = true },
+      explorer = { enabled = false },
       indent = { enabled = true },
       image = { enabled = true },
       input = { enabled = true },
