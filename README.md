@@ -1,30 +1,28 @@
-# Arch Linux / CachyOS config
-
 This repository contains my personal dotfiles for configuring Linux. The setup uses Hyprland / Niri as the desktop environment (Wayland compositor) and Quickshell for building custom desktop components.
 
 ## Preview
 
 ### Overview
 
-![preview-01](./assets/preview-01.png)
+<img width="1920" height="1080" alt="Screenshot_2026-06-18_215258" src="https://github.com/user-attachments/assets/5ec9ac47-613c-4da9-888d-7a321b4fd3a1" />
 
-![preview-02](./assets/preview-02.png)
+<img width="1920" height="1080" alt="Screenshot_2026-06-18_215545" src="https://github.com/user-attachments/assets/87287686-965f-431d-8a94-924ff139f5ea" />
 
 ### App launcher
 
-![preview-03](./assets/preview-03.png)
+<img width="1920" height="1080" alt="Screenshot_2026-06-18_215421" src="https://github.com/user-attachments/assets/10da27d6-5f09-4512-807a-28080708e4ff" />
 
 ### Clipboard manager
 
-![preview-04](./assets/preview-04.png)
+<img width="1920" height="1080" alt="Screenshot_2026-06-18_215503" src="https://github.com/user-attachments/assets/cb5a6434-35c0-4672-9cfc-ec13251ba72d" />
 
 ### Lock screen
 
-![preview-05](./assets/preview-05.png)
+<img width="1920" height="1080" alt="Screenshot_2026-06-18_215800" src="https://github.com/user-attachments/assets/fc7c0280-b1d7-43af-84e6-87cb9aeeeb94" />
 
 ### Neovim
 
-![preview-06](./assets/preview-06.png)
+<img width="1920" height="1080" alt="Screenshot_2026-06-18_215930" src="https://github.com/user-attachments/assets/ab034c4b-c772-4f61-9eff-0b77f52f908e" />
 
 ## Automatic install (Recommended)
 
