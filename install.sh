@@ -127,9 +127,12 @@ config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lazygit lsd m
 for item in "${config_items[@]}"; do
   if [ -e "$HOME/.config/$item" ] || [ -L "$HOME/.config/$item" ]; then
     mv "$HOME/.config/$item" "$BACKUP_DIR/"
-    ln -s ~/dotfiles/$item ~/.config/
   fi
+
+  ln -s ~/dotfiles/$item ~/.config/
 done
+
+ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv
 
 # Clean up backup directory if it ends up empty
 rmdir "$BACKUP_DIR" 2>/dev/null || echo "--> Existing configs backed up to $BACKUP_DIR"

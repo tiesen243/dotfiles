@@ -1,7 +1,6 @@
 # System utilities
 bluez
 bluez-utils
-btrfs-assistant
 power-profiles-daemon
 python-gobject
 ufw
