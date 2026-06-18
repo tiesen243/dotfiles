@@ -116,9 +116,9 @@ if (( $+commands[bun] )); then
   alias ba='bun add'
   alias bad='bun add -d'
   alias bap='bun add -p'
-  alias bR='bun remove'
+  alias brm='bun remove'
   alias bu='bun update'
-  alias bU='bun update --interactive --recursive'
+  alias bur='bun update --interactive --recursive'
 
   alias bx='bunx --bun'
   alias bd='bun --bun run dev'

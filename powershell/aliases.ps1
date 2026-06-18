@@ -30,8 +30,8 @@ if (Get-Command git -ErrorAction SilentlyContinue) {
     function gco { git commit -m $args }
     function gca { git commit --amend $args }
 
-    function gP { git push $args }
-    function gU { git pull $args }
+    function gph { git push $args }
+    function gul { git pull $args }
     function gf { git fetch $args }
     
     function gsw { git switch $args }
@@ -98,9 +98,9 @@ if (Get-Command bun -ErrorAction SilentlyContinue) {
     function ba { bun add $args }
     function bad { bun add -d $args }
     function bap { bun add -p $args }
-    function bR { bun remove $args }
+    function brm { bun remove $args }
     function bu { bun update $args }
-    function bU { bun update --interactive --recursive $args }
+    function bur { bun update --interactive --recursive $args }
 
     function bx { bunx --bun $args }
     function bd { bun --bun run dev $args }
