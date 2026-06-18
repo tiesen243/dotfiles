@@ -1,4 +1,4 @@
-# Yuki Theme v1.0.0
+﻿# Yuki Theme v1.0.0
 #
 # Copyright 2026, All rights reserved
 #
