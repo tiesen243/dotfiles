@@ -79,7 +79,7 @@ if (( $+commands[git] )); then
     alias grl='git clone'
   fi
 
-  function gcm() {
+  function gcz() {
     local types=(feat chore style fix docs refactor test ci build perf revert)
     local type=$(print -l "${types[@]}" | fzf --height=40% --layout=reverse --prompt="Select commit type: ")
     if [[ -z "$type" ]]; then
@@ -123,6 +123,7 @@ if (( $+commands[bun] )); then
   alias bx='bunx --bun'
   alias bd='bun --bun run dev'
   alias bb='bun --bun run build'
+  alias bs='bun --bun run start'
   alias br='bun run'
 
   alias b='bun'
