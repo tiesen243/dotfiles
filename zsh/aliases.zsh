@@ -1,5 +1,4 @@
 # ------------       General        ------------
-alias icon="kitten unicode-input"
 alias icat="kitten icat"
 alias cls="clear"
 alias q="exit"

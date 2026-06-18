@@ -48,8 +48,9 @@ echo "Select a window manager to install:"
 echo "1) Hyprland"
 echo "2) Niri"
 echo "3) Both"
+echo "4) None"
 echo "-----------------------------------------"
-read -p "Enter your choice (1-3): " wm_choice
+read -p "Enter your choice (1-4): " wm_choice
 case $wm_choice in
   1) wm_pkg="hyprland xdg-desktop-portal-hyprland" ;;
   2) wm_pkg="niri xdg-desktop-portal-wlr" ;;
@@ -85,7 +86,6 @@ if [ -f "$HOME/dotfiles/package.txt" ]; then
     $(grep -v '^#' ~/dotfiles/package.txt) $browser_pkg $wm_pkg
 else
   if [ -n "$browser_pkg" ] || [ -n "$wm_pkg" ]; then
-    echo "--> Installing selected browser..."
     yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg $wm_pkg
   else
     echo "⚠️ Warning: ~/dotfiles/package.txt not found and no browser selected!"
