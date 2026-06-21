@@ -20,6 +20,14 @@ window-rule {
   open-floating true
 }
 
+window-rule {
+  match app-id=r#"^Waydroid$"#
+
+  default-column-width { fixed 634; }
+  min-width 634
+  max-width 634
+}
+
 layer-rule {
   match namespace="^quickshell-background$" 
   place-within-backdrop true

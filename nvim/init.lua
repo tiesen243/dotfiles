@@ -16,6 +16,8 @@ require("yuki").setup({
     "plugins.langs.lua",
     "plugins.langs.markdown",
 
+    "plugins.langs.c",
+
     "plugins.langs.tailwind",
     "plugins.langs.typescript",
 
