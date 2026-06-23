@@ -103,9 +103,9 @@ if (Get-Command bun -ErrorAction SilentlyContinue) {
     function bur { bun update --interactive --recursive $args }
 
     function bx { bunx --bun $args }
-    function bd { bun --bun run dev $args }
-    function bb { bun --bun run build $args }
-    function bs { bun --bun start $args }
+    function bd { bun run dev $args }
+    function bb { bun run build $args }
+    function bs { bun start $args }
     function br { bun run $args }
 
     function b { bun $args }
