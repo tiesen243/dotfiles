@@ -75,7 +75,7 @@ local M = {
 
       return {
         auto_insert_mode = true,
-        model = "gemini-3.1-pro-preview",
+        model = "gpt-5-mini",
         question_header = "  " .. user .. " ",
         answer_header = "  Copilot ",
         sticky = { "#buffer" },

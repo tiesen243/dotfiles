@@ -77,7 +77,7 @@ yuki_directory() {
   fi
 }
 
-PROMPT+='%F{yellow}%B$(yuki_directory)'
+PROMPT+='%F{blue}%B$(yuki_directory)'
 # }}}
 
 # Async git segment {{{
