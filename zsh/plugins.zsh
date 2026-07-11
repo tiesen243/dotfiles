@@ -26,5 +26,5 @@ _zplugin_load zsh-users zsh-syntax-highlighting
 _zplugin_load agkozak zsh-z
 
 # ------------    Config Plugins    ------------
-ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSHZ_DATA="$XDG_CACHE_HOME/zsh/z"
