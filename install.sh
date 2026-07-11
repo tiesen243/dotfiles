@@ -58,6 +58,22 @@ case $wm_choice in
   *) wm_pkg="" ;;
 esac
 
+
+echo "-----------------------------------------"
+echo "           COMPONENT SELECTION                  "
+echo "-----------------------------------------"
+echo "Select a utility to install:"
+echo "1) Quickshell"
+echo "2) Hyprpaper + Hyprlock"
+echo "-----------------------------------------"
+read -p "Enter your choice (1-4): " utility_choice
+case $utility_choice in
+  1) utility_pkg="quickshell" ;;
+  2) utility_pkg="hyprpaper hyprlock" ;;
+  *) utility_pkg="" ;;
+esac
+echo "Note: If you select quickshell, remember to configure it in niri/modules/autostart.conf or hypr/modules/autostart.lua and {hypr,niri}/hypridle.conf"
+
 echo "-----------------------------------------"
 echo "         BROWSER SELECTION               "
 echo "-----------------------------------------"
@@ -83,10 +99,10 @@ esac
 echo "--> Installing packages from the list..."
 if [ -f "$HOME/dotfiles/package.txt" ]; then
   yes | yay -S --needed --noconfirm --answerclean All --answerdiff None \
-    $(grep -v '^#' ~/dotfiles/package.txt) $browser_pkg $wm_pkg
+    $(grep -v '^#' ~/dotfiles/package.txt) $browser_pkg $wm_pkg $utility_pkg
 else
   if [ -n "$browser_pkg" ] || [ -n "$wm_pkg" ]; then
-    yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg $wm_pkg
+    yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg $wm_pkg $utility_pkg
   else
     echo "⚠️ Warning: ~/dotfiles/package.txt not found and no browser selected!"
   fi

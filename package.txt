@@ -9,7 +9,6 @@ upower
 # Hyprland & Shell components
 hypridle
 hyprpolkitagent
-quickshell
 
 # Fonts
 noto-fonts

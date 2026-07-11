@@ -112,4 +112,8 @@ function M.insert_package_json(root_files, field, fname)
   return M.root_markers_with_field(root_files, { "package.json", "package.json5" }, field, fname)
 end
 
+function M.get_time()
+  return os.date("%H:%M")
+end
+
 return M

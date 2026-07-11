@@ -25,15 +25,15 @@ fi
 if (( $+commands[lsd] )); then
   alias ls='lsd'
   
-  alias lld='lsd -l --directory-only'
-  alias lt='lsd --tree --depth 3'
-  alias lla='lsd -la'
-  alias la='lsd -a'
-  alias ll='lsd -l'
+  alias lld='lsd -l --directory-only 2> /dev/null'
+  alias lt='lsd --tree --depth 3 2> /dev/null'
+  alias lla='lsd -la 2> /dev/null'
+  alias la='lsd -a 2> /dev/null'
+  alias ll='lsd -l 2> /dev/null'
 else
-  alias ll='ls -lh'
-  alias la='ls -A'
-  alias lla='ls -lah'
+  alias ll='ls -lh 2> /dev/null'
+  alias la='ls -A 2> /dev/null'
+  alias lla='ls -lah 2> /dev/null'
 fi
 
 # ------------        Git           ------------
