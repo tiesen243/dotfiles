@@ -17,7 +17,7 @@ spawn-sh-at-startup "gsettings set org.gnome.desktop.interface color-scheme 'pre
 spawn-sh-at-startup "gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'"
 
 // Compositor
-spawn-sh-at-startup "quickshell"
-// spawn-sh-at-startup "swaybg --image ~/dotfiles/assets/_background.png --mode fill"
+// spawn-sh-at-startup "quickshell"
 spawn-sh-at-startup "hypridle -c ~/.config/niri/hypridle.conf"
+spawn-sh-at-startup "hyprpaper"
 

@@ -29,7 +29,7 @@ window-rule {
 }
 
 layer-rule {
-  match namespace="^quickshell-background$" 
+  match namespace="^hyprpaper$" 
   place-within-backdrop true
 }
 
