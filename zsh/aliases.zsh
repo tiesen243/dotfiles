@@ -129,3 +129,20 @@ if (( $+commands[bun] )); then
   alias b='bun'
   alias bt='bun test'
 fi
+
+# ------------         Other        ------------
+function open() {
+  if [ -z "$1" ]; then
+    echo "Usage: open <application>"
+    return 1
+  fi
+
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "Error: '$1' is not installed or not in PATH."
+    return 1
+  fi
+
+  "$1" > /dev/null 2>&1 & disown
+}
+
+compdef '_command_names -e' open
