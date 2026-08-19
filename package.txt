@@ -7,8 +7,8 @@ ufw
 upower
 
 # Hyprland & Shell components
-hypridle
-hyprpolkitagent
+# hypridle
+# hyprpolkitagent
 
 # Fonts
 noto-fonts
@@ -39,16 +39,16 @@ docker-compose
 brightnessctl
 cliphist
 ffmpeg
-grim
+# grim
 libnotify
 playerctl
-slurp
-wl-clipboard
+# slurp
+# wl-clipboard
 
 # Theming
 adw-gtk-theme
 capitaine-cursors
-matugen
+# matugen
 
 # File manager
 gvfs

@@ -7,10 +7,9 @@ binds {
   Mod+E hotkey-overlay-title="Open a File Manager: thunar" { spawn "thunar"; }
   Mod+B hotkey-overlay-title="Open a Web Browser: zen-browser" { spawn "zen-browser"; }
 
-  // Quickshell
-  Mod+Space   { spawn-sh "quickshell ipc call app-launcher toggle"; }
-  Mod+V       { spawn-sh "quickshell ipc call clipboard-manager toggle"; }
-  Mod+A       { spawn-sh "quickshell ipc call control-center toggle"; }
+  Mod+Space   { spawn-sh "noctalia msg panel-toggle launcher"; }
+  Mod+V       { spawn-sh "noctalia msg panel-toggle clipboard"; }
+  Mod+A       { spawn-sh "noctalia msg panel-toggle control-center"; }
 
   // Window focus and movement
   Mod+H     { focus-column-left; }
@@ -77,7 +76,7 @@ binds {
   XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
 
   // Screenshots
-  Print { spawn-sh "~/dotfiles/scripts/screenshot.sh --mode region"; }
-  Mod+S { spawn-sh "~/dotfiles/scripts/screenshot.sh --mode region"; }
-  Mod+Shift+S { spawn-sh "~/dotfiles/scripts/screenshot.sh --mode fullscreen"; }
+  Print { spawn-sh "noctalia msg screenshot-region"; }
+  Mod+S { spawn-sh "noctalia msg screenshot-region"; }
+  Mod+Shift+S { spawn-sh "noctalia msg screenshot-fullscreen"; }
 }

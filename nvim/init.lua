@@ -20,6 +20,7 @@ require("yuki").setup({
 
     "plugins.langs.tailwind",
     "plugins.langs.typescript",
+    "plugins.langs.vue",
 
     "plugins.extras.ai",
     "plugins.extras.oxc",

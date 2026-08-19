@@ -72,8 +72,8 @@ Then, remove existed config and create the symbolic links to the config files
 
 ```bash
 rm -rf ~/{.cache,.local,.zshrc}
-rm -rf ~/.config/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh}
-ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,matugen,nvim,quickshell,zsh} ~/.config
+rm -rf ~/.config/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,nvim,zsh}
+ln -s ~/dotfiles/{Thunar,btop,fastfetch,git,gtk-3.0,gtk-4.0,hypr,kitty,lazygit,lsd,nvim,zsh} ~/.config
 ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv
 
 # For who like lowercase stuffs
@@ -144,12 +144,6 @@ Remove-Item -Force -Recurse $HOME\AppData\Local\nvim
 New-Item -ItemType SymbolicLink -Path $HOME\Documents\WindowsPowerShell -Target $HOME\dotfiles\powershell
 New-Item -ItemType SymbolicLink -Path $HOME\AppData\Local\nvim -Target $HOME\dotfiles\nvim
 ```
-
-### 3. Change Wallpaper
-
-Add your preferred wallpapers to ~/dotfiles/assets/wallpapers/. You can then toggle the wallpaper selector by open the Start Menu using Super+A and click the Wallpaper Selector icon (located at the bottom-right corner of the quick action buttons). After changing the wallpaper, it automatically generates color schemes based on the wallpaper and applies it to the system by using Matugen.
-
-### 4. Add your avatar to `/usr/share/sddm/faces/$USER.face.icon` to show in the lock screen
 
 ## Conclusion
 

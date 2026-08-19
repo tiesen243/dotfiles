@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Color Preview</title>
+    <style>
+      body {
+        background: oklch(0 0 0);
+        color: oklch(1 0 0);
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+      }
+      .color-box {
+        border-radius: calc(0.5rem + 4px);
+        padding: 1.5rem;
+        background: oklch(0.14 0 0);
+        border: 1px solid oklch(0.26 0 0);
+        box-shadow: 0px 1px 2px 0px hsl(0 0% 0% / 0.09);
+      }
+      .swatch {
+        height: 3rem;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid 333;
+      }
+      .name {
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+      .code {
+        font-family: monospace;
+        font-size: 0.8rem;
+        color: ccc;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Color Preview</h1>
+    <div class="grid">
+      <!-- Colors start -->
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #111418"
+        ></div>
+        <div class="name">$background</div>
+        <div class="code">#111418</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #ffb4ab"
+        ></div>
+        <div class="name">$error</div>
+        <div class="code">#ffb4ab</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #93000a"
+        ></div>
+        <div class="name">$error_container</div>
+        <div class="code">#93000a</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #2e3135"
+        ></div>
+        <div class="name">$inverse_on_surface</div>
+        <div class="code">#2e3135</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #38618e"
+        ></div>
+        <div class="name">$inverse_primary</div>
+        <div class="code">#38618e</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #e1e2e8"
+        ></div>
+        <div class="name">$inverse_surface</div>
+        <div class="code">#e1e2e8</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #e1e2e8"
+        ></div>
+        <div class="name">$on_background</div>
+        <div class="code">#e1e2e8</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #690005"
+        ></div>
+        <div class="name">$on_error</div>
+        <div class="code">#690005</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #ffdad6"
+        ></div>
+        <div class="name">$on_error_container</div>
+        <div class="code">#ffdad6</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #00325a"
+        ></div>
+        <div class="name">$on_primary</div>
+        <div class="code">#00325a</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #d2e4ff"
+        ></div>
+        <div class="name">$on_primary_container</div>
+        <div class="code">#d2e4ff</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #001c37"
+        ></div>
+        <div class="name">$on_primary_fixed</div>
+        <div class="code">#001c37</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #1c4975"
+        ></div>
+        <div class="name">$on_primary_fixed_variant</div>
+        <div class="code">#1c4975</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #253141"
+        ></div>
+        <div class="name">$on_secondary</div>
+        <div class="code">#253141</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #d7e3f8"
+        ></div>
+        <div class="name">$on_secondary_container</div>
+        <div class="code">#d7e3f8</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #101c2b"
+        ></div>
+        <div class="name">$on_secondary_fixed</div>
+        <div class="code">#101c2b</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #3c4858"
+        ></div>
+        <div class="name">$on_secondary_fixed_variant</div>
+        <div class="code">
+          #3c4858
+        </div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #e1e2e8"
+        ></div>
+        <div class="name">$on_surface</div>
+        <div class="code">#e1e2e8</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #c3c6cf"
+        ></div>
+        <div class="name">$on_surface_variant</div>
+        <div class="code">#c3c6cf</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #3b2947"
+        ></div>
+        <div class="name">$on_tertiary</div>
+        <div class="code">#3b2947</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #f4daff"
+        ></div>
+        <div class="name">$on_tertiary_container</div>
+        <div class="code">#f4daff</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #251431"
+        ></div>
+        <div class="name">$on_tertiary_fixed</div>
+        <div class="code">#251431</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #533f5f"
+        ></div>
+        <div class="name">$on_tertiary_fixed_variant</div>
+        <div class="code">#533f5f</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #8d9199"
+        ></div>
+        <div class="name">$outline</div>
+        <div class="code">#8d9199</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #43474e"
+        ></div>
+        <div class="name">$outline_variant</div>
+        <div class="code">#43474e</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #a2c9fd"
+        ></div>
+        <div class="name">$primary</div>
+        <div class="code">#a2c9fd</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #1c4975"
+        ></div>
+        <div class="name">$primary_container</div>
+        <div class="code">#1c4975</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #d2e4ff"
+        ></div>
+        <div class="name">$primary_fixed</div>
+        <div class="code">#d2e4ff</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #a2c9fd"
+        ></div>
+        <div class="name">$primary_fixed_dim</div>
+        <div class="code">#a2c9fd</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #000000"
+        ></div>
+        <div class="name">$scrim</div>
+        <div class="code">#000000</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #bbc7db"
+        ></div>
+        <div class="name">$secondary</div>
+        <div class="code">#bbc7db</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #3c4858"
+        ></div>
+        <div class="name">$secondary_container</div>
+        <div class="code">#3c4858</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #d7e3f8"
+        ></div>
+        <div class="name">$secondary_fixed</div>
+        <div class="code">#d7e3f8</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #bbc7db"
+        ></div>
+        <div class="name">$secondary_fixed_dim</div>
+        <div class="code">#bbc7db</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #000000"
+        ></div>
+        <div class="name">$shadow</div>
+        <div class="code">#000000</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #dde5f4"
+        ></div>
+        <div class="name">$source_color</div>
+        <div class="code">#dde5f4</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #111418"
+        ></div>
+        <div class="name">$surface</div>
+        <div class="code">#111418</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #37393e"
+        ></div>
+        <div class="name">$surface_bright</div>
+        <div class="code">#37393e</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #1d2024"
+        ></div>
+        <div class="name">$surface_container</div>
+        <div class="code">#1d2024</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #272a2f"
+        ></div>
+        <div class="name">$surface_container_high</div>
+        <div class="code">#272a2f</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #32353a"
+        ></div>
+        <div class="name">$surface_container_highest</div>
+        <div class="code">#32353a</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #191c20"
+        ></div>
+        <div class="name">$surface_container_low</div>
+        <div class="code">#191c20</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #0b0e13"
+        ></div>
+        <div class="name">$surface_container_lowest</div>
+        <div class="code">#0b0e13</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #111418"
+        ></div>
+        <div class="name">$surface_dim</div>
+        <div class="code">#111418</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #a2c9fd"
+        ></div>
+        <div class="name">$surface_tint</div>
+        <div class="code">#a2c9fd</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #43474e"
+        ></div>
+        <div class="name">$surface_variant</div>
+        <div class="code">#43474e</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #d7bde4"
+        ></div>
+        <div class="name">$tertiary</div>
+        <div class="code">#d7bde4</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #533f5f"
+        ></div>
+        <div class="name">$tertiary_container</div>
+        <div class="code">#533f5f</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #f4daff"
+        ></div>
+        <div class="name">$tertiary_fixed</div>
+        <div class="code">#f4daff</div>
+      </div>
+      <div class="color-box">
+        <div
+          class="swatch"
+          style="background: #d7bde4"
+        ></div>
+        <div class="name">$tertiary_fixed_dim</div>
+        <div class="code">#d7bde4</div>
+      </div>
+      <!-- Colors end -->
+    </div>
+  </body>
+</html>

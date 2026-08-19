@@ -6,6 +6,13 @@ window-rule {
 }
 
 window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
+}
+
+window-rule {
   match title="^Picture-in-Picture$"
 
   open-floating true
@@ -29,7 +36,17 @@ window-rule {
 }
 
 layer-rule {
-  match namespace="^hyprpaper$" 
+  match namespace="^(hyprpaper|noctalia-backdrop)$"
   place-within-backdrop true
 }
 
+layer-rule {
+  match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+  background-effect {
+    xray false
+  }
+}
+
+debug {
+  honor-xdg-activation-with-invalid-serial
+}

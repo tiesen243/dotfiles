@@ -7,3 +7,4 @@ include "./modules/autostart.kdl"
 include "./modules/interface.kdl"
 include "./modules/keymaps.kdl"
 
+include "noctalia.kdl"

@@ -12,6 +12,9 @@ hypr/hyprtoolkit.conf
 lazygit/config.yml
 matugen/preview.html
 
+# Noctalia generated files
+**/noctalia.*
+
 # misc
 Thunar/accels.scm
 git/config.local
