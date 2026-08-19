@@ -1,6 +1,7 @@
 # System utilities
 bluez
 bluez-utils
+power-profiles-daemon
 ufw
 upower
 
