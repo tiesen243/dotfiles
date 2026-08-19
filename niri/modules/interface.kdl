@@ -1,5 +1,3 @@
-include "./colors.kdl"
-
 // @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#hotkey-overlay
 hotkey-overlay {
   skip-at-startup

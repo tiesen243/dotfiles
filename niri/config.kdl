@@ -7,4 +7,5 @@ include "./modules/autostart.kdl"
 include "./modules/interface.kdl"
 include "./modules/keymaps.kdl"
 
+// For Noctalia Color templates
 include "noctalia.kdl"
