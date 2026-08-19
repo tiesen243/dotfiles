@@ -1,14 +1,8 @@
 # System utilities
 bluez
 bluez-utils
-power-profiles-daemon
-python-gobject
 ufw
 upower
-
-# Hyprland & Shell components
-# hypridle
-# hyprpolkitagent
 
 # Fonts
 noto-fonts
@@ -39,16 +33,12 @@ docker-compose
 brightnessctl
 cliphist
 ffmpeg
-# grim
 libnotify
 playerctl
-# slurp
-# wl-clipboard
 
 # Theming
 adw-gtk-theme
 capitaine-cursors
-# matugen
 
 # File manager
 gvfs
