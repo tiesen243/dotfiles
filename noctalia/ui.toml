@@ -2,6 +2,7 @@
 builtin = "Noctalia"
 source = "wallpaper"
 wallpaper_scheme = "soft"
+pure_black_dark = true
 
   [theme.templates]
   builtin_ids = [ "btop", "gtk3", "gtk4", "hyprland", "kitty", "niri" ]

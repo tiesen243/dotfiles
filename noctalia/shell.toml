@@ -4,6 +4,10 @@ offline_mode = true
 panel_anchor_bar = "default"
 polkit_agent = true
 
+button_borders = false
+card_borders = false
+popup_borders = false
+
   [shell.launcher]
     categories = false
 
