@@ -9,7 +9,7 @@
 --
 hl.on("hyprland.start", function()
   -- Polkit agent
-  hl.exec_cmd("systemctl --user start hyprpolkitagent")
+  -- hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
   -- Clipboard managers
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
@@ -19,12 +19,9 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
   hl.exec_cmd("fcitx5 -d")
 
-  -- Theme
-  hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
-  hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme '" .. os.getenv("GTK_THEME") .. "'")
-
   -- Compositors
-  hl.exec_cmd("quickshell")
-  hl.exec_cmd("hypridle -c " .. os.getenv("HOME") .. "/.config/hypr/hypridle.conf")
+  -- hl.exec_cmd("quickshell")
+  hl.exec_cmd("noctalia")
+  -- hl.exec_cmd("hypridle -c " .. os.getenv("HOME") .. "/.config/hypr/hypridle.conf")
   -- hl.exec_cmd("hyprpaper")
 end)

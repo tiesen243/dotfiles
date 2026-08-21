@@ -1,35 +1,28 @@
 ---------------------
----- MY PROGRAMS ----
----------------------
-
--- Set programs that you use
-local browser = "zen-browser"
-local fileManager = "thunar"
-local terminal = "kitty"
-
----------------------
 ---- KEYBINDINGS ----
 ---------------------
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 local priMod = "SUPER"
 local secMod = "SUPER + SHIFT"
-local scripts = os.getenv("HOME") .. "/dotfiles/scripts"
+local terMod = "SUPER + CTRL"
 
+-- Core Apps & Actions
 hl.bind(priMod .. " + Q", hl.dsp.window.close())
-hl.bind(secMod .. " + Q", hl.dsp.exit())
-hl.bind(priMod .. " + T", hl.dsp.exec_cmd(terminal))
-hl.bind(priMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(priMod .. " + B", hl.dsp.exec_cmd(browser))
 
--- Quickshell
-hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("quickshell ipc call app-launcher toggle"))
-hl.bind(priMod .. " + V", hl.dsp.exec_cmd("quickshell ipc call clipboard-manager toggle"))
-hl.bind(priMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call control-center toggle"))
+hl.bind(priMod .. " + T", hl.dsp.exec_cmd("kitty"))
+hl.bind(priMod .. " + E", hl.dsp.exec_cmd("thunar"))
+hl.bind(priMod .. " + B", hl.dsp.exec_cmd("zen-browser"))
 
--- Window focus and movement
+-- Noctalia
+hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
+hl.bind(priMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
+hl.bind(priMod .. " + A", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
+hl.bind(priMod .. " + X", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+
 local directions = { h = "left", j = "down", k = "up", l = "right" }
 for key, direction in pairs(directions) do
+  -- Focus window
   hl.bind(priMod .. " + " .. key, function()
     local layout = hl.get_config("general.layout")
 
@@ -42,6 +35,7 @@ for key, direction in pairs(directions) do
     end
   end)
 
+  -- Move window
   hl.bind(secMod .. " + " .. key, function()
     local layout = hl.get_config("general.layout")
 
@@ -52,8 +46,9 @@ for key, direction in pairs(directions) do
     end
   end)
 
+  -- Resize window
   hl.bind(
-    secMod .. " + CTRL +" .. key,
+    terMod .. " + " .. key,
     hl.dsp.window.resize({
       x = key == "h" and -10 or key == "l" and 10 or 0,
       y = key == "j" and 10 or key == "k" and -10 or 0,
@@ -63,30 +58,27 @@ for key, direction in pairs(directions) do
   )
 end
 
--- Switch workspaces with priMod + [0-9]
--- Move active window to a workspace with secMod + [0-9]
-for i = 1, 10 do
-  local key = i % 10 -- 10 maps to key 0
-  hl.bind(priMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ workspace = i }))
+-- Workspaces
+for key = 1, 9 do
+  hl.bind(priMod .. " + " .. key, hl.dsp.focus({ workspace = key }))
+  hl.bind(secMod .. " + " .. key, hl.dsp.window.move({ workspace = key }))
 end
 
-hl.bind(priMod .. " + period", function()
+-- Layout controls
+hl.bind(priMod .. " + comma", function()
   local layout = hl.get_config("general.layout")
 
   if layout == "scrolling" then
     hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
   end
 end)
-
-hl.bind(priMod .. " + comma", function()
+hl.bind(priMod .. " + period", function()
   local layout = hl.get_config("general.layout")
 
   if layout == "scrolling" then
     hl.dispatch(hl.dsp.layout("consume_or_expel next"))
   end
 end)
-
 hl.bind(priMod .. " + R", function()
   local layout = hl.get_config("general.layout")
 
@@ -94,7 +86,6 @@ hl.bind(priMod .. " + R", function()
     hl.dispatch(hl.dsp.layout("colresize +conf"))
   end
 end)
-
 hl.bind(secMod .. " + R", function()
   local layout = hl.get_config("general.layout")
 
@@ -103,16 +94,15 @@ hl.bind(secMod .. " + R", function()
   end
 end)
 
+-- Window states
 hl.bind(priMod .. " + C", hl.dsp.window.center())
 hl.bind(priMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(secMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
-hl.bind(priMod .. " + CTRL + F", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(terMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 
--- Scroll through existing workspaces with priMod + scroll
+-- Mouse bindings
 hl.bind(priMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(priMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
-
--- Move/resize windows
 hl.bind(priMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(priMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
@@ -147,7 +137,7 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tru
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 hl.bind("XF86AudioStop", hl.dsp.exec_cmd("playerctl stop"), { locked = true })
 
--- Screenshot
-hl.bind("PRINT", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
-hl.bind(priMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode region"))
-hl.bind(secMod .. " + S", hl.dsp.exec_cmd(scripts .. "/screenshot.sh --mode fullscreen"))
+-- Screenshots
+hl.bind("PRINT", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
+hl.bind(priMod .. " + S", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
+hl.bind(secMod .. " + S", hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen"))

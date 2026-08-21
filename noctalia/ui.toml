@@ -1,0 +1,18 @@
+[theme]
+builtin = "Noctalia"
+source = "wallpaper"
+wallpaper_scheme = "soft"
+
+  [theme.templates]
+  builtin_ids = [ "btop", "gtk3", "gtk4", "hyprland", "kitty", "niri" ]
+  enable_community_templates = false
+
+[wallpaper]
+directory = "~/pictures/wallpapers"
+edge_smoothness = 0.01
+transition = [ "fade" ]
+transition_duration = 400
+
+  [wallpaper.automation]
+  order = "alphabetical"
+  recursive = false

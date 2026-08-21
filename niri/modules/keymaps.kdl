@@ -1,32 +1,37 @@
 binds {
+  // Core Apps & Actions
   Mod+Q   repeat=false { close-window; }
-  Mod+Shift+Q { quit; }
   Mod+Tab repeat=false { toggle-overview; }
 
   Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
   Mod+E hotkey-overlay-title="Open a File Manager: thunar" { spawn "thunar"; }
   Mod+B hotkey-overlay-title="Open a Web Browser: zen-browser" { spawn "zen-browser"; }
 
+  // Noctalia
   Mod+Space   { spawn-sh "noctalia msg panel-toggle launcher"; }
   Mod+V       { spawn-sh "noctalia msg panel-toggle clipboard"; }
   Mod+A       { spawn-sh "noctalia msg panel-toggle control-center"; }
+  Mod+X       { spawn-sh "noctalia msg panel-toggle session"; }
 
-  // Window focus and movement
+  // Focus window
   Mod+H     { focus-column-left; }
   Mod+J     { focus-window-down; }
   Mod+K     { focus-window-up; }
   Mod+L     { focus-column-right; }
+
+  // Move window
   Mod+Shift+H     { move-column-left; }
   Mod+Shift+J     { move-window-down; }
   Mod+Shift+K     { move-window-up; }
   Mod+Shift+L     { move-column-right; }
 
-  Mod+Ctrl+Shift+H { set-column-width  "-1%"; }
-  Mod+Ctrl+Shift+J { set-window-height "-1%"; }
-  Mod+Ctrl+Shift+K { set-window-height "+1%"; }
-  Mod+Ctrl+Shift+L { set-column-width  "+1%"; }
+  // Resize window
+  Mod+Ctrl+H { set-column-width  "-1%"; }
+  Mod+Ctrl+J { set-window-height "-1%"; }
+  Mod+Ctrl+K { set-window-height "+1%"; }
+  Mod+Ctrl+L { set-column-width  "+1%"; }
 
-  // Workspaces switch and movement
+  // Workspaces
   Mod+1 { focus-workspace 1; }
   Mod+2 { focus-workspace 2; }
   Mod+3 { focus-workspace 3; }
@@ -46,18 +51,19 @@ binds {
   Mod+Shift+8 { move-column-to-workspace 8; }
   Mod+Shift+9 { move-column-to-workspace 9; }
 
-  Mod+Comma  { consume-or-expel-window-left; }
-  Mod+Period { consume-or-expel-window-right; }
-
+  // Layout controls
+  Mod+Comma   { consume-or-expel-window-left; }
+  Mod+Period  { consume-or-expel-window-right; }
   Mod+R       { switch-preset-column-width; }
   Mod+Shift+R { switch-preset-column-width-back; }
 
+  // Window states
   Mod+C       { center-column; }
   Mod+F       { maximize-column; }
   Mod+Shift+F { fullscreen-window; }
   Mod+Ctrl+F  { toggle-window-floating; }
 
-  // Scroll through existing workspaces
+  // Mouse bindings
   Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
   Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
 

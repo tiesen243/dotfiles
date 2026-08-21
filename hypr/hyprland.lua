@@ -7,5 +7,6 @@ require("modules.autostart")
 require("modules.interface")
 require("modules.keymaps")
 
+
 -- For Noctalia Color templates
 require("noctalia").apply_theme()

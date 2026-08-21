@@ -3,7 +3,6 @@ bluez
 bluez-utils
 power-profiles-daemon
 ufw
-upower
 
 # Fonts
 noto-fonts
@@ -36,6 +35,7 @@ cliphist
 ffmpeg
 libnotify
 playerctl
+wl-clipboard
 
 # Theming
 adw-gtk-theme

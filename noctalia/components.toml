@@ -1,0 +1,64 @@
+[bar.default]
+background_opacity = 0.8
+start = [ "control-center", "workspaces" ]
+center = [ "clock" ]
+end = [ "tray", "notifications", "volume", "battery" ]
+hover_highlight = false
+margin_ends = 0
+padding = 8
+panel_overlap = 0
+radius = 0
+radius_bottom_left = 24
+radius_bottom_right = 24
+thickness = 24
+widget_spacing = 8
+
+  [bar.default.dead_zone.actions]
+  right = "none"
+
+[control_center]
+hidden_tabs = [ "media", "weather", "screen-time" ]
+show_session_button = false
+show_shortcut_labels = false
+width = 800
+
+  [[control_center.shortcuts]]
+  type = "wifi"
+
+  [[control_center.shortcuts]]
+  type = "bluetooth"
+
+  [[control_center.shortcuts]]
+  type = "notification"
+
+  [[control_center.shortcuts]]
+  type = "dark_mode"
+
+  [[control_center.shortcuts]]
+  type = "power_profile"
+
+[widget.workspaces]
+hide_when_empty = true
+show_labels = false
+
+[dock]
+active_opacity = 0.8
+background_opacity = 0.8
+concave_edge_corners = false
+inactive_opacity = 0.8
+icon_size = 24
+
+[notification]
+background_opacity = 0.8
+border = false
+offset_x = 4
+offset_y = 4
+
+[osd]
+background_opacity = 0.8
+enabled = false
+offset_x = 4
+offset_y = 4
+orientation = "vertical"
+position = "center_right"
+position_vertical = "center_right"

@@ -1,0 +1,56 @@
+[shell]
+font_family = "GeistMono NF"
+offline_mode = true
+panel_anchor_bar = "default"
+polkit_agent = true
+
+  [shell.launcher]
+    categories = false
+
+  [shell.panel]
+  clipboard_placement = "attached"
+  clipboard_position = "bottom_center"
+  launcher_placement = "attached"
+
+  [shell.screenshot]
+  directory = "~/pictures/screenshots"
+  filename_pattern = "Screenshot_%Y-%m-%d_%H%M%S"
+
+  [shell.session]
+  grid = true
+  grid_columns = 4
+
+    [[shell.session.actions]]
+    action = "lock"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "1"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "logout"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "2"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "lock_and_suspend"
+    countdown_seconds = 0.0
+    enabled = false
+    shortcut = "3"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "reboot"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "4"
+    variant = "default"
+
+    [[shell.session.actions]]
+    action = "shutdown"
+    countdown_seconds = 0.0
+    enabled = true
+    shortcut = "5"
+    variant = "destructive"

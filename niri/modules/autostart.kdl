@@ -12,13 +12,9 @@ spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 spawn-sh-at-startup "fcitx5 -d"
 
-// Theme
-spawn-sh-at-startup "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
-spawn-sh-at-startup "gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'"
-
 // Compositor
 // spawn-sh-at-startup "quickshell"
 spawn-sh-at-startup "noctalia"
-spawn-sh-at-startup "hypridle -c ~/.config/niri/hypridle.conf"
+// spawn-sh-at-startup "hypridle -c ~/.config/niri/hypridle.conf"
 // spawn-sh-at-startup "hyprpaper"
 
