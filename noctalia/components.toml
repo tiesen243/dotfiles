@@ -16,6 +16,14 @@ widget_spacing = 8
   [bar.default.dead_zone.actions]
   right = "none"
 
+  [widget.workspaces]
+  hide_when_empty = true
+  show_labels = false
+
+    [widget.workspaces.actions]
+    middle = "none"
+    right = "exec niri msg action toggle-overview"
+
 [control_center]
 hidden_tabs = [ "media", "weather", "screen-time" ]
 show_session_button = false
@@ -36,10 +44,6 @@ width = 800
 
   [[control_center.shortcuts]]
   type = "power_profile"
-
-[widget.workspaces]
-hide_when_empty = true
-show_labels = false
 
 [dock]
 active_opacity = 0.8
