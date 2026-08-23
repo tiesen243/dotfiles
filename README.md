@@ -47,13 +47,19 @@ makepkg -si
 rm -rf ~/yay
 ```
 
-1.2. Install packages from `package.txt`
+1.2. Clone this repository
+
+```bash
+git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
+```
+
+1.3. Install packages from `package.txt`
 
 ```bash
 yay -S --needed --noconfirm --answerclean All --answerdiff --None $(grep -v '^#' ~/dotfiles/package.txt)
 ```
 
-1.3. Set `zsh` as the default shell
+1.4. Set `zsh` as the default shell
 
 ```bash
 chsh -s $(which zsh)
@@ -63,11 +69,7 @@ chsh -s $(which zsh)
 
 2.1. For Linux
 
-```bash
-git clone git@github.com:tiesen243/dotfiles.git ~/dotfiles
-```
-
-Then, remove existed config and create the symbolic links to the config files
+First, remove existed config and create the symbolic links to the config files
 
 ```bash
 rm -rf ~/{.cache,.local,.zshrc}
