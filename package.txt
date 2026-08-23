@@ -24,11 +24,6 @@ ripgrep
 unzip
 zsh
 
-# Docker
-docker
-docker-buildx
-docker-compose
-
 # Media & notifications
 brightnessctl
 cliphist

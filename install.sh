@@ -136,7 +136,7 @@ mkdir -p "$BACKUP_DIR"
 mkdir -p "$HOME/.config"
 
 # Define the specific folders you want to link
-config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lazygit lsd matugen niri nvim quickshell zsh)
+config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lsd matugen niri nvim quickshell zsh)
 
 # Move ONLY the specific target folders to the backup directory if they exist
 # And then create symlinks for those specific folders
@@ -171,10 +171,10 @@ fi
 
 # 7. Configure lowercase user directories
 echo "-----------------------------------------"
-read -p "Do you want to use lowercase user directories? (e.g., downloads, pictures) [y/N]: " answer
+read -p "Do you want to use lowercase user directories? (e.g., downloads, pictures) [y/N]: " answer_dir
 echo "-----------------------------------------"
 
-if [[ "$answer" =~ ^[Yy]$ ]]; then
+if [[ "$answer_dir" =~ ^[Yy]$ ]]; then
   echo "--> Configuring lowercase user directories..."
   rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos}
   mkdir -p ~/{documents,downloads,pictures,projects,videos}
@@ -228,26 +228,36 @@ else
   echo "⚠️ Warning: Bluetooth is not installed, skipping service setup."
 fi
 
-# 10. Setup Docker (Services & Permissions)
-if command -v docker &> /dev/null; then
-  echo "--> Configuring Docker service and user groups..."
-  sudo systemctl enable --now docker.service
-  
-  # Add current user to the docker group if not already a member
-  if ! groups $USER | grep -q '\bdocker\b'; then
-    sudo usermod -aG docker $USER
-    echo "--> Added $USER to the docker group. (Will take effect after reboot)"
-  fi
-else
-  echo "⚠️ Warning: Docker is not installed, skipping service setup."
-fi
-
-# 11. Setup Power Profiles Daemon
+# 10. Setup Power Profiles Daemon
 if command -v powerprofilesctl &> /dev/null; then
   echo "--> Enabling Power Profiles Daemon service..."
   sudo systemctl enable --now power-profiles-daemon.service
 else
   echo "⚠️ Warning: power-profiles-daemon is not installed, skipping service setup."
+fi
+
+# 11. Setup Docker
+echo "-----------------------------------------"
+read -p "Do you want to use docker? [y/N]: " answer_docker
+echo "-----------------------------------------"
+
+if [[ "$answer_docker" =~ ^[Yy]$ ]]; then
+  yes | yay -S --needed --noconfirm docker docker-buildx docker-compose
+
+  if command -v docker &> /dev/null; then
+    echo "--> Configuring Docker service and user groups..."
+    sudo systemctl enable --now docker.service
+    
+    # Add current user to the docker group if not already a member
+    if ! groups $USER | grep -q '\bdocker\b'; then
+      sudo usermod -aG docker $USER
+      echo "--> Added $USER to the docker group. (Will take effect after reboot)"
+    fi
+  else
+    echo "⚠️ Warning: Docker is not installed, skipping service setup."
+  fi
+else
+  echo "--> Skipping Docker setup."
 fi
 
 echo "--> Making dotfiles scripts executable..."
