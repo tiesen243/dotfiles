@@ -17,3 +17,6 @@ transition_duration = 400
   [wallpaper.automation]
   order = "alphabetical"
   recursive = false
+
+[backdrop]
+enabled = true
