@@ -19,6 +19,8 @@ require("yuki").setup({
     "plugins.langs.tailwind",
     "plugins.langs.typescript",
 
+    "plugins.langs.python",
+
     "plugins.extras.ai",
     "plugins.extras.oxc",
   },
