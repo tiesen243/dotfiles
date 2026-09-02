@@ -136,7 +136,7 @@ mkdir -p "$BACKUP_DIR"
 mkdir -p "$HOME/.config"
 
 # Define the specific folders you want to link
-config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lsd matugen niri nvim quickshell zsh)
+config_items=(Thunar btop fastfetch git gtk-3.0 gtk-4.0 hypr kitty lsd niri noctalia nvim zsh)
 
 # Move ONLY the specific target folders to the backup directory if they exist
 # And then create symlinks for those specific folders
@@ -148,7 +148,7 @@ for item in "${config_items[@]}"; do
   ln -s ~/dotfiles/$item ~/.config/
 done
 
-ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv
+echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee -a /etc/zsh/zshenv
 
 # Clean up backup directory if it ends up empty
 rmdir "$BACKUP_DIR" 2>/dev/null || echo "--> Existing configs backed up to $BACKUP_DIR"
@@ -161,46 +161,7 @@ cat <<EOF > "$HOME/.config/git/config.local"
 EOF
 echo "--> Git configuration has been updated successfully."
 
-# Generate default theme
-if command -v matugen &> /dev/null; then
-  echo "--> Generating default theme..."
-  matugen color hex 3f5ec2
-else
-  echo "⚠️ Warning: matugen is not installed, skipping generate theme."
-fi
-
-# 7. Configure lowercase user directories
-echo "-----------------------------------------"
-read -p "Do you want to use lowercase user directories? (e.g., downloads, pictures) [y/N]: " answer_dir
-echo "-----------------------------------------"
-
-if [[ "$answer_dir" =~ ^[Yy]$ ]]; then
-  echo "--> Configuring lowercase user directories..."
-  rm -rf ~/{Desktop,Documents,Downloads,Music,Pictures,Projects,Public,Templates,Videos}
-  mkdir -p ~/{documents,downloads,pictures,projects,videos}
-
-  cat <<EOF > "$HOME/.config/user-dirs.dirs"
-XDG_DESKTOP_DIR="\$HOME/"
-XDG_DOWNLOAD_DIR="\$HOME/downloads"
-XDG_TEMPLATES_DIR="\$HOME/"
-XDG_PUBLICSHARE_DIR="\$HOME/"
-XDG_DOCUMENTS_DIR="\$HOME/documents"
-XDG_MUSIC_DIR="\$HOME/"
-XDG_PICTURES_DIR="\$HOME/pictures"
-XDG_VIDEOS_DIR="\$HOME/videos"
-XDG_PROJECTS_DIR="\$HOME/projects"
-EOF
-
-  if command -v xdg-user-dirs-update &> /dev/null; then
-    xdg-user-dirs-update
-  else
-      echo "⚠️ Warning: xdg-user-dirs is not installed, skipping user-dirs update."
-  fi
-else
-    echo "--> Skipping lowercase user directories configuration."
-fi
-
-# 8. Setup UFW Firewall
+# 7. Setup UFW Firewall
 if command -v ufw &> /dev/null; then
   echo "--> Configuring UFW Firewall..."
   # Default rules
@@ -220,7 +181,7 @@ else
   echo "⚠️ Warning: UFW is not installed, skipping firewall setup."
 fi
 
-# 9. Setup Bluetooth
+# 8. Setup Bluetooth
 if command -v bluetoothctl &> /dev/null; then
   echo "--> Enabling Bluetooth service..."
   sudo systemctl enable --now bluetooth.service
@@ -228,7 +189,7 @@ else
   echo "⚠️ Warning: Bluetooth is not installed, skipping service setup."
 fi
 
-# 10. Setup Power Profiles Daemon
+# 9. Setup Power Profiles Daemon
 if command -v powerprofilesctl &> /dev/null; then
   echo "--> Enabling Power Profiles Daemon service..."
   sudo systemctl enable --now power-profiles-daemon.service
@@ -236,7 +197,7 @@ else
   echo "⚠️ Warning: power-profiles-daemon is not installed, skipping service setup."
 fi
 
-# 11. Setup Docker
+# 10. Setup Docker
 echo "-----------------------------------------"
 read -p "Do you want to use docker? [y/N]: " answer_docker
 echo "-----------------------------------------"
@@ -258,11 +219,6 @@ if [[ "$answer_docker" =~ ^[Yy]$ ]]; then
   fi
 else
   echo "--> Skipping Docker setup."
-fi
-
-echo "--> Making dotfiles scripts executable..."
-if [ -d "$HOME/dotfiles/scripts" ]; then
-    sudo chmod +x ~/dotfiles/scripts/*
 fi
 
 echo "========================================="
