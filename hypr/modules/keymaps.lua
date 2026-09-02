@@ -19,6 +19,7 @@ hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launche
 hl.bind(priMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 hl.bind(priMod .. " + A", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
 hl.bind(priMod .. " + X", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+hl.bind(terMod .. " + N", hl.dsp.exec_cmd("pkill -9 noctalia; noctalia"))
 
 local directions = { h = "left", j = "down", k = "up", l = "right" }
 for key, direction in pairs(directions) do

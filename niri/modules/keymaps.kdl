@@ -12,6 +12,7 @@ binds {
   Mod+V       { spawn-sh "noctalia msg panel-toggle clipboard"; }
   Mod+A       { spawn-sh "noctalia msg panel-toggle control-center"; }
   Mod+X       { spawn-sh "noctalia msg panel-toggle session"; }
+  Mod+Ctrl+N  { spawn-sh "pkill -9 noctalia; noctalia"; }
 
   // Focus window
   Mod+H     { focus-column-left; }
