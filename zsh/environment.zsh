@@ -2,8 +2,8 @@ mkdir -p "$XDG_CACHE_HOME/zsh"
 fpath=("$XDG_CACHE_HOME/zsh" $fpath)
 
 # >>> nvm initialize >>>
-if [ -d "$HOME/.config/nvm" ]; then
-  export NVM_DIR="$HOME/.config/nvm"
+if [ -d "/usr/share/nvm" ]; then
+  export NVM_DIR="/usr/share/nvm"
 
   nvm() {
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"

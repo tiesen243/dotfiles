@@ -20,6 +20,7 @@ else
   echo "--> yay is already installed."
 fi
 
+
 # 2. Setup Git configuration
 echo "-----------------------------------------"
 echo "           GIT CONFIGURATION             "
@@ -31,6 +32,7 @@ read -p "Enter Git Email [example@arch.btw]: " git_email
 git_email="${git_email:-example@arch.btw}"
 echo "-----------------------------------------"
 
+
 # 3. Clone Dotfiles
 echo "--> Cloning dotfiles from GitHub..."
 if [ -d "$HOME/dotfiles" ]; then
@@ -40,7 +42,9 @@ else
   git clone https://github.com/tiesen243/dotfiles.git ~/dotfiles
 fi
 
+
 # 4. Install packages
+
 echo "-----------------------------------------"
 echo "           WM SELECTION                  "
 echo "-----------------------------------------"
@@ -60,21 +64,6 @@ esac
 
 
 echo "-----------------------------------------"
-echo "           COMPONENT SELECTION                  "
-echo "-----------------------------------------"
-echo "Select a utility to install:"
-echo "1) Quickshell"
-echo "2) Hyprpaper + Hyprlock"
-echo "-----------------------------------------"
-read -p "Enter your choice (1-4): " utility_choice
-case $utility_choice in
-  1) utility_pkg="quickshell" ;;
-  2) utility_pkg="hyprpaper hyprlock" ;;
-  *) utility_pkg="" ;;
-esac
-echo "Note: If you select quickshell, remember to configure it in niri/modules/autostart.conf or hypr/modules/autostart.lua and {hypr,niri}/hypridle.conf"
-
-echo "-----------------------------------------"
 echo "         BROWSER SELECTION               "
 echo "-----------------------------------------"
 echo "Select a web browser to install:"
@@ -86,7 +75,6 @@ echo "5) Brave (brave-bin)"
 echo "6) Skip browser installation"
 echo "-----------------------------------------"
 read -p "Enter your choice (1-6): " browser_choice
-
 case $browser_choice in
   1) browser_pkg="zen-browser-bin" ;;
   2) browser_pkg="firefox" ;;
@@ -96,13 +84,14 @@ case $browser_choice in
   *) browser_pkg="" ;;
 esac
 
+
 echo "--> Installing packages from the list..."
 if [ -f "$HOME/dotfiles/package.txt" ]; then
   yes | yay -S --needed --noconfirm --answerclean All --answerdiff None \
-    $(grep -v '^#' ~/dotfiles/package.txt) $browser_pkg $wm_pkg $utility_pkg
+    $(grep -v '^#' ~/dotfiles/package.txt) $wm_pkg $browser_pkg
 else
   if [ -n "$browser_pkg" ] || [ -n "$wm_pkg" ]; then
-    yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $browser_pkg $wm_pkg $utility_pkg
+    yes | yay -S --needed --noconfirm --answerclean All --answerdiff None $wm_pkg $browser_pkg
   else
     echo "⚠️ Warning: ~/dotfiles/package.txt not found and no browser selected!"
   fi
@@ -153,6 +142,9 @@ echo 'export ZDOTDIR="$HOME/.config/zsh"' | sudo tee -a /etc/zsh/zshenv
 # Clean up backup directory if it ends up empty
 rmdir "$BACKUP_DIR" 2>/dev/null || echo "--> Existing configs backed up to $BACKUP_DIR"
 
+# Set noctalia default theme
+noctalia msg wallpaper-set color:1f42d0
+
 # Update git config with user input
 cat <<EOF > "$HOME/.config/git/config.local"
 [user]
@@ -161,7 +153,15 @@ cat <<EOF > "$HOME/.config/git/config.local"
 EOF
 echo "--> Git configuration has been updated successfully."
 
-# 7. Setup UFW Firewall
+# 7. Setup SDDM Display Manager
+if command -v sddm &> /dev/null; then
+  echo "--> Enabling SDDM Display Manager service..."
+  sudo systemctl enable --now sddm.service
+else
+  echo "⚠️ Warning: SDDM is not installed, skipping service setup."
+fi
+
+# 8. Setup UFW Firewall
 if command -v ufw &> /dev/null; then
   echo "--> Configuring UFW Firewall..."
   # Default rules
@@ -181,7 +181,7 @@ else
   echo "⚠️ Warning: UFW is not installed, skipping firewall setup."
 fi
 
-# 8. Setup Bluetooth
+# 9. Setup Bluetooth
 if command -v bluetoothctl &> /dev/null; then
   echo "--> Enabling Bluetooth service..."
   sudo systemctl enable --now bluetooth.service
@@ -189,7 +189,7 @@ else
   echo "⚠️ Warning: Bluetooth is not installed, skipping service setup."
 fi
 
-# 9. Setup Power Profiles Daemon
+# 10. Setup Power Profiles Daemon
 if command -v powerprofilesctl &> /dev/null; then
   echo "--> Enabling Power Profiles Daemon service..."
   sudo systemctl enable --now power-profiles-daemon.service
@@ -197,7 +197,7 @@ else
   echo "⚠️ Warning: power-profiles-daemon is not installed, skipping service setup."
 fi
 
-# 10. Setup Docker
+# 11. Setup Docker
 echo "-----------------------------------------"
 read -p "Do you want to use docker? [y/N]: " answer_docker
 echo "-----------------------------------------"

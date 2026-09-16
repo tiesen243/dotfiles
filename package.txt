@@ -3,6 +3,7 @@ bluez
 bluez-utils
 power-profiles-daemon
 ufw
+sddm
 
 # Fonts
 noto-fonts
@@ -35,6 +36,7 @@ wl-clipboard
 # Theming
 adw-gtk-theme
 capitaine-cursors
+noctalia
 
 # File manager
 gvfs

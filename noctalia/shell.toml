@@ -17,7 +17,7 @@ popup_borders = false
   launcher_placement = "attached"
 
   [shell.screenshot]
-  directory = "~/pictures/screenshots"
+  directory = "~/Pictures/screenshots"
   filename_pattern = "Screenshot_%Y-%m-%d_%H%M%S"
 
   [shell.session]

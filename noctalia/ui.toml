@@ -9,7 +9,7 @@ pure_black_dark = true
   enable_community_templates = false
 
 [wallpaper]
-directory = "~/pictures/wallpapers"
+directory = "~/Pictures/wallpapers"
 edge_smoothness = 0.01
 transition = [ "fade" ]
 transition_duration = 400
