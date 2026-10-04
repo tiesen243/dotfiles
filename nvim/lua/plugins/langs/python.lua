@@ -1,4 +1,4 @@
-vim.lsp.enable({ "basedpyright", "ruff" })
+vim.lsp.enable({ "pyright", "ruff" })
 
 return {
   {
@@ -11,7 +11,7 @@ return {
   {
     { name = "mason", override = true },
     opts = {
-      ensure_installed = { "basedpyright", "ruff" },
+      ensure_installed = { "pyright", "ruff" },
     },
   },
 

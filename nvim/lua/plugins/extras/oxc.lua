@@ -19,6 +19,7 @@ local supported = {
   "typescriptreact",
   "vue",
   "yaml",
+  "toml",
 }
 
 return {

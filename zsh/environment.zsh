@@ -17,6 +17,12 @@ if [ -d "/usr/share/nvm" ]; then
 fi
 # <<< nvm initialize <<<
 
+# >>> viteplus initialize >>>
+if [ -d "$HOME/.config/vite-plus" ]; then
+  source "$HOME/.config/vite-plus/env"
+fi
+# <<< viteplus initialize <<<
+
 # >>> bun initialize >>>
 if (( $+commands[bun] )); then
   export BUN_INSTALL="$HOME/.cache/bun"
