@@ -28,5 +28,3 @@ source "$ZDOTDIR/aliases.zsh"
 source "$ZDOTDIR/plugins.zsh"
 source "$ZDOTDIR/plugins/yuki/yuki.zsh-theme"
 
-# Vite+ bin (https://viteplus.dev)
-. "/home/tiesen/.config/vite-plus/env"
