@@ -111,6 +111,10 @@ sudo systemctl enable --now docker.service
 sudo usermod -aG docker $USER
 ```
 
+> [!NOTE]
+> Some Neovim plugins require Node.js. <br>
+> I recommend installing it via `vite-plus`: run `yay -S --needed vite-plus` and then `vp env install node@lts`.
+
 2.2. For Windows
 
 ```powershell

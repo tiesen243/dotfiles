@@ -2,6 +2,7 @@ mkdir -p "$XDG_CACHE_HOME/zsh"
 fpath=("$XDG_CACHE_HOME/zsh" $fpath)
 
 # >>> nvm initialize >>>
+# yay -S nvm
 if [ -d "/usr/share/nvm" ]; then
   export NVM_DIR="/usr/share/nvm"
 
@@ -17,13 +18,8 @@ if [ -d "/usr/share/nvm" ]; then
 fi
 # <<< nvm initialize <<<
 
-# >>> viteplus initialize >>>
-if [ -d "$HOME/.config/vite-plus" ]; then
-  source "$HOME/.config/vite-plus/env"
-fi
-# <<< viteplus initialize <<<
-
 # >>> bun initialize >>>
+# vp env install bun
 if (( $+commands[bun] )); then
   export BUN_INSTALL="$HOME/.cache/bun"
   export PATH="$BUN_INSTALL/bin:$PATH"
@@ -43,12 +39,14 @@ fi
 # <<< bun initialize <<<
 
 # >>> cargo initialize >>>
+# yay -S rustup
 if [ -d "$HOME/.cargo/bin" ]; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 # <<< cargo initialize <<<
 
 # >>> android-sdk initialize >>>
+# yay -S android-sdk-platform-tools android-sdk-cmdline-tools-22
 if [ -d "/opt/android-sdk" ]; then
   export ANDROID_HOME="/opt/android-sdk"
   export PATH="$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/cmdline-tools/latest/bin"

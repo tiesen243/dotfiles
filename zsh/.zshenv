@@ -23,4 +23,4 @@ export CUDA_CACHE_PATH="$HOME/.cache/nvidia/ComputeCache"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Vite+ bin (https://viteplus.dev)
-. "/home/tiesen/.config/vite-plus/env"
+. "$XDG_CONFIG_HOME/vite-plus/env"
