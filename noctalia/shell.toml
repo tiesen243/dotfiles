@@ -1,60 +1,115 @@
+# =========================================================
+# SHELL
+# =========================================================
+
 [shell]
+
+# General
 font_family = "GeistMono NF"
-offline_mode = true
 panel_anchor_bar = "default"
+settings_expand_all_groups = true
+offline_mode = true
 polkit_agent = true
 
+# Effects
+popup_shadows = false
+
+# Borders
 button_borders = false
 card_borders = false
 popup_borders = false
 
-  [shell.launcher]
-    categories = false
 
-  [shell.panel]
-  clipboard_placement = "attached"
-  clipboard_position = "bottom_center"
-  launcher_placement = "attached"
+# =========================================================
+# LAUNCHER
+# =========================================================
 
-  [shell.screenshot]
-  directory = "~/Pictures/screenshots"
-  filename_pattern = "Screenshot_%Y-%m-%d_%H%M%S"
+[shell.launcher]
+category_icons_only = true
+fetch_exchange_rates = false
+show_session_button = false
+show_settings_button = false
 
-  [shell.session]
-  grid = true
-  grid_columns = 4
 
-    [[shell.session.actions]]
-    action = "lock"
-    countdown_seconds = 0.0
-    enabled = true
-    shortcut = "1"
-    variant = "default"
+# =========================================================
+# PANEL
+# =========================================================
 
-    [[shell.session.actions]]
-    action = "logout"
-    countdown_seconds = 0.0
-    enabled = true
-    shortcut = "2"
-    variant = "default"
+[shell.panel]
+shadow = false
+transparency_mode = "soft"
 
-    [[shell.session.actions]]
-    action = "lock_and_suspend"
-    countdown_seconds = 0.0
-    enabled = false
-    shortcut = "5"
-    variant = "default"
+# Clipboard
+clipboard_placement = "attached"
+clipboard_position = "bottom_center"
 
-    [[shell.session.actions]]
-    action = "reboot"
-    countdown_seconds = 0.0
-    enabled = true
-    shortcut = "3"
-    variant = "default"
+# Launcher
+launcher_placement = "attached"
 
-    [[shell.session.actions]]
-    action = "shutdown"
-    countdown_seconds = 0.0
-    enabled = true
-    shortcut = "4"
-    variant = "destructive"
+
+# =========================================================
+# SCREEN CORNERS
+# =========================================================
+
+[shell.screen_corners]
+size = 20
+
+
+# =========================================================
+# SCREENSHOT
+# =========================================================
+
+[shell.screenshot]
+directory = "~/Pictures/screenshots"
+filename_pattern = "Screenshot_%Y-%m-%d_%H%M%S"
+
+
+# =========================================================
+# SESSION
+# =========================================================
+
+[shell.session]
+grid = true
+grid_columns = 4
+
+
+# ---------------------------------------------------------
+# Session Actions
+# ---------------------------------------------------------
+
+[[shell.session.actions]]
+action = "lock"
+shortcut = "l"
+variant = "default"
+enabled = true
+countdown_seconds = 0.0
+
+[[shell.session.actions]]
+action = "logout"
+shortcut = "q"
+variant = "default"
+enabled = true
+countdown_seconds = 0.0
+
+[[shell.session.actions]]
+action = "reboot"
+shortcut = "r"
+variant = "default"
+enabled = true
+countdown_seconds = 0.0
+
+[[shell.session.actions]]
+action = "shutdown"
+shortcut = "u"
+variant = "destructive"
+enabled = true
+countdown_seconds = 0.0
+
+
+# =========================================================
+# WINDOW SWITCHER
+# =========================================================
+
+[shell.window_switcher]
+mru = true
+

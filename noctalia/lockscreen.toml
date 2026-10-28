@@ -1,55 +1,117 @@
+# =========================================================
+# LOCKSCREEN
+# =========================================================
+
 [lockscreen]
 fingerprint = false
+transition = ["fade"]
+transition_duration = 300
+
+
+# =========================================================
+# LOCKSCREEN WIDGETS
+# =========================================================
 
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001" ]
+widget_order = ["lockscreen-widget-0000000000000001", "lockscreen-login-box@eDP-1"]
 
-  [lockscreen_widgets.grid]
-  cell_size = 16
-  major_interval = 4
-  visible = true
 
-  [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
-  box_height = 150.0
-  box_width = 810.0
-  cx = 960.0
-  cy = 977.0
-  output = "eDP-1"
-  placement_height = 1080.0
-  placement_width = 1920.0
-  rotation = 0.0
-  type = "login_box"
+# =========================================================
+# WIDGET GRID
+# =========================================================
 
-    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
-    background_color = "surface_variant"
-    background_opacity = 0.4
-    background_radius = 12.0
-    center_password_text = false
-    input_opacity = 1.0
-    input_radius = 6.0
-    layout = "regular"
-    show_caps_lock = false
-    show_keyboard_layout = false
-    show_login_button = false
-    show_media = true
-    show_session_buttons = false
-    show_unlock_hint = false
-    show_weather = false
+[lockscreen_widgets.grid]
+visible = false
+cell_size = 16
+major_interval = 4
 
-  [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
-  box_height = 128.0
-  box_width = 512.0
-  cx = 960.0
-  cy = 92.0
-  output = "eDP-1"
-  placement_height = 1080.0
-  placement_width = 1920.0
-  rotation = 0.0
-  type = "clock"
 
-    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
-    background_color = "surface_variant"
-    background_opacity = 0.4
-    background_padding = 0
+# =========================================================
+# LOGIN BOX
+# =========================================================
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+type = "login_box"
+
+# Position
+output = "eDP-1"
+cx = 960.0
+cy = 977.0
+rotation = 0.0
+
+# Size
+box_width = 810.0
+box_height = 150.0
+
+# Placement
+placement_width = 1920.0
+placement_height = 1080.0
+
+
+# ---------------------------------------------------------
+# Login Box Settings
+# ---------------------------------------------------------
+
+[lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+
+# Background
+background_color = "surface_variant"
+background_opacity = 0.40000000000000002
+background_radius = 12.0
+
+# Input
+input_opacity = 1.0
+input_radius = 6.0
+center_password_text = false
+
+# Layout
+layout = "regular"
+
+# Visibility
+show_caps_lock = true
+show_keyboard_layout = false
+show_login_button = false
+show_media = true
+show_password_reveal = true
+show_session_buttons = false
+show_unlock_hint = true
+show_weather = false
+
+
+# =========================================================
+# CLOCK
+# =========================================================
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+type = "clock"
+
+# Position
+output = "eDP-1"
+cx = 960.0
+cy = 92.0
+rotation = 0.0
+
+# Size
+box_width = 400.0
+box_height = 128.0
+
+# Placement
+placement_width = 1920.0
+placement_height = 1080.0
+
+
+# ---------------------------------------------------------
+# Clock Settings
+# ---------------------------------------------------------
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+clock_style = "digital"
+
+# Background
+background = false
+background_color = "surface_variant"
+background_opacity = 0.4
+background_padding = 0
+

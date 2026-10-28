@@ -1,68 +1,153 @@
 [bar.default]
-background_opacity = 0.8
-start = [ "control-center", "workspaces" ]
-center = [ "clock" ]
-end = [ "tray", "notifications", "volume", "battery" ]
-hover_highlight = false
-margin_ends = 0
-padding = 8
-panel_overlap = 0
-radius = 0
-radius_bottom_left = 24
-radius_bottom_right = 24
+# ─────────────────────────────────────────────
+# Layout
+# ─────────────────────────────────────────────
+start = ["control-center", "workspaces"]
+center = ["clock"]
+end = ["tray", "network", "bluetooth", "output_volume", "brightness", "battery"]
+
 thickness = 24
+padding = 4
 widget_spacing = 8
+margin_ends = 0
+panel_overlap = 0
 
-  [bar.default.dead_zone.actions]
-  right = "none"
+# ─────────────────────────────────────────────
+# Background / Shape
+# ─────────────────────────────────────────────
+background_opacity = 0.6
 
-  [widget.workspaces]
-  hide_when_empty = true
-  show_labels = false
+radius = 0
+radius_bottom_left = 20
+radius_bottom_right = 20
 
-    [widget.workspaces.actions]
-    middle = "none"
-    right = "exec niri msg action toggle-overview"
+capsule_border_width = 0.0
+capsule_opacity = 0.6
+capsule_padding = 8.0
+capsule_thickness = 1
+
+# ─────────────────────────────────────────────
+# Effects
+# ─────────────────────────────────────────────
+shadow = false
+hover_highlight = false
+
+
+# =========================================================
+# WORKSPACES
+# =========================================================
+
+[widget.workspaces]
+hide_when_empty = true
+show_labels = false
+
+[widget.workspaces.actions]
+middle = "none"
+right = "exec niri msg action toggle-overview"
+
+
+# =========================================================
+# WIDGETS
+# =========================================================
+
+[widget.bluetooth]
+hide_when_no_connected_device = true
+
+[widget.network]
+show_label = false
+
+
+# =========================================================
+# CONTROL CENTER
+# =========================================================
 
 [control_center]
-hidden_tabs = [ "media", "weather", "screen-time" ]
-show_session_button = false
+hidden_tabs = ["weather", "screen-time"]
+show_session_button = true
 show_shortcut_labels = false
 width = 800
 
-  [[control_center.shortcuts]]
-  type = "wifi"
+[[control_center.shortcuts]]
+type = "wifi"
 
-  [[control_center.shortcuts]]
-  type = "bluetooth"
+[[control_center.shortcuts]]
+type = "bluetooth"
 
-  [[control_center.shortcuts]]
-  type = "notification"
+[[control_center.shortcuts]]
+type = "notification"
 
-  [[control_center.shortcuts]]
-  type = "dark_mode"
+[[control_center.shortcuts]]
+type = "dark_mode"
 
-  [[control_center.shortcuts]]
-  type = "power_profile"
+[[control_center.shortcuts]]
+type = "power_profile"
+
+
+# =========================================================
+# DOCK
+# =========================================================
 
 [dock]
+# Appearance
+background_opacity = 0.6
 active_opacity = 0.8
-background_opacity = 0.8
-concave_edge_corners = false
 inactive_opacity = 0.8
+shadow = false
+
+# Icons / Items
 icon_size = 24
+item_spacing = 8
+inactive_scale = 1.0
+magnification_scale = 1.0
+show_instance_count = false
+
+# Position / Behavior
+launcher_position = "start"
+layer = "overlay"
+margin_edge = 4
+pinned = ["zen", "kitty"]
+reserve_space = false
+smart_auto_hide = true
+
+# Shape
+concave_edge_corners = false
+
+
+# =========================================================
+# NOTIFICATIONS
+# =========================================================
 
 [notification]
-background_opacity = 0.8
+# Appearance
+background_opacity = 0.6
 border = false
+layer = "overlay"
+
+# Position
 offset_x = 4
 offset_y = 4
 
+# Behavior
+max_visible = 3
+
+
+# =========================================================
+# OSD
+# =========================================================
+
 [osd]
-background_opacity = 0.8
+# State
 enabled = false
+
+# Appearance
+background_opacity = 0.6
+border = false
+layer = "overlay"
+
+# Position
 offset_x = 4
 offset_y = 4
 orientation = "vertical"
 position = "center_right"
 position_vertical = "center_right"
+

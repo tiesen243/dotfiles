@@ -1,23 +1,63 @@
+# =========================================================
+# KEYBINDS
+# =========================================================
+
 [keybinds]
-left =  [ "Left" , "Ctrl+h" ]
-down =  [ "Down" , "Ctrl+j" ]
-up =    [ "Up"   , "Ctrl+k" ]
-right = [ "Right", "Ctrl+l" ]
+left = ["Left", "Ctrl+h"]
+down = ["Down", "Ctrl+j"]
+up = ["Up", "Ctrl+k"]
+right = ["Right", "Ctrl+l"]
+
+
+# =========================================================
+# AUDIO
+# =========================================================
+
+[audio]
+enable_sounds = false
+enable_notification_sounds = false
+enable_volume_sounds = false
+enable_power_sounds = false
+enable_screenshot_sounds = false
+
+
+# =========================================================
+# BRIGHTNESS
+# =========================================================
+
+[brightness]
+sync_all_monitors = true
+
+
+# =========================================================
+# SYSTEM MONITOR
+# =========================================================
 
 [system.monitor]
 enabled = false
 
+
+# =========================================================
+# WEATHER
+# =========================================================
+
 [weather]
 enabled = false
 
-[[plugins.source]]
-enabled = false
-kind = "git"
-location = "https://github.com/noctalia-dev/official-plugins"
-name = "official"
+
+# =========================================================
+# PLUGINS
+# =========================================================
 
 [[plugins.source]]
-enabled = false
+name = "official"
 kind = "git"
-location = "https://github.com/noctalia-dev/community-plugins"
+enabled = false
+location = "https://github.com/noctalia-dev/official-plugins"
+
+[[plugins.source]]
 name = "community"
+kind = "git"
+enabled = false
+location = "https://github.com/noctalia-dev/community-plugins"
+
