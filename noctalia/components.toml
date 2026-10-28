@@ -142,7 +142,6 @@ enabled = false
 # Appearance
 background_opacity = 0.6
 border = false
-layer = "overlay"
 
 # Position
 offset_x = 4
