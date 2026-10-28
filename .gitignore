@@ -13,7 +13,7 @@ lazygit/config.yml
 matugen/preview.html
 
 # Noctalia generated files
-**/noctalia.*
+# **/noctalia.*
 
 # misc
 Thunar/accels.scm

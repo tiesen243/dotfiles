@@ -25,7 +25,7 @@ hl.config({
 -- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
 hl.config({
   scrolling = {
-    explicit_column_widths = "0.33333, 0.5, 0.66667",
+    explicit_column_widths = "0.33, 0.50, 0.67, 1.00",
   },
 })
 

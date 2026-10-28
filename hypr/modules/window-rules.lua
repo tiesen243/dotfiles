@@ -18,11 +18,10 @@ hl.window_rule({
 })
 
 hl.window_rule({
-  name = "floating-file-utility",
-  match = { class = "^xdg-desktop-portal-gtk", title = "^File$" },
+  name = "noctalia",
+  match = { class = "dev.noctalia.Noctalia" },
   float = true,
-  center = true,
-  size = { 640, 480 },
+  size = { 1080, 920 },
 })
 
 hl.window_rule({

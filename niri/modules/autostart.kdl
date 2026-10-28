@@ -6,14 +6,12 @@
 
 // Clipboard managers
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
-spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 
 // Input method
 spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 spawn-sh-at-startup "fcitx5 -d"
 
 // Compositor
-// spawn-sh-at-startup "quickshell"
 spawn-sh-at-startup "noctalia"
 // spawn-sh-at-startup "hypridle -c ~/.config/niri/hypridle.conf"
 // spawn-sh-at-startup "hyprpaper"
