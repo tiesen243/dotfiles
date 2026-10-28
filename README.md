@@ -11,7 +11,7 @@ It is focused on a modern Arch Linux setup and includes:
 
 This repository is intentionally modular: you can run the one-line installer for a quick setup, or follow the manual steps to inspect and customize each part. There are also Windows PowerShell profile and symlink instructions for reusing parts of this config on Windows.
 
-<img width="1920" height="1080" alt="Screenshot_2026-08-23_164152" src="https://github.com/user-attachments/assets/19edefe5-0752-43df-b565-8f9f5fa3a8cf" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6f76202b-a3c1-40cd-a636-c1f6ac77c5c2" />
 
 ## Features
 
