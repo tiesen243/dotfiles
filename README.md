@@ -72,34 +72,6 @@ Dry-run mode goes through the installation flow and prints commands that would b
 bash <(curl -fsSL "https://raw.githubusercontent.com/tiesen243/dotfiles/main/install.sh") --help
 ```
 
-## What the installer does
-
-The installer performs the following steps:
-
-1. Checks that the system is Arch-based and that the script is not being run as root.
-2. Installs `git` and `base-devel` when required.
-3. Installs `yay` if it is not already available.
-4. Clones or updates this repository at `~/dotfiles`.
-5. Reads packages from `package.txt`.
-6. Installs the selected window manager and browser.
-7. Installs `zsh` from the package list and sets it as the default shell when available.
-8. Backs up existing configuration directories before creating symlinks.
-9. Links the dotfiles configuration into `~/.config`.
-10. Configures `ZDOTDIR` through `/etc/zsh/zshenv`.
-11. Creates `~/.config/git/config.local` using the Git identity provided during setup.
-12. Enables SDDM when installed.
-13. Configures UFW when installed.
-14. Enables Bluetooth when installed.
-15. Enables `power-profiles-daemon` when installed.
-16. Optionally installs and enables Docker.
-17. Writes a timestamped installation log to `~/.local/state/yukios/`.
-
-Existing configuration is backed up to a timestamped directory such as:
-
-```text
-~/.config.bak_{timestamp}
-```
-
 ## Manual installation
 
 If you prefer to inspect and configure everything manually, follow the steps below.
