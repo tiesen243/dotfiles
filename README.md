@@ -18,7 +18,14 @@ It is designed to be modular and reproducible, with an interactive installer for
 - UFW, Bluetooth and power-profiles-daemon service setup
 - Windows PowerShell configuration snippets
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/6f76202b-a3c1-40cd-a636-c1f6ac77c5c2" />
+<img width="1920" height="1080" alt="Screenshot_2026-10-29_135008" src="https://github.com/user-attachments/assets/775d0fd7-e193-48df-b621-5dfb2fb1fffc" />
+
+
+| Niri | Hyprland |
+| ---  | --- |
+| <img width="1920" height="1080" alt="Screenshot_2026-10-29_134806" src="https://github.com/user-attachments/assets/e4825f8a-0ef4-4609-a1bd-77bebfd61877" /> | <img width="1920" height="1080" alt="Screenshot_2026-10-29_134728" src="https://github.com/user-attachments/assets/588f7ce0-12c4-4b9a-b784-2ccf93dce8c1" /> |
+
+
 
 ## Supported systems
 
