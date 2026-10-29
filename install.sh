@@ -820,6 +820,50 @@ else
 fi
 
 # =========================================================
+# VIETNAMESE INPUT METHOD
+# =========================================================
+
+section "VIETNAMESE INPUT METHOD"
+
+if [[ "$install_vietnamese_input" == true ]]; then
+    if "$DRY_RUN"; then
+        log_info "Would reload udev rules."
+        log_info "Would load kernel module: uinput"
+        log_info "Would enable and start fcitx5-lotus-server@$(whoami).service."
+        log_info "After logging out and logging back in, configure Lotus in Fcitx5 Configuration."
+    else
+        log_info "Reloading udev rules..."
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger
+
+        log_info "Loading kernel module: uinput"
+        sudo modprobe uinput
+
+        log_info "Enabling Fcitx5 Lotus server..."
+        sudo systemctl enable --now "fcitx5-lotus-server@$(whoami).service" \
+            || (sudo systemd-sysusers && sudo systemctl enable --now "fcitx5-lotus-server@$(whoami).service")
+
+        log_success "Fcitx5 Lotus server is enabled and running."
+    fi
+
+    echo
+    printf "${BOLD}Fcitx5 Configuration${RESET}\n"
+    cat <<'EOF'
+
+After logging out and logging back in:
+
+- Open Fcitx5 Configuration
+  (find it in the application menu (SUPER + SPACE) or run `fcitx5-configtool`).
+- Find "Lotus" in the right column.
+- Click the "<" arrow to add it to the left column.
+- Click "Apply" to save the configuration.
+
+EOF
+else
+    log_info "Skipping Vietnamese input method configuration."
+fi
+
+# =========================================================
 # CLEANUP
 # =========================================================
 
