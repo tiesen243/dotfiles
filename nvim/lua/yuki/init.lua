@@ -4,6 +4,7 @@ _G.Yuki = {}
 
 ---@class YukiConfig
 ---@field ai_cmp boolean|nil
+---@field ai_chat boolean|nil
 ---@field icons table|nil
 ---@field nesting_rules table|nil
 ---@field logo string|nil

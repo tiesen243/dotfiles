@@ -4,6 +4,7 @@ require("yuki").setup({
   theme = "vercel",
   config = {
     ai_cmp = false,
+    ai_chat = false,
   },
 
   plugins = {

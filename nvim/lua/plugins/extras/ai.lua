@@ -18,8 +18,10 @@ local M = {
       },
     },
   },
+}
 
-  {
+if Yuki.configs.ai_chat then
+  table.insert(M, {
     { src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim" },
     keys = {
       { "<c-s>", "<CR>", { ft = "copilot-chat", desc = "Submit Prompt", remap = true } },
@@ -88,8 +90,8 @@ local M = {
         mappings = { reset = { normal = "" } },
       }
     end,
-  },
-}
+  })
+end
 
 if Yuki.configs.ai_cmp then
   table.insert(M, "https://github.com/fang2hou/blink-copilot")
