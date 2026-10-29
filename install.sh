@@ -201,13 +201,13 @@ section "INSTALLATION CONFIGURATION"
 # Git
 # ---------------------------------------------------------
 
-printf "Git username [%s]: " "$USER"
+printf "Git username [tiesen]: "
 read -r git_name
-git_name="${git_name:-$USER}"
+git_name="${git_name:-tiesen}"
 
-printf "Git email [$USER@arch.btw]: "
+printf "Git email [tiesen@arch.btw]: "
 read -r git_email
-git_email="${git_email:-$USER@arch.btw}"
+git_email="${git_email:-tiesen@arch.btw}"
 
 # ---------------------------------------------------------
 # Window Manager
@@ -248,14 +248,13 @@ case "$wm_choice" in
             xdg-desktop-portal-gnome
         )
         ;;
-    4)
+    *)
         wm_name="None"
         ;;
-    *)
-        log_error "Invalid window manager choice."
-        exit 1
-        ;;
 esac
+
+wm_package_list=$(printf '%s, ' "${wm_packages[@]}")
+wm_package_list="${wm_package_list%, }"
 
 # ---------------------------------------------------------
 # Browser
@@ -268,41 +267,81 @@ echo "  2) Firefox"
 echo "  3) Chromium"
 echo "  4) Google Chrome"
 echo "  5) Brave"
-echo "  6) Skip"
-
-read -r -p "Choice [1-6]: " browser_choice
+echo "  6) Microsoft Edge"
+echo "  7) Cốc Cốc"
+echo "  8) Vivaldi"
+echo "  9) Opera"
+echo " 10) LibreWolf"
+echo " 11) Floorp"
+echo " 12) Skip"
+echo
+read -r -p "Choice [1-12, multiple allowed e.g. 1 2 7]: " browser_choices
 
 browser_packages=()
+browser_descriptions=()
 
-case "$browser_choice" in
-    1)
-        browser_name="Zen Browser"
-        browser_packages=(zen-browser-bin)
-        ;;
-    2)
-        browser_name="Firefox"
-        browser_packages=(firefox)
-        ;;
-    3)
-        browser_name="Chromium"
-        browser_packages=(chromium)
-        ;;
-    4)
-        browser_name="Google Chrome"
-        browser_packages=(google-chrome)
-        ;;
-    5)
-        browser_name="Brave"
-        browser_packages=(brave-bin)
-        ;;
-    6)
-        browser_name="None"
-        ;;
-    *)
-        log_error "Invalid browser choice."
-        exit 1
-        ;;
-esac
+for browser_choice in $browser_choices; do
+    case "$browser_choice" in
+        1)
+            browser_packages+=(zen-browser)
+            browser_descriptions+=("Zen Browser (zen-browser)")
+            ;;
+        2)
+            browser_packages+=(firefox)
+            browser_descriptions+=("Firefox (firefox)")
+            ;;
+        3)
+            browser_packages+=(chromium)
+            browser_descriptions+=("Chromium (chromium)")
+            ;;
+        4)
+            browser_packages+=(google-chrome)
+            browser_descriptions+=("Google Chrome (google-chrome)")
+            ;;
+        5)
+            browser_packages+=(brave-bin)
+            browser_descriptions+=("Brave (brave-bin)")
+            ;;
+        6)
+            browser_packages+=(microsoft-edge-stable-bin)
+            browser_descriptions+=("Microsoft Edge (microsoft-edge-stable-bin)")
+            ;;
+        7)
+            browser_packages+=(coccoc-browser-stable)
+            browser_descriptions+=("Cốc Cốc (coccoc-browser-stable)")
+            ;;
+        8)
+            browser_packages+=(vivaldi)
+            browser_descriptions+=("Vivaldi (vivaldi)")
+            ;;
+        9)
+            browser_packages+=(opera)
+            browser_descriptions+=("Opera (opera)")
+            ;;
+        10)
+            browser_packages+=(librewolf)
+            browser_descriptions+=("LibreWolf (librewolf)")
+            ;;
+        11)
+            browser_packages+=(floorp)
+            browser_descriptions+=("Floorp (floorp)")
+            ;;
+        *)
+            ;;
+    esac
+done
+
+# Remove duplicate package names while preserving order.
+if (( ${#browser_packages[@]} > 0 )); then
+    mapfile -t browser_packages < <(printf '%s\n' "${browser_packages[@]}" | awk '!seen[$0]++')
+fi
+
+if (( ${#browser_descriptions[@]} > 0 )); then
+    browser_plan=$(printf '%s, ' "${browser_descriptions[@]}")
+    browser_plan="${browser_plan%, }"
+else
+    browser_plan=""
+fi
 
 # ---------------------------------------------------------
 # Docker
@@ -317,6 +356,24 @@ else
     install_docker=false
 fi
 
+# ---------------------------------------------------------
+# Vietnamese Input Method
+# ---------------------------------------------------------
+
+echo
+read -r -p "Install Vietnamese input method? [y/N]: " vietnamese_input_choice
+
+if [[ "$vietnamese_input_choice" =~ ^[Yy]$ ]]; then
+    install_vietnamese_input=true
+    vietnamese_packages=(
+        fcitx5-config-qt
+        fcitx5-lotus-bin
+    )
+else
+    install_vietnamese_input=false
+    vietnamese_packages=()
+fi
+
 # =========================================================
 # INSTALLATION PLAN
 # =========================================================
@@ -325,9 +382,28 @@ section "INSTALLATION PLAN"
 
 printf "OS        : %s\n" "${PRETTY_NAME:-unknown}"
 printf "Git       : %s <%s>\n" "$git_name" "$git_email"
-printf "WM        : %s\n" "$wm_name"
-printf "Browser   : %s\n" "$browser_name"
-printf "Docker    : %s\n" "$([[ "$install_docker" == true ]] && echo "Yes" || echo "No")"
+printf "WM        : %s (%s)\n" "$wm_name" "$wm_package_list"
+printf "Packages  :\n"
+if [[ -n "$browser_plan" && "$browser_plan" != "None" ]]; then
+    printf "  - Browser: %s\n" "$browser_plan"
+fi
+if [[ "$install_docker" == true ]]; then
+    printf "  - Docker: docker docker-buildx docker-compose\n"
+fi
+if [[ "$install_vietnamese_input" == true ]]; then
+    printf "  - Vietnamese Input: fcitx5-config-qt fcitx5-lotus-bin\n"
+fi
+if [[ -f "$DOTFILES_DIR/package.txt" ]]; then
+    printf "  - package.txt: %s package(s)\n" "$(
+        awk '
+            {
+                gsub(/^[[:space:]]+|[[:space:]]+$/, "", $0)
+            }
+            $0 != "" && $0 !~ /^#/ { count++ }
+            END { print count+0 }
+        ' "$DOTFILES_DIR/package.txt"
+    )"
+fi
 printf "Dry-run   : %s\n" "$([[ "$DRY_RUN" == true ]] && echo "Yes" || echo "No")"
 
 echo
@@ -442,9 +518,18 @@ fi
 
 packages+=("${wm_packages[@]}")
 packages+=("${browser_packages[@]}")
+packages+=("${vietnamese_packages[@]}")
+
+if [[ "$install_docker" == true ]]; then
+    packages+=(
+        docker
+        docker-buildx
+        docker-compose
+    )
+fi
 
 if (( ${#packages[@]} > 0 )); then
-    log_info "Packages selected for installation: ${#packages[@]}"
+    log_info "Installing ${#packages[@]} selected packages..."
 
     run yay \
         -S \
@@ -520,11 +605,10 @@ if (( ${#existing_configs[@]} == 0 )); then
     log_info "No existing configuration needs to be backed up."
 else
     if "$DRY_RUN"; then
-        log_info "Would create backup directory:"
-        log_info "  $BACKUP_DIR"
+        log_info "Would create backup directory: $BACKUP_DIR"
 
         for item in "${existing_configs[@]}"; do
-            log_info "Would backup: ~/.config/$item"
+            log_info "Would backup: $HOME/.config/$item"
         done
     else
         mkdir -p "$CONFIG_DIR"
@@ -563,7 +647,7 @@ for item in "${config_items[@]}"; do
         log_info "  $target -> $source"
     else
         ln -s "$source" "$target"
-        log_success "Linked ~/.config/$item"
+        log_success "Linked $HOME/.config/$item"
     fi
 done
 
@@ -710,14 +794,6 @@ section "DOCKER"
 if [[ "$install_docker" == true ]]; then
     log_info "Docker selected."
 
-    run yay \
-        -S \
-        --needed \
-        --noconfirm \
-        docker \
-        docker-buildx \
-        docker-compose
-
     if "$DRY_RUN"; then
         log_info "Would enable and start docker.service."
         log_info "Would add $USER to the docker group."
@@ -737,10 +813,10 @@ if [[ "$install_docker" == true ]]; then
 
         log_success "Docker is installed and running."
     else
-        log_warn "Docker installation completed, but the docker command is unavailable."
+        log_warn "Docker packages were selected, but the docker command is unavailable."
     fi
 else
-    log_info "Skipping Docker installation."
+    log_info "Skipping Docker configuration."
 fi
 
 # =========================================================

@@ -15,7 +15,11 @@ transition_duration = 300
 [lockscreen_widgets]
 enabled = true
 schema_version = 2
-widget_order = ["lockscreen-widget-0000000000000001", "lockscreen-login-box@eDP-1"]
+widget_order = [
+  "lockscreen-widget-0000000000000001",
+  "lockscreen-widget-0000000000000002",
+  "lockscreen-login-box@eDP-1",
+]
 
 
 # =========================================================
@@ -23,7 +27,7 @@ widget_order = ["lockscreen-widget-0000000000000001", "lockscreen-login-box@eDP-
 # =========================================================
 
 [lockscreen_widgets.grid]
-visible = false
+visible = true
 cell_size = 16
 major_interval = 4
 
@@ -90,12 +94,12 @@ type = "clock"
 # Position
 output = "eDP-1"
 cx = 960.0
-cy = 92.0
+cy = 150.0
 rotation = 0.0
 
 # Size
-box_width = 400.0
-box_height = 128.0
+box_width = 540.0
+box_height = 236.0
 
 # Placement
 placement_width = 1920.0
@@ -107,11 +111,35 @@ placement_height = 1080.0
 # ---------------------------------------------------------
 
 [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
-clock_style = "digital"
-
-# Background
 background = false
-background_color = "surface_container"
-background_opacity = 0.4
-background_padding = 0
+
+# ---------------------------------------------------------
+# DATE
+# ---------------------------------------------------------
+
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+type = "clock"
+
+# Position
+output = "eDP-1"
+cx = 960.0
+cy = 252.0
+rotation = 0.0
+
+# Size
+box_width = 320.0
+box_height = 32.0
+
+# Placement
+placement_width = 1920.0
+placement_height = 1080.0
+
+# ---------------------------------------------------------
+# Date Settings
+# ---------------------------------------------------------
+[lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+background = false
+
+color = "on_surface_variant"
+format = "{:%A, %B %-d, %Y}"
 

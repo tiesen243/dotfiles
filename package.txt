@@ -43,7 +43,3 @@ gvfs
 thunar
 thunar-volman
 tumbler
-
-# Vietnamese input method
-fcitx5-config-qt
-fcitx5-lotus-bin
