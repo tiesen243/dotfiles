@@ -9,10 +9,10 @@ binds {
 
   // Noctalia
   Mod+Space   { spawn-sh "noctalia msg panel-toggle launcher"; }
-  Mod+V       { spawn-sh "noctalia msg panel-toggle clipboard"; }
+  Alt+Tab     { spawn-sh "noctalia msg window-switcher hold"; }
   Mod+A       { spawn-sh "noctalia msg panel-toggle control-center"; }
+  Mod+V       { spawn-sh "noctalia msg panel-toggle clipboard"; }
   Mod+X       { spawn-sh "noctalia msg panel-toggle session"; }
-  Mod+Ctrl+N  { spawn-sh "pkill -9 noctalia; noctalia"; }
 
   // Focus window
   Mod+H     { focus-column-left; }
@@ -69,12 +69,12 @@ binds {
   Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
 
   // Laptop multimedia keys for volume and LCD brightness
-  XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"; }
-  XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
-  XF86AudioMute         allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+  XF86AudioRaiseVolume  allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+  XF86AudioLowerVolume  allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+  XF86AudioMute         allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
   XF86AudioMicMute      allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-  XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "brightnessctl -n2 set 5%+"; }
-  XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl -n2 set 5%-"; }
+  XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+  XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
 
   // Playerctl
   XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }

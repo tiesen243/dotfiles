@@ -15,14 +15,14 @@ panel_overlap = 0
 # ─────────────────────────────────────────────
 # Background / Shape
 # ─────────────────────────────────────────────
-background_opacity = 0.6
+background_opacity = 0.8
 
 radius = 0
 radius_bottom_left = 20
 radius_bottom_right = 20
 
 capsule_border_width = 0.0
-capsule_opacity = 0.6
+capsule_opacity = 0.8
 capsule_padding = 8.0
 capsule_thickness = 1
 
@@ -42,7 +42,6 @@ hide_when_empty = true
 show_labels = false
 
 [widget.workspaces.actions]
-middle = "none"
 right = "exec niri msg action toggle-overview"
 
 
@@ -89,7 +88,7 @@ type = "power_profile"
 
 [dock]
 # Appearance
-background_opacity = 0.6
+background_opacity = 0.8
 active_opacity = 0.8
 inactive_opacity = 0.8
 shadow = false
@@ -119,7 +118,7 @@ concave_edge_corners = false
 
 [notification]
 # Appearance
-background_opacity = 0.6
+background_opacity = 0.8
 border = false
 layer = "overlay"
 
@@ -140,7 +139,7 @@ max_visible = 3
 enabled = false
 
 # Appearance
-background_opacity = 0.6
+background_opacity = 0.8
 border = false
 
 # Position

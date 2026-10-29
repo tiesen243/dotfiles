@@ -2,11 +2,11 @@
 ---- LOOK AND FEEL ----
 -----------------------
 
--- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
+-- @see https://wiki.hypr.land/configuring/core/config-options
 hl.config({
   general = {
     gaps_in = 2,
-    gaps_out = 4,
+    gaps_out = { top = 6, right = 4, bottom = 4, left = 4 },
 
     border_size = 1,
 
@@ -15,10 +15,10 @@ hl.config({
     extend_border_grab_area = 8,
     hover_icon_on_border = true,
 
-    -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
+    -- @see https://wiki.hypr.land/configuring/extra/tearing
     allow_tearing = false,
 
-    -- @see https://wiki.hypr.land/Configuring/Variables/#snap
+    -- @see https://wiki.hypr.land/configuring/core/config-options/#snap
     snap = {
       enabled = false,
       window_gap = 4,
@@ -40,7 +40,14 @@ hl.config({
     blur = {
       enabled = false,
       size = 3,
-      passes = 1,
+      passes = 2,
+      vibrancy = 0.1696,
+    },
+
+    shadow = {
+      enabled = false,
+      range = 4,
+      render_power = 3,
     },
   },
 
@@ -49,6 +56,7 @@ hl.config({
   },
 })
 
+-- @see https://wiki.hypr.land/configuring/core/animations
 hl.curve("fluent", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
 hl.curve("expo", { type = "bezier", points = { { 0.16, 1 }, { 0.3, 1 } } })
 hl.curve("easy", { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })

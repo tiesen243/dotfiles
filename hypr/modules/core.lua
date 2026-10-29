@@ -8,21 +8,21 @@ hl.config({
   },
 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+-- @see https://wiki.hypr.land/configuring/layouts/dwindle-layout
 hl.config({
   dwindle = {
     preserve_split = true,
   },
 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
+-- @see https://wiki.hypr.land/configuring/layouts/master-layout
 hl.config({
   master = {
     new_status = "master",
   },
 })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
+-- @see https://wiki.hypr.land/configuring/layouts/scrolling-layout
 hl.config({
   scrolling = {
     explicit_column_widths = "0.33, 0.50, 0.67, 1.00",
@@ -60,14 +60,14 @@ hl.config({
     follow_mouse = 1,
     sensitivity = 0,
 
-    -- @see https://wiki.hypr.land/Configuring/Variables/#touchpad
+    -- @see https://wiki.hypr.land/configuring/core/config-options/#touchpad
     touchpad = {
       natural_scroll = true,
       tap_to_click = true,
       tap_and_drag = true,
     },
 
-    -- @see https://wiki.hypr.land/Configuring/Variables/#touchdevice
+    -- @see https://wiki.hypr.land/configuring/core/config-options/#touchdevice
     touchdevice = {
       enabled = false,
     },
@@ -109,8 +109,8 @@ hl.gesture({
 })
 
 -- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
-hl.device({
-  name = "epic-mouse-v1",
-  sensitivity = -0.5,
-})
+-- @see https://wiki.hypr.land/configuring/core/devices
+-- hl.device({
+--   name = "epic-mouse-v1",
+--   sensitivity = -0.5,
+-- })

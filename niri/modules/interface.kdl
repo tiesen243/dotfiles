@@ -72,3 +72,11 @@ animations {
   slowdown 1.0
 }
 
+// @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#blur
+blur {
+  passes 2
+  offset 3.0
+  noise 0.03
+  saturation 1.0
+}
+

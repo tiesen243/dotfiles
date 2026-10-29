@@ -1,4 +1,8 @@
+//-------------------
+//------ INPUT ------
+//-------------------
 // @see https://niri-wm.github.io/niri/Configuration:-Input
+
 input {
   // @see https://niri-wm.github.io/niri/Configuration%3A-Input.html#keyboard
   keyboard {

@@ -1,8 +1,8 @@
+//-------------------
+//---- AUTOSTART ----
+//-------------------
 // @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#spawn-at-startup
 // @see https://niri-wm.github.io/niri/Configuration%3A-Miscellaneous.html#spawn-sh-at-startup
-
-// Polkit agent
-// spawn-sh-at-startup "systemctl --user start hyprpolkitagent"
 
 // Clipboard managers
 spawn-sh-at-startup "wl-paste --type text --watch cliphist store"

@@ -2,10 +2,11 @@
 ---- KEYBINDINGS ----
 ---------------------
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+-- @see https://wiki.hypr.land/configuring/core/binds
 local priMod = "SUPER"
 local secMod = "SUPER + SHIFT"
 local terMod = "SUPER + CTRL"
+local ipc = "noctalia msg "
 
 -- Core Apps & Actions
 hl.bind(priMod .. " + Q", hl.dsp.window.close())
@@ -15,11 +16,11 @@ hl.bind(priMod .. " + E", hl.dsp.exec_cmd("thunar"))
 hl.bind(priMod .. " + B", hl.dsp.exec_cmd("zen-browser"))
 
 -- Noctalia
-hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
-hl.bind(priMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
-hl.bind(priMod .. " + A", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
-hl.bind(priMod .. " + X", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
-hl.bind(terMod .. " + N", hl.dsp.exec_cmd("pkill -9 noctalia; noctalia"))
+hl.bind(priMod .. " + SPACE", hl.dsp.exec_cmd(ipc .. " panel-toggle launcher"))
+hl.bind("ALT " .. " + Tab", hl.dsp.exec_cmd(ipc .. "window-switcher hold"))
+hl.bind(priMod .. " + A", hl.dsp.exec_cmd(ipc .. " panel-toggle control-center"))
+hl.bind(priMod .. " + V", hl.dsp.exec_cmd(ipc .. " panel-toggle clipboard"))
+hl.bind(priMod .. " + X", hl.dsp.exec_cmd(ipc .. " panel-toggle session"))
 
 local directions = { h = "left", j = "down", k = "up", l = "right" }
 for key, direction in pairs(directions) do
@@ -108,28 +109,16 @@ hl.bind(priMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(priMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind(
-  "XF86AudioRaiseVolume",
-  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
-  { locked = true, repeating = true }
-)
-hl.bind(
-  "XF86AudioLowerVolume",
-  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
-  { locked = true, repeating = true }
-)
-hl.bind(
-  "XF86AudioMute",
-  hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),
-  { locked = true, repeating = true }
-)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc .. "volume-up"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc .. "volume-down"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"), { locked = true, repeating = true })
 hl.bind(
   "XF86AudioMicMute",
   hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
   { locked = true, repeating = true }
 )
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -n2 set 5%+"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -n2 set 5%-"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"), { locked = true, repeating = true })
 
 -- Playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })

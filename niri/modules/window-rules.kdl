@@ -6,13 +6,6 @@ window-rule {
 }
 
 window-rule {
-  match app-id="dev.noctalia.Noctalia"
-  open-floating true
-  default-column-width { fixed 1080; }
-  default-window-height { fixed 920; }
-}
-
-window-rule {
   match title="^Picture-in-Picture$"
 
   open-floating true
@@ -27,14 +20,30 @@ window-rule {
   open-floating true
 }
 
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
+}
+
 layer-rule {
-  match namespace="^(hyprpaper|noctalia-backdrop)$"
+  match namespace="^noctalia-backdrop"
   place-within-backdrop true
 }
 
 layer-rule {
   match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
   background-effect {
+    xray false
+    blur false
+  }
+}
+
+layer-rule {
+  match namespace="noctalia-window-switcher"
+  background-effect {
+    blur true
     xray false
   }
 }

@@ -1,8 +1,7 @@
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+-- @see https://wiki.hypr.land/configuring/core/environment-variables
 
 -- Theme
 hl.env("XCURSOR_THEME", "capitaine-cursors")
@@ -46,7 +45,7 @@ hl.env("LIBVA_DRIVER_NAME", "nvidia")
 ----- PERMISSIONS -----
 -----------------------
 
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
+-- @see https://wiki.hypr.land/configuring/core/advanced-configuration/permissions
 -- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
 -- for security reasons
 
