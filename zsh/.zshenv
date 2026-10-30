@@ -24,3 +24,4 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Vite+ bin (https://viteplus.dev)
 . "$XDG_CONFIG_HOME/vite-plus/env"
+
