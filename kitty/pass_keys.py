@@ -3,7 +3,6 @@
 import re
 
 from kittens.tui.handler import result_handler
-
 from kitty.key_encoding import KeyEvent, parse_shortcut
 
 VIM_ID = "n?vim"
@@ -11,10 +10,13 @@ VIM_ID = "n?vim"
 
 def is_window_vim(window):
     fp = window.child.foreground_processes
-    return any(
-        re.search(VIM_ID, p["cmdline"][0] if len(p["cmdline"]) else "", re.I)
+    if any(
+        re.search(VIM_ID, p["cmdline"][0] if p["cmdline"] else "", re.IGNORECASE)
         for p in fp
-    )
+    ):
+        return True
+
+    return (getattr(window, "title", "") or "").startswith("NVIM")
 
 
 def encode_key_mapping(window, key_mapping):

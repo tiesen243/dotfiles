@@ -117,8 +117,12 @@ function M.get_time()
 end
 
 function M.get_host()
-  local hostname = vim.loop.os_gethostname()
-  local user = vim.env.USER or "Unknown"
+  local hostname = vim.loop.os_gethostname() or "unknown"
+  local user = vim.env.USER or "unknown"
+
+  if vim.env.SSH_CONNECTION then
+    hostname = vim.env.SSH_CONNECTION:match("%S+%s+%S+%s+(%S+)") or hostname
+  end
 
   return string.format("%s@%s", user, hostname)
 end
