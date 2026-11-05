@@ -16,7 +16,7 @@ def is_window_vim(window):
     ):
         return True
 
-    return (getattr(window, "title", "") or "").startswith("NVIM")
+    return (getattr(window, "title", "") or "").startswith("nvim")
 
 
 def encode_key_mapping(window, key_mapping):

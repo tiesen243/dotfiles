@@ -84,5 +84,6 @@ opt.fillchars = {
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+-- Fix nvim navigation in ssh sessions
 vim.opt.title = true
-vim.opt.titlestring = "NVIM"
+vim.opt.titlestring = "nvim"
