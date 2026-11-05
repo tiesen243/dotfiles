@@ -46,7 +46,7 @@ return {
           { "progress", separator = "" },
           { "location" },
         },
-        lualine_z = { Yuki.utils.get_time }
+        lualine_z = { Yuki.utils.get_host }
       },
       -- stylua: ignore end
       inactive_sections = {},

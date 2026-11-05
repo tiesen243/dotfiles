@@ -116,4 +116,11 @@ function M.get_time()
   return os.date("%H:%M")
 end
 
+function M.get_host()
+  local hostname = vim.loop.os_gethostname()
+  local user = vim.env.USER or "Unknown"
+
+  return string.format("%s@%s", user, hostname)
+end
+
 return M

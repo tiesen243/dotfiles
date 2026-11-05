@@ -63,7 +63,7 @@ opt.foldlevelstart = 99
 opt.foldtext = ""
 
 -- system & misc
-opt.clipboard:append("unnamedplus")
+opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus"
 opt.encoding = "utf-8"
 opt.history = 1000
 opt.isfname:append("@-@")
