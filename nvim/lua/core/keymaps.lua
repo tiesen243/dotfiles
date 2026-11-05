@@ -34,9 +34,9 @@ Yuki.utils.map("<C-d>", "<C-d>zz", "Scroll Down")
 if vim.fn.executable("kitty") == 1 then
 	-- stylua: ignore start
 	Yuki.utils.map("<C-h>", function() Yuki.utils.navigate("h") end, "Go to Left Window", { mode = { "n", "v" } })
-	Yuki.utils.map( "<C-j>", function() Yuki.utils.navigate("j") end, "Go to Lower Window", { mode = { "n", "v" } })
-	Yuki.utils.map( "<C-k>", function() Yuki.utils.navigate("k") end, "Go to Upper Window", { mode = { "n", "v" } })
-	Yuki.utils.map( "<C-l>", function() Yuki.utils.navigate("l") end, "Go to Right Window", { mode = { "n", "v" } })
+	Yuki.utils.map("<C-j>", function() Yuki.utils.navigate("j") end, "Go to Lower Window", { mode = { "n", "v" } })
+	Yuki.utils.map("<C-k>", function() Yuki.utils.navigate("k") end, "Go to Upper Window", { mode = { "n", "v" } })
+	Yuki.utils.map("<C-l>", function() Yuki.utils.navigate("l") end, "Go to Right Window", { mode = { "n", "v" } })
 -- stylua: ignore end
 else
   Yuki.utils.map("<C-h>", "<C-w>h", "Go to Left Window", { mode = { "n", "v" } })
