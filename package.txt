@@ -39,7 +39,4 @@ capitaine-cursors
 noctalia
 
 # File manager
-gvfs
-thunar
-thunar-volman
-tumbler
+nautilus

@@ -12,7 +12,7 @@ local ipc = "noctalia msg "
 hl.bind(priMod .. " + Q", hl.dsp.window.close())
 
 hl.bind(priMod .. " + T", hl.dsp.exec_cmd("kitty"))
-hl.bind(priMod .. " + E", hl.dsp.exec_cmd("thunar"))
+hl.bind(priMod .. " + E", hl.dsp.exec_cmd("nautilus"))
 hl.bind(priMod .. " + B", hl.dsp.exec_cmd("zen-browser"))
 
 -- Noctalia
